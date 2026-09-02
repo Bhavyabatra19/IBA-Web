@@ -1,0 +1,5638 @@
+﻿/* ==================================================================
+   India Blockchain Alliance — Evolution of Value
+
+   Palette is strictly Red / Black / White. Every "grey" is an alpha
+   mix of those three, nothing else.
+
+   THEME: the page alternates dark and light bands. Rather than write
+   each component twice, every component styles through tokens, and a
+   band flips the token values for its own subtree. One class changes
+   the whole section — and a component can never be half-themed,
+   because it has no literal colours of its own to leave behind.
+   ================================================================== */
+
+:root {
+  --red: #c0392b;
+  --red-hot: #e0503f;
+  --black: #0a0a0a;
+  --white: #ffffff;
+
+  --red-08: rgba(192, 57, 43, 0.08);
+  --red-24: rgba(192, 57, 43, 0.24);
+  --red-55: rgba(192, 57, 43, 0.55);
+
+  /* ---- dark band (the default) ---- */
+  --bg: var(--black);
+  --ink-1: rgba(255, 255, 255, 0.95);
+  --ink-2: rgba(255, 255, 255, 0.6);
+  --ink-3: rgba(255, 255, 255, 0.38);
+  --ink-4: rgba(255, 255, 255, 0.2);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --surface: rgba(255, 255, 255, 0.03);
+
+  --font-display: 'Barlow Condensed', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --gutter: clamp(1.5rem, 5vw, 6rem);
+  --maxw: 1440px;
+  /* The one vertical step inside a section: head to content, content to the
+     call to action, block to block. It was written out at four slightly
+     different values across the stylesheet, which is the kind of difference
+     nobody can name and everybody can see. */
+  --step: clamp(2.5rem, 6vh, 4rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Read by JS as well as CSS: the nav's band triggers measure against it and
+     anchor scrolling offsets by it, so there is exactly one definition. */
+  --nav-h: 76px;
+  /* one radius for every card, panel and window on the page */
+  --r-card: 14px;
+  --z-nav: 90;
+  --z-drawer: 95;
+  --z-modal: 100;
+}
+
+@media (max-width: 1080px) {
+  :root {
+    --nav-h: 64px;
+  }
+}
+
+/* Set while an overlay is up. Lenis is stopped at the same time; this covers
+   the reduced-motion path, where there is no Lenis to stop. */
+html.is-locked,
+html.is-locked body {
+  overflow: hidden;
+}
+
+/* ---- light band ---- */
+.band--light {
+  --bg: var(--white);
+  --ink-1: rgba(10, 10, 10, 0.94);
+  --ink-2: rgba(10, 10, 10, 0.62);
+  --ink-3: rgba(10, 10, 10, 0.42);
+  --ink-4: rgba(10, 10, 10, 0.2);
+  --line: rgba(10, 10, 10, 0.13);
+  --line-soft: rgba(10, 10, 10, 0.07);
+  --surface: rgba(10, 10, 10, 0.028);
+}
+.band--dark {
+  /* restated rather than inherited, so a dark band nested after a light one
+     always resets every token instead of picking some of them up */
+  --bg: var(--black);
+  --ink-1: rgba(255, 255, 255, 0.95);
+  --ink-2: rgba(255, 255, 255, 0.6);
+  --ink-3: rgba(255, 255, 255, 0.38);
+  --ink-4: rgba(255, 255, 255, 0.2);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --surface: rgba(255, 255, 255, 0.03);
+}
+.band {
+  position: relative;
+  background: var(--bg);
+  color: var(--ink-1);
+}
+/* ---- the air in a dark band ----
+   The hero, the About hero and the closing band each built their own
+   atmosphere; every other dark band was flat #0a0a0a, which is what made the
+   page look unfinished the further down it you got. This is the same recipe
+   those three use, at a fraction of the strength, applied once to all of them.
+
+   Five layers, painted first on top:
+     1 a red pool bleeding in from the top-left corner — the light in the room
+     2 a second, cooler, out of the opposite corner, so the band has a diagonal
+       rather than a centre
+     3 the band's own black, painted around the perimeter, which is what kills
+       the grid before it reaches any edge
+     4·5 the grid itself, on the same 84px module the showcase heroes use
+
+   Layer 3 is the load-bearing one and it faces INWARD — grid in the middle,
+   nothing at the edges — which is the About hero's arrangement and not the
+   showcase hero's. It has to be this way round here: these bands sit directly
+   against each other, and a grid that is brightest at its edges would be
+   brightest exactly at every seam, where two of them meet a phase apart.
+
+   It is a background on the band and not a layer inside it, deliberately: a
+   pseudo-element would collide with the three sections that already use theirs,
+   and every one of those is excluded below anyway.
+
+   Kept under 0.1 alpha throughout. Above that the red stops being the air in
+   the room and starts being a colour wash over the type. */
+.band--dark:not(.hero):not(.chero):not(.close):not(.svc__hero--show) {
+  background-image: radial-gradient(
+      68% 55% at 10% 0%,
+      rgba(192, 57, 43, 0.085),
+      transparent 68%
+    ),
+    radial-gradient(55% 55% at 94% 100%, rgba(192, 57, 43, 0.055), transparent 72%),
+    radial-gradient(82% 76% at 50% 50%, transparent 22%, var(--black) 90%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: auto, auto, auto, 84px 84px, 84px 84px;
+}
+
+/* Two bands of the same tone meeting are one region of the page, not two.
+   The section step is the air BETWEEN regions; taken twice inside one it is a
+   void, and a void of flat colour reads as the page having ended. Every page
+   that carries a crosslink into the closing band was doing exactly that. */
+.band--dark + .band--dark,
+.band--light + .band--light {
+  padding-top: 0;
+}
+
+/* ------------------------------- reset ------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis owns scrolling */
+}
+body {
+  background: var(--black);
+  color: var(--ink-1);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+em {
+  font-style: normal;
+  color: var(--red);
+}
+::selection {
+  background: var(--red);
+  color: var(--white);
+}
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* ---------------------------- primitives ---------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  position: relative;
+  z-index: 2;
+}
+
+.section {
+  padding-block: clamp(5.5rem, 13vh, 10rem);
+}
+
+/* One subhead for the whole page, the hero's included.
+   The red dot is gone: at this size it read as a bullet on a one-item list, and
+   with a dot in front of every section label the page collected seven of them.
+   What identifies a subhead is the tracking, not a mark — so the tracking is
+   opened up to carry it alone, and the ink lifted from --ink-3 to --ink-2,
+   which is what the dot's contrast was standing in for. */
+.eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  /* tracking adds space after the last letter too; this pulls the optical
+     left edge back onto the gutter the headline below it starts from */
+  text-indent: -0.02em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+/* Two steps, and only two, for every section head on the page.
+   `.h2` is a head that has the full measure to itself. `.h2--col` is a head
+   sharing its row with a graphic, where the full step would overrun a column
+   roughly half as wide. Sections previously carried their own font-size each,
+   which is how the same rank of heading ended up at four different sizes. */
+.h2 {
+  font-size: clamp(2.4rem, 6vw, 5.4rem);
+}
+.h2--col {
+  font-size: clamp(2rem, 4.4vw, 3.9rem);
+}
+
+.lede {
+  max-width: 46ch;
+  font-size: clamp(0.96rem, 1.1vw, 1.1rem);
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+
+/* headline lines clip-reveal */
+.line {
+  display: block;
+  overflow: hidden;
+}
+.line__inner {
+  display: block;
+}
+
+/* ------------------------------ buttons ----------------------------- */
+.btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.95rem 1.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s ease,
+    border-color 0.4s ease, background-color 0.4s ease, color 0.4s ease;
+}
+.btn:hover {
+  transform: translate3d(0, -2px, 0);
+}
+.btn--primary {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 16px 34px rgba(192, 57, 43, 0.3);
+}
+.btn--primary:hover {
+  box-shadow: 0 22px 46px rgba(192, 57, 43, 0.42);
+}
+.btn--ghost {
+  border-color: var(--line);
+  color: var(--ink-1);
+  background: var(--surface);
+}
+.btn--ghost:hover {
+  border-color: var(--red);
+}
+.btn__note {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: none;
+  color: var(--ink-3);
+}
+.btn--sm {
+  padding: 0.7rem 1.25rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  box-shadow: 0 10px 24px rgba(192, 57, 43, 0.26);
+}
+.btn--block {
+  width: 100%;
+}
+/* The button is a column because most of them carry a note under the label.
+   One with a trailing mark instead sets the mark beside the word. */
+.btn--row {
+  flex-direction: row;
+  gap: 0.6rem;
+}
+.btn--row span {
+  transition: transform 0.45s var(--ease-out);
+}
+.btn--row:hover span {
+  transform: translateX(5px);
+}
+
+/* ------------------------------ fields ------------------------------ */
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+.field > span {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.field input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink-1);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.8rem 0.9rem;
+  transition: border-color 0.35s var(--ease-out), background-color 0.35s ease;
+}
+.field input::placeholder {
+  color: var(--ink-4);
+}
+.field input:hover {
+  border-color: var(--ink-4);
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--red);
+}
+.field--inline {
+  gap: 0.35rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+  padding-block: 0.8rem;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.45s var(--ease-out), color 0.45s var(--ease-out);
+}
+.arrow span {
+  transition: transform 0.45s var(--ease-out);
+}
+.arrow:hover {
+  border-color: var(--red);
+}
+.arrow:hover span {
+  transform: translateX(7px);
+}
+.arrow--red {
+  color: var(--red);
+}
+
+/* ==================================================================
+   The persistent 3D stage — one WebGL context for the whole page
+   ================================================================== */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-out);
+}
+.stage.is-live {
+  opacity: 1;
+}
+.stage canvas {
+  width: 100%;
+  height: 100%;
+}
+.stage__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity 0.8s var(--ease-out);
+}
+.stage__fallback span {
+  width: clamp(150px, 19vw, 260px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.1), transparent 62%);
+}
+/* once the real scene draws, the still steps aside; if the module or the
+   context failed it stays, and the page still has a subject */
+.stage[data-ready='true'] .stage__fallback {
+  opacity: 0;
+}
+.stage[data-failed='true'],
+.stage[data-failed='true'] .stage__fallback {
+  opacity: 1;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- back to top ----
+   It floats over bands that alternate black and white, so like the condensed
+   nav it carries its own dark ground and blurs what is behind it rather than
+   trying to theme itself against whatever it happens to be over.
+
+   Under the drawer on purpose: --z-nav is the bar, and this sits a step below
+   it so an open menu covers it instead of leaving a stray button on top.
+
+   Hidden with `visibility` and not opacity alone — a transparent button is
+   still in the tab order, and the reader would tab to a control they cannot
+   see and cannot use. */
+.toTop {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 2rem);
+  bottom: clamp(1rem, 2.5vw, 2rem);
+  z-index: calc(var(--z-nav) - 1);
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(10, 10, 10, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 10px, 0);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out),
+    visibility 0.4s, background-color 0.4s ease, border-color 0.4s ease;
+}
+.toTop[data-shown] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.toTop:hover {
+  color: var(--white);
+  background: var(--red);
+  border-color: var(--red);
+}
+.toTop svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ==================================================================
+   2.1 HERO — dark
+   ================================================================== */
+/* The atmosphere the object sits in.
+
+   It is painted OVER the canvas, not behind it: the renderer clears to opaque
+   black through a post-processing composer, so nothing underneath the stage is
+   ever visible. Every stop is therefore translucent — an opaque value here
+   would simply hide the coin.
+
+   Three layers, and each is doing a job rather than decorating:
+     · a warm pool at the optical centre, so the bloom on the object reads as
+       light spilling into the room instead of stopping at its silhouette
+     · a cool counter-light off the top-left, which is what keeps the pool from
+       looking like a symmetrical vignette centred on nothing
+     · a red lift in the bottom-right, opposite the counter-light, so the frame
+       has a diagonal rather than a centre
+
+   Kept tight and low: the radii stay well inside the frame so the gradient
+   falls off before it reaches the edges, and the peak sits under 0.1. Wider or
+   hotter than this and the red stops being the air around the object and reads
+   as a colour wash laid over the whole hero. */
+.hero {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      36% 40% at 50% 46%,
+      rgba(192, 57, 43, 0.02) 0%,
+      rgba(192, 57, 43, 0.085) 50%,
+      rgba(192, 57, 43, 0.03) 78%,
+      transparent 100%
+    ),
+    radial-gradient(42% 34% at 0% -12%, rgba(255, 255, 255, 0.04), transparent 64%),
+    radial-gradient(48% 38% at 110% 112%, rgba(192, 57, 43, 0.055), transparent 66%),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.2), transparent 22%);
+}
+/* The object is centred in the viewport and, once the halves part, it is wide.
+   A scrim at top and bottom guarantees the type always sits on darkness instead
+   of on brushed metal — cheaper and more reliable than trying to choreograph
+   the copy around a shape that changes for the whole length of the pin. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.92) 0%,
+      transparent 22%,
+      transparent 52%,
+      rgba(10, 10, 10, 0.86) 82%,
+      rgba(10, 10, 10, 0.97) 100%
+    ),
+    radial-gradient(120% 70% at 50% 50%, transparent 38%, rgba(10, 10, 10, 0.5) 100%);
+}
+.hero__inner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-block: clamp(1.5rem, 5vh, 3.25rem);
+}
+/* The centre row is deliberately empty — it belongs to the object. Laying the
+   type around a reserved band is what keeps the coin on the optical centre at
+   every breakpoint, instead of the coin being nudged around the type. */
+/* Empty. It reserves the height the fixed nav occupies so the copy in the
+   bottom row lands where it did when the lockup lived in this row. */
+.hero__top {
+  height: max(0px, calc(var(--nav-h) - clamp(1.5rem, 5vh, 3.25rem)));
+  min-height: 0;
+}
+.hero__bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+/* eyebrow sits directly above the H1, so the two need a gap between them */
+.hero__headline {
+  display: grid;
+  gap: clamp(0.9rem, 1.6vh, 1.4rem);
+  justify-items: start;
+}
+/* The hero's eyebrow. The rest of the page uses .eyebrow — a label led by a
+   red dot — which suits an eyebrow naming a section the reader has arrived at.
+   This is the first line on the site and sits above the H1, so it is left as
+   type alone: no mark, no ground, just a lighter ink than the body eyebrows so
+   it reads as an opening line rather than a caption. */
+.hero__title {
+  font-size: clamp(2.4rem, 6.6vw, 6.6rem);
+}
+.hero__aside {
+  display: grid;
+  gap: 1.6rem;
+  justify-items: start;
+  padding-bottom: 0.4rem;
+}
+.hero__lede {
+  max-width: 34rem;
+  font-size: clamp(0.9rem, 1vw, 1rem);
+}
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* ==================================================================
+   2.2 CREDIBILITY BAR — dark, closes the hero block
+   ================================================================== */
+.cred {
+  border-top: 1px solid var(--line-soft);
+  padding-block: clamp(3rem, 7vh, 5rem);
+}
+/* No gap: the rules between the columns are the separation, and a gap either
+   side of a rule reads as a gap rather than as a divided row. */
+.cred__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3.5vh, 2.5rem) 0;
+}
+.cred__item {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding-inline: clamp(0.75rem, 2vw, 1.75rem);
+}
+/* Between the columns, never leading the row. `+ .cred__item` would be right
+   at four across and wrong at two, where it would draw a rule down the left of
+   the second row's first item — so the divisor tracks the column count. */
+.cred__item:not(:nth-child(4n + 1)) {
+  border-left: 1px solid var(--line-soft);
+}
+.cred__k {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+/* the small line above the figure */
+.cred__v {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-wrap: balance;
+}
+
+/* ==================================================================
+   2.3 WHAT WE DO — light
+   ================================================================== */
+/* Centred, unlike the other section heads on the page: the three cards below
+   are a symmetrical block, and a left-aligned head over a centred grid reads as
+   a mistake rather than a choice. */
+.wwd__head {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 46rem;
+  margin-inline: auto;
+  justify-items: center;
+  text-align: center;
+}
+.wwd__cards {
+  margin-top: var(--step);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.wwd__card {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-content: start;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--white);
+  transition: transform 0.55s var(--ease-out), border-color 0.55s var(--ease-out),
+    box-shadow 0.55s var(--ease-out);
+}
+/* One state, two ways into it. [data-on] is the card the section has stopped on
+   and :hover is the one the reader has — they must look identical, or taking
+   the focus by hand would read as a different kind of thing than being given it.
+   Neither exists without JS: the deck is three cards at rest, as it was. */
+.wwd__card:hover,
+.wwd__card[data-on] {
+  transform: translate3d(0, -3px, 0);
+  border-color: var(--red-24);
+  box-shadow: 0 20px 44px rgba(10, 10, 10, 0.08);
+}
+.wwd__card[data-on] .wwd__n {
+  color: var(--red);
+}
+
+/* ---- the drawn panel ---- */
+.wwd__art {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+  /* White, like the card and the band. The panel is separated from the copy by
+     its rule and its texture, not by a grey fill — the graph paper and the glow
+     do that work, and a tint here just makes the whole section look dirty. */
+  background: var(--white);
+}
+/* graph paper, faded off at the edges so the panel has no visible seam */
+.wwd__art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, rgba(10, 10, 10, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(72% 72% at 50% 50%, #000, transparent 80%);
+  mask-image: radial-gradient(72% 72% at 50% 50%, #000, transparent 80%);
+}
+/* the glow lights as the card arrives — the entrance, in place of the old
+   marker that rode the rule these cards no longer share */
+.wwd__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(46% 46% at 50% 47%, rgba(192, 57, 43, 0.21), transparent 72%);
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-out), transform 1.1s var(--ease-out);
+}
+.wwd__card.is-in .wwd__art::after {
+  opacity: 1;
+}
+/* the light comes up on the card whose turn it is — the same glow, opened out,
+   rather than a second effect layered over it */
+.wwd__card[data-on] .wwd__art::after,
+.wwd__card:hover .wwd__art::after {
+  opacity: 1;
+  transform: scale(1.18);
+}
+.wwd__art svg {
+  position: relative;
+  z-index: 1;
+  width: 74%;
+  max-width: 250px;
+  height: auto;
+  color: var(--black);
+  /* the drawn shapes are white on a grey panel, so they need a shadow to sit
+     on it rather than dissolve into it */
+  filter: drop-shadow(0 6px 14px rgba(10, 10, 10, 0.08));
+  transition: transform 0.9s var(--ease-out);
+}
+.wwd__card[data-on] .wwd__art svg,
+.wwd__card:hover .wwd__art svg {
+  transform: scale(1.04);
+}
+/* the order marker, now part of the panel's chrome */
+.wwd__n {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  left: 1rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.55s var(--ease-out);
+}
+
+/* ---- the copy ---- */
+.wwd__meta {
+  display: grid;
+  align-content: start;
+  gap: 0.7rem;
+  padding: clamp(1.15rem, 1.9vw, 1.6rem);
+}
+.wwd__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.25rem, 1.9vw, 1.7rem);
+  line-height: 1;
+}
+.wwd__body {
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: var(--ink-2);
+}
+.wwd__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+.wwd__links .arrow {
+  font-size: 0.68rem;
+  padding-block: 0.55rem;
+}
+
+/* ==================================================================
+   2.4 IMPACT — dark
+   ================================================================== */
+.impact__head {
+  display: grid;
+  gap: 1.4rem;
+  max-width: 42rem;
+}
+
+/* Counted stats beside the stated portfolio. The panel is given the wider
+   column: it carries four facts, a CTA and the drawing, where each card
+   carries one number. */
+.impact__grid {
+  margin-top: var(--step);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.impact__stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* even rows, so the 2×2 rises and falls with the panel beside it */
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+
+.impact__card,
+.impact__panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: border-color 0.55s var(--ease-out);
+}
+.impact__card:hover,
+.impact__panel:hover {
+  border-color: var(--red-24);
+}
+/* the light in the far corner — the one thing that keeps a flat dark card from
+   reading as an empty box */
+.impact__card::before,
+.impact__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(68% 68% at 100% 100%, rgba(192, 57, 43, 0.18), transparent 66%);
+}
+.impact__panel::before {
+  background: radial-gradient(52% 58% at 100% 6%, rgba(192, 57, 43, 0.2), transparent 68%);
+}
+
+.impact__card {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.6rem;
+  text-align: center;
+  padding: clamp(1.6rem, 3vw, 2.4rem) 1.1rem;
+}
+.impact__k,
+.impact__v {
+  position: relative;
+  z-index: 1;
+}
+.impact__k {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.impact__v {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-wrap: balance;
+}
+
+/* ---- the portfolio panel ---- */
+.impact__panel {
+  /* held as a variable because the drawing has to cancel it exactly to reach
+     the corner — a second clamp written out again would drift from this one */
+  --pad: clamp(1.6rem, 2.8vw, 2.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding: var(--pad);
+}
+.impact__panelCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: start;
+  gap: 1.25rem;
+  align-content: start;
+}
+.impact__facts {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  gap: 0.5rem;
+}
+.impact__facts li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.8rem;
+  color: var(--ink-3);
+}
+.impact__facts strong {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--ink-1);
+  font-variant-numeric: tabular-nums;
+  /* a fixed measure, so the labels line up into a column of their own */
+  min-width: 4.4em;
+}
+/* Full-bleed down the panel's right edge: it takes the whole card height and
+   cancels the padding on three sides, so it is the panel's ground rather than
+   an item stacked inside it. Width is what is fixed here — the height comes
+   from the row, and the svg's `slice` fitting covers it. */
+.impact__art {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  width: clamp(170px, 19vw, 285px);
+  margin: calc(var(--pad) * -1) calc(var(--pad) * -1) calc(var(--pad) * -1) 0;
+}
+.impact__art svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: var(--ink-1);
+  filter: drop-shadow(0 16px 30px rgba(0, 0, 0, 0.55));
+}
+
+/* ==================================================================
+   2.5 TRUSTED BY — light
+   ================================================================== */
+/* The claim and the line that qualifies it, on one row. The qualifier is set
+   under a rule and at body weight, so the two read as a statement and its
+   footnote rather than as two headings of different sizes. */
+.trusted__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1.25rem, 4vw, 4rem);
+}
+.trusted__head {
+  display: grid;
+  gap: 1.4rem;
+}
+.trusted__caption {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+/* The two rows are one wall, so they are spaced as one — close enough to read
+   as a pair of strips rather than as two separate lists. */
+.trusted__rows {
+  margin-top: var(--step);
+  display: grid;
+  gap: clamp(0.6rem, 1.2vw, 1rem);
+}
+.marquee {
+  overflow: hidden;
+  position: relative;
+  padding-block: 0.35rem;
+  /* fade the ends instead of hard-cropping, so the rows read as continuous */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+/* The spacing between items is a margin on the items, and NOT a gap on this
+   track. It reads as the same thing and it is not: a flex gap falls between
+   every pair, so the doubled list is 2×items + (2n−1) gaps wide, and half of
+   that is half a gap short of one list. The loop jumped by that half-gap every
+   lap. As a margin the item carries its own space, the track is exactly two
+   identical halves, and -50% is exactly one lap. */
+.marquee__row {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+.marquee--rev .marquee__row {
+  animation-direction: reverse;
+}
+.marquee:hover .marquee__row {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* the track holds the list twice, so -50% is one seamless lap */
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+/* A slot with a name in it. The hard-bordered box read as a row of buttons on
+   a band where nothing is clickable; on the band's own surface with a soft edge
+   it reads as what it is — a place a mark will go once one is licensed. */
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  height: clamp(2.9rem, 4.6vw, 3.75rem);
+  margin-right: clamp(0.6rem, 1.2vw, 1rem);
+  padding-inline: clamp(1.1rem, 2vw, 1.75rem);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: border-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+/* the strip already stops under the pointer, so one name can be picked out of
+   a row that is no longer moving */
+.marquee__item:hover {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+
+/* ==================================================================
+   2.6 VERIFYBLE — dark, the coin opens behind it
+   ================================================================== */
+/* An ordinary band. It used to be a transparent full-viewport window onto the
+   WebGL stage, pinned for three screens while the coin opened — hence the
+   scrim, the 100vh and the z-index stack that are all gone with it. */
+/* The copy takes the wider share: it carries the four items two by two, and at
+   an even split each of those cells was narrower than the line inside it. */
+.vfy__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.vfy__copy {
+  display: grid;
+  justify-items: start;
+  align-content: center;
+  gap: 1.5rem;
+  max-width: 40rem;
+}
+.vfy__art {
+  display: flex;
+  justify-content: center;
+}
+.vfy__art svg {
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  color: var(--ink-1);
+}
+/* The four things Verifyble carries, in the arrangement the diagram beside them
+   already puts them in: the seal and the wallet across the top, the labs and the
+   tiers under them — the same four in the same corners as the four satellites.
+   Each is its mark and its line, side by side.
+
+   No card around them. A border and a fill would make four boxes of what is
+   really four labelled marks, and this band already has one drawn object in it;
+   a block of framed tiles beside it reads as a second, competing one. */
+.vfy__list {
+  list-style: none;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.5vw, 1.9rem) clamp(1.25rem, 2.5vw, 2rem);
+}
+.vfy__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.75rem, 1.4vw, 1rem);
+}
+.vfy__itemLabel {
+  font-size: clamp(0.82rem, 0.92vw, 0.9rem);
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+/* Deliberately the diagram's node and not a generic chip: the same dark fill
+   inside the same red edge, so an item reads as one of the four satellites
+   brought down out of the drawing rather than as a bullet that happens to have
+   a picture in it. */
+.vfy__ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(38px, 3.2vw, 46px);
+  height: clamp(38px, 3.2vw, 46px);
+  border-radius: 13px;
+  border: 1px solid var(--red-24);
+  background: var(--black);
+  color: var(--red-hot);
+}
+.vfy__ico svg {
+  width: 45%;
+  height: 45%;
+}
+
+/* ==================================================================
+   2.7 LIBRARY — light
+   ================================================================== */
+/* The glow under the window is deliberately wider than its box. Once this band
+   is one column that bleed reaches past the viewport edge and the whole page
+   becomes horizontally scrollable, so the band clips it. */
+.lib {
+  overflow: hidden;
+}
+
+/* The window first, the argument second — the shelf is the reason to read the
+   copy, not an illustration of it. */
+.lib__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+.lib__head {
+  display: grid;
+  justify-items: start;
+  gap: 1.4rem;
+}
+/* ---- the window ---- */
+.lib__media {
+  position: relative;
+}
+/* A warm ground behind the panel, so it is lit rather than pasted onto the
+   white. Kept low — red at any strength over white turns pink rather than
+   glowing, so this reads as warmth in the paper, not as a colour. */
+.lib__media::before {
+  content: '';
+  position: absolute;
+  inset: -20% -16%;
+  pointer-events: none;
+  background: radial-gradient(56% 56% at 44% 48%, rgba(192, 57, 43, 0.17), transparent 74%);
+}
+.lib__shot {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 34px 66px rgba(10, 10, 10, 0.1);
+}
+.lib__bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(10, 10, 10, 0.022);
+}
+.lib__dots {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+.lib__dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+.lib__dots i:first-child {
+  background: var(--red);
+}
+.lib__search {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  font-size: 0.7rem;
+  color: var(--ink-4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.38rem 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: border-color 0.5s var(--ease-out);
+}
+.lib__q {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Entered text, not the placeholder — the field is being typed into, and the
+   two must not be the same grey. [data-empty] is the moment between one query
+   being cleared and the next starting, when the placeholder is back. */
+.lib__search[data-typing] {
+  border-color: var(--red-24);
+}
+.lib__search[data-typing] .lib__q:not([data-empty]) {
+  color: var(--ink-1);
+}
+/* Only ever shown while the animation owns the field. Under reduced motion
+   nothing sets [data-typing], so there is no caret blinking at a still shelf. */
+.lib__caret {
+  display: none;
+  width: 1px;
+  height: 0.85em;
+  flex: none;
+  background: var(--red);
+}
+.lib__search[data-typing] .lib__caret {
+  display: block;
+  animation: lib-caret 1.05s steps(1, end) infinite;
+}
+@keyframes lib-caret {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  56%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.lib__rows {
+  list-style: none;
+  display: grid;
+}
+.lib__rows li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.7rem, 1.5vw, 1.1rem);
+  padding: clamp(0.75rem, 1.6vw, 1.05rem) clamp(0.9rem, 1.8vw, 1.2rem);
+  transition: opacity 0.5s var(--ease-out);
+}
+/* the leading edge of a row the search landed on */
+.lib__rows li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--red);
+  transform: scaleY(0);
+  transition: transform 0.5s var(--ease-out);
+}
+.lib__rows li[data-hit]::before {
+  transform: scaleY(1);
+}
+/* [data-found] is only on the list once a query has actually landed, so the
+   shelf is never dimmed while one is still being typed — and never at all
+   under reduced motion, where none of these attributes is ever written. */
+.lib__rows[data-found] li:not([data-hit]) {
+  opacity: 0.42;
+}
+.lib__rows li[data-hit] .lib__n,
+.lib__rows li[data-hit] .lib__go {
+  color: var(--red);
+}
+.lib__rows li[data-hit] .lib__go {
+  transform: translateX(3px);
+}
+.lib__rows li + li {
+  border-top: 1px solid var(--line-soft);
+}
+.lib__n {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+.lib__type {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid var(--red-24);
+  background: var(--red-08);
+  color: var(--red);
+}
+.lib__type svg {
+  width: 16px;
+  height: 16px;
+}
+.lib__label {
+  font-size: 0.9rem;
+  color: var(--ink-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lib__go {
+  font-size: 0.85rem;
+  color: var(--ink-4);
+  transition: color 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+/* the gate is stated on the shelf, not discovered at the click */
+.lib__gate {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem clamp(0.9rem, 1.8vw, 1.2rem);
+  border-top: 1px solid var(--line);
+  background: var(--red-08);
+  color: var(--red);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.lib__gate svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* ==================================================================
+   2.8 CLOSING — dark
+   ================================================================== */
+/* The one band that does not take .section's padding whole, and the reason is
+   what sits under it: the footer opens with 5rem of its own padding directly
+   below this, so the standard rhythm stacks two gaps into a ~200px void. The
+   top keeps most of its air; the bottom gives way to the footer's. */
+.close {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4.5rem, 10vh, 7rem) clamp(3rem, 7vh, 5rem);
+}
+/* Seven pages end on a dark band and then on this one. They are one dark region
+   and are now spaced as one — restated here because .close sets its own
+   padding-block below the general rule and would otherwise win.
+
+   No rule between them: a hairline was the first answer, and it was the wrong
+   one. It drew a seam through the middle of a region rather than admitting the
+   two bands are a region — the crosslink reads as the lead-in to the ask, which
+   is what it is. */
+.band--dark + .close {
+  padding-top: 0;
+}
+/* The artwork brings its own glow and grid, so the band adds only a faint lift
+   under it — enough that the image's black and the band's #0a0a0a meet without
+   a visible seam at the edge of the picture. */
+.close::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(70% 60% at 78% 55%, rgba(192, 57, 43, 0.1), transparent 74%);
+}
+/* The cube field, between the glow and the type.
+   Paint order inside .close is DOM order: ::before is the lift, then this, then
+   ::after is the scrim that keeps the copy readable, and .close__inner lifts
+   above all three on z-index 1. */
+.close__cubes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.close__cubes svg {
+  width: 100%;
+  height: 100%;
+}
+/* Both columns now carry type, and the field is `slice` — at narrower viewports
+   it crops inward and the blocks advance. So the scrim runs the full width,
+   heaviest where the copy is and letting go only at the far corner where the
+   blocks are meant to be seen. */
+.close::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+      100deg,
+      rgba(10, 10, 10, 0.94) 0%,
+      rgba(10, 10, 10, 0.84) 38%,
+      rgba(10, 10, 10, 0.6) 68%,
+      rgba(10, 10, 10, 0.34) 100%
+    ),
+    radial-gradient(58% 60% at 100% 100%, transparent 30%, rgba(10, 10, 10, 0.3) 100%);
+}
+/* The ask on the left, the ways to answer it on the right. */
+.close__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5.5rem);
+}
+.close__inner {
+  display: grid;
+  justify-items: start;
+  gap: clamp(1.1rem, 2.2vh, 1.6rem);
+  max-width: 34rem;
+}
+/* A band rather than a block. Deep enough to read as a field, shallow enough
+   that it is not the tallest thing in the column. */
+.close__dots {
+  width: min(100%, 20rem);
+  height: 62px;
+  margin-top: clamp(0.25rem, 1vh, 0.75rem);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.24) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  /* fades into the band rather than ending on a straight edge */
+  -webkit-mask-image: linear-gradient(125deg, #000 10%, transparent 82%);
+  mask-image: linear-gradient(125deg, #000 10%, transparent 82%);
+}
+.close__sub {
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  color: var(--ink-2);
+}
+
+/* The three ways to reach IBA, as cards. They used to be two links in a row —
+   at the size that made them, the address a reader actually came for was the
+   smallest thing on the band. */
+/* No cards. Each way to reach IBA is an outlined mark, a name, and the detail
+   under it — the boxes were containing three items that were already a list,
+   and dropping them lets the names carry the rhythm instead of the borders. */
+.close__ways {
+  list-style: none;
+  display: grid;
+  gap: clamp(1.5rem, 3.2vh, 2.4rem);
+}
+.close__ways a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'ico k'
+    'ico v';
+  align-items: start;
+  column-gap: 1.05rem;
+  row-gap: 0.3rem;
+}
+.close__ico {
+  grid-area: ico;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  color: var(--red-hot);
+  transition: transform 0.45s var(--ease-out);
+}
+.close__ico svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 1.1;
+}
+.close__ways a:hover .close__ico {
+  transform: translate3d(0, -2px, 0);
+}
+.close__k {
+  grid-area: k;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-1);
+}
+.close__v {
+  grid-area: v;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+  transition: color 0.4s var(--ease-out);
+  /* the address is one long token; the escape hatch if the column is ever
+     narrower than it, not the expected case */
+  overflow-wrap: anywhere;
+}
+.close__ways a:hover .close__v {
+  color: var(--red-hot);
+}
+
+/* ==================================================================
+   GLOBAL FOOTER — dark, continuous with the Closing band above it
+   ================================================================== */
+.foot {
+  padding-top: clamp(3.5rem, 9vh, 6rem);
+  border-top: 1px solid var(--line-soft);
+}
+/* Four link columns plus a wider fifth for the newsletter field, which needs
+   room an 1fr column would not give it. */
+.foot__cols {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.35fr);
+  gap: clamp(1.75rem, 3vw, 3rem);
+}
+.foot__col {
+  display: grid;
+  gap: 1.1rem;
+  align-content: start;
+}
+.foot__h {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  color: var(--ink-1);
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+.foot__col ul {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+.foot__col li a {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  font-size: 0.86rem;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+.foot__col li a:hover {
+  color: var(--red-hot);
+}
+/* the audience qualifier — "For Students" — is a tag, not part of the label */
+.foot__note {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  white-space: nowrap;
+}
+
+.foot__sub {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+.foot__sub button {
+  flex: none;
+  width: 2.85rem;
+  height: 2.85rem;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--white);
+  background: var(--red);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.35s ease, transform 0.35s var(--ease-out);
+}
+.foot__sub button:hover {
+  background: var(--red-hot);
+  transform: translate3d(0, -2px, 0);
+}
+.foot__status {
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+/* Three marks on one row. It was three lines of text — a LinkedIn name, a long
+   address and a number — which is a lot of column for something the closing
+   band above already sets out in full on every page.
+
+   Qualified by .foot__col, and it has to be: this list sits inside a footer
+   column, and `.foot__col ul` and `.foot__col li a` above are both more
+   specific than a lone .foot__contact. Unqualified, the column's own grid and
+   its baseline-aligned links win and the marks stay in a stack. */
+.foot__col .foot__contact {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.foot__col .foot__contact li a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    background-color 0.35s ease;
+}
+.foot__col .foot__contact li a:hover {
+  color: var(--red-hot);
+  border-color: var(--red-24);
+  background: var(--red-08);
+}
+.foot__col .foot__contact svg {
+  width: 17px;
+  height: 17px;
+}
+.foot__signin {
+  justify-self: start;
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--red-24);
+  padding: 0 0 0.4rem;
+  cursor: pointer;
+  transition: border-color 0.35s var(--ease-out);
+}
+.foot__signin:hover {
+  border-color: var(--red);
+}
+
+.foot__strip {
+  margin-top: clamp(3rem, 7vh, 4.5rem);
+  border-top: 1px solid var(--line-soft);
+  padding-block: 1.6rem clamp(1.6rem, 4vh, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem clamp(1.25rem, 2.5vw, 2.25rem);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.foot__strip a:not(.foot__mark) {
+  transition: color 0.35s var(--ease-out);
+}
+.foot__strip a:not(.foot__mark):hover {
+  color: var(--ink-2);
+}
+.foot__triad i {
+  font-style: normal;
+  color: var(--ink-4);
+  opacity: 0.55;
+  padding-inline: 0.2rem;
+}
+/* The lockup carries its own white ground, so the tile is what makes that
+   ground look deliberate on a black page instead of like a stray white square.
+   The explicit background also covers the case where the asset is exported
+   with transparency — the black blocks would otherwise disappear entirely. */
+.foot__mark {
+  display: inline-flex;
+  overflow: hidden;
+  background: var(--white);
+  flex: none;
+}
+/* Scaled inside a box that clips it, which crops the white margin the asset is
+   exported with without changing the size of the slot it sits in. See the note
+   on .nav__brand img — the real fix is a tighter export. */
+.foot__mark img {
+  height: 32px;
+  width: auto;
+  transform: scale(1.16);
+}
+/* pushed to the far end so the strip reads: mark … claim */
+.foot__tag {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+
+/* ==================================================================
+   PRIMARY NAV — fixed, and themed by the band underneath it
+
+   The bar carries its own copy of the theme tokens rather than picking a
+   side. The page alternates dark and light the whole way down, and a fixed
+   bar that committed to one of them would need a permanent scrim to stay
+   legible over the other. `data-over="light"` is set from JS when a light
+   band is under the bar; every rule below reads tokens, so that one attribute
+   re-themes the whole thing including the buttons inside it.
+   ================================================================== */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+
+  --bg: var(--black);
+  --ink-1: rgba(255, 255, 255, 0.95);
+  --ink-2: rgba(255, 255, 255, 0.6);
+  --ink-3: rgba(255, 255, 255, 0.38);
+  --ink-4: rgba(255, 255, 255, 0.2);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.07);
+  --surface: rgba(255, 255, 255, 0.03);
+  --nav-bg: rgba(10, 10, 10, 0.72);
+
+  color: var(--ink-1);
+  transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+  border-bottom: 1px solid transparent;
+}
+.nav[data-over='light'] {
+  --ink-1: rgba(10, 10, 10, 0.94);
+  --ink-2: rgba(10, 10, 10, 0.62);
+  --ink-3: rgba(10, 10, 10, 0.42);
+  --ink-4: rgba(10, 10, 10, 0.2);
+  --line: rgba(10, 10, 10, 0.13);
+  --line-soft: rgba(10, 10, 10, 0.07);
+  --surface: rgba(10, 10, 10, 0.028);
+  --nav-bg: rgba(255, 255, 255, 0.8);
+}
+/* Over the hero the bar floats on the scrim the hero already draws; it only
+   takes a ground of its own once the page has moved under it. */
+.nav[data-condensed] {
+  background: var(--nav-bg);
+  border-bottom-color: var(--line-soft);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+}
+
+.nav__bar {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* The white ground stays — the lockup's own is baked in, and if the asset is
+   ever re-exported with transparency its black blocks would vanish on a dark
+   bar without one. What is gone is the 4px of padding that sat outside it,
+   which read as a white border rather than as the mark's own edge. */
+.nav__brand {
+  display: inline-flex;
+  overflow: hidden;
+  background: var(--white);
+  flex: none;
+  transition: transform 0.4s var(--ease-out);
+}
+.nav__brand:hover {
+  transform: translate3d(0, -2px, 0);
+}
+/* The supplied lockup is square, contains its own wordmark, and is exported
+   with roughly a tenth of its width as white margin on every side. It is
+   scaled up inside a box that clips it, so the margin is cropped away and the
+   slot it occupies does not change size.
+ *
+ * ⚠ This is a workaround for the asset. A tightly cropped export — and a
+ * horizontal variant, which would serve this slot far better than a square one
+ * capped to the bar height — makes both this rule and the scale unnecessary. */
+.nav__brand img {
+  height: calc(var(--nav-h) - 26px);
+  width: auto;
+  transform: scale(1.16);
+}
+
+.nav__tabs {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.25rem, 1.4vw, 1.25rem);
+  margin-right: auto;
+  margin-left: clamp(0.5rem, 2vw, 1.75rem);
+}
+/* Light. At this size, uppercase and tracked this far open, semibold was doing
+   the job the tracking is already doing and the bar read heavier than anything
+   under it — the lockup included. The weight the tabs carry is their ink, and
+   the tab that is live still says so with colour and the rule beneath it. */
+.nav__tabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  padding: 0.65rem 0.55rem;
+  cursor: pointer;
+  transition: color 0.35s var(--ease-out);
+}
+.nav__tabBtn svg {
+  width: 8px;
+  flex: none;
+  opacity: 0.55;
+  transition: transform 0.35s var(--ease-out), opacity 0.35s ease;
+}
+.nav__tabBtn:hover,
+.nav__tabBtn[data-active] {
+  color: var(--ink-1);
+}
+.nav__tabBtn[data-active] svg {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+/* An open tab used to draw a red rule under itself. It is gone: the panel opens
+   on hover, so the rule arrived on hover too, and it was the third thing saying
+   the same one thing — the tab has already taken the full ink, its chevron has
+   already turned over, and the panel it names is open underneath it. */
+/* The page being read is marked by colour, which is a state that persists the
+   whole time you are on that page. */
+.nav__tabBtn[aria-current='page'] {
+  color: var(--red);
+}
+
+.nav__util {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.6vw, 1.5rem);
+  flex: none;
+}
+/* The same weight as the tabs it sits beside, and now the same hover: it takes
+   the full ink and nothing is drawn under it. */
+.nav__signin {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-block: 0.4rem;
+  transition: color 0.35s var(--ease-out);
+}
+.nav__signin:hover {
+  color: var(--ink-1);
+}
+
+/* ---------------------------- mega panel ---------------------------- */
+.nav__panel {
+  background: var(--nav-bg);
+  border-top: 1px solid var(--line-soft);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  backdrop-filter: blur(20px) saturate(1.4);
+  animation: navPanel 0.4s var(--ease-out) both;
+}
+@keyframes navPanel {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+}
+.nav__panelIn {
+  padding-block: clamp(1.75rem, 3.5vh, 2.75rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.32fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+}
+.nav__panelHead {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+}
+.nav__panelTitle {
+  font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+}
+.nav__panelList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.15rem clamp(1rem, 2.5vw, 2.5rem);
+}
+.nav__panelList a {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.7rem 0.75rem 0.7rem 1rem;
+  font-size: 0.92rem;
+  color: var(--ink-2);
+  border-left: 1px solid var(--line);
+  transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    background-color 0.35s ease;
+}
+.nav__panelList a:hover {
+  color: var(--ink-1);
+  border-left-color: var(--red);
+  background: var(--surface);
+}
+.nav__itemNote {
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  white-space: nowrap;
+}
+
+/* ------------------------------ burger ------------------------------ */
+.nav__burger {
+  display: none;
+  width: 42px;
+  height: 42px;
+  margin-right: calc(var(--gutter) * -0.25);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  flex: none;
+}
+.nav__burger span {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background: var(--ink-1);
+  transition: transform 0.4s var(--ease-out), opacity 0.3s ease;
+}
+.nav__burger span:first-child {
+  top: 17px;
+}
+.nav__burger span:last-child {
+  top: 24px;
+}
+.nav__burger[aria-expanded='true'] span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.nav__burger[aria-expanded='true'] span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* ==================================================================
+   MOBILE DRAWER — the same five tabs as accordions
+   ================================================================== */
+.drawer {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--z-drawer);
+  display: none;
+  grid-template-rows: minmax(0, 1fr) auto;
+  background: var(--black);
+  color: var(--ink-1);
+  animation: drawerIn 0.4s var(--ease-out) both;
+}
+.drawer[data-open] {
+  display: grid;
+}
+@keyframes drawerIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
+  }
+}
+.drawer__scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-inline: var(--gutter);
+  padding-block: 0.5rem 1.5rem;
+}
+.drawer__acc {
+  border-bottom: 1px solid var(--line-soft);
+}
+.drawer__acc h2 {
+  margin: 0;
+  font: inherit;
+}
+/* the accordion head and the plain link (Home) are the same row — one has a
+   chevron to turn, the other just goes somewhere */
+.drawer__acc h2 button,
+.drawer__acc h2 a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink-1);
+  background: none;
+  border: none;
+  padding-block: 1.15rem;
+  cursor: pointer;
+  text-align: left;
+}
+.drawer__acc h2 button svg {
+  width: 13px;
+  flex: none;
+  color: var(--red);
+  transition: transform 0.45s var(--ease-out);
+}
+/* the page being read, marked the same way in both halves of the nav */
+.drawer__acc h2 a[aria-current='page'],
+.drawer__acc[data-current] h2 button {
+  color: var(--red);
+}
+/* the plus rotates into a minus */
+.drawer__acc[data-open] h2 button svg {
+  transform: rotate(135deg);
+}
+/* 0fr → 1fr animates the row to its content height with no measured pixels */
+.drawer__accBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-out);
+}
+.drawer__acc[data-open] .drawer__accBody {
+  grid-template-rows: 1fr;
+}
+.drawer__accBody > div {
+  overflow: hidden;
+}
+.drawer__accBody ul {
+  list-style: none;
+  display: grid;
+  gap: 0.1rem;
+  padding-bottom: 1rem;
+}
+.drawer__accBody a {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.6rem 0 0.6rem 1rem;
+  border-left: 1px solid var(--line);
+  font-size: 0.95rem;
+  color: var(--ink-2);
+}
+.drawer__accBody a:hover {
+  color: var(--ink-1);
+  border-left-color: var(--red);
+}
+/* Pinned, not the last thing in the scroller — the two actions the drawer
+   exists to offer should not need scrolling past five accordions to reach. */
+.drawer__foot {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.75rem;
+  padding: 1rem var(--gutter) calc(1rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--line);
+  background: var(--black);
+}
+
+/* ==================================================================
+   /about
+   ================================================================== */
+
+/* ==================================================================
+   3.1 the coin hero — a pinned, four-scene opening
+
+   The copy DOES sit over the object here, which the split layout this
+   replaced deliberately avoided. It works because the object is a ring
+   with a hole in it: the type lives in that hole, on its own radial
+   scrim, and it is gone by the time the halves travel through where it
+   was. Nothing is ever read across moving metal.
+   ================================================================== */
+.chero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+
+  /* Local to the piece. The page's tokens are band-flipping (--ink-*), and
+     these must NOT flip: the coins are lit for a black ground and the whites
+     here are specular highlights on metal, not text colour. */
+  --coin: clamp(112px, 13vw, 180px);
+  --w-04: rgba(255, 255, 255, 0.04);
+  --w-40: rgba(255, 255, 255, 0.4);
+  --w-56: rgba(255, 255, 255, 0.56);
+  --w-72: rgba(255, 255, 255, 0.72);
+}
+
+/* --- ambient background --- */
+/* The layer itself carries what the section landing heroes carry: a lift along
+   the top edge and a red pool along the bottom one. The centre is left alone —
+   .chero__glow is already the halo there, and it is on the timeline. */
+.chero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(70% 40% at 50% 100%, rgba(192, 57, 43, 0.1), transparent 74%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035), transparent 26%);
+}
+.chero__glow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 96vmax;
+  height: 96vmax;
+  /* a tight halo behind the coins, not a haze over the whole hero */
+  background: radial-gradient(
+    closest-side,
+    rgba(192, 57, 43, 0.22),
+    rgba(192, 57, 43, 0.07) 40%,
+    transparent 68%
+  );
+  will-change: transform, opacity;
+}
+.chero__grid {
+  position: absolute;
+  inset: -20% -10%;
+  background-image: linear-gradient(var(--w-04) 1px, transparent 1px),
+    linear-gradient(90deg, var(--w-04) 1px, transparent 1px);
+  background-size: 88px 88px;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 20%, transparent 78%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 20%, transparent 78%);
+  opacity: 0.7;
+  will-change: transform, opacity;
+}
+.chero__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(closest-side at 50% 50%, transparent 42%, rgba(10, 10, 10, 0.72) 100%),
+    linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.85),
+      transparent 22%,
+      transparent 74%,
+      rgba(10, 10, 10, 0.95)
+    );
+}
+
+/* --- stage --- */
+.chero__stage {
+  position: absolute;
+  inset: 0;
+  /* matches half of .chero__copy's padding-top, so the ring stays concentric
+     with the headline after the copy is pushed clear of the nav */
+  top: clamp(2rem, 5.5vh, 4rem);
+  z-index: 3;
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+  pointer-events: none;
+}
+.chero__tilt {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* --- red light revealed between the halves --- */
+/* A glow and nothing else. A hard red-and-white rule down the centre of it
+   read as a line drawn across the hero rather than as light coming out of the
+   opening, so the bloom carries the beat on its own. */
+.chero__core-bloom {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: min(58vh, 560px);
+  height: min(58vh, 560px);
+  z-index: 3;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(192, 57, 43, 0.55),
+    rgba(192, 57, 43, 0.18) 42%,
+    transparent 72%
+  );
+  will-change: transform, opacity;
+}
+
+/* --- coins --- */
+/* Deliberately NOT preserve-3d.
+   A disc tilted ~48deg spans ~230px in Z, so no workable z-spacing stops the
+   coins intersecting — and intersecting geometry inside one 3D context makes
+   Chromium BSP-split the polygons, which shows up as torn shards.
+   Giving the stack `perspective` instead makes each .coin its own self-contained
+   3D scene (its rim still renders correctly) that is then flattened and
+   composited in z-index order. Depth still reads, nothing tears. */
+.coin-stack {
+  position: absolute;
+  inset: 0;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  z-index: 10;
+  will-change: transform;
+}
+.coin {
+  --r: calc(var(--coin) / 2);
+  --t: calc(var(--coin) * 0.115); /* thickness */
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--coin);
+  height: var(--coin);
+  transform-style: preserve-3d;
+  /* NEVER add opacity here. Per CSS Transforms 2, opacity (and will-change:
+     opacity) is a grouping property that forces transform-style: flat, which
+     collapses the 90deg rim strips to zero height and kills the thickness. */
+  will-change: transform;
+}
+.coin__body {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ---- cylindrical edge: N tangential strips around the circumference ---- */
+.coin__rim {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.coin__seg {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  /* arc width per strip, +1.5px overlap so no seams show */
+  width: calc(6.2832 * var(--r) / var(--seg) + 1.5px);
+  height: var(--t);
+  /* land on the circumference at --a, then stand up along the Z axis */
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1)) rotateX(90deg);
+  background-color: #131313;
+  background-image: /* milled edge */
+    repeating-linear-gradient(90deg, rgba(10, 10, 10, 0.34) 0 1px, transparent 1px 4px),
+    /* dark band with two bright machined lips — on a black page those lips are
+       what actually draw each coin's silhouette */
+      linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, calc(var(--lum) * 0.95)) 0%,
+        rgba(255, 255, 255, calc(var(--lum) * 0.34)) 20%,
+        rgba(255, 255, 255, calc(var(--lum) * 0.14)) 52%,
+        rgba(255, 255, 255, calc(var(--lum) * 0.72)) 100%
+      );
+}
+
+/* ---- faces ---- */
+.coin__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  /* crisp seam so the face reads as separate from the rim behind it */
+  box-shadow: inset 0 0 0 1.5px rgba(10, 10, 10, 0.3);
+}
+/* one soft contact shadow per coin, on the front face only — box-shadow
+   renders outside the border box, so overflow:hidden doesn't clip it */
+.coin__face--front {
+  transform: translateZ(calc(var(--t) / 2));
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.55);
+}
+.coin__face--back {
+  transform: translateZ(calc(var(--t) / -2)) rotateY(180deg);
+}
+
+/* light matte metal — every value is a white/black mix */
+.coin__plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  /* Black chrome, not silver: a hot specular at the upper left that falls away
+     fast into near-black, so the coins read as the brand's black + red + white
+     rather than as generic grey metal. */
+  background: radial-gradient(30% 30% at 86% 88%, rgba(192, 57, 43, 0.42), transparent 74%),
+    conic-gradient(
+      from 200deg at 50% 50%,
+      rgba(255, 255, 255, 0.16),
+      rgba(10, 10, 10, 0.3) 20%,
+      rgba(255, 255, 255, 0.2) 38%,
+      rgba(10, 10, 10, 0.28) 57%,
+      rgba(255, 255, 255, 0.15) 76%,
+      rgba(10, 10, 10, 0.3) 90%,
+      rgba(255, 255, 255, 0.16)
+    ),
+    radial-gradient(
+      118% 112% at 30% 20%,
+      #ffffff 0%,
+      #cfcfcf 5%,
+      #6e6e6e 14%,
+      #3a3a3a 32%,
+      #1e1e1e 55%,
+      #121212 78%,
+      #0a0a0a 100%
+    );
+}
+/* recessed inner well, like a struck coin */
+.coin__well {
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.7),
+    inset 0 -2px 3px rgba(255, 255, 255, 0.24), 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+/* rim bevel on the face */
+.coin__bevel {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.62),
+    inset 0 0 0 3px rgba(10, 10, 10, 0.55), inset 0 8px 20px rgba(255, 255, 255, 0.12),
+    inset 0 -10px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* engraved mark: a lit lower lip under a dark recess — no filters involved */
+.coin__glyph {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  /* generous: tilt foreshortening squashes tall marks like the Bitcoin B */
+  width: 62%;
+  height: 62%;
+}
+/* On dark metal an engraved (dark) mark disappears, so the mark is raised
+   instead: a black drop beneath a light face. */
+.coin__glyph--lip {
+  color: rgba(0, 0, 0, 0.8);
+  transform: translate3d(0, 2px, 0);
+}
+.coin__glyph--cut {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* moving specular reflection */
+.coin__spec {
+  position: absolute;
+  inset: -35%;
+  opacity: 0.32;
+  background: linear-gradient(
+    104deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.25) 47.5%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.25) 52.5%,
+    transparent 58%
+  );
+  transform: translate3d(-72%, 0, 0);
+  animation: coin-shine 6s var(--shine-delay, 0s) linear infinite;
+  will-change: transform;
+}
+@keyframes coin-shine {
+  0% {
+    transform: translate3d(-72%, 0, 0);
+  }
+  58%,
+  100% {
+    transform: translate3d(72%, 0, 0);
+  }
+}
+
+/* --- the mark the stack collapses into --- */
+.chero__emblem {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(220px, 30vw, 400px);
+  height: clamp(220px, 30vw, 400px);
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  will-change: transform, opacity;
+}
+.chero__emblem-glow {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(340px, 46vw, 640px);
+  height: clamp(340px, 46vw, 640px);
+  z-index: 19;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(192, 57, 43, 0.42),
+    rgba(192, 57, 43, 0.1) 46%,
+    transparent 74%
+  );
+  will-change: transform, opacity;
+}
+
+/* the four blocks of the lockup, drawn rather than served as a bitmap so the
+   cells can be addressed individually — see components/IbaMark.jsx */
+.ibamark {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(var(--logo-size, 1rem) * 0.16);
+  width: calc(var(--logo-size, 1rem) * 2.6);
+  flex: none;
+}
+.ibamark__cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: calc(var(--logo-size, 1rem) * 0.09);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--logo-size, 1rem) * 0.86);
+  line-height: 1;
+  will-change: transform, opacity;
+}
+/* on a dark ground a black cell is invisible, so it gets an edge instead */
+.ibamark__cell--i,
+.ibamark__cell--a {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1.5px var(--w-40);
+  color: var(--white);
+}
+.ibamark__cell--b {
+  background: var(--red);
+  color: var(--white);
+}
+.ibamark__cell--link {
+  color: var(--red);
+  padding: 16%;
+}
+.ibamark__link {
+  width: 100%;
+  height: 100%;
+}
+.ibamark--chero {
+  --logo-size: clamp(3.2rem, 5.6vw, 5rem);
+}
+
+/* --- hero copy --- */
+.chero__copy {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-inline: var(--gutter);
+  /* Clearance under the fixed nav. max() rather than clamp() so the floor holds
+     on short windows — a vh-only value collapses to a few px at 660px tall,
+     putting the kicker under the bar. */
+  padding-top: max(6.5rem, 10vh);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+/* scrim so white type stays legible over bright metal.
+   .chero__copy has z-index 30, so this sits above the coins but below the text. */
+.chero__copy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  z-index: -1;
+  /* Full-bleed ellipse: sizing the element itself made its boundary visible.
+     Taller than the ring's hole on purpose — this opening carries two supporting
+     paragraphs where the home hero carries one, and the lower one sits on the
+     near arc of the ring rather than inside it. */
+  background: radial-gradient(
+    ellipse 50% 46% at 50% 50%,
+    rgba(10, 10, 10, 0.82),
+    rgba(10, 10, 10, 0.5) 46%,
+    transparent 76%
+  );
+}
+.chero__kicker {
+  margin-bottom: clamp(1rem, 2vw, 1.8rem);
+  color: var(--w-72);
+  /* small type has to survive sitting on bright metal */
+  text-shadow: 0 2px 16px rgba(10, 10, 10, 0.95), 0 0 6px rgba(10, 10, 10, 0.9);
+}
+.chero__title {
+  /* sized for a long headline — "We Shape the Future" is 19 characters */
+  font-size: clamp(2.3rem, 5.6vw, 5.2rem);
+  letter-spacing: -0.02em;
+  text-shadow: 0 12px 60px rgba(10, 10, 10, 0.85);
+}
+.chero__lede {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 62ch;
+  margin-top: clamp(1.2rem, 2.4vw, 2rem);
+  font-size: clamp(0.9rem, 1.02vw, 1.02rem);
+  line-height: 1.7;
+  color: var(--w-72);
+  text-shadow: 0 2px 16px rgba(10, 10, 10, 0.95), 0 0 6px rgba(10, 10, 10, 0.9);
+}
+
+/* --- the stat strip, inline under the lede --- */
+.chero__stats {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.55rem clamp(0.9rem, 2.2vw, 2rem);
+  margin-top: clamp(1.3rem, 3vh, 2.1rem);
+  text-shadow: 0 2px 16px rgba(10, 10, 10, 0.95), 0 0 6px rgba(10, 10, 10, 0.9);
+}
+.chero__stats li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+/* the separator belongs to the item that follows it, so it can never end up
+   trailing the last one */
+.chero__stats li + li::before {
+  content: '·';
+  color: var(--red);
+  margin-right: 0.1rem;
+}
+.chero__statK {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+.chero__statLead,
+.chero__statV {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--w-56);
+}
+
+/* --- scene 3 typography, revealed between the doors --- */
+.chero__reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 1.6vw, 1.5rem);
+  text-align: center;
+  /* kept narrow so the opened doors clear it on both sides */
+  padding-inline: clamp(1.5rem, 19vw, 24rem);
+  pointer-events: none;
+}
+.chero__reveal-item {
+  will-change: transform, opacity;
+}
+.chero__reveal-title {
+  font-size: clamp(2rem, 4.8vw, 4.2rem);
+  letter-spacing: -0.015em;
+}
+.chero__reveal-body {
+  max-width: 38ch;
+  font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--w-56);
+}
+
+
+.ab__head {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 44rem;
+  margin-bottom: var(--step);
+}
+
+/* ---- the alliance field ---- */
+/* Clipped, and that is the point: the nodes start well outside the frame, so
+   the opening is a handful of strays wandering in rather than a full diagram
+   sitting there waiting. It also keeps them out of the copy above. */
+.af {
+  position: relative;
+  min-height: clamp(240px, 46vh, 500px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.af svg {
+  width: 100%;
+  height: 100%;
+  max-height: 500px;
+}
+.af__cam {
+  will-change: transform;
+}
+.af__link {
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1;
+}
+/* the spokes off the centre are the ones worth reading, so they carry the red */
+.af__link[data-hub] {
+  stroke: rgba(224, 80, 63, 0.55);
+  stroke-width: 1.2;
+}
+.af__dot[data-kind='hub'] {
+  fill: var(--red-hot);
+  filter: drop-shadow(0 0 10px rgba(224, 80, 63, 0.85));
+}
+.af__dot[data-kind='mid'] {
+  fill: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 0 6px rgba(224, 80, 63, 0.45));
+}
+.af__dot[data-kind='out'] {
+  fill: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- 3.2 the six dimensions ---- */
+/* A bento, not a 3x2. Only the three cards that break the grid say anything
+   about placement; the other three auto-flow into what is left, which is what
+   keeps the shape editable — reorder the array and the layout still closes.
+
+     ┌────────┬──────────────────┐
+     │        │    wide-top      │
+     │  tall  ├────────┬─────────┤
+     │        │        │         │
+     ├────────┴────────┼─────────┤
+     │   wide-bottom   │         │
+     └─────────────────┴─────────┘ */
+.core__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.core__card[data-cell='tall'] {
+  grid-column: 1;
+  grid-row: span 2;
+}
+.core__card[data-cell='wide-top'] {
+  grid-column: 2 / 4;
+}
+.core__card[data-cell='wide-bottom'] {
+  grid-column: 1 / 3;
+}
+
+.core__card {
+  /* The one literal colour in the drawings, and the ink that sits on top of it.
+     Both flip on a red card, which is what lets one drawing serve both
+     grounds instead of needing a second version of itself. */
+  --art-accent: var(--red);
+  --art-on-accent: var(--white);
+  /* the drawing's three weights — subject, structure, scaffolding */
+  --l1: 0.3;
+  --l2: 0.17;
+  --l3: 0.1;
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--white);
+  transition: transform 0.55s var(--ease-out), border-color 0.55s var(--ease-out),
+    box-shadow 0.55s var(--ease-out);
+}
+.core__card:hover {
+  transform: translate3d(0, -3px, 0);
+  border-color: var(--red-24);
+  box-shadow: 0 20px 44px rgba(10, 10, 10, 0.08);
+}
+/* The red cards carry their own ground, so they restate the ink tokens rather
+   than inheriting the band's — otherwise the body copy on them would be the
+   light band's near-black. */
+.core__card[data-hot] {
+  --ink-1: #fff;
+  --ink-2: rgba(255, 255, 255, 0.82);
+  --ink-4: rgba(255, 255, 255, 0.5);
+  --line-soft: rgba(255, 255, 255, 0.18);
+  --art-accent: #fff;
+  --art-on-accent: var(--red);
+  /* Lifted, all three together. White at 0.1 on red is nothing — the same
+     drawing needs roughly twice the weight to read on this ground. */
+  --l1: 0.62;
+  --l2: 0.4;
+  --l3: 0.24;
+  background: var(--red);
+  border-color: transparent;
+}
+.core__card[data-hot]:hover {
+  border-color: transparent;
+  box-shadow: 0 20px 44px rgba(192, 57, 43, 0.28);
+}
+
+/* ---- the drawn panel ---- */
+.core__art {
+  position: relative;
+  /* Grows into whatever height the bento gives the card, which is the whole
+     point of the uneven sizes — the tall card gets a tall drawing, not a short
+     one with a gap under it. */
+  flex: 1 1 auto;
+  min-height: clamp(120px, 10.5vw, 155px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+}
+/* the wide cells get a slightly deeper panel, since width is the one dimension
+   their drawing cannot use — all six are square */
+.core__card[data-cell^='wide'] .core__art {
+  min-height: clamp(135px, 12vw, 175px);
+}
+/* graph paper, faded off at the edges so the panel has no visible seam */
+.core__art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 26px 26px;
+  color: var(--ink-1);
+  opacity: 0.05;
+  -webkit-mask-image: radial-gradient(72% 72% at 50% 50%, #000, transparent 80%);
+  mask-image: radial-gradient(72% 72% at 50% 50%, #000, transparent 80%);
+}
+/* The glow lights as the card arrives. Weaker and tighter than the home page's,
+   which lives on a small 16/10 panel — at this size the same values washed the
+   whole card pink and the three plain cards stopped reading as plain. */
+.core__art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(34% 40% at 50% 48%, rgba(192, 57, 43, 0.13), transparent 70%);
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-out);
+}
+/* on the red cards the same light has to be lighter than the ground, not redder */
+.core__card[data-hot] .core__art::after {
+  background: radial-gradient(38% 44% at 50% 48%, rgba(255, 255, 255, 0.14), transparent 72%);
+}
+.core__card.is-in .core__art::after {
+  opacity: 1;
+}
+/* Sized by width, capped in absolute units. A percentage HEIGHT would be the
+   more natural way to say this, but the panel's own height comes from its
+   content — so the percentage resolves against nothing and the drawing falls
+   back to its intrinsic size, which is how a card ends up 1200px tall. Every
+   viewBox is cropped square, so one max-width sizes all six alike. */
+/* The drawing is a mark on the panel, not the panel's contents: it sits well
+   inside its own ground with air around it, the way the card's copy sits inside
+   its padding. Sized so the panel is always taller than the drawing — a figure
+   that fills its box is what makes the panel, and then the card, grow. */
+.core__art svg {
+  position: relative;
+  z-index: 1;
+  width: 48%;
+  max-width: 108px;
+  height: auto;
+  color: var(--ink-1);
+}
+.core__card[data-cell^='wide'] .core__art svg {
+  max-width: 128px;
+}
+/* The tall cell's height is set by the two rows beside it, not by its own
+   content, so a larger mark here fills the panel without growing the card. */
+.core__card[data-cell='tall'] .core__art svg {
+  max-width: 215px;
+}
+
+/* the three weights, the accent, and the ink that sits on the accent */
+.core__l1,
+.core__l2,
+.core__l3 {
+  fill: none;
+  stroke: currentColor;
+}
+.core__l1 {
+  stroke-opacity: var(--l1);
+}
+.core__l2 {
+  stroke-opacity: var(--l2);
+}
+.core__l3 {
+  stroke-opacity: var(--l3);
+}
+.core__accent {
+  fill: var(--art-accent);
+}
+.core__accentStroke {
+  fill: none;
+  stroke: var(--art-accent);
+}
+.core__onAccent {
+  fill: none;
+  stroke: var(--art-on-accent);
+}
+/* the order marker, part of the panel's chrome */
+.core__n {
+  position: absolute;
+  z-index: 2;
+  top: 0.85rem;
+  left: 1rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the copy ---- */
+.core__meta {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  padding: clamp(1.1rem, 1.9vw, 1.6rem) clamp(1.1rem, 1.9vw, 1.6rem)
+    clamp(1.25rem, 2.1vw, 1.75rem);
+}
+.core__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.1;
+  color: var(--ink-1);
+}
+.core__body {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* 3.3 initiatives is the Orbit wheel — see .orb, under 4.1, where it was first
+   needed. The four take the same shape as the Consulting Stack's six steps and
+   are read the same way, so they are the same block rather than a second one
+   that would drift from it. */
+
+/* ---- 3.4 the team ---- */
+.ab__team {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.75rem);
+}
+.ab__team li {
+  display: grid;
+  justify-items: start;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+/* Initials, not a stock silhouette: a portrait that is not there should look
+   like a name waiting for a photograph, not like a person. */
+.ab__portrait {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 0.4rem;
+  border-radius: 50%;
+  border: 1px solid var(--red-24);
+  background: var(--red-08);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  color: var(--red);
+}
+.ab__memberName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1.05;
+}
+.ab__memberRole {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.ab__memberBio {
+  font-size: 0.9rem;
+  line-height: 1.68;
+  color: var(--ink-2);
+}
+/* deliberately plain and dimmed — it should read as missing, not as copy */
+.ab__pending {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink-4);
+  padding-block: 0.3rem;
+}
+
+.ab__advisory {
+  margin-top: clamp(1.5rem, 3vh, 2.5rem);
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+.ab__advisoryName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+.ab__advisoryBody {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+  max-width: 44ch;
+}
+
+/* ---- 3.5 impact ---- */
+/* The eight figures are laid out by the home page's .impact__* rules — same
+   two kinds of claim, same split, so the same layout rather than a second one
+   that would have to be kept in step with it by hand. */
+.ab__tokens {
+  margin-top: clamp(3rem, 7vh, 4.5rem);
+}
+.ab__tokensName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.2rem, 2.2vw, 1.9rem);
+  line-height: 1.1;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+}
+/* Read by a screen reader, taken out of the visual layout. Not `display:none`,
+   which would take it out of the accessibility tree as well. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- the ring and the record ---- */
+.tk {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.tk__figure {
+  display: grid;
+  justify-items: center;
+  gap: 1.1rem;
+}
+/* Square, and the ring only occupies its middle — the labels live in the
+   margin that leaves, so they never need to escape the box to be placed. */
+.tk__chart {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1;
+}
+/* The ring takes the middle 64% and the labels live in the 18% margin that
+   leaves on each side. Those two numbers and LABEL_R in Tokenomics.jsx are one
+   decision: the labels have to clear the ring's outer edge, which sits at
+   26.1% of the box from the centre. */
+.tk__ring {
+  position: absolute;
+  inset: 18%;
+  width: 64%;
+  height: 64%;
+  overflow: visible;
+  /* start at twelve o'clock, run clockwise */
+  transform: rotate(-90deg);
+}
+.tk__track {
+  fill: none;
+  stroke: var(--line-soft);
+  stroke-width: 24;
+}
+/* One hue for all four. The arcs already carry the magnitude; a ramp would say
+   it a second time and leave the categories looking ordered when they are not. */
+.tk__seg {
+  fill: none;
+  stroke: var(--red);
+  stroke-width: 24;
+  cursor: default;
+  transition: stroke 0.35s var(--ease-out);
+}
+.tk__seg[data-on] {
+  stroke: var(--red-hot);
+}
+
+.tk__centre {
+  position: absolute;
+  inset: 30%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  text-align: center;
+  pointer-events: none;
+}
+.tk__total {
+  font-family: var(--font-display);
+  font-weight: 600;
+  /* proportional figures: tabular ones read loose at display sizes */
+  font-size: clamp(1.05rem, 2.1vw, 1.6rem);
+  line-height: 1;
+  text-wrap: balance;
+}
+.tk__totalV {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Centred on its radial point, so the box reaches 10% inward — which is why
+   LABEL_R is 38 and not 28: 38 − 10 = 28% clears the ring's 26.1% edge. */
+.tk__label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+  width: 20%;
+  text-align: center;
+  cursor: default;
+}
+.tk__pct {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.9vw, 1.45rem);
+  line-height: 1;
+  color: var(--ink-1);
+  transition: color 0.35s var(--ease-out);
+}
+.tk__label[data-on] .tk__pct {
+  color: var(--red-hot);
+}
+.tk__name {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--ink-3);
+  text-wrap: balance;
+}
+.tk__caption {
+  max-width: 34ch;
+  text-align: center;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-4);
+}
+
+/* The table scrolls inside its own box rather than widening the page. min-width
+   is what actually enforces that: a grid item defaults to min-width:auto, which
+   is its content's width, so the wrapper's overflow never engages and the
+   min-width table pushes the page sideways instead. */
+.tk__record {
+  min-width: 0;
+}
+.tk__tableWrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+.tk__table {
+  width: 100%;
+  min-width: 30rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+.tk__table th,
+.tk__table td {
+  padding-block: clamp(0.7rem, 1.7vh, 1rem);
+  padding-right: 1.25rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--ink-2);
+  vertical-align: baseline;
+  transition: color 0.35s var(--ease-out);
+}
+.tk__table thead th {
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.tk__table tbody th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-1);
+}
+.tk__table tbody tr {
+  transition: background-color 0.35s var(--ease-out);
+}
+.tk__table tbody tr[data-on] {
+  background: var(--red-08);
+}
+.tk__table tbody tr[data-on] th,
+.tk__table tbody tr[data-on] td {
+  color: var(--ink-1);
+}
+/* the disclosed total, set apart from the rows it sums */
+.tk__table tfoot th,
+.tk__table tfoot td {
+  border-bottom: none;
+  padding-top: 1.1rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tk__share,
+.tk__value {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tk__value {
+  color: var(--red-hot);
+}
+.tk__more {
+  margin-top: 1.1rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+/* ==================================================================
+   4. SERVICES
+   Seven pages built from one set of parts. Every surface here is the
+   site's existing card language — hairline border, --surface ground,
+   red-tinted border on hover — so a service page reads as the same
+   site rather than as a section with a look of its own.
+   ================================================================== */
+
+/* ---- the page hero ---- */
+.svc__hero {
+  padding-top: clamp(8rem, 18vh, 12rem);
+  /* the object is drawn past its box on purpose; without this the bleed makes
+     the whole page horizontally scrollable */
+  overflow: hidden;
+}
+/* The right half of the hero, which the headline leaves empty. `.band` is
+   already positioned and `.wrap` already carries z-index 2, so the type sits
+   over this without either of them knowing about the other. */
+/* Inset below the bar: the nav is fixed and transparent at the top of a page,
+   so an object drawn to the very top puts geometry behind the tabs. */
+.heroArt {
+  position: absolute;
+  top: var(--nav-h);
+  right: 0;
+  z-index: 1;
+  /* Narrow enough that the object clears the headline column at 1440, where
+     the spectrum chips run furthest right. It still bleeds behind them a
+     little, which is wanted — the copy sitting over the object is what gives
+     the band depth — but never far enough to fight the words for attention. */
+  width: 47%;
+  height: calc(100% - var(--nav-h));
+  pointer-events: none;
+}
+.heroArt canvas {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s var(--ease-out);
+}
+/* only once a real frame has been drawn — see HeroArt.jsx */
+.heroArt[data-live] canvas {
+  opacity: 1;
+}
+.heroArt[data-failed] canvas {
+  opacity: 0;
+}
+.svc__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color 0.35s var(--ease-out);
+}
+.svc__back:hover {
+  color: var(--red-hot);
+}
+.svc__title {
+  margin-top: 1.3rem;
+  max-width: 18ch;
+}
+.svc__sub {
+  margin-top: clamp(1.2rem, 3vh, 1.8rem);
+  max-width: 52ch;
+  font-size: clamp(1rem, 1.3vw, 1.22rem);
+  line-height: 1.55;
+  color: var(--ink-1);
+}
+.svc__intro {
+  margin-top: clamp(1.2rem, 3vh, 1.8rem);
+  max-width: 62ch;
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.svc__intro p + p {
+  margin-top: 1rem;
+}
+
+/* the discipline bar under the landing headline */
+.svc__spectrum {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: clamp(1.4rem, 3.5vh, 2.2rem);
+  max-width: 62rem;
+}
+.svc__spectrum li {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* ==================================================================
+   4.0 THE SHOWCASE HERO — a section's entrance
+   ==================================================================
+   A centred composition rather than the standard hero's left column:
+   outlined word, headline inside a bracket, red light, and the section's
+   contents drawn under it as a console tilted away from the reader.
+
+   Everything here is built from the band's own tokens and one red. No
+   image, no second WebGL context — the object is type, a border and two
+   gradients, so it costs a repaint and cannot fail to load. */
+.svc__hero--show {
+  padding-top: calc(var(--nav-h) + clamp(3.5rem, 10vh, 7rem));
+  /* The console is masked away at its own bottom edge, so it needs a little
+     dark under it to fade INTO. At zero the fade ended exactly on the seam with
+     the next band, and a gradient cut off mid-fall reads as a rendering fault
+     rather than as depth. */
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+  text-align: center;
+  isolation: isolate;
+}
+
+/* The air. Red above, where the headline is, and again under the console,
+   so the two ends of the band are lit and the middle is not — which is what
+   stops it reading as a wash laid over the whole section. */
+.svc__showAmb {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(52% 34% at 50% 2%, rgba(192, 57, 43, 0.16), transparent 72%),
+    radial-gradient(70% 42% at 50% 96%, rgba(192, 57, 43, 0.1), transparent 74%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035), transparent 26%);
+}
+/* The ground under it all: a grid that fades out before it reaches the copy,
+   so it is texture at the edges rather than a pattern behind the words. */
+.svc__showAmb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line-soft) 1px, transparent 1px);
+  background-size: 84px 84px;
+  -webkit-mask-image: radial-gradient(58% 46% at 50% 34%, transparent 30%, #000 100%);
+  mask-image: radial-gradient(58% 46% at 50% 34%, transparent 30%, #000 100%);
+  opacity: 0.7;
+}
+
+/* The section, naming itself at a size the H1 cannot be set at. Outline only:
+   filled, it is a second headline competing with the first.
+
+   Shared with the About hero, which is a different piece entirely but opens the
+   same way — one rule rather than two, so the two cannot drift apart. */
+.svc__showGhost,
+.chero__ghost {
+  position: absolute;
+  top: calc(var(--nav-h) * 0.5);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: clamp(6rem, 22vw, 21rem);
+  line-height: 0.78;
+  letter-spacing: 0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+  -webkit-mask-image: linear-gradient(to bottom, #000 8%, transparent 78%);
+  mask-image: linear-gradient(to bottom, #000 8%, transparent 78%);
+}
+
+.svc__showCopy {
+  display: grid;
+  justify-items: center;
+  gap: clamp(1rem, 2.4vh, 1.6rem);
+}
+/* The bracket around the headline. Its top and bottom are masked off, so it
+   reads as a frame the type sits inside rather than a box drawn around it. */
+.svc__showFrame {
+  position: absolute;
+  inset: -1.5rem clamp(0rem, 5vw, 5rem) -2rem;
+  z-index: -1;
+  pointer-events: none;
+  border: 1px solid var(--line);
+  border-radius: clamp(28px, 5vw, 64px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 74%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 16%, #000 74%, transparent);
+}
+.svc__showTitle {
+  max-width: 17ch;
+  font-size: clamp(2.6rem, 7vw, 6.4rem);
+}
+.svc__showSub {
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.3vw, 1.22rem);
+  line-height: 1.55;
+  color: var(--ink-1);
+}
+.svc__showIntro {
+  max-width: 64ch;
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+.svc__showIntro p + p {
+  margin-top: 1rem;
+}
+.svc__showCopy .btn {
+  margin-top: clamp(0.6rem, 1.6vh, 1.2rem);
+}
+
+/* ---- the console ---- */
+/* Tilted away and fading into the band at its lower edge: it is the contents
+   of the page receding, not a card sitting on it. The bottom of the screen is
+   never a hard line, so nothing has to be choreographed against the band end. */
+.svc__console {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(3rem, 9vh, 6rem);
+  padding-inline: var(--gutter);
+  perspective: 1700px;
+}
+.svc__consoleGlow {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  z-index: -1;
+  transform: translateX(-50%);
+  width: min(78%, 860px);
+  height: 46%;
+  background: radial-gradient(58% 100% at 50% 50%, rgba(192, 57, 43, 0.3), transparent 72%);
+  filter: blur(34px);
+  pointer-events: none;
+}
+.svc__screen {
+  position: relative;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: clamp(1rem, 2vw, 1.6rem) clamp(1rem, 2.4vw, 2rem) clamp(3rem, 7vw, 5rem);
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: clamp(12px, 1.6vw, 22px);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.012) 42%,
+    rgba(10, 10, 10, 0.85)
+  );
+  box-shadow: 0 60px 120px -46px rgba(0, 0, 0, 0.95);
+  transform: rotateX(9deg);
+  transform-origin: 50% 0%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+}
+.svc__screenBar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line-soft);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.svc__screenDots {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+.svc__screenDots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-4);
+}
+.svc__screenDots i:first-child {
+  background: var(--red);
+}
+
+/* The six, in their order, on one line. The rule behind them is the arc the
+   page's opening paragraph describes, and it is red where the work starts and
+   fades out where it ends — the order is the information here. */
+.svc__rail {
+  position: relative;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin-top: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+/* A rail is as many columns as it has nodes: the Studio's four sections and
+   Education's two doors are the same object as the six services, not a short
+   version of it, so they fill the screen rather than sitting in its left third. */
+.svc__rail[data-n='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.svc__rail[data-n='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.svc__rail[data-n='4'] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.svc__rail[data-n='5'] {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+.svc__rail::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  height: 1px;
+  background: linear-gradient(to right, var(--red-55), var(--red-24) 42%, var(--line) 78%, transparent);
+  transform-origin: 0 50%;
+}
+
+/* ---- the rail arriving, and then running ----
+   Two CSS animations, both switched on by [data-live], which ShowcaseHero sets
+   and nothing else does. Under reduced motion it is never set: the rule is
+   simply drawn, the nodes are simply there, and nothing travels — so there is
+   no reduced-motion rule here, and must not be.
+
+   The rule draws left to right and the nodes land along it in order, because
+   the rail IS an order and filling it out of sequence would say otherwise. */
+.svc__rail[data-live]::before {
+  animation: railDraw 1.05s var(--ease-out) 0.3s both;
+}
+.svc__rail[data-live] li {
+  animation: railNode 0.6s var(--ease-out) both;
+  animation-delay: calc(0.5s + var(--i, 0) * 0.09s);
+}
+@keyframes railDraw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes railNode {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 9px, 0);
+  }
+}
+
+/* A signal running the length of the rail, on a loop. The rail is a sequence —
+   frame, structure, build, govern — and this is that sequence being traversed
+   rather than merely listed.
+
+   Drawn as a moving background rather than a moving element: a strip the full
+   width of the rail with one short bright band on it, so the travel is a
+   background-position and never needs to know the rail's pixel width. */
+.svc__rail[data-live]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  height: 1px;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, transparent, var(--red-hot), transparent);
+  background-size: 22% 100%;
+  background-repeat: no-repeat;
+  animation: railPulse 3.6s linear 1.9s infinite;
+}
+/* parked while the hero is off screen — an endless animation on a band the
+   reader has left is work for nobody */
+.svc__rail[data-hold]::after {
+  animation-play-state: paused;
+}
+@keyframes railPulse {
+  from {
+    background-position: -28% 0;
+  }
+  to {
+    background-position: 128% 0;
+  }
+}
+.svc__rail li {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 0.7rem;
+  padding-right: 0.9rem;
+}
+/* the node itself, on the rule: a ring on the band's own black, so the line
+   passes behind it rather than through it */
+.svc__rail li::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  margin-top: 6px;
+  border-radius: 50%;
+  border: 1px solid var(--red-55);
+  background: var(--black);
+  box-shadow: 0 0 0 5px var(--black);
+}
+/* A node that goes somewhere carries the whole cell, so the number and the name
+   are one target rather than two — the same grid as the li, so a linked rail and
+   a labelled one set identically. */
+.svc__railLink {
+  display: grid;
+  justify-items: start;
+  gap: 0.55rem;
+}
+.svc__railN {
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  color: var(--red-hot);
+}
+.svc__railName {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: color 0.35s var(--ease-out);
+}
+/* who the node is for, or what is behind it — a sentence fragment, so it drops
+   the tracking and the caps the label above it is set in */
+.svc__railNote {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.svc__railLink:hover .svc__railName,
+.svc__railLink:focus-visible .svc__railName {
+  color: var(--ink-1);
+}
+/* the node lights up with the name above it — the dot is the thing on the rail,
+   so it is what says the whole cell is live */
+.svc__rail li:has(.svc__railLink:hover)::before,
+.svc__rail li:has(.svc__railLink:focus-visible)::before {
+  background: var(--red);
+  border-color: var(--red-hot);
+}
+
+/* the discipline bar, when it is set inside the console instead of under the
+   headline — the same chips, quieter, because the rail above is the subject */
+.svc__spectrum--screen {
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+  padding-top: clamp(1.2rem, 2.5vw, 1.8rem);
+  border-top: 1px solid var(--line-soft);
+  max-width: none;
+}
+.svc__spectrum--screen li {
+  border-color: var(--line-soft);
+  color: var(--ink-3);
+}
+
+/* ---- section head ---- */
+.svc__head {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 44rem;
+  margin-bottom: var(--step);
+}
+.svc__note {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+/* the same note, when it trails the block it qualifies rather than heading it */
+.svc__note--after {
+  margin-top: clamp(1.5rem, 3.5vh, 2.2rem);
+  max-width: 62ch;
+}
+
+/* ---- 4.0 the index of services ---- */
+/* The arrows sit above the rail and to the right, out of the reading order of
+   the cards themselves. Disabled at each end rather than hidden: a control that
+   vanishes is a control the reader has to find again. */
+.idx__nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.idx__nav button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink-2);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    background-color 0.35s ease, opacity 0.35s ease;
+}
+.idx__nav button:hover:not(:disabled) {
+  color: var(--red-hot);
+  border-color: var(--red-24);
+  background: var(--red-08);
+}
+.idx__nav button:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+/* The rail. It scrolls natively; the buttons only move it by one card.
+   The vertical padding is not decoration — a card grows on hover, and with
+   overflow-x set the browser makes overflow-y `auto` too, so without room to
+   grow into the top of the lifted card is clipped. */
+.svc__index {
+  list-style: none;
+  display: flex;
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding-block: 0.75rem 1.5rem;
+  /* the scrollbar is replaced by the arrows and the card cut off at the edge */
+  scrollbar-width: none;
+}
+.svc__index::-webkit-scrollbar {
+  display: none;
+}
+.svc__index:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+.svc__index > li {
+  flex: 0 0 clamp(15rem, 27vw, 20rem);
+  scroll-snap-align: start;
+}
+.svc__indexLink {
+  height: 100%;
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: transform 0.55s var(--ease-out), border-color 0.55s var(--ease-out),
+    box-shadow 0.55s var(--ease-out);
+}
+/* Grows, and its name takes the accent. The card is scaled from its own bottom
+   edge so the row it stands on does not appear to move under it. */
+.svc__indexLink:hover {
+  transform: scale(1.045);
+  transform-origin: 50% 100%;
+  border-color: var(--red-24);
+  box-shadow: 0 22px 48px rgba(10, 10, 10, 0.1);
+}
+.svc__indexN {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+  transition: color 0.45s var(--ease-out);
+}
+.svc__indexName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.1;
+  color: var(--ink-1);
+  transition: color 0.45s var(--ease-out);
+}
+.svc__indexLink:hover .svc__indexName {
+  color: var(--red);
+}
+.svc__indexLink:hover .svc__indexN {
+  color: var(--red-hot);
+}
+.svc__indexBlurb {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+/* justify-self, or the arrow's rule stretches the whole card as a grid item */
+.svc__indexLink .arrow {
+  margin-top: 0.35rem;
+  justify-self: start;
+}
+
+/* ---- the education cross-link ---- */
+.svc__cross {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+  padding: clamp(1.6rem, 3vw, 2.4rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.svc__crossName {
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  line-height: 1.05;
+}
+.svc__crossBody {
+  margin-top: 0.6rem;
+  max-width: 46ch;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ---- described tiles ---- */
+.svc__tiles {
+  list-style: none;
+  display: grid;
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.svc__tiles[data-cols='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.svc__tiles[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.svc__tiles li {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: border-color 0.55s var(--ease-out);
+}
+.svc__tiles li:hover {
+  border-color: var(--red-24);
+}
+.svc__tileName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  line-height: 1.15;
+  color: var(--ink-1);
+}
+.svc__tileBody {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ---- undescribed capabilities: a name is the whole entry ---- */
+.svc__chips {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1.1vw, 1rem);
+}
+.svc__chips li {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: clamp(1rem, 1.8vw, 1.35rem) clamp(1.1rem, 2vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--ink-1);
+  transition: border-color 0.55s var(--ease-out);
+}
+.svc__chips li::before {
+  content: '';
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.svc__chips li:hover {
+  border-color: var(--red-24);
+}
+
+/* ---- bare tags ---- */
+.svc__tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.svc__tags li {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  transition: border-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
+}
+.svc__tags li:hover {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+
+/* ---- the numbered timeline ---- */
+.svc__steps {
+  list-style: none;
+  counter-reset: none;
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.svc__steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 16rem) minmax(0, 2fr);
+  gap: 0.5rem clamp(1.25rem, 3vw, 3rem);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3.5vh, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+.svc__stepN {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--red-hot);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.45rem;
+}
+.svc__stepName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.05rem, 1.6vw, 1.4rem);
+  line-height: 1.15;
+  color: var(--ink-1);
+}
+.svc__stepBody {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* ---- the same six steps, on a wheel ----
+   The reading point is on the left of the circle and the step's copy sits
+   beside it. One hub, three things hung off it: the arc the names stand on, the
+   point they are read at, and the names — all three positioned from --hub-x and
+   --r, so the arc cannot drift off the radius the items sit on.
+
+   Everything under [data-live] is the geometry, and only Orbit ever sets it.
+   Under reduced motion the wheel is not rendered and the panes fall into flow,
+   which is the printed list of six this block started as — so there is no
+   reduced-motion rule here, and must not be. */
+.orb {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+.orb__copy {
+  display: grid;
+  gap: clamp(2rem, 5vh, 3rem);
+}
+.orb__pane {
+  display: grid;
+  justify-items: start;
+  gap: 0.9rem;
+  max-width: 34rem;
+}
+.orb__n {
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 0.8;
+  color: var(--red);
+}
+.orb__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  line-height: 1.05;
+}
+.orb__body {
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.72;
+  color: var(--ink-2);
+}
+.orb__list {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+}
+.orb__item button {
+  font: inherit;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.2rem 0;
+  text-align: left;
+}
+.orb__itemN {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--red-hot);
+}
+.orb__itemName {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: color 0.5s var(--ease-out);
+}
+.orb__arc,
+.orb__dot {
+  display: none;
+}
+
+/* ---- the wheel proper ---- */
+/* The panes stack in one cell and cross-fade. All six stay in the document and
+   none is hidden from a screen reader: what changes is which is painted, not
+   which exists. */
+.orb[data-live] .orb__copy {
+  grid-template-areas: 'pane';
+  gap: 0;
+}
+.orb[data-live] .orb__pane {
+  grid-area: pane;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.orb[data-live] .orb__pane[data-on] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.orb[data-live] .orb__ring {
+  --hub-x: 6%;
+  --r: clamp(5rem, 11vw, 8.5rem);
+  /* how much of its own angle a name is turned by — see .orb__item */
+  --tilt: 0.45;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+/* a zero-sized box at the hub, so an item's own box starts on the centre of
+   rotation and the origin below is that centre */
+.orb[data-live] .orb__list {
+  position: absolute;
+  left: var(--hub-x);
+  top: 50%;
+  display: block;
+  width: 0;
+  height: 0;
+  gap: 0;
+}
+.orb[data-live] .orb__item {
+  position: absolute;
+  left: 0;
+  top: -0.8em;
+  transform-origin: 0 50%;
+  /* Placed at the full angle, tilted at a fraction of it. A name follows the
+     arc — that is the whole picture — but a name that follows it exactly is
+     set at 60° on a wheel of six and straight up the page on a wheel of four.
+
+     The last rotation takes the text back to --tilt of its BEARING, not of the
+     angle it was placed at: the placement angle keeps climbing as the wheel
+     turns, so tilting by a fraction of it turned every name a little further
+     over on each lap until they came round upside down. The bearing is folded
+     into ±180 and cannot accumulate. Net rotation of the text is --tilt × --n.
+
+     The fold itself is a jump, and it happens at ±180 — directly behind the
+     reading point, where --k has been 0 since the falloff. It is never seen. */
+  transform: rotate(var(--a, 0deg)) translateX(var(--r))
+    rotate(calc(var(--tilt) * var(--n, 0deg) - var(--a, 0deg)));
+  /* --k is 1 at the reading point and 0 at the falloff, written per step by the
+     component. Distance off the point is all that styles an item. */
+  opacity: var(--k, 1);
+  filter: blur(calc((1 - var(--k, 1)) * 3.5px));
+  transition: transform 0.9s var(--ease-out), opacity 0.9s var(--ease-out),
+    filter 0.9s var(--ease-out);
+}
+.orb[data-live] .orb__item button {
+  padding-left: 1rem;
+  white-space: nowrap;
+}
+.orb[data-live] .orb__item[data-on] .orb__itemName {
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.orb__item button:hover .orb__itemName,
+.orb__item button:focus-visible .orb__itemName {
+  color: var(--ink-1);
+}
+.orb[data-live] .orb__arc,
+.orb[data-live] .orb__dot {
+  display: block;
+  position: absolute;
+  left: var(--hub-x);
+  top: 50%;
+}
+.orb[data-live] .orb__arc {
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  /* only the leading edge of the circle — the rest is behind the reader */
+  -webkit-mask-image: radial-gradient(closest-side at 0% 50%, transparent 55%, #000 100%);
+  mask-image: radial-gradient(closest-side at 0% 50%, transparent 55%, #000 100%);
+}
+.orb[data-live] .orb__dot {
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 calc(var(--r) - 3.5px);
+  border-radius: 50%;
+  background: var(--red);
+}
+
+/* ---- the two tracks ---- */
+.svc__tracks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.svc__track {
+  padding: clamp(1.5rem, 2.6vw, 2.2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.svc__trackK {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red-hot);
+}
+.svc__trackName {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.15;
+}
+.svc__trackList {
+  list-style: none;
+  counter-reset: step;
+  margin-top: 1.3rem;
+  display: grid;
+}
+.svc__trackList li {
+  counter-increment: step;
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding-block: 0.8rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.svc__trackList li + li {
+  border-top: 1px solid var(--line-soft);
+}
+.svc__trackList li::before {
+  content: counter(step, decimal-leading-zero);
+  flex: none;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- grouped lists ---- */
+.svc__groups {
+  list-style: none;
+  display: grid;
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.svc__groups[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.svc__groups[data-cols='3'] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.svc__groups > li {
+  padding: clamp(1.4rem, 2.4vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.svc__groupName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 1.4vw, 1.22rem);
+  line-height: 1.15;
+  color: var(--ink-1);
+}
+.svc__groupList {
+  list-style: none;
+  margin-top: 1.1rem;
+  display: grid;
+}
+.svc__groupList li {
+  display: grid;
+  gap: 0.25rem;
+  padding-block: 0.6rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.svc__groupList li + li {
+  border-top: 1px solid var(--line-soft);
+}
+.svc__groupList strong {
+  font-weight: 600;
+  color: var(--ink-1);
+}
+
+/* ---- sector panels ---- */
+.svc__panels {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.svc__panel {
+  border-bottom: 1px solid var(--line);
+}
+.svc__panel h3 {
+  margin: 0;
+  font: inherit;
+}
+.svc__panel button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--ink-1);
+  background: none;
+  border: none;
+  padding-block: clamp(1.1rem, 2.6vh, 1.6rem);
+  cursor: pointer;
+  text-align: left;
+}
+.svc__panelCount {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+.svc__panel button svg {
+  width: 13px;
+  flex: none;
+  color: var(--red);
+  transition: transform 0.45s var(--ease-out);
+}
+/* the plus rotates into a minus */
+.svc__panel[data-open] button svg {
+  transform: rotate(135deg);
+}
+/* 0fr → 1fr animates the row to its content height with no measured pixels */
+.svc__panelBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-out);
+}
+.svc__panel[data-open] .svc__panelBody {
+  grid-template-rows: 1fr;
+}
+.svc__panelBody > div {
+  overflow: hidden;
+}
+.svc__panelBody ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-bottom: clamp(1.2rem, 3vh, 1.8rem);
+}
+.svc__panelBody li {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.76rem;
+  color: var(--ink-2);
+}
+.svc__pending {
+  padding-bottom: clamp(1.2rem, 3vh, 1.8rem);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--ink-4);
+}
+
+/* ---- legal: the note and the required disclaimer ---- */
+.svc__note-block {
+  max-width: 60ch;
+  display: grid;
+  gap: 1rem;
+}
+.svc__lede {
+  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
+  line-height: 1.7;
+  color: var(--ink-1);
+}
+/* Its own panel with a red edge: a term of the engagement, not small print. */
+.svc__disclaimer {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  max-width: 68ch;
+  padding: clamp(1.3rem, 2.4vw, 1.9rem);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--red);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.svc__disclaimerK {
+  margin-bottom: 0.6rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red-hot);
+}
+
+/* ---- counted figures in a row ---- */
+.svc__figures {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.svc__figures[data-cols='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.svc__figures[data-cols='4'] {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* ---- the closing call to action ---- */
+.svc__cta {
+  margin-top: var(--step);
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+.svc__ctaNote {
+  max-width: 52ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.svc__ctaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+/* the tertiary route: a link, not a third button competing with the two above */
+.svc__ctaAside {
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+.svc__ctaAside li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.svc__ctaAsideNote {
+  font-size: 0.78rem;
+  color: var(--ink-4);
+}
+
+/* ==================================================================
+   5. EDUCATION
+   Three pages built from the Services vocabulary — only the shapes
+   that section never needed are here: the two doors of the chooser,
+   the tiers table, and the paired outcome rows.
+   ================================================================== */
+
+/* ---- 5.0 the two doors ---- */
+/* Wider and taller than an index tile because the choice is bigger: two cards
+   are the entire page, so they get the room the six service tiles share. */
+.edu__doors {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.6rem);
+}
+.edu__doors > li {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  padding: clamp(1.8rem, 3.2vw, 2.8rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: transform 0.55s var(--ease-out), border-color 0.55s var(--ease-out),
+    box-shadow 0.55s var(--ease-out);
+}
+.edu__doors > li:hover {
+  transform: translate3d(0, -3px, 0);
+  border-color: var(--red-24);
+  box-shadow: 0 20px 44px rgba(10, 10, 10, 0.08);
+}
+/* who the reader is, above what is behind the door — the card answers
+   "which are you", not "which do you want" */
+.edu__doorK {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red-hot);
+}
+.edu__doorName {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  color: var(--ink-1);
+}
+.edu__doorBody {
+  max-width: 46ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.edu__doors .btn {
+  margin-top: 0.7rem;
+  justify-self: start;
+}
+
+/* ---- a stat strip closing the hero ---- */
+/* Closes the hero's dark block rather than opening a band, so it drops the
+   band's top padding and keeps only enough to sit clear of the intro. Used by
+   the Red Club and the Studio both, so it is not an edu__ shape. */
+/* ---- 5.2 the tiers table ---- */
+/* Scrolls in its own box: three columns of prose cannot narrow past a point,
+   and a table that overflows the page body breaks the whole layout instead. */
+.edu__tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.edu__table {
+  width: 100%;
+  min-width: 44rem;
+  border-collapse: collapse;
+  text-align: left;
+}
+.edu__table caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.edu__table th,
+.edu__table td {
+  padding: clamp(1rem, 1.8vw, 1.5rem) clamp(1.1rem, 2vw, 1.6rem);
+  vertical-align: top;
+}
+.edu__table thead th {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border-bottom: 1px solid var(--line);
+}
+.edu__table tbody tr + tr th,
+.edu__table tbody tr + tr td {
+  border-top: 1px solid var(--line-soft);
+}
+/* the tier name is the row's heading, so it is set like one */
+.edu__table tbody th {
+  width: 12rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  line-height: 1.15;
+  color: var(--ink-1);
+}
+.edu__table td {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+/* ---- 5.2 the outcome, paired with what reaches it ---- */
+.edu__pairs {
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+.edu__pairs > li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 0.75rem clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  padding-block: clamp(1.5rem, 3.5vh, 2.5rem);
+  border-bottom: 1px solid var(--line);
+}
+/* the ambition, set as the claim it is rather than as a label */
+.edu__pairOutcome {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.4;
+  color: var(--ink-1);
+}
+.edu__pairName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.15;
+  color: var(--red-hot);
+}
+.edu__pairBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* ---- 5.2 the commercial terms, under the engagement ---- */
+.edu__terms {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  display: grid;
+  gap: 1.2rem;
+}
+
+/* ---- the FAQ, which is Panels wearing prose ---- */
+/* A question is a sentence, so it loses the display face and the uppercasing
+   the sector panels use for what are actually headings. */
+.svc__panels[data-faq] button {
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: clamp(0.98rem, 1.3vw, 1.15rem);
+  line-height: 1.4;
+}
+.svc__panels[data-faq] button > span {
+  margin-right: auto;
+}
+.svc__panelBody p {
+  max-width: 62ch;
+  padding-bottom: clamp(1.2rem, 3vh, 1.8rem);
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+}
+
+/* ==================================================================
+   6. STUDIO
+   One page of four sections. Only three shapes are new: the jump
+   list into them, the filtered client wall, and a card for a thing
+   that is named but not yet written.
+   ================================================================== */
+
+/* ---- 6.0 the contents list ---- */
+/* Shaped like the services spectrum, but these go somewhere — so they take the
+   ink of a link and answer to hover and focus, which those chips never do. */
+.stu__jump {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: clamp(1.6rem, 4vh, 2.4rem);
+}
+.stu__jump a {
+  display: inline-block;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  transition: border-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
+}
+.stu__jump a:hover,
+.stu__jump a:focus-visible {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+
+/* ---- 6.1 the client wall ---- */
+/* ⚠ Every cell is a typeset organisation name, NOT a logo. See studio.js. */
+.stu__wall {
+  display: grid;
+  gap: clamp(1.5rem, 3.5vh, 2.4rem);
+}
+.stu__filters {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.stu__filters button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out);
+}
+.stu__filters button:hover {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+/* the pressed chip carries the accent, so which filter is on is never a
+   question of remembering what was clicked */
+.stu__filters button[data-active] {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+.stu__chipN {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-4);
+  font-variant-numeric: tabular-nums;
+}
+.stu__filters button[data-active] .stu__chipN {
+  color: rgba(255, 255, 255, 0.65);
+}
+.stu__group + .stu__group {
+  margin-top: clamp(1.5rem, 3.5vh, 2.4rem);
+}
+.stu__groupName {
+  margin-bottom: 1.1rem;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+/* auto-fill rather than a fixed count: the names run from "Own" to "Indo Zambia
+   Blockchain Alliance", so a column count picked for one is wrong for the other.
+   Each cell carries its own hairline rather than the grid's gap showing a ground
+   through — 88 names never divide evenly into the columns, and a ruled grid
+   would end every group on a run of empty boxes. */
+.stu__marks {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: clamp(0.5rem, 0.8vw, 0.75rem);
+}
+.stu__marks li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 6.5rem;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  transition: border-color 0.45s var(--ease-out);
+}
+.stu__marks li:hover {
+  border-color: var(--red-24);
+}
+.stu__markName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  line-height: 1.25;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--ink-2);
+  transition: color 0.45s var(--ease-out);
+}
+.stu__marks li:hover .stu__markName {
+  color: var(--ink-1);
+}
+/* A cell with a mark sets its name smaller — the logo is doing the identifying
+   and the name is confirming it, not competing. */
+.stu__marks li[data-mark] .stu__markName {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+/* A white plate under the mark: these are favicons, drawn to sit on browser-tab
+   chrome, so a few are light-on-transparent and would otherwise vanish straight
+   into the band. White is the ground they were all drawn against. */
+.stu__marks img {
+  width: 2.9rem;
+  height: 2.9rem;
+  flex: none;
+  object-fit: contain;
+  padding: 0.3rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+}
+
+/* ---- 6.2 the government client list ---- */
+.stu__govClients {
+  margin-top: var(--step);
+  display: grid;
+  gap: 1.2rem;
+}
+
+/* ---- 6.3 named, not yet written ---- */
+/* The headings the copy will fill are listed and the card says so, rather than
+   the gap being filled with plausible text. */
+.stu__pending {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.4vw, 1.35rem);
+}
+.stu__pending > li {
+  display: grid;
+  align-content: start;
+  gap: 1.1rem;
+  padding: clamp(1.6rem, 2.8vw, 2.4rem);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--red-24);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.stu__pendingName {
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  line-height: 1.05;
+  color: var(--ink-1);
+}
+.stu__pending ul {
+  list-style: none;
+  display: grid;
+}
+.stu__pending ul li {
+  padding-block: 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.stu__pending ul li + li {
+  border-top: 1px solid var(--line-soft);
+}
+.stu__pending .svc__pending {
+  padding-bottom: 0;
+}
+
+/* ==================================================================
+   7. LIBRARY
+   A landing page built from the shared vocabulary, three forms, and
+   the signed-in dashboard.
+
+   ⚠ The dashboard is NOT a gated area — see lib/previewSession.js.
+   Its warning strip is load-bearing: do not style it away.
+   ================================================================== */
+
+/* ---- 7.1 the terms, next to the button that accepts them ---- */
+.lib__trust {
+  margin-top: clamp(1.5rem, 3.5vh, 2.2rem);
+  max-width: 62ch;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+/* ---- 7.2 / 7.3 the form pages ---- */
+/* A form is a task, so it gets a narrow column and no scrolled hero: everything
+   the reader needs in order to fill it in is the form itself. */
+.form__page {
+  padding-top: clamp(8rem, 18vh, 12rem);
+}
+.form__wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 30rem) minmax(0, 20rem);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+.form__main {
+  display: grid;
+  gap: 0.9rem;
+}
+.form__title {
+  margin-top: 0.5rem;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+}
+.form__sub {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.form {
+  display: grid;
+  gap: 1.1rem;
+}
+.form__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.form__link {
+  font-size: 0.82rem;
+  color: var(--red-hot);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.form__consents {
+  margin-top: 0.3rem;
+  display: grid;
+  gap: 0.7rem;
+}
+.form__foot {
+  margin-top: 1.4rem;
+  font-size: 0.85rem;
+  color: var(--ink-3);
+}
+.form__foot a,
+.check label a,
+.dash__sub a {
+  color: var(--red-hot);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+/* Said in the accent, because it is the one thing on the page that is not
+   working the way the reader expects it to. */
+.form__notice {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--red-24);
+  border-left: 2px solid var(--red);
+  border-radius: 2px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink-1);
+}
+.form__aside {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+  display: grid;
+  gap: 0.7rem;
+}
+.form__trust {
+  display: grid;
+  gap: 0.7rem;
+  padding: clamp(1.2rem, 2.4vw, 1.8rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+.form__mailSubject {
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.form__mailNote {
+  font-size: 0.72rem;
+  font-style: italic;
+  color: var(--ink-4);
+}
+
+/* ---- form controls ---- */
+.field__opt {
+  margin-left: 0.5rem;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  color: var(--ink-4);
+}
+.field__hint {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--ink-4);
+}
+/* the chevron is drawn, so the control looks the same in every browser */
+.field__select {
+  position: relative;
+  display: grid;
+}
+.field__select select {
+  width: 100%;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink-1);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 0.8rem 2.4rem 0.8rem 0.9rem;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.35s var(--ease-out);
+}
+.field__select select:hover {
+  border-color: var(--ink-4);
+}
+.field__select select:focus {
+  outline: none;
+  border-color: var(--red);
+}
+/* the dropdown list is drawn by the OS and inherits nothing, so it is told */
+.field__select option {
+  color: #111;
+  background: #fff;
+}
+.field__select svg {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  width: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--ink-3);
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+.check input {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+.check label {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+/* Six things you can tap, not a native multiple-select — picking a second
+   option in one of those needs a ctrl-click most readers never discover. */
+.multi {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: grid;
+  gap: 0.6rem;
+}
+.multi legend {
+  padding: 0;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.multi ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.multi label {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease-out), color 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out);
+}
+.multi label:hover {
+  border-color: var(--ink-4);
+  color: var(--ink-1);
+}
+.multi label[data-on] {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+}
+/* the real checkbox stays in the DOM for the form and the screen reader; it is
+   only taken out of the picture visually */
+.multi input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.multi label:focus-within {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+/* ---- the third-party buttons, disabled with the reason on them ---- */
+.fed {
+  margin-top: 1.6rem;
+  display: grid;
+  gap: 0.8rem;
+}
+.fed__rule {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.fed__rule::before,
+.fed__rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.fed__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.fed__row .btn {
+  flex: 1 1 12rem;
+}
+.fed__row .btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- 7.5 the dashboard ---- */
+.dash {
+  padding-top: clamp(7rem, 15vh, 10rem);
+}
+/* ⚠ Load-bearing. It is the only thing telling a reader that nothing here is
+   gated, and it has no dismiss — the next person to open the page would not
+   see one that had been dismissed. */
+.dash__warning {
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--red-24);
+  border-left: 2px solid var(--red);
+  border-radius: 2px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.dash__warning strong {
+  color: var(--red-hot);
+}
+.dash__head {
+  margin: clamp(2rem, 5vh, 3rem) 0 clamp(2.5rem, 6vh, 4rem);
+  display: grid;
+  justify-items: start;
+  gap: 0.9rem;
+}
+.dash__title {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.05;
+}
+.dash__sub {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.dash__signout {
+  padding: 0.45rem 0.9rem;
+  font: inherit;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
+}
+.dash__signout:hover {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+.dash__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 19rem);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+}
+.dash__main {
+  display: grid;
+  gap: clamp(1.5rem, 3.5vh, 2.4rem);
+}
+.dash__shelf {
+  padding: clamp(1.3rem, 2.4vw, 1.9rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.dash__shelfName {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  line-height: 1.15;
+  color: var(--ink-1);
+}
+/* An empty shelf on a new account, which is the truth — so it says what puts
+   something on it rather than pretending to be loading. */
+.dash__empty {
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+/* No catalogue exists yet. Marked, not filled with invented titles. */
+.dash__awaiting {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--ink-4);
+}
+.dash__cats {
+  list-style: none;
+  margin-top: 1.1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.5rem;
+}
+.dash__cats a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-size: 0.86rem;
+  color: var(--ink-2);
+  transition: border-color 0.35s var(--ease-out), color 0.35s var(--ease-out);
+}
+.dash__cats a:hover {
+  border-color: var(--red-24);
+  color: var(--ink-1);
+}
+.dash__aside {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+}
+.dash__upsell {
+  display: grid;
+  justify-items: start;
+  gap: 0.8rem;
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--red);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+.dash__upsellName {
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.1;
+  color: var(--ink-1);
+}
+.dash__upsell p {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ==================================================================
+   Entrance states — set here, cleared by GSAP.
+   Behind `.js` so the page is fully readable if the script never runs.
+   ================================================================== */
+.js [data-rise] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+}
+.js [data-clip] .line__inner {
+  transform: translate3d(0, 108%, 0);
+}
+
+/* ============================== responsive ========================== */
+/* The five tabs plus two utility actions stop fitting well before the layout
+   grid does, so the bar collapses to the drawer at its own, wider breakpoint. */
+@media (max-width: 1180px) {
+  .nav__tabs,
+  .nav__util {
+    display: none;
+  }
+  .nav__burger {
+    display: block;
+    margin-left: auto;
+  }
+  /* the drawer supplies its own ground, so the bar above it needs one too */
+  .nav:has(+ .drawer[data-open]) {
+    background: var(--nav-bg);
+    border-bottom-color: var(--line-soft);
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero__bottom,
+  .lib__inner,
+  .vfy__inner,
+  /* the wheel goes under the step it is describing rather than beside it */
+  .orb,
+  /* the qualifier goes under the claim rather than beside it */
+  .trusted__top,
+  .close__grid,
+  .ab__advisory {
+    grid-template-columns: 1fr;
+  }
+  /* Two columns cannot hold a three-column bento, and a two-column one would
+     be a different composition rather than the same one narrower. So the
+     placement is dropped and the six cards become a plain pair of columns —
+     with the tall card kept tall, since it is the one that still earns it. */
+  .core__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .core__card[data-cell='wide-top'],
+  .core__card[data-cell='wide-bottom'] {
+    grid-column: auto;
+  }
+  .core__card[data-cell='tall'] {
+    grid-column: auto;
+    grid-row: auto;
+  }
+  /* The hero copy takes the full width here, so there is no column left to
+     draw into. HeroArt.jsx checks the same width and never mounts a context —
+     display:none alone would leave one rendering behind an invisible box. */
+  .heroArt {
+    display: none;
+  }
+  /* Five nodes and six stop fitting on one line, so those rails wrap to rows of
+     three — and the rule goes with them: a single line drawn across a two-row
+     grid would connect the first row's nodes and pass under the second's. The
+     short rails still fit, and keep theirs. */
+  .svc__rail[data-n='5'],
+  .svc__rail[data-n='6'] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 1.8rem;
+  }
+  /* the signal goes with the rule it travels on */
+  .svc__rail[data-n='5']::before,
+  .svc__rail[data-n='6']::before,
+  .svc__rail[data-n='5']::after,
+  .svc__rail[data-n='6']::after {
+    content: none;
+  }
+  /* three columns of prose stop being readable well before the grid breaks.
+     The index is not here any more — it is a rail, and a rail needs no
+     breakpoint: fewer cards simply fit at once. */
+  .svc__tiles[data-cols='3'],
+  .svc__chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .svc__groups[data-cols='2'],
+  .svc__tracks,
+  .edu__doors {
+    grid-template-columns: 1fr;
+  }
+  /* three headed lists of prose are past readable here; two still hold */
+  .svc__groups[data-cols='3'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* four figures still read at half width — stacking them would turn the strip
+     into a column four screens tall */
+  .svc__figures[data-cols='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* the ambition goes above the program that reaches it rather than beside it */
+  .edu__pairs > li {
+    grid-template-columns: 1fr;
+  }
+  .stu__pending {
+    grid-template-columns: 1fr;
+  }
+  /* the aside drops under the form / the shelves and stops being sticky —
+     stuck to the top of a column it no longer has, it would follow the reader
+     down the whole page */
+  .form__wrap,
+  .dash__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .form__aside,
+  .dash__aside {
+    position: static;
+  }
+  /* the name keeps its own column; number and body share the rest */
+  .svc__steps li {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .svc__stepBody {
+    grid-column: 2;
+  }
+  /* the ring stops sitting beside the record and goes above it — below this the
+     ring's own labels have less room than the words in them need */
+  .tk {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+  .tk__record {
+    width: 100%;
+  }
+  .ab__advisory {
+    justify-items: start;
+  }
+  /* stacked, so the contact list gets its own breathing room under the copy */
+  .close__grid {
+    gap: clamp(2.5rem, 6vh, 4rem);
+  }
+  /* the diagram goes under the copy, and stops growing with the column */
+  .vfy__art svg {
+    max-width: 380px;
+  }
+  .nav__panelIn {
+    grid-template-columns: 1fr;
+  }
+  .foot__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .foot__col--wide {
+    grid-column: 1 / -1;
+  }
+  .foot__tag {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+  .wwd__cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cred__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cred__item:not(:nth-child(4n + 1)) {
+    border-left: none;
+  }
+  .cred__item:not(:nth-child(2n + 1)) {
+    border-left: 1px solid var(--line-soft);
+  }
+  /* the panel drops under the 2×2 rather than sitting beside it */
+  .impact__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The coin hero's own breakpoint. It matches the 760 in lib/coinHero.js: the
+   coins get smaller and the halves travel further on the same line, or the
+   opened doors stop clearing the revealed claim. */
+@media (max-width: 760px) {
+  .chero {
+    --coin: clamp(100px, 30vw, 150px);
+  }
+  .chero__title {
+    font-size: clamp(2.6rem, 13vw, 5rem);
+  }
+  .chero__reveal {
+    padding-inline: 1.5rem;
+  }
+  .chero__reveal-title {
+    font-size: clamp(1.9rem, 8.5vw, 3rem);
+  }
+  /* The scrim is a percentage of the copy box, so on a phone it shrinks to
+     narrower than the text it is meant to be backing. */
+  .chero__copy::before {
+    background: radial-gradient(
+      ellipse 78% 42% at 50% 50%,
+      rgba(10, 10, 10, 0.88),
+      rgba(10, 10, 10, 0.6) 52%,
+      transparent 82%
+    );
+  }
+}
+
+/* Below this the strip no longer fits on one line, and a separator that
+   belongs to the item after it strands at the start of every wrapped row. So
+   it stops being a line and becomes a list. */
+@media (max-width: 960px) {
+  .chero__stats {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .chero__stats li + li::before {
+    content: none;
+  }
+}
+
+@media (max-width: 700px) {
+  /* one column, and the panel flattens — at full card width a 16:10 panel is
+     taller than the copy it introduces */
+  .wwd__cards {
+    grid-template-columns: 1fr;
+  }
+  .wwd__art {
+    aspect-ratio: 16 / 8;
+  }
+}
+
+@media (max-width: 620px) {
+  .cred__grid {
+    grid-template-columns: 1fr;
+  }
+  /* stacked, so the rule turns to run across rather than down */
+  .cred__item:not(:nth-child(2n + 1)) {
+    border-left: none;
+  }
+  .cred__item + .cred__item {
+    border-top: 1px solid var(--line-soft);
+    padding-top: 1.5rem;
+  }
+  /* The 2×2 holds — four short numbers read fine at half width, and stacking
+     them turns the block into a column four screens tall. The panel is what
+     gives way: its drawing goes under the copy instead of beside it. */
+  .impact__panel {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  /* stacked, so it goes back to sizing by its own aspect instead of covering
+     a row height it no longer sits beside */
+  .impact__art {
+    justify-self: center;
+    align-self: auto;
+    width: min(100%, 250px);
+    margin: 0;
+  }
+  .impact__art svg {
+    height: auto;
+  }
+  .hero__ctas {
+    width: 100%;
+  }
+  .hero__ctas .btn {
+    flex: 1 1 auto;
+  }
+  .core__grid,
+  .ab__team,
+  /* the labels are a line and a half at half a phone's width; the pairing with
+     the diagram's corners is worth less than being able to read them */
+  .vfy__list,
+  .svc__tiles[data-cols='3'],
+  .svc__tiles[data-cols='2'],
+  .svc__chips,
+  .svc__figures,
+  .svc__groups[data-cols='3'] {
+    grid-template-columns: 1fr;
+  }
+  /* one card at a time, with the next just showing past the edge so it is
+     obvious there is more to the right */
+  .svc__index > li {
+    flex-basis: min(78vw, 20rem);
+  }
+  /* the strip is the one thing that holds its pair — four short numbers read
+     fine at half a phone's width, and the alternative is four full screens */
+  .svc__figures[data-cols='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Everything longer than a pair goes to two columns; a pair already is one.
+     The rule only survives where the rail is still a single row. */
+  .svc__rail[data-n='3'],
+  .svc__rail[data-n='4'],
+  .svc__rail[data-n='5'],
+  .svc__rail[data-n='6'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 1.6rem;
+  }
+  .svc__rail[data-n='3']::before,
+  .svc__rail[data-n='4']::before,
+  .svc__rail[data-n='3']::after,
+  .svc__rail[data-n='4']::after {
+    content: none;
+  }
+  /* The tilt is a wide-screen effect: on a phone the console is nearly as wide
+     as the viewport, and rotating it there throws the far edge off the screen
+     and softens the type. It goes back to being flat, and keeps the fade. */
+  .svc__screen {
+    transform: none;
+  }
+  /* the bracket has no margin left to sit in — inside the gutters it would be
+     drawn through the headline's own line endings */
+  .svc__showFrame {
+    display: none;
+  }
+  /* the tier name stops claiming a fixed column it no longer has room for */
+  .edu__table tbody th {
+    width: auto;
+  }
+  /* the tracking is what makes these labels wide, so that is what gives way —
+     a subhead should sit on one line above its headline, not wrap into two */
+  .eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+  }
+  .foot__cols {
+    grid-template-columns: 1fr;
+  }
+  .drawer__foot {
+    grid-auto-flow: row;
+  }
+  .foot__strip {
+    gap: 0.6rem 1.25rem;
+  }
+  /* the cubes have no corner of their own left to hold, so they step back to
+     being a texture behind the copy rather than competing with it */
+  .close__cubes {
+    opacity: 0.45;
+  }
+  /* the dot field was balancing a second column that is no longer beside it */
+  .close__dots {
+    display: none;
+  }
+}
+
+/* --------------------- short viewports ------------------------------ */
+@media (max-height: 680px) {
+  /* the whole column has to shrink, not just the cue — otherwise the bottom of
+     it is clipped by the hero's overflow:hidden */
+  .chero__copy {
+    padding-top: max(5.4rem, 8vh);
+  }
+  .chero__title {
+    font-size: clamp(1.8rem, 4.2vw, 3.4rem);
+  }
+  .chero__kicker {
+    margin-bottom: 0.55rem;
+  }
+  .chero__lede {
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin-top: 0.85rem;
+  }
+  .chero__stats {
+    margin-top: 0.9rem;
+  }
+  .chero__statK {
+    font-size: 1rem;
+  }
+}
+/* Nothing here is allowed to hide the lede. Those two paragraphs are what the
+   opening actually says, and a laptop at 1280x720 lands in this range once the
+   browser chrome is taken off — so the copy sets tighter instead of leaving. */
+@media (max-height: 600px) {
+  .chero__copy {
+    padding-top: max(4.6rem, 7vh);
+  }
+  .chero__title {
+    font-size: clamp(1.55rem, 3.6vw, 2.7rem);
+  }
+  .chero__lede {
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    margin-top: 0.6rem;
+  }
+  .chero__stats {
+    margin-top: 0.7rem;
+    gap: 0.4rem 1rem;
+  }
+  .chero__statK {
+    font-size: 0.9rem;
+  }
+  .chero__statLead,
+  .chero__statV {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+}
+
+
+/* ==================================================================
+   Reduced motion
+   The evolution is the argument of the page, so it is not removed —
+   it is delivered as resolved states instead of a scrub, and nothing
+   pins or moves under the reader.
+   ================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-rise],
+  .js [data-clip] .line__inner {
+    opacity: 1;
+    transform: none;
+  }
+  /* The coin hero unstacks: nothing pins, the ring is held at its opening state
+     as an illustration, and the claim the doors would have revealed is simply
+     read in the flow underneath. */
+  .chero {
+    height: auto;
+    min-height: 100vh;
+    padding-block: 8rem;
+    /* order is set explicitly rather than taken from the DOM: the markup is
+       stacked back-to-front for the animation, which would otherwise read as
+       the claim, then the object, then the statement it answers */
+    display: flex;
+    flex-direction: column;
+  }
+  .chero__copy,
+  .chero__reveal {
+    position: static;
+    padding-block: 3rem;
+  }
+  .chero__copy {
+    order: 1;
+  }
+  .chero__stage {
+    position: relative;
+    order: 2;
+    height: 60vh;
+  }
+  .chero__reveal {
+    order: 3;
+  }
+  /* .vfy was here too, back when it was a pinned full-viewport band */
+  .hero {
+    height: auto;
+    min-height: 0;
+    padding-block: clamp(5rem, 12vh, 8rem);
+  }
+  /* `relative`, not `static`: this only needs to leave the absolute layout and
+     go back into flow, and a static box has no z-index — which would drop it
+     under the hero's own scrim and gradient and wash out the type. */
+  .hero__inner {
+    position: relative;
+    display: grid;
+    gap: 3rem;
+    padding-top: calc(var(--nav-h) + 1.5rem);
+  }
+  /* The hero is auto-height here, so the object is centred behind the copy
+     rather than in the empty row a pinned hero reserves for it. The scrim has
+     to take it down far enough for body text to sit on it — it stays a ground,
+     but it is no longer the subject. */
+  .hero::before {
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, 0.9) 0%,
+        rgba(10, 10, 10, 0.8) 45%,
+        rgba(10, 10, 10, 0.95) 100%
+      ),
+      radial-gradient(120% 70% at 50% 50%, transparent 25%, rgba(10, 10, 10, 0.55) 100%);
+  }
+  /* the reserve row is replaced by the padding above — as a grid child it
+     would otherwise contribute a 3rem gap and nothing else */
+  .hero__top {
+    display: none;
+  }
+  .nav,
+  .nav__panel,
+  .drawer {
+    animation: none;
+    transition: none;
+  }
+  /* not a track any more, just a wrapped list of the names */
+  .marquee__row {
+    animation: none;
+    flex-wrap: wrap;
+    gap: clamp(0.6rem, 1.2vw, 1rem);
+    width: 100%;
+  }
+  .marquee__item {
+    margin-right: 0;
+  }
+  .marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .stage {
+    transition: none;
+  }
+}
