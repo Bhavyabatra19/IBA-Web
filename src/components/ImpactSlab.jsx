@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ImpactSlab.jsx
  * ------------------------------------------------------------------
  * One solid slab over three flat planes falling away beneath it — the drawing
@@ -86,11 +86,11 @@ export default function ImpactSlab() {
             <stop offset="1" stopColor="#d8503b" />
           </linearGradient>
           <linearGradient id={id('floor')} x1="184" y1="28" x2="56" y2="92" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#e0503f" />
+            <stop stopColor="#ff4a50" />
             <stop offset="1" stopColor="#f6a495" />
           </linearGradient>
           <linearGradient id={id('left')} x1="38" y1="60" x2="120" y2="137" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#e0503f" />
+            <stop stopColor="#ff4a50" />
             <stop offset="1" stopColor="#b3331f" />
           </linearGradient>
           <linearGradient id={id('right')} x1="202" y1="60" x2="120" y2="137" gradientUnits="userSpaceOnUse">
@@ -98,7 +98,7 @@ export default function ImpactSlab() {
             <stop offset="1" stopColor="#8b2718" />
           </linearGradient>
           <linearGradient id={id('plane')} x1="202" y1="0" x2="38" y2="300" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#c0392b" />
+            <stop stopColor="#d71920" />
             <stop offset="1" stopColor="#7d2416" />
           </linearGradient>
         </defs>

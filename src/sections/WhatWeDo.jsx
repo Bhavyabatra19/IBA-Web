@@ -1,28 +1,33 @@
-﻿/**
+/**
  * 2.3 — What We Do. Light band.
  *
- * Three cards, each led by a drawn panel. The panels are not stock icons: each
- * one states the shape of its service — a compliance sheet being signed off, a
- * core with its satellites, two doors onto one mission — so the illustration is
- * carrying the same argument as the copy under it rather than decorating it.
+ * Three steps in a row, each led by a line icon, with a dashed link curving
+ * between them — the layout of a "get started in three steps" block. The
+ * numbers encode a real order (advise before build, build before the
+ * institution can teach it) so they are printed as steps rather than as a
+ * grid of three equal options, and the links between them are what say so.
  *
- * The numbers survive the redesign, moved into the panel chrome. They encode a
- * real order — advise before build, build before the institution can teach it —
- * so they are information, and dropping them would lose it.
+ * The icons are the three files supplied for this section, in public/icons —
+ * two people and a message for Advise, the pieces being fitted for Build, a
+ * lit bulb for Educate — used AS THEY WERE SUPPLIED, not redrawn.
  *
- * And the section walks that order rather than only printing it: one card is
- * live at a time, 01 then 02 then 03. Three equal cards are read as three
- * options; the same three taken in turn are read as the sequence they are.
+ * They are applied as CSS masks rather than placed as <img>: a mask takes the
+ * file's alpha as the shape and paints it in whatever colour the element has,
+ * so the same black-on-transparent PNG is the band's ink at rest and the
+ * brand's red when its step is live. An <img> would be black in both states,
+ * and the only way to recolour one is a filter chain nobody can read. The
+ * price is that a masked span has no alt — which is right here: the tile is
+ * decoration beside a heading that already says the word.
  *
- * The reader can interrupt it. Hovering a card, or tabbing into one, takes the
- * focus and holds it there — the cycle never moves the focus off a card someone
- * is actually looking at.
+ * The section still walks its own order: one step is live at a time, 01 then
+ * 02 then 03, and its tile tilts up as the live one. Hovering a step, or
+ * tabbing into one, takes the focus and holds it there — the cycle never moves
+ * the focus off a step someone is actually reading.
  */
 
-import { useLayoutEffect, useRef } from 'react'
+import { Fragment, useLayoutEffect, useRef } from 'react'
 import {
   gsap,
-  ScrollTrigger,
   revealLines,
   revealRise,
   reducedMotion,
@@ -31,124 +36,65 @@ import {
 } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
 
-/* Drawn at one size and scaled by the panel. currentColor is the band's ink, so
-   every neutral is an alpha of it and only the accents are literal red. */
-const ART = {
-  advise: (
-    <svg viewBox="0 0 200 130" fill="none" aria-hidden="true">
-      <rect
-        x="56"
-        y="22"
-        width="88"
-        height="86"
-        rx="9"
-        fill="#fff"
-        stroke="currentColor"
-        strokeOpacity=".15"
-      />
-      <rect x="68" y="36" width="36" height="5" rx="2.5" fill="currentColor" fillOpacity=".22" />
-      {/* the settled item */}
-      <circle cx="73" cy="58" r="5.5" fill="#c0392b" />
-      <path
-        d="M70.6 58.2l1.8 1.8 3.1-3.4"
-        stroke="#fff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <rect x="85" y="55.6" width="47" height="4.6" rx="2.3" fill="currentColor" fillOpacity=".15" />
-      {/* the ones still open */}
-      <circle cx="73" cy="75" r="5.5" stroke="currentColor" strokeOpacity=".22" />
-      <rect x="85" y="72.6" width="40" height="4.6" rx="2.3" fill="currentColor" fillOpacity=".1" />
-      <circle cx="73" cy="92" r="5.5" stroke="currentColor" strokeOpacity=".22" />
-      <rect x="85" y="89.6" width="33" height="4.6" rx="2.3" fill="currentColor" fillOpacity=".1" />
-    </svg>
-  ),
-  build: (
-    <svg viewBox="0 0 200 130" fill="none" aria-hidden="true">
-      <path
-        d="M100 65H58M100 65h42M100 65V36M100 65v29"
-        stroke="currentColor"
-        strokeOpacity=".18"
-        strokeDasharray="3 4"
-      />
-      <rect x="40" y="53" width="24" height="24" rx="7" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      <rect x="136" y="53" width="24" height="24" rx="7" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      <rect x="88" y="16" width="24" height="24" rx="7" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      <rect x="88" y="90" width="24" height="24" rx="7" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      {/* the satellites carry a mark — empty boxes read as placeholders */}
-      <circle cx="52" cy="65" r="2.6" fill="currentColor" fillOpacity=".3" />
-      <circle cx="148" cy="65" r="2.6" fill="currentColor" fillOpacity=".3" />
-      <circle cx="100" cy="28" r="2.6" fill="currentColor" fillOpacity=".3" />
-      <circle cx="100" cy="102" r="2.6" fill="currentColor" fillOpacity=".3" />
-      <rect x="81" y="46" width="38" height="38" rx="11" fill="#c0392b" />
-      <path d="M100 56l11 6-11 6-11-6z" fill="#fff" />
-      <path
-        d="M89 68l11 6 11-6"
-        stroke="#fff"
-        strokeOpacity=".72"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
-  educate: (
-    <svg viewBox="0 0 200 130" fill="none" aria-hidden="true">
-      {/* students */}
-      <rect x="38" y="24" width="54" height="82" rx="9" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      <path d="M65 48l17 7.5-17 7.5-17-7.5z" fill="#c0392b" />
-      <path
-        d="M73.5 59.5V69c0 2.4-3.8 4.3-8.5 4.3S56.5 71.4 56.5 69v-9.5"
-        stroke="#c0392b"
-        strokeWidth="1.9"
-        strokeLinecap="round"
-      />
-      {/* institutions */}
-      <rect x="108" y="24" width="54" height="82" rx="9" fill="#fff" stroke="currentColor" strokeOpacity=".18" />
-      <path d="M135 42l15 9h-30z" fill="currentColor" fillOpacity=".3" />
-      <path d="M119 55h32M118 79h34" stroke="#c0392b" strokeWidth="2.3" strokeLinecap="round" />
-      <path
-        d="M124 60v14M131 60v14M139 60v14M146 60v14"
-        stroke="currentColor"
-        strokeOpacity=".3"
-        strokeWidth="2.3"
-        strokeLinecap="round"
-      />
-      {/* one mission */}
-      <path d="M92 65h16" stroke="#c0392b" strokeOpacity=".55" strokeWidth="1.7" strokeDasharray="3 4" />
-    </svg>
-  ),
-}
+/* The app is served from the domain root — path routing already requires
+   that — so the public path is absolute. The file is named for the step. */
+const icon = (key) => `/icons/${key}.png`
 
-const CARDS = [
+/**
+ * ⚠ THE ORDER CHANGED, and it is not cosmetic.
+ *
+ * It ran Advise → Build → Educate, and the comment at the top of this file
+ * still explains why that was an order rather than a list: advise before build,
+ * build before the institution can teach it. The supplied layout runs Educate →
+ * Advise → Build, which is a different argument — train the builders, de-risk
+ * the decision, ship the system. People first.
+ *
+ * Each step now carries a short claim of its own above the paragraph; those
+ * three verbs are the headline of the section as much as the names are.
+ */
+const STEPS = [
   {
     n: '01',
-    name: 'Advise',
-    art: ART.advise,
-    body: 'Policy, compliance, standards, taxation and risk — settled before a single line of code is written.',
-    links: [{ label: 'Explore Services', href: '#connect' }],
+    key: 'educate',
+    name: 'Educate',
+    claim: 'Train the builders',
+    body: 'The IBA Red Club brings certified training, Blockchain and AI labs, live projects and placements to students and institutions.',
+    links: [{ label: 'Visit Red Club', href: '/education/red-club' }],
   },
   {
     n: '02',
-    name: 'Build',
-    art: ART.build,
-    body: 'Strategy, solution design, custom development and tokenization. End-to-end delivery across 16+ verticals.',
-    links: [{ label: 'See the Consulting Stack', href: '#connect' }],
+    key: 'advise',
+    name: 'Advise',
+    claim: 'De-risk the decision',
+    body: 'Policy, compliance, standards, taxation, forensics and risk mitigation — the right blockchain decision before a single line of code is written.',
+    links: [{ label: 'See Expertise', href: '/services' }],
   },
   {
     n: '03',
-    name: 'Educate',
-    art: ART.educate,
-    body: 'Two doors, one mission. The IBA Red Club trains students; Verifyble runs labs on campus for institutions.',
-    links: [
-      { label: 'For Students', href: '/education/red-club' },
-      { label: 'For Institutions', href: '/education/verifyble' },
-    ],
+    key: 'build',
+    name: 'Build',
+    claim: 'Ship the system',
+    body: 'From strategy assessment to solution design, custom development, tokenization and ecosystem management, across 16+ industry verticals.',
+    links: [{ label: 'See the Consulting Stack', href: '/services/consulting-stack' }],
   },
 ]
 
-/** How long a card holds the focus. */
+/* The link between two steps: a dashed curve with a point at each end, one
+   dipping and the next arching, so the three read as a path and not a row. */
+const Link = ({ flip }) => (
+  <svg
+    className="wwd__link"
+    viewBox="0 0 120 40"
+    aria-hidden="true"
+    data-flip={flip ? '' : undefined}
+  >
+    <path d="M6 20 C 40 20, 50 34, 60 34 S 80 20, 114 20" />
+    <circle cx="6" cy="20" r="2.4" />
+    <circle cx="114" cy="20" r="2.4" />
+  </svg>
+)
+
+/** How long a step holds the focus. */
 const DWELL = 3.4
 
 export default function WhatWeDo() {
@@ -156,8 +102,6 @@ export default function WhatWeDo() {
 
   useLayoutEffect(() => {
     const el = root.current
-    /* Listeners and attributes are not GSAP's to undo, so they are collected
-       here and torn down alongside the context. */
     const undo = []
 
     const ctx = gsap.context(() => {
@@ -165,80 +109,62 @@ export default function WhatWeDo() {
       revealLines(el, { trigger: el })
       revealRise(el, { trigger: el })
 
-      const cards = gsap.utils.toArray('.wwd__card', el)
-      cards.forEach((card, i) => {
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top 86%',
-          once: true,
-          onEnter: () => gsap.delayedCall(i * 0.1, () => card.classList.add('is-in')),
-        })
-      })
-
-      /* ---- one card live at a time ---- */
-      const deck = cards[0]?.parentElement
-      if (!deck || cards.length < 2) return
+      /* ---- one step live at a time ---- */
+      const steps = gsap.utils.toArray('.wwd__step', el)
+      const deck = steps[0]?.parentElement
+      if (!deck || steps.length < 2) return
 
       let at = 0
       const show = (i) => {
         at = i
-        cards.forEach((c, j) => {
-          if (j === i) c.dataset.on = ''
-          else delete c.dataset.on
+        steps.forEach((s, j) => {
+          if (j === i) s.dataset.on = ''
+          else delete s.dataset.on
         })
       }
       show(0)
 
-      /* `onRepeat` rather than a callback at the end of the timeline: the exact
-         end time is the boundary the playhead jumps across when the timeline
-         loops, so a callback there fires on the first lap and is skipped on the
-         ones after — the deck advanced once and then stopped. */
+      /* `onRepeat`, not a callback at the end of the timeline: the exact end
+         time is the boundary the playhead jumps across when it loops, so a
+         callback there fires on the first lap and is skipped on the ones
+         after. */
       const tl = gsap.timeline({
         repeat: -1,
         paused: true,
-        onRepeat: () => show((at + 1) % cards.length),
+        onRepeat: () => show((at + 1) % steps.length),
       })
       tl.to({ t: 0 }, { t: 1, duration: DWELL, ease: 'none' })
 
-      /* Never turning off screen: a loop behind the viewport is a wake-up every
-         few seconds for something nobody is looking at.
-
-         Watched rather than measured. This deck sits below the hero's
-         five-viewport pin, and a ScrollTrigger created before that pin exists
-         records a position a pin's worth too high — see whileOnScreen. */
+      /* watched rather than measured — see whileOnScreen */
       undo.push(whileOnScreen(el, () => tl.play(), () => tl.pause()))
 
-      /* Taking the focus by hand, and giving it back. */
       const hold = (i) => {
         show(i)
         tl.pause()
       }
       const release = () => {
-        /* from the top of the dwell, so the released card is read from the
-           start of its turn rather than for whatever was left of it */
         tl.time(0)
         tl.play()
       }
 
-      /* Pointer only where there is a pointer. On a touch screen an enter with
-         no matching leave would hold the cycle for good on the first tap. */
+      /* pointer only where there is a pointer — on touch, an enter with no
+         matching leave would hold the cycle for good on the first tap */
       if (!isCoarse()) {
-        cards.forEach((card, i) => {
+        steps.forEach((step, i) => {
           const enter = () => hold(i)
-          card.addEventListener('pointerenter', enter)
-          card.addEventListener('pointerleave', release)
+          step.addEventListener('pointerenter', enter)
+          step.addEventListener('pointerleave', release)
           undo.push(() => {
-            card.removeEventListener('pointerenter', enter)
-            card.removeEventListener('pointerleave', release)
+            step.removeEventListener('pointerenter', enter)
+            step.removeEventListener('pointerleave', release)
           })
         })
       }
 
-      /* Keyboard, always: tabbing to a card's link makes that card the live one,
-         so the focus ring and the highlight are never on different cards. */
+      /* keyboard, always: tabbing to a step's link makes that step the live one */
       const onIn = (e) => {
-        const card = e.target.closest('.wwd__card')
-        if (card) hold(cards.indexOf(card))
+        const step = e.target.closest('.wwd__step')
+        if (step) hold(steps.indexOf(step))
       }
       const onOut = (e) => {
         if (!deck.contains(e.relatedTarget)) release()
@@ -264,38 +190,41 @@ export default function WhatWeDo() {
           <p className="eyebrow" data-rise>What We Do</p>
           <h2 className="h2 display" data-clip>
             <span className="line">
-              <span className="line__inner">Advise. Build.</span>
+              <span className="line__inner wwd__grad">Advise. Build.</span>
             </span>
             <span className="line">
-              <span className="line__inner">
+              <span className="line__inner wwd__grad">
                 <em>Educate.</em>
               </span>
             </span>
           </h2>
         </div>
 
-        <div className="wwd__cards">
-          {CARDS.map((c) => (
-            <article className="wwd__card" key={c.n}>
-              <div className="wwd__art">
-                <span className="wwd__n">{c.n}</span>
-                {c.art}
-              </div>
-              <div className="wwd__meta">
-                <h3 className="wwd__name">{c.name}</h3>
-                <p className="wwd__body">{c.body}</p>
-                {/* Go, not a bare anchor: two of these now point at pages, and
-                    a plain href would reload the site to reach them. */}
+        <div className="wwd__steps">
+          {STEPS.map((s, i) => (
+            <Fragment key={s.n}>
+              {i > 0 && <Link flip={i % 2 === 0} />}
+              <article className="wwd__step" data-rise>
+                <span className="wwd__ico" aria-hidden="true">
+                  <span
+                    className="wwd__mark"
+                    style={{ '--icon': `url(${icon(s.key)})` }}
+                  />
+                </span>
+                <span className="wwd__stepN">Step {s.n}</span>
+                <h3 className="wwd__stepName display wwd__grad">{s.name}</h3>
+                <p className="wwd__claim">{s.claim}</p>
+                <p className="wwd__stepBody">{s.body}</p>
                 <div className="wwd__links">
-                  {c.links.map((l) => (
+                  {s.links.map((l) => (
                     <Go className="arrow arrow--red" href={l.href} key={l.label}>
                       {l.label}
                       <span aria-hidden="true">→</span>
                     </Go>
                   ))}
                 </div>
-              </div>
-            </article>
+              </article>
+            </Fragment>
           ))}
         </div>
       </div>

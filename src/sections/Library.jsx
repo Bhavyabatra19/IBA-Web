@@ -211,20 +211,22 @@ export default function Library() {
         </div>
 
         <div className="lib__head">
-          <p className="eyebrow" data-rise>The IBA Library</p>
+          <p className="eyebrow" data-rise>Open Knowledge Base</p>
           <h2 className="h2 h2--col display" data-clip>
             <span className="line">
-              <span className="line__inner">Knowledge,</span>
+              <span className="line__inner">Built by practitioners,</span>
             </span>
             <span className="line">
               <span className="line__inner">
-                Free and <em>Open</em>
+                open to the <em>community.</em>
               </span>
             </span>
           </h2>
           <p className="lede" data-rise>
-            Research, policy briefs, playbooks and recorded sessions from the IBA
-            network — free to every registered member.
+            An open-source knowledge base of articles, videos, research and policy
+            briefs, developed by IBA’s industry experts and advisors for the wider
+            blockchain community — searchable, categorised and free to every
+            registered member.
           </p>
           {/* the band is the teaser; 7.1 is the page it teases */}
           <Go className="btn btn--primary btn--sm" href="/library" data-rise>

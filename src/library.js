@@ -16,34 +16,69 @@
 /* ================================================================== */
 
 export const LIB_BODY =
-  "Research, policy briefs, sector playbooks, tokenomics primers and recorded sessions — contributed by IBA's 100+ global advisors and 800+ members. Create a free account to access everything."
+  'Articles, videos, research, policy briefs and recorded sessions — published by IBA and contributed by our 100+ global advisors and 800+ members. Create a free account to access everything and save what matters.'
 
-export const LIB_VALUE = [
-  'Policy and regulatory briefs across 20+ jurisdictions',
-  'Sector playbooks for BFSI, supply chain, healthcare, e-governance and more',
-  'Tokenomics and RWA structuring primers',
-  'Recorded webinars and expert sessions',
-  'Red Club curriculum samples and FDP materials',
-  'Research papers and consulting frameworks',
+/**
+ * The two vocabularies the Library is organised by, and the ONE definition of
+ * each.
+ *
+ * They are not decoration on this page. When the index is built they become
+ * its two filter groups; the signup form's Interests field is the topic list
+ * verbatim, because a reader who ticks three interests at signup is choosing
+ * the filter their first visit opens on; and the dashboard browses by the same
+ * topics. Four places, one array each — which is the only way the filter, the
+ * form and the dashboard can be guaranteed to offer the same words.
+ *
+ * A resource carries one format and up to three topics. That is why format is
+ * a short closed list and topic is longer: one says what a thing IS, the other
+ * says what it is ABOUT, and only the second is a subject anyone browses by.
+ */
+export const LIB_FORMATS = [
+  'Article',
+  'Video',
+  'Report / Whitepaper',
+  'Webinar / Recording',
+  'Policy Brief',
+  'Playbook',
+  'Case Study',
 ]
 
 /**
- * The same six, named rather than described — the shelves as they appear on the
- * rail in the landing hero, where a full sentence per node would be unreadable.
+ * What each format actually is, as the "What's Inside" band reads them.
  *
- * Paired with LIB_VALUE by order, so the two lists have to change together. Two
- * lists of the same six is a cost; six sentences set as a row of labels is worse.
- *
- * Not `LIB_SHELVES` — that is the dashboard's four shelves, further down, which
- * are a different thing wearing the same word.
+ * Derived from LIB_FORMATS rather than written as a second list, so the cards
+ * ARE the vocabulary: add a format above and it appears here with an empty
+ * line rather than being silently missing from the page. The names stay a flat
+ * array of strings because that is what the filters will want.
  */
-export const LIB_SHELF_NAMES = [
-  'Policy Briefs',
-  'Sector Playbooks',
-  'Tokenomics Primers',
-  'Recorded Sessions',
-  'Curriculum Samples',
-  'Research Papers',
+const FORMAT_NOTES = {
+  Article: 'Short reads on what changed this week and what it means for the people building.',
+  Video: 'Explainers, panels and interviews — the things easier watched than read.',
+  'Report / Whitepaper':
+    'Long-form research with the workings shown: methodology, data and sources.',
+  'Webinar / Recording':
+    'Sessions you missed, kept in full. Nothing behind a "request the recording" form.',
+  'Policy Brief':
+    'What a regulation actually says, what it applies to, and what it does not.',
+  Playbook: 'Step-by-step guides for a specific job — a pilot, a listing, a campus lab.',
+  'Case Study': 'One deployment, start to finish, including what did not work first time.',
+}
+
+export const LIB_FORMAT_CARDS = LIB_FORMATS.map((name) => ({
+  name,
+  body: FORMAT_NOTES[name] || '',
+}))
+
+export const LIB_TOPICS = [
+  'Policy & Regulation',
+  'Tokenization & RWA',
+  'Web3 Corridors',
+  'Education & Skilling',
+  'Enterprise Blockchain',
+  'AI & Emerging Tech',
+  'ESG & Green Chain',
+  'Credentialing & Identity',
+  'Sector Deep Dives',
 ]
 
 /** Stated on the page, not buried in the terms — it is the reason to sign up. */
@@ -64,14 +99,11 @@ export const ROLES = [
   'Other',
 ]
 
-export const INTERESTS = [
-  'Policy & Regulation',
-  'Tokenization / RWA',
-  'Education & Skilling',
-  'Enterprise Blockchain',
-  'AI',
-  'ESG & Green Chain',
-]
+/* The Interests field is LIB_TOPICS and nothing else — see the note there. It
+   had a list of its own, six topics against the library's seven, worded
+   differently ("Tokenization / RWA" against "Tokenization & RWA", "AI" against
+   "AI & Emerging Tech"). A reader ticked an interest at signup that no filter
+   in the library would ever match. */
 
 /**
  * Countries, as ISO 3166-1 alpha-2 codes resolved to names at load.
@@ -105,15 +137,8 @@ export const COUNTRIES = (() => {
 /* 7.5 — the dashboard                                                */
 /* ================================================================== */
 
-export const LIB_CATEGORIES = [
-  'Policy & Regulation',
-  'Tokenization & RWA',
-  'Sector Playbooks',
-  'Education & Skilling',
-  'AI & Emerging Tech',
-  'ESG & Green Chain',
-  'Recordings',
-]
+/* "Browse by topic" browses LIB_TOPICS. This had its own seven as well —
+   overlapping the other two lists without matching either. */
 
 /**
  * The dashboard's shelves.
@@ -154,7 +179,7 @@ export const LIB_UPSELL = {
   title: 'Want more than resources?',
   body: 'Members get advisory access, event invitations and ecosystem introductions.',
   cta: 'Explore Membership',
-  href: '/#connect',
+  href: '/connect',
 }
 
 /* ================================================================== */

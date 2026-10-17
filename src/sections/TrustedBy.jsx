@@ -81,21 +81,22 @@ export default function TrustedBy() {
           had already scrolled past the thing it explains. */}
       <div className="wrap trusted__top">
         <div className="trusted__head">
-          <p className="eyebrow" data-rise>Trusted By</p>
+          <p className="eyebrow" data-rise>Ecosystem</p>
           <h2 className="h2 h2--col display" data-clip>
             <span className="line">
-              <span className="line__inner">Where policy,</span>
+              <span className="line__inner">An alliance,</span>
             </span>
             <span className="line">
               <span className="line__inner">
-                capital and <em>code</em> meet.
+                not a <em>vendor.</em>
               </span>
             </span>
           </h2>
         </div>
         <p className="trusted__caption" data-rise>
-          From Ministries to marketplaces — IBA works where policy, capital and code
-          meet.
+          300+ ecosystem partners · 70+ global affiliations · government mandates
+          across ministries · products, councils and communities built with our
+          network.
         </p>
       </div>
 

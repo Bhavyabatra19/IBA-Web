@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 7.5 — The signed-in Library.
  *
  * ⚠ THIS IS NOT A GATED AREA. There is no backend and nothing here is
@@ -15,7 +15,7 @@
 
 import { Go } from '../../sections/service/ServiceBlocks'
 import { endPreview, usePreview } from '../../lib/previewSession'
-import { LIB_CATEGORIES, LIB_SHELVES, LIB_UPSELL } from '../../library'
+import { LIB_TOPICS, LIB_SHELVES, LIB_UPSELL } from '../../library'
 
 export default function Dashboard() {
   const preview = usePreview()
@@ -69,11 +69,11 @@ export default function Dashboard() {
                 Browse by category
               </h2>
               <ul className="dash__cats">
-                {LIB_CATEGORIES.map((c) => (
+                {LIB_TOPICS.map((c) => (
                   <li key={c}>
                     {/* every category resolves to the same place until the
                         catalogue exists — said here rather than discovered */}
-                    <Go href="/#connect">
+                    <Go href="/connect">
                       {c}
                       <span aria-hidden="true">→</span>
                     </Go>

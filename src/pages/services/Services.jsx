@@ -1,23 +1,37 @@
-﻿/**
- * 4.0 — Services landing.
+/**
+ * 4.0 — Expertise landing.
  *
- * Five tiles over a sixth that runs the full width. The wide one is Sector
- * Expertise, and it is wide because it is a different kind of thing: the five
- * are what IBA does, the sixth is where it has done it.
+ * Everything IBA sells or delivers, split by BUYER rather than by feature: six
+ * things an organisation engages, and one thing a person enrols in. That split
+ * is the page's whole structure, because it is the first question a reader
+ * answers about themselves — and the six and the one are not alternatives to
+ * each other, so a flat list of seven would ask them to choose between things
+ * that are not a choice.
+ *
+ * ⚠ The route is still /services. The section is named Expertise everywhere it
+ * is read — the nav, the headings, the footer — and only the URL still says
+ * otherwise. Renaming it means moving six sub-pages, servicePath(), the router
+ * table and every `back` link with them, so it is left as one deliberate piece
+ * of work rather than done halfway here.
  */
 
 import { ServicePage, Band, Head, Index, Cross } from '../../sections/service/ServiceBlocks'
-import { SERVICES, SERVICE_SPECTRUM, servicePath } from '../../services'
+import {
+  SERVICES,
+  SERVICE_SPECTRUM,
+  EXPERTISE_STUDENTS,
+  servicePath,
+} from '../../services'
 
 export default function Services() {
   return (
     <ServicePage
       art="services"
-      eyebrow="Services"
+      eyebrow="Expertise"
       lines={[
-        'End-to-End Blockchain',
+        'What We',
         <>
-          Solutions Across <em>Every Stage</em>
+          <em>Deliver</em>
         </>,
       ]}
       spectrum={SERVICE_SPECTRUM}
@@ -28,7 +42,7 @@ export default function Services() {
          head. The rail is the six below, in their order, so the object under
          the headline is the contents of the page it opens. */
       showcase={{
-        ghost: 'Services',
+        ghost: 'Expertise',
         cta: { label: 'Talk to our team', href: '#connect' },
         label: 'The arc — frame, structure, build, govern',
         rail: SERVICES.map((s) => ({ n: s.n, name: s.short || s.name })),
@@ -38,28 +52,39 @@ export default function Services() {
         <Head
           eyebrow="What We Offer"
           lines={[
-            'Six Ways In,',
+            'Two Ways In,',
             <>
               One <em>Alliance</em>
             </>,
           ]}
         />
-        {/* A rail rather than a grid. `wide` on the sixth is not read here —
-            on a rail every card is the same size, and Sector Expertise being a
-            different kind of thing is said by where it sits in the order and by
-            its own page, not by being twice the width of the others. */}
+
+        {/* Each group is a rail of its own rather than one rail of seven. The
+            heading between them is the information — take it away and the Red
+            Club is a seventh service, which is exactly what it is not. */}
+        <h3 className="svc__groupTitle" data-rise>
+          For Enterprises &amp; Governments
+        </h3>
         <Index
-          label="The six services"
+          label="What IBA delivers to enterprises and governments"
           items={SERVICES.map((s) => ({ ...s, href: servicePath(s.slug) }))}
+        />
+
+        <h3 className="svc__groupTitle" data-rise>
+          For Institutions &amp; Students
+        </h3>
+        <Index
+          label="What IBA delivers to institutions and students"
+          items={EXPERTISE_STUDENTS}
         />
       </Band>
 
-      <Band tone="dark" id="education-crosslink">
+      <Band tone="dark" id="ecosystem-crosslink">
         <Cross
-          title="Looking for education?"
-          body="Students join the IBA Red Club. Institutions partner through Verifyble."
-          cta="Go to Education"
-          href="/education"
+          title="Looking for our initiatives, partners or communities?"
+          body="Expertise is what IBA is brought in to do. Ecosystem is everything it convenes."
+          cta="Go to Ecosystem"
+          href="/studio"
         />
       </Band>
     </ServicePage>

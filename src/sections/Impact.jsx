@@ -79,7 +79,7 @@ export default function Impact() {
                   </li>
                 ))}
               </ul>
-              <a className="btn btn--primary btn--sm" href="#connect">
+              <a className="btn btn--primary btn--sm" href="#connect" data-enquiry="">
                 See Our Work
               </a>
             </div>

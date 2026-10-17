@@ -7,6 +7,8 @@
  * typed into each section, where "800+" and "850+" could quietly disagree.
  */
 
+import { FACTS } from './data/facts'
+
 /**
  * The strip under the home hero, and inside About's own hero.
  *
@@ -16,18 +18,18 @@
  * number, where a lead-in would have nothing to lead into.
  */
 export const CRED_STATS = [
-  { to: 800, suffix: '+', label: 'Global Members' },
-  { to: 100, suffix: '+', label: 'Global Advisories' },
-  { to: 14, suffix: '', label: 'Countries', lead: 'Presence in' },
-  { to: 70, suffix: '+', label: 'Global Affiliations' },
+  { to: FACTS.members.n, suffix: FACTS.members.suffix, label: 'Global Members' },
+  { to: FACTS.advisors.n, suffix: FACTS.advisors.suffix, label: 'Global Advisories' },
+  { to: FACTS.countries.n, suffix: '', label: 'Countries', lead: 'Presence in' },
+  { to: FACTS.affiliations.n, suffix: FACTS.affiliations.suffix, label: 'Global Affiliations' },
 ]
 
 /** Counted — a running tally still growing. */
 export const IMPACT_PRIMARY = [
-  { to: 5, prefix: '$', suffix: 'B+', label: 'Tokenized Assets' },
-  { to: 20, prefix: '', suffix: '+', label: 'Jurisdictions' },
-  { to: 14, prefix: '', suffix: '+', label: 'Live Blockchains' },
-  { to: 75, prefix: '', suffix: '+', label: 'Ecosystem Partners' },
+  { to: FACTS.tokenized.n, prefix: FACTS.tokenized.prefix, suffix: FACTS.tokenized.suffix, label: 'Tokenized Assets' },
+  { to: FACTS.countries.n, prefix: '', suffix: '', label: 'Countries' },
+  { to: FACTS.sectors.n, prefix: '', suffix: '', label: 'Tokenization Sectors' },
+  { to: FACTS.partners.n, prefix: '', suffix: FACTS.partners.suffix, label: 'Ecosystem Partners' },
 ]
 
 /** Stated — settled portfolio facts, so they are printed, not animated. */

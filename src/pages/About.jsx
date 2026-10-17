@@ -23,6 +23,7 @@ import {
 } from '../lib/scroll'
 import AboutHero from '../sections/AboutHero'
 import Closing from '../sections/Closing'
+import GlobalPresence from '../sections/GlobalPresence'
 import IbaCore from '../sections/IbaCore'
 /* `Go` is the app's internal link, so the two buttons on this page scroll to the
    band at its foot rather than reloading the site to reach the home page's.
@@ -32,6 +33,7 @@ import { Go, Orbit } from '../sections/service/ServiceBlocks'
 import ImpactSlab from '../components/ImpactSlab'
 import Tokenomics from '../sections/Tokenomics'
 import { IMPACT_PRIMARY, IMPACT_SECONDARY } from '../content'
+import { ADVISORS_PENDING, MISSION, MISSION_PILLARS, VISION } from '../about'
 
 /* ------------------------------------------------------------------ */
 /* 3.3 — initiatives                                                   */
@@ -112,7 +114,71 @@ export default function About() {
           time. It still opens the home page, which is its own section. */}
       <AboutHero />
 
-      {/* ---------------- 3.2 The IBA Core ---------------- */}
+      {/* ---------------- 3.2 Vision ---------------- */}
+      {/* Centred, in display type, with a red rule above it — the brief's own
+          treatment, and the right one: this is the only block on the site that
+          is a single sentence asked to carry a whole section, so nothing sits
+          beside it to divide the attention. */}
+      <section className="section band band--light vis" id="our-vision">
+        <div className="wrap vis__inner">
+          <span className="vis__rule" aria-hidden="true" />
+          <p className="eyebrow" data-rise>
+            Our Vision
+          </p>
+          <p className="vis__statement display" data-rise>
+            {VISION.statement}
+          </p>
+          <p className="vis__support" data-rise>
+            {VISION.support}
+          </p>
+          {/* Signed, not hidden. The brief marks this wording unapproved and a
+              reader of the live site would have no way to know — see VISION. */}
+          {VISION.draft && (
+            <p className="vis__draft" data-rise>
+              Drafted from IBA’s positioning. Awaiting confirmation of the approved
+              vision statement.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* ---------------- 3.3 Mission ---------------- */}
+      <section className="section band band--dark" id="our-mission">
+        <div className="wrap">
+          <div className="ab__head">
+            <p className="eyebrow" data-rise>
+              Our Mission
+            </p>
+            <h2 className="h2 display" data-clip>
+              <span className="line">
+                <span className="line__inner">Advance. Shape.</span>
+              </span>
+              <span className="line">
+                <span className="line__inner">
+                  Build. <em>Connect.</em>
+                </span>
+              </span>
+            </h2>
+            <p className="mis__statement" data-rise>
+              {MISSION.statement}
+            </p>
+          </div>
+
+          {/* Four, numbered, because the statement above names them in this
+              order — the cards are that sentence opened out. */}
+          <ol className="mis__pillars">
+            {MISSION_PILLARS.map((p) => (
+              <li key={p.n} data-rise>
+                <span className="mis__n display">{p.n}</span>
+                <h3 className="mis__name">{p.name}</h3>
+                <p className="mis__body">{p.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ---------------- The IBA Core (3.5's six dimensions) ---------------- */}
       <IbaCore />
 
       {/* ---------------- 3.3 Initiatives ---------------- */}
@@ -194,16 +260,29 @@ export default function About() {
                 100+ global advisors across policy, law, finance, engineering and academia
                 support IBA mandates.
               </p>
+              {/* 3.6 asks for a grid of 8–12 advisor cards. None have been
+                  supplied, so there is no grid: eight grey silhouettes standing
+                  in for real people who have not agreed to be named is a worse
+                  outcome than a line saying the profiles are coming. See
+                  ADVISORS in about.js — filling that array is the only edit. */}
+              <p className="ab__pending">{ADVISORS_PENDING}</p>
             </div>
-            <Go className="btn btn--primary btn--sm" href="#connect">
+            <Go className="btn btn--primary btn--sm" href="#connect" data-enquiry="">
               Join the Alliance
             </Go>
           </div>
         </div>
       </section>
 
+      {/* ---------------- 3.4 Global Presence ---------------- */}
+      <GlobalPresence />
+
       {/* ---------------- 3.5 Impact ---------------- */}
-      <section className="section band band--dark" id="impact-numbers">
+      {/* band--own because Global Presence above it is dark too, and two dark
+          bands are otherwise spaced as one region — which is right when the
+          second is a figure strip belonging to the first, and wrong here, where
+          both are full sections with their own heads. */}
+      <section className="section band band--dark band--own" id="impact-numbers">
         <div className="wrap">
           <div className="ab__head">
             <p className="eyebrow" data-rise>Impact</p>
@@ -261,7 +340,7 @@ export default function About() {
                 </ul>
                 {/* a bare hash: this page now ends on its own connect band, so
                     the ask is a scroll rather than a trip to the home page */}
-                <Go className="btn btn--primary btn--sm" href="#connect">
+                <Go className="btn btn--primary btn--sm" href="#connect" data-enquiry="">
                   See Our Work
                 </Go>
               </div>

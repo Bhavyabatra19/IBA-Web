@@ -1,4 +1,4 @@
-/**
+﻿/**
  * The About hero's scroll piece — scattered points drawing together into a
  * connected network.
  *
@@ -164,8 +164,8 @@ export default function AllianceField() {
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet" fill="none">
         <defs>
           <radialGradient id="afGlow">
-            <stop stopColor="#c0392b" stopOpacity=".3" />
-            <stop offset="1" stopColor="#c0392b" stopOpacity="0" />
+            <stop stopColor="#d71920" stopOpacity=".3" />
+            <stop offset="1" stopColor="#d71920" stopOpacity="0" />
           </radialGradient>
         </defs>
 

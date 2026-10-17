@@ -20,7 +20,7 @@ export default function Reset() {
     e.preventDefault()
     /* TODO: POST to the reset endpoint, which sends EMAIL_RESET. Do not show a
        "check your inbox" confirmation until something is actually sending. */
-    setNotice('No email was sent — password reset is not connected yet. Email rk@indiablockchainalliance.org and we will reset it by hand.')
+    setNotice('No email was sent — password reset is not connected yet. Email hello@indiablockchainalliance.org and we will reset it by hand.')
   }
 
   return (

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 7.2 — Join the IBA Library.
  *
  * The full field set, on a page rather than in the nav's modal: eight fields is
@@ -25,7 +25,7 @@ import {
 import { navigate } from '../../lib/router'
 import { startPreview } from '../../lib/previewSession'
 import { PENDING } from '../../nav'
-import { COUNTRIES, INTERESTS, LIB_TRUST, ROLES } from '../../library'
+import { COUNTRIES, LIB_TOPICS, LIB_TRUST, ROLES } from '../../library'
 
 export default function Join() {
   const [notice, setNotice] = useState(null)
@@ -77,7 +77,7 @@ export default function Join() {
         <Multi
           legend="Interests"
           name="interests"
-          options={INTERESTS}
+          options={LIB_TOPICS}
           hint="Pick any number. We use these to decide what to send you, nothing else."
         />
 

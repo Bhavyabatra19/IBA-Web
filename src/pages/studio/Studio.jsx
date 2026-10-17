@@ -1,5 +1,5 @@
 ﻿/**
- * 6.0 — The Studio.
+ * 5.0 — The Ecosystem landing.
  *
  * One page, four bands, not four pages. The brief sets 6.1–6.4 as H2s under a
  * single H1, and it is right to: Clients, Government Projects, Corridors and
@@ -24,6 +24,7 @@ import {
   Tiles,
   Tags,
   Chips,
+  Index,
   Pending,
   Cta,
   Cross,
@@ -35,14 +36,14 @@ import LOGOS from '../../logos.json'
 import {
   CLIENT_GROUPS,
   CORRIDORS,
-  CORRIDOR_INTRO,
+  CORRIDOR_TEASER,
   COUNCILS,
   COUNCILS_NOTE,
   GOV_CLIENTS,
   GOV_PROJECTS,
   GOV_PROJECTS_MORE,
+  ECOSYSTEM_ENTRIES,
   STUDIO_INTRO,
-  STUDIO_SECTIONS,
 } from '../../studio'
 
 /* the two the intro names, taken from the counters the site already publishes
@@ -56,14 +57,14 @@ export default function Studio() {
   return (
     <ServicePage
       art="studio"
-      eyebrow="Studio"
+      eyebrow="Ecosystem"
       lines={[
-        'The',
+        'The IBA',
         <>
-          <em>Studio</em>
+          <em>Ecosystem</em>
         </>,
       ]}
-      sub="Our ecosystem — the partners, clients, governments and corridors we build with."
+      sub="Initiatives, organisations, communities and people. Everything we convene rather than sell."
       intro={STUDIO_INTRO}
       /* The four sections are the rail, and every node is a link: the console is
          this page's contents list as well as its picture, which is why the jump
@@ -75,12 +76,8 @@ export default function Studio() {
            a watermark. So the ghost says what the Studio is instead. */
         ghost: 'Ecosystem',
         cta: { label: 'Become an ecosystem partner', href: '#connect' },
-        label: 'The ecosystem, in four views',
-        rail: STUDIO_SECTIONS.map((s, i) => ({
-          n: `0${i + 1}`,
-          name: s.label,
-          href: s.href,
-        })),
+        label: 'The ecosystem, in five parts',
+        rail: ECOSYSTEM_ENTRIES.map((e) => ({ n: e.n, name: e.name, href: e.href })),
         spectrum: COUNCILS,
       }}
     >
@@ -89,6 +86,24 @@ export default function Studio() {
           meeting are spaced as one region — see .band--dark + .band--dark. */}
       <Band tone="dark" id="reach">
         <Stats items={REACH} cols={2} />
+      </Band>
+
+      {/* The five ways in. Three of them are anchors further down this page and
+          two are on pages that already hold the material — so this is a table
+          of contents for the ecosystem rather than a menu of five destinations
+          that would each need building first. */}
+      <Band tone="light" id="ways-in" className="band--own">
+        <Head
+          eyebrow="Ways In"
+          lines={[
+            'Five Doors Into',
+            <>
+              One <em>Ecosystem</em>
+            </>,
+          ]}
+        />
+        <Index label="The five parts of the ecosystem" items={ECOSYSTEM_ENTRIES} />
+        <Cta label="Become an Ecosystem Partner" />
       </Band>
 
       <Band tone="light" id="clients">
@@ -135,10 +150,13 @@ export default function Studio() {
               Through <em>Blockchain</em>
             </>,
           ]}
-          note={CORRIDOR_INTRO}
+          note={CORRIDOR_TEASER}
         />
         <Pending items={CORRIDORS} />
-        <Cta label="Partner on a Corridor" />
+        {/* At the flagship page, not at this page's connect band: the corridors
+            have a page of their own now, and it is where both the four pillars
+            and the application form live. */}
+        <Cta label="Explore Web3 Corridors" href="/corridor" />
       </Band>
 
       <Band tone="dark" id="councils">
@@ -158,9 +176,9 @@ export default function Studio() {
 
       <Band tone="light" id="services-crosslink">
         <Cross
-          title="Want to work with us rather than beside us?"
-          body="The Studio is the ecosystem. Services is what IBA is brought in to do inside it."
-          cta="Go to Services"
+          title="Want us working for you rather than beside you?"
+          body="Ecosystem is everything IBA convenes. Expertise is what it is brought in to do."
+          cta="Go to Expertise"
           href="/services"
         />
       </Band>

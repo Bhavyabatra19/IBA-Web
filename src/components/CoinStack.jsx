@@ -100,10 +100,27 @@ function CoinFace({ variant, glyph }) {
   )
 }
 
-export default function CoinStack({ count = 10, segments = 24 }) {
+/**
+ * @param rim  'strips' — the faceted cylinder above, true to any angle.
+ *             'discs'  — `segments` round discs stacked through the thickness.
+ *             Every disc is a circle, so the silhouette stays perfectly round
+ *             at any tilt; it only reads as layers near edge-on (90°), which a
+ *             coin that tumbles but never turns side-on does not reach. Fewer
+ *             3D layers than strips, too, so it is the cheaper choice for
+ *             coins that move every frame.
+ */
+export default function CoinStack({ count = 10, segments = 24, float = true, rim = 'strips' }) {
   const rootRef = useRef(null)
 
-  const strips = useMemo(() => rimStrips(segments), [segments])
+  const strips = useMemo(() => (rim === 'strips' ? rimStrips(segments) : []), [rim, segments])
+  /* disc depths from back face to front face, as fractions of the thickness */
+  const discs = useMemo(
+    () =>
+      rim === 'discs'
+        ? Array.from({ length: segments }, (_, k) => (k + 0.5) / segments - 0.5)
+        : [],
+    [rim, segments]
+  )
 
   const coins = useMemo(
     () =>
@@ -114,9 +131,11 @@ export default function CoinStack({ count = 10, segments = 24 }) {
     [count]
   )
 
-  /* Ambient float — deliberately unsynced from the scroll timeline. */
+  /* Ambient float — deliberately unsynced from the scroll timeline. Off when
+     the owner already moves every coin each frame (the home hero's wheel):
+     a second transform per coin there is only extra work. */
   useLayoutEffect(() => {
-    if (reducedMotion()) return
+    if (!float || reducedMotion()) return
     const ctx = gsap.context(() => {
       gsap.utils.toArray('.coin__body').forEach((body, i) => {
         gsap.to(body, {
@@ -132,7 +151,7 @@ export default function CoinStack({ count = 10, segments = 24 }) {
       })
     }, rootRef)
     return () => ctx.revert()
-  }, [count])
+  }, [count, float])
 
   return (
     <div className="coin-stack" ref={rootRef}>
@@ -154,6 +173,9 @@ export default function CoinStack({ count = 10, segments = 24 }) {
                   key={k}
                   style={{ '--a': `${s.deg}deg`, '--lum': s.lum.toFixed(3) }}
                 />
+              ))}
+              {discs.map((d, k) => (
+                <span className="coin__disc" key={k} style={{ '--d': d.toFixed(4) }} />
               ))}
             </div>
 

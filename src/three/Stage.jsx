@@ -78,6 +78,7 @@ export default function Stage() {
         root.dataset.ready = 'true'
 
         ticker = () => {
+          root.classList.toggle('is-hero', stageBus.owner === 'hero')
           const live = stageBus.live && !!stageBus.rig
           if (live !== lastLive) {
             lastLive = live
@@ -87,11 +88,12 @@ export default function Stage() {
 
           // With reduced motion the rig holds one resolved state per section,
           // so there is nothing to redraw until that state actually changes.
-          if (still) {
+          if (still || stageBus.owner === 'hero') {
             if (stageBus.revision === lastRevision) return
             lastRevision = stageBus.revision
           }
 
+          if (stageBus.owner === 'hero') scene.setPointer(0, 0)
           scene.apply(stageBus.rig)
           scene.render()
         }
@@ -105,7 +107,7 @@ export default function Stage() {
     let onMove = null
     if (!still && !isCoarse()) {
       onMove = (e) => {
-        if (!scene) return
+        if (!scene || stageBus.owner === 'hero') return
         scene.setPointer(
           e.clientX / window.innerWidth - 0.5,
           -(e.clientY / window.innerHeight - 0.5)

@@ -26,13 +26,26 @@
 import gsap from 'gsap'
 import { EASE } from './lib/scroll'
 
-/** The five states, and where each begins. Drives the hero rail too. */
+/**
+ * The two states, and where each begins.
+ *
+ * There were five. The sequence opened on a rough fragment that turned, then
+ * shattered into shards that flew into the shape of the disc, then struck the
+ * coin and turned it square to the reader — four fifths of the pin spent
+ * arriving at the object rather than showing it. It now opens ON that object,
+ * seated and closed, and the two states that remain are what it then does:
+ * the seam opens, and the halves part.
+ *
+ * The two that remain are stretched to fill the same hundred units in their
+ * old proportions, so every beat still lands where it did inside its own state.
+ *
+ * The fragment and the shards still exist in three/matter.js. Nothing builds
+ * them any more; the file is kept because this is not a repository and a
+ * deleted file here is a deleted file.
+ */
 export const STAGES = [
-  { key: 'primitive', name: 'Primitive', at: 0 },
-  { key: 'forming', name: 'Forming', at: 18 },
-  { key: 'coin', name: 'Coin', at: 40 },
-  { key: 'blockchain', name: 'Blockchain', at: 58 },
-  { key: 'future', name: 'Future', at: 78 },
+  { key: 'blockchain', name: 'Blockchain', at: 0 },
+  { key: 'future', name: 'Future', at: 49 },
 ]
 
 export const stageAt = (pct) => {
@@ -47,75 +60,61 @@ export const stageAt = (pct) => {
 export function makeRig(mode = 'hero') {
   const hero = mode === 'hero'
   return {
-    /* the irregular fragment we start from */
-    rock: { op: hero ? 1 : 0, scale: 1, spin: 0, shatter: 0 },
-    /* the pieces that carry it from fragment to disc */
-    shards: { op: 0, form: 0, spin: 0 },
-    /* the coin, as two halves that can part */
-    coin: { op: hero ? 0 : 1, split: hero ? 0 : 0.12, spinY: hero ? -2.1 : 0, tilt: 0, scale: 1 },
+    /* The coin, as two halves that can part — and the frame the hero opens on:
+       present, square to the reader, and shut. It used to arrive turned away
+       and seat itself over the first third of the pin; it is now already
+       seated, so `spinY` and `tilt` start where that beat left them and the
+       sequence begins with the object rather than with its approach. */
+    coin: { op: 1, split: hero ? 0 : 0.12, spinY: 0, tilt: hero ? 0.1 : 0, scale: 1 },
     /* the lattice inside it */
     core: { op: hero ? 0 : 1, expand: hero ? 0 : 0.3, spin: 0, energy: 0 },
-    cam: { x: 0, y: 0, z: hero ? 7.4 : 6.4, fov: 38 },
-    bloom: 0.22,
+    /* Where the camera and the light stood when the seam was about to open.
+       Starting them where the removed states left them is what keeps the
+       opening frame the frame it always was at that point in the sequence. */
+    cam: { x: 0, y: 0, z: hero ? 4.9 : 6.4, fov: 38 },
+    bloom: hero ? 0.3 : 0.22,
     tail: 0,
   }
 }
 
 /* ================================================================== */
-/* HERO — primitive → forming → coin → blockchain → future             */
+/* HERO — blockchain → future                                          */
 /* ================================================================== */
+/**
+ * The two durations are the old ones scaled by 100/70, because the three
+ * removed states were thirty of the hundred units that were left: 34 → 49,
+ * 36 → 51. Every offset inside a state is scaled by the same figure, so each
+ * beat still lands at the same point within its own state as it always did.
+ */
 export function buildHeroTimeline(R) {
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
 
-  /* ---------- 1 · PRIMITIVE · 0–18 ----------
-     A rough fragment, turning. No structure to read yet — the whole point of
-     the opening is that there is nothing here that was made. */
-  tl.to(R.cam, { z: 5.7, duration: 18, ease: EASE.camera }, 0)
-    .to(R.rock, { spin: 1.15, duration: 18, ease: EASE.drift }, 0)
-    .to(R, { bloom: 0.3, duration: 18 }, 0)
-
-  /* ---------- 2 · FORMING · 18–40 ----------
-     The fragment comes apart and the pieces start finding the circle. Shards
-     lead the rock's own fade so there is never a frame with nothing in it. */
-  tl.to(R.shards, { op: 1, duration: 5, ease: EASE.rise }, 18)
-    .to(R.rock, { shatter: 1, duration: 12, ease: EASE.matter }, 18)
-    .to(R.rock, { op: 0, duration: 8, ease: 'power2.in' }, 20)
-    .to(R.shards, { form: 1, duration: 21, ease: EASE.matter }, 19)
-    .to(R.shards, { spin: 0.9, duration: 22, ease: EASE.drift }, 18)
-    .to(R.cam, { z: 5.2, duration: 22, ease: EASE.camera }, 18)
-
-  /* ---------- 3 · COIN · 40–58 ----------
-     The pieces resolve into the struck object. They cross-fade rather than cut:
-     the shards hold their assembled positions while the coin arrives underneath
-     them, so the swap reads as consolidation, not as a replacement. */
-  tl.to(R.coin, { op: 1, duration: 9, ease: 'power2.out' }, 40)
-    .to(R.shards, { op: 0, duration: 8, ease: 'power2.in' }, 41.5)
-    .to(R.coin, { spinY: 0, duration: 18, ease: EASE.seat }, 40)
-    .to(R.coin, { tilt: 0.1, duration: 18, ease: EASE.camera }, 40)
-    .to(R.cam, { z: 4.9, duration: 18, ease: EASE.camera }, 40)
-
-  /* ---------- 4 · BLOCKCHAIN · 58–78 ----------
+  /* ---------- 1 · BLOCKCHAIN · 0–49 ----------
      The seam opens just enough to show there is something inside. The interior
      is lit from within before it is revealed, so the opening reveals a working
-     thing rather than an empty shell. */
-  tl.to(R.core, { op: 1, duration: 10, ease: 'power2.out' }, 58)
-    .to(R.coin, { split: 0.24, duration: 20, ease: EASE.matter }, 58)
-    .to(R.core, { expand: 0.55, duration: 20, ease: EASE.matter }, 58)
-    .to(R.core, { energy: 0.5, duration: 20, ease: 'power2.out' }, 58)
-    .to(R.core, { spin: 0.55, duration: 20, ease: 'none' }, 58)
-    .to(R.cam, { z: 4.5, x: 0.28, duration: 20, ease: EASE.camera }, 58)
-    .to(R, { bloom: 0.5, duration: 20, ease: 'power2.in' }, 58)
+     thing rather than an empty shell.
 
-  /* ---------- 5 · FUTURE · 78–100 ----------
+     Nothing introduces the coin before this: it is the first thing on the page
+     and it is already there, closed, so the sequence's first move is the one
+     move that matters. */
+  tl.to(R.core, { op: 1, duration: 24, ease: 'power2.out' }, 0)
+    .to(R.coin, { split: 0.24, duration: 49, ease: EASE.matter }, 0)
+    .to(R.core, { expand: 0.55, duration: 49, ease: EASE.matter }, 0)
+    .to(R.core, { energy: 0.5, duration: 49, ease: 'power2.out' }, 0)
+    .to(R.core, { spin: 0.55, duration: 49, ease: 'none' }, 0)
+    .to(R.cam, { z: 4.5, x: 0.28, duration: 49, ease: EASE.camera }, 0)
+    .to(R, { bloom: 0.5, duration: 49, ease: 'power2.in' }, 0)
+
+  /* ---------- 2 · FUTURE · 49–100 ----------
      The halves seat fully apart and hold, perfectly aligned. The camera settles
      back rather than pushing in: the object has become the subject, and crowding
      it at the end loses the symmetry that the whole sequence was building. */
-  tl.to(R.coin, { split: 1, duration: 22, ease: EASE.seat }, 78)
-    .to(R.core, { expand: 1, duration: 22, ease: EASE.matter }, 78)
-    .to(R.core, { spin: 1.5, duration: 22, ease: 'none' }, 78)
-    .to(R.core, { energy: 1, duration: 18, ease: 'power2.out' }, 78)
-    .to(R.cam, { z: 5.5, x: 0, y: 0.12, duration: 22, ease: EASE.camera }, 78)
-    .to(R, { bloom: 0.78, duration: 14, ease: 'power2.out' }, 80)
+  tl.to(R.coin, { split: 1, duration: 51, ease: EASE.seat }, 49)
+    .to(R.core, { expand: 1, duration: 51, ease: EASE.matter }, 49)
+    .to(R.core, { spin: 1.5, duration: 51, ease: 'none' }, 49)
+    .to(R.core, { energy: 1, duration: 43, ease: 'power2.out' }, 49)
+    .to(R.cam, { z: 5.5, x: 0, y: 0.12, duration: 51, ease: EASE.camera }, 49)
+    .to(R, { bloom: 0.78, duration: 33, ease: 'power2.out' }, 53)
 
   tl.set(R, { tail: 1 }, 100)
   return tl

@@ -1,0 +1,125 @@
+/* ==================================================================
+   FLOATING MOTION — a slow drift across the site (by request).
+
+   Every float uses the individual `translate` property, never
+   `transform`, so it composes with the hover lifts (which use transform)
+   instead of fighting them for the same property. Amplitudes are small
+   and timings staggered so neighbours never move in step.
+
+   Reduced motion: nothing floats. Delete this file (and its import in
+   main.jsx) to remove the effect entirely.
+   ================================================================== */
+
+@keyframes float-lg {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -10px;
+  }
+}
+@keyframes float-md {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -6px;
+  }
+}
+@keyframes float-sm {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+@keyframes float-tilt {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: 0deg;
+  }
+  33% {
+    translate: 0 -7px;
+    rotate: -1.5deg;
+  }
+  66% {
+    translate: 0 -3px;
+    rotate: 1deg;
+  }
+}
+
+/* cards stay still (by request) */
+/* stats and the map's figures drift a little more */
+.pk-stat,
+.git__stat,
+.pg__fig {
+  animation: float-md 6s ease-in-out infinite;
+}
+/* logos and the monogram — icons and the card numbers stay still (by request) */
+.eco__logo,
+.eco__mono,
+.fnd__mono {
+  animation: float-md 5s ease-in-out infinite;
+}
+/* objects */
+.pk-wallet {
+  animation: float-tilt 7s ease-in-out infinite;
+}
+.pg__map {
+  animation: float-lg 9s ease-in-out infinite;
+}
+
+/* stagger — neighbours start at different points of the cycle */
+:is(.pk-stat, .git__stat):nth-child(2n) {
+  animation-delay: -1.75s;
+}
+:is(.pk-stat, .git__stat):nth-child(3n) {
+  animation-delay: -3.5s;
+  animation-duration: 7.8s;
+}
+:is(.pk-stat, .git__stat):nth-child(4n) {
+  animation-delay: -5.2s;
+  animation-duration: 8.4s;
+}
+.eco__chip:nth-child(2n) :is(.eco__logo, .eco__mono) {
+  animation-delay: -1.4s;
+}
+.eco__chip:nth-child(3n) :is(.eco__logo, .eco__mono) {
+  animation-delay: -2.8s;
+}
+.pg__pin:nth-child(2) .pg__fig {
+  animation-delay: -2s;
+}
+.pg__pin:nth-child(3) .pg__fig {
+  animation-delay: -4s;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .pk-stat,
+  .git__stat,
+  .pg__fig,
+  .eco__logo,
+  .eco__mono,
+  .fnd__mono,
+  .pk-wallet,
+  .pg__map {
+    animation: none;
+  }
+}
+
+/* the marquee's logos stay still (by request) — the row is already moving */
+.eco__marquee :is(.eco__logo, .eco__mono) {
+  animation: none;
+}
+
+/* the Global Presence map and its figures stay still (by request) */
+.pg__map,
+.pg__fig {
+  animation: none;
+}

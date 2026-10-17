@@ -1,0 +1,6184 @@
+/* ==================================================================
+   IBA BRAND GUIDELINES v1.0 — applied to the whole site.
+
+   Loaded after styles.css and kit.css, so where the two disagree the book
+   wins. What it enforces, by section of the book:
+
+     §01  three colours, one typeface; flat colour, square corners, no
+          shadows, no gradients
+     §02  the core and supporting palette, in their listed roles only
+     §03  Questrial Regular 400 for everything; the heading and text scale
+     §04  8px spacing, a 1200px container, 40/24px page padding,
+          96/48px section padding, 128/64px hero padding
+     §05  white leads, Surface Alt alternates, at most one black section,
+          one full-red CTA band directly above a black footer
+     §06  48px square caps buttons; 1px-line cards that darken to ink on
+          hover; 4px-radius inputs and tags
+     §07  black-and-white photography with one red block
+
+   Kept by request, outside the book: the home hero's animated coin arch and
+   the corridor band's glass cubes.
+   ================================================================== */
+
+/* ---------------------------------------------------------------- */
+/* §02 · tokens — the book's CSS starter, plus layout                */
+/* ---------------------------------------------------------------- */
+:root {
+  --iba-red: #d71920;
+  --iba-red-deep: #9e1016;
+  --iba-red-soft: #fdeaea;
+  --iba-black: #111111;
+  --bb-surface: #ffffff;
+  --bb-surface-alt: #f5f3f2;
+  --bb-ink: #0e0e0e;
+  --bb-ink-muted: #5c5c5c;
+  --bb-line: #e2dfdd;
+  --bb-line-strong: #8a8a8a;
+  --bb-on-black-muted: #b3b3b3;
+  --bb-success: #1f7a3d;
+  --bb-success-soft: #e7f4ec;
+  --bb-font: 'Questrial', 'Helvetica Neue', Arial, sans-serif;
+
+  /* §04 — container and padding */
+  --bb-container: 1200px;
+  --bb-side: 40px;
+  --bb-section: 96px;
+  --bb-hero: 128px;
+  /* inline padding that keeps content inside a centred 1200px column on a
+     full-bleed band */
+  --bb-gutter: max(var(--bb-side), calc((100% - var(--bb-container)) / 2));
+
+  /* the previous design's margins, kept by request: every band is inset
+     from the window edges, with a gap between bands */
+  --page-side: 12px;
+  --hero-inset: clamp(4px, 1.2vw, 20px);
+  --hero-gap: clamp(1.25rem, 3.5vh, 2.5rem);
+  --bb-band-gap: clamp(6px, 0.8vw, 12px);
+  --page-bg: var(--bb-surface);
+}
+@media (max-width: 767px) {
+  :root {
+    --bb-side: 24px;
+    --bb-section: 48px;
+    --bb-hero: 64px;
+  }
+}
+
+/* §01 — one typeface, one weight, no italics, no shadows */
+body {
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  font-family: var(--bb-font);
+  font-weight: 400;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+b,
+button,
+input,
+select,
+textarea {
+  font-family: var(--bb-font);
+  font-weight: 400;
+}
+em,
+i {
+  font-style: normal;
+}
+:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------- */
+/* §03 · the type scale, as reusable rules                            */
+/* ---------------------------------------------------------------- */
+/* H1 56/62 · mobile 36/42 */
+.pk-hero__title {
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: -0.015em;
+}
+/* H2 40/48 · mobile 30/38 */
+.pk-head__title,
+.ib__title,
+.cb__title,
+.kb__title,
+.pg__title,
+.eco__title,
+.git__title,
+.fnd__title,
+.cta-band__title {
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: -0.01em;
+}
+/* H3 28/36 · mobile 24/32 */
+.pk-sub h3,
+.pk-prose .pk-prose__lead {
+  font-size: 24px;
+  line-height: 32px;
+}
+/* H4 22/30 · mobile 20/28 — card titles */
+.pk-card__title,
+.wd__title,
+.kb__card-title,
+.pk-wallet__brand {
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+/* Lead 22/34 · mobile 18/28 */
+.pk-hero__lede p {
+  font-size: 18px;
+  line-height: 28px;
+}
+/* Subtext 18/28 · mobile 16/26 */
+.pk-head__lede,
+.ib__lede,
+.cb__lede,
+.kb__lede,
+.pg__lede,
+.eco__lede,
+.git__lede,
+.pk-sub p,
+.cta-band__text {
+  font-size: 16px;
+  line-height: 26px;
+}
+/* Body small 14/22 — card descriptions */
+.pk-card__text,
+.wd__text,
+.pk-bullets li,
+.pk-aside,
+.kb__meta {
+  font-size: 14px;
+  line-height: 22px;
+}
+/* Body 16/26 — running text */
+.pk-prose p,
+.fnd__quote p {
+  font-size: 16px;
+  line-height: 26px;
+}
+@media (min-width: 1024px) {
+  .pk-hero__title {
+    font-size: 56px;
+    line-height: 62px;
+  }
+  .pk-head__title,
+  .ib__title,
+  .cb__title,
+  .kb__title,
+  .pg__title,
+  .eco__title,
+  .git__title,
+  .fnd__title,
+  .cta-band__title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .pk-sub h3,
+  .pk-prose .pk-prose__lead {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  .pk-card__title,
+  .wd__title,
+  .kb__card-title,
+  .pk-wallet__brand {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  .pk-hero__lede p {
+    font-size: 22px;
+    line-height: 34px;
+  }
+  .pk-head__lede,
+  .ib__lede,
+  .cb__lede,
+  .kb__lede,
+  .pg__lede,
+  .eco__lede,
+  .git__lede,
+  .pk-sub p,
+  .cta-band__text {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+/* Eyebrow 13/16, 0.14em caps, red, max four words — the pill, its gradient
+   ring and its icon all go. The home hero keeps its pill (by request), so
+   its eyebrow — the one inside .hero__bottom — is excluded. */
+:not(.hero__bottom) > .hero__kicker,
+.pk-eyebrow,
+.wd__eyebrow,
+.pg__eyebrow {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+:not(.hero__bottom) > .hero__kicker .hero__kicker-icon {
+  display: none;
+}
+/* on black, small red fails contrast (§02 pairings) — the dark-mode red */
+.pk-hero .hero__kicker,
+.pk-sec--dark .hero__kicker {
+  color: #ff4a50;
+}
+
+/* ---------------------------------------------------------------- */
+/* §06 · buttons — 48px, square, caps label, colour-only hover 150ms  */
+/* ---------------------------------------------------------------- */
+.bb-btn,
+.btn,
+.pk-btn,
+.ib__cta,
+.eco__cta,
+.kb__cta,
+.git__btn,
+.fnd__go {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 32px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.bb-btn:hover,
+.btn:hover,
+.pk-btn:hover,
+.ib__cta:hover,
+.eco__cta:hover,
+.kb__cta:hover,
+.git__btn:hover,
+.fnd__go:hover {
+  transform: none;
+  box-shadow: none;
+}
+/* the bar's two buttons stay compact, as before */
+.nav__util .btn {
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: 13px;
+}
+/* arrows inside labels never move */
+.bb-btn span,
+.pk-btn span,
+.eco__cta span,
+.kb__cta span,
+.git__btn span,
+.fnd__go span {
+  transform: none !important;
+}
+
+/* Primary — the main action, red, hover Red Deep */
+.btn--primary,
+.pk-btn--primary,
+.kb__cta,
+.git__btn--primary {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.btn--primary:hover,
+.pk-btn--primary:hover,
+.kb__cta:hover,
+.git__btn--primary:hover {
+  border-color: var(--iba-red-deep);
+  background: var(--iba-red-deep);
+  color: #ffffff;
+}
+/* Black — secondary, and the button on the red CTA band */
+.bb-btn--black {
+  border-color: var(--iba-black);
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.bb-btn--black:hover {
+  border-color: #000;
+  background: #000;
+  color: #ffffff;
+}
+/* Outline — tertiary on white (the home hero keeps its own buttons) */
+:not(.hero__ctas) > .btn--ghost,
+.pk-btn--ghost,
+.ib__cta,
+.eco__cta,
+.fnd__go {
+  border-color: var(--bb-ink);
+  background: transparent;
+  color: var(--bb-ink);
+}
+:not(.hero__ctas) > .btn--ghost:hover,
+.pk-btn--ghost:hover,
+.ib__cta:hover,
+.eco__cta:hover,
+.fnd__go:hover {
+  border-color: var(--bb-ink);
+  background: var(--bb-ink);
+  color: #ffffff;
+}
+/* Outline light — secondary on black */
+.pk-hero .pk-btn--ghost,
+.pk-sec--dark .pk-btn--ghost {
+  border-color: #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+.pk-hero .pk-btn--ghost:hover,
+.pk-sec--dark .pk-btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--bb-ink);
+}
+
+/* Text button — inline links in cards: red caps, underlined */
+.pk-card__cta,
+.wd__go {
+  gap: 0.4rem;
+  padding: 0 0 2px;
+  border-bottom: 1px solid var(--iba-red);
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+
+/* ---------------------------------------------------------------- */
+/* §06 · header — white, 72px, 1px bottom line                       */
+/* ---------------------------------------------------------------- */
+body:has(.nav--home:not([data-condensed])) {
+  background: var(--bb-surface);
+}
+.nav,
+.nav.nav--home,
+.nav.nav--home[data-condensed] {
+  --ink-1: var(--bb-ink);
+  --ink-2: var(--bb-ink-muted);
+  --ink-3: var(--bb-ink-muted);
+  --ink-4: var(--bb-ink-muted);
+  --line: var(--bb-line);
+  --line-soft: var(--bb-line);
+  --surface: var(--bb-surface-alt);
+  --nav-bg: #ffffff;
+  border-bottom: 1px solid var(--bb-line);
+  background: #ffffff;
+  color: var(--bb-ink);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.nav__tabBtn {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+/* the flagship tab: an outline, square */
+.nav__tabBtn[data-pill] {
+  border-radius: 0;
+  color: var(--iba-red);
+}
+
+/* ---------------------------------------------------------------- */
+/* §05 · bands — square, a 1200px column inside, and (kept from the   */
+/* previous design) inset from the window with a gap between bands   */
+/* ---------------------------------------------------------------- */
+main {
+  padding-inline: var(--page-side);
+}
+/* every band: square, flat, the book's section padding */
+.pk-sec.band.band--light,
+.pk-hero.band.band--light,
+.fnd.section,
+.cred.band.band--light,
+.ib.band.band--light,
+.cb.band.band--light,
+.wd.band.band--light,
+.wd.wd--two.band.band--light,
+.wd.wd--two.kb.band.band--light,
+.pg.band.band--light,
+.eco.band.band--light,
+.git.band.band--light {
+  margin: 0;
+  padding: var(--bb-band-gap) 0 0;
+  border: 0;
+  background: transparent;
+}
+.pk-sec__panel,
+.pk-sec--plain .pk-sec__panel,
+.pk-sec--card .pk-sec__panel,
+.pk-sec--dark .pk-sec__panel,
+.fnd > .wrap,
+.cred > .wrap,
+.ib__panel,
+.cb__panel,
+.wd__inner,
+.pg__inner,
+.eco__inner,
+.git__panel,
+.cta-band__inner {
+  max-width: none;
+  margin: 0 var(--hero-inset);
+  padding: var(--bb-section) var(--bb-gutter);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.pk-hero__panel {
+  margin: var(--nav-h) var(--hero-inset) 0;
+  padding: var(--bb-hero) var(--bb-gutter);
+  border-radius: 0;
+}
+
+/* §05 — the rhythm. White leads; Surface Alt alternates; black for the hero
+   and at most one section per page; red once, for the CTA band. */
+.pk-sec--plain .pk-sec__panel,
+.fnd > .wrap,
+.ib__panel,
+.wd:not(.wd--two) .wd__inner,
+.pg__inner,
+.kb .wd__inner {
+  background: var(--bb-surface);
+}
+.pk-sec--card .pk-sec__panel,
+.cred > .wrap,
+.cb__panel,
+.wd--two:not(.kb) .wd__inner,
+.eco__inner {
+  background: var(--bb-surface-alt);
+}
+.pk-hero__panel,
+.pk-sec--dark .pk-sec__panel {
+  background: var(--iba-black);
+}
+
+/* §02 — no gradients anywhere they were used as decoration */
+.pk-hero__beam,
+.git__beam,
+.ib__bg,
+.cb__bg,
+.pk-sec--dark .pk-sec__panel::before,
+.wd__media::after {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Home hero — the previous design, kept by request: the rounded,    */
+/* inset black panel with its red beam, eyebrow pill, red gradient    */
+/* phrase and coin arch. Only the typeface follows the book.          */
+/* ---------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- */
+/* §06 · cards — 24px padding, 1px line, darkens to ink on hover      */
+/* ---------------------------------------------------------------- */
+.pk-card,
+.pk-sec--card .pk-card,
+.wd__card,
+.cred__item,
+.cred__item:not(:nth-child(4n + 1)),
+.cred__item:not(:nth-child(2n + 1)),
+.cred__item + .cred__item,
+.fnd__card,
+.pk-form,
+.pk-sec--card .pk-form {
+  border: 1px solid var(--bb-line);
+  border-radius: 0;
+  background: var(--bb-surface);
+  box-shadow: none;
+  transform: none;
+}
+.pk-card {
+  padding: 24px;
+}
+.pk-card:hover,
+.wd__card:hover,
+.cred__item:hover {
+  border-color: var(--bb-ink);
+  background: var(--bb-surface);
+  box-shadow: none;
+  transform: none;
+}
+.pk-card,
+.wd__card,
+.cred__item {
+  transition: border-color 150ms ease;
+}
+/* hover changes the border only — the red fill and white text go */
+.pk-card:hover .pk-card__title,
+.pk-card:hover .pk-card__num,
+.pk-card:hover .pk-card__sub,
+.pk-card:hover .pk-card__text strong,
+.wd__card:hover .wd__title {
+  color: var(--bb-ink);
+}
+.pk-card:hover .pk-card__text,
+.pk-card:hover .pk-bullets li,
+.wd__card:hover .wd__text,
+.wd__card:hover .kb__meta {
+  color: var(--bb-ink-muted);
+}
+.pk-card:hover .pk-card__cta,
+.wd__card:hover .wd__go {
+  color: var(--iba-red);
+}
+.pk-card:hover .pk-bullets li::before {
+  background: var(--iba-red);
+}
+.pk-card:hover .pk-card__go .pk-btn {
+  border-color: var(--bb-ink);
+  background: var(--bb-ink);
+  color: #ffffff;
+}
+.pk-card__title,
+.wd__title {
+  color: var(--bb-ink);
+}
+.pk-card__text,
+.wd__text,
+.pk-bullets li {
+  color: var(--bb-ink-muted);
+}
+/* number or tag above the title — red, small */
+.pk-card__num,
+.pk-card__sub {
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  color: var(--iba-red);
+}
+.pk-card__text strong {
+  color: var(--bb-ink);
+}
+/* the featured card is black — in a black section, every card is */
+.pk-sec--dark .pk-card {
+  border-color: #333333;
+  background: var(--iba-black);
+}
+.pk-sec--dark .pk-card:hover {
+  border-color: #ffffff;
+  background: var(--iba-black);
+}
+.pk-sec--dark .pk-card__title,
+.pk-sec--dark .pk-card:hover .pk-card__title,
+.pk-sec--dark .pk-card__text strong,
+.pk-sec--dark .pk-card:hover .pk-card__text strong {
+  color: #ffffff;
+}
+.pk-sec--dark .pk-card__text,
+.pk-sec--dark .pk-card:hover .pk-card__text,
+.pk-sec--dark .pk-bullets li,
+.pk-sec--dark .pk-card:hover .pk-bullets li {
+  color: var(--bb-on-black-muted);
+}
+/* red text on black only at heading size; small labels take the dark-mode red */
+.pk-sec--dark .pk-card__num,
+.pk-sec--dark .pk-card:hover .pk-card__num,
+.pk-sec--dark .pk-card__sub,
+.pk-sec--dark .pk-card__cta,
+.pk-sec--dark .pk-card:hover .pk-card__cta {
+  color: #ff4a50;
+  border-color: #ff4a50;
+}
+.pk-sec--dark .pk-head__title,
+.pk-sec--dark .pk-sub h3 {
+  color: #ffffff;
+}
+.pk-sec--dark .pk-head__lede,
+.pk-sec--dark .pk-sub p,
+.pk-sec--dark .pk-prose p {
+  color: var(--bb-on-black-muted);
+}
+
+/* Tags — Red Soft behind Red Deep, 4px radius */
+.wd__tag,
+.pk-card:hover .wd__tag,
+.wd__card:hover .wd__tag {
+  display: inline-flex;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--iba-red-soft);
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--iba-red-deep);
+}
+.wd__tag::before {
+  display: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* §03 · stats — big red numbers, caption below, no tiles            */
+/* ---------------------------------------------------------------- */
+.pk-stat,
+.pk-sec--card .pk-stat,
+.pk-stats--dark .pk-stat,
+.pk-sec--dark .pk-stat,
+.pk-hero .pk-stat,
+.git__stat {
+  justify-items: start;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  text-align: left;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.git__stat:hover {
+  transform: none;
+}
+.pk-stat strong,
+.cred__k,
+.git__stat strong,
+.pk-hero .pk-stat strong,
+.pk-sec--dark .pk-stat strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  color: var(--iba-red);
+}
+@media (min-width: 1024px) {
+  .pk-stat strong,
+  .cred__k,
+  .git__stat strong,
+  .pk-hero .pk-stat strong,
+  .pk-sec--dark .pk-stat strong {
+    font-size: 64px;
+    line-height: 64px;
+  }
+}
+.pk-stat span,
+.cred__v {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--bb-ink-muted);
+}
+.pk-hero .pk-stat span,
+.pk-sec--dark .pk-stat span {
+  color: var(--bb-on-black-muted);
+}
+.pk-stats {
+  gap: 32px;
+}
+
+/* ---------------------------------------------------------------- */
+/* §03 · quote — 28/38, a red 4px rule above                         */
+/* ---------------------------------------------------------------- */
+.pk-quote {
+  padding: 24px 0 0;
+  border-top: 4px solid var(--iba-red);
+}
+.pk-quote__mark,
+.fnd__mark {
+  display: none;
+}
+.pk-quote blockquote {
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 0;
+}
+@media (min-width: 1024px) {
+  .pk-quote blockquote {
+    font-size: 28px;
+    line-height: 38px;
+  }
+}
+.pk-quote figcaption {
+  font-size: 14px;
+}
+.pk-sec--dark .pk-quote figcaption {
+  color: var(--bb-on-black-muted);
+}
+
+/* ---------------------------------------------------------------- */
+/* §06 · forms — visible labels, 1px #8A8A8A, 4px radius, red focus  */
+/* ---------------------------------------------------------------- */
+.pk-field {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--bb-ink);
+}
+.pk-field input,
+.pk-field select,
+.pk-field textarea,
+.pk-search input,
+.pk-select select {
+  border: 1px solid var(--bb-line-strong);
+  border-radius: 4px;
+  background: #ffffff;
+  color: var(--bb-ink);
+}
+.pk-field input:focus,
+.pk-field select:focus,
+.pk-field textarea:focus,
+.pk-search input:focus,
+.pk-select select:focus {
+  border-color: var(--iba-red);
+  box-shadow: 0 0 0 2px var(--iba-red);
+}
+.pk-check input {
+  accent-color: var(--iba-red);
+}
+/* confirmation — Success Soft behind Success, with a tick */
+.pk-form__status {
+  border-radius: 0;
+  background: var(--bb-success-soft);
+  color: var(--bb-success);
+}
+.pk-form__status::before {
+  content: '✓ ';
+}
+
+/* ---------------------------------------------------------------- */
+/* Page heroes (kit) — black, flat                                    */
+/* ---------------------------------------------------------------- */
+.pk-hero__lede p {
+  color: var(--bb-on-black-muted);
+}
+.pk-head__title,
+.pk-sub h3 {
+  color: var(--bb-ink);
+}
+.pk-head__lede,
+.pk-sub p {
+  color: var(--bb-ink-muted);
+}
+/* heading → subtext 16px, then 48px to content (§03 pairings) */
+.pk-head {
+  gap: 16px;
+}
+.pk-sec__panel {
+  gap: 48px;
+}
+.pk-label {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--iba-red);
+}
+.pk-prose p {
+  color: var(--bb-ink);
+}
+.pk-prose .pk-prose__lead {
+  letter-spacing: -0.01em;
+  color: var(--bb-ink);
+}
+.pk-sign {
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------- */
+/* Home sections, restyled to the book                                */
+/* ---------------------------------------------------------------- */
+/* Founder — a square card; the portrait panel is a flat black block */
+.fnd__portrait {
+  background: var(--iba-black);
+}
+.fnd__mono {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.35);
+}
+.fnd__caption {
+  background: var(--iba-black);
+}
+.fnd__role {
+  color: var(--bb-on-black-muted);
+}
+.fnd__quote {
+  padding: 24px 0 0;
+  border-top: 4px solid var(--iba-red);
+}
+.fnd__quote p {
+  color: var(--bb-ink);
+}
+.fnd__sign {
+  border-top-color: var(--bb-line);
+}
+.fnd__sign-name small {
+  color: var(--bb-ink-muted);
+}
+
+/* Counters — the book's proof row */
+.cred__grid {
+  gap: 24px;
+}
+.cred__item {
+  justify-items: start;
+  padding: 24px;
+  text-align: left;
+}
+
+/* Impact — white, ink type */
+.ib__panel {
+  color: var(--bb-ink);
+}
+.ib__title {
+  color: var(--bb-ink);
+}
+.ib__lede {
+  color: var(--bb-ink-muted);
+}
+
+/* Corridor — Surface Alt; the glass cubes are kept */
+.cb__title {
+  color: var(--bb-ink);
+}
+.cb__lede {
+  color: var(--bb-ink-muted);
+}
+.cb .ib__cta {
+  border-color: var(--bb-ink);
+  color: var(--bb-ink);
+}
+
+/* What we do, Academia, Knowledge base — square cards, B&W photography
+   with one red block (§07) */
+.wd__grid {
+  gap: 24px;
+}
+.wd__card {
+  overflow: hidden;
+}
+.wd__media {
+  aspect-ratio: 16 / 9;
+}
+.wd--two .wd__media,
+.kb .wd__media {
+  aspect-ratio: 16 / 9;
+}
+.wd__photo,
+.wd__card:hover .wd__photo,
+.kb .wd__photo,
+.kb .wd__card:hover .wd__photo {
+  filter: grayscale(1);
+  transform: none;
+}
+.wd__tint {
+  display: none;
+}
+/* the icon badge becomes the one red block */
+.wd__badge,
+.wd__card:hover .wd__badge {
+  right: 0;
+  bottom: 0;
+  width: 56px;
+  border: 0;
+  border-radius: 0;
+  background: var(--iba-red);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: none;
+}
+.wd__num {
+  padding: 4px 8px;
+  background: var(--iba-black);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: #ffffff;
+}
+.wd__body {
+  padding: 24px;
+}
+.wd__card:hover .wd__go {
+  color: var(--iba-red);
+}
+.kb__meta {
+  color: var(--bb-ink-muted);
+}
+.wd__card:hover .kb__meta {
+  color: var(--bb-ink-muted);
+}
+
+/* Global presence — flat; the stat figures in red */
+.pg__layer {
+  fill: #c9c4bf;
+}
+.pg__fig {
+  border-radius: 0;
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.pg__fig strong {
+  color: var(--iba-red);
+}
+.pg__fig span {
+  color: var(--bb-ink-muted);
+}
+
+/* Ecosystem chips — 4px tags, flat marks, no shadows */
+.eco__chip {
+  border: 1px solid var(--bb-line);
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: none;
+}
+.eco__chip:hover {
+  border-color: var(--bb-ink);
+  box-shadow: none;
+  transform: none;
+}
+.eco__logo,
+.eco__mono {
+  border-radius: 0;
+}
+.eco__mono--ink {
+  background: var(--iba-black);
+}
+.eco__mono--deep {
+  background: var(--iba-red-deep);
+}
+.eco__mono--red {
+  background: var(--iba-red);
+}
+.eco__name {
+  font-weight: 400;
+}
+
+/* Get in touch — home's CTA band: the only full-red section */
+.git__panel {
+  background: var(--iba-red);
+}
+.git .hero__kicker {
+  color: #ffffff;
+}
+.git__title,
+.git__lede {
+  color: #ffffff;
+}
+/* on red the primary action is black; the others are outline light */
+.git__btn--primary {
+  border-color: var(--iba-black);
+  background: var(--iba-black);
+}
+.git__btn--primary:hover {
+  border-color: #000;
+  background: #000;
+}
+.git__btn {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+.git__btn:hover {
+  background: #ffffff;
+  color: var(--iba-red);
+}
+.git__btn svg {
+  stroke: currentColor;
+}
+.git__stat strong,
+.git__stat span {
+  color: #ffffff;
+}
+.git__stat span {
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* The shared CTA band on every other page */
+.cta-band {
+  padding: var(--bb-band-gap) var(--page-side) 0;
+  color: #ffffff;
+}
+.cta-band__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px 48px;
+  padding-block: 64px;
+  background: var(--iba-red);
+}
+.cta-band__title {
+  margin: 0 0 8px;
+  color: #ffffff;
+}
+.cta-band__text {
+  margin: 0;
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- */
+/* §06 · footer — black, full bleed, no red text                      */
+/* ---------------------------------------------------------------- */
+/* inset like every band above it; outside <main>, so it adds main's side
+   padding to the inset itself */
+.ft {
+  padding: var(--bb-band-gap) var(--page-side) var(--page-side);
+  background: var(--page-bg);
+}
+.ft__panel {
+  margin: 0 var(--hero-inset);
+  padding: var(--bb-section) var(--bb-gutter) 32px;
+  border-radius: 0;
+  background: var(--iba-black);
+}
+/* H5 18/26, sentence case */
+.ft__h {
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+  color: #ffffff;
+}
+.ft__col a {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--bb-on-black-muted);
+}
+.ft__col a:hover {
+  color: #ffffff;
+  transform: none;
+}
+.ft__triad,
+.ft__strip,
+.ft__legal a {
+  color: var(--bb-on-black-muted);
+}
+.ft__triad i,
+.ft__strip i {
+  color: inherit;
+}
+.ft__logo {
+  border-radius: 0;
+}
+
+/* ---------------------------------------------------------------- */
+/* Kit page parts                                                     */
+/* ---------------------------------------------------------------- */
+.pk-lock {
+  border: 1px solid #333333;
+  border-radius: 0;
+}
+.pk-lock svg {
+  stroke: #ff4a50;
+}
+/* the Red Club wallet: a flat red card */
+.pk-wallet {
+  border-radius: 0;
+  background: var(--iba-red);
+  box-shadow: none;
+  transform: none;
+}
+.pk-wallet::after {
+  display: none;
+}
+.pk-wallet__chip {
+  border-radius: 0;
+  background: var(--iba-black);
+}
+.pk-jump__link {
+  border: 1px solid var(--bb-line);
+  border-radius: 0;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+.pk-jump__link:hover {
+  border-color: var(--bb-ink);
+  color: var(--bb-ink);
+}
+.pk-lines li {
+  border-bottom-color: var(--bb-line);
+}
+.pk-lines span {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  color: var(--bb-ink-muted);
+}
+.pk-lines a {
+  font-weight: 400;
+  color: var(--bb-ink);
+}
+.pk-aside a {
+  font-weight: 400;
+  color: var(--iba-red);
+  text-decoration: underline;
+}
+#catalogue .pk-card__cta {
+  border: 0;
+  padding: 0;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--bb-ink-muted);
+}
+
+/* back-to-top and any remaining rounded surfaces */
+.scroll-top,
+.to-top {
+  border-radius: 0;
+}
+
+/* the card header's backdrop, seen before a photo loads: flat black, not
+   the old gradient tint */
+.wd__media {
+  background: var(--iba-black);
+}
+
+/* the home hero's secondary button, as the previous design had it: white
+   with black text, turning red on hover */
+.hero__ctas .btn--ghost {
+  border-color: var(--bb-line-strong);
+  background: #ffffff;
+  color: var(--iba-black);
+}
+.hero__ctas .btn--ghost:hover {
+  border-color: var(--iba-red);
+  background: #ffffff;
+  color: var(--iba-red);
+}
+
+/* Eyebrow: the book's style everywhere, the home hero included (by
+   request) — plain red caps, no pill. On black, the dark-mode red. */
+.hero__bottom > .hero__kicker {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff4a50;
+}
+.hero__bottom > .hero__kicker .hero__kicker-icon {
+  display: none;
+}
+
+/* the header without its bottom rule (by request) */
+.nav,
+.nav.nav--home,
+.nav.nav--home[data-condensed] {
+  border-bottom: 0;
+}
+
+/* the home hero, square like every other band (by request) */
+.hero,
+.stage.is-hero {
+  border-radius: 0;
+}
+
+/* A heavier hero heading (by request). Questrial ships one weight only, so
+   instead of the browser's faux-bold the glyphs are thickened with a stroke
+   in their own colour. The rolling phrase is gradient-clipped, so its stroke
+   is transparent: the text clip takes in the stroke, so the gradient
+   paints the added weight too. */
+.hero__title .hero__lead {
+  -webkit-text-stroke: 0.025em #ffffff;
+}
+.hero__phrase {
+  -webkit-text-stroke: 0.025em transparent;
+}
+
+/* the hero subtext: 18px at every width (by request), on a 28px line */
+.hero__lede {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+/* .wrap is width: 100%; with the inset margin on top it overhung the right
+   edge by twice the inset. Auto width lets the margin come out of the
+   width, so these bands match every other one. */
+.fnd > .wrap,
+.cred > .wrap {
+  width: auto;
+}
+
+/* ---------------------------------------------------------------- */
+/* §06 buttons, applied to the home hero and the header (by request) */
+/* 48px, square, 15/20 caps label at 0.06em, colour-only hover 150ms */
+/* ---------------------------------------------------------------- */
+.hero__ctas .btn,
+.nav__util .btn {
+  min-height: 48px;
+  padding: 0 32px;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: none;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+/* the header's pair is tighter, so both fit beside the tabs */
+.nav__util .btn {
+  padding: 0 20px;
+}
+/* Primary — red, hover Red Deep (hero Get Started, header Connect) */
+.hero__ctas .btn--primary,
+.nav__util .btn--primary {
+  border: 1px solid var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.hero__ctas .btn--primary:hover,
+.nav__util .btn--primary:hover {
+  border-color: var(--iba-red-deep);
+  background: var(--iba-red-deep);
+  color: #ffffff;
+}
+/* Outline light — the secondary action on black (hero) */
+.hero__ctas .btn--ghost {
+  border: 1px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+.hero__ctas .btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-black);
+}
+/* Outline — the tertiary action on white (header Member Login) */
+.nav__util .btn--ghost {
+  border: 1px solid var(--bb-ink);
+  background: transparent;
+  color: var(--bb-ink);
+}
+.nav__util .btn--ghost:hover {
+  border-color: var(--bb-ink);
+  background: var(--bb-ink);
+  color: #ffffff;
+}
+
+/* Smaller button labels (by request). Questrial's capitals run large, so
+   the book's 15px reads oversized in caps; 13px keeps the 48px button and
+   opens the tracking a touch to compensate. */
+.hero__ctas .btn,
+.nav__util .btn {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0.08em;
+}
+
+/* The bar keeps one layout whether or not a menu is open. It used to narrow
+   to --maxw while a dropdown was open (the condensed state), which squeezed
+   the tabs until "Web3 Corridor" wrapped and the bar grew taller on hover. */
+.nav.nav--home .nav__bar,
+.nav.nav--home[data-condensed] .nav__bar {
+  max-width: none;
+  padding-inline: clamp(1.25rem, 2.7vw, 2.6rem);
+}
+.nav__tabBtn {
+  white-space: nowrap;
+}
+
+/* Explore the Membership: white ground, black label (by request); hover
+   turns the label red, colour only */
+.hero__ctas .btn--ghost {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-black);
+}
+.hero__ctas .btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-red);
+}
+
+/* The counter boxes lift on hover (by request): a layered shadow and a
+   small rise, so the box reads as standing off the page */
+.cred__item {
+  transition: border-color 150ms ease, box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cred__item:hover {
+  border-color: var(--bb-ink);
+  box-shadow: 0 2px 4px rgba(17, 17, 17, 0.06), 0 18px 36px -12px rgba(17, 17, 17, 0.22);
+  transform: translateY(-6px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cred__item:hover {
+    transform: none;
+  }
+}
+
+/* What We Do cards (the three-up band only, not Academia or the Library):
+   on hover the card lifts with a layered shadow and its body turns IBA Red
+   with white text (by request). Text on red is always white (§02). */
+.wd:not(.wd--two) .wd__card {
+  transition: border-color 150ms ease, background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wd:not(.wd--two) .wd__card:hover {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.08), 0 28px 50px -16px rgba(158, 16, 22, 0.55);
+  transform: translateY(-8px);
+}
+.wd:not(.wd--two) .wd__card :is(.wd__title, .wd__text, .wd__go, .wd__go span) {
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.wd:not(.wd--two) .wd__card:hover :is(.wd__title, .wd__text) {
+  color: #ffffff;
+}
+.wd:not(.wd--two) .wd__card:hover .wd__go {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+/* the tag turns white with red text, so it still reads on the red */
+.wd:not(.wd--two) .wd__card:hover .wd__tag {
+  background: #ffffff;
+  color: var(--iba-red);
+}
+/* the red badge would vanish on a red card; it goes black */
+.wd:not(.wd--two) .wd__card:hover .wd__badge {
+  background: var(--iba-black);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd:not(.wd--two) .wd__card:hover {
+    transform: none;
+  }
+}
+
+/* What We Do cards stand off the page at rest too (by request); hover then
+   lifts them further, to the deeper shadow above */
+.wd:not(.wd--two) .wd__card {
+  box-shadow: 0 2px 4px rgba(17, 17, 17, 0.06), 0 14px 30px -12px rgba(17, 17, 17, 0.2);
+}
+
+/* no red border on hover (by request): the card keeps its resting line */
+.wd:not(.wd--two) .wd__card:hover {
+  border-color: var(--bb-line);
+}
+
+/* Academia & Students and Knowledge Base cards: the same treatment as What We Do (by request)
+   — resting depth, and on hover a lift, IBA Red body and white text, with
+   the border left as it is */
+.wd.wd--two .wd__card {
+  box-shadow: 0 2px 4px rgba(17, 17, 17, 0.06), 0 14px 30px -12px rgba(17, 17, 17, 0.2);
+  transition: border-color 150ms ease, background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wd.wd--two .wd__card:hover {
+  border-color: var(--bb-line);
+  background: var(--iba-red);
+  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.08), 0 28px 50px -16px rgba(158, 16, 22, 0.55);
+  transform: translateY(-8px);
+}
+.wd.wd--two .wd__card :is(.wd__title, .wd__text, .wd__go) {
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.wd.wd--two .wd__card:hover :is(.wd__title, .wd__text) {
+  color: #ffffff;
+}
+.wd.wd--two .wd__card:hover .wd__go {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+.wd.wd--two .wd__card:hover .wd__tag {
+  background: #ffffff;
+  color: var(--iba-red);
+}
+.wd.wd--two .wd__card:hover .wd__badge {
+  background: var(--iba-black);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd.wd--two .wd__card:hover {
+    transform: none;
+  }
+}
+
+/* the knowledge base's source and date line turns white with the rest */
+.wd.wd--two .wd__card:hover .kb__meta {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------------------------------------------------------------- */
+/* Flagship Programme graphic — the corridor network (CorridorBand)  */
+/* Flat black, red and line grey, square nodes; replaces the cubes.  */
+/* ---------------------------------------------------------------- */
+.cb__net {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: max(var(--bb-side), calc((100% - var(--bb-container)) / 2));
+  width: min(42%, 480px);
+  height: auto;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+/* the copy stays above the graphic, and clear of it on wide screens */
+.cb__copy {
+  position: relative;
+  z-index: 1;
+  max-width: min(100%, 36rem);
+}
+.cb__route {
+  stroke: var(--bb-ink);
+  stroke-width: 1.5;
+}
+/* a red pulse running from the hub out along each route */
+.cb__pulse {
+  stroke: var(--iba-red);
+  stroke-width: 3;
+  stroke-linecap: square;
+  stroke-dasharray: 24 400;
+  stroke-dashoffset: 24;
+  animation: cb-pulse 2.8s linear infinite;
+}
+@keyframes cb-pulse {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+.cb__node {
+  fill: var(--iba-black);
+}
+.cb__hub {
+  fill: var(--iba-red);
+}
+.cb__ring {
+  fill: none;
+  stroke: var(--iba-red);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cb-ring 2.8s ease-out infinite;
+}
+@keyframes cb-ring {
+  0% {
+    opacity: 0.9;
+    scale: 0.8;
+  }
+  100% {
+    opacity: 0;
+    scale: 1.9;
+  }
+}
+.cb__label {
+  font-family: var(--bb-font);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  fill: var(--bb-ink-muted);
+}
+.cb__label--hub {
+  fill: var(--iba-red);
+}
+@media (max-width: 860px) {
+  .cb__net {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 0 var(--bb-side) var(--bb-section);
+    translate: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cb__pulse,
+  .cb__ring {
+    animation: none;
+  }
+  .cb__pulse {
+    display: none;
+  }
+}
+/* the grid fades out toward its edges instead of ending in a hard square */
+.cb__grid {
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
+/* ---------------------------------------------------------------- */
+/* Flagship Programme graphic — the red globe (CorridorGlobe.jsx),    */
+/* replacing the network diagram                                      */
+/* ---------------------------------------------------------------- */
+.cb__globe {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: max(var(--bb-side), calc((100% - var(--bb-container)) / 2));
+  width: min(44%, 500px);
+  height: auto;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+.cg__land {
+  fill: var(--iba-red);
+  opacity: 0.82;
+}
+.cg__rim {
+  fill: none;
+  stroke: rgba(158, 16, 22, 0.25);
+  stroke-width: 1;
+}
+.cg__orbit {
+  fill: none;
+  stroke: var(--iba-red);
+  stroke-width: 1.4;
+  opacity: 0.55;
+}
+.cg__orbit--dash {
+  stroke-dasharray: 5 6;
+}
+/* over the globe the orbits are fainter, so the land reads through */
+.cg__orbit--front {
+  opacity: 0.3;
+}
+.cg__dot {
+  fill: var(--iba-red);
+}
+.cg__dot--soft {
+  fill: #f2b9bc;
+}
+@media (max-width: 860px) {
+  .cb__globe {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    padding-bottom: var(--bb-section);
+    translate: none;
+  }
+}
+
+/* the globe in the brand's balance (by request): white and greys, with red
+   kept for the dots riding the orbits — the one red focal point */
+.cg__land {
+  fill: #c9c4bf;
+  opacity: 1;
+}
+.cg__rim {
+  stroke: rgba(17, 17, 17, 0.08);
+}
+.cg__orbit {
+  stroke: var(--bb-line-strong);
+  opacity: 0.6;
+}
+.cg__orbit--front {
+  opacity: 0.35;
+}
+.cg__dot {
+  fill: var(--iba-red);
+}
+.cg__dot--soft {
+  fill: #d8d3ce;
+}
+
+/* Every page's hero set like the home hero (by request): the same heading
+   size, tight tracking and stroke-thickened weight, and the same white
+   subtext on the same line height. */
+.pk-hero__title {
+  font-size: clamp(1.8rem, 8.5vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  -webkit-text-stroke: 0.025em #ffffff;
+}
+.pk-hero__lede p {
+  font-size: 16px;
+  line-height: 26px;
+  color: #ffffff;
+}
+@media (min-width: 761px) {
+  .pk-hero__title {
+    font-size: clamp(1.9rem, 4.8vw, 4.75rem);
+  }
+}
+@media (min-width: 1024px) {
+  .pk-hero__lede p {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+/* What We Do, Academia & Students and Knowledge Base cards grow a little as
+   they lift on hover (by request). The selector matches the weight of the
+   card rules above (.wd:not(...) / .wd.wd--two), and comes later, so it wins;
+   z-index lets the enlarged card draw over its neighbours. */
+.wd:is(.wd--two, :not(.wd--two)) .wd__card:hover {
+  position: relative;
+  z-index: 2;
+  transform: translateY(-8px) scale(1.07);
+  /* a neutral shadow, not a red one (by request) */
+  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.08), 0 24px 44px -14px rgba(17, 17, 17, 0.28);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd:is(.wd--two, :not(.wd--two)) .wd__card:hover {
+    transform: none;
+  }
+}
+
+/* Descender room for the rolling phrase. Questrial's j / g / y, thickened by
+   the stroke above, reach further below the line box than the earlier 0.24em
+   allowed, so the window was clipping them. More room inside each phrase,
+   and the same amount given back below the window so the spacing under the
+   heading does not change. */
+.hero__phrase {
+  padding-bottom: 0.36em;
+}
+.hero__roller {
+  margin-bottom: -0.28em;
+}
+/* Clip the roll with a clip-path that reaches past the window's bottom and
+   sides, instead of overflow: hidden, so no descender or stroked edge can be
+   trimmed whatever the font metrics. The top edge still clips, which is what
+   hides the outgoing phrase as it rolls up; the incoming phrase is fully
+   transparent as it enters from below. */
+.hero__roller {
+  overflow: visible;
+  clip-path: inset(0 -0.3em -0.45em -0.3em);
+}
+
+/* ==================================================================
+   MOBILE FIXES (≤ 760px)
+   ================================================================== */
+@media (max-width: 760px) {
+  /* Founder: the monogram sits in the space above the name caption, sized
+     to fit, rather than running under the caption and being cut */
+  .fnd__portrait {
+    min-height: 280px;
+    place-items: start center;
+    padding-top: 40px;
+  }
+  .fnd__mono {
+    font-size: 96px;
+  }
+
+  /* Counters: two by two, not four stacked */
+  .cred__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .cred__item {
+    padding: 16px;
+  }
+  .cred__k {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  /* Global presence: the pins' tall stems and labels collide with the copy
+     at this width, so the markets show as dots; the figures are stated in
+     the counters above */
+  .pg__map {
+    margin-top: 1.5rem;
+  }
+  .pg__stem,
+  .pg__fig {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  /* Get in touch: the heading, the long email button and the figures all
+     ran past the right edge */
+  .git__panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+  .git__title {
+    font-size: 28px;
+    line-height: 34px;
+    overflow-wrap: anywhere;
+  }
+  .git__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .git__btn {
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    overflow-wrap: anywhere;
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  .git__stats {
+    gap: 16px;
+  }
+  .git__stat strong {
+    font-size: 40px;
+    line-height: 44px;
+  }
+  /* every band's copy gets its full width, never wider than the screen */
+  .pk-hero__title,
+  .pk-head__title,
+  .ib__title,
+  .cb__title,
+  .kb__title,
+  .pg__title,
+  .eco__title {
+    overflow-wrap: anywhere;
+  }
+}
+@media (max-width: 760px) {
+  /* a section's single column can never grow wider than the screen, so one
+     wide child (a long partner name, the wallet card) can't push every
+     other block in that section past the right edge */
+  .pk-sec__panel,
+  .pk-split,
+  .pk-hero__panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pk-sec__panel > *,
+  .pk-split > * {
+    min-width: 0;
+  }
+  /* long partner names wrap inside their chip */
+  .pk-orgs .eco__chip {
+    max-width: 100%;
+  }
+  .pk-orgs .eco__name {
+    white-space: normal;
+  }
+  /* the wallet card scales to the column */
+  .pk-wallet {
+    max-width: 100%;
+  }
+  /* buttons may wrap their label rather than overflow */
+  .pk-btn {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* Footer: LinkedIn, Email and Phone as a row of square icon buttons (by
+   request). White line on black, filling white on hover; colour-only, 150ms. */
+.ft__icons {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ft__icons a {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.ft__icons a:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-black);
+}
+.ft__icons svg {
+  width: 18px;
+  height: 18px;
+}
+/* outweighs `.ft__col ul` (a vertical grid), so the icons sit in a row */
+.ft__col ul.ft__icons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.ft__col ul.ft__icons {
+  margin-top: 20px;
+}
+
+/* Footer brand: a smaller logo, and the tagline kept on one line */
+.ft__logo {
+  padding: 4px;
+}
+.ft__logo img {
+  width: 40px;
+}
+.ft__triad {
+  white-space: nowrap;
+  font-size: 14px;
+}
+/* the logo back to full size, with no white margin around it — the tile is
+   now just the artwork's own white ground */
+.ft__logo {
+  padding: 0;
+}
+.ft__logo img {
+  width: 64px;
+}
+/* The logo file carries a white border around the artwork (25px of 198 on
+   every side). Crop it: the box is the artwork's size, and the image is
+   scaled up and offset so only the artwork shows — no padding at all. */
+.ft__logo {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  background: none;
+}
+.ft__logo img {
+  width: 134%;
+  max-width: none;
+  margin: -16.9%;
+}
+/* the artwork's own white cells need a white ground behind them — flush to
+   the cropped logo, with no padding */
+.ft__logo {
+  background: #ffffff;
+}
+
+/* ---------------------------------------------------------------- */
+/* Get in touch — filled out: the direct lines as links on the left, */
+/* and on the right the figures over a white "start a conversation" */
+/* card, each row opening the enquiry on its topic                  */
+/* ---------------------------------------------------------------- */
+.git__panel {
+  align-items: start;
+}
+.git__lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.git__lines a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  color: #ffffff;
+  transition: border-color 150ms ease;
+}
+.git__lines a:hover {
+  border-color: #ffffff;
+}
+.git__lines svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.git__side {
+  display: grid;
+  gap: 32px;
+}
+/* the figures, split by a white rule */
+.git__stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+.git__stat + .git__stat {
+  padding-left: 32px;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+.git__stat {
+  animation: none;
+}
+
+/* the card: white, square, black type, red arrows */
+.git__card {
+  padding: 28px;
+  background: #ffffff;
+  color: var(--bb-ink);
+  box-shadow: 0 24px 48px -24px rgba(80, 6, 10, 0.55);
+}
+.git__card-title {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.git__topics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.git__topics a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--bb-line);
+  color: var(--bb-ink);
+  transition: color 150ms ease;
+}
+.git__topics strong {
+  display: block;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}
+.git__topics small {
+  display: block;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--bb-ink-muted);
+}
+.git__arrow {
+  flex: none;
+  font-size: 18px;
+  color: var(--iba-red);
+  transition: transform 150ms ease;
+}
+.git__topics a:hover strong {
+  color: var(--iba-red);
+}
+.git__topics a:hover .git__arrow {
+  transform: translateX(4px);
+}
+.git__where {
+  margin: 16px 0 0;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  color: var(--bb-ink-muted);
+}
+@media (max-width: 760px) {
+  .git__card {
+    padding: 20px;
+  }
+  .git__stat + .git__stat {
+    padding-left: 16px;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* About hero — floating brushed-metal cubes (FloatingCubes.jsx)     */
+/* ---------------------------------------------------------------- */
+.fc {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 1 / 1.05;
+  margin-left: auto;
+  perspective: 1200px;
+}
+.fc__wrap {
+  position: absolute;
+  width: var(--s);
+  height: var(--s);
+  transform-style: preserve-3d;
+  animation: fc-float 7s ease-in-out infinite;
+}
+@keyframes fc-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -16px;
+  }
+}
+.fc__cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: fc-turn 18s ease-in-out infinite alternate;
+}
+/* a slow turn between two three-quarter views, so a lit top face and two
+   sides always show, as in the reference */
+@keyframes fc-turn {
+  from {
+    transform: rotateX(-28deg) rotateY(38deg) rotateZ(-4deg);
+  }
+  to {
+    transform: rotateX(-16deg) rotateY(68deg) rotateZ(6deg);
+  }
+}
+.fc__wrap:nth-child(even) .fc__cube {
+  animation-name: fc-turn-b;
+}
+@keyframes fc-turn-b {
+  from {
+    transform: rotateX(-34deg) rotateY(-32deg) rotateZ(5deg);
+  }
+  to {
+    transform: rotateX(-20deg) rotateY(-58deg) rotateZ(-6deg);
+  }
+}
+
+/* the faces — brushed metal: fine vertical grain over a lit gradient */
+.fc__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  background-image: repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 0 1px,
+      transparent 1px 3px
+    ),
+    var(--g);
+}
+.fc__face--front {
+  --g: linear-gradient(165deg, #2c2c2c, #0c0c0c 70%);
+  transform: translateZ(calc(var(--s) / 2));
+}
+.fc__face--back {
+  --g: linear-gradient(165deg, #1a1a1a, #050505);
+  transform: rotateY(180deg) translateZ(calc(var(--s) / 2));
+}
+.fc__face--right {
+  --g: radial-gradient(70% 60% at 35% 40%, rgba(255, 255, 255, 0.16), transparent 70%),
+    linear-gradient(200deg, #222222, #040404 75%);
+  transform: rotateY(90deg) translateZ(calc(var(--s) / 2));
+}
+.fc__face--left {
+  --g: linear-gradient(150deg, #3a3a3a, #101010 75%);
+  transform: rotateY(-90deg) translateZ(calc(var(--s) / 2));
+}
+/* the lit top face, brushed silver */
+.fc__face--top {
+  --g: linear-gradient(135deg, #f2f2f2 0%, #bdbdbd 35%, #7c7c7c 70%, #4a4a4a 100%);
+  transform: rotateX(90deg) translateZ(calc(var(--s) / 2));
+}
+.fc__face--bottom {
+  --g: linear-gradient(180deg, #0a0a0a, #000000);
+  transform: rotateX(-90deg) translateZ(calc(var(--s) / 2));
+}
+/* the one red cube */
+.fc__wrap--red .fc__face--top {
+  --g: linear-gradient(135deg, #ff7a72 0%, #e8333a 40%, #b5141b 100%);
+}
+.fc__wrap--red .fc__face--front {
+  --g: linear-gradient(165deg, #b8161d, #5c070b 75%);
+}
+.fc__wrap--red .fc__face--left {
+  --g: linear-gradient(150deg, #d71920, #7a0b10 75%);
+}
+.fc__wrap--red .fc__face--right {
+  --g: radial-gradient(70% 60% at 35% 40%, rgba(255, 255, 255, 0.18), transparent 70%),
+    linear-gradient(200deg, #9e1016, #3a0306 75%);
+}
+.fc__wrap--red .fc__face--back,
+.fc__wrap--red .fc__face--bottom {
+  --g: linear-gradient(180deg, #5c070b, #2a0204);
+}
+
+/* the About hero's figures, as a compact row under the copy */
+.about-stats {
+  width: 100%;
+  margin-top: 24px;
+}
+.about-stats .pk-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.about-stats .pk-stat strong {
+  font-size: 40px;
+  line-height: 44px;
+}
+@media (max-width: 860px) {
+  .fc {
+    max-width: 340px;
+    margin: 0 auto;
+  }
+  .about-stats .pk-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fc__wrap,
+  .fc__cube {
+    animation: none;
+  }
+  .fc__cube {
+    transform: rotateX(-24deg) rotateY(42deg);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Expertise hero — the dark globe with orbit rings and icon buttons */
+/* (ExpertiseGlobe.jsx)                                              */
+/* ---------------------------------------------------------------- */
+.xg {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin-left: auto;
+}
+.xg > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.xg__rim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1.2;
+}
+.xg__ring {
+  fill: none;
+  stroke: rgba(200, 200, 210, 0.45);
+  stroke-width: 1.6;
+}
+.xg__ring--red {
+  stroke: var(--iba-red);
+  stroke-width: 2.4;
+  filter: drop-shadow(0 0 6px rgba(215, 25, 32, 0.6));
+}
+.xg__dot {
+  fill: #ff4a50;
+  filter: drop-shadow(0 0 8px rgba(255, 74, 80, 0.9));
+}
+/* the three frosted buttons, overlapping the foot of the globe */
+.xg__icons {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: 2%;
+  display: flex;
+  justify-content: space-between;
+}
+.xg__icon {
+  display: grid;
+  place-items: center;
+  width: clamp(64px, 8vw, 104px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(30, 30, 32, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  animation: xg-bob 5s ease-in-out infinite;
+}
+.xg__icon:nth-child(2) {
+  animation-delay: -1.6s;
+}
+.xg__icon:nth-child(3) {
+  animation-delay: -3.2s;
+}
+@keyframes xg-bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+.xg__icon svg {
+  width: 40%;
+  height: 40%;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 860px) {
+  .xg {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xg__icon {
+    animation: none;
+  }
+  .xg__dot {
+    display: none;
+  }
+}
+/* the reference's frame: portrait, the globe running off the right and
+   bottom edges, the three buttons spaced along the foot */
+.xg {
+  max-width: 560px;
+}
+.xg > svg {
+  overflow: hidden;
+}
+.xg__icons {
+  left: 0;
+  right: 0;
+  bottom: auto;
+  top: 83%;
+  display: block;
+}
+.xg__icon {
+  position: absolute;
+  width: 21.6%;
+  translate: -50% -50%;
+}
+.xg__icon:nth-child(1) {
+  left: 16.7%;
+}
+.xg__icon:nth-child(2) {
+  left: 50%;
+}
+.xg__icon:nth-child(3) {
+  left: 83%;
+}
+@keyframes xg-bob {
+  0%,
+  100% {
+    translate: -50% -50%;
+  }
+  50% {
+    translate: -50% calc(-50% - 8px);
+  }
+}
+/* The globe runs off the hero's own right and bottom edges, as it runs off
+   the reference's frame, instead of being cropped in a box inside the panel.
+   The panel clips it (overflow: hidden). */
+.pk-hero__panel:has(.xg) {
+  position: relative;
+}
+.pk-hero__aside:has(.xg) {
+  position: static;
+}
+.pk-hero__aside .xg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: min(58%, 860px);
+  max-width: none;
+  margin: 0;
+}
+/* the bigger globe needs a taller panel to show its crown; the copy stays
+   above the rings where they pass behind it */
+@media (min-width: 861px) {
+  .pk-hero__panel:has(.xg) {
+    min-height: 820px;
+    align-content: center;
+  }
+  .pk-hero__panel:has(.xg) .pk-hero__copy {
+    position: relative;
+    z-index: 2;
+  }
+}
+@media (max-width: 860px) {
+  .pk-hero__aside .xg {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 0 0 auto;
+    right: auto;
+    bottom: auto;
+  }
+}
+
+/* About — Vision & Mission, as the home page's Academia cards (VisionMission.jsx) */
+.wd__card--vision {
+  --tint: linear-gradient(135deg, #2a1d1a 0%, #7a2a22 50%, #d71920 100%);
+}
+.wd__card--mission {
+  --tint: linear-gradient(135deg, #3a0a0d 0%, #8e1d18 45%, #d71920 100%);
+}
+.vm .wd__card {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+/* About and Expertise heroes: the home hero's red light beam behind the
+   graphic (by request; the brand book's no-gradient rule still holds on the
+   other inner heroes) */
+:is(#who-we-are, #expertise, #ecosystem, #library, #red-club, #corridor) .pk-hero__panel {
+  background: #060607;
+}
+:is(#who-we-are, #expertise, #ecosystem, #library, #red-club, #corridor) .pk-hero__beam {
+  display: block;
+  z-index: -1;
+  background:
+    linear-gradient(
+      158deg,
+      transparent 44%,
+      rgba(150, 30, 42, 0.18) 52%,
+      rgba(200, 52, 62, 0.55) 58.5%,
+      rgba(150, 30, 42, 0.18) 64%,
+      transparent 72%
+    ),
+    radial-gradient(60% 55% at 92% 30%, rgba(120, 22, 34, 0.28), transparent 70%);
+  filter: blur(14px);
+  -webkit-mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
+}
+
+/* ==================================================================
+   About — Message From the Founder, set as a letter (FounderLetter.jsx):
+   a black profile panel that stays in view, the letter beside it
+   ================================================================== */
+.fl {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.7fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+.fl__profile {
+  position: sticky;
+  top: calc(var(--nav-h) + 1.5rem);
+  display: grid;
+  gap: 1.75rem;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  background: var(--iba-black);
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.08), 0 24px 48px -20px rgba(17, 17, 17, 0.45);
+}
+.fl__mono {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  aspect-ratio: 1;
+  background: var(--iba-red);
+  font-family: var(--bb-font);
+  font-size: 2.4rem;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+.fl__who {
+  display: grid;
+  gap: 0.35rem;
+}
+.fl__who strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.9rem);
+  letter-spacing: -0.02em;
+}
+.fl__who span,
+.fl__label {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+.fl__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid rgba(255, 255, 255, 0.14);
+  list-style: none;
+}
+.fl__facts li {
+  display: grid;
+  gap: 0.3rem;
+}
+.fl__facts li + li {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+.fl__facts strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 1.2rem + 1vw, 2.2rem);
+  line-height: 1;
+  color: var(--iba-red);
+}
+.fl__facts span {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.7);
+}
+.fl__regs {
+  display: grid;
+  gap: 0.75rem;
+}
+.fl__regs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fl__regs li {
+  padding: 0.4rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+.fl__profile .pk-btn--ghost {
+  justify-self: start;
+  border-color: #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+.fl__profile .pk-btn--ghost:hover {
+  background: #ffffff;
+  color: var(--iba-black);
+}
+
+.fl__letter {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  min-width: 0;
+}
+.fl__lead {
+  position: relative;
+  margin: 0;
+  padding-top: 1.75rem;
+  border-top: 4px solid var(--iba-red);
+}
+.fl__mark {
+  position: absolute;
+  top: -0.15em;
+  right: 0;
+  font-family: var(--bb-font);
+  font-size: clamp(6rem, 10vw, 9rem);
+  line-height: 1;
+  color: var(--iba-red);
+  opacity: 0.18;
+}
+.fl__lead p {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--bb-font);
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.fl__body {
+  display: grid;
+  gap: 1.15rem;
+  max-width: 44rem;
+}
+.fl__body > div {
+  display: grid;
+  gap: 1.15rem;
+}
+.fl__body p {
+  margin: 0;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  line-height: 1.75;
+  color: #4a4542;
+}
+/* the opening paragraph gets a red drop cap */
+.fl__body > div:first-child > p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--bb-font);
+  font-size: 3.6em;
+  line-height: 0.85;
+  color: var(--iba-red);
+}
+.fl__body p.fl__pull {
+  margin-block: 0.75rem;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  border-left: 4px solid var(--iba-red);
+  font-family: var(--bb-font);
+  font-size: clamp(1.3rem, 1rem + 1vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--bb-ink);
+}
+.fl__sign {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
+}
+.fl__sig {
+  font-family: var(--bb-font);
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.fl__sig-role {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+@media (max-width: 860px) {
+  .fl {
+    grid-template-columns: 1fr;
+  }
+  .fl__profile {
+    position: static;
+  }
+}
+.fl__profile .fl__who strong {
+  color: #ffffff;
+}
+.fl__lead .fl__mark {
+  top: 0.12em;
+}
+.fl__facts li {
+  align-content: start;
+}
+.fl__lead {
+  padding-right: clamp(3.5rem, 8vw, 6.5rem);
+}
+
+/* ==================================================================
+   Expertise hero — the red low-poly brain over its pedestal
+   (ExpertiseHolo.jsx), after the client's reference
+   ================================================================== */
+.xh {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin-inline: auto 0;
+}
+.xh > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.xh__floor path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.11);
+  stroke-width: 1.2;
+}
+.xh__candle--far path {
+  stroke: rgba(215, 25, 32, 0.55);
+  stroke-width: 2;
+}
+.xh__candle--far rect {
+  fill: rgba(215, 25, 32, 0.4);
+}
+.xh__mote {
+  fill: #ff8a8e;
+  opacity: 0.25;
+  animation: xh-twinkle 4s ease-in-out infinite;
+}
+.xh__rim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1;
+}
+.xh__band {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 2.4;
+}
+.xh__band-glow {
+  fill: none;
+  stroke: #d71920;
+  stroke-width: 10;
+  opacity: 0.85;
+}
+.xh__plate-base {
+  fill: #08080a;
+}
+.xh__plate-ring {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 3;
+  animation: xh-pulse 3s ease-in-out infinite;
+}
+.xh__plate-ring--glow {
+  stroke-width: 8;
+}
+.xh__plate-mark {
+  font-family: var(--bb-font);
+  font-size: 16px;
+  letter-spacing: 0.22em;
+  text-anchor: middle;
+  fill: #e6e6ea;
+}
+.xh__beam {
+  fill: rgba(215, 25, 32, 0.14);
+  filter: blur(8px);
+}
+.xh__halo {
+  fill: #d71920;
+  opacity: 0.75;
+}
+.xh__facet {
+  stroke: rgba(255, 225, 226, 0.75);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+}
+.xh__outline {
+  fill: none;
+  stroke: rgba(255, 220, 222, 0.9);
+  stroke-width: 1.2;
+}
+.xh__node {
+  fill: #ffffff;
+}
+.xh__ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1.1;
+}
+.xh__ring--back {
+  stroke: rgba(255, 255, 255, 0.2);
+}
+/* clusters of light dots flowing round each ring */
+.xh__dots {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 9 0.1 9 0.1 9 0.1 9 0.1 9 0.1 160;
+  opacity: 0.85;
+  animation: xh-flow linear infinite;
+}
+.xh__bead {
+  fill: #ff4a50;
+  filter: drop-shadow(0 0 6px rgba(255, 58, 64, 0.95));
+}
+.xh__wick {
+  stroke: #c9c9cd;
+  stroke-width: 2.5;
+}
+.xh__cap {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+.xh__brain {
+  animation: xh-float 6s ease-in-out infinite;
+}
+@keyframes xh-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes xh-flow {
+  to {
+    stroke-dashoffset: -205;
+  }
+}
+@keyframes xh-pulse {
+  50% {
+    stroke: #ff9a9e;
+  }
+}
+@keyframes xh-twinkle {
+  50% {
+    opacity: 0.9;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xh__brain,
+  .xh__dots,
+  .xh__plate-ring,
+  .xh__mote {
+    animation: none;
+  }
+}
+.pk-hero__aside .xh {
+  max-width: 620px;
+}
+@media (max-width: 860px) {
+  .pk-hero__aside .xh {
+    max-width: 380px;
+    margin-inline: auto;
+  }
+}
+
+/* Expertise hero image (Expertise.jsx): its edges fade into the hero's black */
+.xp-img {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto 0;
+}
+.xp-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(70% 70% at 50% 48%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(70% 70% at 50% 48%, #000 55%, transparent 100%);
+}
+@media (max-width: 860px) {
+  .xp-img {
+    max-width: 440px;
+    margin-inline: auto;
+  }
+}
+.xp-img {
+  max-width: 720px;
+  margin-right: -2rem;
+}
+.xp-img img {
+  filter: contrast(1.25) brightness(0.92) saturate(1.05);
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 62%, transparent 100%);
+  mix-blend-mode: lighten;
+}
+@media (max-width: 860px) {
+  .xp-img {
+    margin-right: auto;
+  }
+}
+@media (min-width: 861px) {
+  .xp-img {
+    transform: scale(1.4);
+    transform-origin: 60% 50%;
+  }
+}
+.xp-img img {
+  -webkit-mask-image: radial-gradient(60% 62% at 50% 48%, #000 70%, transparent 100%);
+  mask-image: radial-gradient(60% 62% at 50% 48%, #000 70%, transparent 100%);
+}
+.xp-img img {
+  -webkit-mask-image: radial-gradient(50% 50% at 50% 48%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(50% 50% at 50% 48%, #000 62%, transparent 100%);
+}
+:is(#expertise, #ecosystem, #library, #red-club, #corridor) .pk-hero__copy {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==================================================================
+   Library — Member Login: the form, and beside it a black panel showing
+   what the library holds (Library.jsx, .lg)
+   ================================================================== */
+.lg {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: stretch;
+}
+.lg__form {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+.lg__panel {
+  display: grid;
+  gap: 1.75rem;
+  align-content: start;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.lg__eyebrow,
+.lg__label {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.lg__label {
+  color: rgba(255, 255, 255, 0.6);
+}
+.lg__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0 0 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  list-style: none;
+}
+.lg__stats li {
+  display: grid;
+  gap: 0.35rem;
+}
+.lg__stats li + li {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+.lg__stats strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.5rem + 1.4vw, 2.8rem);
+  line-height: 1;
+  color: #ffffff;
+}
+.lg__stats span {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+.lg__perks {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lg__perks li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+}
+.lg__perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  background: var(--iba-red);
+  transform: rotate(45deg);
+}
+.lg__latest {
+  display: grid;
+  gap: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.lg__latest ol {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lg__latest li {
+  display: grid;
+  gap: 0.25rem;
+}
+.lg__fmt {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.lg__title {
+  font-size: 0.98rem;
+  line-height: 1.4;
+  color: #ffffff;
+}
+@media (max-width: 860px) {
+  .lg {
+    grid-template-columns: 1fr;
+  }
+}
+/* the login column is one white box, stretched to the panel's height: the
+   form at the top, the sign-up line at its foot */
+.lg__form {
+  grid-template-rows: auto 1fr;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+}
+.lg__form .pk-form {
+  border: 0;
+  background: transparent;
+}
+.lg__form > .pk-aside {
+  align-self: end;
+  padding: 1.25rem clamp(1.4rem, 3vw, 2.2rem) clamp(1.4rem, 3vw, 2.2rem);
+  border-top: 1px solid var(--bb-line);
+}
+.lg__main {
+  display: grid;
+  align-content: center;
+  gap: 0.25rem;
+  padding-top: clamp(1.4rem, 3vw, 2.2rem);
+}
+.lg__head {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0 clamp(1.4rem, 3vw, 2.2rem);
+}
+.lg__mark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.4rem;
+  background: var(--iba-red);
+}
+.lg__mark svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.8;
+}
+.lg__head h3 {
+  margin: 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 1.1rem + 0.8vw, 1.8rem);
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.lg__head p,
+.lg__help {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #6b655e;
+}
+.lg__help {
+  padding: 0 clamp(1.4rem, 3vw, 2.2rem);
+  font-size: 0.88rem;
+}
+.lg__help a {
+  color: var(--iba-red);
+  text-decoration: underline;
+}
+
+/* ==================================================================
+   Ecosystem — the partner wall as a uniform grid: equal square cells
+   ruled by hairlines, the mark centred above the name (Ecosystem.jsx)
+   ================================================================== */
+.pk-orgs.pk-orgs--grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--bb-line);
+  border-left: 1px solid var(--bb-line);
+}
+.pk-orgs--grid .eco__chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  aspect-ratio: 1;
+  max-width: none;
+  margin: 0;
+  padding: 1rem 0.75rem;
+  border: 0;
+  border-right: 1px solid var(--bb-line);
+  border-bottom: 1px solid var(--bb-line);
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+  text-align: center;
+  transition: background-color 0.25s ease;
+}
+.pk-orgs--grid .eco__chip:hover {
+  border-color: var(--bb-line);
+  background: var(--bb-surface-alt);
+  transform: none;
+  box-shadow: none;
+}
+.pk-orgs--grid :is(.eco__logo, .eco__mono) {
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 0;
+}
+.pk-orgs--grid .eco__mono {
+  font-size: 1.05rem;
+}
+.pk-orgs--grid .eco__name {
+  display: -webkit-box;
+  min-height: 2.6em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.92rem;
+  line-height: 1.3;
+  white-space: normal;
+  color: var(--bb-ink);
+}
+@media (max-width: 1100px) {
+  .pk-orgs.pk-orgs--grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .pk-orgs.pk-orgs--grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .pk-orgs--grid :is(.eco__logo, .eco__mono) {
+    width: 48px;
+    height: 48px;
+  }
+  .pk-orgs--grid .eco__name {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 460px) {
+  .pk-orgs.pk-orgs--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* the marks sit still in the grid, so every cell lines up */
+.pk-orgs--grid :is(.eco__logo, .eco__mono) {
+  animation: none;
+}
+/* the closing cell fills the rest of the last row: 38 partners leave 4
+   cells at 6 across, 2 at 4 across, 1 at 3 across, a full row at 2 */
+.pk-orgs__more {
+  grid-column: span 4;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-right: 1px solid var(--bb-line);
+  border-bottom: 1px solid var(--bb-line);
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.pk-orgs__more > span {
+  max-width: 22ch;
+  font-family: var(--bb-font);
+  font-size: clamp(1.15rem, 0.9rem + 0.8vw, 1.6rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.pk-orgs__more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  background: var(--iba-red);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.pk-orgs__more a:hover {
+  background: var(--iba-red-deep);
+}
+@media (max-width: 1100px) {
+  .pk-orgs__more {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 760px) {
+  .pk-orgs__more {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0.75rem;
+  }
+  .pk-orgs__more > span {
+    font-size: 0.85rem;
+  }
+  .pk-orgs__more a {
+    padding: 0.55rem 0.7rem;
+    font-size: 10px;
+  }
+}
+@media (max-width: 460px) {
+  .pk-orgs.pk-orgs--grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 340px) {
+  .pk-orgs.pk-orgs--grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pk-orgs__more {
+    grid-column: span 2;
+  }
+}
+/* on narrow screens the closing cell is one square: the whole cell is the
+   red link, the line of copy drops */
+@media (max-width: 760px) {
+  .pk-orgs__more {
+    padding: 0;
+    background: var(--iba-red);
+  }
+  .pk-orgs__more > span {
+    display: none;
+  }
+  .pk-orgs__more a {
+    flex: 1;
+    align-self: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .pk-orgs__more a:hover {
+    background: var(--iba-red-deep);
+  }
+}
+@media (max-width: 340px) {
+  .pk-orgs__more a {
+    aspect-ratio: auto;
+    padding: 1.25rem;
+  }
+}
+
+/* ==================================================================
+   Larger type where it read too small (by request)
+   ================================================================== */
+/* Navbar: the tabs grow from 15px where the bar first appears (1261px) to
+   17px by 1440px, so the row still fits at its narrowest; the Web3 Corridor
+   pill and the two buttons grow with them */
+.nav__tabBtn {
+  font-size: clamp(15px, calc(15px + (100vw - 1261px) * 0.0112), 17px);
+}
+.nav__tabBtn[data-pill] {
+  padding: 0.5rem 1rem;
+  font-size: clamp(13px, calc(13px + (100vw - 1261px) * 0.0112), 15px);
+}
+.nav__util .btn {
+  font-size: 15px;
+}
+
+/* Home stats: bigger figures and labels, and less dead space in the box */
+.cred__item {
+  align-content: center;
+  gap: 0.75rem;
+  padding: clamp(24px, 2.6vw, 36px);
+}
+.cred__k {
+  font-size: clamp(56px, 3.2rem + 2.2vw, 88px);
+  line-height: 1;
+}
+.cred__v {
+  font-size: clamp(16px, 0.9rem + 0.3vw, 19px);
+  line-height: 1.35;
+  color: var(--bb-ink);
+}
+@media (max-width: 760px) {
+  .cred__k {
+    font-size: 44px;
+  }
+  .cred__v {
+    font-size: 15px;
+  }
+}
+
+/* ==================================================================
+   The founder's photograph (public/images/founder.jpg) everywhere the
+   RK monogram stood in
+   ================================================================== */
+/* Home founder band: the photo fills the panel, the face kept in frame;
+   the caption sits over a fade rather than a solid black bar */
+.fnd__portrait {
+  min-height: clamp(360px, 34vw, 520px);
+}
+.fnd__photo {
+  object-position: 50% 22%;
+}
+.fnd__caption {
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.92) 10%, rgba(17, 17, 17, 0));
+}
+@media (max-width: 760px) {
+  .fnd__portrait {
+    min-height: 360px;
+    padding-top: 0;
+  }
+}
+
+/* About — the profile panel opens with the portrait */
+.fl__photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.fl__profile {
+  padding-top: 0;
+  overflow: hidden;
+}
+.fl__profile > .fl__photo {
+  width: calc(100% + 2 * clamp(1.75rem, 3vw, 2.5rem));
+  max-width: none;
+  margin-inline: calc(-1 * clamp(1.75rem, 3vw, 2.5rem));
+}
+
+/* Expertise — the founder quote's byline carries a small round headshot */
+.pk-quote__by {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.pk-quote__photo {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--iba-red);
+}
+.fl__profile > .fl__photo {
+  height: auto;
+}
+
+/* Navbar and hero buttons: 15px labels (by request) */
+.nav__util .btn,
+.hero__ctas .btn {
+  font-size: 15px;
+  line-height: 20px;
+}
+/* the inner pages' hero buttons match the home hero's: 15px labels */
+.pk-hero .pk-btn {
+  font-size: 15px;
+  line-height: 20px;
+}
+/* Web3 Corridor pill: the same type size as the tabs beside it, on a
+   tighter box (by request) */
+.nav__tabBtn[data-pill] {
+  padding: 0.3rem 0.65rem;
+  font-size: clamp(15px, calc(15px + (100vw - 1261px) * 0.0112), 17px);
+}
+
+/* What We Do, Academia & Students and the Knowledge Base: every card in a
+   band is the same size as its neighbours — each row as tall as the
+   tallest, so the Knowledge Base's two rows match, and so do the cards
+   when they stack on narrow screens (Vision & Mission excepted: its two
+   cards carry very different lengths of copy) */
+.wd:not(.vm) .wd__grid {
+  grid-auto-rows: 1fr;
+}
+
+/* ==================================================================
+   Home Flagship Programme: a dotted world map with the corridor's
+   regions pinned (CorridorBand.jsx), in place of the globe
+   ================================================================== */
+.cb__map {
+  width: min(54%, 680px);
+  pointer-events: auto;
+}
+.cb__map .corr__map {
+  margin-right: 0;
+}
+.cb__map .corr__world {
+  color: var(--bb-ink);
+  opacity: 0.32;
+}
+.cb__map .corr__pinDot {
+  width: 11px;
+  height: 11px;
+  background: var(--iba-red);
+  animation: cb-pin 2.4s ease-out infinite;
+}
+.cb__map .corr__pin:nth-child(2n) .corr__pinDot {
+  animation-delay: -1.2s;
+}
+.cb__map .corr__pinCard {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--bb-line);
+  border-radius: 0;
+  background: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--bb-ink);
+  box-shadow: 0 6px 16px -10px rgba(17, 17, 17, 0.35);
+}
+@keyframes cb-pin {
+  0% {
+    box-shadow: 0 0 0 0 rgba(215, 25, 32, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(215, 25, 32, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cb__map .corr__pinDot {
+    animation: none;
+  }
+}
+@media (max-width: 860px) {
+  .cb__map {
+    max-width: 520px;
+    padding-bottom: var(--bb-section);
+  }
+  .cb__map .corr__pinCard {
+    font-size: 10px;
+  }
+}
+
+/* card icons (Kit Cards' `icon`) — About's How the Mission Runs uses them in
+   place of numbers (by request): a red square with a white line icon */
+.pk-card__icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  background: var(--iba-red);
+}
+.pk-card__icon svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ==================================================================
+   Client round (home): What We Do is two cards with a red-hued photo;
+   every other card photo in full colour with more contrast, so the
+   images stand out rather than sitting back in greyscale
+   ================================================================== */
+.wd.wd--duo .wd__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.wd.wd--duo .wd__media {
+  aspect-ratio: 16 / 8;
+}
+/* the red hue: the photo in high-contrast mono, IBA Red laid over it as a
+   colour blend, so the light and shade stay and the hue turns red */
+.wd.wd--duo .wd__card .wd__photo,
+.wd.wd--duo .wd__card:hover .wd__photo {
+  filter: grayscale(1) contrast(1.25) brightness(1.08);
+}
+.wd.wd--duo .wd__tint {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(135deg, #ff3a40, #9e1016);
+  mix-blend-mode: color;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+.wd.wd--duo .wd__card:hover .wd__tint {
+  opacity: 0.65;
+}
+.wd.wd--duo .wd__card:hover .wd__photo {
+  transform: scale(1.05);
+  transition: transform 0.8s ease;
+}
+/* Knowledge Hub, the Knowledge Base and About's Vision & Mission: the
+   photos in full colour, a touch more contrast and saturation */
+.wd.wd--two .wd__card .wd__photo,
+.wd.wd--two.kb .wd__card .wd__photo {
+  filter: saturate(1.15) contrast(1.1);
+  transition: transform 0.8s ease;
+}
+.wd.wd--two .wd__card:hover .wd__photo,
+.wd.wd--two.kb .wd__card:hover .wd__photo {
+  filter: saturate(1.2) contrast(1.12);
+  transform: scale(1.05);
+}
+@media (max-width: 960px) {
+  .wd.wd--duo .wd__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* the red hue, deeper: red multiplied over the mono photo, so the lights go
+   IBA Red and the shadows stay black, rather than washing out to pink */
+.wd.wd--duo .wd__card .wd__photo,
+.wd.wd--duo .wd__card:hover .wd__photo {
+  filter: grayscale(1) contrast(1.15) brightness(1.2);
+}
+.wd.wd--duo .wd__tint {
+  background: linear-gradient(135deg, #ff2a31, #b3121a);
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+.wd.wd--duo .wd__card:hover .wd__tint {
+  opacity: 0.75;
+}
+
+/* ==================================================================
+   The hover menu, tidied (client round): a bordered white sheet with a
+   soft shadow; a smaller heading; the links on an even three-column grid
+   as quiet rows — ink type at a readable size, no rules between columns —
+   each taking a grey ground, red type and an arrow on hover
+   ================================================================== */
+.nav__panel {
+  border-top: 1px solid var(--bb-line);
+  border-bottom: 1px solid var(--bb-line);
+  background: #ffffff;
+  box-shadow: 0 24px 40px -28px rgba(17, 17, 17, 0.35);
+}
+.nav__panelIn {
+  grid-template-columns: minmax(0, 0.28fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 3rem);
+  padding-block: 28px 32px;
+}
+.nav__panelHead {
+  gap: 0.75rem;
+  padding-top: 4px;
+}
+.nav__panelTitle {
+  font-size: 26px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.nav__panelHead .arrow {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+.nav__panelList {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px 16px;
+}
+.nav__panelList a {
+  position: relative;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-left: 0;
+  font-size: 16px;
+  line-height: 1.3;
+  color: var(--bb-ink);
+}
+.nav__panelList a::after {
+  content: '→';
+  flex: none;
+  margin-left: auto;
+  color: var(--iba-red);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.nav__panelList a:hover {
+  border-left-color: transparent;
+  background: var(--bb-surface-alt);
+  color: var(--iba-red);
+}
+.nav__panelList a:hover::after {
+  opacity: 1;
+  transform: none;
+}
+.nav__itemLabel {
+  min-width: 0;
+}
+.nav__itemNote {
+  margin-left: 8px;
+  padding: 2px 6px;
+  border-color: var(--iba-red);
+  border-radius: 0;
+  font-size: 10px;
+  color: var(--iba-red);
+}
+.nav__panelList a .nav__itemNote + * {
+  margin-left: 0;
+}
+.nav__panelGroups {
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.nav__panelGroupTitle {
+  margin-bottom: 8px;
+  padding-left: 16px;
+  font-size: 11px;
+  color: var(--bb-ink-muted);
+}
+.nav__panelGroups .nav__panelList {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.nav__panelList a {
+  justify-content: flex-start;
+}
+.nav__itemLabel {
+  white-space: nowrap;
+}
+.nav__panelList a .nav__itemLabel:only-child,
+.nav__panelGroups .nav__itemLabel {
+  white-space: normal;
+}
+.nav__panelList a {
+  gap: 10px;
+}
+.nav__panelList a .nav__itemNote {
+  margin-left: 0;
+}
+/* What We Do: a lighter red hue (by request) — the photo keeps some of its
+   own colour, and the red wash is roughly half as strong */
+.wd.wd--duo .wd__card .wd__photo,
+.wd.wd--duo .wd__card:hover .wd__photo {
+  filter: grayscale(0.6) contrast(1.1) brightness(1.08);
+}
+.wd.wd--duo .wd__tint {
+  opacity: 0.42;
+}
+.wd.wd--duo .wd__card:hover .wd__tint {
+  opacity: 0.3;
+}
+
+/* ==================================================================
+   One photo treatment for every card image (by request: images that
+   stand out, not washed-out greyscale) — What We Do, Knowledge Hub, the
+   Knowledge Base and About's Vision & Mission:
+     · full colour, lifted: more saturation and contrast
+     · the brand touch: an IBA Red glow rising from the bottom corner
+       (soft-light, so it warms the photo without painting over it) and a
+       light shade at the foot for depth
+     · on hover the photo eases in and its colour lifts a little more
+   The selectors repeat .wd to outrank the earlier per-band rules.
+   ================================================================== */
+.wd.wd.wd .wd__card .wd__photo {
+  filter: saturate(1.3) contrast(1.12) brightness(1.03);
+  transform: scale(1.01);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+}
+.wd.wd.wd .wd__card:hover .wd__photo {
+  filter: saturate(1.4) contrast(1.15) brightness(1.05);
+  transform: scale(1.06);
+}
+.wd.wd.wd .wd__card .wd__tint {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(to top, rgba(17, 17, 17, 0.35), rgba(17, 17, 17, 0) 45%),
+    radial-gradient(90% 80% at 0% 100%, rgba(215, 25, 32, 0.75), rgba(215, 25, 32, 0) 70%);
+  mix-blend-mode: soft-light;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.wd.wd.wd .wd__card:hover .wd__tint {
+  opacity: 0.7;
+}
+
+/* the founder's portrait: the same lift, gentler, as it is a face */
+.fnd__photo,
+.fl__photo,
+.pk-quote__photo {
+  filter: saturate(1.12) contrast(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd.wd.wd .wd__card .wd__photo,
+  .wd.wd.wd .wd__card:hover .wd__photo {
+    transform: none;
+  }
+}
+/* the brand glow, strong enough to read on every card */
+.wd.wd.wd .wd__card .wd__tint {
+  background:
+    linear-gradient(to top, rgba(17, 17, 17, 0.4), rgba(17, 17, 17, 0) 50%),
+    radial-gradient(110% 95% at 0% 100%, rgba(215, 25, 32, 0.95), rgba(215, 25, 32, 0) 65%);
+  mix-blend-mode: overlay;
+}
+/* the AI circuit board's neon green turned to IBA Red, so the one photo
+   with a strong colour of its own speaks the brand's instead */
+.wd.wd.wd .kb__card--ink .wd__photo {
+  filter: hue-rotate(225deg) saturate(1.2) contrast(1.12) brightness(1.03);
+}
+.wd.wd.wd .kb__card--ink:hover .wd__photo {
+  filter: hue-rotate(225deg) saturate(1.3) contrast(1.15) brightness(1.05);
+}
+
+/* ==================================================================
+   Hover menu, compact (client: too much space). The links no longer
+   stretch across the full width: the heading and the links sit side by
+   side at their own size, in columns as wide as their longest label,
+   with tighter padding and rows
+   ================================================================== */
+.nav__panelIn {
+  grid-template-columns: max-content max-content;
+  justify-content: start;
+  gap: 56px;
+  padding-block: 20px 24px;
+}
+.nav__panelHead {
+  gap: 6px;
+  min-width: 160px;
+  padding-top: 8px;
+}
+.nav__panelTitle {
+  font-size: 22px;
+}
+.nav__panelHead .arrow {
+  font-size: 12px;
+}
+.nav__panelList,
+.nav__panelGroups .nav__panelList {
+  grid-template-columns: repeat(3, max-content);
+  gap: 2px 8px;
+}
+.nav__panelList a {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 15px;
+}
+.nav__panelIn {
+  gap: 40px;
+  padding-block: 16px 18px;
+}
+.nav__panelHead {
+  min-width: 140px;
+  padding-top: 6px;
+}
+
+/* ==================================================================
+   Dropdown menu, after the client's reference: labelled groups of
+   links, each with an icon, a label and a one-line description, and a
+   light grey "Get Started" column on the right. Scoped under .nav
+   .nav__panel to outrank the earlier panel rules.
+   ================================================================== */
+.nav .nav__panel .nav__panelIn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: 0;
+  align-items: stretch;
+  padding-block: 0;
+}
+.nav .nav__panel .nav__panelGroups {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 300px);
+  justify-content: start;
+  gap: 24px;
+  padding: 24px 32px 28px 0;
+}
+.nav .nav__panel .nav__panelGroupTitle {
+  margin: 0 0 10px;
+  padding-left: 12px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.nav .nav__panel .nav__panelList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+}
+.nav .nav__panel .nav__panelList a {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  min-height: 0;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--bb-ink);
+  transition: background-color 0.15s ease;
+}
+.nav .nav__panel .nav__panelList a::after {
+  content: none;
+}
+.nav .nav__panel .nav__panelList a:hover {
+  background: var(--bb-surface-alt);
+  color: var(--bb-ink);
+}
+.nav__itemIcon {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  fill: none;
+  stroke: var(--bb-ink);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.15s ease;
+}
+.nav .nav__panel .nav__panelList a:hover .nav__itemIcon {
+  stroke: var(--iba-red);
+}
+.nav__itemText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.nav .nav__panel .nav__itemLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.3;
+  white-space: normal;
+  color: var(--bb-ink);
+}
+.nav .nav__panel .nav__panelList a:hover .nav__itemLabel {
+  color: var(--iba-red);
+}
+.nav__itemDesc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--bb-ink-muted);
+}
+.nav .nav__panel .nav__itemNote {
+  margin: 0;
+  padding: 1px 6px;
+  border: 0;
+  background: var(--iba-red-soft);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--iba-red-deep);
+}
+/* the side column: a grey strip running to the panel's right edge */
+.nav__panelSide {
+  padding: 24px 0 28px 28px;
+  background: var(--bb-surface-alt);
+  box-shadow: 100vw 0 0 0 var(--bb-surface-alt);
+  clip-path: inset(0 -100vw 0 0);
+}
+.nav__panelSide ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nav__panelSide a {
+  display: block;
+  padding: 7px 12px;
+  font-size: 15px;
+  color: var(--bb-ink);
+  transition: color 0.15s ease;
+}
+.nav__panelSide a:hover {
+  color: var(--iba-red);
+}
+.nav__panelSide li:first-child a {
+  color: var(--iba-red);
+}
+.nav .nav__panel .nav__panelSide .nav__panelGroupTitle {
+  color: var(--bb-ink-muted);
+}
+.nav .nav__panel .nav__panelGroups {
+  grid-template-columns: none;
+  grid-auto-columns: 290px;
+}
+.nav .nav__panel {
+  overflow: hidden;
+}
+.nav__panelSide {
+  position: relative;
+  box-shadow: none;
+  clip-path: none;
+}
+.nav__panelSide::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 100vw;
+  background: var(--bb-surface-alt);
+}
+
+/* Mobile menu: Member Login sits on the drawer's black, so it takes the
+   outline-light style (white border and label) rather than the dark
+   outline meant for white grounds */
+.drawer__foot .btn--ghost {
+  border-color: #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+.drawer__foot .btn--ghost:hover,
+.drawer__foot .btn--ghost:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-black);
+}
+
+/* Home hero, smaller screens: the coin arch crests below the copy rather
+   than behind the buttons (Hero.jsx), so it needs more room under the copy
+   to rise into */
+@media (max-width: 1100px) {
+  .hero {
+    --arch-space: clamp(200px, 26vw, 270px);
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    --arch-space: clamp(170px, 46vw, 220px);
+  }
+}
+
+/* ==================================================================
+   Inner pages: the bands alternate white, dark and red (by request —
+   stacked off-white panels blurred together). Each page picks its tones
+   in pages/site/*.jsx; every grey Surface Alt band is now white.
+   ================================================================== */
+.pk-sec--card .pk-sec__panel,
+.wd.vm .wd__inner {
+  background: var(--bb-surface);
+}
+
+/* --- red: an IBA Red panel, white type, white cards and buttons --- */
+.pk-sec--red .pk-sec__panel {
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.pk-sec--red .hero__kicker,
+.pk-sec--red .pk-head__title,
+.pk-sec--red .pk-sub h3,
+.pk-sec--red .pk-prose .pk-prose__lead,
+.pk-sec--red .pk-quote blockquote,
+.pk-sec--red .pk-stat strong {
+  color: #ffffff;
+}
+.pk-sec--red .pk-head__lede,
+.pk-sec--red .pk-sub p,
+.pk-sec--red .pk-prose p,
+.pk-sec--red .pk-quote figcaption,
+.pk-sec--red .pk-stat span,
+.pk-sec--red .pk-aside {
+  color: rgba(255, 255, 255, 0.88);
+}
+.pk-sec--red .pk-aside a {
+  color: #ffffff;
+}
+/* cards stay white on red, so their own type is unchanged; no red glow */
+.pk-sec--red .pk-card {
+  border-color: transparent;
+  background: #ffffff;
+}
+.pk-sec--red .pk-card:hover {
+  border-color: var(--iba-black);
+}
+/* the card icon squares go black, or they would vanish into the band */
+.pk-sec--red .pk-card__icon {
+  background: var(--iba-black);
+}
+/* buttons on red: primary is white with a red label, secondary an outline */
+.pk-sec--red .pk-btn--primary {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-red);
+}
+.pk-sec--red .pk-btn--primary:hover {
+  border-color: var(--iba-black);
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.pk-sec--red .pk-btn--ghost {
+  border-color: #ffffff;
+  background: transparent;
+  color: #ffffff;
+}
+.pk-sec--red .pk-btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-red);
+}
+
+/* --- dark: the pieces that had no dark style yet --- */
+.pk-sec--dark .pk-aside {
+  color: var(--bb-on-black-muted);
+}
+.pk-sec--dark .pk-aside a {
+  color: #ffffff;
+}
+/* the partner grid's white cells read as one block on black, and its
+   closing cell turns red so it does not vanish into the band */
+.pk-sec--dark .pk-orgs--grid {
+  border-color: #333333;
+}
+.pk-sec--dark .pk-orgs__more {
+  background: var(--iba-red);
+}
+.pk-sec--dark .pk-orgs__more a {
+  background: #ffffff;
+  color: var(--iba-red);
+}
+.pk-sec--dark .pk-orgs__more a:hover {
+  background: var(--iba-black);
+  color: #ffffff;
+}
+/* the eyebrow's gradient lettering is replaced by plain white on red */
+.pk-sec--red .hero__kicker {
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  color: #ffffff;
+}
+/* the founder quote on red: the headshot's ring goes white */
+.pk-sec--red .pk-quote__photo {
+  border-color: #ffffff;
+}
+.pk-sec--red .pk-quote__mark {
+  color: #ffffff;
+  opacity: 0.35;
+}
+
+/* ==================================================================
+   About — Vision & Mission cards: short paragraphs with air between
+   them, a red-ruled closing line, and a branded backing behind the photo
+   so a photo still loading never shows as a flat black box
+   ================================================================== */
+.vm .wd__media {
+  background:
+    radial-gradient(90% 80% at 0% 100%, rgba(215, 25, 32, 0.85), rgba(215, 25, 32, 0) 70%),
+    linear-gradient(135deg, #2a2a2e, #111111);
+}
+.vm__photo {
+  z-index: 0;
+}
+.vm .wd__tint {
+  z-index: 1;
+}
+.vm .wd__badge {
+  z-index: 2;
+}
+.vm__copy {
+  display: grid;
+  gap: 0.85rem;
+  max-width: 62ch;
+}
+.vm .wd__text {
+  font-size: 16px;
+  line-height: 1.6;
+}
+.vm__close {
+  margin: 0.5rem 0 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--iba-red);
+  font-family: var(--bb-font);
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.25rem);
+  line-height: 1.4;
+  color: var(--bb-ink);
+}
+.wd.vm .wd__card:hover .vm__close {
+  color: var(--bb-ink);
+}
+
+/* ==================================================================
+   Card grids never leave an orphan (by request). On tablets the 3- and
+   4-up grids drop to two columns, which left a 3-card grid with one card
+   alone beside an empty gap:
+     · a grid of exactly three keeps its three across on tablets, and goes
+       to one column below 860px instead of two
+     · any other odd count in a two-column layout: the last card spans the
+       full row rather than leaving a hole
+   ================================================================== */
+@media (max-width: 1100px) and (min-width: 861px) {
+  .pk-cards:is(.pk-cards--3, .pk-cards--4):has(> :last-child:nth-child(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 860px) and (min-width: 681px) {
+  .pk-cards:is(.pk-cards--3, .pk-cards--4):has(> :last-child:nth-child(3)) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 1100px) and (min-width: 681px) {
+  .pk-cards:is(.pk-cards--2, .pk-cards--3, .pk-cards--4) > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+  /* …except where the grid is three across, where it has a column of its own */
+  .pk-cards:is(.pk-cards--3, .pk-cards--4):has(> :last-child:nth-child(3)) > :last-child {
+    grid-column: auto;
+  }
+}
+@media (min-width: 1101px) {
+  .pk-cards--2 > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==================================================================
+   Library (Resources) hero — the open book and its floating format cards
+   (LibraryHolo.jsx), on the same red beam as the other inner heroes
+   ================================================================== */
+.lh {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto 0;
+}
+.lh > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.lh__floor path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1.2;
+}
+.lh__mote {
+  fill: #ff8a8e;
+  opacity: 0.3;
+  animation: lh-twinkle 4s ease-in-out infinite;
+}
+.lh__band {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 2.4;
+}
+.lh__band-glow {
+  fill: none;
+  stroke: #d71920;
+  stroke-width: 10;
+  opacity: 0.85;
+}
+.lh__beam {
+  filter: blur(6px);
+  animation: lh-breathe 4s ease-in-out infinite;
+}
+.lh__book-glow {
+  fill: #ff3a40;
+  opacity: 0.7;
+  animation: lh-breathe 4s ease-in-out infinite;
+}
+.lh__lines path {
+  fill: none;
+  stroke: rgba(17, 17, 17, 0.28);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+}
+.lh__spine {
+  stroke: rgba(17, 17, 17, 0.35);
+  stroke-width: 1.5;
+}
+.lh__link {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 8;
+  animation: lh-flow 2.4s linear infinite;
+}
+.lh__card {
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1;
+}
+.lh__card-glow {
+  fill: none;
+  stroke: #d71920;
+  stroke-width: 6;
+  opacity: 0.55;
+}
+.lh__card-tab {
+  fill: var(--iba-red);
+}
+.lh__icon {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lh__label {
+  font-family: var(--bb-font);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  fill: #ffffff;
+}
+.lh__text {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.lh__float {
+  animation: lh-float ease-in-out infinite;
+}
+@keyframes lh-float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes lh-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+@keyframes lh-breathe {
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes lh-twinkle {
+  50% {
+    opacity: 0.9;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lh__float,
+  .lh__link,
+  .lh__beam,
+  .lh__book-glow,
+  .lh__mote {
+    animation: none;
+  }
+}
+@media (max-width: 860px) {
+  .lh {
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
+
+/* Red Club hero — the floating cap (RedClubHolo.jsx), on the shared stage */
+.rch__plate {
+  fill: #08080a;
+}
+.rch__plate-ring {
+  fill: #141417;
+  stroke: #ff4a50;
+  stroke-width: 2.5;
+  animation: lh-breathe 3s ease-in-out infinite;
+}
+.rch__cap {
+  animation: lh-float 6s ease-in-out infinite;
+}
+.rch__body {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1;
+}
+.rch__rim {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(255, 58, 64, 0.8));
+}
+.rch__board {
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 18px rgba(215, 25, 32, 0.7));
+}
+.rch__board-edge {
+  fill: #9e1016;
+}
+.rch__board-edge--dark {
+  fill: #5c080c;
+}
+.rch__sheen {
+  fill: #ffffff;
+  opacity: 0.22;
+}
+.rch__cord {
+  fill: none;
+  stroke: #e6e6ea;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rch__cap,
+  .rch__plate-ring {
+    animation: none;
+  }
+}
+
+/* ==================================================================
+   Library (Resources) hero — the catalogue grid under a magnifying glass
+   (LibraryHolo.jsx); its own look, distinct from the Red Club stage
+   ================================================================== */
+.lb__plane path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+.lb__halo {
+  animation: lh-breathe 4s ease-in-out infinite;
+}
+.lb__tile {
+  animation: lb-bob 5.5s ease-in-out infinite;
+}
+.lb__tile--found {
+  animation: lb-rise 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 16px rgba(255, 58, 64, 0.75));
+}
+.lb__side {
+  fill: #050506;
+}
+.lb__face {
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1;
+}
+.lb__tile--found .lb__face {
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+.lb__icon {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.75);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lb__tile--found .lb__icon {
+  stroke: #ffffff;
+  stroke-width: 1.6;
+}
+.lb__glass {
+  animation: lb-scan 9s ease-in-out infinite;
+}
+.lb__shadow {
+  fill: #000000;
+  opacity: 0.45;
+}
+.lb__handle-back {
+  stroke: #1a1a1d;
+  stroke-width: 22;
+  stroke-linecap: round;
+}
+.lb__handle {
+  stroke: var(--iba-red);
+  stroke-width: 16;
+  stroke-linecap: round;
+}
+.lb__lens-glow {
+  fill: none;
+  stroke: #ff3a40;
+  stroke-width: 10;
+  opacity: 0.6;
+}
+.lb__shine {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+@keyframes lb-bob {
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes lb-rise {
+  0%,
+  100% {
+    transform: translateY(-14px);
+  }
+  50% {
+    transform: translateY(-24px);
+  }
+}
+@keyframes lb-scan {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-10px, 6px);
+  }
+  66% {
+    transform: translate(8px, -6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lb__tile,
+  .lb__tile--found,
+  .lb__glass,
+  .lb__halo {
+    animation: none;
+  }
+  .lb__tile--found {
+    transform: translateY(-14px);
+  }
+}
+/* the lens sits over the found tile, which shows through the red glass */
+.lb .lb__glass {
+  transform-origin: 300px 294px;
+}
+@media (min-width: 861px) {
+  .pk-hero__aside .lb {
+    max-width: 620px;
+  }
+}
+
+/* ==================================================================
+   Web3 Corridor hero — the globe with the corridor routes
+   (CorridorHolo.jsx), on the same red beam as the other inner heroes
+   ================================================================== */
+.cx__halo {
+  animation: lh-breathe 5s ease-in-out infinite;
+}
+.cx__rim {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 1.2;
+}
+.cx__route {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.cx__route-glow {
+  fill: none;
+  stroke: #d71920;
+  stroke-width: 7;
+  opacity: 0.7;
+}
+/* light travelling along each route */
+.cx__run {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 92;
+  animation: cx-run 3.4s linear infinite;
+}
+.cx__dot {
+  fill: #ffffff;
+  stroke: var(--iba-red);
+  stroke-width: 2.5;
+}
+.cx__pin--hub .cx__dot {
+  fill: var(--iba-red);
+  stroke: #ffffff;
+}
+.cx__pulse {
+  fill: rgba(255, 58, 64, 0.35);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-pulse 2.6s ease-out infinite;
+}
+.cx__label {
+  font-family: var(--bb-font);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  fill: #ffffff;
+  paint-order: stroke;
+  stroke: rgba(5, 5, 5, 0.85);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.cx__pin--hub .cx__label {
+  font-size: 16px;
+}
+.cx__orbit {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1.2;
+}
+.cx__orbit--back {
+  stroke: rgba(255, 255, 255, 0.16);
+}
+.cx__orbit-path {
+  fill: none;
+  stroke: none;
+}
+.cx__orbit-dot {
+  fill: #ff4a50;
+  filter: drop-shadow(0 0 6px rgba(255, 58, 64, 0.95));
+}
+@keyframes cx-run {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+@keyframes cx-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx__run,
+  .cx__pulse,
+  .cx__halo {
+    animation: none;
+  }
+  .cx__run {
+    display: none;
+  }
+}
+
+/* ==================================================================
+   Web3 Corridor hero image: shown at its own size (the 1.4× enlargement
+   and the contrast filter blurred it), with motion laid over it: a float,
+   a breathing glow and a sheen
+   ================================================================== */
+.xp-img.xp-img--corridor {
+  max-width: 600px;
+  margin: 0 0 0 auto;
+}
+@media (min-width: 861px) {
+  .xp-img.xp-img--corridor {
+    transform: none;
+  }
+}
+.xp-img--corridor img {
+  filter: none;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 48%, #000 78%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 48%, #000 78%, transparent 100%);
+}
+.xpc {
+  position: relative;
+  animation: xpc-float 7s ease-in-out infinite;
+}
+.xpc img {
+  position: relative;
+  z-index: 1;
+}
+/* the glow behind the globe, breathing */
+.xpc__glow {
+  position: absolute;
+  z-index: 0;
+  left: 51%;
+  top: 46%;
+  width: 70%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(215, 25, 32, 0.55), rgba(215, 25, 32, 0) 70%);
+  animation: xpc-breathe 5s ease-in-out infinite;
+}
+/* a sheen sweeping across the globe, clipped to its circle */
+.xpc__sheen {
+  position: absolute;
+  z-index: 2;
+  left: 51%;
+  top: 46%;
+  width: 58%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.xpc__sheen::before {
+  content: '';
+  position: absolute;
+  inset: -20% auto -20% -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-18deg);
+  animation: xpc-sweep 6s ease-in-out infinite;
+}
+@keyframes xpc-float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes xpc-breathe {
+  50% {
+    opacity: 0.55;
+    scale: 1.06;
+  }
+}
+@keyframes xpc-sweep {
+  0%,
+  35% {
+    left: -60%;
+  }
+  70%,
+  100% {
+    left: 120%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xpc,
+  .xpc__glow,
+  .xpc__sheen::before {
+    animation: none;
+  }
+}
+@media (max-width: 860px) {
+  .xp-img.xp-img--corridor {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+/* ==================================================================
+   Web3 Corridor hero — the tunnel of gateways (CorridorTunnel.jsx)
+   ================================================================== */
+.ct__core {
+  animation: lh-breathe 4s ease-in-out infinite;
+}
+.ct__floor {
+  fill: none;
+  stroke-width: 1.2;
+}
+.ct__streak {
+  fill: none;
+  stroke: #ff6a6e;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 10 90;
+  animation: ct-streak 2.6s linear infinite;
+}
+/* each gate scales out of the far point, brightening as it nears, then
+   fades past the viewer */
+.ct__gate {
+  transform-box: view-box;
+  transform-origin: 300px 250px;
+  animation: ct-gate 6s linear infinite;
+}
+.ct__frame {
+  fill: none;
+  stroke: #ff4a50;
+  stroke-width: 2.4;
+  vector-effect: non-scaling-stroke;
+}
+.ct__frame-glow {
+  fill: none;
+  stroke: #d71920;
+  stroke-width: 9;
+  opacity: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+.ct__chip {
+  animation: lh-float 6s ease-in-out infinite;
+}
+.ct__chip-box {
+  fill: rgba(17, 17, 17, 0.88);
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 1;
+}
+.ct__chip-bar {
+  fill: var(--iba-red);
+}
+.ct__chip-text {
+  font-family: var(--bb-font);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  fill: #ffffff;
+}
+@keyframes ct-gate {
+  0% {
+    transform: scale(0.06);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+@keyframes ct-streak {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct__gate {
+    animation: none;
+    transform: scale(var(--s));
+    opacity: var(--s);
+  }
+  .ct__streak,
+  .ct__core,
+  .ct__chip {
+    animation: none;
+  }
+}
+
+/* ==================================================================
+   Web3 Corridor hero — the home page's Flagship Programme map (by
+   request), in light dots for the black hero; same pins and labels
+   ================================================================== */
+.cmap {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto 0;
+}
+.cmap .corr__map {
+  margin-right: 0;
+}
+.cmap .corr__world {
+  color: #ffffff;
+  opacity: 0.38;
+}
+.cmap .corr__pinDot {
+  width: 11px;
+  height: 11px;
+  background: var(--iba-red);
+  animation: cb-pin 2.4s ease-out infinite;
+}
+.cmap .corr__pin:nth-child(2n) .corr__pinDot {
+  animation-delay: -1.2s;
+}
+.cmap .corr__pinCard {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0;
+  background: var(--iba-black);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cmap .corr__pinDot {
+    animation: none;
+  }
+}
+@media (max-width: 860px) {
+  .cmap {
+    max-width: 520px;
+    margin-inline: auto;
+  }
+  .cmap .corr__pinCard {
+    font-size: 10px;
+  }
+}
+@media (max-width: 860px) {
+  .cmap .corr__pinCard {
+    padding: 0.15rem 0.35rem;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  .cmap .corr__pinDot {
+    width: 8px;
+    height: 8px;
+  }
+}
+/* the Web3 Corridor hero map, larger (by request): wider than its column,
+   running into the panel's right padding */
+@media (min-width: 861px) {
+  .pk-hero__aside .cmap {
+    width: 135%;
+    max-width: none;
+    margin: 0 -14% 0 -21%;
+  }
+  .cmap .corr__pinCard {
+    font-size: 13px;
+  }
+}
+@media (max-width: 860px) {
+  .pk-hero__aside .cmap {
+    width: 116%;
+    max-width: none;
+    margin: 0 -8%;
+  }
+}
+
+/* ==================================================================
+   The new IBA logo (public/iba-logo-2.webp): already cropped tight, on its
+   own dark ground, so the old crop-and-scale workarounds are switched off
+   ================================================================== */
+.nav__brand {
+  background: none;
+}
+.nav__brand img {
+  height: calc(var(--nav-h) - 18px);
+  width: auto;
+  transform: none;
+}
+.ft__logo,
+.ft__col .ft__logo {
+  width: auto;
+  height: auto;
+  padding: 0;
+  overflow: visible;
+  background: none;
+}
+.ft__logo img {
+  width: 120px;
+  height: auto;
+  max-width: none;
+  margin: 0;
+}
+/* the logo is square: the same box both ways */
+.nav__brand img {
+  width: calc(var(--nav-h) - 16px);
+  height: calc(var(--nav-h) - 16px);
+  aspect-ratio: 1;
+}
+.ft__logo img {
+  width: 120px;
+  height: 120px;
+  aspect-ratio: 1;
+}
+/* the logo, cut out of its background: transparent, its own proportions
+   (480 × 398), so it is sized by height and keeps its shape */
+.nav__brand img {
+  width: auto;
+  height: calc(var(--nav-h) - 18px);
+  aspect-ratio: auto;
+}
+.ft__logo img {
+  width: 140px;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+/* Home hero: the coins stay strictly below the button at every width
+   (Hero.jsx), so the space under the copy is deep enough for the arch to
+   rise into on desktop too */
+.hero {
+  --arch-space: clamp(240px, 22vw, 340px);
+}
+@media (max-width: 1100px) {
+  .hero {
+    --arch-space: clamp(220px, 28vw, 290px);
+  }
+}
+@media (max-width: 760px) {
+  .hero {
+    --arch-space: clamp(180px, 48vw, 230px);
+  }
+}
+
+/* ==================================================================
+   Home partners (EcosystemMarquee.jsx), after the client's reference: a
+   dark band lit red by sweeping arcs, the partners as frosted glass cards
+   ================================================================== */
+.eco__inner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0b0b0c;
+}
+.eco__swoosh {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.eco__arc {
+  fill: none;
+  stroke: #ff3a40;
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+.eco__arc--glow {
+  stroke: #d71920;
+  stroke-width: 18;
+  opacity: 0.75;
+}
+.eco__arc--wide {
+  stroke: #d71920;
+  stroke-width: 140;
+  opacity: 0.35;
+}
+.eco__arc--faint {
+  stroke: rgba(255, 90, 95, 0.4);
+  stroke-width: 1.5;
+}
+.eco__arc--floor {
+  stroke: #ff3a40;
+  stroke-width: 6;
+  opacity: 0.45;
+}
+/* type on the dark band */
+.eco .pg__eyebrow {
+  background: none;
+  color: #ff4a50;
+}
+.eco .eco__title {
+  color: #ffffff;
+}
+.eco .eco__lede {
+  color: rgba(255, 255, 255, 0.82);
+}
+/* the glass cards */
+.eco .eco__marquee .eco__chip {
+  gap: 14px;
+  margin-right: 16px;
+  padding: 12px 22px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 10px 28px -12px rgba(0, 0, 0, 0.7),
+    0 0 22px -8px rgba(255, 58, 64, 0.55);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.eco .eco__marquee .eco__chip:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.08));
+  transform: none;
+}
+.eco .eco__marquee :is(.eco__logo, .eco__mono) {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 10px;
+}
+.eco .eco__marquee .eco__name {
+  font-size: 17px;
+  color: #ffffff;
+}
+/* the button: an outline-light pill of glass */
+.eco .eco__cta {
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.eco .eco__cta:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-black);
+}
+/* the partner glass cards, tighter (by request): a smaller logo, less padding */
+.eco .eco__marquee .eco__chip {
+  gap: 10px;
+  margin-right: 12px;
+  padding: 8px 16px 8px 8px;
+  border-radius: 12px;
+}
+.eco .eco__marquee :is(.eco__logo, .eco__mono) {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+}
+.eco .eco__marquee .eco__name {
+  font-size: 15px;
+}
+
+/* ==================================================================
+   Home partners, closer to the reference: brighter red light, curved
+   sphere forms with lit rims, a reflective floor; cards with a shiny
+   red rim and a bright top edge
+   ================================================================== */
+.eco__arc--rim {
+  stroke: #ff5a60;
+  stroke-width: 2.5;
+  opacity: 0.85;
+}
+.eco__arc--glow {
+  stroke: #ff2a31;
+  stroke-width: 22;
+  opacity: 0.55;
+}
+.eco__arc--beam {
+  stroke: #ff3a40;
+  stroke-width: 160;
+  opacity: 0.45;
+}
+.eco__arc--streak {
+  stroke: #ff8a8e;
+  stroke-width: 10;
+  opacity: 0.7;
+}
+.eco__arc--floor {
+  stroke: #ff2a31;
+  stroke-width: 14;
+  opacity: 0.6;
+}
+.eco__arc--floor-line {
+  fill: none;
+  stroke: #ff9a9e;
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+/* the cards: red-tinted glass, a lit rim, a bright top highlight, a glow */
+.eco .eco__marquee .eco__chip {
+  border: 1px solid rgba(255, 130, 135, 0.75);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.06) 45%, rgba(150, 20, 28, 0.28) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px rgba(255, 70, 76, 0.25),
+    inset 0 -10px 18px -10px rgba(255, 60, 66, 0.35),
+    0 0 16px rgba(255, 40, 48, 0.45),
+    0 14px 28px -12px rgba(0, 0, 0, 0.75);
+}
+.eco .eco__marquee .eco__chip:hover {
+  border-color: rgba(255, 190, 192, 0.95);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(170, 25, 32, 0.35) 100%);
+}
+/* the button, the same shiny rim */
+.eco .eco__cta {
+  border: 1px solid rgba(255, 140, 145, 0.8);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.35));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 0 18px rgba(255, 40, 48, 0.45);
+}
+.eco .pg__eyebrow {
+  color: #ffb3b6;
+  -webkit-text-fill-color: #ffb3b6;
+}
+.eco__arc--beam {
+  opacity: 0.32;
+}
+
+/* ==================================================================
+   Home partners, matched to the reference's sampled values: a deep,
+   darker red; smoky dark-red glass cards with a thin rose rim, brightest
+   on the top edge; logos straight on the glass
+   ================================================================== */
+.eco__inner {
+  background: #060506;
+}
+.eco__arc--rim {
+  stroke: #ff4a50;
+  stroke-width: 2;
+  opacity: 0.9;
+}
+.eco__arc--glow {
+  stroke: #e0141c;
+  stroke-width: 26;
+  opacity: 0.45;
+}
+.eco__arc--beam {
+  stroke: #ff2a31;
+  stroke-width: 150;
+  opacity: 0.4;
+}
+.eco__arc--streak {
+  stroke: #ff5a60;
+  stroke-width: 12;
+  opacity: 0.75;
+}
+.eco__arc--streak-core {
+  fill: none;
+  stroke: #ffd0d2;
+  stroke-width: 2;
+  opacity: 0.85;
+}
+.eco__arc--trail {
+  fill: none;
+  stroke: #ff6a6e;
+  stroke-width: 1.6;
+  opacity: 0.85;
+}
+.eco__arc--trail-glow {
+  stroke: #e0141c;
+  stroke-width: 9;
+  opacity: 0.55;
+}
+.eco__arc--trail-faint {
+  opacity: 0.35;
+}
+.eco__arc--floor {
+  stroke: #c8141c;
+  stroke-width: 12;
+  opacity: 0.45;
+}
+.eco__arc--floor-line {
+  stroke: #ff8a8e;
+  opacity: 0.5;
+}
+.eco .pg__eyebrow {
+  color: #ff4a50;
+  -webkit-text-fill-color: #ff4a50;
+}
+
+/* the cards */
+.eco .eco__marquee .eco__chip {
+  border: 1px solid rgba(255, 185, 185, 0.42);
+  border-top-color: rgba(255, 215, 215, 0.78);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(110, 38, 38, 0.62) 0%, rgba(70, 18, 20, 0.58) 55%, rgba(48, 10, 12, 0.62) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 0 0 1px rgba(40, 6, 8, 0.55),
+    inset 0 1px 0 1px rgba(255, 255, 255, 0.16),
+    0 0 14px rgba(255, 50, 58, 0.22),
+    0 12px 24px -12px rgba(0, 0, 0, 0.8);
+}
+.eco .eco__marquee .eco__chip:hover {
+  border-color: rgba(255, 200, 200, 0.65);
+  border-top-color: rgba(255, 230, 230, 0.95);
+  background: linear-gradient(180deg, rgba(130, 44, 44, 0.66) 0%, rgba(80, 20, 22, 0.6) 55%, rgba(54, 12, 14, 0.64) 100%);
+}
+/* logos sit straight on the glass, no white tile */
+.eco .eco__marquee :is(.eco__logo, .eco__mono) {
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  object-fit: contain;
+}
+.eco .eco__marquee .eco__name {
+  font-weight: 400;
+  color: #ffffff;
+}
+
+/* the button: dark glass with the same rim */
+.eco .eco__cta {
+  border: 1px solid rgba(255, 185, 185, 0.5);
+  border-top-color: rgba(255, 215, 215, 0.8);
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(60, 14, 16, 0.55), rgba(10, 4, 5, 0.75));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 14px rgba(255, 50, 58, 0.22);
+}
+.eco__arc--gloss {
+  stroke: #ffffff;
+  stroke-width: 10;
+  opacity: 0.22;
+}
+.eco__pool {
+  fill: #ff2a31;
+  opacity: 0.35;
+}
+.eco__arc--rim {
+  stroke: #ff5a60;
+  stroke-width: 2.4;
+}
+/* a brighter, glossier rim all round, as on the reference cards */
+.eco .eco__marquee .eco__chip {
+  border-color: rgba(255, 195, 195, 0.6);
+  border-top-color: rgba(255, 228, 228, 0.92);
+  background: linear-gradient(180deg, rgba(140, 56, 56, 0.6) 0%, rgba(84, 22, 24, 0.56) 50%, rgba(52, 12, 14, 0.6) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(40, 6, 8, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -8px 14px -8px rgba(255, 70, 76, 0.3),
+    0 0 18px rgba(255, 50, 58, 0.3),
+    0 12px 24px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* the partner cards and button: a white gradient border — bright at the
+   top-left and bottom-right, fading through the sides — drawn as a masked
+   ring over the card so the glass inside is untouched */
+.eco .eco__marquee .eco__chip,
+.eco .eco__cta {
+  position: relative;
+  border-color: transparent;
+}
+.eco .eco__marquee .eco__chip::before,
+.eco .eco__cta::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.35) 22%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.35) 78%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.eco .eco__marquee .eco__chip:hover::before {
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.55) 25%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.55) 75%, #ffffff 100%);
+}
+
+/* ==================================================================
+   Partner cards: real glassmorphism. A masked parent blocks
+   backdrop-filter from seeing the backdrop, so the rows' edge-fade mask
+   is dropped; the rows run to the section's dark edges instead, and dark
+   overlays fade the cards out there.
+   ================================================================== */
+.eco .eco__rows {
+  position: relative;
+  width: calc(100% + 2 * var(--bb-gutter));
+  margin-inline: calc(-1 * var(--bb-gutter));
+}
+.eco .eco__marquee {
+  position: relative;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.eco .eco__marquee::before,
+.eco .eco__marquee::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 14%;
+  pointer-events: none;
+}
+.eco .eco__marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #060405, rgba(6, 4, 5, 0));
+}
+.eco .eco__marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, #0a0506, rgba(10, 5, 6, 0));
+}
+/* the glass: a light frosted tint over a strong blur of the red behind */
+.eco .eco__marquee .eco__chip {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.07) 45%, rgba(255, 255, 255, 0.03) 70%, rgba(255, 120, 125, 0.1) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6) brightness(1.08);
+  backdrop-filter: blur(18px) saturate(1.6) brightness(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 22px rgba(255, 255, 255, 0.05),
+    0 0 18px rgba(255, 50, 58, 0.25),
+    0 14px 28px -12px rgba(0, 0, 0, 0.7);
+}
+.eco .eco__marquee .eco__chip:hover {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(255, 255, 255, 0.06) 70%, rgba(255, 120, 125, 0.14) 100%);
+}
+.eco .eco__cta {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+}
+/* the edge fades run the full height of the section, blending into its
+   already-dark sides, rather than boxing each row */
+.eco .eco__rows {
+  width: 100%;
+  margin-inline: 0;
+}
+.eco .eco__marquee::before,
+.eco .eco__marquee::after {
+  content: none;
+}
+.eco__inner::before,
+.eco__inner::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  width: calc(var(--bb-gutter) + 6%);
+  pointer-events: none;
+}
+.eco__inner::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(5, 4, 5, 0.98) 0%, rgba(5, 4, 5, 0.9) 45%, rgba(5, 4, 5, 0));
+}
+.eco__inner::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(8, 4, 5, 0.95) 0%, rgba(8, 4, 5, 0.8) 45%, rgba(8, 4, 5, 0));
+}
+.eco__inner::before {
+  background: linear-gradient(90deg, rgba(5, 4, 5, 1) 0%, rgba(5, 4, 5, 1) 56%, rgba(5, 4, 5, 0));
+}
+.eco__inner::after {
+  background: linear-gradient(270deg, rgba(8, 4, 5, 1) 0%, rgba(8, 4, 5, 1) 56%, rgba(8, 4, 5, 0));
+}
+/* the rows run out to the panel's own edges (the panel clips them), with
+   only a soft fade there — no dark columns, no cut inside the panel */
+.eco .eco__marquee {
+  overflow: visible;
+}
+.eco__inner::before,
+.eco__inner::after {
+  width: 9%;
+}
+.eco__inner::before {
+  background: linear-gradient(90deg, rgba(5, 4, 5, 0.9), rgba(5, 4, 5, 0));
+}
+.eco__inner::after {
+  background: linear-gradient(270deg, rgba(8, 4, 5, 0.9), rgba(8, 4, 5, 0));
+}
+/* the panel's column is its own width: the overflowing rows must not
+   stretch it (they did, and centred the heading thousands of px away) */
+.eco__inner {
+  grid-template-columns: minmax(0, 1fr);
+}
+.eco .eco__rows,
+.eco .eco__marquee {
+  min-width: 0;
+}
+
+/* Global Presence: the supplied map artwork, full width, its white ground
+   fading into the band's */
+.pg__art {
+  width: 100%;
+  margin: 0;
+}
+.pg__art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, #000 82%, transparent), linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-composite: intersect;
+}
+/* the map's ground is now pure white, so no edge fade is needed */
+.pg__art img {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* ==================================================================
+   Card photos: the supplied branded artwork (public/images/card-*.jpg)
+   is already in the IBA palette — red on white glass — so it is shown as
+   is: no saturation boost, no red overlay, no hue shift
+   ================================================================== */
+.wd.wd.wd .wd__card .wd__photo,
+.wd.wd.wd .wd__card:hover .wd__photo,
+.wd.wd.wd .kb__card--ink .wd__photo,
+.wd.wd.wd .kb__card--ink:hover .wd__photo {
+  filter: none;
+}
+.wd.wd.wd .wd__card .wd__tint {
+  display: none;
+}
+/* the shield sits high in its picture: keep its top in frame */
+.wd__photo[src$='card-compliance.jpg'] {
+  object-position: 50% 15%;
+}
+
+/* Home partners: the supplied background image in place of the drawn
+   arcs (public/images/eco-bg.jpg) */
+.eco__inner {
+  background: #050304 url('/images/eco-bg.jpg') center / cover no-repeat;
+}
+.eco__swoosh {
+  display: none;
+}
+
+/* Flagship Programme: the supplied map artwork. Its off-white ground is
+   near the panel's own; the edges are faded so the two meet seamlessly */
+.cb__art {
+  width: min(58%, 760px);
+  pointer-events: none;
+}
+.cb__art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 82%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 82%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+@media (max-width: 860px) {
+  .cb__art {
+    width: 100%;
+    max-width: 560px;
+  }
+}
+@media (min-width: 861px) {
+  .cb__art {
+    width: min(54%, 760px);
+    right: max(16px, calc(var(--bb-gutter) - 60px));
+  }
+  .cb .cb__copy {
+    max-width: min(100%, 31rem);
+  }
+}
+
+
+/* ==================================================================
+   About — Message From the Founder, relaid (FounderLetter.jsx, .fl2):
+   a full-width introduction (portrait | quote, figures, regulators),
+   then the letter in one centred reading column
+   ================================================================== */
+.fl2 {
+  display: grid;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+.fl2__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.fl2__portrait {
+  position: relative;
+  margin: 0;
+}
+.fl2__portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 18%;
+  filter: saturate(1.08) contrast(1.04);
+}
+/* the red block behind the portrait, offset — the brand's one red block */
+.fl2__portrait::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 24px -24px -24px 24px;
+  background: var(--iba-red);
+}
+.fl2__badge {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: grid;
+  gap: 4px;
+  padding: 18px 22px;
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.fl2__badge strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 1rem + 0.6vw, 1.6rem);
+  letter-spacing: -0.01em;
+}
+.fl2__badge span {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.fl2__side {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+  align-content: center;
+}
+.fl2__lead {
+  position: relative;
+  margin: 0;
+  padding-top: 1.5rem;
+  border-top: 4px solid var(--iba-red);
+}
+.fl2__mark {
+  position: absolute;
+  top: 0.05em;
+  right: 0;
+  font-family: var(--bb-font);
+  font-size: clamp(5rem, 8vw, 7.5rem);
+  line-height: 1;
+  color: var(--iba-red);
+  opacity: 0.18;
+}
+.fl2__lead p {
+  margin: 0;
+  padding-right: clamp(2.5rem, 6vw, 5rem);
+  font-family: var(--bb-font);
+  font-size: clamp(1.7rem, 1.1rem + 1.7vw, 2.6rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.fl2__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 1.5rem 0;
+  border-block: 1px solid var(--bb-line);
+  list-style: none;
+}
+.fl2__facts li {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+}
+.fl2__facts li + li {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--bb-line);
+}
+.fl2__facts strong {
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 1.6rem + 1.6vw, 3.2rem);
+  line-height: 1;
+  color: var(--iba-red);
+}
+.fl2__facts span {
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--bb-ink-muted);
+}
+.fl2__regs {
+  display: grid;
+  gap: 0.75rem;
+}
+.fl2__label {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--bb-ink-muted);
+}
+.fl2__regs ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fl2__regs li {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface-alt);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--bb-ink);
+}
+
+/* the letter: one comfortable reading column */
+.fl2__letter {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+}
+.fl2__para {
+  display: grid;
+  gap: 1.25rem;
+}
+.fl2__para p {
+  margin: 0;
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
+  line-height: 1.8;
+  color: #3d3936;
+}
+/* the opening paragraph's first letter, large and red */
+.fl2__letter > .fl2__para:first-child > p:first-child::first-letter {
+  float: left;
+  margin: 0.06em 0.12em 0 0;
+  font-family: var(--bb-font);
+  font-size: 3.8em;
+  line-height: 0.82;
+  color: var(--iba-red);
+}
+/* the pulled line breaks out wider than the column */
+.fl2__para p.fl2__pull {
+  margin: 1.25rem calc(-1 * clamp(0rem, 6vw, 5rem));
+  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 4vw, 3rem);
+  background: var(--iba-black);
+  font-family: var(--bb-font);
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  border-left: 6px solid var(--iba-red);
+}
+.fl2__sign {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--bb-line);
+}
+.fl2__sign img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--iba-red);
+}
+.fl2__sign > span {
+  display: grid;
+  gap: 0.25rem;
+}
+.fl2__sig {
+  font-family: var(--bb-font);
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--bb-ink);
+}
+.fl2__sig-role {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+
+@media (max-width: 960px) {
+  .fl2__intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fl2__portrait {
+    max-width: 440px;
+    margin-right: 24px;
+  }
+  .fl2__para p.fl2__pull {
+    margin-inline: 0;
+  }
+}
+@media (max-width: 480px) {
+  .fl2__facts li + li {
+    padding-left: 0.75rem;
+  }
+  .fl2__facts span {
+    font-size: 12px;
+  }
+}
+.fl2__badge strong {
+  color: #ffffff;
+}
+/* the red block sits inside the figure's own stacking context, under the photo */
+.fl2__portrait {
+  isolation: isolate;
+}
+.fl2__portrait::before {
+  z-index: 0;
+}
+.fl2__portrait img,
+.fl2__badge {
+  position: relative;
+  z-index: 1;
+}
+.fl2__badge {
+  position: absolute;
+}
+@media (max-width: 960px) {
+  .fl2__portrait {
+    margin-bottom: 24px;
+  }
+  .fl2__portrait img {
+    aspect-ratio: 4 / 4.4;
+  }
+  .fl2__badge {
+    padding: 12px 16px;
+  }
+  .fl2__badge span {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+}
+/* the portrait, smaller (by request): a narrower column and a squarer crop */
+@media (min-width: 961px) {
+  .fl2__intro {
+    grid-template-columns: minmax(0, 3.6fr) minmax(0, 6fr);
+  }
+}
+.fl2__portrait img {
+  aspect-ratio: 1 / 1.05;
+}
+.fl2__portrait::before {
+  inset: 16px -16px -16px 16px;
+}
+@media (max-width: 960px) {
+  .fl2__portrait {
+    max-width: 320px;
+  }
+  .fl2__portrait img {
+    aspect-ratio: 1 / 1;
+  }
+}
+/* photo and text, one height (by request): the row stretches, the photo
+   fills its cell and the text runs from the photo's top edge to its bottom */
+@media (min-width: 961px) {
+  .fl2__intro {
+    align-items: stretch;
+  }
+  .fl2__portrait {
+    display: flex;
+  }
+  .fl2__portrait img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    min-height: 0;
+  }
+  .fl2__side {
+    align-content: space-between;
+    gap: 1.5rem;
+  }
+  .fl2__lead {
+    padding-top: 1.25rem;
+  }
+  .fl2__facts {
+    padding: 1.1rem 0;
+  }
+}
+
+/* ==================================================================
+   About — Vision & Mission: a five-line preview on each card and a
+   Read more button; the whole text in a popup (VisionMission.jsx)
+   ================================================================== */
+.vm .vm__preview {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  margin: 0;
+}
+.vm__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.6rem 0 0.2rem;
+  border: 0;
+  border-bottom: 1px solid var(--iba-red);
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+  cursor: pointer;
+}
+.vm__more span {
+  transition: transform 0.2s ease;
+}
+.vm__more:hover span,
+.vm__more:focus-visible span {
+  transform: translateX(4px);
+}
+.wd.vm .wd__body {
+  min-height: 0;
+}
+
+/* the popup */
+.vm__dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 0;
+  background: #ffffff;
+  color: var(--bb-ink);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+}
+.vm__dialog[open] {
+  display: flex;
+  animation: vm-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.vm__dialog::backdrop {
+  background: rgba(17, 17, 17, 0.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.vm__sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.vm__sheet-media {
+  flex: none;
+  height: clamp(140px, 22vh, 220px);
+  overflow: hidden;
+  background: var(--iba-black);
+}
+.vm__sheet-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.vm__sheet-body {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+.vm__sheet-body .wd__tag {
+  justify-self: start;
+}
+.vm__sheet-title {
+  margin: 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--bb-ink);
+}
+.vm__sheet .wd__text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #3d3936;
+}
+.vm__x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: #ffffff;
+  color: var(--bb-ink);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.vm__x svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.vm__x:hover,
+.vm__x:focus-visible {
+  background: var(--iba-red);
+  color: #ffffff;
+}
+@keyframes vm-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vm__dialog[open] {
+    animation: none;
+  }
+}
+/* centred: the global reset zeroes the margin a dialog centres with */
+.vm__dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+}
+/* on a hovered (red) card the Read more link turns white, like the text */
+.wd.vm .wd__card:hover .vm__more,
+.wd.vm .wd__card:focus-within .vm__more {
+  border-bottom-color: #ffffff;
+  color: #ffffff;
+}
+/* a taller header in the popup, so the whole picture shows */
+.vm__sheet-media {
+  height: auto;
+  aspect-ratio: 16 / 7;
+  max-height: 34vh;
+}
+
+/* Red Club — Wallet: the supplied artwork on the dark band, its edges
+   fading into the band's black */
+.rc-wallet {
+  margin: 0;
+  width: 100%;
+}
+.rc-wallet img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 78%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 78%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+@media (min-width: 861px) {
+  #rc-wallet .pk-split {
+    align-items: center;
+  }
+  .rc-wallet {
+    width: 118%;
+    margin: -6% -8% -6% -10%;
+  }
+}
+
+/* Red Club hero: the supplied artwork on a plain black ground (by request:
+   no red beam behind it), its edges fading into the black */
+#red-club .pk-hero__panel {
+  background: #000000;
+}
+#red-club .pk-hero__beam {
+  display: none;
+}
+.rc-hero-img {
+  margin: 0;
+  width: 100%;
+}
+.rc-hero-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 80%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 80%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+@media (min-width: 861px) {
+  .pk-hero__aside .rc-hero-img {
+    width: 120%;
+    margin: -4% -10% -4% -10%;
+  }
+}
+/* the Red Club hero image, larger (by request): runs out into the panel's
+   right padding and further behind the copy's edge */
+@media (min-width: 861px) {
+  .pk-hero__aside .rc-hero-img {
+    width: 150%;
+    margin: -12% -26% -12% -24%;
+  }
+  #red-club .pk-hero__copy {
+    position: relative;
+    z-index: 2;
+  }
+}
+@media (max-width: 860px) {
+  .pk-hero__aside .rc-hero-img {
+    width: 124%;
+    margin: -4% -12%;
+  }
+}
+/* keep breathing room at the right (by request): the image no longer runs
+   into the panel's right padding — it grows to the left instead */
+@media (min-width: 861px) {
+  .pk-hero__aside .rc-hero-img {
+    width: 130%;
+    margin: -10% 0 -10% -30%;
+  }
+}
+
+/* Web3 Corridor hero: the supplied map artwork on a plain black ground (by
+   request: no red beam), its edges fading into the black, with space kept
+   at the right */
+#corridor .pk-hero__panel {
+  background: #000000;
+}
+#corridor .pk-hero__beam {
+  display: none;
+}
+.cx-map {
+  margin: 0;
+  width: 100%;
+}
+.cx-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 84%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 84%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+@media (min-width: 861px) {
+  .pk-hero__aside .cx-map {
+    width: 140%;
+    margin: 0 0 0 -40%;
+  }
+}
+@media (max-width: 860px) {
+  .pk-hero__aside .cx-map {
+    width: 112%;
+    margin: 0 -6%;
+  }
+}
+/* the dropdown's link columns share the space beside the grey column, so a
+   third group (Web3 Corridor → Memberships) never runs under it */
+.nav .nav__panel .nav__panelGroups {
+  grid-auto-columns: minmax(0, 1fr);
+  justify-content: stretch;
+  padding-right: 28px;
+}
+/* …but no wider than before, so two-group menus stay compact on the left */
+.nav .nav__panel .nav__panelGroups {
+  grid-auto-columns: minmax(0, 290px);
+  justify-content: start;
+}
+
+/* Enquiry form — the document upload (FormBlocks FileField): the native
+   input sits invisibly over a styled row, so clicking anywhere on it and
+   keyboard focus both work as normal */
+.field--file > label:first-child {
+  display: block;
+}
+.file__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 6px 6px 6px 6px;
+  border: 1px dashed #8a8a8a;
+  background: #ffffff;
+}
+.file__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.file__btn {
+  flex: none;
+  padding: 8px 14px;
+  background: var(--iba-black);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  pointer-events: none;
+}
+.file__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: var(--bb-ink-muted);
+  pointer-events: none;
+}
+.file__row:hover {
+  border-color: var(--iba-red);
+}
+.file__row:focus-within {
+  border-style: solid;
+  border-color: var(--iba-red);
+  box-shadow: 0 0 0 2px var(--iba-red);
+}
+.field--file:has(.file__input[aria-invalid]) .file__row {
+  border-color: #b3261e;
+}
+/* the upload takes the form's own field look: the same small uppercase label
+   and the same box as the text inputs, in either the dark modal or the
+   light Connect page */
+.field--file > label:first-child {
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.file__row {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+}
+.file__btn {
+  background: var(--iba-red);
+}
+.file__name {
+  color: var(--ink-2);
+}
+/* the navbar buttons at the same type size as the menu links beside them
+   (by request): 15px where the bar first appears, 17px by 1440px */
+.nav__util .btn {
+  font-size: clamp(15px, calc(15px + (100vw - 1261px) * 0.0112), 17px);
+}
+/* narrower desktops: a little less padding in the buttons and between the
+   tabs, so the larger labels still fit on one line */
+@media (max-width: 1400px) {
+  .nav__util .btn {
+    padding-inline: 13px;
+  }
+  .nav__tabs {
+    column-gap: 3px;
+  }
+}
+/* the navbar buttons in their written case, not capitals (by request), so
+   they read like the menu links beside them */
+.nav__util .btn {
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+/* the Web3 Corridor pill at the navbar buttons' height (by request) */
+.nav__tabBtn[data-pill] {
+  box-sizing: border-box;
+  min-height: 48px;
+  padding-block: 0;
+  padding-inline: 16px;
+}
+
+/* What We Do, Knowledge Hub and Knowledge Base cards: the icon sits at the
+   top of the text, above the label and heading (by request), as a small
+   red square — no longer on the photo's corner */
+.wd .wd__card .wd__badge--inline,
+.wd .wd__card:hover .wd__badge--inline {
+  position: static;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  aspect-ratio: auto;
+  margin-bottom: 4px;
+  border: 0;
+  border-radius: 0;
+  background: var(--iba-red);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transform: none;
+  transition: background-color 0.2s ease;
+}
+.wd .wd__badge--inline .wd__icon {
+  width: 26px;
+  stroke: #ffffff;
+}
+/* on a hovered (red) card the square turns white, its icon red */
+.wd .wd__card:hover .wd__badge--inline {
+  background: #ffffff;
+}
+.wd .wd__card:hover .wd__badge--inline .wd__icon {
+  stroke: var(--iba-red);
+}
+/* on a hovered (red) card the square goes black with a white icon */
+.wd.wd .wd__card:hover .wd__badge--inline {
+  background: var(--iba-black);
+}
+.wd.wd .wd__card:hover .wd__badge--inline .wd__icon {
+  stroke: #ffffff;
+}
+/* the icon now sits between the label and the heading */
+.wd .wd__card .wd__badge--inline {
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+/* Section intros: no single word left alone on the last line (by request —
+   "network." was wrapping onto a line of its own). The hero intro is also
+   a little wider, so it sets in fewer, fuller lines. */
+.hero__lede {
+  max-width: 760px;
+}
+.hero__lede,
+.eco__lede,
+.pg__lede,
+.cb__lede,
+.ib__lede,
+.git__lede,
+.kb__lede,
+.wd__lede,
+.pk-head__lede,
+.pk-hero__lede p {
+  text-wrap: pretty;
+}
+/* Global Presence: a wider intro (by request), so it sets in fewer lines */
+.pg__head {
+  max-width: 68rem;
+}
+/* the partners intro, wider too (by request), so it sets on one line */
+.eco__head {
+  max-width: 68rem;
+}
+
+/* Open Knowledge Base: the heading block centred (by request), like the
+   Global Presence and Ecosystem intros */
+.kb__head {
+  justify-items: center;
+  max-width: 68rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.kb__head .kb__lede {
+  margin-inline: auto;
+}
+.kb__head .wd__eyebrow {
+  justify-self: center;
+  margin-inline: auto;
+}
+/* the Knowledge Base intro, wider (by request), like Global Presence's */
+.kb__head .kb__lede {
+  max-width: 68rem;
+}
+
+/* Home cards: the icon in the card's bottom-right corner (by request), clear
+   of the link or the date at the bottom left */
+.wd .wd__card {
+  position: relative;
+}
+.wd .wd__card .wd__badge--inline,
+.wd .wd__card:hover .wd__badge--inline {
+  position: absolute;
+  right: clamp(1.25rem, 2.2vw, 1.75rem);
+  bottom: clamp(1.25rem, 2.2vw, 1.75rem);
+  margin: 0;
+}
+/* the text keeps clear of the corner */
+.wd .wd__card:has(.wd__badge--inline) .wd__body {
+  padding-right: calc(clamp(1.25rem, 2.2vw, 1.75rem) + 60px);
+}
+/* flush in the corner (by request): no gap from the card's edges */
+.wd .wd__card .wd__badge--inline,
+.wd .wd__card:hover .wd__badge--inline {
+  right: 0;
+  bottom: 0;
+}
+.wd .wd__card:has(.wd__badge--inline) .wd__body {
+  padding-right: calc(clamp(1.25rem, 2.2vw, 1.75rem) + 40px);
+}
+
+/* Home counters: figure and label centred in each card (by request) */
+.cred__item {
+  justify-items: center;
+  text-align: center;
+}
+
+/* Get in Touch: the direct lines as icon buttons only (by request) —
+   white outline squares that fill white on hover */
+.git__lines.git__lines--icons {
+  gap: 12px;
+}
+.git__lines--icons a {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #ffffff;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.git__lines--icons a:hover,
+.git__lines--icons a:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--iba-red);
+}
+.git__lines--icons svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Homepage cards (What We Do, Knowledge Hub, Knowledge Base): on hover the
+   card turns IBA Black rather than red (by request); text stays white, the
+   label stays a white pill with red text, and the icon square — black on the
+   old red card — goes red so it still shows. About's Vision & Mission (.vm)
+   keep their red hover. */
+.wd:is(.wd--two, :not(.wd--two)):not(.vm) .wd__card:hover {
+  background: var(--iba-black);
+}
+.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline {
+  background: var(--iba-red);
+}
+.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline .wd__icon {
+  stroke: #ffffff;
+}
+
+/* What We Do and Knowledge Hub: the card link in IBA Black (by request);
+   on the black hover card it turns white as before */
+.wd.wd:is(.wd--duo, .wd--two:not(.kb):not(.vm)) .wd__card .wd__go {
+  border-color: var(--iba-black);
+  color: var(--iba-black);
+}
+.wd.wd:is(.wd--duo, .wd--two:not(.kb):not(.vm)) .wd__card:hover .wd__go {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* ==================================================================
+   Every button and call-to-action in its written case, not capitals (by
+   request) — "Explore Memberships", not "EXPLORE MEMBERSHIPS". One rule for
+   the site, so a new button picks it up too; !important because the caps
+   were set by many separate, more specific rules.
+   ================================================================== */
+:is(
+    .btn,
+    .pk-btn,
+    .bb-btn,
+    .ib__cta,
+    .wd__go,
+    .eco__cta,
+    .kb__cta,
+    .git__btn,
+    .fnd__go,
+    .vm__more,
+    .file__btn,
+    .pk-orgs__more a,
+    .drawer__foot .btn,
+    .enq__end .btn,
+    button[type='submit']
+  ) {
+  text-transform: none !important;
+  letter-spacing: 0.01em !important;
+}

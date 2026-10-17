@@ -141,7 +141,16 @@ export default function RedClub() {
         <Actions
           items={[
             { label: 'Join the Red Club', href: '#connect' },
-            { label: 'Ask IBA to Come to My Campus', href: '#connect', tone: 'ghost' },
+            {
+              label: 'Ask IBA to Come to My Campus',
+              href: '#connect',
+              tone: 'ghost',
+              /* The one ask on this page that is not a student's. A campus
+                 request is an institution writing in, so it overrides the
+                 page's own topic and routes to institutional partnerships
+                 rather than to student intake. */
+              topic: 'Red Club / Verifyble (institution)',
+            },
             {
               label: 'Browse the Free IBA Library',
               href: '/#library',

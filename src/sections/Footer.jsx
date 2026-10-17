@@ -1,28 +1,50 @@
 /**
- * Global footer — the same map as the nav, flattened.
+ * Global footer — a dark, rounded panel at the hero's width, so the page ends
+ * in the same frame the hero opens it in.
  *
- * Four columns restate the nav tabs with no dropdown to open, so every
- * destination on the site is visible at once. The fifth is the one thing the
- * bar has no room for: the Library entry point and the ways to reach IBA.
- *
- * Dark, because it closes the page — and the Closing band above it is dark, so
- * the two read as one ending rather than as a band and then a footer.
+ * The brand and its line on the left, then five link columns (FOOTER in
+ * nav.js), then one strip: the line, the year, the tagline, and the two
+ * policy links.
  */
 
-import { useState } from 'react'
 import { FOOTER, PENDING } from '../nav'
-/* the same three ways to reach IBA the closing band sets out above — one
-   definition of both the values and the marks */
-import { WAYS } from './Closing'
 import { scrollToId, scrollToTop } from '../lib/scroll'
 import { navigate, parseHref } from '../lib/router'
 
-export default function Footer() {
-  const [note, setNote] = useState(null)
+/* the contact icons, drawn on a 24 grid in currentColor */
+const ICONS = {
+  linkedin: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11Z"
+      />
+    </svg>
+  ),
+  email: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+    </svg>
+  ),
+  phone: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+}
 
+export default function Footer() {
+  /* internal links go through the router, so the page never reloads */
   const go = (e, href) => {
     const { path, hash, external } = parseHref(href)
-    if (external) return
+    if (external || href.startsWith('mailto:') || href.startsWith('tel:')) return
     e.preventDefault()
     if (path && path !== window.location.pathname) {
       navigate(href) // App scrolls once the new page has laid out
@@ -33,115 +55,65 @@ export default function Footer() {
     else scrollToTop()
   }
 
-  const subscribe = (e) => {
-    e.preventDefault()
-    /* TODO: POST to the list provider. Saying so beats a fake confirmation
-       the reader would then wait on. */
-    setNote('Newsletter signup is not wired up yet — email us to be added.')
-  }
-
   return (
-    <footer className="foot band band--dark">
-      <div className="wrap">
-        <div className="foot__cols">
+    <footer className="ft">
+      <div className="ft__panel">
+        <div className="ft__top">
+          <div className="ft__brand">
+            <a className="ft__logo" href="/" onClick={(e) => go(e, '/')} aria-label="India Blockchain Alliance — home">
+              <img src="/iba-logo-blocks.png" alt="" />
+            </a>
+            <p className="ft__triad">
+              Insights <i>|</i> Impact <i>|</i> Innovation
+            </p>
+          </div>
+
           {FOOTER.map((col) => (
-            <nav className="foot__col" key={col.title} aria-label={col.title}>
-              <h2 className="foot__h">{col.title}</h2>
+            <nav className="ft__col" key={col.title} aria-label={col.title}>
+              <h2 className="ft__h">{col.title}</h2>
               <ul>
-                {col.items.map((it) => (
+                {col.items.filter((it) => !it.icon).map((it) => (
                   <li key={it.label}>
-                    <a href={it.href} onClick={(e) => go(e, it.href)}>
+                    <a
+                      href={it.href}
+                      onClick={(e) => go(e, it.href)}
+                      {...(it.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                    >
                       {it.label}
-                      {it.note && <span className="foot__note">{it.note}</span>}
                     </a>
                   </li>
                 ))}
               </ul>
+              {/* the ways to reach IBA, as a row of icons */}
+              {col.items.some((it) => it.icon) && (
+                <ul className="ft__icons">
+                  {col.items.filter((it) => it.icon).map((it) => (
+                    <li key={it.label}>
+                      <a
+                        href={it.href}
+                        aria-label={it.label}
+                        title={it.label}
+                        {...(it.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                      >
+                        {ICONS[it.icon]}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </nav>
           ))}
-
-          <div className="foot__col foot__col--wide">
-            <h2 className="foot__h">Stay Connected</h2>
-            <ul>
-              <li>
-                <a href="/library" onClick={(e) => go(e, '/library')}>
-                  Library
-                  <span className="foot__note">Free Resources</span>
-                </a>
-              </li>
-            </ul>
-
-            <form className="foot__sub" onSubmit={subscribe}>
-              <label className="field field--inline">
-                <span>Newsletter</span>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@organisation.org"
-                  autoComplete="email"
-                  required
-                />
-              </label>
-              <button type="submit" aria-label="Subscribe to the newsletter">
-                <span aria-hidden="true">→</span>
-              </button>
-            </form>
-            {note && (
-              <p className="foot__status" role="status">
-                {note}
-              </p>
-            )}
-
-            {/* A row of marks rather than three lines of text. The values
-                themselves are not lost by being dropped here — the closing
-                band directly above sets all three out in full, with their
-                labels, on every page of the site. Each mark carries the value
-                it points at as its accessible name, so it is announced and it
-                is in the tooltip. */}
-            <ul className="foot__contact">
-              {WAYS.map((w) => (
-                <li key={w.k}>
-                  <a
-                    href={w.href}
-                    title={`${w.k} — ${w.v}`}
-                    aria-label={`${w.k}: ${w.v}`}
-                    {...(w.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
-                  >
-                    <svg
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      aria-hidden="true"
-                    >
-                      {w.icon}
-                    </svg>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <a
-              className="foot__signin"
-              href="/library/sign-in"
-              onClick={(e) => go(e, '/library/sign-in')}
-            >
-              Sign in for free access
-            </a>
-          </div>
         </div>
 
-        <div className="foot__strip">
-          <a className="foot__mark" href="/" onClick={(e) => go(e, '/')} aria-label="India Blockchain Alliance — top">
-            <img src="/iba-logo.webp" alt="" />
-          </a>
-          <span className="foot__triad">Insights <i>|</i> Impact <i>|</i> Innovation</span>
-          <span>© India Blockchain Alliance {new Date().getFullYear()}</span>
-          <a href={PENDING.privacy}>Privacy Policy</a>
-          <a href={PENDING.terms}>Terms</a>
-          <span className="foot__tag">Building a Nation. Block by Block.</span>
+        <div className="ft__strip">
+          <p>
+            © India Blockchain Alliance{' '}
+            {new Date().getFullYear()} · Connecting Economies. Block by Block.
+          </p>
+          <div className="ft__legal">
+            <a href={PENDING.privacy}>Privacy Policy</a>
+            <a href={PENDING.terms}>Terms</a>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,27 +1,25 @@
 import { useEffect, useLayoutEffect } from 'react'
-import Stage from './three/Stage'
 import Nav from './components/Nav'
+import Enquiry from './components/Enquiry'
 import ScrollTop from './components/ScrollTop'
 import Footer from './sections/Footer'
+import CtaBand from './components/CtaBand'
 import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/services/Services'
-import ConsultingStack from './pages/services/ConsultingStack'
-import Web3Advisory from './pages/services/Web3Advisory'
-import LegalAdvisory from './pages/services/LegalAdvisory'
-import RwaTokenization from './pages/services/RwaTokenization'
-import WhiteLabel from './pages/services/WhiteLabel'
-import SectorExpertise from './pages/services/SectorExpertise'
-import Education from './pages/education/Education'
-import RedClub from './pages/education/RedClub'
-import Verifyble from './pages/education/Verifyble'
-import Studio from './pages/studio/Studio'
-import Library from './pages/library/Library'
-import Join from './pages/library/Join'
-import SignIn from './pages/library/SignIn'
-import Reset from './pages/library/Reset'
-import Dashboard from './pages/library/Dashboard'
+/* The site's pages, as the content source sets them out. The earlier pages
+   (pages/services, pages/education, pages/studio, pages/library/*, and the
+   old About, Corridor and Connect) are no longer routed; their files are
+   kept so nothing is lost, and can be deleted once the new pages are signed off. */
+import About from './pages/site/About'
+import Expertise from './pages/site/Expertise'
+import Ecosystem from './pages/site/Ecosystem'
+import Initiatives from './pages/site/Initiatives'
+import Corridor from './pages/site/Corridor'
+import RedClub from './pages/site/RedClub'
+import Library from './pages/site/Library'
+import Connect from './pages/site/Connect'
 import { usePath } from './lib/router'
+import { applySeo } from './lib/seo'
+import { SEO } from './seo'
 import {
   initSmoothScroll,
   refreshOnLoad,
@@ -35,24 +33,28 @@ import {
 const PAGES = {
   '/': Home,
   '/about': About,
-  '/services': Services,
-  '/services/consulting-stack': ConsultingStack,
-  '/services/web3-advisory': Web3Advisory,
-  '/services/legal-advisory': LegalAdvisory,
-  '/services/rwa-tokenization': RwaTokenization,
-  '/services/white-label': WhiteLabel,
-  '/services/sector-expertise': SectorExpertise,
-  '/education': Education,
-  '/education/red-club': RedClub,
-  '/education/verifyble': Verifyble,
-  /* One page, not four: the Studio's four sections are anchors into it. */
-  '/studio': Studio,
+  '/expertise': Expertise,
+  '/ecosystem': Ecosystem,
+  '/initiatives': Initiatives,
+  '/corridor': Corridor,
+  '/red-club': RedClub,
   '/library': Library,
-  '/library/join': Join,
-  '/library/sign-in': SignIn,
-  '/library/reset': Reset,
-  /* ⚠ Not gated. There is no session to gate on — see lib/previewSession.js. */
-  '/library/dashboard': Dashboard,
+  '/connect': Connect,
+}
+
+/**
+ * Every route needs a row in the SEO table, or it inherits the fallback — which
+ * is the home page's title on a page that is not the home page.
+ *
+ * Checked in development only, and by comparing the two lists rather than by
+ * remembering: this file is where a route is added, so it is the only place the
+ * omission can be caught at the moment it is made.
+ */
+if (import.meta.env.DEV) {
+  const missing = Object.keys(PAGES).filter((p) => !SEO[p])
+  const orphan = Object.keys(SEO).filter((p) => !PAGES[p])
+  if (missing.length) console.warn('[seo] routes with no title:', missing)
+  if (orphan.length) console.warn('[seo] titles with no route:', orphan)
 }
 
 export default function App() {
@@ -63,6 +65,11 @@ export default function App() {
 
   useLayoutEffect(() => initSmoothScroll(), [])
   useEffect(() => refreshOnLoad(), [])
+
+  /* 9 — the title, description, canonical and share tags for this route. A
+     layout effect so the title has changed before the new page paints; a reader
+     watching the tab should not see the old page's name on the new one. */
+  useLayoutEffect(() => applySeo(path), [path])
 
   /* A pinned hero cannot be restored into halfway through — the browser would
      drop the reader into the middle of the sequence with no way to read it. */
@@ -135,7 +142,6 @@ export default function App() {
 
   return (
     <>
-      <Stage />
       <div className="page">
         {/* First in the DOM so it is first in tab order and first for a screen
             reader. Its band triggers still resolve: React commits the whole
@@ -148,11 +154,18 @@ export default function App() {
         <main key={path}>
           <Page />
         </main>
+        {/* the red closing band — home carries its own (GetInTouch) */}
+        {path !== '/' && <CtaBand />}
         <Footer />
         {/* Last in the DOM, so it is last in tab order — a reader tabbing the
             page reaches it after the footer rather than before the content. */}
         <ScrollTop />
       </div>
+      {/* Outside .page, because it covers it. Rendered once and opened from
+          everywhere: it owns the delegated listener that every [data-enquiry]
+          control on the site goes through, so it must not be inside the tree
+          App remounts on a route change. */}
+      <Enquiry />
     </>
   )
 }

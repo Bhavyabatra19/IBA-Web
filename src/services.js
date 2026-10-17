@@ -1,4 +1,4 @@
-/**
+﻿/**
  * The Services section, as content.
  *
  * Seven pages' worth of copy, held here rather than typed into seven
@@ -16,7 +16,14 @@
 /* 4.0 — the landing page                                             */
 /* ================================================================== */
 
-/** The bar under the headline. Rendered as a list, so it is a list. */
+/**
+ * The bar under the headline. Rendered as a list, so it is a list.
+ *
+ * Education is last and is the odd one out on purpose: the twelve before it are
+ * disciplines IBA practises for organisations, and it is the one thing on the
+ * bar delivered to people. It is on the bar because the section now carries the
+ * Red Club — see EXPERTISE_STUDENTS.
+ */
 export const SERVICE_SPECTRUM = [
   'Policy',
   'Compliance',
@@ -30,6 +37,7 @@ export const SERVICE_SPECTRUM = [
   'Launch Pads',
   'Accelerator',
   'Consortiums',
+  'Education',
 ]
 
 /**
@@ -47,7 +55,7 @@ export const SERVICES = [
     name: 'The Consulting Stack',
     short: 'Consulting',
     blurb:
-      'Insights, impact and innovation — from strategy assessment through to running the ecosystem you end up with.',
+      'Strategy, PoC, MVP, custom development, ecosystem management.',
   },
   {
     n: '02',
@@ -55,7 +63,7 @@ export const SERVICES = [
     name: 'Web3 Advisory',
     short: 'Web3',
     blurb:
-      'Separating the signal from the noise: tokenomics, tech stack, financial modeling and the offering itself.',
+      'Tokenomics, tech stack, financial modelling, launch and accelerator.',
   },
   {
     n: '03',
@@ -63,7 +71,7 @@ export const SERVICES = [
     name: 'Legal Advisory',
     short: 'Legal',
     blurb:
-      'Regulation as a design constraint. Token and NFT regulation, documentation, risk assessment and IP.',
+      'Token and NFT regulation, documentation, IP, risk.',
   },
   {
     n: '04',
@@ -71,14 +79,14 @@ export const SERVICES = [
     name: 'RWA Tokenization',
     short: 'RWA',
     blurb:
-      'Structuring, issuance and investor access across the full lifecycle — legal wrapper to post-listing governance.',
+      'Structuring, issuance, listing, governance.',
   },
   {
     n: '05',
     slug: 'white-label',
     name: 'White Label Solutions',
     short: 'White Label',
-    blurb: 'Deployable platforms. Your brand, our rails — remittance, exchange, issuance and IoT.',
+    blurb: 'Deployable platforms across payments, exchange, supply chain and IoT.',
   },
   {
     n: '06',
@@ -86,12 +94,36 @@ export const SERVICES = [
     name: 'Sector Expertise',
     short: 'Sectors',
     wide: true,
-    blurb: 'Specialized knowledge across 16+ high-impact verticals, from BFSI to e-governance.',
+    blurb: 'Deep capability across 16+ verticals.',
   },
 ]
 
 /** Every service page's path, in one place, so the nav and the router agree. */
 export const servicePath = (slug) => `/services/${slug}`
+
+/**
+ * Group B on the Expertise landing: what IBA delivers to people rather than to
+ * organisations.
+ *
+ * One entry, and the split is worth having for one: the six above are bought by
+ * a company and this is enrolled in by a person, and a reader is one or the
+ * other before they are anything else. A flat list of seven would make them
+ * choose between things that are not alternatives.
+ *
+ * It carries its own `href` because it is the one item here that does not live
+ * under /services — the Red Club has a page in the Education section, and
+ * pointing at it is better than a second copy of it.
+ */
+export const EXPERTISE_STUDENTS = [
+  {
+    n: '07',
+    slug: 'red-club',
+    href: '/education/red-club',
+    name: 'IBA Red Club',
+    blurb:
+      'Certified programmes, Blockchain and AI labs, live projects, internships and placements.',
+  },
+]
 
 /* ================================================================== */
 /* 4.1 — the consulting stack                                         */

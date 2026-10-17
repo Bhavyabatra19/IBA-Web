@@ -158,8 +158,16 @@ export function refreshOnLoad() {
 /* Shared DOM choreography                                             */
 /* ------------------------------------------------------------------ */
 
-/** The offscreen start for a clip-reveal, in percent of the line's own height. */
-export const CLIP_FROM = 108
+/**
+ * The offscreen start for a clip-reveal, in percent of the line's own height.
+ *
+ * 122, because the clip box is no longer exactly one line tall: .line carries
+ * 0.15em of bottom padding so descenders are not cut off, and the text has to
+ * start below that padding or its top edge shows through before the reveal.
+ * Mirrored by the `.js [data-clip] .line__inner` rule in the stylesheet — the
+ * two must stay equal, or the no-JS state and the first frame disagree.
+ */
+export const CLIP_FROM = 122
 
 /**
  * Where a section's reveal fires, for every section on the site.
@@ -232,63 +240,114 @@ export function whileOnScreen(el, on, off) {
   return () => io.disconnect()
 }
 
-/** Generic staggered rise for anything marked [data-rise]. */
+/* ------------------------------------------------------------------ */
+/* Reveal on arrival                                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Everything waiting to be revealed, each with what to do when it arrives:
+ * show(el, passed) — `passed` is true when the reader is already beyond it.
+ *
+ * Why not a ScrollTrigger per section (as this used to be): a trigger
+ * records a position when created, and on these pages that position was
+ * often stale (see whileOnScreen) — and the reveal was per SECTION, staggered
+ * over every item in it, so a long section stayed blank for seconds. Jumping
+ * to an anchor (/expertise#consulting-stack) made it worst: the sections
+ * skipped over, and the one landed on, sat empty until their triggers caught
+ * up.
+ *
+ * So each item is checked against live geometry, on scroll, resize and on a
+ * short settling loop after it is registered. An item reveals as soon as its
+ * top is on screen; anything the reader is already past is
+ * shown at once, with no animation, so there is never blank page above or
+ * below an anchor.
+ */
+const waiting = new Map()
+let sweepQueued = false
+let listening = false
+const REVEAL_AT = 1
+
+function sweep() {
+  sweepQueued = false
+  if (!waiting.size) return
+  const vh = window.innerHeight
+  const arrived = []
+  for (const [el, show] of waiting) {
+    if (!el.isConnected) {
+      waiting.delete(el)
+      continue
+    }
+    const r = el.getBoundingClientRect()
+    // on screen, or already scrolled past
+    if (r.top < vh * REVEAL_AT) {
+      waiting.delete(el)
+      arrived.push([el, show, r.bottom < 0])
+    }
+  }
+  /* the ones arriving together share one short stagger, capped so a batch
+     of many never takes long to finish */
+  const moving = arrived.filter((a) => !a[2])
+  const gap = moving.length > 1 ? Math.min(0.06, 0.3 / moving.length) : 0
+  let i = 0
+  for (const [el, show, passed] of arrived) show(el, passed, passed ? 0 : gap * i++)
+}
+
+function queueSweep() {
+  if (sweepQueued) return
+  sweepQueued = true
+  requestAnimationFrame(sweep)
+}
+
+function whenArrives(el, show) {
+  waiting.set(el, show)
+  if (!listening) {
+    listening = true
+    window.addEventListener('scroll', queueSweep, { passive: true })
+    window.addEventListener('resize', queueSweep, { passive: true })
+  }
+  queueSweep()
+  /* the page keeps settling after mount — fonts, images, an anchor jump that
+     lands a few frames later — so look again a few times over the first
+     second and a half, in case nothing scrolls */
+  for (const t of [120, 400, 900, 1500]) setTimeout(queueSweep, t)
+}
+
+/** Generic rise for anything marked [data-rise]. */
 export function revealRise(scope, opts = {}) {
   const items = gsap.utils.toArray('[data-rise]', scope)
   if (!items.length) return
-  return gsap.to(items, {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: EASE.rise,
-    stagger: opts.stagger ?? 0.1,
-    scrollTrigger: opts.trigger
-      ? { trigger: opts.trigger, start: opts.start ?? REVEAL_RISE, once: true }
-      : undefined,
-    delay: opts.delay ?? 0,
-  })
+  // no trigger: the caller wants it now (e.g. a hero on mount)
+  if (!opts.trigger) {
+    return gsap.to(items, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: EASE.rise,
+      stagger: opts.stagger ?? 0.06,
+      delay: opts.delay ?? 0,
+    })
+  }
+  items.forEach((el) =>
+    whenArrives(el, (node, passed, delay) => {
+      if (passed) gsap.set(node, { opacity: 1, y: 0 })
+      else gsap.to(node, { opacity: 1, y: 0, duration: 0.55, ease: EASE.rise, delay })
+    })
+  )
 }
 
 /**
- * Ticks every [data-count] in `scope` up to its target the first time it
- * enters view.
+ * The [data-count] figures (stat cards, impact numbers) — left as written.
  *
- * The element's markup already contains the final value, so a reader with no
- * JS, a failed hydrate, or reduced motion still sees the real number — the
- * animation only ever replaces a number that was already correct.
+ * They used to reset to 0 and count up as they came into view. Anyone who
+ * scrolled past quickly, or caught a screenshot, saw 0 — not the figure. So
+ * the number in the markup is the number on screen, always; the card around
+ * it still rises in with its section, which is the entrance.
  *
- *   <span data-count="800" data-suffix="+">800+</span>
+ *   <span data-count="300" data-suffix="+">300+</span>
  *
- * `immediate` counts on mount instead, with no trigger. For figures that are
- * already on screen when the page opens: a trigger at "top 88%" fires the
- * instant it is created, so the count would be over before the copy around it
- * has finished arriving — and it can never fire a second time on the way back.
+ * Kept as a function (and the data-count attributes kept in the markup) so the
+ * pages that call it need no change, and a count-up could return in one place.
  */
-export function buildCounters(scope, opts = {}) {
-  gsap.utils.toArray('[data-count]', scope).forEach((el) => {
-    const target = parseFloat(el.dataset.count)
-    if (!Number.isFinite(target)) return
-    const prefix = el.dataset.prefix || ''
-    const suffix = el.dataset.suffix || ''
-    const n = { v: 0 }
-
-    const render = () => {
-      el.textContent = prefix + Math.round(n.v).toLocaleString('en-IN') + suffix
-    }
-    render()
-
-    gsap.to(n, {
-      v: target,
-      duration: 1.9,
-      ease: 'power2.out',
-      snap: { v: 1 },
-      onUpdate: render,
-      delay: opts.immediate ? opts.delay ?? 0 : 0,
-      scrollTrigger: opts.immediate
-        ? undefined
-        : { trigger: el, start: 'top 88%', once: true },
-    })
-  })
-}
+export function buildCounters() {}
 
 export { gsap, ScrollTrigger }

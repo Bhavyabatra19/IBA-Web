@@ -1,6 +1,15 @@
 ﻿/**
  * matter.js
  * ------------------------------------------------------------------
+ * ⚠ NOT IN USE. The hero opens on the coin now, so the two states this file
+ * draws — the fragment and the shards — were removed from the storyboard and
+ * scene.js no longer imports it. Nothing here runs and nothing here ships.
+ *
+ * It is kept rather than deleted because this project is not under version
+ * control, so a deleted file is a lost one. To bring the opening back: restore
+ * the PRIMITIVE and FORMING states in rig.js, the rock and shards keys in
+ * makeRig, and the build / apply / dispose lines in scene.js.
+ *
  * The first two states: the raw fragment, and the pieces that carry it into
  * a disc.
  *

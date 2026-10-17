@@ -1,0 +1,13 @@
+# Netlify rules (copied into dist by Vite). Read top to bottom, first match
+# wins; real files are always served first.
+#
+# The build uses relative asset paths (vite.config.js base: './'), so a page
+# one level down (/services/web3-advisory, /library/sign-in) asks for
+# /services/assets/… . Those requests go to the real /assets/ folder, before
+# the catch-all below would answer them with index.html.
+/:a/assets/*       /assets/:splat    200
+/:a/:b/assets/*    /assets/:splat    200
+
+# Single-page app: every other path (/about, /expertise, a refresh, a shared
+# link) gets index.html, and the app's router shows the right page.
+/*    /index.html    200

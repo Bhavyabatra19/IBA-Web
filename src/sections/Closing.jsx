@@ -17,49 +17,8 @@
 
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealLines, revealRise, reducedMotion } from '../lib/scroll'
-import { CONTACT } from '../nav'
-
-/**
- * The three ways to reach IBA, drawn once.
- *
- * Exported because the footer sets the same three as a row of marks directly
- * under this band. The values already come from one place — nav.js — and the
- * glyphs now do too, so an icon that changes here changes there, and the two
- * cannot end up showing different marks for the same thing.
- */
-export const WAYS = [
-  {
-    k: 'Email',
-    v: CONTACT.email.label,
-    href: CONTACT.email.href,
-    icon: (
-      <>
-        <rect x="2" y="3.4" width="12" height="9.2" rx="2.2" />
-        <path d="M2.7 4.8L8 8.7l5.3-3.9" />
-      </>
-    ),
-  },
-  {
-    k: 'Phone',
-    v: CONTACT.phone.label,
-    href: CONTACT.phone.href,
-    icon: (
-      <path d="M5.4 2.4l1.7 2.7-1.3 1.3a8.2 8.2 0 003.8 3.8l1.3-1.3 2.7 1.7v2.1c0 .7-.6 1.2-1.2 1.1A12.2 12.2 0 012.3 3.6c-.1-.6.4-1.2 1.1-1.2z" />
-    ),
-  },
-  {
-    k: 'LinkedIn',
-    v: 'India Blockchain Alliance',
-    href: CONTACT.linkedin.href,
-    external: true,
-    icon: (
-      <>
-        <rect x="2" y="2" width="12" height="12" rx="2.6" />
-        <path d="M5.1 6.9v4.3M5.1 4.8v.2M7.9 11.2V6.9M7.9 8.7c0-1 .6-1.8 1.6-1.8s1.5.8 1.5 1.8v2.5" />
-      </>
-    ),
-  },
-]
+import { channels } from '../components/ReachOut'
+import { contextFor } from '../enquiry'
 
 /**
  * One cube, drawn once around the origin so every placement is a
@@ -87,7 +46,7 @@ const Cube = ({ x, y, s, r = 0, o = 1 }) => (
         strokeWidth="1.35"
         fill="none"
       />
-      <path d="M-30-15v30M30-15v30M0 0v30" stroke="#e0503f" strokeOpacity=".6" strokeWidth="1.1" />
+      <path d="M-30-15v30M30-15v30M0 0v30" stroke="#ff4a50" strokeOpacity=".6" strokeWidth="1.1" />
       {/* the underside catches bounce off the floor */}
       <path d="M-30 15 0 30 30 15" stroke="#ff5f49" strokeOpacity=".45" strokeWidth="1.1" fill="none" />
     </g>
@@ -140,9 +99,9 @@ const CUBE_FIELD = (
       </linearGradient>
       {/* a gradient, not a flat fill — a solid ellipse shows its own outline */}
       <radialGradient id="cbPool">
-        <stop stopColor="#c0392b" stopOpacity=".3" />
-        <stop offset=".5" stopColor="#c0392b" stopOpacity=".13" />
-        <stop offset="1" stopColor="#c0392b" stopOpacity="0" />
+        <stop stopColor="#d71920" stopOpacity=".3" />
+        <stop offset=".5" stopColor="#d71920" stopOpacity=".13" />
+        <stop offset="1" stopColor="#d71920" stopOpacity="0" />
       </radialGradient>
 
       <filter id="cbGlow" x="-70%" y="-70%" width="240%" height="240%">
@@ -185,7 +144,7 @@ const CUBE_FIELD = (
       [905, 214, 2.2, 0.5], [1012, 596, 1.6, 0.35], [1338, 268, 1.9, 0.4],
       [828, 690, 2.4, 0.3], [1244, 470, 1.5, 0.45], [1396, 612, 2, 0.28],
     ].map(([px, py, pr, po]) => (
-      <circle key={`${px}-${py}`} cx={px} cy={py} r={pr} fill="#e0503f" opacity={po} />
+      <circle key={`${px}-${py}`} cx={px} cy={py} r={pr} fill="#ff4a50" opacity={po} />
     ))}
 
     {CUBES.map((c) => (
@@ -196,6 +155,11 @@ const CUBE_FIELD = (
 
 export default function Closing() {
   const root = useRef(null)
+  /* The WhatsApp opener says what this page is about — see PAGE_CONTEXT. Read
+     at render rather than passed in: this band is rendered by ServicePage for
+     ten pages that would otherwise each have to tell it where they are. */
+  const { phrase } = contextFor(window.location.pathname)
+  const WAYS = channels(phrase)
 
   useLayoutEffect(() => {
     const el = root.current
@@ -215,7 +179,7 @@ export default function Closing() {
           auto margins would centre the column it is meant to hold left */}
       <div className="wrap close__grid">
         <div className="close__inner">
-          <p className="eyebrow" data-rise>Connect With Us</p>
+          <p className="eyebrow" data-rise>Get In Touch</p>
           {/* the column step: this head now shares its row with the cubes, and
               at the full step "Rewriting the Rules." wraps inside its own
               .line — which is the one thing the clip-reveal cannot take */}
@@ -233,9 +197,19 @@ export default function Closing() {
             </span>
           </h2>
           <p className="close__sub" data-rise>
-            Building a Nation. Block by Block.
+            Connecting Economies. Block by Block. Talk to our team about membership,
+            corridors, consulting or the Red Club.
           </p>
-          <a className="btn btn--primary" href={CONTACT.email.href} data-rise>
+          {/* 8.1: the closing-band CTA is one of the enquiry triggers. The href
+              is the real page, so it still works with no JS and still opens in a
+              tab on a modified click; the delegated listener in Enquiry.jsx
+              intercepts the plain one and opens the overlay instead — which is
+              the point, since the reader is at the foot of a page they were
+              reading and should not lose it. */}
+          {/* Black, not primary. Section 06: the Black button is "the button on
+              the red CTA band" — a red button on a red ground is not a button,
+              and the book's CTA diagram shows exactly this pairing. */}
+          <a className="btn btn--black" href="/connect" data-enquiry="" data-rise>
             Connect With Us
           </a>
           {/* the field under the copy, holding the column's foot down against

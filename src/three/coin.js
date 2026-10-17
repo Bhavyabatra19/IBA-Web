@@ -172,34 +172,69 @@ function buildNotches(side, count) {
 /* ------------------------------------------------------------------ */
 
 /**
- * Brushed silver / gunmetal. Anisotropy is what separates this from generic
- * chrome: it stretches the highlight along the brushing direction, which is
- * the cue that says "machined" rather than "polished ball".
+ * Polished silver, struck rather than brushed.
+ *
+ * It was noticeably rougher and more anisotropic — a machined, satin finish.
+ * The look being matched is a minted coin: a mirror that carries a hard-edged
+ * highlight and drops to near-black where it turns away from the light. Three
+ * numbers do that, and they all pull the same way:
+ *
+ *   · roughness down. Roughness is the width of a reflected highlight — at 0.29
+ *     every source arrives as a soft patch, which is satin. Lower is a streak
+ *     with an edge.
+ *   · anisotropy down, not off. It stretches the highlight along the brushing
+ *     direction, which is what said "machined"; at 0.28 the trace of it is left
+ *     as a grain in the field without smearing the specular into a band.
+ *   · envMapIntensity up. A metal has no colour of its own — it is entirely the
+ *     room, scaled by this. Up is what turns the brighter env into a brighter
+ *     coin rather than the same coin in a brighter room.
+ *
+ * ⚠ THIS WAS OVERSHOT TWICE, so the numbers here are further toward matte than
+ * the ones the file started with, not a midpoint between them.
+ *
+ * The chase went: 0.29 → 0.16 (wet chrome) → 0.23 (still too shiny) → 0.36.
+ * The lesson is that roughness is not a brightness dial and treating it as one
+ * is what made the first two corrections too small. It is the WIDTH of every
+ * reflected source, and width is the whole difference between a glint and a
+ * sheen: at 0.16 a strip light lands as a hard line no matter how far its
+ * intensity is turned down, because the shape is wrong rather than the level.
+ * Widening it is what makes the object read as struck metal.
+ *
+ * Anisotropy went back up with it. It smears the highlight along one direction,
+ * which breaks a specular up rather than concentrating it — on a coin that is
+ * the machining, and it is working against the shine rather than with it.
  */
 export function buildCoinMaterial({ quality = 'high' } = {}) {
   return new THREE.MeshPhysicalMaterial({
-    color: 0xc4cad1,
+    color: 0xc2c8cf,
     metalness: 1.0,
-    // a touch rougher than a mirror: it blurs the environment, which pulls in
-    // light from a wider solid angle and stops the faces going dead black
-    roughness: 0.29,
-    anisotropy: quality === 'low' ? 0 : 0.7,
+    roughness: 0.36,
+    anisotropy: quality === 'low' ? 0 : 0.75,
     anisotropyRotation: 0,
-    clearcoat: 0.2,
-    clearcoatRoughness: 0.3,
-    envMapIntensity: 1.35,
+    /* A clearcoat is a second, sharper reflection laid over the first — which
+       is exactly the thing being removed. Kept only as a trace, so the surface
+       still has a sealed quality rather than looking like raw cast metal. */
+    clearcoat: 0.1,
+    clearcoatRoughness: 0.45,
+    envMapIntensity: 1.1,
     transparent: true,
     opacity: 1,
   })
 }
 
-/** Slightly darker, rougher gunmetal for the interior cut face. */
+/**
+ * The interior cut face. Still darker and rougher than the struck surface —
+ * the inside of a coin is not polished — but lifted with it, or the halves
+ * would open onto a hole rather than onto metal.
+ */
 export function buildCutMaterial() {
   return new THREE.MeshPhysicalMaterial({
-    color: 0x8f979f,
+    color: 0x8d959d,
     metalness: 1.0,
-    roughness: 0.44,
-    envMapIntensity: 1.1,
+    /* still rougher than the struck face above — the inside of a coin is not
+       polished — but the gap between the two narrowed as the face came down */
+    roughness: 0.48,
+    envMapIntensity: 1,
     transparent: true,
     opacity: 1,
   })
@@ -210,7 +245,15 @@ export function buildCutMaterial() {
 /* ------------------------------------------------------------------ */
 
 /**
- * @returns {{ group: THREE.Group, halves: THREE.Group[], materials: THREE.Material[] }}
+ * `caps` are the two flat cut faces, handed back so the scene can hide them
+ * while the coin is shut. See the note beside their meshes below.
+ *
+ * @returns {{
+ *   group: THREE.Group,
+ *   halves: THREE.Group[],
+ *   caps: THREE.Mesh[],
+ *   materials: THREE.Material[]
+ * }}
  */
 export function buildCoin({ quality = 'high' } = {}) {
   const segments = quality === 'low' ? 48 : 128
@@ -221,13 +264,32 @@ export function buildCoin({ quality = 'high' } = {}) {
 
   const group = new THREE.Group()
   const halves = []
+  const caps = []
 
   for (const side of [1, -1]) {
     const half = new THREE.Group()
     const { shell, cap } = buildHalfGeometries(side, segments)
 
     half.add(new THREE.Mesh(shell, faceMat))
-    half.add(new THREE.Mesh(cap, cutMat))
+
+    /**
+     * The cut face.
+     *
+     * Its normal points along ±X and the camera sits on the Z axis, so while
+     * the coin is shut this plane is exactly edge-on — it should project to
+     * nothing at all. What it actually produced was a dark hairline straight
+     * down the middle of the coin: two coplanar faces at x = 0, both in a
+     * material deliberately darker than the coin, z-fighting for the same
+     * fragments and picked up by anti-aliasing.
+     *
+     * There is nothing to see here until the halves part, so the scene shows
+     * these two meshes only once they have — see coin.caps in scene.js.
+     */
+    const capMesh = new THREE.Mesh(cap, cutMat)
+    capMesh.visible = false
+    half.add(capMesh)
+    caps.push(capMesh)
+
     for (const g of buildRings(side)) half.add(new THREE.Mesh(g, faceMat))
 
     const notches = buildNotches(side, notchCount)
@@ -239,5 +301,5 @@ export function buildCoin({ quality = 'high' } = {}) {
     halves.push(half)
   }
 
-  return { group, halves, materials: [faceMat, cutMat] }
+  return { group, halves, caps, materials: [faceMat, cutMat] }
 }

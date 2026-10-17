@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 7.1 — The IBA Library, before sign-in.
  *
  * The public face of the gate. Its whole job is to be worth making an account
@@ -10,9 +10,17 @@
  * of being asked to sign up again.
  */
 
-import { ServicePage, Band, Head, Chips, Actions, Cross } from '../../sections/service/ServiceBlocks'
+import { ServicePage, Band, Head, Actions, Cross } from '../../sections/service/ServiceBlocks'
+import Formats from '../../sections/library/Formats'
 import { usePreview } from '../../lib/previewSession'
-import { INTERESTS, LIB_BODY, LIB_SHELF_NAMES, LIB_TRUST, LIB_VALUE } from '../../library'
+import { MEMBER_LOGIN } from '../../nav'
+import {
+  LIB_BODY,
+  LIB_FORMATS,
+  LIB_FORMAT_CARDS,
+  LIB_TOPICS,
+  LIB_TRUST,
+} from '../../library'
 
 export default function Library() {
   const preview = usePreview()
@@ -20,14 +28,14 @@ export default function Library() {
   return (
     <ServicePage
       art="library"
-      eyebrow="Library"
+      eyebrow="Resources"
       lines={[
         'The IBA',
         <>
           <em>Library</em>
         </>,
       ]}
-      sub="Free resources from the alliance. No paywall."
+      sub="Free resources from the alliance. Searchable, categorised, no paywall — free with IBA membership."
       intro={LIB_BODY}
       /* The shelves as a rail, so what is behind the gate is visible before the
          account is asked for — the whole argument of this page. The button
@@ -40,29 +48,34 @@ export default function Library() {
         cta: preview
           ? { label: 'Open the Library', href: '/library/dashboard' }
           : { label: 'Create free account', href: '/library/join' },
-        label: 'Six shelves, one free account',
-        rail: LIB_SHELF_NAMES.map((name, i) => ({ n: `0${i + 1}`, name })),
-        spectrum: INTERESTS,
+        label: 'Seven formats, nine topics, one free account',
+        rail: LIB_FORMATS.map((name, i) => ({ n: `0${i + 1}`, name })),
+        spectrum: LIB_TOPICS,
       }}
     >
       <Band tone="light" id="inside">
         <Head
           eyebrow="What's Inside"
           lines={[
-            'Six Shelves,',
+            'Every Format,',
             <>
               One Free <em>Account</em>
             </>,
           ]}
+          note="Seven kinds of thing, all of it free once you have an account. Nothing here is a teaser for something paid."
         />
-        <Chips items={LIB_VALUE} />
+        <Formats items={LIB_FORMAT_CARDS} />
         <Actions
           items={
             preview
               ? [{ label: 'Open the Library', href: '/library/dashboard' }]
               : [
                   { label: 'Create Free Account', href: '/library/join' },
-                  { label: 'Already a member? Sign in', href: '/library/sign-in', tone: 'ghost' },
+                  {
+                    label: `Already a member? ${MEMBER_LOGIN}`,
+                    href: '/library/sign-in',
+                    tone: 'ghost',
+                  },
                 ]
           }
         />

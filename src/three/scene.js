@@ -23,10 +23,24 @@ import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js'
 import { buildEnvironment } from './env'
 import { buildCoin } from './coin'
 import { buildCore } from './core'
-import { buildRock, buildShards } from './matter'
+import { buildShaft } from './shaft'
+/* ./matter — the fragment and the shards — is no longer imported. The sequence
+   opens on the coin now, so nothing ever showed them; built anyway they were a
+   subdivided icosahedron and a 190-instance mesh uploaded to the GPU on the
+   page that can least afford it. The file is kept, and rig.js says why. */
 
 /** How far each half travels at split = 1. Wide enough to clear the lattice. */
 const SPLIT_D = 1.05
+/**
+ * The split at which the cut faces start being drawn.
+ *
+ * At 0.004 the halves are 0.008 units apart — under a pixel at this camera
+ * distance, so the faces appear on the frame the gap between them becomes
+ * something a reader could see through. Below it they are hidden, because a
+ * plane seen exactly edge-on is not a picture of anything: see the note on the
+ * cap meshes in coin.js.
+ */
+const CUT_IN = 0.004
 /** The lattice inside the closed coin has to fit through the aperture. */
 const CORE_MIN = 0.2
 
@@ -45,20 +59,26 @@ export function createScene(canvas, { quality = 'high' } = {}) {
 
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100)
-  camera.position.set(0, 0, 7.4)
+  /* where the rig opens, so the one frame that may be drawn before apply() has
+     run is the frame the sequence starts on rather than the old one */
+  camera.position.set(0, 0, 4.9)
 
   scene.environment = buildEnvironment(renderer, { quality })
 
   /* ---------------- objects ---------------- */
-  const rock = buildRock({ quality })
-  const shards = buildShards(rock, { quality })
   const coin = buildCoin({ quality })
   const core = buildCore({ quality })
+  const shaft = buildShaft()
 
   /* one parent so camera-independent tilt/spin applies to the whole assembly */
   const rig = new THREE.Group()
-  rig.add(rock.mesh, shards.mesh, coin.group, core.group)
+  rig.add(coin.group, core.group)
   scene.add(rig)
+
+  /* Added to the scene and NOT to the rig: the rig is the object, and the shaft
+     is the room the object is in. Inside the rig it would tilt and spin with
+     the coin, which is the one thing a fixed light must not do. */
+  scene.add(shaft.mesh)
 
   core.setOpacity(0)
   core.setEnergy(0)
@@ -101,24 +121,7 @@ export function createScene(canvas, { quality = 'high' } = {}) {
       camera.updateProjectionMatrix()
     }
     camera.lookAt(0, R.cam.y * 0.2, 0)
-
-    /* fragment */
-    rock.material.opacity = R.rock.op
-    rock.mesh.visible = R.rock.op > 0.002
-    if (rock.mesh.visible) {
-      rock.mesh.rotation.set(R.rock.spin * 0.7, R.rock.spin * 1.5, R.rock.spin * 0.25)
-      // it swells slightly as it comes apart, which sells the break better than
-      // simply fading would
-      rock.mesh.scale.setScalar(R.rock.scale * (1 + R.rock.shatter * 0.22))
-    }
-
-    /* shards */
-    shards.material.opacity = R.shards.op
-    shards.mesh.visible = R.shards.op > 0.002
-    if (shards.mesh.visible) {
-      shards.setForm(R.shards.form)
-      shards.mesh.rotation.set(0, 0, R.shards.spin * 0.9)
-    }
+    shaft.mesh.visible = !R.hideShaft
 
     /* coin */
     const coinVisible = R.coin.op > 0.002
@@ -128,6 +131,10 @@ export function createScene(canvas, { quality = 'high' } = {}) {
       const d = R.coin.split * SPLIT_D
       coin.halves[0].position.x = d
       coin.halves[1].position.x = -d
+      /* the interior, shown only once there is a gap to see it through */
+      const cut = R.coin.split > CUT_IN
+      coin.caps[0].visible = cut
+      coin.caps[1].visible = cut
       // the halves ease apart along a slight arc rather than sliding on a rail
       coin.halves[0].rotation.z = -R.coin.split * 0.06
       coin.halves[1].rotation.z = R.coin.split * 0.06
@@ -172,8 +179,7 @@ export function createScene(canvas, { quality = 'high' } = {}) {
   }
 
   function dispose() {
-    rock.dispose()
-    shards.dispose()
+    shaft.dispose()
     core.dispose()
     for (const mat of coin.materials) mat.dispose()
     coin.group.traverse((o) => o.geometry && o.geometry.dispose())

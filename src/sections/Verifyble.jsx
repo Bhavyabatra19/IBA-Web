@@ -100,12 +100,12 @@ const ART = (
   <svg viewBox="0 0 440 440" fill="none" aria-hidden="true">
     <defs>
       <radialGradient id="vfyGlow" cx="0.5" cy="0.5" r="0.5">
-        <stop stopColor="#c0392b" stopOpacity=".38" />
-        <stop offset=".55" stopColor="#c0392b" stopOpacity=".1" />
-        <stop offset="1" stopColor="#c0392b" stopOpacity="0" />
+        <stop stopColor="#d71920" stopOpacity=".38" />
+        <stop offset=".55" stopColor="#d71920" stopOpacity=".1" />
+        <stop offset="1" stopColor="#d71920" stopOpacity="0" />
       </radialGradient>
       <linearGradient id="vfyCore" x1="178" y1="178" x2="262" y2="262" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#e0503f" />
+        <stop stopColor="#ff4a50" />
         <stop offset="1" stopColor="#a02e22" />
       </linearGradient>
     </defs>
@@ -146,12 +146,12 @@ const ART = (
             height="48"
             rx="15"
             fill="#0a0a0a"
-            stroke="#c0392b"
+            stroke="#d71920"
             strokeOpacity=".42"
           />
           <g
             transform={`translate(${n.x - 10} ${n.y - 10}) scale(1.25)`}
-            stroke="#e0503f"
+            stroke="#ff4a50"
             strokeWidth="1.3"
             strokeLinecap="round"
             strokeLinejoin="round"

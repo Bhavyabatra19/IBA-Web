@@ -269,6 +269,10 @@ function PageHero({ eyebrow, lines, sub, spectrum, intro, back, backLabel, art }
  *   contents list — and one without is a label, which is what the Services rail
  *   is, since every name on it already has a tile of its own below.
  * @param {string} [p.label]  the console's own caption, above the rail
+ * @param {React.ReactNode} [p.visual] a drawing under the copy, in place of the
+ *   console. The Web3 Corridor page's subject is a map, and a map is not a list
+ *   of six things — so that one page hands its own object in rather than being
+ *   made to express itself as a rail it does not have.
  */
 export function ShowcaseHero({
   eyebrow,
@@ -280,6 +284,7 @@ export function ShowcaseHero({
   cta,
   rail = [],
   label,
+  visual,
 }) {
   const railRef = useRef(null);
 
@@ -354,6 +359,12 @@ export function ShowcaseHero({
           </Go>
         )}
       </div>
+
+      {visual && (
+        <div className="svc__showVisual" data-rise>
+          {visual}
+        </div>
+      )}
 
       {(rail.length > 0 || spectrum) && (
         <div className="svc__console" data-rise>
@@ -444,7 +455,14 @@ export function Index({ items, label }) {
        what stops the last arrow from staying enabled at the end. */
     const measure = () => {
       const max = el.scrollWidth - el.clientWidth;
-      setAt({ start: el.scrollLeft <= 2, end: el.scrollLeft >= max - 2 });
+      setAt({
+        start: el.scrollLeft <= 2,
+        end: el.scrollLeft >= max - 2,
+        /* Nothing to scroll at all — a group short enough to fit, or a wide
+           enough window. Two arrows that are both dead is worse than no arrows:
+           it offers a control and then refuses it. */
+        still: max <= 2,
+      });
     };
     measure();
     el.addEventListener("scroll", measure, { passive: true });
@@ -474,7 +492,7 @@ export function Index({ items, label }) {
 
   return (
     <div className="idx">
-      <div className="idx__nav" data-rise>
+      <div className="idx__nav" data-rise hidden={at.still}>
         <button
           type="button"
           onClick={() => page(-1)}
@@ -1013,17 +1031,39 @@ export function Pairs({ items }) {
 }
 
 /**
+ * Whether a call to action is an ENQUIRY or a destination.
+ *
+ * `#connect` is the site's long-standing way of saying "the ask" — every page
+ * ends on its own connect band, and that is what these pointed at. Section 8.1
+ * makes the ask an overlay instead, so that one href now means "open the
+ * enquiry form" and everything else still means what it says.
+ *
+ * The href is left on the element rather than stripped: it is a real anchor to
+ * a real band, so it survives with no JS and a middle-click still opens it. The
+ * delegated listener in Enquiry.jsx takes only the plain left click.
+ *
+ * `topic` is optional and, when given, wins over the page's own default — which
+ * Verifyble needs, since that page carries both an institution ask and a
+ * student one and PAGE_CONTEXT can only answer for the page.
+ */
+const asEnquiry = (href, topic) =>
+  href === "#connect" || href === "/connect"
+    ? { "data-enquiry": topic ?? "" }
+    : null;
+
+/**
  * The closing call to action every service page ends on.
  *
  * The default is a bare hash, not `/#connect`: every page these appear on now
- * ends on its own connect band, so the ask is a scroll to the foot of the page
- * the reader is already on rather than a trip to the home page's copy of it.
+ * ends on its own connect band, so with no JS the ask is a scroll to the foot of
+ * the page the reader is already on rather than a trip to the home page's copy
+ * of it. With JS it opens the enquiry overlay — see asEnquiry.
  */
-export function Cta({ label, href = "#connect", note }) {
+export function Cta({ label, href = "#connect", note, topic }) {
   return (
     <div className="svc__cta" data-rise>
       {note && <p className="svc__ctaNote">{note}</p>}
-      <Go className="btn btn--primary" href={href}>
+      <Go className="btn btn--primary" href={href} {...asEnquiry(href, topic)}>
         {label}
       </Go>
     </div>
@@ -1050,6 +1090,7 @@ export function Actions({ items, note }) {
             key={a.label}
             className={`btn ${a.tone === "ghost" ? "btn--ghost" : "btn--primary"}`}
             href={a.href}
+            {...asEnquiry(a.href, a.topic)}
           >
             {a.label}
           </Go>
@@ -1059,7 +1100,7 @@ export function Actions({ items, note }) {
         <ul className="svc__ctaAside">
           {links.map((a) => (
             <li key={a.label}>
-              <Go className="arrow arrow--red" href={a.href}>
+              <Go className="arrow arrow--red" href={a.href} {...asEnquiry(a.href, a.topic)}>
                 {a.label} <span aria-hidden="true">→</span>
               </Go>
               {a.note && <span className="svc__ctaAsideNote">{a.note}</span>}

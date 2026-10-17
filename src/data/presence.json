@@ -1,0 +1,56 @@
+{
+  "total": 14,
+  "regionOrder": ["South Asia", "Middle East", "Europe", "Africa", "Americas"],
+  "countries": [
+    {
+      "country": "India",
+      "iso2": "IN",
+      "region": "South Asia",
+      "lat": 22,
+      "lon": 79,
+      "presence": ["Headquarters", "Members", "Advisors", "Active Programme", "Corridor"],
+      "count": null,
+      "note": "Headquarters"
+    },
+    {
+      "country": "United Arab Emirates",
+      "iso2": "AE",
+      "region": "Middle East",
+      "lat": 24,
+      "lon": 54,
+      "presence": ["Members", "Advisors", "Active Programme", "Corridor"],
+      "count": null,
+      "note": null
+    },
+    {
+      "country": "Spain",
+      "iso2": "ES",
+      "region": "Europe",
+      "lat": 40,
+      "lon": -4,
+      "presence": ["Members", "Corridor"],
+      "count": null,
+      "note": null
+    },
+    {
+      "country": "Zambia",
+      "iso2": "ZM",
+      "region": "Africa",
+      "lat": -13,
+      "lon": 27,
+      "presence": ["Affiliate", "Active Programme"],
+      "count": null,
+      "note": "Indo Zambia Blockchain Alliance"
+    },
+    {
+      "country": "LATAM markets",
+      "iso2": null,
+      "region": "Americas",
+      "lat": -10,
+      "lon": -55,
+      "presence": ["Corridor"],
+      "count": null,
+      "note": "Via the India–Spain–LATAM corridor"
+    }
+  ]
+}

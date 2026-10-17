@@ -19,7 +19,61 @@
 /* ================================================================== */
 
 export const STUDIO_INTRO =
-  'IBA does not work alone. The Studio is where our alliance becomes visible: 75+ ecosystem partners, 70+ global affiliations, government mandates across ministries, and cross-border Web3 corridors connecting economies.'
+  'IBA does not work alone. The ecosystem is where the alliance becomes visible: four flagship initiatives built and run by IBA, 75+ partner organisations, 70+ global affiliations, government mandates across ministries, and the councils and communities where the standards get argued out.'
+
+/**
+ * The five ways into the ecosystem, as the landing page's cards.
+ *
+ * Every href points at the section that carries that content TODAY, which is
+ * the convention nav.js sets out: three of the five are anchors on this page,
+ * and two are on pages that already hold the material rather than second copies
+ * of it made to keep the reader inside one section.
+ *
+ * ⚠ Products is the weak one. What the brief describes — the tokenized asset
+ * platforms and the white-label deployments — is real, but it is written up
+ * under Expertise, and the partner products meant to sit beside it are marked
+ * "confirm which partners have approved being named". Until that list exists,
+ * this card points at the track record rather than at a page that would be
+ * three quarters placeholder.
+ */
+export const ECOSYSTEM_ENTRIES = [
+  {
+    n: '01',
+    slug: 'initiatives',
+    href: '/about#initiatives',
+    name: 'Initiatives',
+    blurb: 'Tech4Good, Green Chain Protocol, Verifyble and the IBA Red Club.',
+  },
+  {
+    n: '02',
+    slug: 'products',
+    href: '/services/rwa-tokenization#track-record',
+    name: 'Products',
+    blurb: 'Partner platforms and tokenized asset issuance running on IBA infrastructure.',
+  },
+  {
+    n: '03',
+    slug: 'organisations',
+    href: '/studio#clients',
+    name: 'Organisations',
+    blurb: 'Clients, government partners and affiliations across 20+ jurisdictions.',
+  },
+  {
+    n: '04',
+    slug: 'communities',
+    href: '/studio#councils',
+    name: 'Communities & Councils',
+    blurb:
+      'The Emerging Technology Council, Blockchain Governance Council and Tech Zero.',
+  },
+  {
+    n: '05',
+    slug: 'people',
+    href: '/about#the-team',
+    name: 'People',
+    blurb: '800+ members, 100+ advisors, mentors and contributors.',
+  },
+]
 
 /** The four sections, as the jump list under the intro. */
 export const STUDIO_SECTIONS = [
@@ -204,27 +258,38 @@ export const GOV_CLIENTS = [
 /* 6.3 — web3 corridors                                               */
 /* ================================================================== */
 
-export const CORRIDOR_INTRO =
+/**
+ * The corridors as the Ecosystem page mentions them in passing.
+ *
+ * Named TEASER because that is now all it is: section 7 gives the corridors a
+ * page of their own, and corridor.js carries the definition the flagship page
+ * opens with. This line stays short on purpose — the Ecosystem page's job is to
+ * say the corridors exist and hand the reader to the page about them.
+ */
+export const CORRIDOR_TEASER =
   "Web3 Corridors are IBA's structured cross-border programs — connecting regulators, capital, talent and projects between markets that should be trading with each other and mostly aren't yet."
 
 /**
  * Both corridors are named and neither is written yet.
  *
  * The brief supplies "description placeholder — objectives, partners, current
- * programs" for both, so that is exactly what ships: the corridor, the three
- * headings its copy will fill, and each marked outstanding. Inventing plausible
- * objectives for a real cross-border program is how a website ends up making a
- * commitment nobody at IBA agreed to.
+ * programmes, how to participate" for both, so that is exactly what ships: the
+ * corridor, the four headings its copy will fill, and each marked outstanding.
+ * Inventing plausible objectives for a real cross-border program is how a
+ * website ends up making a commitment nobody at IBA agreed to.
+ *
+ * Read by two pages — the Ecosystem band and the flagship corridor page — from
+ * here rather than written out on both.
  */
 export const CORRIDORS = [
   {
     name: 'India – UAE',
-    fields: ['Objectives', 'Partners', 'Current programs'],
+    fields: ['Objectives', 'Partners', 'Current programs', 'How to participate'],
     pending: true,
   },
   {
     name: 'India – Spain – LATAM',
-    fields: ['Objectives', 'Partners', 'Current programs'],
+    fields: ['Objectives', 'Partners', 'Current programs', 'How to participate'],
     pending: true,
   },
 ]

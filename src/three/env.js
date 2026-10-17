@@ -1,4 +1,4 @@
-/**
+﻿/**
  * env.js
  * ------------------------------------------------------------------
  * The lighting rig, built as geometry and pre-filtered with PMREM instead of
@@ -21,7 +21,7 @@
 
 import * as THREE from 'three'
 
-const RED = 0xc0392b // IBA brand red
+const RED = 0xd71920 // IBA brand red
 
 function lightformer(scene, { w, h, color, intensity, pos, lookAt = [0, 0, 0] }) {
   const m = new THREE.Mesh(
@@ -39,19 +39,42 @@ function lightformer(scene, { w, h, color, intensity, pos, lookAt = [0, 0, 0] })
 export function buildEnvironment(renderer, { quality = 'high' } = {}) {
   const envScene = new THREE.Scene()
 
-  /* the surround: a cool, dim studio rather than a void */
-  envScene.background = new THREE.Color(0x14161a)
+  /**
+   * The surround, and it went DARKER.
+   *
+   * Polished metal is a contrast instrument: what makes a coin read as chrome
+   * rather than as grey plastic is having near-white and near-black on the same
+   * face at the same time. The bright half comes from the sources below, and it
+   * only reads as bright if there is something genuinely dark for it to sit
+   * against — so the dome came down from 0x14161a and the key went up.
+   *
+   * Still not pure black, for the reason at the top of this file: a mirror in a
+   * black room is a black object.
+   */
+  envScene.background = new THREE.Color(0x161a1f)
 
-  /* key — upper left front, the dominant highlight on every face */
-  lightformer(envScene, { w: 7, h: 7, color: 0xffffff, intensity: 4.2, pos: [-6, 5, 6] })
+  /* key — upper left front, the dominant highlight on every face. Broad and no
+     longer hot: a large soft source is what LIGHTS a face; a small bright one
+     puts a spot on it. */
+  lightformer(envScene, { w: 11, h: 11, color: 0xffffff, intensity: 3.2, pos: [-6, 5, 6] })
 
-  /* strip — the long specular that crosses the face as the object turns.
-     Single most important light for reading metal in motion. */
-  lightformer(envScene, { w: 22, h: 1.0, color: 0xf2f6ff, intensity: 7.0, pos: [-1.5, 6.5, 3.2] })
-  lightformer(envScene, { w: 17, h: 0.7, color: 0xffffff, intensity: 3.2, pos: [3, -6, 3] })
+  /**
+   * The strip — the long specular that crosses the face as the object turns,
+   * and the single most important light for reading metal in motion.
+   *
+   * ⚠ This was run to 11 with the height at 0.62 and the coin went to liquid
+   * chrome. Width and intensity trade against each other: a narrow strip at
+   * high intensity is a laser line, a broad one at moderate intensity is a
+   * sheen that still travels. It is the second of those now — wider than it has
+   * ever been here and dimmer than the file started with, because the brief on
+   * this object is machined metal, not a mirror.
+   */
+  lightformer(envScene, { w: 24, h: 1.8, color: 0xf2f6ff, intensity: 4.4, pos: [-1.5, 6.5, 3.2] })
+  lightformer(envScene, { w: 18, h: 1.2, color: 0xffffff, intensity: 2.2, pos: [3, -6, 3] })
 
-  /* fill — keeps the shadow side off black without flattening the form */
-  lightformer(envScene, { w: 9, h: 9, color: 0xdfe7f2, intensity: 1.0, pos: [7, -2, 5] })
+  /* fill — keeps the shadow side off black without flattening the form. Up as
+     the key comes down, so the object loses glare rather than losing light. */
+  lightformer(envScene, { w: 12, h: 12, color: 0xdfe7f2, intensity: 1.6, pos: [7, -2, 5] })
 
   /* crimson rim, behind and above. Everything that makes this object belong to
      this brand rather than to a generic metal render comes from these two. */

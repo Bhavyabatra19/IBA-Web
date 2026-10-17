@@ -1,4 +1,4 @@
-/**
+﻿/**
  * heroArt.js
  * ------------------------------------------------------------------
  * One object per inner-page hero. Three of them, built from the same parts.
@@ -32,7 +32,7 @@ const rand = (i, salt = 0) => {
 
 const SILVER = 0xb9c0c8
 const DARK = 0x121215
-const RED = 0xc0392b
+const RED = 0xd71920
 
 /** The metal every hero object is cut from, so the three read as one family. */
 function silverMaterial(extra = {}) {

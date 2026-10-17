@@ -6,25 +6,48 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <meta name="theme-color" content="#0A0A0A" />
+    <meta name="theme-color" content="#111111" />
+
+    <!--
+      The HOME page's title and description, and the ones every URL on the site
+      is served with before JavaScript runs. src/lib/seo.js rewrites them per
+      route from the table in src/seo.js.
+
+      ⚠ These two must stay identical to SEO['/'] in src/seo.js. They are the
+      only metadata a scraper that does not run JavaScript will ever see — which
+      is most crawlers other than Google, and every social link preview.
+      Prerendering the routes, or injecting the tags at the edge, is what
+      finally makes the other nineteen pages share correctly.
+    -->
+    <title>
+      India Blockchain Alliance | Blockchain Advisory, Consulting &amp; Education
+    </title>
     <meta
       name="description"
-      content="India Blockchain Alliance is a premier global blockchain community and advocacy group advancing the development, adoption and implementation of blockchain across sectors — with a sharp focus on Asia and the MENA region."
+      content="IBA is a premier global blockchain community and advocacy group advancing blockchain adoption across Asia and MENA. 800+ members, 14 countries, $5B+ tokenized assets."
     />
-    <title>
-      India Blockchain Alliance — Decentralizing the Future, Together
-    </title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="India Blockchain Alliance" />
+    <meta
+      property="og:title"
+      content="India Blockchain Alliance | Blockchain Advisory, Consulting &amp; Education"
+    />
+    <meta
+      property="og:description"
+      content="IBA is a premier global blockchain community and advocacy group advancing blockchain adoption across Asia and MENA. 800+ members, 14 countries, $5B+ tokenized assets."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/x-icon" href="./iba-logo.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="./assets/index-Dqw-u4wC.js"></script>
+    <script type="module" crossorigin src="./assets/index-DcSEI2Tf.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/vendor-cxkclgJA.js">
     <link rel="modulepreload" crossorigin href="./assets/gsap-CeOnkTHW.js">
-    <link rel="stylesheet" crossorigin href="./assets/style-CyvewvSB.css">
+    <link rel="stylesheet" crossorigin href="./assets/style-BZ2Ny8KI.css">
   </head>
   <body>
     <div id="root"></div>

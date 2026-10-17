@@ -1,4 +1,4 @@
-/**
+﻿/**
  * core.js
  * ------------------------------------------------------------------
  * The lattice inside the coin.
@@ -104,7 +104,7 @@ export function buildCore({ quality = 'high' } = {}) {
     metalness: 1,
     roughness: 0.34,
     envMapIntensity: 1.2,
-    emissive: new THREE.Color(0xc0392b),
+    emissive: new THREE.Color(0xd71920),
     emissiveIntensity: 0,
     transparent: true,
     opacity: 1,
@@ -186,7 +186,7 @@ export function buildCore({ quality = 'high' } = {}) {
     color: 0x2a0509,
     metalness: 0.6,
     roughness: 0.35,
-    emissive: new THREE.Color(0xe0503f),
+    emissive: new THREE.Color(0xff4a50),
     emissiveIntensity: 0,
     transparent: true,
     opacity: 1,
@@ -195,7 +195,7 @@ export function buildCore({ quality = 'high' } = {}) {
   group.add(centre)
 
   const cageMat = new THREE.MeshBasicMaterial({
-    color: 0xe0503f,
+    color: 0xff4a50,
     wireframe: true,
     transparent: true,
     opacity: 0,
@@ -208,7 +208,7 @@ export function buildCore({ quality = 'high' } = {}) {
 
   /* interpolated between a cool silver lattice and a live crimson one */
   const cool = new THREE.Color(0x6f7780)
-  const hot = new THREE.Color(0xc0392b)
+  const hot = new THREE.Color(0xd71920)
   const tmp = new THREE.Color()
 
   /* Opacity and energy both drive the same handful of material properties, so
