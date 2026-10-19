@@ -38,7 +38,7 @@ const DOORS = [
   {
     key: 'students',
     tag: 'Learners',
-    title: 'For Learners',
+    title: 'Global Exposure',
     body: 'Join the IBA Red Club: programmes, projects, placements.',
     cta: 'Join Red Club',
     href: '/red-club',
