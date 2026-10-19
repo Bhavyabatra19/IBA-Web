@@ -55,7 +55,6 @@ export const IMPACT_SECONDARY = [
 export const TOKENOMICS = [
   { project: 'DNA Real Estate', sector: 'Real Estate', usdM: 473 },
   { project: 'KULA', sector: 'Impact Projects', usdM: 110 },
-  { project: 'nGRND', sector: 'Gold', usdM: 160 },
   { project: 'FRE8', sector: 'Logistics', usdM: 250 },
 ]
 

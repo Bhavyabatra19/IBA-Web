@@ -7,7 +7,7 @@
  *
  * Three decisions worth keeping:
  *
- * 1. ONE hue for every segment. The four projects are nominal — a ramp that ran
+ * 1. ONE hue for every segment. The projects are nominal — a ramp that ran
  *    darker as the arcs got longer would encode length twice and say nothing the
  *    arc has not already said. The 4px surface gaps separate the segments and the
  *    labels identify them, so colour is free to mean nothing at all.
@@ -70,7 +70,7 @@ export default function Tokenomics() {
       if (reducedMotion()) return
       /* The arcs draw on. Tweening the dash pattern rather than an offset keeps
          each segment growing from its own start angle instead of the whole ring
-         sweeping — four projects arriving, not one dial filling. */
+         sweeping — the projects arriving, not one dial filling. */
       gsap.from('.tk__seg', {
         attr: { 'stroke-dasharray': `0 ${C}` },
         duration: 1.15,
