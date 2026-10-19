@@ -9,8 +9,8 @@
  *
  * Each card keeps its own anchor (#vision, #mission) for the nav links.
  * Photos: Unsplash, under the Unsplash License, saved in public/images:
- *   ab-vision.jpg   supplied artwork: a red eye ringed by orbits and cubes
- *   ab-mission.jpg  supplied artwork: a red target with a dart, ringed by orbits
+ *   ab-vision.jpg   supplied artwork: a team around a holographic globe
+ *   ab-mission.jpg  supplied artwork: a team around tokenized assets in glass cubes
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
