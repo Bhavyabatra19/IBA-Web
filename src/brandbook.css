@@ -5283,8 +5283,7 @@ main {
 
 /* ==================================================================
    About — Message From the Founder, relaid (FounderLetter.jsx, .fl2):
-   a full-width introduction (portrait | quote, figures, regulators),
-   then the letter in one centred reading column
+   one row — portrait | quote, a short note and LinkedIn
    ================================================================== */
 .fl2 {
   display: grid;
@@ -5370,131 +5369,17 @@ main {
   letter-spacing: -0.02em;
   color: var(--bb-ink);
 }
-.fl2__facts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  padding: 1.5rem 0;
-  border-block: 1px solid var(--bb-line);
-  list-style: none;
-}
-.fl2__facts li {
-  display: grid;
-  gap: 0.35rem;
-  align-content: start;
-}
-.fl2__facts li + li {
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--bb-line);
-}
-.fl2__facts strong {
-  font-family: var(--bb-font);
-  font-weight: 400;
-  font-size: clamp(2.2rem, 1.6rem + 1.6vw, 3.2rem);
-  line-height: 1;
-  color: var(--iba-red);
-}
-.fl2__facts span {
-  font-size: 14px;
-  line-height: 1.35;
-  color: var(--bb-ink-muted);
-}
-.fl2__regs {
-  display: grid;
-  gap: 0.75rem;
-}
-.fl2__label {
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--bb-ink-muted);
-}
-.fl2__regs ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.fl2__regs li {
-  padding: 0.45rem 0.9rem;
-  border: 1px solid var(--bb-line);
-  background: var(--bb-surface-alt);
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  color: var(--bb-ink);
-}
 
 /* the letter: one comfortable reading column */
-.fl2__letter {
+.fl2__note {
   display: grid;
-  gap: 1.25rem;
-  width: 100%;
-  max-width: 46rem;
-  margin-inline: auto;
+  gap: 0.9rem;
 }
-.fl2__para {
-  display: grid;
-  gap: 1.25rem;
-}
-.fl2__para p {
+.fl2__note p {
   margin: 0;
-  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.15rem);
-  line-height: 1.8;
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  line-height: 1.7;
   color: #3d3936;
-}
-/* the opening paragraph's first letter, large and red */
-.fl2__letter > .fl2__para:first-child > p:first-child::first-letter {
-  float: left;
-  margin: 0.06em 0.12em 0 0;
-  font-family: var(--bb-font);
-  font-size: 3.8em;
-  line-height: 0.82;
-  color: var(--iba-red);
-}
-/* the pulled line breaks out wider than the column */
-.fl2__para p.fl2__pull {
-  margin: 1.25rem calc(-1 * clamp(0rem, 6vw, 5rem));
-  padding: clamp(1.5rem, 3vw, 2.25rem) clamp(1.5rem, 4vw, 3rem);
-  background: var(--iba-black);
-  font-family: var(--bb-font);
-  font-size: clamp(1.4rem, 1rem + 1.4vw, 2.1rem);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: #ffffff;
-  border-left: 6px solid var(--iba-red);
-}
-.fl2__sign {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--bb-line);
-}
-.fl2__sign img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--iba-red);
-}
-.fl2__sign > span {
-  display: grid;
-  gap: 0.25rem;
-}
-.fl2__sig {
-  font-family: var(--bb-font);
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-  color: var(--bb-ink);
-}
-.fl2__sig-role {
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--iba-red);
 }
 
 @media (max-width: 960px) {
@@ -5504,17 +5389,6 @@ main {
   .fl2__portrait {
     max-width: 440px;
     margin-right: 24px;
-  }
-  .fl2__para p.fl2__pull {
-    margin-inline: 0;
-  }
-}
-@media (max-width: 480px) {
-  .fl2__facts li + li {
-    padding-left: 0.75rem;
-  }
-  .fl2__facts span {
-    font-size: 12px;
   }
 }
 .fl2__badge strong {
@@ -5592,8 +5466,8 @@ main {
   .fl2__lead {
     padding-top: 1.25rem;
   }
-  .fl2__facts {
-    padding: 1.1rem 0;
+  .fl2__lead p {
+    font-size: clamp(1.5rem, 0.9rem + 1.2vw, 2.1rem);
   }
 }
 
