@@ -78,9 +78,14 @@ export const NAV = [
       {
         title: 'Purpose',
         items: [
-          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
           { label: 'Mission', icon: 'target', desc: 'The infrastructure of trust, and how we build it.', href: '/about#mission' },
-          { label: 'Impact', icon: 'chart', desc: 'The figures behind the alliance.', href: '/about#impact' },
+          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
+        ],
+      },
+      {
+        title: 'Impact',
+        items: [
+          { label: 'Our Presence', icon: 'globe', desc: 'The countries and figures behind the alliance.', href: '/about#impact' },
         ],
       },
     ],
