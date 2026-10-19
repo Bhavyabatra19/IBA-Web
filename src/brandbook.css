@@ -1032,7 +1032,9 @@ main {
   justify-content: space-between;
   gap: 24px 48px;
   padding-block: 64px;
-  background: var(--iba-red);
+  /* same deep red-to-black wash as the home page's closing band */
+  background: var(--bb-red-band);
+  background-color: var(--iba-red-deep);
 }
 .cta-band__title {
   margin: 0 0 8px;
