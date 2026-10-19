@@ -42,7 +42,6 @@ export const PARTNERS = [
   { name: 'ArthaChain', logo: L('arthachain') },
   { name: 'Edza AI', logo: L('edza-ai') },
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
-  { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
   /* no logo supplied yet — shown as monograms on the Ecosystem page only */
   { name: 'The Circle' },
