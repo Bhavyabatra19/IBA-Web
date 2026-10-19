@@ -56,7 +56,7 @@ export default function CorridorBand() {
             accelerate technology transfer,
             investment, entrepreneurship and ecosystem collaboration across regions.
           </p>
-          <Go className="ib__cta" href="/corridor#country-corridors" data-rise>
+          <Go className="ib__cta" href="/corridor#corridor-partners" data-rise>
             Explore Web3 Corridor
           </Go>
         </div>

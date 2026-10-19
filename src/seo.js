@@ -32,7 +32,7 @@
  * previews as unfinished.
  */
 
-import { FACTS, REGIONS_LINE } from './data/facts'
+import { FACTS } from './data/facts'
 
 /* No brand suffix is appended anywhere. Every title below already names IBA or
    the Alliance, which is the brief's own pattern — appending one would give
@@ -98,9 +98,9 @@ export const SEO = {
       'Tech4Good, Green Chain Protocol, Verifyble, IBA Red Club, the Web3 Corridor and the India AI Alliance.',
   },
   '/corridor': {
-    title: 'Web3 Corridor | Global Innovation Corridor Initiative | IBA',
+    title: 'Web3 Corridor | One Global Corridor | IBA',
     description:
-      'A global innovation platform connecting ' + REGIONS_LINE + ' — core dimensions, country corridors and the forum launching at WTC 2026 in Barcelona.',
+      'One global corridor bringing countries together for Web3 resources, partnerships, growth and expansion — its partner countries, the forum at WTC 2026 in Barcelona, and membership.',
   },
   '/red-club': {
     title: 'IBA Experience Zone | Where Builders Get Ready',
