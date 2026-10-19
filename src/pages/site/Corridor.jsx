@@ -15,16 +15,60 @@ import { PageHero, Section, Cards, Form, Btn, SubHead } from '../../components/K
 import { Table } from '../../sections/service/ServiceBlocks'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
-   (public/images/corridor-hero-map.jpg). */
+   (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
+   drawn over it: arcs rise between the continents' pins and a pulse runs
+   along each. HUBS are the pin centres in the artwork's own pixels, so the
+   overlay's viewBox matches the image and the arcs land on the pins. */
+const HUBS = {
+  americas: [538, 496],
+  europe: [910, 260],
+  africa: [973, 472],
+  uae: [1173, 358],
+  india: [1314, 393],
+}
+const ROUTES = [
+  ['americas', 'europe'],
+  ['americas', 'africa'],
+  ['europe', 'uae'],
+  ['europe', 'africa'],
+  ['africa', 'uae'],
+  ['uae', 'india'],
+  ['europe', 'india'],
+]
+/* a quadratic arc that lifts off the map by a share of its length */
+const arc = ([x1, y1], [x2, y2]) => {
+  const lift = Math.hypot(x2 - x1, y2 - y1) * 0.32
+  return `M${x1} ${y1} Q${(x1 + x2) / 2} ${(y1 + y2) / 2 - lift} ${x2} ${y2}`
+}
+
 const HeroMap = () => (
-  <figure className="cx-map">
-    <img
-      src="/images/corridor-hero-map.jpg"
-      alt="A glowing world map with the corridor's partner countries pinned"
-      width="1832"
-      height="859"
-      decoding="async"
-    />
+  <figure className="cx-map" aria-label="A glowing world map with the corridor connecting its partner regions">
+    <div className="cx-map__stage">
+      <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
+      <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
+        <defs>
+          <filter id="cx-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        {ROUTES.map(([from, to], i) => {
+          const d = arc(HUBS[from], HUBS[to])
+          return (
+            <g key={from + to} style={{ '--i': i }}>
+              <path className="cx-map__arc" d={d} />
+              <path className="cx-map__flow" d={d} pathLength="100" />
+              <circle className="cx-map__pulse" r="13" filter="url(#cx-glow)">
+                <animateMotion dur={`${3 + (i % 3) * 0.6}s`} begin={`-${i * 0.45}s`} repeatCount="indefinite" path={d} />
+              </circle>
+            </g>
+          )
+        })}
+      </svg>
+    </div>
   </figure>
 )
 
