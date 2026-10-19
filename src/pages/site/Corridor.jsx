@@ -13,7 +13,6 @@
  */
 
 import { PageHero, Section, Cards, Btn } from '../../components/Kit'
-import { Table } from '../../sections/service/ServiceBlocks'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
@@ -166,21 +165,71 @@ const SIDES = [
  * The membership matrix: the three tiers, the tokenization packs beside them,
  * and only the offerings that tell them apart. Prices are left out on purpose;
  * the full detail is shared when someone gets in touch.
+ *
+ * Each tier carries a medal in its own metal, and Gold, the fullest founder
+ * tier, is raised out of the table.
  */
-const Y = '✓'
-const N = '—'
-const MATRIX = {
-  head: ['', 'Bronze', 'Silver', 'Gold', 'Tokeni\u00adzation'],
-  rows: [
-    ['Best for', 'Early builders', 'Startups', 'By invite', 'Issuers'],
-    ['Community, events & Verified badge', Y, Y, Y, Y],
-    ['Business setup & GTM advisory', Y, Y, Y, Y],
-    ['Investor introductions', N, Y, Y, Y],
-    ['Weekly strategy sessions', N, N, Y, N],
-    ['Tokenomics & tokenization advisory', N, N, N, Y],
-    ['Expert board advisor', N, N, Y, Y],
-  ],
-}
+const TIERS = [
+  { key: 'bronze', name: 'Bronze', best: 'Early builders' },
+  { key: 'silver', name: 'Silver', best: 'Startups' },
+  { key: 'gold', name: 'Gold', best: 'By invite', featured: true },
+  { key: 'token', name: 'Tokeni\u00adzation', best: 'Issuers' },
+]
+const OFFERINGS = [
+  ['Community, events & Verified badge', [1, 1, 1, 1]],
+  ['Business setup & GTM advisory', [1, 1, 1, 1]],
+  ['Investor introductions', [0, 1, 1, 1]],
+  ['Weekly strategy sessions', [0, 0, 1, 0]],
+  ['Tokenomics & tokenization advisory', [0, 0, 0, 1]],
+  ['Expert board advisor', [0, 0, 1, 1]],
+]
+
+const Mark = ({ on }) =>
+  on ? (
+    <span className="cx-mx__yes">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="m4 8.5 2.6 2.5L12 5.5" />
+      </svg>
+      <span className="cx-sr">Included</span>
+    </span>
+  ) : (
+    <span className="cx-mx__no">
+      <span className="cx-sr">Not included</span>
+    </span>
+  )
+
+const Matrix = () => (
+  <div id="corridor-matrix" className="cx-mx" data-rise>
+    <table>
+      <caption className="cx-sr">What each corridor membership includes</caption>
+      <thead>
+        <tr>
+          <td />
+          {TIERS.map((t) => (
+            <th scope="col" key={t.key} className={`cx-mx__tier cx-mx__tier--${t.key}${t.featured ? ' is-featured' : ''}`}>
+              {t.featured && <span className="cx-mx__flag">Most complete</span>}
+              <span className="cx-mx__medal" aria-hidden="true" />
+              <span className="cx-mx__name">{t.name}</span>
+              <span className="cx-mx__best">{t.best}</span>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {OFFERINGS.map(([label, marks]) => (
+          <tr key={label}>
+            <th scope="row">{label}</th>
+            {marks.map((on, i) => (
+              <td key={TIERS[i].key} className={TIERS[i].featured ? 'is-featured' : undefined}>
+                <Mark on={on} />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)
 
 export default function Corridor() {
   return (
@@ -264,9 +313,7 @@ export default function Corridor() {
         title="Join the Corridor"
         lede="Membership is a journey: every stage is gated, and every gate is earned."
       >
-        <div id="corridor-matrix" className="cx-table cx-table--matrix">
-          <Table head={MATRIX.head} rows={MATRIX.rows} caption="What each corridor membership includes" />
-        </div>
+        <Matrix />
         <div className="pk-actions cx-block cx-block--tight" data-rise>
           <Btn enquiry="Web3 Corridor membership">
             Get in Touch <span aria-hidden="true">→</span>
