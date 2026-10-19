@@ -158,16 +158,6 @@ const ACCESS = [
   },
 ]
 
-/** Programmes the corridor runs through: links, not descriptions. */
-const PROGRAMMES = [
-  { title: 'Tech4Good', href: '/initiatives#init-tech4good', cta: 'Explore' },
-  { title: 'Blockchain Council', href: '/ecosystem#communities', cta: 'Explore' },
-  { title: 'Green Chain Protocol', href: '/initiatives#init-green-chain', cta: 'Explore' },
-  { title: 'Verifyble', href: '/initiatives#init-verifyble', cta: 'Explore' },
-  { title: 'Red Club', href: '/red-club', cta: 'Explore' },
-  { title: 'Emerging Tech Council', href: '/ecosystem#communities', cta: 'Explore' },
-]
-
 /**
  * The two memberships, by name.
  *
@@ -251,10 +241,6 @@ export default function Corridor() {
         lede="Being in the corridor means being connected to all of it."
       >
         <Cards items={ACCESS} cols={4} />
-      </Section>
-
-      <Section id="corridor-programmes" eyebrow="Inside the Corridor" title="Programmes Running Through It">
-        <Cards items={PROGRAMMES} cols={3} />
       </Section>
 
       <Section
