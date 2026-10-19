@@ -101,16 +101,10 @@ export default function About() {
         <FounderLetter
           linkedin={CONTACT.linkedin.href}
           lead="I spent over two decades inside the world’s financial system before I chose to help rebuild it."
-          pull={{
-            after: 2,
-            text: 'The next global financial system will not be built in isolation — it will be built in corridors.',
-          }}
           paras={[
-            'Twenty-five years in banking taught me something the industry rarely says out loud: trust was never actually free. It was slow, expensive, and gated — locked behind institutions, intermediaries, and borders that decided who got access to capital and who didn’t. I watched brilliant ideas die in emerging markets not for lack of merit, but for lack of infrastructure.',
+            'Twenty-five years in banking taught me something the industry rarely says out loud: trust was never actually free.',
             'I founded the India Blockchain Alliance because I believe that era is ending — and India will not just witness that ending, it will architect what comes next.',
-            'I have sat across the table from regulators in ADGM, VARA, DIFC, and GIFT City. I have advised founders building everything from tokenized real estate to carbon credits to music royalties, across more than 90 ventures on four continents. And I have come to one conviction: the next global financial system will not be built in isolation — it will be built in corridors. Between Africa’s resources, India’s scale, the UAE’s capital, and Europe’s frameworks. That corridor — GICI — is not a strategy slide to me. It is the blueprint for how emerging economies stop waiting for permission and start setting the standard.',
-            'This Alliance exists for one reason: to make sure India does not adopt the future of finance — it defines it. We are not here to speculate. We are here to structure. To bring the discipline of banking to the audacity of blockchain, and the audacity of blockchain to the caution of banking — until the two are no longer separate conversations.',
-            'To every builder, regulator, and investor who believes trust should be engineered, not inherited by privilege — this Alliance is your table. I didn’t build it to lead the industry from the front. I built it so India leads the industry from the center of the world’s next economic corridor.',
+            'This Alliance exists for one reason: to make sure India does not adopt the future of finance — it defines it. We are not here to speculate. We are here to structure.',
             'The rails of the next financial system are being laid right now. I intend for them to run through India — and I invite you to help lay them with us.',
           ]}
         />

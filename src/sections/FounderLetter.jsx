@@ -1,18 +1,16 @@
 /**
  * About — Message From the Founder.
  *
- * Two parts, so neither leaves a gap beside the other:
- *   · the introduction, full width: a large portrait on the left; on the
- *     right the opening line as a large quote and LinkedIn
- *   · the letter itself in one centred reading column, with one line pulled
- *     out large across it, and the signature
+ * One row: the portrait on the left; on the right the opening line as a
+ * quote, a short note (lines kept word for word from the founder's letter)
+ * and LinkedIn — sized so the text runs the height of the photo.
  *
  * Styles in brandbook.css (.fl2).
  */
 
 import { Btn } from '../components/Kit'
 
-export default function FounderLetter({ lead, paras, pull, linkedin }) {
+export default function FounderLetter({ lead, paras, linkedin }) {
   return (
     <div className="fl2">
       <div className="fl2__intro">
@@ -39,6 +37,14 @@ export default function FounderLetter({ lead, paras, pull, linkedin }) {
             <p>{lead}</p>
           </blockquote>
 
+          <div className="fl2__note">
+            {paras.map((p) => (
+              <p data-rise key={p.slice(0, 24)}>
+                {p}
+              </p>
+            ))}
+          </div>
+
           <div data-rise>
             <Btn href={linkedin} variant="ghost">
               Connect on LinkedIn <span aria-hidden="true">→</span>
@@ -46,27 +52,6 @@ export default function FounderLetter({ lead, paras, pull, linkedin }) {
           </div>
         </div>
       </div>
-
-      <article className="fl2__letter">
-        {paras.map((p, i) => (
-          <div className="fl2__para" key={p.slice(0, 24)}>
-            <p data-rise>{p}</p>
-            {i === pull.after && (
-              <p className="fl2__pull" data-rise>
-                {pull.text}
-              </p>
-            )}
-          </div>
-        ))}
-
-        <footer className="fl2__sign" data-rise>
-          <img src="/images/founder-sq.jpg" alt="" width="56" height="56" loading="lazy" />
-          <span>
-            <span className="fl2__sig">Raj Kapoor</span>
-            <span className="fl2__sig-role">Founder, India Blockchain Alliance</span>
-          </span>
-        </footer>
-      </article>
     </div>
   )
 }
