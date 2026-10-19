@@ -363,9 +363,15 @@ export default function Nav() {
             <div className="nav__panelIn wrap">
               {/* the links, in labelled groups (a flat tab is one group) */}
               <div className="nav__panelGroups">
-                {(panel.groups || [{ title: panel.label, items: panel.items }]).map((g) => (
-                  <div className="nav__panelGroup" key={g.title}>
-                    <h3 className="nav__panelGroupTitle">{g.title}</h3>
+                {(panel.groups || [{ title: panel.label, items: panel.items }]).map((g, i) => (
+                  <div className="nav__panelGroup" key={g.title || i}>
+                    {/* an untitled group keeps the heading's space, so its
+                        links line up with the columns beside it */}
+                    {g.title ? (
+                      <h3 className="nav__panelGroupTitle">{g.title}</h3>
+                    ) : (
+                      <div className="nav__panelGroupTitle" aria-hidden="true">&nbsp;</div>
+                    )}
                     <ul className="nav__panelList">
                       {g.items.map((it) => (
                         <li key={it.label}>

@@ -78,9 +78,14 @@ export const NAV = [
       {
         title: 'Purpose',
         items: [
-          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
           { label: 'Mission', icon: 'target', desc: 'The infrastructure of trust, and how we build it.', href: '/about#mission' },
-          { label: 'Impact', icon: 'chart', desc: 'The figures behind the alliance.', href: '/about#impact' },
+          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
+        ],
+      },
+      {
+        title: 'Impact',
+        items: [
+          { label: 'Our Presence', icon: 'globe', desc: 'The countries and figures behind the alliance.', href: '/about#impact' },
         ],
       },
     ],
@@ -123,10 +128,15 @@ export const NAV = [
         ],
       },
       {
-        title: 'Get Involved',
+        title: 'Connect',
         items: [
           { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
           { label: 'Member Directory', icon: 'lock', desc: 'Find members across the alliance.', href: '/ecosystem#member-directory' },
+        ],
+      },
+      {
+        title: 'Get Involved',
+        items: [
           { label: 'Become a Partner', icon: 'handshake', desc: 'Partner with IBA.', href: '/ecosystem#become-a-partner' },
         ],
       },
@@ -150,6 +160,11 @@ export const NAV = [
         items: [
           { label: 'Videos', icon: 'play', desc: 'Walkthroughs and explainers.', href: '/library#catalogue' },
           { label: 'Webinars', icon: 'video', desc: 'Recorded sessions with IBA experts.', href: '/library#catalogue' },
+        ],
+      },
+      /* no title: it continues Watch & Read in a third column */
+      {
+        items: [
           { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
         ],
       },
