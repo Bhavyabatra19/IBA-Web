@@ -1092,13 +1092,6 @@ main {
 /* ---------------------------------------------------------------- */
 /* Kit page parts                                                     */
 /* ---------------------------------------------------------------- */
-.pk-lock {
-  border: 1px solid #333333;
-  border-radius: 0;
-}
-.pk-lock svg {
-  stroke: #ff4a50;
-}
 /* the Red Club wallet: a flat red card */
 .pk-wallet {
   border-radius: 0;

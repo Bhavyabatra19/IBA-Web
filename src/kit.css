@@ -677,27 +677,6 @@
   margin: 0;
 }
 
-/* --- locked directory --- */
-.pk-lock {
-  display: grid;
-  justify-items: start;
-  gap: 1.1rem;
-  max-width: 40rem;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  border: 1px dashed rgba(255, 255, 255, 0.25);
-  border-radius: 22px;
-}
-.pk-lock svg {
-  width: 40px;
-  height: 40px;
-  fill: none;
-  stroke: var(--red-hot);
-  stroke-width: 1.6;
-}
-.pk-lock .pk-prose__lead {
-  font-size: clamp(1.3rem, 1rem + 1vw, 1.8rem);
-}
-
 /* --- Red Club: jump links and the wallet card --- */
 .pk-jump {
   display: flex;

@@ -131,7 +131,6 @@ export const NAV = [
         title: 'Connect',
         items: [
           { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
-          { label: 'Member Directory', icon: 'lock', desc: 'Find members across the alliance.', href: '/ecosystem#member-directory' },
         ],
       },
       {
@@ -269,7 +268,7 @@ export const MEMBER_LOGIN = 'Member Login'
  * section that answers it; where a section has no anchor of its own, at the
  * page that holds it.
  *
- *   Key Partners / Member Directory  the Ecosystem page's organisations list
+ *   Key Partners                     the Ecosystem page's organisations list
  *   Core Dimensions                  how corridors work, on /corridor
  *   Corridor Forum                   /corridor — the forum has no section yet
  *   Newsletter signup                an email, until a list provider is wired
@@ -301,7 +300,6 @@ export const FOOTER = [
     items: [
       { label: 'Key Partners', href: '/ecosystem#organisations' },
       { label: 'People', href: '/ecosystem#people' },
-      { label: 'Member Directory', href: '/ecosystem#member-directory' },
       { label: 'Become a Partner', href: '/ecosystem#become-a-partner' },
     ],
   },
