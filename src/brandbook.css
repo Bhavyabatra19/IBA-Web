@@ -5237,6 +5237,12 @@ main {
 .wd.wd.wd .wd__card .wd__tint {
   display: none;
 }
+/* the home cards' artwork (what we do, academia) carries its own labels
+   out to its edges, so the header takes the art's own 9:4 proportion and
+   no label is cropped */
+.wd.wd.wd--art .wd__media {
+  aspect-ratio: 9 / 4;
+}
 /* the shield sits high in its picture: keep its top in frame */
 .wd__photo[src$='card-compliance.jpg'] {
   object-position: 50% 15%;
