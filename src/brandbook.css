@@ -6190,6 +6190,27 @@ main {
   letter-spacing: 0.01em !important;
 }
 
+/* Web3 Corridor: a menu tab like the others, not a button (by request) —
+   no box, the tabs' own size and spacing — highlighted by its red label
+   and a short red rule beneath it */
+.nav__tabBtn[data-pill],
+.nav__tabBtn[data-pill]:hover,
+.nav__tabBtn[data-pill][data-active] {
+  min-height: 0;
+  margin-left: 0;
+  padding: 0.65rem 0.55rem;
+  border: 0;
+  background: none;
+  font-size: clamp(15px, calc(15px + (100vw - 1261px) * 0.0112), 17px);
+  color: var(--iba-red);
+  text-decoration: underline 2px var(--iba-red);
+  text-underline-offset: 8px;
+}
+.nav__tabBtn[data-pill]:hover,
+.nav__tabBtn[data-pill][data-active] {
+  color: var(--iba-red-deep);
+}
+
 /* ==================================================================
    Ecosystem — Key Partners as a glass carousel (PartnerCarousel.jsx):
    frosted tiles over drifting red glows, two rows of scroll-snapped
