@@ -28,6 +28,11 @@
   --iba-red-deep: #9e1016;
   --iba-red-soft: #fdeaea;
   --iba-black: #111111;
+  /* the fill for every full red band: deep IBA red running into near-black.
+     Flat #D71920 behind a band of white type glared and was hard to read. */
+  --bb-red-band:
+    radial-gradient(120% 90% at 0% 0%, rgba(215, 25, 32, 0.55), rgba(215, 25, 32, 0) 60%),
+    linear-gradient(155deg, var(--iba-red-deep) 0%, #5a0b0f 55%, #1a0a0b 100%);
   --bb-surface: #ffffff;
   --bb-surface-alt: #f5f3f2;
   --bb-ink: #0e0e0e;
@@ -973,9 +978,10 @@ main {
   font-weight: 400;
 }
 
-/* Get in touch — home's CTA band: the only full-red section */
+/* Get in touch — home's CTA band, on the same red-to-black as the red bands */
 .git__panel {
-  background: var(--iba-red);
+  background: var(--bb-red-band);
+  background-color: var(--iba-red-deep);
 }
 .git .hero__kicker {
   color: #ffffff;
@@ -3813,14 +3819,9 @@ main {
   background: var(--bb-surface);
 }
 
-/* --- red: an IBA Red panel, white type, white cards and buttons ---
-   Flat #D71920 behind a full band of white type glared, so the panel runs
-   from a deep IBA red down into near-black: still read as red, but calmer
-   and with more contrast for the type on it. */
+/* --- red: a red-to-black panel, white type, white cards and buttons --- */
 .pk-sec--red .pk-sec__panel {
-  background:
-    radial-gradient(120% 90% at 0% 0%, rgba(215, 25, 32, 0.55), rgba(215, 25, 32, 0) 60%),
-    linear-gradient(155deg, var(--iba-red-deep) 0%, #5a0b0f 55%, #1a0a0b 100%);
+  background: var(--bb-red-band);
   background-color: var(--iba-red-deep);
   color: #ffffff;
 }
