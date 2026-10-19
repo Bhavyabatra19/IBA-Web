@@ -8255,6 +8255,14 @@ main {
 .cb__title {
   color: #161412;
 }
+/* keep "IBA Global Initiative" together on its own line */
+.cb__title-line {
+  display: block;
+  white-space: nowrap;
+}
+@media (max-width: 380px) {
+  .cb__title-line { white-space: normal; }
+}
 .cb__lede {
   color: #5f5a54;
 }
