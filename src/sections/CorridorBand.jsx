@@ -27,13 +27,13 @@ export default function CorridorBand() {
     <section className="cb band band--light band--own" ref={root} aria-labelledby="cb-title">
       <div className="cb__panel">
         {/* the corridor's reach: the supplied map artwork, the five regions
-            pinned and linked (public/images/flagship-map.jpg) */}
+            pinned and linked (public/images/flagship-map-3d.jpg) */}
         <div className="cb__globe cb__art">
           <img
-            src="/images/flagship-map.jpg"
+            src="/images/flagship-map-3d.jpg"
             alt="World map linking the Americas, Europe, Africa, the UAE and India"
-            width="1832"
-            height="859"
+            width="1667"
+            height="943"
             loading="lazy"
             decoding="async"
           />
