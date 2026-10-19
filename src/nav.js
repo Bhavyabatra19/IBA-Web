@@ -128,10 +128,15 @@ export const NAV = [
         ],
       },
       {
-        title: 'Get Involved',
+        title: 'Connect',
         items: [
           { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
           { label: 'Member Directory', icon: 'lock', desc: 'Find members across the alliance.', href: '/ecosystem#member-directory' },
+        ],
+      },
+      {
+        title: 'Get Involved',
+        items: [
           { label: 'Become a Partner', icon: 'handshake', desc: 'Partner with IBA.', href: '/ecosystem#become-a-partner' },
         ],
       },
