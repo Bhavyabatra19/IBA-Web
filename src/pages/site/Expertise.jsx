@@ -1,6 +1,6 @@
 /** Expertise — the consulting stack, how we work, and who we work with. */
 
-import { PageHero, Section, Cards, SubHead, Quote, Btn } from '../../components/Kit'
+import { PageHero, Section, Cards, Quote, Btn } from '../../components/Kit'
 import { REGIONS_LINE } from '../../data/facts'
 
 /* The hero image: the client's Pinterest reference (pin.it/4IGXSzIxE),
@@ -93,15 +93,25 @@ export default function Expertise() {
         lede="Four areas of expertise that cover what an organisation needs to move from an idea to a governed, working product. Each one can be engaged on its own, or together as a single programme."
       >
         <Cards items={STACK} cols={4} />
+      </Section>
 
-        <SubHead lede="End-to-end support for token offerings (IDO, STO and IEO), delivered across three workstreams that run side by side: getting the offering known, getting it built and keeping it financially sound.">
-          Power Consulting
-        </SubHead>
+      <Section
+        id="power-consulting"
+        tone="dark"
+        eyebrow="Token Offerings"
+        title="Power Consulting"
+        lede="End-to-end support for token offerings (IDO, STO and IEO), delivered across three workstreams that run side by side: getting the offering known, getting it built and keeping it financially sound."
+      >
         <Cards items={POWER} cols={3} />
+      </Section>
 
-        <SubHead lede="We stay with you from the first question to a business running at scale. The first three steps get the product right: nothing is built until the problem is framed and the regulation is mapped, and nothing is handed over until it has been tested and audited. The next four take it to market, fund it and grow it.">
-          How We Work
-        </SubHead>
+      <Section
+        id="how-we-work"
+        tone="card"
+        eyebrow="How We Work"
+        title="From the First Question to a Business at Scale"
+        lede="The first three steps get the product right: nothing is built until the problem is framed and the regulation is mapped, and nothing is handed over until it has been tested and audited. The next four take it to market, fund it and grow it."
+      >
         <p className="pk-label" data-rise>Assess, design and develop</p>
         <Cards items={BUILD} cols={3} />
         <p className="pk-label" data-rise>Launch, fund, grow and scale</p>
@@ -121,11 +131,17 @@ export default function Expertise() {
         </Quote>
       </Section>
 
-      <Section id="who-we-serve" tone="dark" eyebrow="Who We Work With" title="One Stack, Multiple Partners">
+      <Section id="who-we-serve" eyebrow="Who We Work With" title="One Stack, Multiple Partners">
         <Cards items={PARTNERS} cols={4} />
-        <SubHead lede="Every engagement is measured by what you can do at the end of it. These are the results we work towards with each partner.">
-          The Outcome: We Equip You to Build, Launch and Scale
-        </SubHead>
+      </Section>
+
+      <Section
+        id="outcomes"
+        tone="dark"
+        eyebrow="The Outcome"
+        title="We Equip You to Build, Launch and Scale"
+        lede="Every engagement is measured by what you can do at the end of it. These are the results we work towards with each partner."
+      >
         <Cards items={OUTCOMES} cols={3} />
         <div className="pk-actions" data-rise>
           <Btn enquiry="Consulting">
@@ -134,7 +150,7 @@ export default function Expertise() {
         </div>
       </Section>
 
-      <Section id="initiatives" eyebrow="IBA Initiatives" title="Programmes We Built, Run and Stand Behind">
+      <Section id="initiatives" tone="card" eyebrow="IBA Initiatives" title="Programmes We Built, Run and Stand Behind">
         <Cards items={INITIATIVES} cols={3} />
       </Section>
     </div>

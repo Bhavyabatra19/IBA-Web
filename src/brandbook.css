@@ -5731,6 +5731,25 @@ main {
 .cx-map {
   margin: 0;
   width: 100%;
+  perspective: 1400px;
+}
+/* the map lies back like a table top and drifts gently, with a glow
+   pooled on the "floor" beneath it */
+.cx-map__stage {
+  position: relative;
+  transform: rotateX(24deg) rotateZ(-4deg);
+  transform-style: preserve-3d;
+  animation: cx-drift 9s ease-in-out infinite;
+}
+.cx-map__stage::after {
+  content: '';
+  position: absolute;
+  inset: 70% 8% -14%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(218, 30, 40, 0.35), transparent);
+  filter: blur(22px);
+  transform: translateZ(-60px);
 }
 .cx-map img {
   display: block;
@@ -5741,16 +5760,63 @@ main {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-@media (min-width: 861px) {
+.cx-map__routes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: translateZ(40px);
+}
+.cx-map__arc {
+  fill: none;
+  stroke: rgba(255, 80, 90, 0.7);
+  stroke-width: 4;
+  stroke-dasharray: 10 10;
+  filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
+}
+.cx-map__flow {
+  fill: none;
+  stroke: #ff3b47;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 22 78;
+  filter: drop-shadow(0 0 10px rgba(255, 40, 50, 0.9));
+  animation: cx-flow 3.2s linear infinite;
+  animation-delay: calc(var(--i) * -0.45s);
+}
+.cx-map__pulse {
+  fill: #fff;
+}
+@keyframes cx-flow {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cx-drift {
+  0%, 100% { transform: rotateX(24deg) rotateZ(-4deg) translateY(0); }
+  50% { transform: rotateX(20deg) rotateZ(-2deg) translateY(-8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx-map__stage,
+  .cx-map__flow {
+    animation: none;
+  }
+  .cx-map__pulse {
+    display: none;
+  }
+}
+/* the map stays in its own column: it may bleed into the panel's right
+   gutter, never left under the headline */
+@media (min-width: 1200px) {
   .pk-hero__aside .cx-map {
-    width: 140%;
-    margin: 0 0 0 -40%;
+    width: 130%;
+    margin: 0 -30% 0 0;
   }
 }
 @media (max-width: 860px) {
   .pk-hero__aside .cx-map {
-    width: 112%;
-    margin: 0 -6%;
+    width: 104%;
+    margin: 0 -2%;
   }
 }
 
@@ -6120,14 +6186,14 @@ main {
    card turns IBA Black rather than red (by request); text stays white, the
    label stays a white pill with red text, and the icon square — black on the
    old red card — goes red so it still shows. About's Vision & Mission (.vm)
-   keep their red hover. */
-.wd:is(.wd--two, :not(.wd--two)):not(.vm) .wd__card:hover {
+   now match them (by request). */
+.wd:is(.wd--two, :not(.wd--two)) .wd__card:hover {
   background: var(--iba-black);
 }
-.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline {
+.wd.wd .wd__card:hover .wd__badge--inline {
   background: var(--iba-red);
 }
-.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline .wd__icon {
+.wd.wd .wd__card:hover .wd__badge--inline .wd__icon {
   stroke: #ffffff;
 }
 
