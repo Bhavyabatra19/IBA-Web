@@ -1,10 +1,9 @@
 /** Ecosystem — initiatives, key partners, councils, people, directory, partnering. */
 
 import { PageHero, Section, Cards, Form, Btn, Prose } from '../../components/Kit'
-import { PARTNERS, initials } from '../../data/partners'
+import PartnerCarousel from '../../components/PartnerCarousel'
+import { PARTNERS } from '../../data/partners'
 import { FACTS } from '../../data/facts'
-
-const TONES = ['red', 'ink', 'deep']
 
 /* The hero image: the client's Pinterest reference (pin.it/2FjSHQlfR), a
    shield hub joined to tiles, cropped to the graphic (the source's brand mark
@@ -66,27 +65,7 @@ export default function Ecosystem() {
         title="Our Growing Network of Ecosystem Partners"
         lede="And more. Logo usage rights pending confirmation for every mark shown here."
       >
-        <ul className="pk-orgs pk-orgs--grid">
-          {PARTNERS.map(({ name, logo }, i) => (
-            <li className="eco__chip" key={name} data-rise>
-              {logo ? (
-                <img className="eco__logo" src={logo} alt="" loading="lazy" />
-              ) : (
-                <span className={`eco__mono eco__mono--${TONES[i % TONES.length]}`} aria-hidden="true">
-                  {initials(name)}
-                </span>
-              )}
-              <span className="eco__name">{name}</span>
-            </li>
-          ))}
-          {/* closes the last row of the grid, whatever the column count */}
-          <li className="pk-orgs__more" data-rise>
-            <span>And more partners joining every quarter.</span>
-            <a href="#become-a-partner">
-              Become a Partner <span aria-hidden="true">→</span>
-            </a>
-          </li>
-        </ul>
+        <PartnerCarousel partners={PARTNERS} />
       </Section>
 
       <Section id="communities" tone="dark" eyebrow="Communities & Councils" title="Where the Standards Get Set">
