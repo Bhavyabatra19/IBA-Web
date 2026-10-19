@@ -160,6 +160,11 @@ export const NAV = [
         items: [
           { label: 'Videos', icon: 'play', desc: 'Walkthroughs and explainers.', href: '/library#catalogue' },
           { label: 'Webinars', icon: 'video', desc: 'Recorded sessions with IBA experts.', href: '/library#catalogue' },
+        ],
+      },
+      /* no title: it continues Watch & Read in a third column */
+      {
+        items: [
           { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
         ],
       },
