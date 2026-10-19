@@ -6564,3 +6564,43 @@ main {
     transform: none;
   }
 }
+
+/* Web3 Corridor — the two membership tracks over their matrix tables */
+.cx-track {
+  margin: 32px 0 12px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+/* the terms and matrix tables: row labels in sentence case, short cells kept on one line */
+.cx-table .edu__table tbody th {
+  width: auto;
+  font-family: var(--bb-font);
+  text-transform: none;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.cx-table--terms .edu__table td:nth-child(n + 3),
+.cx-table--terms .edu__table thead th:nth-child(n + 3) {
+  white-space: nowrap;
+}
+.cx-table--terms .edu__table tbody th {
+  white-space: nowrap;
+  font-family: var(--font-display, var(--bb-font));
+  text-transform: uppercase;
+}
+.cx-table--matrix .edu__table tbody th {
+  width: 40%;
+}
+.cx-table--matrix .edu__table td,
+.cx-table--matrix .edu__table thead th:not(:first-child) {
+  width: 20%;
+  text-align: center;
+}
+.cx-table--matrix .edu__table td,
+.cx-table--matrix .edu__table tbody th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
