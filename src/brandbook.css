@@ -6114,14 +6114,14 @@ main {
    card turns IBA Black rather than red (by request); text stays white, the
    label stays a white pill with red text, and the icon square — black on the
    old red card — goes red so it still shows. About's Vision & Mission (.vm)
-   keep their red hover. */
-.wd:is(.wd--two, :not(.wd--two)):not(.vm) .wd__card:hover {
+   now match them (by request). */
+.wd:is(.wd--two, :not(.wd--two)) .wd__card:hover {
   background: var(--iba-black);
 }
-.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline {
+.wd.wd .wd__card:hover .wd__badge--inline {
   background: var(--iba-red);
 }
-.wd.wd:not(.vm) .wd__card:hover .wd__badge--inline .wd__icon {
+.wd.wd .wd__card:hover .wd__badge--inline .wd__icon {
   stroke: #ffffff;
 }
 

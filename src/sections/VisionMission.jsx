@@ -1,8 +1,8 @@
 /**
  * About — Vision and Mission, as two cards built like the home page's
  * Academia & Students cards (.wd--two): photo header toned into the brand,
- * icon badge, tag and the lead line, then the opening of the copy clamped
- * to five lines and a Read more button; the whole text opens in a popup (a
+ * tag and the lead line, then the opening of the copy clamped
+ * to five lines and a Read more button, the icon in the corner; the whole text opens in a popup (a
  * native <dialog>: focus kept inside, Esc and the backdrop close it, the page
  * behind does not scroll). The photos load straight away (not lazily), as
  * this band sits right under the hero.
@@ -85,11 +85,6 @@ export default function VisionMission({ vision, mission }) {
                     than lazily — a lazy photo here showed as an empty box */}
                 <img className="wd__photo vm__photo" src={c.img} alt="" decoding="async" />
                 <span className="wd__tint" />
-                <span className="wd__badge">
-                  <svg className="wd__icon" viewBox="0 0 48 48">
-                    {ICONS[c.key]}
-                  </svg>
-                </span>
               </div>
               <div className="wd__body">
                 <span className="wd__tag">{c.tag}</span>
@@ -104,6 +99,12 @@ export default function VisionMission({ vision, mission }) {
                 >
                   Read more <span aria-hidden="true">→</span>
                 </button>
+                {/* the icon in the card's bottom-right corner, as on the home cards */}
+                <span className="wd__badge wd__badge--inline" aria-hidden="true">
+                  <svg className="wd__icon" viewBox="0 0 48 48">
+                    {ICONS[c.key]}
+                  </svg>
+                </span>
               </div>
             </article>
           ))}
