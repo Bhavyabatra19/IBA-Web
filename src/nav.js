@@ -192,13 +192,13 @@ export const NAV = [
           { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#corridor-membership' },
         ],
       },
-      /* ⚠ Both memberships land on the corridor's membership section until
-         they have pages of their own; the descriptions are placeholders to confirm. */
+      /* The Web360 Club memberships live on the corridor page, with their
+         terms and matrix. */
       {
         title: 'Memberships',
         items: [
-          { label: 'Partner Members', icon: 'link', desc: 'Organisations partnering on the corridor.', href: '/corridor#corridor-membership' },
-          { label: 'Web360 Members', icon: 'globe', desc: 'Individual members across the network.', href: '/corridor#corridor-membership' },
+          { label: 'Web360 Club', icon: 'globe', desc: 'Founder and tokenization memberships.', href: '/corridor#corridor-membership' },
+          { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
         ],
       },
     ],
