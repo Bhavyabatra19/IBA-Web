@@ -180,25 +180,25 @@ export const NAV = [
       {
         title: 'The Initiative',
         items: [
-          { label: 'Global Innovation Corridor', icon: 'globe', desc: 'What the corridor is and why it exists.', href: '/corridor' },
-          { label: 'Core Dimensions', icon: 'layers', desc: 'How the corridors work.', href: '/corridor#how-corridors-work' },
-          { label: 'Country Corridors', icon: 'pin', desc: 'Where the corridor reaches.', href: '/corridor#country-corridors' },
+          { label: 'One Global Corridor', icon: 'globe', desc: 'One corridor connecting its partner countries.', href: '/corridor' },
+          { label: 'Corridor Partners', icon: 'pin', desc: 'The countries in the corridor.', href: '/corridor#corridor-partners' },
+          { label: 'What the Corridor Opens', icon: 'layers', desc: 'Resources, partnerships, growth and expansion.', href: '/corridor#corridor-access' },
         ],
       },
       {
         title: 'Take Part',
         items: [
           { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor partner.', href: '/corridor#join-corridor' },
+          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#corridor-membership' },
         ],
       },
-      /* ⚠ Both memberships land on the corridor's join form until they have
-         pages of their own; the descriptions are placeholders to confirm. */
+      /* ⚠ Both memberships land on the corridor's membership section until
+         they have pages of their own; the descriptions are placeholders to confirm. */
       {
         title: 'Memberships',
         items: [
-          { label: 'Partner Members', icon: 'link', desc: 'Organisations partnering on the corridor.', href: '/corridor#join-corridor' },
-          { label: 'Web360 Members', icon: 'globe', desc: 'Individual members across the network.', href: '/corridor#join-corridor' },
+          { label: 'Partner Members', icon: 'link', desc: 'Organisations partnering on the corridor.', href: '/corridor#corridor-membership' },
+          { label: 'Web360 Members', icon: 'globe', desc: 'Individual members across the network.', href: '/corridor#corridor-membership' },
         ],
       },
     ],
@@ -270,8 +270,7 @@ export const MEMBER_LOGIN = 'Member Login'
  * page that holds it.
  *
  *   Key Partners / Member Directory  the Ecosystem page's organisations list
- *   Core Dimensions                  how corridors work, on /corridor
- *   Corridor Forum                   /corridor — the forum has no section yet
+ *   Corridor Partners                the partner countries, on /corridor
  *   Newsletter signup                an email, until a list provider is wired
  *                                    up; a form that pretended to subscribe
  *                                    would be worse than a plain link
@@ -308,11 +307,10 @@ export const FOOTER = [
   {
     title: 'Web3 Corridor',
     items: [
-      { label: 'Global Innovation Corridor', href: '/corridor' },
-      { label: 'Core Dimensions', href: '/corridor#how-corridors-work' },
+      { label: 'One Global Corridor', href: '/corridor' },
+      { label: 'Corridor Partners', href: '/corridor#corridor-partners' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
-      { label: 'Country Corridors', href: '/corridor#country-corridors' },
-      { label: 'Join the Corridor', href: '/corridor#join-corridor' },
+      { label: 'Membership', href: '/corridor#corridor-membership' },
     ],
   },
   {

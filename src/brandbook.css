@@ -5747,6 +5747,103 @@ main {
     margin: 0 -6%;
   }
 }
+
+/* Web3 Corridor — the partner countries, each card led by its flag */
+.cx-partners {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cx-partner {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+  transition: border-color 150ms ease;
+}
+.cx-partner:hover {
+  border-color: var(--bb-ink);
+}
+.cx-flag {
+  display: block;
+  width: 60px;
+  height: 40px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 0 1px var(--bb-line);
+}
+.cx-flag--next {
+  display: grid;
+  place-items: center;
+  box-shadow: none;
+  border: 1px dashed var(--bb-ink-muted);
+  font-size: 22px;
+  color: var(--bb-ink-muted);
+}
+.cx-partner__role {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.cx-partner__name {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--bb-ink);
+}
+.cx-partner__city {
+  margin: 2px 0 12px;
+  font-size: 14px;
+  color: var(--bb-ink-muted);
+}
+.cx-partner__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--bb-ink-muted);
+}
+.cx-partner--next {
+  border-style: dashed;
+}
+.cx-partner--next .cx-partner__name {
+  margin-bottom: 12px;
+}
+.cx-partner__go {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+  text-decoration: none;
+}
+.cx-partner__go:hover {
+  text-decoration: underline;
+}
+/* the membership matrix and terms, under the membership cards */
+.cx-block {
+  margin-top: 48px;
+}
+.cx-terms {
+  margin: 0;
+  padding-left: 1.4em;
+  max-width: 72ch;
+  color: var(--bb-ink-muted);
+  line-height: 1.6;
+}
+.cx-terms li + li {
+  margin-top: 10px;
+}
+#join-corridor .pk-form {
+  max-width: 760px;
+}
 /* the dropdown's link columns share the space beside the grey column, so a
    third group (Web3 Corridor → Memberships) never runs under it */
 .nav .nav__panel .nav__panelGroups {

@@ -1,18 +1,26 @@
-/** Web3 Corridor — the Global Innovation Corridor Initiative. */
+/**
+ * Web3 Corridor — one global corridor.
+ *
+ * The page tells a single story, in order: there is one corridor; these are
+ * the countries partnering on it; this is what it opens for anyone inside it;
+ * this is where it launches; and this is how to become a member. Membership,
+ * its matrix and its terms close the page.
+ *
+ * Earlier versions repeated the same idea as objectives, core dimensions,
+ * strands, impact and next steps, and named regions in prose. The partner
+ * countries are now the flags, and everything a member gets is said once.
+ */
 
-import { PageHero, Section, Cards, Stats, Prose, SubHead, Form, Btn } from '../../components/Kit'
-import { REGIONS_LINE } from '../../data/facts'
+import { PageHero, Section, Cards, Form, Btn, SubHead } from '../../components/Kit'
+import { Table } from '../../sections/service/ServiceBlocks'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
-   with the five regions pinned (public/images/corridor-hero-map.jpg), on a
-   plain black hero. Earlier versions are kept as alternatives: the drawn
-   dotted map (components/WorldMap.jsx), the tunnel (CorridorTunnel.jsx) and
-   the drawn globe with routes (CorridorHolo.jsx). */
+   (public/images/corridor-hero-map.jpg). */
 const HeroMap = () => (
   <figure className="cx-map">
     <img
       src="/images/corridor-hero-map.jpg"
-      alt="World map with the corridor's regions pinned: the Americas, Europe, Africa, the UAE and India"
+      alt="A glowing world map with the corridor's partner countries pinned"
       width="1832"
       height="859"
       decoding="async"
@@ -20,53 +28,127 @@ const HeroMap = () => (
   </figure>
 )
 
-const OBJECTIVES = [
-  { num: '01', title: 'Build', text: 'A sustainable innovation corridor connecting nations with global technology, investment and innovation ecosystems.' },
-  { num: '02', title: 'Facilitate', text: 'Technology transfer, knowledge exchange and capacity building in emerging technologies.' },
-  { num: '03', title: 'Create Pathways', text: 'For startups, SMEs, innovation hubs, women entrepreneurs and young innovators to access markets and funding.' },
+/* ------------------------------------------------------------------ */
+/* Flags — drawn, not emoji: emoji flags render as two letters on      */
+/* Windows. 3:2 boxes, simplified where the real flag carries an       */
+/* emblem.                                                             */
+/* ------------------------------------------------------------------ */
+
+const FLAGS = {
+  IN: (
+    <>
+      <rect width="30" height="20" fill="#ffffff" />
+      <rect width="30" height="6.67" fill="#ff9933" />
+      <rect y="13.33" width="30" height="6.67" fill="#138808" />
+      <circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" strokeWidth="0.6" />
+      <circle cx="15" cy="10" r="0.6" fill="#000080" />
+    </>
+  ),
+  AE: (
+    <>
+      <rect width="30" height="20" fill="#ffffff" />
+      <rect width="30" height="6.67" fill="#00732f" />
+      <rect y="13.33" width="30" height="6.67" fill="#000000" />
+      <rect width="8" height="20" fill="#ff0000" />
+    </>
+  ),
+  ES: (
+    <>
+      <rect width="30" height="20" fill="#aa151b" />
+      <rect y="5" width="30" height="10" fill="#f1bf00" />
+    </>
+  ),
+  ZM: (
+    <>
+      <rect width="30" height="20" fill="#198a00" />
+      <rect x="18" y="8" width="4" height="12" fill="#de2010" />
+      <rect x="22" y="8" width="4" height="12" fill="#000000" />
+      <rect x="26" y="8" width="4" height="12" fill="#ef7d00" />
+      <path d="M22.5 4.2c1.5-.9 3.5-.9 5 0-1.2.2-1.8.7-2.5 1.6-.7-.9-1.3-1.4-2.5-1.6Z" fill="#ef7d00" />
+    </>
+  ),
+}
+
+const Flag = ({ code, name }) => (
+  <svg className="cx-flag" viewBox="0 0 30 20" role="img" aria-label={`Flag of ${name}`}>
+    {FLAGS[code]}
+  </svg>
+)
+
+/**
+ * The corridor's partner countries. Each is a door into the same corridor,
+ * not a corridor of its own; the role says what that country brings to it.
+ */
+const PARTNERS = [
+  { code: 'IN', country: 'India', city: 'New Delhi', role: 'Strategic advisory lead', text: 'Home of the India Blockchain Alliance: Web3 services, knowledge sharing, membership and international collaboration.' },
+  { code: 'AE', country: 'United Arab Emirates', city: 'Dubai', role: 'Activation hub', text: 'The corridor’s gateway for investment and partnerships, with TheBlock as the venue where startups and investors meet.' },
+  { code: 'ES', country: 'Spain', city: 'Barcelona', role: 'Launch stage', text: 'The corridor’s European partner and host of the Global Innovation Corridor Forum at WTC 2026.' },
+  { code: 'ZM', country: 'Zambia', city: 'Lusaka', role: 'Talent hub', text: 'The corridor’s African partner through the Indo Zambia Blockchain Alliance: programmes, hubs and capacity building.' },
 ]
 
-/* the core dimensions, each with a line icon in place of a number (by
-   request): screen, block, hub, rocket, women, learning */
-const PILLARS = [
-  { icon: <><rect x="3" y="4" width="18" height="12" /><path d="M8 20h8M12 16v4M7 10l3-3 3 3 4-4" /></>, title: 'Web3 Technologies and Digital Transformation', focus: 'Web3 technology literacy, adoption, digital skills development and Web3-powered solutions.', outcome: 'Workforce readiness, increased digital competitiveness and accelerated transformation.' },
-  { icon: <><path d="m12 2 8 4.5v9L12 20l-8-4.5v-9Z" /><path d="m4 6.5 8 4.5 8-4.5M12 11v9" /></>, title: 'Blockchain, Web3 and Tokenization', focus: 'Digital identity, tokenization, smart contracts, Web3 innovation and decentralized technologies.', outcome: 'Technology adoption, innovation acceleration and cross-border collaboration.' },
-  { icon: <><path d="M3 21V9l9-6 9 6v12" /><path d="M9 21v-6h6v6M3 21h18" /></>, title: 'Hubs and Co-Working Ecosystems', focus: 'Hub development, startup incubation, innovation exchange and collaborative workspaces.', outcome: 'Stronger innovation infrastructure, regional collaboration and entrepreneurial growth.' },
-  { icon: <><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2" /><path d="M9 15l-3-3c1-4 4-8 11-9 0 7-5 10-9 11Z" /><circle cx="14" cy="8" r="1.5" /></>, title: 'Startup Development and Investment', focus: 'Startup acceleration, venture development, investor readiness and market access.', outcome: 'More funding opportunities, stronger scaling pathways and international partnerships for high-potential startups.' },
-  { icon: <><circle cx="12" cy="8" r="4" /><path d="M12 12v9M8.5 17.5h7" /></>, title: 'Girls and Women in Emerging Technologies', focus: 'Leadership development, skills training, entrepreneurship and mentorship for girls and women.', outcome: 'Greater participation, inclusion and women-led innovation across technology sectors.' },
-  { icon: <><path d="M2 9.5 12 5l10 4.5L12 14Z" /><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M22 9.5V15" /></>, title: 'Knowledge, Research and Capacity Building', focus: 'Certifications, training, research collaboration and academic partnerships.', outcome: 'Industry-ready talent, deeper knowledge exchange and sustainable capacity building.' },
+/** What being inside the corridor gives you, each said once. */
+const ACCESS = [
+  {
+    num: '01',
+    title: 'Web3 Resources',
+    text: 'Shared knowledge, research, certifications and advisory from every partner country, in one place.',
+    list: ['Blockchain, tokenization and digital identity expertise', 'Training and credentials through Verifyble', 'Regulatory insight across partner markets'],
+  },
+  {
+    num: '02',
+    title: 'Partnerships',
+    text: 'Introductions to the governments, institutions, corporates and builders already in the corridor.',
+    list: ['Investors, funds and launchpads', 'Universities and innovation hubs', 'Councils and industry bodies'],
+  },
+  {
+    num: '03',
+    title: 'Growth',
+    text: 'Support to take ventures and people from early stage to investment-ready.',
+    list: ['Startup acceleration and investor readiness', 'Women and girls in emerging technology', 'Mentors and talent across the network'],
+  },
+  {
+    num: '04',
+    title: 'Expansion',
+    text: 'One membership that opens every partner market, instead of starting over in each.',
+    list: ['Market entry into partner countries', 'Cross-border pilots and projects', 'A presence at corridor events worldwide'],
+  },
 ]
 
+/** Programmes the corridor runs through: links, not descriptions. */
 const PROGRAMMES = [
   { title: 'Tech4Good', href: '/initiatives#init-tech4good', cta: 'Explore' },
   { title: 'Blockchain Council', href: '/ecosystem#communities', cta: 'Explore' },
-  { title: 'Emerging Tech Council', href: '/ecosystem#communities', cta: 'Explore' },
   { title: 'Green Chain Protocol', href: '/initiatives#init-green-chain', cta: 'Explore' },
   { title: 'Verifyble', href: '/initiatives#init-verifyble', cta: 'Explore' },
   { title: 'Red Club', href: '/red-club', cta: 'Explore' },
+  { title: 'Emerging Tech Council', href: '/ecosystem#communities', cta: 'Explore' },
 ]
 
-const STRANDS = [
-  { title: 'Tokenization Networks', text: 'Connecting tokenization innovation hubs and co-working ecosystems globally.' },
-  { title: 'Ecosystem Connections', text: 'Connecting innovators, investors, governments, academia, startups and technology leaders.' },
-  { title: 'Adoption & Inclusion', text: 'Supporting innovation, financial inclusion, digital trust and emerging technology adoption.' },
-  { title: 'Women’s Initiatives', text: 'Advancing women and girls in AI, blockchain, Web3, entrepreneurship and innovation.' },
+/**
+ * The two memberships, by name.
+ *
+ * ⚠ The descriptions come from the site's own navigation; replace them with
+ * the wording in IBA's corridor deck. Prices are left out on purpose until IBA
+ * publishes them.
+ */
+const MEMBERSHIPS = [
+  { tag: 'Organisations', title: 'Partner Members', text: 'For companies, institutions and public bodies partnering on the corridor across its member countries.', href: '#join-corridor', cta: 'Apply' },
+  { tag: 'Individuals', title: 'Web360 Members', text: 'For founders, professionals and builders joining the corridor network as individuals.', href: '#join-corridor', cta: 'Apply' },
 ]
 
-const AUDIENCES = [
-  { title: 'Startups & Projects', text: 'Market entry, regulatory clarity, capital introductions.' },
-  { title: 'Investors & Funds', text: 'Startup and investor engagement across the corridor regions.' },
-  { title: 'Governments & Regulators', text: 'Peer engagement and shared standards work.' },
-  { title: 'Institutions', text: 'Learner pathways, joint research and faculty exchange.' },
-  { title: 'Corporates', text: 'Supply chain, payments and trade finance pilots across the corridor.' },
-]
-
-const COUNTRIES = [
-  { tag: 'The Activation Hub', title: 'UAE · Dubai', text: 'The strategic global gateway for innovation: investment and collaboration platform, partnership facilitator, startup and investor engagement centre, and corridor activation venue. TheBlock serves as the physical and relational platform for corridor activation.' },
-  { tag: 'Strategic Advisory Lead', title: 'India', text: 'India Blockchain Alliance is the leading strategic advisory partner: global Web3 services connector, knowledge-sharing partner, membership and services facilitator, and international collaboration enabler for technology transfer, startup development and ecosystem collaboration.' },
-  { tag: 'The Talent Hub', title: 'Africa', text: 'Talent hub for ecosystem partners: ecosystem coordinator, programme delivery, innovation hub facilitator and capacity-building coordinator.' },
-  { tag: 'The Launch Stage', title: 'Spain · Barcelona', text: 'Home of the Global Innovation Corridor Forum, launching at WTC 2026 in November, where the corridor is launched, partners are introduced and the implementation roadmap is established.' },
-]
+/**
+ * ⚠ TO FILL from IBA's corridor deck: the membership matrix and the terms.
+ *
+ * MATRIX: one row per benefit, one column per membership, e.g.
+ *   head: ['Benefit', 'Partner Members', 'Web360 Members'],
+ *   rows: [['Corridor network access', '✓', '✓'], ...]
+ * TERMS: one string per clause.
+ *
+ * Both sections render as soon as they have content; until then the page
+ * offers them on request rather than inventing either.
+ */
+const MATRIX = { head: ['Benefit', 'Partner Members', 'Web360 Members'], rows: [] }
+const TERMS = []
 
 export default function Corridor() {
   return (
@@ -75,120 +157,131 @@ export default function Corridor() {
         id="corridor"
         aside={<HeroMap />}
         eyebrow="IBA Web3 Corridor"
-        title="Global Innovation Corridor Initiative"
-        lede={`Connecting ${REGIONS_LINE} through innovation, technology, investment and partnerships.`}
+        title="One Global Corridor"
+        lede="A single corridor that brings countries together, giving everyone inside it access to Web3 resources, partnerships, growth and expansion across every partner market."
         actions={
           <>
-            <Btn href="#join-corridor">
-              Join the Corridor <span aria-hidden="true">→</span>
+            <Btn href="#corridor-membership">
+              Become a Member <span aria-hidden="true">→</span>
             </Btn>
-            <Btn href="#country-corridors" variant="ghost">
-              See the Country Corridors
+            <Btn href="#corridor-partners" variant="ghost">
+              Meet the Corridor Partners
             </Btn>
           </>
         }
       />
 
       <Section
-        id="corridor-overview"
-        eyebrow="A Broader Corridor for Shared Growth"
-        title="From a Web3 & AI Corridor to a Global Innovation Platform"
-        lede={`The initiative expands across borders into a global innovation platform connecting ${REGIONS_LINE}. It is designed to accelerate technology transfer, investment, entrepreneurship and ecosystem collaboration across regions.`}
+        id="corridor-partners"
+        eyebrow="Corridor Partners"
+        title="The Countries in the Corridor"
+        lede="Each partner country is a door into the same corridor. Join through one and you reach them all."
       >
-        <SubHead lede="The concept was initiated by Raj Kapoor of the India Blockchain Alliance, stemming from several cross-border sessions and summits on emerging technologies and global collaboration. One message came through everywhere: the need to explore practical implementation pathways and expand the vision into a broader corridor model.">
-          Origin Story: From India to a Global Corridor
-        </SubHead>
-      </Section>
-
-      <Section id="corridor-rationale" tone="dark" eyebrow="Why the Corridor Matters" title="Stronger Cross-Border Collaboration">
-        <div className="pk-split">
-          <Prose paras={['The initiative responds to the need for stronger cross-border collaboration in emerging technologies, startup growth and digital transformation. It aims to unlock opportunities across regions that together represent a population of more than 2.8 billion people.']} />
-          <Stats items={[{ value: '2.8B+', count: 2.8, suffix: 'B+', label: 'People across the corridor regions' }]} />
-        </div>
+        <ul className="cx-partners">
+          {PARTNERS.map((p) => (
+            <li className="cx-partner" key={p.code} data-rise>
+              <Flag code={p.code} name={p.country} />
+              <p className="cx-partner__role">{p.role}</p>
+              <h3 className="cx-partner__name">{p.country}</h3>
+              <p className="cx-partner__city">{p.city}</p>
+              <p className="cx-partner__text">{p.text}</p>
+            </li>
+          ))}
+          <li className="cx-partner cx-partner--next" data-rise>
+            <span className="cx-flag cx-flag--next" aria-hidden="true">+</span>
+            <p className="cx-partner__role">Expanding</p>
+            <h3 className="cx-partner__name">Your Country</h3>
+            <p className="cx-partner__text">The corridor grows through new country partners.</p>
+            <a className="cx-partner__go" href="#join-corridor" data-enquiry="Web3 Corridor">
+              Become a country partner <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
       </Section>
 
       <Section
-        id="corridor-vision"
-        eyebrow="Vision"
-        title="A Globally Connected Innovation Ecosystem"
-        lede="A globally connected innovation ecosystem that accelerates technology transfer, investment, entrepreneurship, talent development and inclusive participation in emerging technologies across India and global partner regions."
+        id="corridor-access"
+        tone="dark"
+        eyebrow="What the Corridor Opens"
+        title="Access Across Every Partner Country"
+        lede="Being in the corridor means being connected to all of it."
       >
-        <SubHead>Core Objectives</SubHead>
-        <Cards items={OBJECTIVES} cols={3} />
+        <Cards items={ACCESS} cols={4} />
       </Section>
 
-      <Section id="how-corridors-work" tone="red" eyebrow="How Corridors Work" title="Core Dimensions of the Corridor">
-        <Cards items={PILLARS} cols={3} />
-      </Section>
-
-      <Section id="corridor-initiatives" eyebrow="Flagship Initiatives" title="Programmes That Bring the Corridor to Life">
+      <Section id="corridor-programmes" eyebrow="Inside the Corridor" title="Programmes Running Through It">
         <Cards items={PROGRAMMES} cols={3} />
-        <Cards items={STRANDS} cols={4} />
       </Section>
 
       <Section
-        id="corridor-forum" tone="dark"
-        eyebrow="Forum Announcement"
+        id="corridor-forum"
+        tone="red"
+        eyebrow="Launch · WTC 2026 · November · Barcelona"
         title="Global Innovation Corridor Forum"
-        lede="Launching at WTC 2026 · November · Barcelona"
+        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and the roadmap is set."
       >
-        <div className="pk-split">
-          <div className="pk-init">
-            <Prose paras={['IBA will launch the Corridor at the World Token Congress and introduce strategic partners, connect investors and innovators, promote technology transfer, facilitate startup partnerships and establish the implementation roadmap.']} />
-            <div className="pk-actions" data-rise>
-              <Btn enquiry="Web3 Corridor">
-                Participate in WTC 2026 <span aria-hidden="true">→</span>
-              </Btn>
-            </div>
-          </div>
-          <Stats items={[{ value: 'Nov 2026', label: 'Barcelona, Spain' }]} />
+        <div className="pk-actions" data-rise>
+          <Btn enquiry="Web3 Corridor">
+            Participate in WTC 2026 <span aria-hidden="true">→</span>
+          </Btn>
         </div>
       </Section>
 
-      <Section id="corridor-impact" tone="red" eyebrow="From Vision to Execution" title="Expected Impact and Going Forward">
-        <Cards
-          cols={2}
-          items={[
-            {
-              title: 'Expected Impact',
-              list: ['Technology transfer', 'Startup growth', 'Investment mobilization', 'Innovation hub development', 'Skills development', 'Women’s participation in technology', 'Cross-border collaboration'],
-            },
-            {
-              title: 'Immediate Next Steps',
-              list: ['Finalize the partnership agreement', 'Establish a joint working group', 'Define participation structures', 'Develop the roadmap', 'Engage partners', 'Plan global activation', 'Launch pilot initiatives'],
-            },
+      <Section
+        id="corridor-membership"
+        eyebrow="Membership"
+        title="Join the Corridor"
+        lede="Two ways in, one corridor."
+      >
+        <Cards items={MEMBERSHIPS} cols={2} />
+
+        <div id="corridor-matrix" className="cx-block">
+          <SubHead>Membership Matrix</SubHead>
+          {MATRIX.rows.length ? (
+            <Table head={MATRIX.head} rows={MATRIX.rows} caption="What each corridor membership includes" />
+          ) : (
+            <RequestDoc topic="Corridor membership matrix">Request the membership matrix</RequestDoc>
+          )}
+        </div>
+
+        <div id="corridor-terms" className="cx-block">
+          <SubHead>Terms of Membership</SubHead>
+          {TERMS.length ? (
+            <ol className="cx-terms" data-rise>
+              {TERMS.map((t, i) => (
+                <li key={i}>{t}</li>
+              ))}
+            </ol>
+          ) : (
+            <RequestDoc topic="Corridor membership terms">Request the terms of membership</RequestDoc>
+          )}
+        </div>
+      </Section>
+
+      <Section id="join-corridor" tone="dark" eyebrow="Apply" title="Become a Corridor Member">
+        <Form
+          subject="Corridor membership application"
+          submit="Apply to Join the Corridor"
+          consent="I agree to be contacted about my enquiry."
+          fields={[
+            { name: 'name', label: 'Name' },
+            { name: 'org', label: 'Organisation' },
+            { name: 'email', label: 'Work email', type: 'email' },
+            { name: 'country', label: 'Country' },
+            { name: 'membership', label: 'Membership', type: 'select', options: ['Partner Member', 'Web360 Member', 'Country partner', 'Not sure yet'] },
+            { name: 'looking', label: "What you're looking for", type: 'textarea' },
           ]}
         />
-      </Section>
-
-      <Section id="join-corridor" eyebrow="Join the Corridor" title="Who the Corridor Is For">
-        <div className="pk-split">
-          <Cards items={AUDIENCES} cols={1} />
-          <Form
-            subject="Corridor application"
-            submit="Apply to Join a Corridor"
-            consent="I agree to be contacted about my enquiry."
-            fields={[
-              { name: 'name', label: 'Name' },
-              { name: 'org', label: 'Organisation' },
-              { name: 'email', label: 'Work email', type: 'email' },
-              { name: 'country', label: 'Country' },
-              { name: 'region', label: 'Region', type: 'select', options: ['Africa', 'India', 'UAE', 'Europe / Spain', 'Americas', 'Proposing a new corridor'] },
-              { name: 'role', label: 'I am a', type: 'select', options: ['Startup / Project', 'Investor / Fund', 'Government / Regulator', 'Institution', 'Corporate'] },
-              { name: 'looking', label: "What you're looking for", type: 'textarea' },
-            ]}
-          />
-        </div>
-      </Section>
-
-      <Section
-        id="country-corridors" tone="dark"
-        eyebrow="The Partnership Architecture"
-        title="Country Corridors"
-        lede="The initial focus is established with the UAE as the hub, with ecosystem partner countries incorporated through strategic partnerships as the corridor expands. The corridor is anchored by collaboration with the UAE, India and Europe as key international ecosystem partners, supporting global connectivity, knowledge exchange, market access and capital flow."
-      >
-        <Cards items={COUNTRIES} cols={4} />
       </Section>
     </div>
   )
 }
+
+/** Until a document is published on the page, it is offered on request. */
+const RequestDoc = ({ topic, children }) => (
+  <div className="pk-actions" data-rise>
+    <Btn enquiry={topic} variant="ghost">
+      {children} <span aria-hidden="true">→</span>
+    </Btn>
+  </div>
+)
