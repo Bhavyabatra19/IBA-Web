@@ -72,7 +72,7 @@ export const SEO = {
     brief: true,
     title: 'IBA Library | Free Blockchain Articles, Videos & Research',
     description:
-      'Searchable, categorised library of articles, videos, reports and recorded sessions. Free with a member account.',
+      'Searchable, categorised library of articles, videos, reports and recorded sessions. Free and open to all.',
   },
   '/connect': {
     brief: true,

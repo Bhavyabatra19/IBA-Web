@@ -2756,8 +2756,8 @@ main {
 }
 
 /* ==================================================================
-   Library — Member Login: the form, and beside it a black panel showing
-   what the library holds (Library.jsx, .lg)
+   Red Club — Member Login: the form, and beside it a black panel showing
+   what membership holds (RedClub.jsx, .lg)
    ================================================================== */
 .lg {
   display: grid;
@@ -3877,6 +3877,13 @@ main {
 }
 .pk-sec--dark .pk-aside a {
   color: #ffffff;
+}
+/* ...except inside the login's white box (Red Club), which keeps its light colours */
+.pk-sec--dark .lg__form .pk-aside {
+  color: #6b655e;
+}
+.pk-sec--dark .lg__form .pk-aside a {
+  color: var(--iba-red);
 }
 /* the partner grid's white cells read as one block on black, and its
    closing cell turns red so it does not vanish into the band */

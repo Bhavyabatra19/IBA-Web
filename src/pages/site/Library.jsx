@@ -1,15 +1,14 @@
 /**
- * The IBA Library — where to find our content, the searchable catalogue,
- * and the member sign-up and log-in.
+ * The IBA Library — where to find our content, and the searchable catalogue.
+ * It is open to everyone: there is no IBA membership, so no sign-up or log-in
+ * here (the only membership is the Red Club's, and its login is on /red-club).
  *
- * ⚠ ACCOUNTS ARE NOT LIVE. There is no auth backend, so the sign-up and
- * log-in forms say so on submit rather than pretending to create or open an
- * account. The catalogue below is the source's sample list, and its cards do
- * not open an item yet — each needs a real URL (`href`) when published.
+ * The catalogue below is the source's sample list, and its cards do not open
+ * an item yet — each needs a real URL (`href`) when published.
  */
 
 import { useMemo, useRef, useState } from 'react'
-import { PageHero, Section, Cards, Form, Btn } from '../../components/Kit'
+import { PageHero, Section, Cards } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import { FACTS } from '../../data/facts'
 import LibraryHolo from '../../components/LibraryHolo'
@@ -52,11 +51,6 @@ const fmtDate = (d) =>
     year: 'numeric',
   })
 
-const ACCOUNTS_NOTE =
-  'Member accounts are not live yet, so nothing has been created or sent. Email ' +
-  CONTACT.email.label +
-  ' and the IBA team will set up your access.'
-
 export default function Library() {
   const [q, setQ] = useState('')
   const [f, setF] = useState({ format: '', topic: '', level: '', source: '' })
@@ -85,12 +79,7 @@ export default function Library() {
         aside={<LibraryHolo />}
         eyebrow="The IBA Library"
         title="An Open Knowledge Base, Built by the Community"
-        lede={`Articles, videos, research, policy briefs and recorded sessions, developed by IBA's industry experts and contributed by our ${FACTS.advisors.text} global advisors and ${FACTS.members.text} members, open to the wider community. Free with a member account, no paywall.`}
-        actions={
-          <Btn href="#login">
-            Member Login <span aria-hidden="true">→</span>
-          </Btn>
-        }
+        lede={`Articles, videos, research, policy briefs and recorded sessions, developed by IBA's industry experts and contributed by our ${FACTS.advisors.text} global advisors and ${FACTS.members.text} members, open to the wider community. Free, no paywall.`}
       />
 
       <Section eyebrow="Where to Find Us" title="Read, Follow and Watch" tone="red">
@@ -202,123 +191,6 @@ export default function Library() {
         </div>
       </section>
 
-      <Section
-        id="signup" tone="dark"
-        eyebrow="Join Free"
-        title="Become an IBA Member"
-        lede={[
-          'One free account. Full Library access. No cost, ever.',
-          "Free forever for registered members. We don't sell your data. Unsubscribe from emails any time.",
-        ]}
-      >
-        <Form
-          notice={ACCOUNTS_NOTE}
-          submit="Create My Member Account"
-          consent={['I agree to the Terms and Privacy Policy.', 'Send me IBA research and event updates.']}
-          fields={[
-            { name: 'name', label: 'Full name' },
-            { name: 'email', label: 'Work email', type: 'email' },
-            { name: 'password', label: 'Password', type: 'password' },
-            { name: 'org', label: 'Organisation' },
-            {
-              name: 'role',
-              label: 'Role',
-              type: 'select',
-              options: [
-                'Learner',
-                'Faculty / Institution',
-                'Corporate',
-                'Government / Regulator',
-                'Startup / Founder',
-                'Investor',
-                'Other',
-              ],
-            },
-            { name: 'country', label: 'Country' },
-          ]}
-        />
-        <p className="pk-aside" data-rise>
-          Already a member? <a href="#login">Member Login</a>
-        </p>
-      </Section>
-
-      <Section id="login" eyebrow="Members" title="Member Login" lede="Welcome back to the alliance.">
-        <div className="lg">
-          <div className="lg__form">
-            <div className="lg__main">
-              <div className="lg__head" data-rise>
-                <span className="lg__mark" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <rect x="5" y="10" width="14" height="10" />
-                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-                  </svg>
-                </span>
-                <h3>Log in to your account</h3>
-                <p>Use the email you registered with to open the full Library.</p>
-              </div>
-              <Form
-                notice={ACCOUNTS_NOTE}
-                submit="Log In"
-                consent={[]}
-                fields={[
-                  { name: 'email', label: 'Email', type: 'email', wide: true },
-                  {
-                    name: 'password',
-                    label: 'Password',
-                    type: 'password',
-                    wide: true,
-                  },
-                ]}
-              />
-              <p className="lg__help" data-rise>
-                Trouble logging in? Email <a href={CONTACT.email.href}>{CONTACT.email.label}</a>
-              </p>
-            </div>
-            <p className="pk-aside" data-rise>
-              Not a member yet? <a href="#signup">Create a free account</a>
-            </p>
-          </div>
-
-          {/* what's waiting on the other side, from the catalogue itself */}
-          <aside className="lg__panel" data-rise>
-            <p className="lg__eyebrow">Inside the Member Library</p>
-            <ul className="lg__stats">
-              <li>
-                <strong>{RESOURCES.length}</strong>
-                <span>Resources</span>
-              </li>
-              <li>
-                <strong>{uniq('topic').length}</strong>
-                <span>Topics</span>
-              </li>
-              <li>
-                <strong>{uniq('format').length}</strong>
-                <span>Formats</span>
-              </li>
-            </ul>
-            <ul className="lg__perks">
-              <li>Reports, whitepapers and council publications</li>
-              <li>Recorded webinars with IBA experts and partners</li>
-              <li>Case studies and founder playbooks</li>
-              <li>Free for members, no paywall</li>
-            </ul>
-            <div className="lg__latest">
-              <p className="lg__label">Latest Additions</p>
-              <ol>
-                {[...RESOURCES]
-                  .sort(SORTS.newest)
-                  .slice(0, 3)
-                  .map((r) => (
-                    <li key={r.title}>
-                      <span className="lg__fmt">{r.format}</span>
-                      <span className="lg__title">{r.title}</span>
-                    </li>
-                  ))}
-              </ol>
-            </div>
-          </aside>
-        </div>
-      </Section>
     </div>
   )
 }

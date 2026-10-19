@@ -1,7 +1,22 @@
-/** Experience Zone — programmes, the wallet, investor readiness, the AI tool, the 90-day plan. */
+/**
+ * Experience Zone — programmes, the wallet, investor readiness, the AI tool,
+ * the 90-day plan, and the member login.
+ *
+ * Red Club is IBA's only membership: paid and by invitation. The site's one
+ * Member Login (nav bar, drawer, footer) lands on #login here.
+ *
+ * ⚠ ACCOUNTS ARE NOT LIVE. There is no auth backend, so the login form says
+ * so on submit rather than pretending to open an account.
+ */
 
-import { PageHero, Section, Cards, Bullets, Btn } from '../../components/Kit'
+import { PageHero, Section, Cards, Bullets, Form, Btn } from '../../components/Kit'
 import { Go } from '../../sections/service/ServiceBlocks'
+import { CONTACT, MEMBER_LOGIN } from '../../nav'
+
+const ACCOUNTS_NOTE =
+  'Member accounts are not live yet, so nothing has been sent. Email ' +
+  CONTACT.email.label +
+  ' and the IBA team will help you into your account.'
 /* The hero graphic: the supplied artwork (public/images/rc-hero.jpg). The
    drawn alternative is components/RedClubHolo.jsx. */
 const HeroImage = () => (
@@ -38,8 +53,8 @@ export default function RedClub() {
             <Btn enquiry="Red Club (learner)">
               Join Experience Zone <span aria-hidden="true">→</span>
             </Btn>
-            <Btn href="/library#login" variant="ghost">
-              Member Login
+            <Btn href="#login" variant="ghost">
+              {MEMBER_LOGIN}
             </Btn>
           </>
         }
@@ -86,7 +101,7 @@ export default function RedClub() {
               ]}
             />
             <div className="pk-actions">
-              <Btn href="/library#login">
+              <Btn href="#login">
                 Open Your Wallet <span aria-hidden="true">→</span>
               </Btn>
             </div>
@@ -164,6 +179,58 @@ export default function RedClub() {
           <Btn enquiry="Red Club / Verifyble (institution)" variant="ghost">
             Bring the Experience Zone to Your Institution
           </Btn>
+        </div>
+      </Section>
+
+      <Section
+        id="login" tone="dark"
+        eyebrow="Members Only"
+        title={MEMBER_LOGIN}
+        lede="Red Club is a paid membership, by invitation only. Log in to open your programmes and wallet."
+      >
+        <div className="lg">
+          <div className="lg__form">
+            <div className="lg__main">
+              <div className="lg__head" data-rise>
+                <span className="lg__mark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="5" y="10" width="14" height="10" />
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                  </svg>
+                </span>
+                <h3>Log in to your account</h3>
+                <p>Use the email your invitation was sent to.</p>
+              </div>
+              <Form
+                notice={ACCOUNTS_NOTE}
+                submit="Log In"
+                consent={[]}
+                fields={[
+                  { name: 'email', label: 'Email', type: 'email', wide: true },
+                  { name: 'password', label: 'Password', type: 'password', wide: true },
+                ]}
+              />
+              <p className="lg__help" data-rise>
+                Trouble logging in? Email <a href={CONTACT.email.href}>{CONTACT.email.label}</a>
+              </p>
+            </div>
+            <p className="pk-aside" data-rise>
+              Not a member yet? Membership is by invitation.{' '}
+              <a href="/connect" data-enquiry="Red Club (learner)">
+                Request an invitation
+              </a>
+            </p>
+          </div>
+
+          <aside className="lg__panel" data-rise>
+            <p className="lg__eyebrow">Inside the Red Club</p>
+            <ul className="lg__perks">
+              <li>Your membership and programme records</li>
+              <li>The Experience Zone Wallet: certificates, achievements and digital assets</li>
+              <li>The Investor Ready Programme and the AI tool for businesses</li>
+              <li>Your 30-60-90 day plan</li>
+            </ul>
+          </aside>
         </div>
       </Section>
     </div>

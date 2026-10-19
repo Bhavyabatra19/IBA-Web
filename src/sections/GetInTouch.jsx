@@ -15,10 +15,9 @@ import { waLink } from '../enquiry'
 
 /* each row opens the site's enquiry form already set to that topic */
 const TOPICS = [
-  { label: 'Memberships', note: 'Join the alliance and its network', topic: 'Ecosystem partnership' },
   { label: 'Web3 Corridor', note: 'Enter a market through a corridor', topic: 'Web3 Corridor' },
   { label: 'Consulting', note: 'Scope an advisory or delivery project', topic: 'Consulting' },
-  { label: 'Red Club', note: 'Events, programmes and labs', topic: 'Red Club (learner)' },
+  { label: 'Red Club', note: 'Paid, invite-only membership: programmes and labs', topic: 'Red Club (learner)' },
 ]
 
 export default function GetInTouch() {
@@ -54,7 +53,7 @@ export default function GetInTouch() {
           <p className="git__lede" data-rise>
             Connecting Economies. Block by Block.
             <br />
-            Talk to our team about memberships, corridors, consulting or the Red Club.
+            Talk to our team about corridors, consulting or Red Club membership.
           </p>
           <div className="git__actions" data-rise>
             <a className="git__btn git__btn--primary" href="#connect" data-enquiry="">
@@ -81,7 +80,7 @@ export default function GetInTouch() {
             </li>
             <li>
               <a
-                href={waLink('IBA membership, corridors or consulting')}
+                href={waLink('Red Club membership, corridors or consulting')}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`WhatsApp ${CONTACT.whatsapp.label}`}

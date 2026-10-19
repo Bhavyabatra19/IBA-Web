@@ -27,7 +27,7 @@ const COUNCILS = [
 ]
 
 const PEOPLE = [
-  { title: 'Members', text: 'Practitioners, founders, policymakers and learners across ' + FACTS.countries.text + ' countries. Membership is how most people enter the alliance.' },
+  { title: 'Members', text: 'Practitioners, founders, policymakers and learners across ' + FACTS.countries.text + ' countries.' },
   { title: 'Advisors', text: FACTS.advisors.text + ' global advisors across policy, law, finance, engineering and academia, supporting IBA mandates and client work.' },
   { title: 'Mentors & Contributors', text: 'Industry mentors supporting Red Club learners on projects, research and careers, and contributors publishing through the IBA Library.' },
 ]
@@ -105,11 +105,6 @@ export default function Ecosystem() {
         lede={`${FACTS.members.text} global members. ${FACTS.advisors.text} global advisors. ${FACTS.countries.text} countries.`}
       >
         <Cards items={PEOPLE} cols={3} />
-        <div className="pk-actions" data-rise>
-          <Btn href="/library#signup">
-            Join the Alliance <span aria-hidden="true">→</span>
-          </Btn>
-        </div>
       </Section>
 
       <Section id="become-a-partner" eyebrow="Become a Partner" title="Partner With IBA">

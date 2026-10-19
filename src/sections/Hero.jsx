@@ -223,8 +223,8 @@ export default function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <a className="btn btn--ghost" href="/ecosystem#people">
-              Explore Memberships
+            <a className="btn btn--ghost" href="/red-club">
+              Explore Red Club Membership
             </a>
           </div>
         </div>

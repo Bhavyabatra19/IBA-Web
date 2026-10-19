@@ -14,7 +14,7 @@ export default function CtaBand() {
             Ready to start?
           </h2>
           <p className="cta-band__text">
-            Talk to our team about membership, corridors, consulting or the Red Club.
+            Talk to our team about corridors, consulting or Red Club membership.
           </p>
         </div>
         <a className="bb-btn bb-btn--black" href="/connect" data-enquiry="">

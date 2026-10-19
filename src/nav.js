@@ -252,15 +252,15 @@ export const CONTACT = {
 }
 
 /**
- * The label on the way in, everywhere it appears.
+ * The label on the way in, and where it goes.
  *
- * "Member Login", not "Sign In": IBA is an alliance of 800+ members, and the
- * label should say what the account actually is. It lives here because the
- * brief asks for it to be identical in the nav, the footer, the modal heading,
- * the transactional emails and the empty states — and five copies of a word are
- * five chances for one of them to drift.
+ * There is no IBA membership: the only accounts are Red Club members', a paid,
+ * invite-only membership, so the one login is the Red Club's. It lives here so
+ * the nav bar, the drawer, the footer and the Red Club page say the same thing
+ * and point to the same place.
  */
-export const MEMBER_LOGIN = 'Member Login'
+export const MEMBER_LOGIN = 'Red Club Login'
+export const MEMBER_LOGIN_HREF = '/red-club#login'
 
 /**
  * Footer columns, as the footer design sets them out: five lists, the last
@@ -317,8 +317,8 @@ export const FOOTER = [
     title: 'Resources & Contact',
     items: [
       { label: 'The IBA Library', href: '/library' },
-      { label: MEMBER_LOGIN, href: '/library#login' },
-      { label: 'Newsletter signup', href: '/library#signup' },
+      { label: MEMBER_LOGIN, href: MEMBER_LOGIN_HREF },
+      { label: 'Newsletter signup', href: `mailto:${CONTACT.email.label}?subject=${encodeURIComponent('Newsletter signup')}` },
       { label: 'Contact Us', href: '/connect' },
       { label: 'LinkedIn', href: CONTACT.linkedin.href, external: true, icon: 'linkedin' },
       { label: 'Email', href: CONTACT.email.href, icon: 'email' },

@@ -197,8 +197,8 @@ export default function Closing() {
             </span>
           </h2>
           <p className="close__sub" data-rise>
-            Connecting Economies. Block by Block. Talk to our team about membership,
-            corridors, consulting or the Red Club.
+            Connecting Economies. Block by Block. Talk to our team about corridors,
+            consulting or Red Club membership.
           </p>
           {/* 8.1: the closing-band CTA is one of the enquiry triggers. The href
               is the real page, so it still works with no JS and still opens in a

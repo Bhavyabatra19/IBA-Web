@@ -23,9 +23,8 @@
  *    `pill` renders as the flagship. None of the three is a hand-written case
  *    here, so the bar follows nav.js wherever it goes.
  *
- * Member Login is a link to /library/sign-in, not a modal. It used to open one;
- * the real forms are pages now (7.2, 7.3), and a modal holding a second, shorter
- * copy of them is how the two versions start disagreeing.
+ * Member Login is a link to the Red Club login (MEMBER_LOGIN_HREF), not a
+ * modal: Red Club is the only membership, and its form lives on its own page.
  *
  * Connect With Us — in the bar and at the foot of the drawer — opens the 8.1
  * enquiry overlay. Neither button has a handler for it: both carry
@@ -35,7 +34,7 @@
  */
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { NAV, MEMBER_LOGIN, tabItems } from '../nav'
+import { NAV, MEMBER_LOGIN, MEMBER_LOGIN_HREF, tabItems } from '../nav'
 import {
   gsap,
   ScrollTrigger,
@@ -323,8 +322,8 @@ export default function Nav() {
                 than as two buttons of different rank. */}
             <a
               className="btn btn--ghost btn--sm"
-              href="/library#login"
-              onClick={(e) => go(e, '/library#login')}
+              href={MEMBER_LOGIN_HREF}
+              onClick={(e) => go(e, MEMBER_LOGIN_HREF)}
             >
               {MEMBER_LOGIN}
             </a>
@@ -396,8 +395,8 @@ export default function Nav() {
                 ))}
               </div>
 
-              {/* the grey side column: the section's own page and the two
-                  ways in, as quiet links */}
+              {/* the grey side column: the section's own page and the way
+                  in, as quiet links */}
               <aside className="nav__panelSide">
                 <h3 className="nav__panelGroupTitle">Get Started</h3>
                 <ul>
@@ -409,16 +408,6 @@ export default function Nav() {
                   <li>
                     <a href="/connect" data-enquiry="">
                       Connect With Us
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/library#signup" onClick={(e) => go(e, '/library#signup')}>
-                      Become a Member
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/library#login" onClick={(e) => go(e, '/library#login')}>
-                      {MEMBER_LOGIN}
                     </a>
                   </li>
                 </ul>
@@ -504,8 +493,8 @@ export default function Nav() {
         <div className="drawer__foot">
           <a
             className="btn btn--ghost btn--block"
-            href="/library#login"
-            onClick={(e) => go(e, '/library#login')}
+            href={MEMBER_LOGIN_HREF}
+            onClick={(e) => go(e, MEMBER_LOGIN_HREF)}
           >
             {MEMBER_LOGIN}
           </a>
