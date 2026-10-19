@@ -5,10 +5,8 @@
  * photo header toned into the brand, glass icon badge, red on hover. Two
  * columns instead of three, and a wider header to suit them.
  *
- * Photos: Unsplash, under the Unsplash License (free for commercial use, no
- * attribution required), saved locally in public/images:
- *   ac-students.jpg      Christian Lendl    unsplash.com/photos/nxBucBB_ihQ
- *   ac-institutions.jpg  Matthieu Joannon   unsplash.com/photos/m8MSzLd2Y4Q
+ * Photos: the supplied artwork, saved locally in public/images (card-*.jpg)
+ * and shown uncropped at 9:4 (.wd--art in brandbook.css).
  */
 
 import { useLayoutEffect, useRef } from 'react'
@@ -69,7 +67,7 @@ export default function AcademiaCards() {
 
   return (
     <section
-      className="wd wd--two band band--light band--own"
+      className="wd wd--two wd--art band band--light band--own"
       ref={root}
       aria-labelledby="ac-title"
     >
