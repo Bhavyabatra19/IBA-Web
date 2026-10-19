@@ -5,10 +5,8 @@
  * a photo header in a red hue, with an icon badge; the copy sits beneath. On
  * hover the card turns red and the photo eases in.
  *
- * Photos: Unsplash, under the Unsplash License (free for commercial use, no
- * attribution required), saved locally in public/images:
- *   wd-advise.jpg  Vitaly Gariev     unsplash.com/photos/8k5j5z6ZYT4
- *   wd-build.jpg   GuerrillaBuzz     unsplash.com/photos/7hA2wqBcSF8
+ * Photos: the supplied artwork, saved locally in public/images (card-*.jpg)
+ * and shown uncropped at 9:4 (.wd--art in brandbook.css).
  */
 
 import { useLayoutEffect, useRef } from 'react'
@@ -67,7 +65,7 @@ export default function WhatWeDoCards() {
   }, [])
 
   return (
-    <section className="wd wd--duo band band--light band--own" ref={root} aria-labelledby="wd-title">
+    <section className="wd wd--duo wd--art band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
         <p className="hero__kicker wd__eyebrow" id="wd-title" data-rise>
           <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
