@@ -9,7 +9,7 @@ import { PageHero, Section, Form, Btn } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 
 const WAYS = [
-  { title: 'For Learners', text: 'Join the IBA Red Club: programmes, projects, placements.', enquiry: 'Red Club (learner)', cta: 'Join Red Club' },
+  { title: 'Global Exposure', text: 'Join the IBA Red Club: programmes, projects, placements.', enquiry: 'Red Club (learner)', cta: 'Join Red Club' },
   { title: 'For Institutions', text: 'Bring Red Club programmes and campus labs to your university.', enquiry: 'Red Club / Verifyble (institution)', cta: 'Request Prospectus' },
   { title: 'For Enterprises & Governments', text: 'Scope an advisory or delivery engagement.', enquiry: 'Consulting', cta: 'Book a Call' },
   { title: 'For Partners', text: 'Join the ecosystem or the Global Innovation Corridor.', enquiry: 'Ecosystem partnership', cta: 'Partner With Us' },
