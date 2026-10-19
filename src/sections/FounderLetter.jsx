@@ -3,24 +3,14 @@
  *
  * Two parts, so neither leaves a gap beside the other:
  *   · the introduction, full width: a large portrait on the left; on the
- *     right the opening line as a large quote, the founder's name and role,
- *     three figures and the regulators named in the letter, and LinkedIn
+ *     right the opening line as a large quote and LinkedIn
  *   · the letter itself in one centred reading column, with one line pulled
  *     out large across it, and the signature
  *
- * Every figure here is taken from the letter's own text. Styles in
- * brandbook.css (.fl2).
+ * Styles in brandbook.css (.fl2).
  */
 
 import { Btn } from '../components/Kit'
-
-const FACTS = [
-  { value: '25', label: 'Years in banking' },
-  { value: '90+', label: 'Ventures advised' },
-  { value: '4', label: 'Continents' },
-]
-
-const REGULATORS = ['ADGM', 'VARA', 'DIFC', 'GIFT City']
 
 export default function FounderLetter({ lead, paras, pull, linkedin }) {
   return (
@@ -48,24 +38,6 @@ export default function FounderLetter({ lead, paras, pull, linkedin }) {
             </span>
             <p>{lead}</p>
           </blockquote>
-
-          <ul className="fl2__facts" data-rise>
-            {FACTS.map((f) => (
-              <li key={f.label}>
-                <strong>{f.value}</strong>
-                <span>{f.label}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="fl2__regs" data-rise>
-            <span className="fl2__label">At the table with</span>
-            <ul>
-              {REGULATORS.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          </div>
 
           <div data-rise>
             <Btn href={linkedin} variant="ghost">

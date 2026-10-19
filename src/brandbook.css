@@ -5370,61 +5370,6 @@ main {
   letter-spacing: -0.02em;
   color: var(--bb-ink);
 }
-.fl2__facts {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-  padding: 1.5rem 0;
-  border-block: 1px solid var(--bb-line);
-  list-style: none;
-}
-.fl2__facts li {
-  display: grid;
-  gap: 0.35rem;
-  align-content: start;
-}
-.fl2__facts li + li {
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--bb-line);
-}
-.fl2__facts strong {
-  font-family: var(--bb-font);
-  font-weight: 400;
-  font-size: clamp(2.2rem, 1.6rem + 1.6vw, 3.2rem);
-  line-height: 1;
-  color: var(--iba-red);
-}
-.fl2__facts span {
-  font-size: 14px;
-  line-height: 1.35;
-  color: var(--bb-ink-muted);
-}
-.fl2__regs {
-  display: grid;
-  gap: 0.75rem;
-}
-.fl2__label {
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--bb-ink-muted);
-}
-.fl2__regs ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.fl2__regs li {
-  padding: 0.45rem 0.9rem;
-  border: 1px solid var(--bb-line);
-  background: var(--bb-surface-alt);
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  color: var(--bb-ink);
-}
 
 /* the letter: one comfortable reading column */
 .fl2__letter {
@@ -5509,14 +5454,6 @@ main {
     margin-inline: 0;
   }
 }
-@media (max-width: 480px) {
-  .fl2__facts li + li {
-    padding-left: 0.75rem;
-  }
-  .fl2__facts span {
-    font-size: 12px;
-  }
-}
 .fl2__badge strong {
   color: #ffffff;
 }
@@ -5591,9 +5528,6 @@ main {
   }
   .fl2__lead {
     padding-top: 1.25rem;
-  }
-  .fl2__facts {
-    padding: 1.1rem 0;
   }
 }
 
