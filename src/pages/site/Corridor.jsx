@@ -3,16 +3,16 @@
  *
  * The page tells a single story, in order: there is one corridor; these are
  * the countries partnering on it; this is what it opens for anyone inside it;
- * this is where it launches; and this is how to become a member. Membership
- * (the Web360 Club), its terms and its matrix close the page. Content follows
- * IBA's corridor membership deck; prices are deliberately not shown.
+ * this is where it launches; and a small membership matrix closes the page,
+ * asking people to get in touch. Content follows IBA's corridor membership
+ * deck; prices are deliberately not shown.
  *
  * Earlier versions repeated the same idea as objectives, core dimensions,
  * strands, impact and next steps, and named regions in prose. The partner
  * countries are now the flags, and everything a member gets is said once.
  */
 
-import { PageHero, Section, Cards, Form, Btn, SubHead } from '../../components/Kit'
+import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { Table } from '../../sections/service/ServiceBlocks'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
@@ -162,80 +162,23 @@ const SIDES = [
   { tag: 'For Investors', title: 'One Framework to De-risk', text: 'A unified framework to de-risk international deployments, with vetted deal flow arriving from every partner country.' },
 ]
 
-/** What the Web360 Club provides across every membership. */
-const CLUB_SERVICES = [
-  { title: 'Tech Support', text: 'Advanced support stacks to accelerate tech and business outcomes, with end-to-end plans for tokenized business solutions.' },
-  { title: 'Business Setup', text: 'Pre-verified frameworks for the legal and regulatory requirements of each corridor market, with advanced KYC and KYB.' },
-  { title: 'Advisory & Mentoring', text: 'Direct access to veterans who have scaled Web3 across borders, and mentor sessions with subject-matter experts.' },
-  { title: 'Global Visibility', text: 'Marketing, networking and forums that put your venture in front of global decision makers and investors.' },
-  { title: 'Go-To-Market Plans', text: 'Blueprints to launch and scale globally, with separate plans for tokenization.' },
-]
-
 /**
- * Terms of membership: who each tier is for, how you get in and how long it
- * runs, as the deck sets them out. Prices are left out on purpose until IBA
- * publishes them.
+ * The membership matrix: the three tiers, the tokenization packs beside them,
+ * and only the offerings that tell them apart. Prices are left out on purpose;
+ * the full detail is shared when someone gets in touch.
  */
-const TERMS = {
-  head: ['Membership', 'Who it’s for', 'Entry', 'Term'],
-  rows: [
-    ['Bronze', 'Starters and early builders: individual founders and operators, MSMEs and companies active in one or two countries', 'Open application', '1 year'],
-    ['Silver', 'Founders and operators: registered startups moving from seed to growth to scale', 'Committee-gated', '1 year'],
-    ['Gold', 'Invite-only class: family offices, LPs and institutional capital, with custom terms and global activations', 'By invitation', '6 months'],
-    ['Club Starter', 'Tokenization explorers to professionals: a fast-track advisory plan to be market-ready in 90 days', 'Open application', '3 months'],
-    ['Bronze Plus', 'Starter pack for tokenization professionals, founders, issuers, advisors and small businesses', 'Open application', '1 year'],
-    ['Silver Plus', 'Pro pack: more visibility, enhanced listings and active business development', 'Open application', '1 year'],
-    ['Gold Plus', 'Mega pack for corporates and institutions: tokenization platforms, law firms, banks, exchanges and compliance providers', 'Open application', '1 year'],
-  ],
-}
-
-/* each tier includes everything in the tier before it, as the deck says */
 const Y = '✓'
 const N = '—'
-
-/** The founder track: Bronze, Silver, Gold. */
-const MATRIX_FOUNDERS = {
-  head: ['Benefit', 'Bronze', 'Silver', 'Gold'],
+const MATRIX = {
+  head: ['', 'Bronze', 'Silver', 'Gold', 'Tokeni\u00adzation'],
   rows: [
-    ['Verified Club badge', Y, Y, Y],
-    ['Webinars, AMAs and community events', Y, Y, Y],
-    ['Monthly Corridor members roundup', Y, Y, Y],
-    ['Member pricing on corridor services', Y, Y, Y],
-    ['Corporate vault for documents, KYC and KYB', Y, Y, Y],
-    ['Business setup, legal and GTM advisory', Y, Y, Y],
-    ['Dubai co-hosted events', 'Special packages', '2 complimentary passes', 'Special pricing'],
-    ['Learning links: RWA, tokenomics, regulation', N, Y, Y],
-    ['Company feature on the ecosystem podcast', N, Y, Y],
-    ['Tech interns on request', N, Y, Y],
-    ['Matched investor introductions', N, Y, Y],
-    ['Curated meetings with experts and founder-mentors', N, N, Y],
-    ['Weekly strategy sessions and KPI reviews', N, N, Y],
-    ['Expert board advisor', N, N, '6 months'],
-    ['Route into the tokenization track', 'Priority review for Bronze Plus', 'Priority review for Silver Plus', 'Fast-track into Gold Plus'],
-  ],
-}
-
-/** The tokenization track: Bronze Plus, Silver Plus, Gold Plus. */
-const MATRIX_TOKENIZATION = {
-  head: ['Benefit', 'Bronze Plus', 'Silver Plus', 'Gold Plus'],
-  rows: [
-    ['Verified Club badge', Y, Y, Y],
-    ['Webinars, live and on demand', Y, Y, Y],
-    ['Tokenized Markets weekly newsletter', Y, Y, Y],
-    ['Learning Center: RWA, tokenomics, regulation', Y, Y, Y],
-    ['Member portal, RWA Forum and directories', Y, Y, Y],
-    ['Corporate vault with issuer profile', Y, Y, Y],
-    ['Member pricing and Dubai event pricing', Y, Y, Y],
-    ['GTM advisory and tech interns on request', Y, Y, Y],
-    ['Enhanced listings and business development', N, Y, Y],
-    ['Tokenomics white paper mentoring', N, Y, Y],
-    ['Project and business plan reviews', N, Y, Y],
-    ['Introductions to tokenization platforms', N, Y, Y],
-    ['Member Spotlight, podcast and media features', N, Y, Y],
-    ['Company-wide team access', N, N, Y],
-    ['Sponsorships and lead generation', N, N, Y],
-    ['Web3 Corridor contributor and Priority Pass', N, N, Y],
-    ['Expert board advisor', N, N, '6 months'],
+    ['Best for', 'Early builders', 'Startups', 'By invite', 'Issuers'],
+    ['Community, events & Verified badge', Y, Y, Y, Y],
+    ['Business setup & GTM advisory', Y, Y, Y, Y],
+    ['Investor introductions', N, Y, Y, Y],
+    ['Weekly strategy sessions', N, N, Y, N],
+    ['Tokenomics & tokenization advisory', N, N, N, Y],
+    ['Expert board advisor', N, N, Y, Y],
   ],
 }
 
@@ -281,7 +224,7 @@ export default function Corridor() {
             <p className="cx-partner__role">Expanding</p>
             <h3 className="cx-partner__name">Your Country</h3>
             <p className="cx-partner__text">The corridor grows through new country partners.</p>
-            <a className="cx-partner__go" href="#join-corridor" data-enquiry="Web3 Corridor">
+            <a className="cx-partner__go" href="/connect" data-enquiry="Web3 Corridor">
               Become a country partner <span aria-hidden="true">→</span>
             </a>
           </li>
@@ -317,51 +260,18 @@ export default function Corridor() {
 
       <Section
         id="corridor-membership"
-        eyebrow="The Corridor Entry · Web360 Club"
-        title="Membership Is a Journey"
-        lede="Not a static subscription: every stage is gated, and every gate is earned. Two tracks run through the Web360 Club, one for founders and one for tokenization, and every membership draws on the same club services."
+        eyebrow="Membership · Web360 Club"
+        title="Join the Corridor"
+        lede="Membership is a journey: every stage is gated, and every gate is earned."
       >
-        <Cards items={CLUB_SERVICES} cols={3} />
-
-        <div id="corridor-terms" className="cx-block">
-          <SubHead lede="Pricing is shared on application.">Terms of Membership</SubHead>
-          <div className="cx-table cx-table--terms">
-            <Table head={TERMS.head} rows={TERMS.rows} caption="Who each corridor membership is for, how to enter and its term" />
-          </div>
+        <div id="corridor-matrix" className="cx-table cx-table--matrix">
+          <Table head={MATRIX.head} rows={MATRIX.rows} caption="What each corridor membership includes" />
         </div>
-
-        <div id="corridor-matrix" className="cx-block">
-          <SubHead lede="Each tier includes everything in the tier before it.">Membership Matrix</SubHead>
-          <h4 className="cx-track">Founder track</h4>
-          <div className="cx-table cx-table--matrix">
-            <Table head={MATRIX_FOUNDERS.head} rows={MATRIX_FOUNDERS.rows} caption="Founder track benefits by tier" />
-          </div>
-          <h4 className="cx-track">Tokenization track</h4>
-          <div className="cx-table cx-table--matrix">
-            <Table head={MATRIX_TOKENIZATION.head} rows={MATRIX_TOKENIZATION.rows} caption="Tokenization track benefits by tier" />
-          </div>
+        <div className="pk-actions cx-block cx-block--tight" data-rise>
+          <Btn enquiry="Web3 Corridor membership">
+            Get in Touch <span aria-hidden="true">→</span>
+          </Btn>
         </div>
-      </Section>
-
-      <Section id="join-corridor" tone="dark" eyebrow="Apply" title="Become a Corridor Member">
-        <Form
-          subject="Corridor membership application"
-          submit="Apply to Join the Corridor"
-          consent="I agree to be contacted about my enquiry."
-          fields={[
-            { name: 'name', label: 'Name' },
-            { name: 'org', label: 'Organisation' },
-            { name: 'email', label: 'Work email', type: 'email' },
-            { name: 'country', label: 'Country' },
-            {
-              name: 'membership',
-              label: 'Membership',
-              type: 'select',
-              options: ['Bronze', 'Silver', 'Gold (by invitation)', 'Club Starter', 'Bronze Plus', 'Silver Plus', 'Gold Plus', 'Country partner', 'Not sure yet'],
-            },
-            { name: 'looking', label: "What you're looking for", type: 'textarea' },
-          ]}
-        />
       </Section>
     </div>
   )

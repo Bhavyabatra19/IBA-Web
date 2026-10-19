@@ -5893,22 +5893,9 @@ main {
 .cx-partner__go:hover {
   text-decoration: underline;
 }
-/* the membership matrix and terms, under the membership cards */
+/* spacing between blocks inside a corridor section */
 .cx-block {
   margin-top: 48px;
-}
-.cx-terms {
-  margin: 0;
-  padding-left: 1.4em;
-  max-width: 72ch;
-  color: var(--bb-ink-muted);
-  line-height: 1.6;
-}
-.cx-terms li + li {
-  margin-top: 10px;
-}
-#join-corridor .pk-form {
-  max-width: 760px;
 }
 /* the dropdown's link columns share the space beside the grey column, so a
    third group (Web3 Corridor → Memberships) never runs under it */
@@ -6565,16 +6552,7 @@ main {
   }
 }
 
-/* Web3 Corridor — the two membership tracks over their matrix tables */
-.cx-track {
-  margin: 32px 0 12px;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--iba-red);
-}
-/* the terms and matrix tables: row labels in sentence case, short cells kept on one line */
+/* the membership matrix: row labels in sentence case, tiers centred */
 .cx-table .edu__table tbody th {
   width: auto;
   font-family: var(--bb-font);
@@ -6582,25 +6560,44 @@ main {
   font-size: 15px;
   line-height: 1.4;
 }
-.cx-table--terms .edu__table td:nth-child(n + 3),
-.cx-table--terms .edu__table thead th:nth-child(n + 3) {
-  white-space: nowrap;
-}
-.cx-table--terms .edu__table tbody th {
-  white-space: nowrap;
-  font-family: var(--font-display, var(--bb-font));
-  text-transform: uppercase;
-}
 .cx-table--matrix .edu__table tbody th {
-  width: 40%;
+  width: 32%;
 }
 .cx-table--matrix .edu__table td,
 .cx-table--matrix .edu__table thead th:not(:first-child) {
-  width: 20%;
+  width: 17%;
   text-align: center;
+}
+.cx-block--tight {
+  margin-top: 24px;
 }
 .cx-table--matrix .edu__table td,
 .cx-table--matrix .edu__table tbody th {
   padding-top: 12px;
   padding-bottom: 12px;
+}
+/* on a phone the matrix fits the screen rather than scrolling in its box */
+@media (max-width: 680px) {
+  .cx-table--matrix .edu__table {
+    min-width: 0;
+    table-layout: fixed;
+  }
+  .cx-table--matrix .edu__table tbody th {
+    width: 31%;
+  }
+  .cx-table--matrix .edu__table td,
+  .cx-table--matrix .edu__table tbody th,
+  .cx-table--matrix .edu__table thead th {
+    padding: 10px 4px;
+    font-size: 12px;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .cx-table--matrix .edu__table tbody th {
+    padding-left: 10px;
+  }
+  .cx-table--matrix .edu__table thead th {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
 }
