@@ -170,6 +170,10 @@ export default function Enquiry() {
         aria-modal="true"
         aria-labelledby="enq-title"
         ref={panel}
+        /* lockScroll stops Lenis, and a stopped Lenis still takes every wheel
+           and touch event and cancels it — including the ones meant for this
+           panel's own overflow. This tells it to leave the panel's alone. */
+        data-lenis-prevent
       >
         <button type="button" className="enq__x" onClick={close} aria-label="Close">
           <svg viewBox="0 0 16 16" aria-hidden="true">
