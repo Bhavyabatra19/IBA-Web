@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <!-- Web360 World mark: a wireframe globe ringed by an orbit, with the
+       wordmark beneath. Placeholder artwork; swap in the supplied logo file
+       at this same path to replace it everywhere. -->
+  <g stroke="#ffffff" stroke-width="6">
+    <circle cx="300" cy="250" r="170" />
+    <ellipse cx="300" cy="250" rx="85" ry="170" />
+    <line x1="300" y1="80" x2="300" y2="420" />
+    <line x1="130" y1="250" x2="470" y2="250" />
+    <path d="M152 165h296M152 335h296" />
+  </g>
+  <ellipse cx="300" cy="250" rx="250" ry="70" stroke="#da1e28" stroke-width="8" transform="rotate(-18 300 250)" />
+  <text x="300" y="530" text-anchor="middle" fill="#ffffff" font-family="Helvetica, Arial, sans-serif" font-size="92" font-weight="700" letter-spacing="4">WEB360</text>
+  <text x="300" y="586" text-anchor="middle" fill="#ffffff" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="400" letter-spacing="22">WORLD</text>
+</svg>

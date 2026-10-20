@@ -18,7 +18,8 @@ import { PageHero, Section, Cards, Btn } from '../../components/Kit'
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
    drawn over it: arcs rise between the continents' pins and a pulse runs
    along each. HUBS are the pin centres in the artwork's own pixels, so the
-   overlay's viewBox matches the image and the arcs land on the pins. */
+   overlay's viewBox matches the image and the arcs land on the pins. The
+   Web360 World logo sits faintly behind it all. */
 const HUBS = {
   americas: [538, 496],
   europe: [910, 260],
@@ -43,6 +44,7 @@ const arc = ([x1, y1], [x2, y2]) => {
 
 const HeroMap = () => (
   <figure className="cx-map" aria-label="A glowing world map with the corridor connecting its partner regions">
+    <img className="cx-map__logo" src="/images/web360-world-logo.svg" alt="" width="600" height="600" decoding="async" />
     <div className="cx-map__stage">
       <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
       <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
@@ -239,7 +241,10 @@ export default function Corridor() {
         aside={<HeroMap />}
         eyebrow="IBA Web3 Corridor"
         title="One Global Corridor"
-        lede="A single corridor that brings countries together, giving everyone inside it access to Web3 resources, partnerships, growth and expansion. It draws on the strengths of each partner country to create value for all of them."
+        lede={[
+          'A high velocity initiative by India Blockchain Alliance bringing countries together, on one unified platform. Bridging global regions and mapping a trillion-dollar opportunity across four key regions. A structured form giving access across the globe for shared growth.',
+          'Connecting Africa, UAE, India and Europe through innovation, technology, investments and partnerships.',
+        ]}
         actions={
           <>
             <Btn href="#corridor-membership">
