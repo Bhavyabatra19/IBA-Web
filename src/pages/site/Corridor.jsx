@@ -4,11 +4,12 @@
  * The page tells a single story, in order: there is one corridor and why it
  * exists; these are the countries partnering on it; these are its objectives
  * and focus pillars; this is what it opens and how IBA supports it; this is
- * where it launches; and the membership tiers close the page, asking people
- * to get in touch. Content follows IBA's corridor deck; prices are
+ * where it launches; and a membership carousel closes the page, asking
+ * people to get in touch. Content follows IBA's corridor deck; prices are
  * deliberately not shown.
  */
 
+import { useRef } from 'react'
 import { PageHero, Section, Cards, Btn, Bullets } from '../../components/Kit'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
@@ -192,83 +193,45 @@ const SUPPORT = [
   { title: 'Go-To-Market Plans', text: 'Complete blueprints to launch and scale globally, actionable strategies for fast entry into high-demand markets, and separate plans for tokenization.' },
 ]
 
-/** Who each membership tier is for, ahead of the matrix. */
-const TIER_CARDS = [
-  { tag: 'Bronze', title: 'Early Builders', text: 'For individual founders and operators, MSMEs, and companies active in 1–2 countries. Includes deal flow, mentor access and advisory hours.' },
-  { tag: 'Silver', title: 'Startups', text: 'For registered startups. Committee-gated Seed → Growth → Scale acceleration, with event hosting and traction across several countries.' },
-  { tag: 'Gold', title: 'By Invite', sub: 'Most complete', text: 'For family offices, LPs and institutional capital. Custom terms, global activations, enterprise-level functions and a Priority Concierge Pass.' },
-  { tag: 'Tokenization', title: 'Issuers', text: 'For businesses tokenizing assets. Includes tokenomics and tokenization advisory with an expert board advisor.' },
-]
-
 /**
- * The membership matrix: the three tiers, the tokenization packs beside them,
- * and only the offerings that tell them apart. Prices are left out on purpose;
- * the full detail is shared when someone gets in touch.
- *
- * Each tier carries a medal in its own metal, and Gold, the fullest founder
- * tier, is raised out of the table.
+ * The membership carousel: twelve placeholder cards, with no tier names,
+ * prices or benefits until IBA confirms them (by request). The earlier tier
+ * cards and benefits matrix are in git history (commit 9e1a995).
  */
-const TIERS = [
-  { key: 'bronze', name: 'Bronze', best: 'Early builders' },
-  { key: 'silver', name: 'Silver', best: 'Startups' },
-  { key: 'gold', name: 'Gold', best: 'By invite', featured: true },
-  { key: 'token', name: 'Tokeni\u00adzation', best: 'Issuers' },
-]
-const OFFERINGS = [
-  ['Community, events & Verified badge', [1, 1, 1, 1]],
-  ['Business setup & GTM advisory', [1, 1, 1, 1]],
-  ['Investor introductions', [0, 1, 1, 1]],
-  ['Weekly strategy sessions', [0, 0, 1, 0]],
-  ['Tokenomics & tokenization advisory', [0, 0, 0, 1]],
-  ['Expert board advisor', [0, 0, 1, 1]],
-]
+const MEMBERSHIPS = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))
 
-const Mark = ({ on }) =>
-  on ? (
-    <span className="cx-mx__yes">
-      <svg viewBox="0 0 16 16" aria-hidden="true">
-        <path d="m4 8.5 2.6 2.5L12 5.5" />
-      </svg>
-      <span className="cx-sr">Included</span>
-    </span>
-  ) : (
-    <span className="cx-mx__no">
-      <span className="cx-sr">Not included</span>
-    </span>
-  )
-
-const Matrix = () => (
-  <div id="corridor-matrix" className="cx-mx" data-rise>
-    <table>
-      <caption className="cx-sr">What each corridor membership includes</caption>
-      <thead>
-        <tr>
-          <td />
-          {TIERS.map((t) => (
-            <th scope="col" key={t.key} className={`cx-mx__tier cx-mx__tier--${t.key}${t.featured ? ' is-featured' : ''}`}>
-              {t.featured && <span className="cx-mx__flag">Most complete</span>}
-              <span className="cx-mx__medal" aria-hidden="true" />
-              <span className="cx-mx__name">{t.name}</span>
-              <span className="cx-mx__best">{t.best}</span>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {OFFERINGS.map(([label, marks]) => (
-          <tr key={label}>
-            <th scope="row">{label}</th>
-            {marks.map((on, i) => (
-              <td key={TIERS[i].key} className={TIERS[i].featured ? 'is-featured' : undefined}>
-                <Mark on={on} />
-              </td>
-            ))}
-          </tr>
+function MembershipCarousel() {
+  const track = useRef(null)
+  const step = (dir) => {
+    const t = track.current
+    const card = t?.firstElementChild
+    if (!card) return
+    const gap = parseFloat(getComputedStyle(t).columnGap) || 0
+    t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
+  }
+  return (
+    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="Corridor memberships" data-rise>
+      <ul className="cx-mc__track" ref={track} tabIndex={0}>
+        {MEMBERSHIPS.map((n) => (
+          <li className="cx-mc__card" key={n}>
+            <span className="cx-mc__medal" aria-hidden="true" />
+            <span className="cx-mc__num">{n}</span>
+            <h3 className="cx-mc__name">Membership {n}</h3>
+            <p className="cx-mc__text">Details coming soon.</p>
+          </li>
         ))}
-      </tbody>
-    </table>
-  </div>
-)
+      </ul>
+      <div className="cx-mc__nav">
+        <button type="button" className="cx-mc__arrow" onClick={() => step(-1)} aria-label="Previous memberships">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label="Next memberships">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function Corridor() {
   return (
@@ -385,13 +348,9 @@ export default function Corridor() {
         id="corridor-membership"
         eyebrow="Membership · Web360 Club"
         title="Join the Corridor"
-        lede="Membership is a journey, not a static subscription: every stage is gated, and every gate is earned. It’s a step-by-step path to connect, collaborate and commit to the Corridor."
+        lede="Membership details are coming soon. Get in touch to hear about them first."
       >
-        <Cards items={TIER_CARDS} cols={4} />
-        <h3 className="cx-mx__title cx-block" data-rise>
-          What each corridor membership includes
-        </h3>
-        <Matrix />
+        <MembershipCarousel />
         <div className="pk-actions cx-block cx-block--tight" data-rise>
           <Btn enquiry="Web3 Corridor membership">
             Get in Touch <span aria-hidden="true">→</span>
