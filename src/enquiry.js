@@ -256,13 +256,13 @@ export const CONNECT_SUB =
 export const QUICK_PATHS = [
   {
     who: 'For Learners',
-    body: 'Join the IBA Red Club: programmes, projects, placements.',
-    cta: 'Join Red Club',
+    body: 'Join the IBA Startup Club: learning, internships, opportunities.',
+    cta: 'Join Startup Club',
     topic: 'Red Club (learner)',
   },
   {
     who: 'For Institutions',
-    body: 'Bring Verifyble and campus labs to your university.',
+    body: 'Partner with IBA Red Club Experience Programmes: tokenisation labs, blockchain learning, internships, global networking.',
     cta: 'Request Prospectus',
     topic: 'Red Club / Verifyble (institution)',
   },

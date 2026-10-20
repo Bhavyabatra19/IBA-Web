@@ -38,7 +38,7 @@ const DOORS = [
     tag: 'Learners',
     title: 'Global Exposure',
     body: 'Join the IBA Startup Club: learning, internships, opportunities.',
-    cta: 'Join Red Club',
+    cta: 'Join Startup Club',
     href: '/red-club',
     img: '/images/card-students.jpg',
   },
