@@ -5275,13 +5275,16 @@ main {
 @media (max-width: 860px) {
   .cb__art {
     width: 100%;
-    max-width: 560px;
+    max-width: 720px;
   }
 }
+/* the map runs large, close to the panel's right edge (by request) */
 @media (min-width: 861px) {
   .cb__art {
-    width: min(54%, 760px);
-    right: max(16px, calc(var(--bb-gutter) - 60px));
+    --cb-art-right: max(8px, calc(var(--bb-gutter) - 180px));
+    right: var(--cb-art-right);
+    /* …but never across the copy column */
+    width: min(64%, 980px, calc(100% - var(--bb-gutter) - 29rem - var(--cb-art-right)));
   }
   .cb .cb__copy {
     max-width: min(100%, 31rem);

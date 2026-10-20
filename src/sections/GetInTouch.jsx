@@ -15,10 +15,11 @@ import { waLink } from '../enquiry'
 
 /* each row opens the site's enquiry form already set to that topic */
 const TOPICS = [
-  { label: 'Memberships', note: 'Join the alliance and its network', topic: 'Ecosystem partnership' },
-  { label: 'Web3 Corridor', note: 'Enter a market through a corridor', topic: 'Web3 Corridor' },
-  { label: 'Consulting', note: 'Scope an advisory or delivery project', topic: 'Consulting' },
-  { label: 'Red Club', note: 'Events, programmes and labs', topic: 'Red Club (learner)' },
+  { label: 'Web360 Memberships', note: 'Join the alliance and its network', topic: 'Ecosystem partnership' },
+  { label: 'Web360 Partnerships', note: 'Partner with IBA across the ecosystem', topic: 'Ecosystem partnership' },
+  { label: 'Consulting and Advisory', note: 'Scope an advisory or delivery project', topic: 'Consulting' },
+  { label: 'Red Club Program', note: 'Events, programmes and labs', topic: 'Red Club (learner)' },
+  { label: 'UAE Experience Center', note: 'Blockchain and AI labs on campus', topic: 'Red Club / Verifyble (institution)' },
 ]
 
 export default function GetInTouch() {
