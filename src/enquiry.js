@@ -68,9 +68,11 @@ export const CONTACT_METHODS = ['Email', 'Phone', 'WhatsApp']
  * the endpoint must add it; a honeypot alone stops the crude bots only.
  *
  * Deliberately named like a real field. `name="_hp"` is a pattern the scrapers
- * know to skip.
+ * know to skip. Not named after anything the form really asks for: next to the
+ * real website field, a browser's autofill could match a "company_website"
+ * honeypot and flag a person as a bot.
  */
-export const HONEYPOT = 'company_website'
+export const HONEYPOT = 'referral_code'
 
 /* ---- the three ways the form can end ---- */
 
