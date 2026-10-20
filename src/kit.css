@@ -886,3 +886,10 @@
     grid-template-columns: 1fr;
   }
 }
+.pk-field__hint {
+  font-size: 0.8rem;
+  color: #7a736b;
+}
+.pk-field input[type='file'] {
+  cursor: pointer;
+}
