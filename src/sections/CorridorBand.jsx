@@ -11,6 +11,16 @@ import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
 import { REGIONS_LINE } from '../data/facts'
 
+/* The five red cubes in flagship-map.jpg, as % of the image: Americas,
+   Europe, Africa, UAE, India. ⚠ If the artwork changes, re-measure these. */
+const HUBS = [
+  [28.4, 57.0],
+  [47.9, 27.4],
+  [52.4, 53.6],
+  [65.0, 39.6],
+  [72.3, 42.8],
+]
+
 export default function CorridorBand() {
   const root = useRef(null)
 
@@ -29,14 +39,24 @@ export default function CorridorBand() {
         {/* the corridor's reach: the supplied map artwork, the five regions
             pinned and linked (public/images/flagship-map.jpg) */}
         <div className="cb__globe cb__art">
-          <img
-            src="/images/flagship-map.jpg"
-            alt="World map linking the Americas, Europe, Africa, the UAE and India"
-            width="1832"
-            height="859"
-            loading="lazy"
-            decoding="async"
-          />
+          {/* the map drifts and tilts slowly; the hubs pulse and a light
+              sweeps across it (brandbook.css, "Flagship map, in motion") */}
+          <div className="cb__artMove">
+            <img
+              src="/images/flagship-map.jpg"
+              alt="World map linking the Americas, Europe, Africa, the UAE and India"
+              width="1832"
+              height="859"
+              loading="lazy"
+              decoding="async"
+            />
+            <span className="cb__sweep" aria-hidden="true" />
+            <ul className="cb__hubs" aria-hidden="true">
+              {HUBS.map(([x, y], i) => (
+                <li key={i} style={{ left: `${x}%`, top: `${y}%`, '--d': `${i * -0.7}s` }} />
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="cb__copy">

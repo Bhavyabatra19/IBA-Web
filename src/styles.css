@@ -6965,8 +6965,9 @@ em {
 /* The six tabs plus two utility actions stop fitting well before the layout
    grid does, so the bar collapses to the drawer at its own, wider breakpoint.
    It went up with the sixth tab: the row was already the widest thing on the
-   page, and Home added a label to it. */
-@media (max-width: 1260px) {
+   page, and Home added a label to it. Down to 1025px the bar is compacted
+   instead (brandbook.css, "Navbar on laptops"), so 13–14" laptops keep it. */
+@media (max-width: 1024px) {
   .nav__tabs,
   .nav__util {
     display: none;
