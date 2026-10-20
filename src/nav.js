@@ -52,8 +52,12 @@
  * are the ones that need building, listed where they can be counted.
  */
 export const PENDING = {
-  privacy: '/privacy',
   terms: '/terms',
+}
+
+/** Legal pages that exist. */
+export const LEGAL = {
+  privacy: '/privacy',
 }
 
 export const NAV = [
@@ -197,7 +201,7 @@ export const NAV = [
       {
         title: 'Memberships',
         items: [
-          { label: 'Web360 Club', icon: 'globe', desc: 'Founder and tokenization memberships.', href: '/corridor#corridor-membership' },
+          { label: 'Web360 Club', icon: 'globe', desc: 'Corridor memberships.', href: '/corridor#corridor-membership' },
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
         ],
       },

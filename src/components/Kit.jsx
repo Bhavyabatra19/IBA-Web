@@ -10,7 +10,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, revealRise, reducedMotion, buildCounters } from '../lib/scroll'
 import { Go } from '../sections/service/ServiceBlocks'
-import { CONTACT } from '../nav'
+import { CONTACT, LEGAL } from '../nav'
 
 /* the block mark every eyebrow carries */
 const Block = () => (
@@ -271,6 +271,18 @@ export const Quote = ({ children, by, photo }) => (
   </figure>
 )
 
+/* A consent line, with "Privacy Policy" in it made a link to the policy. */
+const consentText = (c) =>
+  c.split(/(Privacy Policy)/).map((part, i) =>
+    part === 'Privacy Policy' ? (
+      <Go href={LEGAL.privacy} key={i}>
+        {part}
+      </Go>
+    ) : (
+      part
+    ),
+  )
+
 /**
  * A form.
  *
@@ -352,7 +364,7 @@ export function Form({ fields, submit, subject, consent, notice }) {
       </div>
       {[].concat(consent || []).map((c, i) => (
         <label className="pk-check" key={c}>
-          <input type="checkbox" required={i === 0} /> <span>{c}</span>
+          <input type="checkbox" required={i === 0} /> <span>{consentText(c)}</span>
         </label>
       ))}
       <button className="pk-btn pk-btn--primary" type="submit">

@@ -24,7 +24,7 @@ import {
 } from '../../sections/library/FormBlocks'
 import { navigate } from '../../lib/router'
 import { startPreview } from '../../lib/previewSession'
-import { PENDING } from '../../nav'
+import { PENDING, LEGAL } from '../../nav'
 import { COUNTRIES, LIB_TOPICS, LIB_TRUST, ROLES } from '../../library'
 
 export default function Join() {
@@ -88,7 +88,7 @@ export default function Join() {
             label={
               <>
                 I agree to the <Go href={PENDING.terms}>Terms</Go> and{' '}
-                <Go href={PENDING.privacy}>Privacy Policy</Go>
+                <Go href={LEGAL.privacy}>Privacy Policy</Go>
               </>
             }
           />
