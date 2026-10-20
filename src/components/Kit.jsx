@@ -280,7 +280,12 @@ export const Quote = ({ children, by, photo }) => (
  * log-in) passes `notice` instead, which is shown on submit and says plainly
  * that it is not live yet.
  *
- * fields: { name, label, type?, options?, required?, wide? }
+ * fields: { name, label, type?, options?, required?, wide?, hint?, ...input }
+ *
+ * Anything else on a field (placeholder, pattern, title, accept, inputMode,
+ * autoComplete) goes straight onto the input. A `file` field cannot travel in
+ * a mailto link, so the message names the file and the confirmation asks the
+ * reader to attach it before sending.
  */
 export function Form({ fields, submit, subject, consent, notice }) {
   const [status, setStatus] = useState(null)
@@ -292,41 +297,58 @@ export function Form({ fields, submit, subject, consent, notice }) {
       return
     }
     const data = new FormData(e.currentTarget)
+    const files = fields
+      .filter((f) => f.type === 'file')
+      .map((f) => data.get(f.name)?.name)
+      .filter(Boolean)
     const body = fields
       .filter((f) => f.type !== 'password')
-      .map((f) => `${f.label}: ${data.get(f.name) || '—'}`)
+      .map((f) => {
+        const v = data.get(f.name)
+        if (f.type === 'file') return `${f.label}: ${v?.name ? `${v.name} (attached)` : '—'}`
+        return `${f.label}: ${v || '—'}`
+      })
       .join('\n')
     window.location.href =
       `mailto:${CONTACT.email.label}?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`
-    setStatus('Your email app has opened with these details filled in — press send and the IBA team will reply within two working days.')
+    setStatus(
+      files.length
+        ? `Your email app has opened with these details filled in — attach ${files.join(', ')} to the email, press send, and the IBA team will reply within two working days.`
+        : 'Your email app has opened with these details filled in — press send and the IBA team will reply within two working days.',
+    )
   }
 
   return (
     <form className="pk-form" onSubmit={onSubmit} data-rise>
       <div className="pk-form__grid">
-        {fields.map((f) => (
-          <label className={`pk-field${f.wide || f.type === 'textarea' ? ' pk-field--wide' : ''}`} key={f.name}>
-            <span>
-              {f.label}
-              {f.required !== false && <i aria-hidden="true"> *</i>}
-            </span>
-            {f.type === 'select' ? (
-              <select name={f.name} required={f.required !== false} defaultValue="">
-                <option value="" disabled>
-                  Select one
-                </option>
-                {f.options.map((o) => (
-                  <option key={o}>{o}</option>
-                ))}
-              </select>
-            ) : f.type === 'textarea' ? (
-              <textarea name={f.name} rows="4" required={f.required !== false} />
-            ) : (
-              <input name={f.name} type={f.type || 'text'} required={f.required !== false} />
-            )}
-          </label>
-        ))}
+        {fields.map(({ hint, options, wide, ...f }) => {
+          /* whatever is left after the Form's own keys goes on the input */
+          const { name, label, type, required, ...input } = f
+          return (
+            <label className={`pk-field${wide || type === 'textarea' || type === 'file' ? ' pk-field--wide' : ''}`} key={name}>
+              <span>
+                {label}
+                {required !== false && <i aria-hidden="true"> *</i>}
+              </span>
+              {type === 'select' ? (
+                <select name={name} required={required !== false} defaultValue="">
+                  <option value="" disabled>
+                    Select one
+                  </option>
+                  {options.map((o) => (
+                    <option key={o}>{o}</option>
+                  ))}
+                </select>
+              ) : type === 'textarea' ? (
+                <textarea name={name} rows="4" required={required !== false} />
+              ) : (
+                <input name={name} type={type || 'text'} required={required !== false} {...input} />
+              )}
+              {hint && <small className="pk-field__hint">{hint}</small>}
+            </label>
+          )
+        })}
       </div>
       {[].concat(consent || []).map((c, i) => (
         <label className="pk-check" key={c}>
