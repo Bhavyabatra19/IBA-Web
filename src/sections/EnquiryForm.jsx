@@ -35,7 +35,7 @@ import {
   Go,
 } from './library/FormBlocks'
 import { COUNTRIES } from '../library'
-import { CONTACT, PENDING } from '../nav'
+import { CONTACT, LEGAL } from '../nav'
 import {
   CONTACT_METHODS,
   FAILED,
@@ -386,7 +386,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
           onChange={recheck('consent')}
           label={
             <>
-              I agree to the <Go href={PENDING.privacy}>Privacy Policy</Go> and to being
+              I agree to the <Go href={LEGAL.privacy}>Privacy Policy</Go> and to being
               contacted about my enquiry
             </>
           }

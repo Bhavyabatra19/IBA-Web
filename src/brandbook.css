@@ -6845,3 +6845,35 @@ main {
     display: none;
   }
 }
+
+/* Privacy Policy — one readable document column on the page's own ground */
+.pv__doc {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--bb-gutter);
+}
+.pv__sec + .pv__sec {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+.pv__sec h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.35rem, 1.1rem + 0.8vw, 1.75rem);
+  letter-spacing: -0.015em;
+  color: #161412;
+}
+.pv__sec p {
+  margin: 0 0 0.8rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #3b3632;
+}
+.pv__sec .pk-bullets {
+  margin: 0 0 0.8rem;
+}
+.pv__sec .pk-bullets li {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: #3b3632;
+}

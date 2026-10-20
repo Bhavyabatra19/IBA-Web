@@ -7,7 +7,7 @@
  * policy links.
  */
 
-import { FOOTER, PENDING } from '../nav'
+import { FOOTER, PENDING, LEGAL } from '../nav'
 import { scrollToId, scrollToTop } from '../lib/scroll'
 import { navigate, parseHref } from '../lib/router'
 
@@ -111,7 +111,7 @@ export default function Footer() {
             {new Date().getFullYear()} · Connecting Economies. Block by Block.
           </p>
           <div className="ft__legal">
-            <a href={PENDING.privacy}>Privacy Policy</a>
+            <a href={LEGAL.privacy}>Privacy Policy</a>
             <a href={PENDING.terms}>Terms</a>
           </div>
         </div>

@@ -39,7 +39,7 @@ import {
 import WorldMap, { CORRIDOR_ARCS } from '../../components/WorldMap'
 import { scrollToId } from '../../lib/scroll'
 import { COUNTRIES } from '../../library'
-import { PENDING } from '../../nav'
+import { PENDING, LEGAL } from '../../nav'
 import { CORRIDORS } from '../../studio'
 import {
   CORRIDOR_AUDIENCES,
@@ -208,7 +208,7 @@ export default function Corridor() {
                 label={
                   <>
                     I agree to the <Go href={PENDING.terms}>Terms</Go> and{' '}
-                    <Go href={PENDING.privacy}>Privacy Policy</Go>
+                    <Go href={LEGAL.privacy}>Privacy Policy</Go>
                   </>
                 }
               />

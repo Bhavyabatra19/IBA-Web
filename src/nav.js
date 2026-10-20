@@ -52,8 +52,12 @@
  * are the ones that need building, listed where they can be counted.
  */
 export const PENDING = {
-  privacy: '/privacy',
   terms: '/terms',
+}
+
+/** Legal pages that exist. */
+export const LEGAL = {
+  privacy: '/privacy',
 }
 
 export const NAV = [

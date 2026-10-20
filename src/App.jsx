@@ -17,6 +17,7 @@ import Corridor from './pages/site/Corridor'
 import RedClub from './pages/site/RedClub'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
+import Privacy from './pages/site/Privacy'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
@@ -40,6 +41,7 @@ const PAGES = {
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,
+  '/privacy': Privacy,
 }
 
 /**

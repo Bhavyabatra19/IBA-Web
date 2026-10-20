@@ -121,7 +121,7 @@ export default function Ecosystem() {
           <Form
             subject="Partnership enquiry"
             submit="Submit Partnership Enquiry"
-            consent="I agree to be contacted about my partnership enquiry."
+            consent="I agree to the Privacy Policy and to being contacted about my partnership enquiry."
             fields={[
               { name: 'name', label: 'Name' },
               { name: 'org', label: 'Organisation' },
