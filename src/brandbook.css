@@ -5751,7 +5751,7 @@ main {
   filter: blur(22px);
   transform: translateZ(-60px);
 }
-.cx-map img:not(.cx-map__logo) {
+.cx-map img {
   display: block;
   width: 100%;
   height: auto;
@@ -5812,23 +5812,6 @@ main {
   position: relative;
   z-index: 2;
 }
-.cx-map {
-  position: relative;
-}
-/* the logo is laid over the map but screened, so it reads as a faint
-   watermark through the map's black ground rather than being hidden by it */
-.cx-map__logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  width: 78%;
-  height: auto;
-  opacity: 0.16;
-  mix-blend-mode: screen;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
 @media (min-width: 861px) {
   .pk-hero__aside .cx-map {
     width: 175%;
@@ -5838,13 +5821,9 @@ main {
   .pk-hero__aside .cx-map__stage {
     animation-name: cx-drift-away;
   }
-  .pk-hero__aside .cx-map img:not(.cx-map__logo) {
+  .pk-hero__aside .cx-map img {
     -webkit-mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
     mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
-  }
-  .pk-hero__aside .cx-map__logo {
-    left: 32%;
-    width: 52%;
   }
 }
 @keyframes cx-drift-away {

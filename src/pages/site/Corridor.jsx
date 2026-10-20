@@ -18,8 +18,7 @@ import { PageHero, Section, Cards, Btn } from '../../components/Kit'
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
    drawn over it: arcs rise between the continents' pins and a pulse runs
    along each. HUBS are the pin centres in the artwork's own pixels, so the
-   overlay's viewBox matches the image and the arcs land on the pins. The
-   Web360 World logo sits faintly behind it all. */
+   overlay's viewBox matches the image and the arcs land on the pins. */
 const HUBS = {
   americas: [538, 496],
   europe: [910, 260],
@@ -44,7 +43,6 @@ const arc = ([x1, y1], [x2, y2]) => {
 
 const HeroMap = () => (
   <figure className="cx-map" aria-label="A glowing world map with the corridor connecting its partner regions">
-    <img className="cx-map__logo" src="/images/web360-world-logo.svg" alt="" width="600" height="600" decoding="async" />
     <div className="cx-map__stage">
       <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
       <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
