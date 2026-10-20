@@ -5808,13 +5808,30 @@ main {
     display: none;
   }
 }
-/* the map stays in its own column: it may bleed into the panel's right
-   gutter, never left under the headline */
-@media (min-width: 1200px) {
+/* the map, larger (by request), recedes off the panel's right edge: it
+   turns away to the right and runs out past the panel, which crops it.
+   It never reaches left under the headline. */
+#corridor .pk-hero__copy {
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 861px) {
   .pk-hero__aside .cx-map {
-    width: 130%;
-    margin: 0 -30% 0 0;
+    width: 175%;
+    margin: -6% -75% -6% -4%;
+    perspective-origin: 0% 50%;
   }
+  .pk-hero__aside .cx-map__stage {
+    animation-name: cx-drift-away;
+  }
+  .pk-hero__aside .cx-map img {
+    -webkit-mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
+    mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
+  }
+}
+@keyframes cx-drift-away {
+  0%, 100% { transform: rotateY(-22deg) rotateX(14deg) rotateZ(-3deg) translateY(0); }
+  50% { transform: rotateY(-19deg) rotateX(11deg) rotateZ(-2deg) translateY(-8px); }
 }
 @media (max-width: 860px) {
   .pk-hero__aside .cx-map {
@@ -5905,6 +5922,37 @@ main {
 /* spacing between blocks inside a corridor section */
 .cx-block {
   margin-top: 48px;
+}
+/* Web3 Corridor — why the corridor: the four reasons in two columns, each
+   on its own white tile */
+.cx-why .pk-bullets {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 680px) {
+  .cx-why .pk-bullets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cx-why .pk-bullets li {
+  padding: 22px 24px 22px 44px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+  font-size: 1.02rem;
+  color: #2b2724;
+}
+.cx-why .pk-bullets li::before {
+  left: 22px;
+  top: calc(22px + 0.55em);
+}
+/* the heading above the membership matrix */
+.cx-mx__title {
+  margin-bottom: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
+  letter-spacing: -0.015em;
+  color: #161412;
 }
 /* the dropdown's link columns share the space beside the grey column, so a
    third group (Web3 Corridor → Memberships) never runs under it */
