@@ -5920,6 +5920,37 @@ main {
 .cx-block {
   margin-top: 48px;
 }
+/* Web3 Corridor — why the corridor: the four reasons in two columns, each
+   on its own white tile */
+.cx-why .pk-bullets {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 680px) {
+  .cx-why .pk-bullets {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cx-why .pk-bullets li {
+  padding: 22px 24px 22px 44px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+  font-size: 1.02rem;
+  color: #2b2724;
+}
+.cx-why .pk-bullets li::before {
+  left: 22px;
+  top: calc(22px + 0.55em);
+}
+/* the heading above the membership matrix */
+.cx-mx__title {
+  margin-bottom: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
+  letter-spacing: -0.015em;
+  color: #161412;
+}
 /* the dropdown's link columns share the space beside the grey column, so a
    third group (Web3 Corridor → Memberships) never runs under it */
 .nav .nav__panel .nav__panelGroups {
