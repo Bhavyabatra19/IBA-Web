@@ -5281,10 +5281,11 @@ main {
 /* the map runs large, close to the panel's right edge (by request) */
 @media (min-width: 861px) {
   .cb__art {
-    --cb-art-right: max(8px, calc(var(--bb-gutter) - 180px));
+    --cb-art-right: max(0px, calc(var(--bb-gutter) - 220px));
     right: var(--cb-art-right);
-    /* …but never across the copy column */
-    width: min(64%, 980px, calc(100% - var(--bb-gutter) - 29rem - var(--cb-art-right)));
+    /* …but never across the copy column; the map's faded left edge may
+       tuck a little under it */
+    width: min(70%, 1080px, calc(100% - var(--bb-gutter) - 26rem - var(--cb-art-right)));
   }
   .cb .cb__copy {
     max-width: min(100%, 31rem);
@@ -6993,5 +6994,168 @@ main {
 @media (prefers-reduced-motion: reduce) {
   .cx-mc__track {
     scroll-behavior: auto;
+  }
+}
+
+/* ==================================================================
+   Navbar on laptops (1025–1260px): the full bar stays (by request) —
+   a 13–14" laptop was getting the hamburger. Type, tab padding and
+   button padding step down so the row fits on one line at 1025px.
+   ================================================================== */
+@media (min-width: 1025px) and (max-width: 1260px) {
+  .nav.nav--home .nav__bar,
+  .nav.nav--home[data-condensed] .nav__bar,
+  .nav__bar {
+    padding-inline: 1rem;
+  }
+  .nav__tabs {
+    margin-left: 0.5rem;
+    column-gap: 0;
+  }
+  .nav__tabBtn {
+    font-size: 14px;
+    padding-inline: 0.4rem;
+  }
+  .nav__tabBtn[data-pill] {
+    font-size: 13px;
+    padding-inline: 10px;
+  }
+  .nav__util {
+    gap: 0.4rem;
+  }
+  .nav__util .btn {
+    font-size: 14px;
+    padding-inline: 10px;
+  }
+}
+
+/* The hero headline in two lines on desktop (by request): "Building the
+   world's" over the rolling phrase, which no longer wraps — the roller's
+   15em cap is what broke "most comprehensive Web3 ecosystem" in two. Phones
+   keep the wrap; the phrase is wider than the screen there. */
+@media (min-width: 761px) {
+  .hero__roller {
+    max-width: none;
+  }
+  .hero__phrase {
+    white-space: nowrap;
+  }
+}
+
+/* ==================================================================
+   Flagship map, in motion (CorridorBand.jsx): a slow drift and tilt, a
+   pulse on each of the five hubs, and a light sweeping across the map.
+   Transforms and opacity only; still under reduced motion.
+   ================================================================== */
+.cb__artMove {
+  position: relative;
+  transform-origin: 50% 60%;
+  animation: cb-map-drift 9s ease-in-out infinite;
+  will-change: transform;
+}
+.cb__art {
+  perspective: 1400px;
+}
+@keyframes cb-map-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(6deg) rotateY(-3deg) scale(1.02);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotateX(2deg) rotateY(3deg) scale(1.06);
+  }
+}
+/* the sweep: a soft red-white light crossing left to right, inside the
+   same faded oval as the map so its edges never show */
+.cb__sweep {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(closest-side at 50% 50%, #000 70%, transparent 100%);
+  mask-image: radial-gradient(closest-side at 50% 50%, #000 70%, transparent 100%);
+}
+.cb__sweep::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 28%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 74, 80, 0.14) 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 74, 80, 0.14) 60%,
+    transparent
+  );
+  transform: translateX(-120%) skewX(-12deg);
+  animation: cb-map-sweep 7s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+@keyframes cb-map-sweep {
+  0%,
+  15% {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  75%,
+  100% {
+    transform: translateX(460%) skewX(-12deg);
+  }
+}
+/* the hubs: two red rings opening out from each cube, in turn */
+.cb__hubs {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.cb__hubs li {
+  position: absolute;
+  width: clamp(20px, 4.2vw, 56px);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+}
+.cb__hubs li::before,
+.cb__hubs li::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(215, 25, 32, 0.75);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 74, 80, 0.45);
+  opacity: 0;
+  transform: scale(0.3) scaleY(0.55);
+  animation: cb-hub-pulse 3.5s ease-out infinite;
+  animation-delay: var(--d, 0s);
+}
+.cb__hubs li::after {
+  animation-delay: calc(var(--d, 0s) - 1.75s);
+}
+@keyframes cb-hub-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) scaleY(0.55);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.6) scaleY(0.55);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cb__artMove,
+  .cb__sweep::before,
+  .cb__hubs li::before,
+  .cb__hubs li::after {
+    animation: none;
+  }
+  .cb__sweep,
+  .cb__hubs {
+    display: none;
   }
 }
