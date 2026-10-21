@@ -18,8 +18,8 @@ const TOPICS = [
   { label: 'Memberships', note: 'Exclusive Web3 access, experiences and opportunities', topic: 'Ecosystem partnership' },
   { label: 'Partnerships', note: 'Grow your brand and services in the IBA Web3 ecosystem', topic: 'Ecosystem partnership' },
   { label: 'Consulting and Advisory', note: 'Strategy, tokenization, execution and expansion, built to scale', topic: 'Consulting' },
-  { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', topic: 'Red Club (learner)' },
   { label: 'UAE Experience Center', note: 'Tokenize real-world assets and meet the right investors', topic: 'Red Club / Verifyble (institution)' },
+  { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', topic: 'Red Club (learner)' },
 ]
 
 export default function GetInTouch() {
