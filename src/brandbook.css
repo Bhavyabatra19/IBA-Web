@@ -5819,7 +5819,7 @@ main {
 @media (min-width: 861px) {
   .pk-hero__aside .cx-map {
     width: 175%;
-    margin: -6% -75% -6% -4%;
+    margin: -6% -63% -6% -16%;
     perspective-origin: 0% 50%;
   }
   .pk-hero__aside .cx-map__stage {
