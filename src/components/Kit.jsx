@@ -44,12 +44,13 @@ function useRise(ref) {
 }
 
 /** A pill button. Internal hrefs go through the router; `enquiry` opens the
-    site's enquiry form, as every other data-enquiry control does. */
-export function Btn({ href = '#', enquiry, variant = 'primary', children }) {
+    site's enquiry form, as every other data-enquiry control does, and
+    `phrase` names what the enquiry is about. */
+export function Btn({ href = '#', enquiry, phrase, variant = 'primary', children }) {
   const cls = `pk-btn pk-btn--${variant}`
   if (enquiry !== undefined)
     return (
-      <a className={cls} href="/connect" data-enquiry={enquiry}>
+      <a className={cls} href="/connect" data-enquiry={enquiry} data-enquiry-phrase={phrase}>
         {children}
       </a>
     )

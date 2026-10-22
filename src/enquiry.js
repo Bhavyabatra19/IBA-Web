@@ -13,6 +13,7 @@
  */
 
 import { CONTACT } from './nav'
+import { ALL_MEMBERSHIPS, membershipPath } from './memberships'
 
 /* ================================================================== */
 /* 8.1 — the modal                                                    */
@@ -47,6 +48,7 @@ export const TOPICS = [
   'Red Club (learner)',
   'Red Club / Verifyble (institution)',
   'Web3 Corridor',
+  'Web3 Corridor membership',
   'Ecosystem partnership',
   /* ⚠ NAMING, carried over from nav.js: "Tech4Good" matches none of the four
      initiatives the site publishes (Emerging Technology Council, Blockchain
@@ -157,6 +159,7 @@ export const ROUTING = {
     'Red Club (learner)': 'education-student',
     'Red Club / Verifyble (institution)': 'education-institution',
     'Web3 Corridor': 'corridor',
+    'Web3 Corridor membership': 'corridor',
     'Ecosystem partnership': 'partnerships',
     'Tech4Good / Green Chain Protocol': 'partnerships',
     'Media / Speaking': 'comms',
@@ -232,6 +235,10 @@ export const PAGE_CONTEXT = {
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
   '/corridor': { topic: 'Web3 Corridor', phrase: 'Web3 Corridor' },
+  '/memberships': { topic: 'Web3 Corridor membership', phrase: 'Web3 Corridor membership' },
+  ...Object.fromEntries(
+    ALL_MEMBERSHIPS.map((m) => [membershipPath(m), { topic: 'Web3 Corridor membership', phrase: `the ${m.name} membership` }])
+  ),
   '/studio': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/library': { topic: 'Something else', phrase: 'the IBA Library' },
 }
