@@ -15,11 +15,11 @@ import { waLink } from '../enquiry'
 
 /* each row opens the site's enquiry form already set to that topic */
 const TOPICS = [
-  { label: 'Web360 Memberships', note: 'Join the alliance and its network', topic: 'Ecosystem partnership' },
-  { label: 'Web360 Partnerships', note: 'Partner with IBA across the ecosystem', topic: 'Ecosystem partnership' },
-  { label: 'Consulting and Advisory', note: 'Scope an advisory or delivery project', topic: 'Consulting' },
-  { label: 'Red Club Program', note: 'Events, programmes and labs', topic: 'Red Club (learner)' },
-  { label: 'UAE Experience Center', note: 'Blockchain and AI labs on campus', topic: 'Red Club / Verifyble (institution)' },
+  { label: 'Memberships', note: 'Exclusive Web3 access, experiences and opportunities', topic: 'Ecosystem partnership' },
+  { label: 'Partnerships', note: 'Grow your brand and services in the IBA Web3 ecosystem', topic: 'Ecosystem partnership' },
+  { label: 'Consulting and Advisory', note: 'Strategy, tokenization, execution and expansion, built to scale', topic: 'Consulting' },
+  { label: 'UAE Experience Center', note: 'Tokenize real-world assets and meet the right investors', topic: 'Red Club / Verifyble (institution)' },
+  { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', topic: 'Red Club (learner)' },
 ]
 
 export default function GetInTouch() {
