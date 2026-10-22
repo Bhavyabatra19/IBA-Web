@@ -14,6 +14,7 @@ import Expertise from './pages/site/Expertise'
 import Ecosystem from './pages/site/Ecosystem'
 import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
+import Memberships, { MEMBERSHIP_PAGES } from './pages/site/Memberships'
 import RedClub from './pages/site/RedClub'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
@@ -21,6 +22,7 @@ import Privacy from './pages/site/Privacy'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
+import { ALL_MEMBERSHIPS } from './memberships'
 import {
   initSmoothScroll,
   refreshOnLoad,
@@ -38,6 +40,8 @@ const PAGES = {
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,
+  '/memberships': Memberships,
+  ...MEMBERSHIP_PAGES,
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,
@@ -57,6 +61,12 @@ if (import.meta.env.DEV) {
   const orphan = Object.keys(SEO).filter((p) => !PAGES[p])
   if (missing.length) console.warn('[seo] routes with no title:', missing)
   if (orphan.length) console.warn('[seo] titles with no route:', orphan)
+
+  /* The membership pages show labelled placeholders until IBA's latest decks
+     are supplied; this is the list to clear before they are published. */
+  const awaiting = ALL_MEMBERSHIPS.filter((m) => m.awaiting?.length)
+  if (awaiting.length)
+    console.warn('[memberships] awaiting source material:', Object.fromEntries(awaiting.map((m) => [m.name, m.awaiting])))
 }
 
 export default function App() {

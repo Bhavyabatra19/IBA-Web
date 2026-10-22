@@ -4,13 +4,13 @@
  * The page tells a single story, in order: there is one corridor and why it
  * exists; these are the countries partnering on it; these are its objectives
  * and focus pillars; this is what it opens and how IBA supports it; this is
- * where it launches; and a membership carousel closes the page, asking
- * people to get in touch. Content follows IBA's corridor deck; prices are
- * deliberately not shown.
+ * where it launches; and the memberships close the page, each card opening
+ * its page under /memberships. Content follows IBA's corridor deck; prices
+ * are deliberately not shown.
  */
 
-import { useRef } from 'react'
 import { PageHero, Section, Cards, Btn, Bullets } from '../../components/Kit'
+import { ALL_MEMBERSHIPS, MEMBERSHIPS_PATH, MEMBERSHIP_TOPIC, membershipPath } from '../../memberships'
 
 /* The hero graphic: the supplied map artwork, a glowing red dotted world
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
@@ -193,45 +193,13 @@ const SUPPORT = [
   { title: 'Go-To-Market Plans', text: 'Complete blueprints to launch and scale globally, actionable strategies for fast entry into high-demand markets, and separate plans for tokenization.' },
 ]
 
-/**
- * The membership carousel: twelve placeholder cards, with no tier names,
- * prices or benefits until IBA confirms them (by request). The earlier tier
- * cards and benefits matrix are in git history (commit 9e1a995).
- */
-const MEMBERSHIPS = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))
-
-function MembershipCarousel() {
-  const track = useRef(null)
-  const step = (dir) => {
-    const t = track.current
-    const card = t?.firstElementChild
-    if (!card) return
-    const gap = parseFloat(getComputedStyle(t).columnGap) || 0
-    t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
-  }
-  return (
-    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="Corridor memberships" data-rise>
-      <ul className="cx-mc__track" ref={track} tabIndex={0}>
-        {MEMBERSHIPS.map((n) => (
-          <li className="cx-mc__card" key={n}>
-            <span className="cx-mc__medal" aria-hidden="true" />
-            <span className="cx-mc__num">{n}</span>
-            <h3 className="cx-mc__name">Membership {n}</h3>
-            <p className="cx-mc__text">Details coming soon.</p>
-          </li>
-        ))}
-      </ul>
-      <div className="cx-mc__nav">
-        <button type="button" className="cx-mc__arrow" onClick={() => step(-1)} aria-label="Previous memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-        </button>
-        <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label="Next memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
-    </div>
-  )
-}
+/* the memberships, as Explore cards; each opens its own page */
+const MEMBERSHIPS = ALL_MEMBERSHIPS.map((m) => ({
+  title: m.name,
+  text: m.summary || undefined,
+  href: membershipPath(m),
+  cta: 'Explore',
+}))
 
 export default function Corridor() {
   return (
@@ -244,7 +212,7 @@ export default function Corridor() {
         lede="A single corridor that brings countries together, giving everyone inside it access to Web3 resources, partnerships, growth and expansion. It draws on the strengths of each partner country to create value for all of them. Together, those countries map a trillion-dollar opportunity and are home to more than 2.8 billion people."
         actions={
           <>
-            <Btn href="#corridor-membership">
+            <Btn href={MEMBERSHIPS_PATH}>
               Become a Member <span aria-hidden="true">→</span>
             </Btn>
             <Btn href="#corridor-partners" variant="ghost">
@@ -346,14 +314,17 @@ export default function Corridor() {
 
       <Section
         id="corridor-membership"
-        eyebrow="Membership · Web360 Club"
+        eyebrow="Web3 Corridor Memberships"
         title="Join the Corridor"
-        lede="Membership details are coming soon. Get in touch to hear about them first."
+        lede="IBA’s own membership tracks and partner memberships, each with its own page. Every enquiry comes to IBA first."
       >
-        <MembershipCarousel />
+        <Cards items={MEMBERSHIPS} cols={4} />
         <div className="pk-actions cx-block cx-block--tight" data-rise>
-          <Btn enquiry="Web3 Corridor membership">
-            Get in Touch <span aria-hidden="true">→</span>
+          <Btn href={MEMBERSHIPS_PATH}>
+            All Memberships <span aria-hidden="true">→</span>
+          </Btn>
+          <Btn enquiry={MEMBERSHIP_TOPIC} variant="ghost">
+            Enquire Through IBA
           </Btn>
         </div>
       </Section>

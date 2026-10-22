@@ -33,6 +33,7 @@
  */
 
 import { FACTS } from './data/facts'
+import { ALL_MEMBERSHIPS, membershipPath } from './memberships'
 
 /* No brand suffix is appended anywhere. Every title below already names IBA or
    the Alliance, which is the brief's own pattern — appending one would give
@@ -112,6 +113,21 @@ export const SEO = {
     description:
       'Certified programmes, Blockchain and AI labs, the Experience Zone Wallet, the Investor Ready Programme, an AI tool for businesses and a 30-60-90 day plan.',
   },
+  '/memberships': {
+    title: 'Web3 Corridor Memberships | IBA',
+    description:
+      'IBA Web360, the Founders Startup Pack, Red Club and Institutional memberships, plus partner memberships available through IBA. Every enquiry comes to IBA first.',
+  },
+  /* one row per membership page, from the same list that makes the routes */
+  ...Object.fromEntries(
+    ALL_MEMBERSHIPS.map((m) => [
+      membershipPath(m),
+      {
+        title: `${m.name} | Web3 Corridor Memberships | IBA`,
+        description: `${m.summary || `The ${m.name} membership.`} Enquire through India Blockchain Alliance.`,
+      },
+    ])
+  ),
 }
 
 /**

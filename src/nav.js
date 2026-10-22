@@ -193,11 +193,9 @@ export const NAV = [
         title: 'Take Part',
         items: [
           { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#corridor-membership' },
+          { label: 'Memberships', icon: 'handshake', desc: 'IBA and partner memberships, through IBA.', href: '/memberships' },
         ],
       },
-      /* The Web360 Club memberships live on the corridor page, with their
-         terms and matrix. */
       {
         title: 'Memberships',
         items: [
@@ -314,7 +312,7 @@ export const FOOTER = [
       { label: 'One Global Corridor', href: '/corridor' },
       { label: 'Corridor Partners', href: '/corridor#corridor-partners' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
-      { label: 'Membership', href: '/corridor#corridor-membership' },
+      { label: 'Memberships', href: '/memberships' },
     ],
   },
   {
