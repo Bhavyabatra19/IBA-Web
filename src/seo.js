@@ -97,6 +97,11 @@ export const SEO = {
     description:
       'Tech4Good, Green Chain Protocol, Verifyble, IBA Red Club, the Web3 Corridor and the India AI Alliance.',
   },
+  '/memberships': {
+    title: 'Memberships | The IBA Circle & IBA Block | IBA',
+    description:
+      'The IBA Circle and IBA Block. memberships, from founder community access to virtual asset sponsorship packages, each at 10% off through India Blockchain Alliance.',
+  },
   '/privacy': {
     title: 'Privacy Policy | India Blockchain Alliance',
     description:

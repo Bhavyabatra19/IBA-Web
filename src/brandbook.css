@@ -7159,3 +7159,91 @@ main {
     display: none;
   }
 }
+
+/* ---------------------------------------------------------------- */
+/* Memberships — tier cards with the original price struck through   */
+/* and IBA's discounted price beside it                              */
+/* ---------------------------------------------------------------- */
+.mb-tiers {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .mb-tiers--3,
+  .mb-tiers--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .mb-tiers--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .mb-tiers--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.mb-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mb-tier .pk-card__num,
+.mb-tier .pk-card__title {
+  margin: 0;
+}
+.mb-tier__tag {
+  align-self: flex-start;
+}
+.mb-tier__outcome {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--bb-line);
+}
+.mb-tier__go {
+  padding-top: 4px;
+}
+.mb-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin: 0;
+  font-family: var(--bb-font);
+}
+.mb-price__was {
+  font-size: 16px;
+  color: var(--bb-ink-muted);
+  text-decoration-color: var(--iba-red);
+  text-decoration-thickness: 2px;
+}
+.mb-price__now {
+  font-size: 28px;
+  line-height: 1.1;
+  color: var(--bb-ink);
+}
+.mb-price__per {
+  font-size: 13px;
+  color: var(--bb-ink-muted);
+}
+/* inside the package table the price sits at body size */
+.mb-table .mb-price__now {
+  font-size: 18px;
+}
+.mb-table {
+  margin-top: 32px;
+}
+.mb-table .edu__table tbody th {
+  text-transform: none;
+  font-size: 15px;
+}
+.mb-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

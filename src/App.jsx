@@ -18,6 +18,7 @@ import RedClub from './pages/site/RedClub'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
+import Memberships from './pages/site/Memberships'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
@@ -38,6 +39,7 @@ const PAGES = {
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,
+  '/memberships': Memberships,
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,

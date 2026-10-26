@@ -203,6 +203,8 @@ export const NAV = [
         items: [
           { label: 'Web360 Club', icon: 'globe', desc: 'Corridor memberships.', href: '/corridor#corridor-membership' },
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
+          { label: 'The IBA Circle', icon: 'users', desc: 'Startup venture memberships, 10% off.', href: '/memberships#circle' },
+          { label: 'IBA Block.', icon: 'layers', desc: 'Virtual asset memberships, 10% off.', href: '/memberships#block' },
         ],
       },
     ],
@@ -315,6 +317,7 @@ export const FOOTER = [
       { label: 'Corridor Partners', href: '/corridor#corridor-partners' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
       { label: 'Membership', href: '/corridor#corridor-membership' },
+      { label: 'All Memberships', href: '/memberships' },
     ],
   },
   {
