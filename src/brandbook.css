@@ -7247,3 +7247,144 @@ main {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Memberships — the carousel's live cards, and the pop-up each one opens */
+.mb-mc__card {
+  position: relative;
+  gap: 0;
+}
+.mb-mc__card:has(.mb-mc__open:focus-visible) {
+  border-color: var(--iba-red);
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+.mb-mc__medal {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--iba-red);
+  color: #ffffff;
+  font-family: var(--bb-font);
+  font-size: 16px;
+}
+.mb-mc__text {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #6b655e;
+}
+.mb-mc__from {
+  display: grid;
+  gap: 2px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+.mb-mc__label {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bb-ink-muted);
+}
+.mb-mc__from .mb-price__now {
+  font-size: 22px;
+}
+.mb-mc__open {
+  margin-top: 16px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--bb-font);
+  font-size: 14px;
+  color: var(--iba-red);
+  cursor: pointer;
+  text-align: left;
+}
+/* stretched over the card, so the whole card opens the pop-up */
+.mb-mc__open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.mb-mc__open:focus-visible {
+  outline: none;
+}
+
+.mb-dlg {
+  width: min(1200px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100% - 48px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.mb-dlg::backdrop {
+  background: rgba(14, 14, 14, 0.7);
+}
+.mb-dlg__panel {
+  position: relative;
+  display: grid;
+  gap: 32px;
+  padding: clamp(24px, 4vw, 48px);
+}
+.mb-dlg__x {
+  position: sticky;
+  top: 0;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: -8px -8px -72px 0;
+  padding: 0;
+  border: 1px solid var(--bb-line);
+  border-radius: 50%;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  cursor: pointer;
+  z-index: 1;
+}
+.mb-dlg__x svg {
+  width: 14px;
+  height: 14px;
+}
+.mb-dlg__x:hover {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.mb-dlg__x:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+.mb-dlg__head {
+  display: grid;
+  gap: 12px;
+  max-width: 70ch;
+  padding-right: 48px;
+}
+.mb-dlg__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.mb-dlg__title {
+  margin: 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(26px, 3.6vw, 38px);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.mb-dlg__lede {
+  margin: 0;
+  color: var(--bb-ink-muted);
+}
+.mb-dlg .mb-table {
+  margin-top: 0;
+}
