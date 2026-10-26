@@ -398,7 +398,7 @@ export default function Memberships() {
       <PageHero
         eyebrow="IBA Memberships"
         title="Memberships"
-        lede="IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector. The IBA Circle and IBA Block. are open now, with more on the way. Every membership is 10% off through IBA."
+        lede="IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector."
         actions={
           <>
             <Btn href="/memberships#memberships">Browse Memberships</Btn>
