@@ -1,10 +1,13 @@
 /**
  * Memberships — every membership IBA offers through its partner ecosystem.
  *
- * The page is a carousel with one card per membership: The IBA Circle,
- * IBA Block. (TheBlock.) and Tokenized Asset Foundation, then placeholders for
- * memberships IBA has not yet named. Opening a card shows that membership's
- * levels in a pop-up, set out as its deck sets them out.
+ * Two parts, in this order:
+ *   Web360 Club      IBA's own memberships, as a full-width banner carousel.
+ *                    Three placeholder banners until the tiers are confirmed.
+ *   Ecosystem        memberships run with partners: The IBA Circle, IBA
+ *                    Block. (TheBlock.) and Tokenized Asset Foundation, then
+ *                    placeholders for those to come. Opening a card shows
+ *                    that membership's levels in a pop-up.
  *
  * No prices are shown anywhere on the page, by request. The decks' prices
  * are recorded in git history (the first commit of this page).
@@ -13,14 +16,16 @@
  * LIVE. SLOTS keeps the total at six, so it takes a placeholder's place.
  *
  * Sources: "The IBA Circle – Startup Venture Ecosystem 2026" and "IBA Block
- * Memberships" (both PDFs supplied by IBA). Tier names and benefits are
+ * Memberships" (both PDFs supplied by IBA), and stofdn.com/membership. Tier names and benefits are
  * copied from them word for word, typos aside.
  *
  * ⚠ The partner list (data/partners.js) names this partner "Token Asset
  * Foundation (STO)"; IBA gives the name as Tokenized Asset Foundation.
  *
- * ⚠ Tokenized Asset Foundation's levels have not been supplied yet; its pop-up
- * says so until they are.
+ * Tokenized Asset Foundation's tiers are its three individual tiers, from
+ * stofdn.com/membership. ⚠ That page could not be loaded from the build
+ * session; the benefits were read through search results, so check them
+ * against the page. Its corporate tiers are not shown yet.
  *
  * ⚠ The Circle deck's comparison matrix (page 17) is misaligned in the PDF
  * itself — ticks missing, values in the wrong rows — so it is left out until
@@ -171,11 +176,59 @@ function BlockPackages() {
   )
 }
 
-function TafSoon() {
+/** Tokenized Asset Foundation's individual tiers, from stofdn.com/membership. */
+const TAF = [
+  {
+    name: 'CORE',
+    text: 'Essential access to the global tokenized asset ecosystem.',
+    list: [
+      'Member portal access',
+      'Member badge',
+      'Learning Center access',
+      'Event access',
+      '1 standard directory listing',
+      '1 standard issuer profile with 1 offering',
+      '5-day Buy Side trial, with member pricing',
+    ],
+  },
+  {
+    name: 'GROWTH',
+    text: 'Visibility and promotion across the ecosystem. Everything in CORE, plus:',
+    list: [
+      'Up to 5 Enhanced Vendor Directory Listings',
+      '1 Enhanced Issuer Profile with unlimited offerings',
+      'Branded Learning Center content',
+      '1 annual Foundation strategy or advisory session',
+    ],
+  },
+  {
+    name: 'Founding Member',
+    text: 'Founding recognition, open through 2026. Everything in GROWTH, plus:',
+    list: [
+      'Annual Founding Member designation and badge',
+      'Global press release at enrollment',
+      'Featured profile',
+      'Preferred directory placement',
+      'Annual run-of-network advertising',
+      'Priority introductions',
+    ],
+  },
+]
+
+function TafTiers() {
   return (
-    <div className="mb-soon">
-      <p>Membership levels for Tokenized Asset Foundation are coming soon.</p>
-      <Btn enquiry="Tokenized Asset Foundation membership">Register Interest</Btn>
+    <div className="mb-tiers mb-tiers--3">
+      {TAF.map((t) => (
+        <article className="pk-card mb-tier" key={t.name}>
+          <p className="pk-card__num">Individual Membership</p>
+          <h3 className="pk-card__title">{t.name}</h3>
+          <p className="pk-card__text">{t.text}</p>
+          <Bullets items={t.list} />
+          <div className="mb-tier__go">
+            <Btn enquiry={`Tokenized Asset Foundation: ${t.name}`}>Apply</Btn>
+          </div>
+        </article>
+      ))}
     </div>
   )
 }
@@ -243,12 +296,12 @@ const LIVE = [
   {
     Logo: TafLogo,
     name: 'Tokenized Asset Foundation',
-    kind: 'Partner Membership',
-    text: 'Membership with Tokenized Asset Foundation, an IBA partner. Its levels and benefits are on the way.',
-    cta: 'View details',
-    title: 'Tokenized Asset Foundation',
-    lede: 'Tokenized Asset Foundation is an IBA partner. Register your interest and we will share its membership levels as soon as they are confirmed.',
-    Details: TafSoon,
+    kind: 'Tokenized Asset Ecosystem',
+    text: 'Three tiers in the global tokenized asset ecosystem, from essential access to Founding Member recognition.',
+    cta: 'View the three tiers',
+    title: 'Join the global tokenized asset ecosystem.',
+    lede: 'Membership of Tokenized Asset Foundation (formerly the STO Foundation): directories, issuer profiles, learning, events and visibility across the tokenization industry.',
+    Details: TafTiers,
   },
 ]
 
@@ -267,7 +320,7 @@ function MembershipCarousel({ onOpen }) {
     t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
   }
   return (
-    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="IBA memberships" data-rise>
+    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="Ecosystem memberships" data-rise>
       <ul className="cx-mc__track" ref={track} tabIndex={0}>
         {MEMBERSHIPS.map((m) =>
           m.Details ? (
@@ -305,6 +358,71 @@ function MembershipCarousel({ onOpen }) {
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
         </button>
         <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label="Next memberships">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+  )
+}
+
+/* ---------------------------------------------------------------- */
+/* Web360 Club — the banner carousel                                 */
+/* ---------------------------------------------------------------- */
+
+/** Placeholder banners, one per Web360 Club membership, until IBA confirms them. */
+const WEB360 = ['01', '02', '03']
+
+function BannerCarousel() {
+  const track = useRef(null)
+  const [at, setAt] = useState(0)
+
+  const go = (i) => {
+    const t = track.current
+    if (!t) return
+    const n = (i + WEB360.length) % WEB360.length
+    t.scrollTo({ left: n * t.clientWidth, behavior: 'smooth' })
+  }
+  /* the dots follow the track, however it was scrolled: arrows, swipe or keys */
+  const onScroll = () => {
+    const t = track.current
+    if (t) setAt(Math.round(t.scrollLeft / t.clientWidth))
+  }
+
+  return (
+    <div className="mb-bn" role="region" aria-roledescription="carousel" aria-label="Web360 Club memberships" data-rise>
+      <ul className="mb-bn__track" ref={track} tabIndex={0} onScroll={onScroll}>
+        {WEB360.map((n, i) => (
+          <li
+            className="mb-bn__slide"
+            key={n}
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${WEB360.length}`}
+          >
+            <span className="mb-bn__beam" aria-hidden="true" />
+            <span className="cx-mc__medal mb-bn__medal" aria-hidden="true" />
+            <p className="mb-bn__num">Web360 Club · Membership {n}</p>
+            <h3 className="mb-bn__name">Membership {n}</h3>
+            <p className="mb-bn__text">Details coming soon.</p>
+          </li>
+        ))}
+      </ul>
+      <div className="mb-bn__nav">
+        <button type="button" className="cx-mc__arrow" onClick={() => go(at - 1)} aria-label="Previous membership">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <div className="mb-bn__dots">
+          {WEB360.map((n, i) => (
+            <button
+              type="button"
+              key={n}
+              className="mb-bn__dot"
+              aria-label={`Show membership ${n}`}
+              aria-current={i === at ? 'true' : undefined}
+              onClick={() => go(i)}
+            />
+          ))}
+        </div>
+        <button type="button" className="cx-mc__arrow" onClick={() => go(at + 1)} aria-label="Next membership">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
         </button>
       </div>
@@ -401,18 +519,27 @@ export default function Memberships() {
         lede="IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector."
         actions={
           <>
-            <Btn href="/memberships#memberships">Browse Memberships</Btn>
-            <Btn enquiry="IBA memberships" variant="ghost">
-              Talk to Our Team
+            <Btn href="/memberships#web360">Web360 Club</Btn>
+            <Btn href="/memberships#memberships" variant="ghost">
+              Ecosystem Memberships
             </Btn>
           </>
         }
       />
 
       <Section
+        id="web360"
+        eyebrow="Web360 Club"
+        title="Web360 Club Memberships"
+        lede="IBA's own memberships. Details are coming soon; get in touch to hear about them first."
+      >
+        <BannerCarousel />
+      </Section>
+
+      <Section
         id="memberships"
-        eyebrow="Our Memberships"
-        title="Choose your membership"
+        eyebrow="Our Ecosystem Memberships"
+        title="Choose your membership from the ecosystem"
         lede="Each membership is run with a partner in the IBA ecosystem and has its own levels. Open one to see what each level includes."
         tone="card"
       >

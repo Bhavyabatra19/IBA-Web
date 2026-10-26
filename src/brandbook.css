@@ -7203,7 +7203,12 @@ main {
   border-top: 1px solid var(--bb-line);
 }
 .mb-tier__go {
+  margin-top: auto;
   padding-top: 4px;
+}
+/* with an outcome above it, the outcome takes the push to the bottom */
+.mb-tier__outcome + .mb-tier__go {
+  margin-top: 0;
 }
 .mb-table {
   margin-top: 32px;
@@ -7380,15 +7385,103 @@ main {
   width: 64px;
   object-fit: cover;
 }
-/* a membership whose levels have not been supplied yet */
-.mb-soon {
-  display: grid;
-  justify-items: start;
-  gap: 20px;
-  padding: 24px;
-  border: 1px dashed var(--bb-line-strong);
-  color: var(--bb-ink-muted);
+
+/* Memberships — the Web360 Club banner carousel: one wide banner to a view */
+.mb-bn {
+  min-width: 0;
+  max-width: 100%;
 }
-.mb-soon p {
+.mb-bn__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
   margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.mb-bn__track::-webkit-scrollbar {
+  display: none;
+}
+.mb-bn__track:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 4px;
+}
+.mb-bn__slide {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-height: clamp(240px, 32vw, 360px);
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--iba-black);
+  color: #ffffff;
+  scroll-snap-align: start;
+}
+.mb-bn__beam {
+  position: absolute;
+  inset: -40% -10% auto auto;
+  width: 60%;
+  height: 180%;
+  background: radial-gradient(closest-side, rgba(215, 25, 32, 0.5), rgba(215, 25, 32, 0));
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+.mb-bn__slide > :not(.mb-bn__beam) {
+  position: relative;
+}
+.mb-bn__medal {
+  margin-bottom: auto;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: transparent;
+}
+.mb-bn__num {
+  margin: 24px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff4a50;
+}
+.mb-bn__name {
+  margin: 8px 0 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  color: #ffffff;
+}
+.mb-bn__text {
+  margin: 8px 0 0;
+  color: var(--bb-on-black-muted);
+}
+.mb-bn__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.mb-bn__dots {
+  display: flex;
+  gap: 8px;
+}
+.mb-bn__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--bb-line-strong);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.mb-bn__dot[aria-current] {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+}
+.mb-bn__dot:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 3px;
 }

@@ -196,14 +196,15 @@ export const NAV = [
           { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#corridor-membership' },
         ],
       },
-      /* The Web360 Club memberships live on the corridor page, with their
-         terms and matrix. */
+      /* Both kinds of membership live on /memberships: the Web360 Club
+         banners first, then the ecosystem memberships. The matrix link is
+         the corridor page's, until its matrix moves too. */
       {
         title: 'Memberships',
         items: [
-          { label: 'Web360 Club', icon: 'globe', desc: 'Corridor memberships.', href: '/corridor#corridor-membership' },
+          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/memberships#web360' },
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
-          { label: 'IBA Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships' },
+          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships#memberships' },
         ],
       },
     ],
