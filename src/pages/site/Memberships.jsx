@@ -1,65 +1,37 @@
 /**
  * Memberships — every membership IBA offers through its partner ecosystem.
  *
- * The page is a carousel with one card per membership: The IBA Circle and
- * IBA Block. (TheBlock.) are live, and four placeholders hold the places of
- * memberships IBA has not yet named. Opening a live card shows that
- * membership's levels in a pop-up, set out as its deck sets them out, with
- * IBA's 10% off shown against every price.
+ * The page is a carousel with one card per membership: The IBA Circle,
+ * IBA Block. (TheBlock.) and Tokenized Asset Foundation, then placeholders for
+ * memberships IBA has not yet named. Opening a card shows that membership's
+ * levels in a pop-up, set out as its deck sets them out.
  *
- * To add a membership: give it a DETAILS component, then replace the first
- * placeholder in LIVE's wake by adding its card to LIVE. SLOTS keeps the
- * total at six, so a new membership takes a placeholder's place.
+ * No prices are shown anywhere on the page, by request. The decks' prices
+ * are recorded in git history (the first commit of this page).
+ *
+ * To add a membership: give it a Details component, then add its card to
+ * LIVE. SLOTS keeps the total at six, so it takes a placeholder's place.
  *
  * Sources: "The IBA Circle – Startup Venture Ecosystem 2026" and "IBA Block
- * Memberships" (both PDFs supplied by IBA). Tier names, prices and benefits
- * are copied from them word for word, typos aside. Only the discounted price
- * is ours, and it is worked out here from the original rather than typed in,
- * so a price change in the deck is a one-number change on this page.
+ * Memberships" (both PDFs supplied by IBA). Tier names and benefits are
+ * copied from them word for word, typos aside.
+ *
+ * ⚠ The partner list (data/partners.js) names this partner "Token Asset
+ * Foundation (STO)"; IBA gives the name as Tokenized Asset Foundation.
+ *
+ * ⚠ Tokenized Asset Foundation's levels have not been supplied yet; its pop-up
+ * says so until they are.
  *
  * ⚠ The Circle deck's comparison matrix (page 17) is misaligned in the PDF
  * itself — ticks missing, values in the wrong rows — so it is left out until
  * IBA sends a clean copy. Each level's own page in the deck is complete and
  * is what the pop-up carries.
- *
- * ⚠ The Block deck prices its packages as "12K / 24K / 48K Annually" with no
- * currency. They are shown exactly so; confirm the currency (USD or AED)
- * before launch and set BLOCK_CURRENCY.
  */
 
 import { useEffect, useRef, useState } from 'react'
 import { PageHero, Section, Btn, Bullets } from '../../components/Kit'
 import { Table } from '../../sections/service/ServiceBlocks'
 import { lockScroll, unlockScroll } from '../../lib/scroll'
-
-/** IBA's discount on every membership, as a fraction. */
-const DISCOUNT = 0.1
-
-const off = (n) => Math.round(n * (1 - DISCOUNT) * 100) / 100
-
-/** USD 4,990 */
-const usd = (n) => 'USD ' + n.toLocaleString('en-US')
-
-/** 12K, 10.8K — the Block deck's own shorthand */
-const BLOCK_CURRENCY = ''
-const k = (n) => (BLOCK_CURRENCY ? BLOCK_CURRENCY + ' ' : '') + n / 1000 + 'K'
-
-/** The original price struck through, then the price after IBA's discount. */
-function Price({ amount, format, per }) {
-  return (
-    <p className="mb-price">
-      <s className="mb-price__was">
-        <span className="mb-sr">Was </span>
-        {format(amount)}
-      </s>
-      <span className="mb-price__now">
-        <span className="mb-sr">Now </span>
-        {format(off(amount))}
-      </span>
-      {per && <span className="mb-price__per">{per}</span>}
-    </p>
-  )
-}
 
 /* ---------------------------------------------------------------- */
 /* The IBA Circle                                                    */
@@ -69,8 +41,6 @@ const CIRCLE = [
   {
     level: 'Level 1',
     name: 'Global Member',
-    price: 990,
-    per: '/ year',
     text: 'Ecosystem access for early-stage and international founders building community before needing active execution support.',
     list: [
       'Ecosystem Access: a global network of founders, investors and ecosystem partners.',
@@ -78,15 +48,13 @@ const CIRCLE = [
       'Directories: startup, investor and mentor discovery within the ecosystem.',
       'Founder Resources: templates, KPI frameworks, startup playbooks and data-room guidance.',
       'Mentoring & Media: 4 hours of mentor access per month, plus 1 podcast recording.',
-      'Publishing (Optional): add USD 300 for full distribution on The Block channels and 24K+ newsletter.',
+      'Publishing (Optional): an add-on for full distribution on The Block channels and 24K+ newsletter.',
     ],
     outcome: 'Ecosystem Integration & Community',
   },
   {
     level: 'Level 2',
     name: 'Startup Member',
-    price: 4990,
-    per: '/ year',
     text: 'Strategic guidance to prepare for growth, fundraising, and market expansion without joining a formal accelerator. The most relevant pre-accelerator offer.',
     list: [
       'Strategic Advisory: helping founders make better decisions before they become expensive mistakes.',
@@ -100,8 +68,7 @@ const CIRCLE = [
   {
     level: 'Level 3',
     name: 'Seed Accelerator',
-    price: 9900,
-    per: '/ 3 months',
+    duration: '3 months',
     text: 'The structured execution program for high-potential Seed companies preparing to raise capital and accelerate growth.',
     list: [
       'Structured Execution: weekly strategy sessions, KPI reviews, and a clear growth roadmap.',
@@ -113,8 +80,7 @@ const CIRCLE = [
   {
     level: 'Level 4',
     name: 'Series A Accelerator',
-    price: 19900,
-    per: '/ 4 months',
+    duration: '4 months',
     text: 'The institutional-capital and expansion program for startups preparing to scale, raise institutional capital and accelerate market expansion.',
     list: [
       'Institutional Fundraising: dedicated fundraising strategy and curated introductions to institutional investors and VCs.',
@@ -129,11 +95,7 @@ const CIRCLE = [
 /* IBA Block                                                         */
 /* ---------------------------------------------------------------- */
 
-const BLOCK = [
-  { name: 'Connect', price: 12000 },
-  { name: 'Access', price: 24000 },
-  { name: 'Build', price: 48000 },
-]
+const BLOCK = [{ name: 'Connect' }, { name: 'Access' }, { name: 'Build' }]
 
 const YES = '✓'
 
@@ -169,8 +131,7 @@ function CircleLevels() {
         <article className="pk-card mb-tier" key={t.name}>
           <p className="pk-card__num">{t.level}</p>
           <h3 className="pk-card__title">{t.name}</h3>
-          <span className="wd__tag mb-tier__tag">10% off with IBA</span>
-          <Price amount={t.price} format={usd} per={t.per} />
+          {t.duration && <span className="wd__tag mb-tier__tag">Duration: {t.duration}</span>}
           <p className="pk-card__text">{t.text}</p>
           <Bullets items={t.list} />
           <p className="pk-card__text mb-tier__outcome">
@@ -193,8 +154,6 @@ function BlockPackages() {
           <article className="pk-card mb-tier" key={p.name}>
             <p className="pk-card__num">Sponsorship Package</p>
             <h3 className="pk-card__title">{p.name}</h3>
-            <span className="wd__tag mb-tier__tag">10% off with IBA</span>
-            <Price amount={p.price} format={k} per="Annually" />
             <div className="mb-tier__go">
               <Btn enquiry={`IBA Block: ${p.name} package`}>Enquire</Btn>
             </div>
@@ -205,13 +164,19 @@ function BlockPackages() {
         <Table
           caption="IBA Block. sponsorship packages"
           head={['Sponsorship Packages', ...BLOCK.map((p) => p.name)]}
-          rows={[
-            ['Price', ...BLOCK.map((p) => <Price key={p.name} amount={p.price} format={k} per="Annually" />)],
-            ...BLOCK_ROWS,
-          ]}
+          rows={BLOCK_ROWS}
         />
       </div>
     </>
+  )
+}
+
+function TafSoon() {
+  return (
+    <div className="mb-soon">
+      <p>Membership levels for Tokenized Asset Foundation are coming soon.</p>
+      <Btn enquiry="Tokenized Asset Foundation membership">Register Interest</Btn>
+    </div>
   )
 }
 
@@ -222,33 +187,68 @@ function BlockPackages() {
 /** How many cards the carousel shows in all, live and placeholder. */
 const SLOTS = 6
 
+/** TheCircle.'s mark, drawn: a disc with a square cut from it. Ink on the
+    white card rather than the supplied white-on-black. */
+const CircleLogo = () => (
+  <span className="mb-logo">
+    <svg className="mb-logo__mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="50" fill="currentColor" />
+      <rect x="54" y="54" width="28" height="28" fill="var(--bb-surface)" />
+    </svg>
+    <span className="mb-logo__word">
+      TheCircle<span>.</span>
+    </span>
+  </span>
+)
+
+/** TheBlock.'s mark, then its wordmark set as text: the supplied wordmark is
+    white, and would vanish on the card. */
+const BlockLogo = () => (
+  <span className="mb-logo">
+    <img src="/logos/eco/theblock-ae.png" alt="" width="38" height="38" />
+    <span className="mb-logo__word">
+      TheBlock<span className="mb-logo__dot">.</span>
+    </span>
+  </span>
+)
+
+const TafLogo = () => (
+  <span className="mb-logo">
+    <img className="mb-logo__crop" src="/logos/partners/token-asset-foundation.jpg" alt="" width="64" height="38" />
+  </span>
+)
+
 /** The live memberships, in carousel order. */
 const LIVE = [
   {
-    mark: 'C',
+    Logo: CircleLogo,
     name: 'The IBA Circle',
     kind: 'Startup Venture Ecosystem',
     text: 'Four levels for founders building the company investors want to fund, from Global Member to Series A Accelerator.',
-    from: 990,
-    format: usd,
-    per: '/ year',
     cta: 'View the four levels',
     title: 'Start where you are. Upgrade as you grow.',
     lede: 'Choose the right level of support at the right stage. Not every company is ready for acceleration or fundraising.',
     Details: CircleLevels,
   },
   {
-    mark: 'B',
+    Logo: BlockLogo,
     name: 'IBA Block.',
     kind: 'Virtual Asset Ecosystem',
     text: 'Three membership packages in the capital of virtual assets: spaces, events, media and launch support.',
-    from: 12000,
-    format: k,
-    per: 'Annually',
     cta: 'View the three packages',
     title: 'The Capital of Virtual Assets',
     lede: 'A membership-driven network that brings together chains, market makers, legal experts, technologists, investors and other service providers, with year-round spaces, events and media to keep members connected and visible.',
     Details: BlockPackages,
+  },
+  {
+    Logo: TafLogo,
+    name: 'Tokenized Asset Foundation',
+    kind: 'Partner Membership',
+    text: 'Membership with Tokenized Asset Foundation, an IBA partner. Its levels and benefits are on the way.',
+    cta: 'View details',
+    title: 'Tokenized Asset Foundation',
+    lede: 'Tokenized Asset Foundation is an IBA partner. Register your interest and we will share its membership levels as soon as they are confirmed.',
+    Details: TafSoon,
   },
 ]
 
@@ -272,18 +272,18 @@ function MembershipCarousel({ onOpen }) {
         {MEMBERSHIPS.map((m) =>
           m.Details ? (
             <li className="cx-mc__card mb-mc__card" key={m.num}>
-              <span className="cx-mc__medal mb-mc__medal" aria-hidden="true">
-                {m.mark}
-              </span>
+              {m.Logo ? (
+                <m.Logo />
+              ) : (
+                <span className="cx-mc__medal mb-mc__medal" aria-hidden="true">
+                  {m.mark}
+                </span>
+              )}
               <span className="cx-mc__num">
                 {m.num} · {m.kind}
               </span>
               <h3 className="cx-mc__name">{m.name}</h3>
               <p className="mb-mc__text">{m.text}</p>
-              <div className="mb-mc__from">
-                <span className="mb-mc__label">From</span>
-                <Price amount={m.from} format={m.format} per={m.per} />
-              </div>
               {/* the whole card is the target; the button's box is stretched
                   over it, so the card reads as one control */}
               <button type="button" className="mb-mc__open" onClick={(e) => onOpen(m, e.currentTarget)}>
@@ -413,7 +413,7 @@ export default function Memberships() {
         id="memberships"
         eyebrow="Our Memberships"
         title="Choose your membership"
-        lede="Each membership is run with a partner in the IBA ecosystem and has its own levels. Open one to see what each level includes and its IBA price."
+        lede="Each membership is run with a partner in the IBA ecosystem and has its own levels. Open one to see what each level includes."
         tone="card"
       >
         <MembershipCarousel onOpen={show} />

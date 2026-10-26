@@ -203,7 +203,7 @@ export const NAV = [
         items: [
           { label: 'Web360 Club', icon: 'globe', desc: 'Corridor memberships.', href: '/corridor#corridor-membership' },
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
-          { label: 'IBA Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block. and more, 10% off.', href: '/memberships' },
+          { label: 'IBA Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships' },
         ],
       },
     ],
