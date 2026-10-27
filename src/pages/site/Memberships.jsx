@@ -289,7 +289,7 @@ const LIVE = [
     name: 'The IBA Circle',
     kind: 'Startup Venture Ecosystem',
     text: 'Four levels for founders building the company investors want to fund, from Global Member to Series A Accelerator.',
-    cta: 'View the four levels',
+    cta: 'View levels',
     title: 'Start where you are. Upgrade as you grow.',
     lede: 'Choose the right level of support at the right stage. Not every company is ready for acceleration or fundraising.',
     Details: CircleLevels,
@@ -299,7 +299,7 @@ const LIVE = [
     name: 'IBA Block.',
     kind: 'Virtual Asset Ecosystem',
     text: 'Three membership packages in the capital of virtual assets: spaces, events, media and launch support.',
-    cta: 'View the three packages',
+    cta: 'View packages',
     title: 'The Capital of Virtual Assets',
     lede: 'A membership-driven network that brings together chains, market makers, legal experts, technologists, investors and other service providers, with year-round spaces, events and media to keep members connected and visible.',
     Details: BlockPackages,
@@ -309,7 +309,7 @@ const LIVE = [
     name: 'Tokenized Asset Foundation',
     kind: 'Tokenized Asset Ecosystem',
     text: 'Three tiers in the global tokenized asset ecosystem, from essential access to Founding Member recognition.',
-    cta: 'View the three tiers',
+    cta: 'View tiers',
     title: 'Join the global tokenized asset ecosystem.',
     lede: 'Membership of Tokenized Asset Foundation (formerly the STO Foundation): directories, issuer profiles, learning, events and visibility across the tokenization industry.',
     Details: TafTiers,
@@ -344,7 +344,7 @@ function MembershipCarousel({ items, label, onOpen }) {
             <li className="cx-mc__card mb-mc__card" key={m.num}>
               <h3 className="cx-mc__name">{m.name}</h3>
               <p className="mb-mc__text">{m.text}</p>
-              {/* the call to action on the left, the partner's logo bottom right */}
+              {/* one row: the call to action on the left, the partner's logo on the right */}
               <div className="mb-mc__foot">
                 {/* the whole card is the target; the button's box is stretched
                     over it, so the card reads as one control */}
