@@ -19,6 +19,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealLines, revealRise, reducedMotion } from '../lib/scroll'
 import { channels } from '../components/ReachOut'
 import { contextFor } from '../enquiry'
+import { currentPath } from '../lib/router'
 
 /**
  * One cube, drawn once around the origin so every placement is a
@@ -158,7 +159,7 @@ export default function Closing() {
   /* The WhatsApp opener says what this page is about — see PAGE_CONTEXT. Read
      at render rather than passed in: this band is rendered by ServicePage for
      ten pages that would otherwise each have to tell it where they are. */
-  const { phrase } = contextFor(window.location.pathname)
+  const { phrase } = contextFor(currentPath())
   const WAYS = channels(phrase)
 
   useLayoutEffect(() => {

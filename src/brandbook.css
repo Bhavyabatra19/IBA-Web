@@ -8147,3 +8147,71 @@ main {
 .cx-partner--hub .cx-flag {
   box-shadow: 0 0 0 2px #ffffff;
 }
+
+/* The review build's bar (npm run build:artifact only) */
+.rv {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  /* above the page, below the nav and its mobile drawer */
+  z-index: calc(var(--z-nav) - 1);
+  width: min(300px, calc(100vw - 32px));
+  border: 1px solid var(--iba-black);
+  background: var(--bb-surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  font-family: var(--bb-font);
+}
+.rv__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  background: var(--iba-black);
+  color: #ffffff;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+.rv__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f5a623;
+}
+.rv__list {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+}
+.rv__list a {
+  display: grid;
+  gap: 2px;
+  padding: 8px 14px;
+  color: var(--bb-ink);
+  text-decoration: none;
+}
+.rv__list a:hover,
+.rv__list a[aria-current] {
+  background: var(--bb-surface-alt);
+}
+.rv__list a[aria-current] strong {
+  color: var(--iba-red);
+}
+.rv__list a[aria-current] strong,
+.rv__list a:hover strong {
+  text-decoration: none;
+}
+.rv__list strong {
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--bb-ink);
+}
+.rv__list span {
+  font-size: 12px;
+  color: var(--bb-ink-muted);
+}

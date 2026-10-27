@@ -40,6 +40,7 @@ import {
   wantsEnquiry,
 } from '../lib/enquiryStore'
 import { lockScroll, unlockScroll } from '../lib/scroll'
+import { currentPath } from '../lib/router'
 
 /* Everything that can hold focus, in DOM order. The list is the standard one;
    `:not([disabled])` matters because the submit button IS disabled while a
@@ -72,7 +73,7 @@ export default function Enquiry() {
          the page would scroll away underneath the opening modal. Taking the
          click on the way down means the React handler never runs at all. */
       e.stopPropagation()
-      const page = contextFor(window.location.pathname)
+      const page = contextFor(currentPath())
       openEnquiry({
         /* the trigger's own topic wins; the page's is the fallback */
         topic: el.dataset.enquiry || page.topic,
@@ -87,7 +88,7 @@ export default function Enquiry() {
   /* ?enquiry=open, so a campaign or an email can link straight to the form. */
   useEffect(() => {
     if (wantsEnquiry()) {
-      const page = contextFor(window.location.pathname)
+      const page = contextFor(currentPath())
       openEnquiry({ topic: page.topic, phrase: page.phrase })
     }
   }, [])

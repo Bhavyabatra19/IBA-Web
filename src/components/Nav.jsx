@@ -45,7 +45,7 @@ import {
   lockScroll,
   unlockScroll,
 } from '../lib/scroll'
-import { navigate, parseHref, usePath } from '../lib/router'
+import { currentPath, navigate, parseHref, usePath } from '../lib/router'
 import { useEnquiry } from '../lib/enquiryStore'
 
 /** Line icons for the panel links (the `icon` field in nav.js), on a 24 grid. */
@@ -222,7 +222,7 @@ export default function Nav() {
 
     /* A page change: App handles the scroll once the new page has laid out,
        since there is nothing here to scroll to yet. */
-    if (path && path !== window.location.pathname) {
+    if (path && path !== currentPath()) {
       navigate(href)
       return
     }

@@ -20,6 +20,7 @@ import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
 import Memberships from './pages/site/Memberships'
 import Marketplace from './pages/site/Marketplace'
+import ReviewBar from './components/ReviewBar'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
@@ -172,6 +173,8 @@ export default function App() {
           control on the site goes through, so it must not be inside the tree
           App remounts on a route change. */}
       <Enquiry />
+      {/* the review build's guide to what changed; never in the site build */}
+      {import.meta.env.VITE_ARTIFACT === '1' && <ReviewBar />}
     </>
   )
 }

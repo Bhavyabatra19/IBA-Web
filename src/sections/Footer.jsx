@@ -9,7 +9,7 @@
 
 import { FOOTER, PENDING, LEGAL } from '../nav'
 import { scrollToId, scrollToTop } from '../lib/scroll'
-import { navigate, parseHref } from '../lib/router'
+import { currentPath, navigate, parseHref } from '../lib/router'
 
 /* the contact icons, drawn on a 24 grid in currentColor */
 const ICONS = {
@@ -46,7 +46,7 @@ export default function Footer() {
     const { path, hash, external } = parseHref(href)
     if (external || href.startsWith('mailto:') || href.startsWith('tel:')) return
     e.preventDefault()
-    if (path && path !== window.location.pathname) {
+    if (path && path !== currentPath()) {
       navigate(href) // App scrolls once the new page has laid out
       return
     }
@@ -111,7 +111,9 @@ export default function Footer() {
             {new Date().getFullYear()} · Connecting Economies. Block by Block.
           </p>
           <div className="ft__legal">
-            <a href={LEGAL.privacy}>Privacy Policy</a>
+            <a href={LEGAL.privacy} onClick={(e) => go(e, LEGAL.privacy)}>
+              Privacy Policy
+            </a>
             <a href={PENDING.terms}>Terms</a>
           </div>
         </div>
