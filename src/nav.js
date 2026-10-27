@@ -175,6 +175,9 @@ export const NAV = [
     ],
   },
   { key: 'redclub', label: 'Experience Zone', href: '/red-club' },
+  /* Every membership, and the way in for existing members (Member Login sits
+     on that page now, not in the bar). */
+  { key: 'membership', label: 'Membership', href: '/memberships' },
   {
     key: 'corridor',
     label: 'Web3 Corridor',

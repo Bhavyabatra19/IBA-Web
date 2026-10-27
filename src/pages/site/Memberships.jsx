@@ -40,6 +40,7 @@ import { useEffect, useRef, useState } from 'react'
 import { PageHero, Section, Btn, Bullets } from '../../components/Kit'
 import { Table } from '../../sections/service/ServiceBlocks'
 import { lockScroll, unlockScroll } from '../../lib/scroll'
+import { MEMBER_LOGIN } from '../../nav'
 
 /* ---------------------------------------------------------------- */
 /* The IBA Circle                                                    */
@@ -541,6 +542,10 @@ export default function Memberships() {
             <Btn href="/memberships#web360">Web360 Club</Btn>
             <Btn href="/memberships#memberships" variant="ghost">
               Ecosystem Memberships
+            </Btn>
+            {/* the way in for existing members, moved here from the navbar */}
+            <Btn href="/library#login" variant="ghost">
+              {MEMBER_LOGIN}
             </Btn>
           </>
         }
