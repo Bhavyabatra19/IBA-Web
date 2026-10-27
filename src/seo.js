@@ -102,6 +102,11 @@ export const SEO = {
     description:
       'The IBA Circle, IBA Block. and Tokenized Asset Foundation memberships, from founder programmes to virtual asset packages, through India Blockchain Alliance.',
   },
+  '/marketplace': {
+    title: 'Partner Marketplace | IBA Ecosystem',
+    description:
+      'Every partner company in the India Blockchain Alliance ecosystem and the services they offer members, searchable by offering and location.',
+  },
   '/privacy': {
     title: 'Privacy Policy | India Blockchain Alliance',
     description:

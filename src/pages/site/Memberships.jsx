@@ -1,22 +1,27 @@
 /**
  * Memberships — every membership IBA offers through its partner ecosystem.
  *
- * Two parts, in this order:
- *   Web360 Club      IBA's own memberships, as a full-width banner carousel.
- *                    Three placeholder banners until the tiers are confirmed.
- *   Ecosystem        memberships run with partners: The IBA Circle, IBA
- *                    Block. (TheBlock.) and Tokenized Asset Foundation, then
- *                    placeholders for those to come. Opening a card shows
- *                    that membership's levels in a pop-up.
+ * Three parts, in this order:
+ *   Web360 Club      IBA's own tiers, Bronze, Silver and Gold, three to a
+ *                    view: who each is for, and why to join.
+ *   Ecosystem        partner companies offering their services to members:
+ *                    The IBA Circle (investors), IBA Block. (events) and
+ *                    Tokenized Asset Foundation (tokenization), placeholders,
+ *                    then a card into the marketplace. Explore on a card opens
+ *                    that partner's tiers in a pop-up.
  *   Cohort           memberships for institutes and their students: the Red
  *                    Club Experience Zone (B2B) and the Student Experience.
  *                    Placeholders, named but not yet detailed.
  *
+ * The partner data and the pop-up are exported for the marketplace
+ * (pages/site/Marketplace.jsx), which lists every partner.
+ *
  * No prices are shown anywhere on the page, by request. The decks' prices
  * are recorded in git history (the first commit of this page).
  *
- * To add a membership: give it a Details component, then add its card to
- * LIVE. SLOTS keeps the total at six, so it takes a placeholder's place.
+ * To add a partner membership: give it a Details component, then add it to
+ * ECOSYSTEM. It takes a placeholder's place on this page, and its offerings
+ * and locations put it in the marketplace's filters.
  *
  * Sources: "The IBA Circle – Startup Venture Ecosystem 2026" and "IBA Block
  * Memberships" (both PDFs supplied by IBA), and stofdn.com/membership. Tier names and benefits are
@@ -38,7 +43,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { PageHero, Section, Btn, Bullets } from '../../components/Kit'
-import { Table } from '../../sections/service/ServiceBlocks'
+import { Table, Go } from '../../sections/service/ServiceBlocks'
 import { lockScroll, unlockScroll } from '../../lib/scroll'
 import { MEMBER_LOGIN } from '../../nav'
 
@@ -238,19 +243,8 @@ function TafTiers() {
 }
 
 /* ---------------------------------------------------------------- */
-/* The carousel                                                      */
+/* Partner logos                                                     */
 /* ---------------------------------------------------------------- */
-
-/** How many cards each carousel shows in all, live and placeholder. */
-const SLOTS = 6
-const COHORT_SLOTS = 4
-
-/** Fills a list out to `slots` cards with unnamed placeholders, and numbers them. */
-const fill = (items, slots) =>
-  [...items, ...Array.from({ length: slots - items.length }, () => ({}))].map((m, i) => ({
-    ...m,
-    num: String(i + 1).padStart(2, '0'),
-  }))
 
 /** TheCircle.'s mark, drawn: a disc with a square cut from it. Ink on the
     white card rather than the supplied white-on-black. */
@@ -283,41 +277,86 @@ const TafLogo = () => (
   </span>
 )
 
-/** The live memberships, in carousel order. */
-const LIVE = [
+/* ---------------------------------------------------------------- */
+/* The ecosystem: partner companies and their tiers                  */
+/* ---------------------------------------------------------------- */
+
+/**
+ * Partners whose membership tiers are on the site. `why` is the card's answer
+ * to "Why join through IBA?"; `brief`, `offerings` and `locations` are what
+ * the marketplace lists and filters on — its filter options are read from
+ * these lists, so a new offering here becomes a new filter there.
+ */
+export const ECOSYSTEM = [
   {
+    id: 'circle',
     Logo: CircleLogo,
     name: 'The IBA Circle',
+    partner: 'TheCircle.',
     kind: 'Startup Venture Ecosystem',
-    text: 'Four levels for founders building the company investors want to fund, from Global Member to Series A Accelerator.',
-    cta: 'View levels',
+    why: 'Meet investors before the raise. Join through IBA for global networking with angels, family offices and VCs, and a real-time view of how founders become investor-ready.',
+    brief: 'Startup venture ecosystem connecting founders, operators and investors: acceleration, investor access, mentoring and media.',
+    offerings: ['Investor Access', 'Startup Acceleration', 'Mentoring', 'Media & Visibility'],
+    locations: ['GCC', 'Global'],
     title: 'Start where you are. Upgrade as you grow.',
     lede: 'Choose the right level of support at the right stage. Not every company is ready for acceleration or fundraising.',
     Details: CircleLevels,
   },
   {
+    id: 'block',
     Logo: BlockLogo,
     name: 'IBA Block.',
+    partner: 'TheBlock.',
     kind: 'Virtual Asset Ecosystem',
-    text: 'Three membership packages in the capital of virtual assets: spaces, events, media and launch support.',
-    cta: 'View packages',
+    why: 'The events hub for virtual assets. Join through IBA for global networking at side events, workshops and conferences, and real-time experience of the Dubai ecosystem.',
+    brief: 'Virtual asset hub in Dubai: event spaces, side events and workshops, media, launch support, VA licensing and talent.',
+    offerings: ['Events', 'Spaces', 'Media & Visibility', 'Regulatory & Licensing', 'Talent & Education'],
+    locations: ['UAE'],
     title: 'The Capital of Virtual Assets',
     lede: 'A membership-driven network that brings together chains, market makers, legal experts, technologists, investors and other service providers, with year-round spaces, events and media to keep members connected and visible.',
     Details: BlockPackages,
   },
   {
+    id: 'taf',
     Logo: TafLogo,
     name: 'Tokenized Asset Foundation',
+    partner: 'Tokenized Asset Foundation',
     kind: 'Tokenized Asset Ecosystem',
-    text: 'Three tiers in the global tokenized asset ecosystem, from essential access to Founding Member recognition.',
-    cta: 'View tiers',
+    why: 'Your route into tokenized markets. Join through IBA for global expansion through directories, issuer profiles and events across the tokenization industry.',
+    brief: 'Global tokenized asset ecosystem: vendor and issuer directories, a learning center, events and visibility.',
+    offerings: ['Tokenization', 'Directories', 'Events', 'Talent & Education'],
+    locations: ['Global'],
     title: 'Join the global tokenized asset ecosystem.',
     lede: 'Membership of Tokenized Asset Foundation (formerly the STO Foundation): directories, issuer profiles, learning, events and visibility across the tokenization industry.',
     Details: TafTiers,
   },
 ]
 
-const MEMBERSHIPS = fill(LIVE, SLOTS)
+/* ---------------------------------------------------------------- */
+/* The carousels                                                     */
+/* ---------------------------------------------------------------- */
+
+/** Placeholders after the live partners, before the marketplace card. */
+const ECOSYSTEM_SLOTS = 5
+const COHORT_SLOTS = 4
+
+/** Fills a list out to `slots` cards with unnamed placeholders, and numbers them. */
+const fill = (items, slots) =>
+  [...items, ...Array.from({ length: slots - items.length }, () => ({}))].map((m, i) => ({
+    ...m,
+    num: String(i + 1).padStart(2, '0'),
+  }))
+
+/** The carousel's last card: every partner, and the way to become one. */
+const MARKETPLACE = {
+  num: 'market',
+  href: '/marketplace',
+  name: 'Explore the Marketplace',
+  text: 'Every partner company in the IBA ecosystem and what they offer, in one place. Or join as a partner company or ecosystem member.',
+  cta: 'Explore the Marketplace',
+}
+
+const MEMBERSHIPS = [...fill(ECOSYSTEM, ECOSYSTEM_SLOTS), MARKETPLACE]
 
 /** Cohort memberships: named, with no details yet, so neither opens a pop-up. */
 const COHORT = fill(
@@ -328,7 +367,8 @@ const COHORT = fill(
   COHORT_SLOTS
 )
 
-function MembershipCarousel({ items, label, onOpen }) {
+/** Arrows for a scroll-snapped track: one card's width per press. */
+function useStep() {
   const track = useRef(null)
   const step = (dir) => {
     const t = track.current
@@ -337,6 +377,24 @@ function MembershipCarousel({ items, label, onOpen }) {
     const gap = parseFloat(getComputedStyle(t).columnGap) || 0
     t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
   }
+  return [track, step]
+}
+
+function Arrows({ step, label }) {
+  return (
+    <div className="cx-mc__nav">
+      <button type="button" className="cx-mc__arrow" onClick={() => step(-1)} aria-label={`Previous ${label}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      </button>
+      <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label={`Next ${label}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+      </button>
+    </div>
+  )
+}
+
+function MembershipCarousel({ items, label, onOpen }) {
+  const [track, step] = useStep()
   return (
     <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label={label} data-rise>
       <ul className="cx-mc__track" ref={track} tabIndex={0}>
@@ -344,21 +402,26 @@ function MembershipCarousel({ items, label, onOpen }) {
           m.Details ? (
             <li className="cx-mc__card mb-mc__card" key={m.num}>
               <h3 className="cx-mc__name">{m.name}</h3>
-              <p className="mb-mc__text">{m.text}</p>
+              <p className="mb-mc__why">Why join through IBA?</p>
+              <p className="mb-mc__text">{m.why}</p>
               {/* one row: the call to action on the left, the partner's logo on the right */}
               <div className="mb-mc__foot">
                 {/* the whole card is the target; the button's box is stretched
                     over it, so the card reads as one control */}
                 <button type="button" className="mb-mc__open" onClick={(e) => onOpen(m, e.currentTarget)}>
-                  {m.cta} <span aria-hidden="true">→</span>
+                  Explore <span aria-hidden="true">→</span>
                 </button>
-                {m.Logo ? (
-                  <m.Logo />
-                ) : (
-                  <span className="cx-mc__medal mb-mc__medal" aria-hidden="true">
-                    {m.mark}
-                  </span>
-                )}
+                <m.Logo />
+              </div>
+            </li>
+          ) : m.href ? (
+            <li className="cx-mc__card mb-mc__card mb-mc__card--market" key={m.num}>
+              <h3 className="cx-mc__name">{m.name}</h3>
+              <p className="mb-mc__text">{m.text}</p>
+              <div className="mb-mc__foot">
+                <Go className="mb-mc__open" href={m.href}>
+                  {m.cta} <span aria-hidden="true">→</span>
+                </Go>
               </div>
             </li>
           ) : (
@@ -373,79 +436,66 @@ function MembershipCarousel({ items, label, onOpen }) {
           )
         )}
       </ul>
-      <div className="cx-mc__nav">
-        <button type="button" className="cx-mc__arrow" onClick={() => step(-1)} aria-label="Previous memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-        </button>
-        <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label="Next memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
+      <Arrows step={step} label="memberships" />
     </div>
   )
 }
 
 /* ---------------------------------------------------------------- */
-/* Web360 Club — the banner carousel                                 */
+/* Web360 Club — Bronze, Silver and Gold                             */
 /* ---------------------------------------------------------------- */
 
-/** Placeholder banners, one per Web360 Club membership, until IBA confirms them. */
-const WEB360 = ['01', '02', '03']
+/** IBA's own tiers: who each is for, and why to join. */
+const WEB360 = [
+  {
+    id: 'bronze',
+    name: 'Bronze',
+    forWhom: 'Founders finding product-market fit',
+    why: 'Build with the right people around you while you shape the product. Bronze connects you to founders, mentors and early customers across the IBA network, so you can test, learn and find your fit faster.',
+    cta: 'Apply for Bronze',
+  },
+  {
+    id: 'silver',
+    name: 'Silver',
+    forWhom: 'Companies established in one country, ready to expand globally',
+    why: 'Take what works at home into new markets. Silver opens global networking across the IBA corridor, introductions in each market you enter, and real-time insight from members already operating there.',
+    cta: 'Apply for Silver',
+  },
+  {
+    id: 'gold',
+    name: 'Gold',
+    forWhom: 'Top global leaders',
+    tag: 'Invite only',
+    why: 'Premium, exclusive access for the leaders shaping the industry. A closed circle of global peers, priority access across the IBA ecosystem, and a seat where policy and capital meet.',
+    cta: 'Request an Invitation',
+  },
+]
 
-function BannerCarousel() {
-  const track = useRef(null)
-  const [at, setAt] = useState(0)
-
-  const go = (i) => {
-    const t = track.current
-    if (!t) return
-    const n = (i + WEB360.length) % WEB360.length
-    t.scrollTo({ left: n * t.clientWidth, behavior: 'smooth' })
-  }
-  /* the dots follow the track, however it was scrolled: arrows, swipe or keys */
-  const onScroll = () => {
-    const t = track.current
-    if (t) setAt(Math.round(t.scrollLeft / t.clientWidth))
-  }
-
+function TierCarousel() {
+  const [track, step] = useStep()
   return (
-    <div className="mb-bn" role="region" aria-roledescription="carousel" aria-label="Web360 Club memberships" data-rise>
-      <ul className="mb-bn__track" ref={track} tabIndex={0} onScroll={onScroll}>
-        {WEB360.map((n, i) => (
-          <li
-            className="mb-bn__slide"
-            key={n}
-            aria-roledescription="slide"
-            aria-label={`${i + 1} of ${WEB360.length}`}
-          >
-            <span className="mb-bn__beam" aria-hidden="true" />
-            <span className="cx-mc__medal mb-bn__medal" aria-hidden="true" />
-            <p className="mb-bn__num">Web360 Club · Membership {n}</p>
-            <h3 className="mb-bn__name">Membership {n}</h3>
-            <p className="mb-bn__text">Details coming soon.</p>
+    <div className="cx-mc mb-tc" role="region" aria-roledescription="carousel" aria-label="Web360 Club tiers" data-rise>
+      <ul className="cx-mc__track mb-tc__track" ref={track} tabIndex={0}>
+        {WEB360.map((t) => (
+          <li className={`mb-tc__card mb-tc__card--${t.id}`} key={t.id}>
+            <div className="mb-tc__top">
+              <span className="mb-tc__medal" aria-hidden="true" />
+              {t.tag && <span className="mb-tc__tag">{t.tag}</span>}
+            </div>
+            <h3 className="mb-tc__name">{t.name}</h3>
+            <p className="mb-tc__label">Who it is for</p>
+            <p className="mb-tc__for">{t.forWhom}</p>
+            <p className="mb-tc__label">Why join</p>
+            <p className="mb-tc__why">{t.why}</p>
+            <div className="mb-tc__go">
+              <Btn enquiry={`Web360 Club: ${t.name}`} variant={t.id === 'gold' ? 'ghost' : 'primary'}>
+                {t.cta}
+              </Btn>
+            </div>
           </li>
         ))}
       </ul>
-      <div className="mb-bn__nav">
-        <button type="button" className="cx-mc__arrow" onClick={() => go(at - 1)} aria-label="Previous membership">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-        </button>
-        <div className="mb-bn__dots">
-          {WEB360.map((n, i) => (
-            <button
-              type="button"
-              key={n}
-              className="mb-bn__dot"
-              aria-label={`Show membership ${n}`}
-              aria-current={i === at ? 'true' : undefined}
-              onClick={() => go(i)}
-            />
-          ))}
-        </div>
-        <button type="button" className="cx-mc__arrow" onClick={() => go(at + 1)} aria-label="Next membership">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
+      <Arrows step={step} label="tiers" />
     </div>
   )
 }
@@ -460,7 +510,7 @@ function BannerCarousel() {
  * z-index. The page behind is locked the way the enquiry form locks it, and
  * data-lenis-prevent hands the panel's own scrolling back to the browser.
  */
-function MembershipDialog({ membership, onClose }) {
+export function MembershipDialog({ membership, onClose }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -504,12 +554,13 @@ function MembershipDialog({ membership, onClose }) {
         </button>
         <header className="mb-dlg__head">
           <p className="mb-dlg__eyebrow">
-            {name} · {kind}
+            {name}
+            {kind && ` · ${kind}`}
           </p>
           <h2 className="mb-dlg__title" id="mb-dlg-title">
             {title}
           </h2>
-          <p className="mb-dlg__lede">{lede}</p>
+          {lede && <p className="mb-dlg__lede">{lede}</p>}
         </header>
         <Details />
       </div>
@@ -517,19 +568,23 @@ function MembershipDialog({ membership, onClose }) {
   )
 }
 
-export default function Memberships() {
+/** Which membership the pop-up shows, and focus back to its opener on close. */
+export function useMembershipDialog() {
   const [open, setOpen] = useState(null)
   const opener = useRef(null)
-
   const show = (m, from) => {
     opener.current = from
     setOpen(m)
   }
-  /* focus goes back to the card that opened the pop-up */
   const hide = () => {
     setOpen(null)
     opener.current?.focus()
   }
+  return { open, show, hide }
+}
+
+export default function Memberships() {
+  const { open, show, hide } = useMembershipDialog()
 
   return (
     <>
@@ -554,20 +609,20 @@ export default function Memberships() {
       <Section
         id="web360"
         eyebrow="Web360 Club"
-        title="Web360 Club Memberships"
-        lede="IBA's own memberships. Details are coming soon; get in touch to hear about them first."
+        title="Find the tier that fits where you are"
+        lede="IBA's own memberships, from founders finding their fit to the leaders shaping the industry worldwide."
       >
-        <BannerCarousel />
+        <TierCarousel />
       </Section>
 
       <Section
         id="memberships"
-        eyebrow="Our Ecosystem Memberships"
-        title="Choose your membership from the ecosystem"
-        lede="Each membership is run with a partner in the IBA ecosystem and has its own levels. Open one to see what each level includes."
+        eyebrow="Our Ecosystem Members"
+        title="Services from across the ecosystem"
+        lede="Partner companies in the IBA ecosystem offer their services to our members, from investor access to events and tokenization. Join through IBA for global networking, global expansion and real-time experience of each partner's community."
         tone="card"
       >
-        <MembershipCarousel items={MEMBERSHIPS} label="Ecosystem memberships" onOpen={show} />
+        <MembershipCarousel items={MEMBERSHIPS} label="Ecosystem members" onOpen={show} />
       </Section>
 
       <Section

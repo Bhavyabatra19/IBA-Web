@@ -322,6 +322,7 @@ export const FOOTER = [
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
       { label: 'Membership', href: '/corridor#corridor-membership' },
       { label: 'All Memberships', href: '/memberships' },
+      { label: 'Partner Marketplace', href: '/marketplace' },
     ],
   },
   {

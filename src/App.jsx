@@ -19,6 +19,7 @@ import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
 import Memberships from './pages/site/Memberships'
+import Marketplace from './pages/site/Marketplace'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
@@ -40,6 +41,7 @@ const PAGES = {
   '/initiatives': Initiatives,
   '/corridor': Corridor,
   '/memberships': Memberships,
+  '/marketplace': Marketplace,
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,
