@@ -5774,10 +5774,25 @@ main {
 }
 .cx-map__arc {
   fill: none;
-  stroke: rgba(255, 80, 90, 0.7);
+  stroke: rgba(255, 80, 90, 0.75);
   stroke-width: 4;
-  stroke-dasharray: 10 10;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
   filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
+  /* each route grows out of India in turn, nearest first */
+  animation: cx-grow 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(0.3s + var(--i) * 0.6s);
+}
+/* the next region: a faint dashed promise, drawn last */
+.cx-map__route--next .cx-map__arc {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3;
+  stroke-dasharray: 2 3;
+  stroke-dashoffset: 0;
+  filter: none;
+  opacity: 0;
+  animation: cx-fade 1s ease forwards;
+  animation-delay: calc(0.3s + var(--i) * 0.6s);
 }
 .cx-map__flow {
   fill: none;
@@ -5785,9 +5800,54 @@ main {
   stroke-width: 8;
   stroke-linecap: round;
   stroke-dasharray: 22 78;
+  stroke-dashoffset: 100;
+  opacity: 0;
   filter: drop-shadow(0 0 10px rgba(255, 40, 50, 0.9));
-  animation: cx-flow 3.2s linear infinite;
-  animation-delay: calc(var(--i) * -0.45s);
+  animation: cx-flow 3.2s linear infinite, cx-fade 0.4s ease forwards;
+  animation-delay: calc(1.4s + var(--i) * 0.6s);
+}
+/* India: the hub, with rings spreading out from it */
+.cx-map__core {
+  fill: #ff3b47;
+  stroke: #ffffff;
+  stroke-width: 5;
+}
+.cx-map__ring {
+  fill: none;
+  stroke: #ff3b47;
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-ripple 2.6s ease-out infinite;
+}
+.cx-map__ring--late {
+  animation-delay: 1.3s;
+}
+/* the partner regions: plain nodes that light as their route arrives */
+.cx-map__node {
+  opacity: 0;
+  animation: cx-fade 0.5s ease forwards;
+  animation-delay: calc(1.2s + var(--i) * 0.6s);
+}
+.cx-map__node circle {
+  fill: #ffffff;
+  stroke: rgba(255, 59, 71, 0.8);
+  stroke-width: 4;
+}
+.cx-map__node--next circle {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-dasharray: 4 4;
+}
+@keyframes cx-grow {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cx-fade {
+  to { opacity: 1; }
+}
+@keyframes cx-ripple {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(3.4); opacity: 0; }
 }
 .cx-map__pulse {
   fill: #fff;
@@ -5802,9 +5862,20 @@ main {
 }
 @media (prefers-reduced-motion: reduce) {
   .cx-map__stage,
-  .cx-map__flow {
+  .cx-map__flow,
+  .cx-map__ring {
     animation: none;
   }
+  /* at rest: every route drawn, every node lit */
+  .cx-map__arc,
+  .cx-map__route--next .cx-map__arc,
+  .cx-map__node {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  .cx-map__flow,
+  .cx-map__ring,
   .cx-map__pulse {
     display: none;
   }
@@ -7909,4 +7980,170 @@ main {
 }
 .mk-soon p {
   margin: 0;
+}
+
+/* Web3 Corridor — the network: India at the centre, spokes to each region,
+   beside the tiles for what moves through it */
+.cx-netwrap {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .cx-netwrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.cx-net {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+.cx-net > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.cx-net__spoke path {
+  stroke: rgba(255, 59, 71, 0.7);
+  stroke-width: 1.5;
+}
+.cx-net__spoke--next path {
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-dasharray: 3 4;
+}
+.cx-net__pulse {
+  fill: #ffffff;
+  filter: drop-shadow(0 0 4px #ff3b47);
+}
+.cx-net__ripple {
+  fill: none;
+  stroke: #ff3b47;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-ripple-soft 3s ease-out infinite;
+}
+.cx-net__ripple--late {
+  animation-delay: 1.5s;
+}
+@keyframes cx-ripple-soft {
+  from { transform: scale(1); opacity: 0.8; }
+  to { transform: scale(1.9); opacity: 0; }
+}
+.cx-net__hub,
+.cx-net__node {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+.cx-net__hub {
+  left: 50%;
+  top: 50%;
+  width: clamp(96px, 26%, 130px);
+  height: clamp(96px, 26%, 130px);
+  align-content: center;
+  border-radius: 50%;
+  background: var(--iba-red);
+  box-shadow: 0 0 0 6px rgba(215, 25, 32, 0.25), 0 0 40px rgba(215, 25, 32, 0.6);
+  color: #ffffff;
+}
+.cx-net__hub .cx-flag {
+  width: 30px;
+  height: 20px;
+  margin: 0 0 4px;
+}
+.cx-net__hub strong {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: clamp(16px, 2vw, 20px);
+}
+.cx-net__hub span,
+.cx-net__node span {
+  white-space: nowrap;
+}
+.cx-net__hub span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.cx-net__node {
+  padding: 10px 12px;
+  border: 1px solid #333333;
+  background: var(--iba-black);
+  color: #ffffff;
+  min-width: 84px;
+}
+.cx-net__node .cx-flag {
+  width: 30px;
+  height: 20px;
+  margin: 0 0 6px;
+  box-shadow: none;
+}
+.cx-net__node .cx-flag--next {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+.cx-net__node strong {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 15px;
+}
+.cx-net__node span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bb-on-black-muted);
+}
+.cx-net__node--next {
+  border-style: dashed;
+}
+@media (max-width: 520px) {
+  .cx-net__node {
+    min-width: 0;
+    padding: 8px;
+  }
+  .cx-net__node strong {
+    font-size: 13px;
+  }
+  .cx-net__hub span,
+  .cx-net__node span {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx-net__ripple,
+  .cx-net__pulse {
+    display: none;
+  }
+}
+
+/* India's card: the hub, so it leads in IBA red */
+.cx-partner--hub {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.cx-partner--hub:hover {
+  border-color: var(--iba-red-deep);
+}
+.cx-partner--hub .cx-partner__role,
+.cx-partner--hub .cx-partner__name,
+.cx-partner--hub .cx-partner__city,
+.cx-partner--hub .cx-partner__text {
+  color: #ffffff;
+}
+.cx-partner--hub .cx-flag {
+  box-shadow: 0 0 0 2px #ffffff;
 }
