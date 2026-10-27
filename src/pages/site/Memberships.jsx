@@ -332,9 +332,6 @@ function MembershipCarousel({ onOpen }) {
                   {m.mark}
                 </span>
               )}
-              <span className="cx-mc__num">
-                {m.num} · {m.kind}
-              </span>
               <h3 className="cx-mc__name">{m.name}</h3>
               <p className="mb-mc__text">{m.text}</p>
               {/* the whole card is the target; the button's box is stretched
@@ -346,7 +343,6 @@ function MembershipCarousel({ onOpen }) {
           ) : (
             <li className="cx-mc__card mb-mc__card--soon" key={m.num}>
               <span className="cx-mc__medal" aria-hidden="true" />
-              <span className="cx-mc__num">{m.num}</span>
               <h3 className="cx-mc__name">Membership {m.num}</h3>
               <p className="cx-mc__text">Details coming soon.</p>
             </li>
