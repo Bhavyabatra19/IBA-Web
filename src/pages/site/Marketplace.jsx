@@ -36,7 +36,10 @@ function SoonDetails({ name }) {
   )
 }
 
-const OTHERS = PARTNERS.filter((p) => !LISTED.includes(p.name)).map((p) => ({
+/** Partners kept out of the marketplace, by request. */
+const HIDDEN = ['World Token Congress']
+
+const OTHERS = PARTNERS.filter((p) => !LISTED.includes(p.name) && !HIDDEN.includes(p.name)).map((p) => ({
   id: p.name,
   name: p.name,
   logo: p.logo,
