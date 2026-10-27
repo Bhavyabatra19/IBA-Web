@@ -6,8 +6,8 @@
  *                    view: who each is for, and why to join.
  *   Ecosystem        partner companies offering their services to members:
  *                    The IBA Circle (investors), IBA Block. (events) and
- *                    Tokenized Asset Foundation (tokenization), placeholders,
- *                    then a card into the marketplace. Explore on a card opens
+ *                    Tokenized Asset Foundation (tokenization), then a card
+ *                    into the marketplace. Explore on a card opens
  *                    that partner's tiers in a pop-up.
  *   Cohort           memberships for institutes and their students: the Red
  *                    Club Experience Zone (B2B) and the Student Experience.
@@ -20,7 +20,7 @@
  * are recorded in git history (the first commit of this page).
  *
  * To add a partner membership: give it a Details component, then add it to
- * ECOSYSTEM. It takes a placeholder's place on this page, and its offerings
+ * ECOSYSTEM. It joins the carousel before the marketplace card, and its offerings
  * and locations put it in the marketplace's filters.
  *
  * Sources: "The IBA Circle – Startup Venture Ecosystem 2026" and "IBA Block
@@ -336,8 +336,6 @@ export const ECOSYSTEM = [
 /* The carousels                                                     */
 /* ---------------------------------------------------------------- */
 
-/** Placeholders after the live partners, before the marketplace card. */
-const ECOSYSTEM_SLOTS = 5
 const COHORT_SLOTS = 4
 
 /** Fills a list out to `slots` cards with unnamed placeholders, and numbers them. */
@@ -356,7 +354,8 @@ const MARKETPLACE = {
   cta: 'Explore the Marketplace',
 }
 
-const MEMBERSHIPS = [...fill(ECOSYSTEM, ECOSYSTEM_SLOTS), MARKETPLACE]
+/* the live partners, then straight on to the marketplace — no placeholders */
+const MEMBERSHIPS = [...fill(ECOSYSTEM, ECOSYSTEM.length), MARKETPLACE]
 
 /** Cohort memberships: named, with no details yet, so neither opens a pop-up. */
 const COHORT = fill(

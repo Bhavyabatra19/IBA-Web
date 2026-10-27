@@ -9356,3 +9356,34 @@ main {
     white-space: nowrap;
   }
 }
+
+/* Asset coins (the home hero): a copper mark raised on the silver, inside a
+   dark band that carries the asset's name round the lower rim */
+.coin--asset .coin__glyph {
+  width: 50%;
+  height: 50%;
+}
+.coin--asset .coin__glyph--lip {
+  color: rgba(0, 0, 0, 0.75);
+}
+.coin--asset .coin__glyph--cut {
+  color: #eaa877;
+}
+.coin__label {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.coin__band {
+  fill: none;
+  stroke: rgba(14, 14, 16, 0.82);
+  stroke-width: 11px;
+}
+.coin__label text {
+  font-family: var(--bb-font, 'Questrial', sans-serif);
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  fill: #f3dcc7;
+}
