@@ -7485,3 +7485,42 @@ main {
   outline: 2px solid var(--iba-red);
   outline-offset: 3px;
 }
+
+/* the card's foot: the call to action, then the logo in the bottom right */
+.mb-mc__card,
+.mb-mc__card--soon {
+  align-items: stretch;
+}
+.mb-mc__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.mb-mc__foot .mb-mc__open,
+.mb-mc__foot .cx-mc__text {
+  margin: 0;
+  padding: 0;
+}
+.mb-mc__foot .mb-logo,
+.mb-mc__foot .cx-mc__medal {
+  align-self: flex-end;
+  margin: 0;
+}
+.mb-mc__foot .mb-logo {
+  height: 32px;
+  gap: 8px;
+}
+.mb-mc__foot .mb-logo img,
+.mb-mc__foot .mb-logo__mark {
+  width: 32px;
+  height: 32px;
+}
+.mb-mc__foot .mb-logo img.mb-logo__crop {
+  width: 54px;
+}
+.mb-mc__foot .mb-logo__word {
+  font-size: 18px;
+}

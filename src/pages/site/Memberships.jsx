@@ -8,6 +8,9 @@
  *                    Block. (TheBlock.) and Tokenized Asset Foundation, then
  *                    placeholders for those to come. Opening a card shows
  *                    that membership's levels in a pop-up.
+ *   Cohort           memberships for institutes and their students: the Red
+ *                    Club Experience Zone (B2B) and the Student Experience.
+ *                    Placeholders, named but not yet detailed.
  *
  * No prices are shown anywhere on the page, by request. The decks' prices
  * are recorded in git history (the first commit of this page).
@@ -237,8 +240,16 @@ function TafTiers() {
 /* The carousel                                                      */
 /* ---------------------------------------------------------------- */
 
-/** How many cards the carousel shows in all, live and placeholder. */
+/** How many cards each carousel shows in all, live and placeholder. */
 const SLOTS = 6
+const COHORT_SLOTS = 4
+
+/** Fills a list out to `slots` cards with unnamed placeholders, and numbers them. */
+const fill = (items, slots) =>
+  [...items, ...Array.from({ length: slots - items.length }, () => ({}))].map((m, i) => ({
+    ...m,
+    num: String(i + 1).padStart(2, '0'),
+  }))
 
 /** TheCircle.'s mark, drawn: a disc with a square cut from it. Ink on the
     white card rather than the supplied white-on-black. */
@@ -305,12 +316,18 @@ const LIVE = [
   },
 ]
 
-const MEMBERSHIPS = [
-  ...LIVE,
-  ...Array.from({ length: SLOTS - LIVE.length }, () => ({})),
-].map((m, i) => ({ ...m, num: String(i + 1).padStart(2, '0') }))
+const MEMBERSHIPS = fill(LIVE, SLOTS)
 
-function MembershipCarousel({ onOpen }) {
+/** Cohort memberships: named, with no details yet, so neither opens a pop-up. */
+const COHORT = fill(
+  [
+    { name: 'Red Club Experience Zone', audience: 'B2B · For institutes' },
+    { name: 'Student Experience', audience: 'For students' },
+  ],
+  COHORT_SLOTS
+)
+
+function MembershipCarousel({ items, label, onOpen }) {
   const track = useRef(null)
   const step = (dir) => {
     const t = track.current
@@ -320,31 +337,37 @@ function MembershipCarousel({ onOpen }) {
     t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
   }
   return (
-    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="Ecosystem memberships" data-rise>
+    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label={label} data-rise>
       <ul className="cx-mc__track" ref={track} tabIndex={0}>
-        {MEMBERSHIPS.map((m) =>
+        {items.map((m) =>
           m.Details ? (
             <li className="cx-mc__card mb-mc__card" key={m.num}>
-              {m.Logo ? (
-                <m.Logo />
-              ) : (
-                <span className="cx-mc__medal mb-mc__medal" aria-hidden="true">
-                  {m.mark}
-                </span>
-              )}
               <h3 className="cx-mc__name">{m.name}</h3>
               <p className="mb-mc__text">{m.text}</p>
-              {/* the whole card is the target; the button's box is stretched
-                  over it, so the card reads as one control */}
-              <button type="button" className="mb-mc__open" onClick={(e) => onOpen(m, e.currentTarget)}>
-                {m.cta} <span aria-hidden="true">→</span>
-              </button>
+              {/* the call to action on the left, the partner's logo bottom right */}
+              <div className="mb-mc__foot">
+                {/* the whole card is the target; the button's box is stretched
+                    over it, so the card reads as one control */}
+                <button type="button" className="mb-mc__open" onClick={(e) => onOpen(m, e.currentTarget)}>
+                  {m.cta} <span aria-hidden="true">→</span>
+                </button>
+                {m.Logo ? (
+                  <m.Logo />
+                ) : (
+                  <span className="cx-mc__medal mb-mc__medal" aria-hidden="true">
+                    {m.mark}
+                  </span>
+                )}
+              </div>
             </li>
           ) : (
             <li className="cx-mc__card mb-mc__card--soon" key={m.num}>
-              <span className="cx-mc__medal" aria-hidden="true" />
-              <h3 className="cx-mc__name">Membership {m.num}</h3>
-              <p className="cx-mc__text">Details coming soon.</p>
+              <h3 className="cx-mc__name">{m.name ?? `Membership ${m.num}`}</h3>
+              {m.audience && <p className="mb-mc__text">{m.audience}</p>}
+              <div className="mb-mc__foot">
+                <p className="cx-mc__text">Details coming soon.</p>
+                <span className="cx-mc__medal" aria-hidden="true" />
+              </div>
             </li>
           )
         )}
@@ -539,7 +562,16 @@ export default function Memberships() {
         lede="Each membership is run with a partner in the IBA ecosystem and has its own levels. Open one to see what each level includes."
         tone="card"
       >
-        <MembershipCarousel onOpen={show} />
+        <MembershipCarousel items={MEMBERSHIPS} label="Ecosystem memberships" onOpen={show} />
+      </Section>
+
+      <Section
+        id="cohort"
+        eyebrow="Cohort Memberships"
+        title="Memberships for institutes and their students"
+        lede="Cohort memberships through the IBA Red Club Experience Zone, for institutes and the students they enrol. Details are coming soon."
+      >
+        <MembershipCarousel items={COHORT} label="Cohort memberships" />
       </Section>
 
       <MembershipDialog membership={open} onClose={hide} />
