@@ -2,13 +2,13 @@
  * Web3 Corridor — one global corridor, connected from India.
  *
  * India Blockchain Alliance runs the corridor from India, so the page shows
- * it that way: India is the hub and the network expands outward from it, in
- * the hero map and in the network diagram below it. The page is built to be
- * read at a glance — a picture, then short tiles — in this order:
+ * it that way: India is the hub and the network expands outward from it on
+ * the corridor map. The page is built to be read at a glance — a picture,
+ * then short tiles — in this order:
  *
- *   hero        the map, with routes growing out of India
- *   network     India at the centre: what flows through the corridor, and
- *               its figures
+ *   hero        the Web3 Corridor logo (public/images/corridor-logo.webp)
+ *   network     India at the centre: the map, with routes growing out of
+ *               India, then what flows through the corridor and its figures
  *   partners    the countries, India first as the hub
  *   objectives, pillars, what the corridor opens, services, the forum
  *   membership  a pointer to the Web360 Club tiers on /memberships
@@ -18,14 +18,16 @@
  * offer (October 2026).
  */
 
+import { useEffect, useRef } from 'react'
 import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
 
-/* The hero graphic: the supplied map artwork, a glowing red dotted world
+/* The corridor map: the supplied map artwork, a glowing red dotted world
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
    drawn over it. HUBS are the pin centres in the artwork's own pixels, so the
    overlay's viewBox matches the image and the arcs land on the pins. Every
    route starts in India: the arcs draw outward from it one after another,
-   then a pulse keeps running along each, away from India. */
+   then a pulse keeps running along each, away from India. The sequence waits
+   (data-live) until the map scrolls into view, so it plays where it is seen. */
 const HUBS = {
   americas: [538, 496],
   europe: [910, 260],
@@ -41,10 +43,29 @@ const arc = ([x1, y1], [x2, y2]) => {
   return `M${x1} ${y1} Q${(x1 + x2) / 2} ${(y1 + y2) / 2 - lift} ${x2} ${y2}`
 }
 
-const HeroMap = () => {
+function CorridorMap() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      el.dataset.live = ''
+      return
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return
+        el.dataset.live = ''
+        io.disconnect()
+      },
+      { threshold: 0.35 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   const [ix, iy] = HUBS.india
   return (
-    <figure className="cx-map" aria-label="A glowing world map with the corridor expanding from India to its partner regions">
+    <figure className="cx-map" ref={ref} aria-label="A glowing world map with the corridor expanding from India to its partner regions">
       <div className="cx-map__stage">
         <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
         <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
@@ -94,6 +115,13 @@ const HeroMap = () => {
     </figure>
   )
 }
+
+/** The hero: the Web3 Corridor logo, its square edges faded into the panel. */
+const HeroLogo = () => (
+  <figure className="cx-logo">
+    <img src="/images/corridor-logo.webp" alt="Web3 Corridor" width="1600" height="1600" decoding="async" />
+  </figure>
+)
 
 /* ------------------------------------------------------------------ */
 /* Flags — drawn, not emoji: emoji flags render as two letters on      */
@@ -145,52 +173,6 @@ const Flag = ({ code, name }) => (
 /* ------------------------------------------------------------------ */
 /* The network: India at the centre                                    */
 /* ------------------------------------------------------------------ */
-
-/** The spokes of the network diagram, placed round India on a 400 × 400 grid. */
-const SPOKES = [
-  { code: 'AE', name: 'UAE', place: 'Financial hub', x: 318, y: 88 },
-  { code: 'ES', name: 'Europe', place: 'Spain', x: 82, y: 96 },
-  { code: 'ZM', name: 'Africa', place: 'Zambia', x: 80, y: 306 },
-  { name: 'Americas', place: 'Next', x: 318, y: 312, next: true },
-]
-
-const NetworkDiagram = () => (
-  <figure className="cx-net" aria-label="India at the centre of the corridor, connected to the UAE, Europe and Africa, with the Americas next">
-    <svg viewBox="0 0 400 400" aria-hidden="true">
-      {SPOKES.map((s, i) => {
-        const d = `M200 200 L${s.x} ${s.y}`
-        return (
-          <g key={s.name} className={s.next ? 'cx-net__spoke cx-net__spoke--next' : 'cx-net__spoke'}>
-            <path d={d} />
-            {!s.next && (
-              <circle className="cx-net__pulse" r="4">
-                <animateMotion dur="2.4s" begin={`${i * 0.5}s`} repeatCount="indefinite" path={d} />
-              </circle>
-            )}
-          </g>
-        )
-      })}
-      <circle className="cx-net__ripple" cx="200" cy="200" r="52" />
-      <circle className="cx-net__ripple cx-net__ripple--late" cx="200" cy="200" r="52" />
-    </svg>
-    <div className="cx-net__hub">
-      <Flag code="IN" name="India" />
-      <strong>India</strong>
-      <span>The hub · IBA</span>
-    </div>
-    {SPOKES.map((s) => (
-      <div
-        key={s.name}
-        className={s.next ? 'cx-net__node cx-net__node--next' : 'cx-net__node'}
-        style={{ left: `${(s.x / 400) * 100}%`, top: `${(s.y / 400) * 100}%` }}
-      >
-        {s.code ? <Flag code={s.code} name={s.name} /> : <span className="cx-flag cx-flag--next">+</span>}
-        <strong>{s.name}</strong>
-        <span>{s.place}</span>
-      </div>
-    ))}
-  </figure>
-)
 
 const Icon = ({ d }) => <path d={d} />
 
@@ -268,7 +250,7 @@ export default function Corridor() {
     <div>
       <PageHero
         id="corridor"
-        aside={<HeroMap />}
+        aside={<HeroLogo />}
         eyebrow="IBA Web3 Corridor · Led from India by India Blockchain Alliance"
         title="One Global Corridor"
         lede="From India to the world. One corridor connects partner countries to shared Web3 resources, capital, partnerships and markets, together home to more than 2.8 billion people."
@@ -291,10 +273,10 @@ export default function Corridor() {
         title="India at the centre. The world connected."
         lede="IBA connects the corridor from India. Every partner joins one network, and everything below moves through it."
       >
-        <div className="cx-netwrap">
-          <NetworkDiagram />
-          <Cards items={FLOWS} cols={2} />
+        <div className="cx-netmap">
+          <CorridorMap />
         </div>
+        <Cards items={FLOWS} cols={3} />
         <div className="cx-block">
           <Stats items={FIGURES} dark />
         </div>
