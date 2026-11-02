@@ -1,15 +1,16 @@
 /**
  * Web3 Corridor — one global corridor, connected from India.
  *
- * India Blockchain Alliance runs the corridor from India, so the page shows
- * it that way: India is the hub and the network expands outward from it on
- * the corridor map. The page is built to be read at a glance — a picture,
- * then short tiles — in this order:
+ * Four regions — Africa, the UAE, India and Europe — are equal partners,
+ * each with its own role, and IBA is the central catalyst that connects
+ * them (IBA's corridor deck, slides 1–14, as revised 2 Nov 2026). The page
+ * is built to be read at a glance — a picture, then short tiles — in this
+ * order:
  *
  *   hero        the Web3 Corridor logo (public/images/corridor-logo.webp)
- *   network     India at the centre: the map, with routes growing out of
- *               India, then what flows through the corridor and its figures
- *   partners    the countries, India first as the hub
+ *   network     a corridor for shared growth: the map, then what flows
+ *               through the corridor and its figures
+ *   partners    the regions, each with its role
  *   objectives, pillars, what the corridor opens, services, the forum
  *   membership  a pointer to the Web360 Club tiers on /memberships
  *
@@ -171,7 +172,7 @@ const Flag = ({ code, name }) => (
 )
 
 /* ------------------------------------------------------------------ */
-/* The network: India at the centre                                    */
+/* The network: a corridor for shared growth                         */
 /* ------------------------------------------------------------------ */
 
 const Icon = ({ d }) => <path d={d} />
@@ -194,31 +195,31 @@ const FIGURES = [
 ]
 
 /**
- * The corridor's partner countries, from IBA's corridor deck, India first:
- * it is the hub the others connect through. `role` is the part each plays.
+ * The corridor's partner regions, from IBA's corridor deck, each with the
+ * role it plays. India leads the row as IBA's home; `role` is its part.
  */
 const PARTNERS = [
-  { code: 'IN', country: 'India', node: 'The hub · Home of IBA', role: 'Technical engine', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.', hub: true },
-  { code: 'AE', country: 'United Arab Emirates', node: 'Dubai', role: 'Financial hub & launchpad', text: 'Virtual-asset regulation, capital access and free-zone campuses for Web3 startups.' },
-  { code: 'ES', country: 'Spain', node: 'Europe', role: 'Governance & standards', text: 'Europe’s regulatory lead, and host of the corridor forum in Barcelona.' },
-  { code: 'ZM', country: 'Zambia', node: 'Africa', role: 'Adoption & real-world use', text: 'Mobile-first adoption and real-world DeFi, with a fast-growing developer base.' },
+  { code: 'IN', country: 'India', node: 'Home of IBA', role: 'Technical engine & implementation hub', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.', hub: true },
+  { code: 'AE', country: 'United Arab Emirates', node: 'Dubai', role: 'Financial hub & global launchpad', text: 'Regulatory clarity, capital access and free-zone campuses incubating Web3 startups.' },
+  { code: 'ES', country: 'Spain', node: 'Europe', role: 'Governance & mature market integration', text: 'Institutional compliance, standards and Europe’s lead on Web3 regulation.' },
+  { code: 'ZM', country: 'Zambia', node: 'Africa', role: 'High-growth adoption & real-world utility', text: 'Mobile-first innovation, unbanked growth and real-world DeFi, with fast-growing developer talent.' },
 ]
 
 /** The three core objectives. */
 const OBJECTIVES = [
-  { num: '01', title: 'Connect', text: 'A lasting innovation corridor between nations and global technology, investment and innovation.' },
+  { num: '01', title: 'Connect', text: 'A sustainable innovation corridor connecting nations with global technology, investment and innovation.' },
   { num: '02', title: 'Transfer', text: 'Technology transfer, knowledge exchange and capacity building in emerging technologies.' },
-  { num: '03', title: 'Access', text: 'Pathways to markets and funding for startups, SMEs, hubs, women founders and young innovators.' },
+  { num: '03', title: 'Access', text: 'Pathways to markets and funding for startups, SMEs, innovation hubs, women entrepreneurs and young innovators.' },
 ]
 
 /** The focus pillars, one line each. */
 const PILLARS = [
-  { title: 'Web3 & Digital Transformation', text: 'Literacy, adoption and digital skills.' },
-  { title: 'Blockchain & Tokenization', text: 'Digital identity, tokenization and smart contracts.' },
-  { title: 'Hubs & Co-Working', text: 'Incubation, innovation exchange and shared workspaces.' },
-  { title: 'Startups & Investment', text: 'Acceleration, investor readiness and market access.' },
-  { title: 'Women in Emerging Tech', text: 'Leadership, skills, entrepreneurship and mentorship.' },
-  { title: 'Education & Research', text: 'Certifications, training and academic partnerships.' },
+  { title: 'Web3 Technologies & Digital Transformation', text: 'Literacy, adoption and digital skills.' },
+  { title: 'Blockchain, Web3 & Tokenization', text: 'Digital identity, tokenization and smart contracts.' },
+  { title: 'Hubs & Co-Working Ecosystems', text: 'Hub development, startup incubation and collaborative workspaces.' },
+  { title: 'Startup Development & Investment', text: 'Acceleration, investor readiness and market access.' },
+  { title: 'Girls & Women in Emerging Tech', text: 'Leadership, skills, entrepreneurship and mentorship.' },
+  { title: 'Education, Research & Capacity Building', text: 'Certifications, training and academic partnerships.' },
 ]
 
 /** What being inside the corridor gives you, each said once. */
@@ -231,17 +232,17 @@ const ACCESS = [
 
 /** The two sides the corridor serves. */
 const SIDES = [
-  { tag: 'For Founders', title: 'Tested Pathways to New Markets', text: 'Funding, local go-to-market strategies, technical integration and the tokenization of businesses.' },
-  { tag: 'For Investors', title: 'One Framework to De-risk', text: 'One framework for international deployment, with vetted deal flow from every partner country.' },
+  { tag: 'For Founders', title: 'Tested Pathways to New Markets', text: 'Funding, local go-to-market strategies, new markets, advanced technical integration and business tokenization.' },
+  { tag: 'For Investors', title: 'A Unified Framework to De-risk', text: 'A unified framework to de-risk international deployments, with vetted deal flow across the corridor.' },
 ]
 
 /** The services IBA runs across the corridor. */
 const SERVICES = [
   { num: '01', title: 'Tech Support', text: 'End-to-end plans and operations for tokenized businesses.' },
-  { num: '02', title: 'Business Setup', text: 'Pre-verified legal and regulatory frameworks, KYC and KYB, for each market.' },
-  { num: '03', title: 'Advisory & Mentoring', text: 'Veterans who have scaled Web3 across borders, and experts on call.' },
-  { num: '04', title: 'Global Visibility', text: 'Marketing, networking and forums in front of global decision-makers.' },
-  { num: '05', title: 'Go-To-Market Plans', text: 'Blueprints for fast entry into new markets, with tokenization plans.' },
+  { num: '02', title: 'Business Setup', text: 'Pre-verified legal and regulatory frameworks, with advanced KYC and KYB.' },
+  { num: '03', title: 'Advisory & Mentoring', text: 'Industry veterans who have scaled Web3 across borders, plus expert mentor sessions.' },
+  { num: '04', title: 'Global Visibility', text: 'Marketing, networking and forums that put you in front of global decision-makers and investors.' },
+  { num: '05', title: 'Go-To-Market Plans', text: 'Blueprints to launch and scale in high-demand markets, with separate tokenization plans.' },
   { num: '06', title: 'Asset Pooling', text: 'Cross-border pooling of capital and tokenized real-world assets.' },
 ]
 
@@ -251,9 +252,9 @@ export default function Corridor() {
       <PageHero
         id="corridor"
         aside={<HeroLogo />}
-        eyebrow="IBA Web3 Corridor · Led from India by India Blockchain Alliance"
-        title="One Global Corridor"
-        lede="From India to the world. One corridor connects partner countries to shared Web3 resources, capital, partnerships and markets, together home to more than 2.8 billion people."
+        eyebrow="IBA Web3 Corridor · A high-velocity initiative by India Blockchain Alliance"
+        title="Bridging Global Regions"
+        lede="Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next. One corridor for shared Web3 resources, capital, partnerships and markets, home to more than 2.8 billion people."
         actions={
           <>
             <Btn href="#corridor-membership">
@@ -270,8 +271,8 @@ export default function Corridor() {
         id="corridor-focus"
         tone="dark"
         eyebrow="The Network"
-        title="India at the centre. The world connected."
-        lede="IBA connects the corridor from India. Every partner joins one network, and everything below moves through it."
+        title="A corridor for shared growth."
+        lede="Connecting Africa, the UAE, India and Europe through innovation, technology, investment and partnerships, with IBA as the central catalyst."
       >
         <div className="cx-netmap">
           <CorridorMap />
@@ -285,8 +286,8 @@ export default function Corridor() {
       <Section
         id="corridor-partners"
         eyebrow="Corridor Partners"
-        title="The Countries in the Corridor"
-        lede="India is the hub. Join through any partner and you reach them all."
+        title="The Regions in the Corridor"
+        lede="Each region brings its own strength. Join through one and reach them all."
       >
         <ul className="cx-partners">
           {PARTNERS.map((p) => (
@@ -323,7 +324,7 @@ export default function Corridor() {
         tone="card"
         eyebrow="Build. Fund. Scale."
         title="What the Corridor Opens"
-        lede="One infrastructure for cross-border tech and business: startups become founders, and founders become fundable ventures."
+        lede="One infrastructure for cross-border tech and business: startups become founders, founders become fundable ventures, and ventures graduate into the Corridor Club."
       >
         <Cards items={ACCESS} cols={4} />
         <div className="cx-block">
@@ -335,7 +336,7 @@ export default function Corridor() {
         id="corridor-support"
         eyebrow="Corridor Services"
         title="Services Across the Network"
-        lede="IBA runs these for every venture in the corridor, in every partner market."
+        lede="Advanced support stacks that speed up tech and business outcomes for every corridor venture."
       >
         <Cards items={SERVICES} cols={3} />
       </Section>
@@ -358,7 +359,7 @@ export default function Corridor() {
         id="corridor-membership"
         eyebrow="Membership · Web360 Club"
         title="Join the Corridor"
-        lede="Corridor membership runs through the Web360 Club: Bronze for founders finding their fit, Silver for going global, and Gold by invitation."
+        lede="Membership runs through the Web360 Club, and every stage is earned: Bronze for starters and early builders, Silver for multi-country growth, and Gold, invite-only, for global activations."
       >
         <div className="pk-actions" data-rise>
           <Btn href="/memberships#web360">
