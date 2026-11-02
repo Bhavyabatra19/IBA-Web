@@ -5806,7 +5806,7 @@ main {
   animation: cx-flow 3.2s linear infinite, cx-fade 0.4s ease forwards;
   animation-delay: calc(1.4s + var(--i) * 0.6s);
 }
-/* India: the hub, with rings spreading out from it */
+/* every region's node: a glowing core with rings spreading from it */
 .cx-map__core {
   fill: #ff3b47;
   stroke: #ffffff;
@@ -5823,18 +5823,15 @@ main {
 .cx-map__ring--late {
   animation-delay: 1.3s;
 }
-/* the partner regions: plain nodes that light as their route arrives */
+/* the region nodes light one after another as the loop is drawn */
 .cx-map__node {
   opacity: 0;
   animation: cx-fade 0.5s ease forwards;
-  animation-delay: calc(1.2s + var(--i) * 0.6s);
-}
-.cx-map__node circle {
-  fill: #ffffff;
-  stroke: rgba(255, 59, 71, 0.8);
-  stroke-width: 4;
+  /* each region lights as the route leaving it starts to draw */
+  animation-delay: calc(0.2s + var(--i) * 0.6s);
 }
 .cx-map__node--next circle {
+  stroke-width: 4;
   fill: none;
   stroke: rgba(255, 255, 255, 0.5);
   stroke-dasharray: 4 4;
@@ -7950,24 +7947,6 @@ main {
   margin: 0;
 }
 
-/* India's card: the hub, so it leads in IBA red */
-.cx-partner--hub {
-  border-color: var(--iba-red);
-  background: var(--iba-red);
-  color: #ffffff;
-}
-.cx-partner--hub:hover {
-  border-color: var(--iba-red-deep);
-}
-.cx-partner--hub .cx-partner__role,
-.cx-partner--hub .cx-partner__name,
-.cx-partner--hub .cx-partner__city,
-.cx-partner--hub .cx-partner__text {
-  color: #ffffff;
-}
-.cx-partner--hub .cx-flag {
-  box-shadow: 0 0 0 2px #ffffff;
-}
 
 /* The review build's bar (npm run build:artifact only) */
 .rv {

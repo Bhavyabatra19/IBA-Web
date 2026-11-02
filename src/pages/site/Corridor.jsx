@@ -25,9 +25,10 @@ import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
 /* The corridor map: the supplied map artwork, a glowing red dotted world
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
    drawn over it. HUBS are the pin centres in the artwork's own pixels, so the
-   overlay's viewBox matches the image and the arcs land on the pins. Every
-   route starts in India: the arcs draw outward from it one after another,
-   then a pulse keeps running along each, away from India. The sequence waits
+   overlay's viewBox matches the image and the arcs land on the pins. The four
+   regions are equal partners: each has the same node, and the routes join
+   them in a loop, drawn one after another with a pulse running along each.
+   The Americas hang off it as a faint dashed promise. The sequence waits
    (data-live) until the map scrolls into view, so it plays where it is seen. */
 const HUBS = {
   americas: [538, 496],
@@ -36,8 +37,16 @@ const HUBS = {
   uae: [1173, 358],
   india: [1314, 393],
 }
-/** Where the network reaches from India, nearest first. `next` is not yet live. */
-const REACH = [{ to: 'uae' }, { to: 'europe' }, { to: 'africa' }, { to: 'americas', next: true }]
+/** The four partner regions, each drawn the same. */
+const REGIONS = ['europe', 'uae', 'india', 'africa']
+/** The corridor's routes: a loop through the regions, then the next region. */
+const ROUTES = [
+  { from: 'europe', to: 'uae' },
+  { from: 'uae', to: 'india' },
+  { from: 'india', to: 'africa' },
+  { from: 'africa', to: 'europe' },
+  { from: 'europe', to: 'americas', next: true },
+]
 /* a quadratic arc that lifts off the map by a share of its length */
 const arc = ([x1, y1], [x2, y2]) => {
   const lift = Math.hypot(x2 - x1, y2 - y1) * 0.32
@@ -64,9 +73,8 @@ function CorridorMap() {
     io.observe(el)
     return () => io.disconnect()
   }, [])
-  const [ix, iy] = HUBS.india
   return (
-    <figure className="cx-map" ref={ref} aria-label="A glowing world map with the corridor expanding from India to its partner regions">
+    <figure className="cx-map" ref={ref} aria-label="A glowing world map with the corridor connecting Europe, the UAE, India and Africa, with the Americas next">
       <div className="cx-map__stage">
         <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
         <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
@@ -79,10 +87,10 @@ function CorridorMap() {
               </feMerge>
             </filter>
           </defs>
-          {REACH.map(({ to, next }, i) => {
-            const d = arc(HUBS.india, HUBS[to])
+          {ROUTES.map(({ from, to, next }, i) => {
+            const d = arc(HUBS[from], HUBS[to])
             return (
-              <g key={to} className={next ? 'cx-map__route cx-map__route--next' : 'cx-map__route'} style={{ '--i': i }}>
+              <g key={from + to} className={next ? 'cx-map__route cx-map__route--next' : 'cx-map__route'} style={{ '--i': i }}>
                 <path className="cx-map__arc" d={d} pathLength="100" />
                 {!next && (
                   <>
@@ -95,21 +103,20 @@ function CorridorMap() {
               </g>
             )
           })}
-          {/* the partner regions: plain nodes, lit as their route arrives. The
-              artwork labels each region, so the nodes carry no text. */}
-          {REACH.map(({ to, next }, i) => {
-            const [x, y] = HUBS[to]
+          {/* the regions: one node each, alike, with rings spreading from each.
+              The artwork labels the regions, so the nodes carry no text. */}
+          {REGIONS.map((r, i) => {
+            const [x, y] = HUBS[r]
             return (
-              <g key={to} className={next ? 'cx-map__node cx-map__node--next' : 'cx-map__node'} style={{ '--i': i }}>
-                <circle cx={x} cy={y} r="10" />
+              <g key={r} className="cx-map__node" style={{ '--i': i }}>
+                <circle className="cx-map__ring" cx={x} cy={y} r="16" />
+                <circle className="cx-map__ring cx-map__ring--late" cx={x} cy={y} r="16" />
+                <circle className="cx-map__core" cx={x} cy={y} r="16" filter="url(#cx-glow)" />
               </g>
             )
           })}
-          {/* India: the hub, with rings spreading out from it */}
-          <g className="cx-map__hub">
-            <circle className="cx-map__ring" cx={ix} cy={iy} r="20" />
-            <circle className="cx-map__ring cx-map__ring--late" cx={ix} cy={iy} r="20" />
-            <circle className="cx-map__core" cx={ix} cy={iy} r="20" filter="url(#cx-glow)" />
+          <g className="cx-map__node cx-map__node--next" style={{ '--i': REGIONS.length }}>
+            <circle cx={HUBS.americas[0]} cy={HUBS.americas[1]} r="10" />
           </g>
         </svg>
       </div>
@@ -196,10 +203,10 @@ const FIGURES = [
 
 /**
  * The corridor's partner regions, from IBA's corridor deck, each with the
- * role it plays. India leads the row as IBA's home; `role` is its part.
+ * role it plays; all four are equal partners. `role` is each one's part.
  */
 const PARTNERS = [
-  { code: 'IN', country: 'India', node: 'Home of IBA', role: 'Technical engine & implementation hub', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.', hub: true },
+  { code: 'IN', country: 'India', node: 'Home of IBA', role: 'Technical engine & implementation hub', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.' },
   { code: 'AE', country: 'United Arab Emirates', node: 'Dubai', role: 'Financial hub & global launchpad', text: 'Regulatory clarity, capital access and free-zone campuses incubating Web3 startups.' },
   { code: 'ES', country: 'Spain', node: 'Europe', role: 'Governance & mature market integration', text: 'Institutional compliance, standards and Europe’s lead on Web3 regulation.' },
   { code: 'ZM', country: 'Zambia', node: 'Africa', role: 'High-growth adoption & real-world utility', text: 'Mobile-first innovation, unbanked growth and real-world DeFi, with fast-growing developer talent.' },
@@ -291,7 +298,7 @@ export default function Corridor() {
       >
         <ul className="cx-partners">
           {PARTNERS.map((p) => (
-            <li className={p.hub ? 'cx-partner cx-partner--hub' : 'cx-partner'} key={p.code} data-rise>
+            <li className="cx-partner" key={p.code} data-rise>
               <Flag code={p.code} name={p.country} />
               <p className="cx-partner__role">{p.role}</p>
               <h3 className="cx-partner__name">{p.country}</h3>
