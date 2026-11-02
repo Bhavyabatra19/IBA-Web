@@ -2,13 +2,14 @@
  * 2.1 — Hero. Black band crossed by a single red light beam.
  *
  * No pin, no scrub. Under the copy, silver coins travel an arch across the
- * bottom of the panel, tumbling as they go; the second half of the headline
+ * bottom of the panel, tumbling as they go — each struck with a real-world
+ * asset class (gold, real estate, carbon credits and the rest); the second half of the headline
  * rolls through the alliance's claims. Both run only while on screen.
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, reducedMotion, whileOnScreen, isMobile } from '../lib/scroll'
-import CoinStack from '../components/CoinStack'
+import CoinStack, { ASSET_FACES } from '../components/CoinStack'
 
 const PHRASES = [
   'largest tokenized ecosystem',
@@ -89,7 +90,8 @@ export default function Hero() {
   const roller = useRef(null)
   const orbit = useRef(null)
   const [at, setAt] = useState(0)
-  const [coinCount] = useState(() => (isMobile() ? 6 : 9))
+  /* one coin per asset class on a desktop; a phone's narrower arch takes six */
+  const [coinCount] = useState(() => (isMobile() ? 6 : ASSET_FACES.length))
 
   /* the coin arch — on the GSAP ticker, which already drives Lenis */
   useEffect(() => {
@@ -183,7 +185,7 @@ export default function Hero() {
         {/* The edge is stacked round discs, not strips: strips are flat
             facets, and few enough of them to run smoothly made the edge a
             visible polygon. Discs are round at every tilt, and fewer layers. */}
-        <CoinStack count={coinCount} segments={8} rim="discs" float={false} />
+        <CoinStack count={coinCount} segments={8} rim="discs" float={false} faces={ASSET_FACES} />
       </div>
 
       <div className="hero__inner wrap">

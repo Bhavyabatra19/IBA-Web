@@ -1,22 +1,35 @@
 /**
- * Web3 Corridor — one global corridor.
+ * Web3 Corridor — one global corridor, connected from India.
  *
- * The page tells a single story, in order: there is one corridor and why it
- * exists; these are the countries partnering on it; these are its objectives
- * and focus pillars; this is what it opens and how IBA supports it; this is
- * where it launches; and a membership carousel closes the page, asking
- * people to get in touch. Content follows IBA's corridor deck; prices are
- * deliberately not shown.
+ * Four regions — Africa, the UAE, India and Europe — are equal partners,
+ * each with its own role, and IBA is the central catalyst that connects
+ * them (IBA's corridor deck, slides 1–14, as revised 2 Nov 2026). The page
+ * is built to be read at a glance — a picture, then short tiles — in this
+ * order:
+ *
+ *   hero        the Web3 Corridor logo (public/images/corridor-logo.webp)
+ *   network     a corridor for shared growth: the map, then what flows
+ *               through the corridor and its figures
+ *   partners    the regions, each with its role
+ *   objectives, pillars, what the corridor opens, services, the forum
+ *   membership  a pointer to the Web360 Club tiers on /memberships
+ *
+ * Content follows IBA's corridor deck, cut to its key lines; prices are
+ * deliberately not shown. "Asset pooling" is IBA's addition to the network's
+ * offer (October 2026).
  */
 
-import { useRef } from 'react'
-import { PageHero, Section, Cards, Btn, Bullets } from '../../components/Kit'
+import { useEffect, useRef } from 'react'
+import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
 
-/* The hero graphic: the supplied map artwork, a glowing red dotted world
+/* The corridor map: the supplied map artwork, a glowing red dotted world
    (public/images/corridor-hero-map.jpg), tilted back in 3D with the corridor
-   drawn over it: arcs rise between the continents' pins and a pulse runs
-   along each. HUBS are the pin centres in the artwork's own pixels, so the
-   overlay's viewBox matches the image and the arcs land on the pins. */
+   drawn over it. HUBS are the pin centres in the artwork's own pixels, so the
+   overlay's viewBox matches the image and the arcs land on the pins. The four
+   regions are equal partners: each has the same node, and the routes join
+   them in a loop, drawn one after another with a pulse running along each.
+   The Americas hang off it as a faint dashed promise. The sequence waits
+   (data-live) until the map scrolls into view, so it plays where it is seen. */
 const HUBS = {
   americas: [538, 496],
   europe: [910, 260],
@@ -24,14 +37,15 @@ const HUBS = {
   uae: [1173, 358],
   india: [1314, 393],
 }
+/** The four partner regions, each drawn the same. */
+const REGIONS = ['europe', 'uae', 'india', 'africa']
+/** The corridor's routes: a loop through the regions, then the next region. */
 const ROUTES = [
-  ['americas', 'europe'],
-  ['americas', 'africa'],
-  ['europe', 'uae'],
-  ['europe', 'africa'],
-  ['africa', 'uae'],
-  ['uae', 'india'],
-  ['europe', 'india'],
+  { from: 'europe', to: 'uae' },
+  { from: 'uae', to: 'india' },
+  { from: 'india', to: 'africa' },
+  { from: 'africa', to: 'europe' },
+  { from: 'europe', to: 'americas', next: true },
 ]
 /* a quadratic arc that lifts off the map by a share of its length */
 const arc = ([x1, y1], [x2, y2]) => {
@@ -39,34 +53,81 @@ const arc = ([x1, y1], [x2, y2]) => {
   return `M${x1} ${y1} Q${(x1 + x2) / 2} ${(y1 + y2) / 2 - lift} ${x2} ${y2}`
 }
 
-const HeroMap = () => (
-  <figure className="cx-map" aria-label="A glowing world map with the corridor connecting its partner regions">
-    <div className="cx-map__stage">
-      <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
-      <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
-        <defs>
-          <filter id="cx-glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="5" result="b" />
-            <feMerge>
-              <feMergeNode in="b" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        {ROUTES.map(([from, to], i) => {
-          const d = arc(HUBS[from], HUBS[to])
-          return (
-            <g key={from + to} style={{ '--i': i }}>
-              <path className="cx-map__arc" d={d} />
-              <path className="cx-map__flow" d={d} pathLength="100" />
-              <circle className="cx-map__pulse" r="13" filter="url(#cx-glow)">
-                <animateMotion dur={`${3 + (i % 3) * 0.6}s`} begin={`-${i * 0.45}s`} repeatCount="indefinite" path={d} />
-              </circle>
-            </g>
-          )
-        })}
-      </svg>
-    </div>
+function CorridorMap() {
+  const ref = useRef(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (!('IntersectionObserver' in window)) {
+      el.dataset.live = ''
+      return
+    }
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return
+        el.dataset.live = ''
+        io.disconnect()
+      },
+      { threshold: 0.35 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <figure className="cx-map" ref={ref} aria-label="A glowing world map with the corridor connecting Europe, the UAE, India and Africa, with the Americas next">
+      <div className="cx-map__stage">
+        <img src="/images/corridor-hero-map.jpg" alt="" width="1832" height="859" decoding="async" />
+        <svg className="cx-map__routes" viewBox="0 0 1832 859" aria-hidden="true">
+          <defs>
+            <filter id="cx-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="5" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          {ROUTES.map(({ from, to, next }, i) => {
+            const d = arc(HUBS[from], HUBS[to])
+            return (
+              <g key={from + to} className={next ? 'cx-map__route cx-map__route--next' : 'cx-map__route'} style={{ '--i': i }}>
+                <path className="cx-map__arc" d={d} pathLength="100" />
+                {!next && (
+                  <>
+                    <path className="cx-map__flow" d={d} pathLength="100" />
+                    <circle className="cx-map__pulse" r="11" filter="url(#cx-glow)">
+                      <animateMotion dur="3.2s" begin={`${1 + i * 0.6}s`} repeatCount="indefinite" path={d} />
+                    </circle>
+                  </>
+                )}
+              </g>
+            )
+          })}
+          {/* the regions: one node each, alike, with rings spreading from each.
+              The artwork labels the regions, so the nodes carry no text. */}
+          {REGIONS.map((r, i) => {
+            const [x, y] = HUBS[r]
+            return (
+              <g key={r} className="cx-map__node" style={{ '--i': i }}>
+                <circle className="cx-map__ring" cx={x} cy={y} r="16" />
+                <circle className="cx-map__ring cx-map__ring--late" cx={x} cy={y} r="16" />
+                <circle className="cx-map__core" cx={x} cy={y} r="16" filter="url(#cx-glow)" />
+              </g>
+            )
+          })}
+          <g className="cx-map__node cx-map__node--next" style={{ '--i': REGIONS.length }}>
+            <circle cx={HUBS.americas[0]} cy={HUBS.americas[1]} r="10" />
+          </g>
+        </svg>
+      </div>
+    </figure>
+  )
+}
+
+/** The hero: the Web3 Corridor logo, its square edges faded into the panel. */
+const HeroLogo = () => (
+  <figure className="cx-logo">
+    <img src="/images/corridor-logo.webp" alt="Web3 Corridor" width="1600" height="1600" decoding="async" />
   </figure>
 )
 
@@ -117,131 +178,90 @@ const Flag = ({ code, name }) => (
   </svg>
 )
 
-/**
- * The corridor's partner countries, from IBA's corridor deck. Each is a node
- * of the same corridor, not a corridor of its own: `strength` is what that
- * market brings, `role` is the part it plays.
- */
-const PARTNERS = [
-  { code: 'AE', country: 'United Arab Emirates', node: 'Dubai', role: 'Financial hub & global launchpad', text: 'Regulatory clarity and capital access. The UAE set a global precedent with regulatory frameworks built specifically for virtual assets. Its government-backed free zones run dedicated campuses that incubate Web3 startups, supported by strong public-private partnerships.' },
-  { code: 'IN', country: 'India', node: 'Home of IBA', role: 'Technical engine & implementation hub', text: 'One of the world’s largest pools of blockchain developers and more than 1,250 active Web3 ventures. India contributes heavily to open-source protocols, zero-knowledge privacy solutions and decentralized applications. It already uses blockchain across government, telecoms and finance.' },
-  { code: 'ZM', country: 'Zambia', node: 'Africa', role: 'High-growth adoption & real-world utility', text: 'Mobile-first innovation and grassroots adoption. Africa is a global frontrunner in crypto adoption and DeFi, driven by economic need rather than speculation. It uses Web3 to leapfrog legacy infrastructure, remove real financial friction and grow a large wave of developer talent.' },
-  { code: 'ES', country: 'Spain', node: 'Europe', role: 'Governance & mature market integration', text: 'Institutional compliance and standards from Europe’s regulatory lead, and host of the corridor forum in Barcelona. Europe has pioneered comprehensive legal standards for digital assets. The EU also actively funds and pilots Web3 projects for digital sovereignty.' },
+/* ------------------------------------------------------------------ */
+/* The network: a corridor for shared growth                         */
+/* ------------------------------------------------------------------ */
+
+const Icon = ({ d }) => <path d={d} />
+
+/** What moves through the network — one line each. */
+const FLOWS = [
+  { title: 'Global Connection', text: 'Join through one country and reach every partner in the corridor.', icon: <><circle cx="12" cy="12" r="9" /><Icon d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" /></> },
+  { title: 'Asset Pooling', text: 'Pool capital and real-world assets across borders through tokenization.', icon: <><ellipse cx="12" cy="6" rx="8" ry="3" /><Icon d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" /></> },
+  { title: 'Capital & Investment', text: 'Vetted deal flow for investors, and funding paths for founders.', icon: <Icon d="M3 17l6-6 4 4 8-8M15 7h6v6" /> },
+  { title: 'Technology Transfer', text: "India's developer depth, shared with every market in the corridor.", icon: <Icon d="M8 6l-6 6 6 6M16 6l6 6-6 6" /> },
+  { title: 'Market Access', text: 'Pre-verified business setup and go-to-market plans for each new market.', icon: <Icon d="M5 21V4M5 4h11l-2 4 2 4H5" /> },
+  { title: 'Talent & Knowledge', text: 'Skills, certifications and research partnerships across the network.', icon: <Icon d="M2 9l10-5 10 5-10 5zM6 11v5c3 2 9 2 12 0v-5" /> },
 ]
 
-/** Why the corridor exists. */
-const WHY = [
-  'Responds to the need for stronger cross-border collaboration in emerging technologies, startup growth and digital transformation.',
-  'Unlocks opportunities across regions that together represent more than 2.8 billion people.',
-  'Grows the Web3 & AI Corridor into a global innovation platform, with the Americas next.',
-  'Speeds up technology transfer, investment, entrepreneurship and ecosystem collaboration across regions.',
+const FIGURES = [
+  { value: '2.8B+', label: 'People across the corridor' },
+  { value: '4', label: 'Partner regions, the Americas next' },
+  { value: '1,250+', label: 'Active Web3 ventures in India' },
+  { value: '$1T', label: 'Opportunity the corridor maps' },
+]
+
+/**
+ * The corridor's partner regions, from IBA's corridor deck, each with the
+ * role it plays; all four are equal partners. `role` is each one's part.
+ */
+const PARTNERS = [
+  { code: 'IN', country: 'India', node: 'Home of IBA', role: 'Technical engine & implementation hub', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.' },
+  { code: 'AE', country: 'United Arab Emirates', node: 'Dubai', role: 'Financial hub & global launchpad', text: 'Regulatory clarity, capital access and free-zone campuses incubating Web3 startups.' },
+  { code: 'ES', country: 'Spain', node: 'Europe', role: 'Governance & mature market integration', text: 'Institutional compliance, standards and Europe’s lead on Web3 regulation.' },
+  { code: 'ZM', country: 'Zambia', node: 'Africa', role: 'High-growth adoption & real-world utility', text: 'Mobile-first innovation, unbanked growth and real-world DeFi, with fast-growing developer talent.' },
 ]
 
 /** The three core objectives. */
 const OBJECTIVES = [
-  { num: '01', title: 'Connect', text: 'Build a sustainable innovation corridor connecting nations with global technology, investment and innovation ecosystems.' },
-  { num: '02', title: 'Transfer', text: 'Facilitate technology transfer, knowledge exchange and capacity building in emerging technologies.' },
-  { num: '03', title: 'Access', text: 'Create pathways for startups, SMEs, innovation hubs, women entrepreneurs and young innovators to reach markets and funding.' },
+  { num: '01', title: 'Connect', text: 'A sustainable innovation corridor connecting nations with global technology, investment and innovation.' },
+  { num: '02', title: 'Transfer', text: 'Technology transfer, knowledge exchange and capacity building in emerging technologies.' },
+  { num: '03', title: 'Access', text: 'Pathways to markets and funding for startups, SMEs, innovation hubs, women entrepreneurs and young innovators.' },
 ]
 
-/** The focus pillars, each with what it works on and what it leads to. */
+/** The focus pillars, one line each. */
 const PILLARS = [
-  { title: 'Web3 Technologies & Digital Transformation', text: 'Web3 literacy, adoption, digital skills and Web3-powered solutions.', outcome: 'Workforce readiness, digital competitiveness and faster transformation.' },
-  { title: 'Blockchain, Web3 & Tokenization', text: 'Digital identity, tokenization, smart contracts and decentralized technologies.', outcome: 'Wider adoption, faster innovation and cross-border collaboration.' },
-  { title: 'Hubs & Co-Working Ecosystems', text: 'Hub development, startup incubation, innovation exchange and collaborative workspaces.', outcome: 'Stronger innovation infrastructure and regional collaboration.' },
-  { title: 'Startup Development & Investment', text: 'Startup acceleration, venture development, investor readiness and market access.', outcome: 'More funding, stronger scaling pathways and international partnerships.' },
-  { title: 'Girls & Women in Emerging Technologies', text: 'Leadership development, skills training, entrepreneurship and mentorship.', outcome: 'Greater participation, inclusion and women-led innovation.' },
-  { title: 'Education, Research & Capacity Building', text: 'Certifications, training, research collaboration and academic partnerships.', outcome: 'Industry-ready talent and lasting capacity building.' },
+  { title: 'Web3 Technologies & Digital Transformation', text: 'Literacy, adoption and digital skills.' },
+  { title: 'Blockchain, Web3 & Tokenization', text: 'Digital identity, tokenization and smart contracts.' },
+  { title: 'Hubs & Co-Working Ecosystems', text: 'Hub development, startup incubation and collaborative workspaces.' },
+  { title: 'Startup Development & Investment', text: 'Acceleration, investor readiness and market access.' },
+  { title: 'Girls & Women in Emerging Tech', text: 'Leadership, skills, entrepreneurship and mentorship.' },
+  { title: 'Education, Research & Capacity Building', text: 'Certifications, training and academic partnerships.' },
 ]
 
 /** What being inside the corridor gives you, each said once. */
 const ACCESS = [
-  {
-    num: '01',
-    title: 'Web3 Resources',
-    text: 'Templates, frameworks, learning on RWA, tokenomics and regulation, and tech support to move faster.',
-  },
-  {
-    num: '02',
-    title: 'Partnerships',
-    text: 'Introductions to investors, family offices, mentors, tokenization platforms and members across every partner country.',
-  },
-  {
-    num: '03',
-    title: 'Growth',
-    text: 'Advisory, mentoring and investor readiness that take a startup from founder to fundable venture.',
-  },
-  {
-    num: '04',
-    title: 'Expansion',
-    text: 'Pre-verified business setup, go-to-market plans and visibility to enter new markets across the corridor.',
-  },
+  { num: '01', title: 'Web3 Resources', text: 'Templates, frameworks and learning on RWA, tokenomics and regulation.' },
+  { num: '02', title: 'Partnerships', text: 'Investors, family offices, mentors and members in every partner country.' },
+  { num: '03', title: 'Growth', text: 'Advisory, mentoring and investor readiness, from founder to fundable venture.' },
+  { num: '04', title: 'Expansion', text: 'Business setup, go-to-market plans and visibility in new markets.' },
 ]
 
 /** The two sides the corridor serves. */
 const SIDES = [
-  { tag: 'For Founders', title: 'Tested Pathways to New Markets', text: 'Established opportunities with real scope for funding, local and relevant go-to-market strategies, new markets, advanced technical integration and the tokenization of businesses.' },
-  { tag: 'For Investors', title: 'One Framework to De-risk', text: 'A unified framework to de-risk international deployments, with vetted deal flow arriving from every partner country.' },
+  { tag: 'For Founders', title: 'Tested Pathways to New Markets', text: 'Funding, local go-to-market strategies, new markets, advanced technical integration and business tokenization.' },
+  { tag: 'For Investors', title: 'A Unified Framework to De-risk', text: 'A unified framework to de-risk international deployments, with vetted deal flow across the corridor.' },
 ]
 
-/** How IBA supports ventures across the corridor. */
-const SUPPORT = [
-  { title: 'Tech Support', text: 'End-to-end plans and operational support for tokenized business solutions.' },
-  { title: 'Business Setup', text: 'Pre-verified frameworks for the legal and regulatory requirements of each corridor market, plus advanced KYC and KYB systems.' },
-  { title: 'Advisory & Mentoring', text: 'Direct access to industry veterans who have scaled Web3 across borders, plus mentor sessions with subject-matter experts for tailored solutions.' },
-  { title: 'Global Visibility', text: 'Integrated marketing and networking that put your venture in front of global decision-makers, with forums for visibility, investor readiness and funding tracks.' },
-  { title: 'Go-To-Market Plans', text: 'Complete blueprints to launch and scale globally, actionable strategies for fast entry into high-demand markets, and separate plans for tokenization.' },
+/** The services IBA runs across the corridor. */
+const SERVICES = [
+  { num: '01', title: 'Tech Support', text: 'End-to-end plans and operations for tokenized businesses.' },
+  { num: '02', title: 'Business Setup', text: 'Pre-verified legal and regulatory frameworks, with advanced KYC and KYB.' },
+  { num: '03', title: 'Advisory & Mentoring', text: 'Industry veterans who have scaled Web3 across borders, plus expert mentor sessions.' },
+  { num: '04', title: 'Global Visibility', text: 'Marketing, networking and forums that put you in front of global decision-makers and investors.' },
+  { num: '05', title: 'Go-To-Market Plans', text: 'Blueprints to launch and scale in high-demand markets, with separate tokenization plans.' },
+  { num: '06', title: 'Asset Pooling', text: 'Cross-border pooling of capital and tokenized real-world assets.' },
 ]
-
-/**
- * The membership carousel: twelve placeholder cards, with no tier names,
- * prices or benefits until IBA confirms them (by request). The earlier tier
- * cards and benefits matrix are in git history (commit 9e1a995).
- */
-const MEMBERSHIPS = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))
-
-function MembershipCarousel() {
-  const track = useRef(null)
-  const step = (dir) => {
-    const t = track.current
-    const card = t?.firstElementChild
-    if (!card) return
-    const gap = parseFloat(getComputedStyle(t).columnGap) || 0
-    t.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
-  }
-  return (
-    <div className="cx-mc" role="region" aria-roledescription="carousel" aria-label="Corridor memberships" data-rise>
-      <ul className="cx-mc__track" ref={track} tabIndex={0}>
-        {MEMBERSHIPS.map((n) => (
-          <li className="cx-mc__card" key={n}>
-            <span className="cx-mc__medal" aria-hidden="true" />
-            <span className="cx-mc__num">{n}</span>
-            <h3 className="cx-mc__name">Membership {n}</h3>
-            <p className="cx-mc__text">Details coming soon.</p>
-          </li>
-        ))}
-      </ul>
-      <div className="cx-mc__nav">
-        <button type="button" className="cx-mc__arrow" onClick={() => step(-1)} aria-label="Previous memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-        </button>
-        <button type="button" className="cx-mc__arrow" onClick={() => step(1)} aria-label="Next memberships">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </div>
-    </div>
-  )
-}
 
 export default function Corridor() {
   return (
     <div>
       <PageHero
         id="corridor"
-        aside={<HeroMap />}
+        aside={<HeroLogo />}
         eyebrow="IBA Web3 Corridor · A high-velocity initiative by India Blockchain Alliance"
-        title="One Global Corridor"
-        lede="A single corridor that brings countries together, giving everyone inside it access to Web3 resources, partnerships, growth and expansion. It draws on the strengths of each partner country to create value for all of them. Together, those countries map a trillion-dollar opportunity and are home to more than 2.8 billion people."
+        title="Bridging Global Regions"
+        lede="Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next. One corridor for shared Web3 resources, capital, partnerships and markets, home to more than 2.8 billion people."
         actions={
           <>
             <Btn href="#corridor-membership">
@@ -256,21 +276,25 @@ export default function Corridor() {
 
       <Section
         id="corridor-focus"
-        tone="card"
-        eyebrow="The Corridor Focus"
-        title="A Corridor for Shared Growth"
-        lede="Connecting Africa, the UAE, India and Europe through innovation, technology, investment and partnerships."
+        tone="dark"
+        eyebrow="The Network"
+        title="A corridor for shared growth."
+        lede="Connecting Africa, the UAE, India and Europe through innovation, technology, investment and partnerships, with IBA as the central catalyst."
       >
-        <div className="cx-why" data-rise>
-          <Bullets items={WHY} />
+        <div className="cx-netmap">
+          <CorridorMap />
+        </div>
+        <Cards items={FLOWS} cols={3} />
+        <div className="cx-block">
+          <Stats items={FIGURES} dark />
         </div>
       </Section>
 
       <Section
         id="corridor-partners"
         eyebrow="Corridor Partners"
-        title="The Countries in the Corridor"
-        lede="Each partner country is a node of the same corridor. Join through one and you reach them all."
+        title="The Regions in the Corridor"
+        lede="Each region brings its own strength. Join through one and reach them all."
       >
         <ul className="cx-partners">
           {PARTNERS.map((p) => (
@@ -286,7 +310,7 @@ export default function Corridor() {
             <span className="cx-flag cx-flag--next" aria-hidden="true">+</span>
             <p className="cx-partner__role">Expanding</p>
             <h3 className="cx-partner__name">Your Country</h3>
-            <p className="cx-partner__text">The corridor grows through new country partners.</p>
+            <p className="cx-partner__text">The network grows with new country partners.</p>
             <a className="cx-partner__go" href="/connect" data-enquiry="Web3 Corridor">
               Become a country partner <span aria-hidden="true">→</span>
             </a>
@@ -294,25 +318,20 @@ export default function Corridor() {
         </ul>
       </Section>
 
-      <Section
-        id="corridor-objectives"
-        tone="card"
-        eyebrow="The Corridor Objectives"
-        title="The Three Core Objectives"
-      >
+      <Section id="corridor-objectives" tone="card" eyebrow="The Corridor Objectives" title="Three Core Objectives">
         <Cards items={OBJECTIVES} cols={3} />
       </Section>
 
-      <Section id="corridor-pillars" eyebrow="Focus Pillars" title="Focus Pillars">
+      <Section id="corridor-pillars" eyebrow="Focus Pillars" title="Where the Corridor Focuses">
         <Cards items={PILLARS} cols={3} />
       </Section>
 
       <Section
         id="corridor-access"
-        tone="dark"
+        tone="card"
         eyebrow="Build. Fund. Scale."
         title="What the Corridor Opens"
-        lede="Regional fragmentation is the biggest barrier to the next trillion dollars of the decentralized economy. The IBA Web3 Corridor removes it with one central infrastructure for cross-border tech and business. Startups become founders, founders become fundable ventures, and ventures graduate into the Corridor Club."
+        lede="One infrastructure for cross-border tech and business: startups become founders, founders become fundable ventures, and ventures graduate into the Corridor Club."
       >
         <Cards items={ACCESS} cols={4} />
         <div className="cx-block">
@@ -322,12 +341,11 @@ export default function Corridor() {
 
       <Section
         id="corridor-support"
-        tone="card"
-        eyebrow="Growth with Advantage"
-        title="Shaping the Africa–UAE–India–Europe Corridor"
-        lede="One cohesive platform that breaks down regulatory and geographic silos so innovators can scale across high-growth international markets. IBA is the central catalyst through its Corridor Engagement Programs."
+        eyebrow="Corridor Services"
+        title="Services Across the Network"
+        lede="Advanced support stacks that speed up tech and business outcomes for every corridor venture."
       >
-        <Cards items={SUPPORT} cols={3} />
+        <Cards items={SERVICES} cols={3} />
       </Section>
 
       <Section
@@ -335,7 +353,7 @@ export default function Corridor() {
         tone="red"
         eyebrow="Launch · WTC 2026 · November · Barcelona"
         title="Global Innovation Corridor Forum"
-        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and the roadmap is set."
+        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and set the roadmap."
       >
         <div className="pk-actions" data-rise>
           <Btn enquiry="Web3 Corridor">
@@ -348,12 +366,14 @@ export default function Corridor() {
         id="corridor-membership"
         eyebrow="Membership · Web360 Club"
         title="Join the Corridor"
-        lede="Membership details are coming soon. Get in touch to hear about them first."
+        lede="Membership runs through the Web360 Club, and every stage is earned: Bronze for starters and early builders, Silver for multi-country growth, and Gold, invite-only, for global activations."
       >
-        <MembershipCarousel />
-        <div className="pk-actions cx-block cx-block--tight" data-rise>
-          <Btn enquiry="Web3 Corridor membership">
-            Get in Touch <span aria-hidden="true">→</span>
+        <div className="pk-actions" data-rise>
+          <Btn href="/memberships#web360">
+            See the Web360 Club Tiers <span aria-hidden="true">→</span>
+          </Btn>
+          <Btn enquiry="Web3 Corridor membership" variant="ghost">
+            Get in Touch
           </Btn>
         </div>
       </Section>

@@ -175,6 +175,9 @@ export const NAV = [
     ],
   },
   { key: 'redclub', label: 'Experience Zone', href: '/red-club' },
+  /* Every membership, and the way in for existing members (Member Login sits
+     on that page now, not in the bar). */
+  { key: 'membership', label: 'Membership', href: '/memberships' },
   {
     key: 'corridor',
     label: 'Web3 Corridor',
@@ -196,13 +199,16 @@ export const NAV = [
           { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#corridor-membership' },
         ],
       },
-      /* The Web360 Club memberships live on the corridor page, with their
-         terms and matrix. */
+      /* Every kind of membership lives on /memberships: the Web360 Club
+         banners first, then the ecosystem and cohort memberships. The matrix link is
+         the corridor page's, until its matrix moves too. */
       {
         title: 'Memberships',
         items: [
-          { label: 'Web360 Club', icon: 'globe', desc: 'Corridor memberships.', href: '/corridor#corridor-membership' },
+          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/memberships#web360' },
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#corridor-matrix' },
+          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships#memberships' },
+          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and students.', href: '/memberships#cohort' },
         ],
       },
     ],
@@ -315,6 +321,8 @@ export const FOOTER = [
       { label: 'Corridor Partners', href: '/corridor#corridor-partners' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
       { label: 'Membership', href: '/corridor#corridor-membership' },
+      { label: 'All Memberships', href: '/memberships' },
+      { label: 'Partner Marketplace', href: '/marketplace' },
     ],
   },
   {

@@ -5774,10 +5774,25 @@ main {
 }
 .cx-map__arc {
   fill: none;
-  stroke: rgba(255, 80, 90, 0.7);
+  stroke: rgba(255, 80, 90, 0.75);
   stroke-width: 4;
-  stroke-dasharray: 10 10;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
   filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
+  /* each route grows out of India in turn, nearest first */
+  animation: cx-grow 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: calc(0.3s + var(--i) * 0.6s);
+}
+/* the next region: a faint dashed promise, drawn last */
+.cx-map__route--next .cx-map__arc {
+  stroke: rgba(255, 255, 255, 0.35);
+  stroke-width: 3;
+  stroke-dasharray: 2 3;
+  stroke-dashoffset: 0;
+  filter: none;
+  opacity: 0;
+  animation: cx-fade 1s ease forwards;
+  animation-delay: calc(0.3s + var(--i) * 0.6s);
 }
 .cx-map__flow {
   fill: none;
@@ -5785,9 +5800,51 @@ main {
   stroke-width: 8;
   stroke-linecap: round;
   stroke-dasharray: 22 78;
+  stroke-dashoffset: 100;
+  opacity: 0;
   filter: drop-shadow(0 0 10px rgba(255, 40, 50, 0.9));
-  animation: cx-flow 3.2s linear infinite;
-  animation-delay: calc(var(--i) * -0.45s);
+  animation: cx-flow 3.2s linear infinite, cx-fade 0.4s ease forwards;
+  animation-delay: calc(1.4s + var(--i) * 0.6s);
+}
+/* every region's node: a glowing core with rings spreading from it */
+.cx-map__core {
+  fill: #ff3b47;
+  stroke: #ffffff;
+  stroke-width: 5;
+}
+.cx-map__ring {
+  fill: none;
+  stroke: #ff3b47;
+  stroke-width: 3;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cx-ripple 2.6s ease-out infinite;
+}
+.cx-map__ring--late {
+  animation-delay: 1.3s;
+}
+/* the region nodes light one after another as the loop is drawn */
+.cx-map__node {
+  opacity: 0;
+  animation: cx-fade 0.5s ease forwards;
+  /* each region lights as the route leaving it starts to draw */
+  animation-delay: calc(0.2s + var(--i) * 0.6s);
+}
+.cx-map__node--next circle {
+  stroke-width: 4;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-dasharray: 4 4;
+}
+@keyframes cx-grow {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes cx-fade {
+  to { opacity: 1; }
+}
+@keyframes cx-ripple {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(3.4); opacity: 0; }
 }
 .cx-map__pulse {
   fill: #fff;
@@ -5802,45 +5859,24 @@ main {
 }
 @media (prefers-reduced-motion: reduce) {
   .cx-map__stage,
-  .cx-map__flow {
+  .cx-map__flow,
+  .cx-map__ring {
     animation: none;
   }
+  /* at rest: every route drawn, every node lit */
+  .cx-map__arc,
+  .cx-map__route--next .cx-map__arc,
+  .cx-map__node {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  .cx-map__flow,
+  .cx-map__ring,
   .cx-map__pulse {
     display: none;
   }
 }
-/* the map, larger (by request), turns away to the right but stops short
-   of the panel's right edge, leaving a little padding there. It never
-   reaches left under the headline. */
-#corridor .pk-hero__copy {
-  position: relative;
-  z-index: 2;
-}
-@media (min-width: 861px) {
-  .pk-hero__aside .cx-map {
-    width: 132%;
-    margin: -4% -16% -4% -16%;
-    perspective-origin: 0% 50%;
-  }
-  .pk-hero__aside .cx-map__stage {
-    animation-name: cx-drift-away;
-  }
-  .pk-hero__aside .cx-map img {
-    -webkit-mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
-    mask-image: radial-gradient(62% 50% at 40% 50%, #000 72%, transparent 100%);
-  }
-}
-@keyframes cx-drift-away {
-  0%, 100% { transform: rotateY(-22deg) rotateX(14deg) rotateZ(-3deg) translateY(0); }
-  50% { transform: rotateY(-19deg) rotateX(11deg) rotateZ(-2deg) translateY(-8px); }
-}
-@media (max-width: 860px) {
-  .pk-hero__aside .cx-map {
-    width: 104%;
-    margin: 0 -2%;
-  }
-}
-
 /* Web3 Corridor — the partner countries, each card led by its flag */
 .cx-partners {
   display: grid;
@@ -7157,5 +7193,874 @@ main {
   .cb__sweep,
   .cb__hubs {
     display: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Memberships — tier cards with the original price struck through   */
+/* and IBA's discounted price beside it                              */
+/* ---------------------------------------------------------------- */
+.mb-tiers {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .mb-tiers--3,
+  .mb-tiers--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .mb-tiers--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .mb-tiers--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.mb-tier {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mb-tier .pk-card__num,
+.mb-tier .pk-card__title {
+  margin: 0;
+}
+.mb-tier__tag {
+  align-self: flex-start;
+}
+.mb-tier__outcome {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--bb-line);
+}
+.mb-tier__go {
+  margin-top: auto;
+  padding-top: 4px;
+}
+/* with an outcome above it, the outcome takes the push to the bottom */
+.mb-tier__outcome + .mb-tier__go {
+  margin-top: 0;
+}
+.mb-table {
+  margin-top: 32px;
+}
+.mb-table .edu__table tbody th {
+  text-transform: none;
+  font-size: 15px;
+}
+.mb-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Memberships — the carousel's live cards, and the pop-up each one opens */
+.mb-mc__card {
+  position: relative;
+  gap: 0;
+}
+.mb-mc__card:has(.mb-mc__open:focus-visible) {
+  border-color: var(--iba-red);
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+.mb-mc__medal {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--iba-red);
+  color: #ffffff;
+  font-family: var(--bb-font);
+  font-size: 16px;
+}
+.mb-mc__text {
+  margin: 12px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #6b655e;
+}
+.mb-mc__open {
+  margin-top: auto;
+  padding-top: 20px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--bb-font);
+  font-size: 14px;
+  color: var(--iba-red);
+  cursor: pointer;
+  text-align: left;
+}
+/* stretched over the card, so the whole card opens the pop-up */
+.mb-mc__open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.mb-mc__open:focus-visible {
+  outline: none;
+}
+
+.mb-dlg {
+  width: min(1200px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100% - 48px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.mb-dlg::backdrop {
+  background: rgba(14, 14, 14, 0.7);
+}
+.mb-dlg__panel {
+  position: relative;
+  display: grid;
+  gap: 32px;
+  padding: clamp(24px, 4vw, 48px);
+}
+.mb-dlg__x {
+  position: sticky;
+  top: 0;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: -8px -8px -72px 0;
+  padding: 0;
+  border: 1px solid var(--bb-line);
+  border-radius: 50%;
+  background: var(--bb-surface);
+  color: var(--bb-ink);
+  cursor: pointer;
+  z-index: 1;
+}
+.mb-dlg__x svg {
+  width: 14px;
+  height: 14px;
+}
+.mb-dlg__x:hover {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.mb-dlg__x:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+.mb-dlg__head {
+  display: grid;
+  gap: 12px;
+  max-width: 70ch;
+  padding-right: 48px;
+}
+.mb-dlg__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.mb-dlg__title {
+  margin: 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(26px, 3.6vw, 38px);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.mb-dlg__lede {
+  margin: 0;
+  color: var(--bb-ink-muted);
+}
+.mb-dlg .mb-table {
+  margin-top: 0;
+}
+
+/* a membership's logo, in place of the lettered medal */
+.mb-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  margin-bottom: 20px;
+}
+.mb-logo img,
+.mb-logo__mark {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+.mb-logo__mark {
+  color: var(--bb-ink);
+}
+.mb-logo__word {
+  font-family: var(--bb-font);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--bb-ink);
+}
+.mb-logo__dot {
+  color: #f47a20;
+}
+/* a square logo file with the mark across its middle: cropped to the mark */
+.mb-logo img.mb-logo__crop {
+  width: 64px;
+  object-fit: cover;
+}
+
+/* Memberships — the Web360 Club banner carousel: one wide banner to a view */
+.mb-bn {
+  min-width: 0;
+  max-width: 100%;
+}
+.mb-bn__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.mb-bn__track::-webkit-scrollbar {
+  display: none;
+}
+.mb-bn__track:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 4px;
+}
+.mb-bn__slide {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  min-height: clamp(240px, 32vw, 360px);
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--iba-black);
+  color: #ffffff;
+  scroll-snap-align: start;
+}
+.mb-bn__beam {
+  position: absolute;
+  inset: -40% -10% auto auto;
+  width: 60%;
+  height: 180%;
+  background: radial-gradient(closest-side, rgba(215, 25, 32, 0.5), rgba(215, 25, 32, 0));
+  transform: rotate(-20deg);
+  pointer-events: none;
+}
+.mb-bn__slide > :not(.mb-bn__beam) {
+  position: relative;
+}
+.mb-bn__medal {
+  margin-bottom: auto;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: transparent;
+}
+.mb-bn__num {
+  margin: 24px 0 0;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff4a50;
+}
+.mb-bn__name {
+  margin: 8px 0 0;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.1;
+  color: #ffffff;
+}
+.mb-bn__text {
+  margin: 8px 0 0;
+  color: var(--bb-on-black-muted);
+}
+.mb-bn__nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.mb-bn__dots {
+  display: flex;
+  gap: 8px;
+}
+.mb-bn__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--bb-line-strong);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.mb-bn__dot[aria-current] {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+}
+.mb-bn__dot:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 3px;
+}
+
+/* the card's foot: one row, the call to action left and the logo right */
+.mb-mc__card,
+.mb-mc__card--soon {
+  align-items: stretch;
+  container-type: inline-size;
+}
+.mb-mc__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 24px;
+}
+.mb-mc__foot .mb-mc__open,
+.mb-mc__foot .cx-mc__text {
+  margin: 0;
+  padding: 0;
+}
+.mb-mc__foot .mb-mc__open {
+  white-space: nowrap;
+}
+.mb-mc__foot .mb-logo,
+.mb-mc__foot .cx-mc__medal {
+  flex: none;
+  margin: 0;
+}
+.mb-mc__foot .mb-logo {
+  height: 28px;
+  gap: 6px;
+}
+.mb-mc__foot .mb-logo img,
+.mb-mc__foot .mb-logo__mark {
+  width: 28px;
+  height: 28px;
+}
+.mb-mc__foot .mb-logo img.mb-logo__crop {
+  width: 48px;
+}
+.mb-mc__foot .mb-logo__word {
+  font-size: 16px;
+}
+/* too narrow for the link and the full logo: keep the mark, drop the word */
+@container (max-width: 220px) {
+  .mb-mc__foot .mb-logo__word {
+    display: none;
+  }
+}
+
+/* Memberships — Web360 Club tiers: three to a view, each with its medal */
+.mb-tc__track {
+  grid-auto-columns: calc((100% - 2 * 16px) / 3);
+}
+@media (max-width: 1024px) {
+  .mb-tc__track {
+    grid-auto-columns: calc((100% - 16px) / 2);
+  }
+}
+@media (max-width: 600px) {
+  .mb-tc__track {
+    grid-auto-columns: 86%;
+  }
+}
+.mb-tc__card {
+  --medal: linear-gradient(135deg, #e0a872, #9a5b2c);
+  display: flex;
+  flex-direction: column;
+  min-height: 380px;
+  padding: 28px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+  scroll-snap-align: start;
+  transition: border-color 150ms ease;
+}
+.mb-tc__card:hover {
+  border-color: var(--bb-ink);
+}
+.mb-tc__card--silver {
+  --medal: linear-gradient(135deg, #eef0f2, #8e959c);
+}
+/* gold is the invite-only tier: black, like the site's featured cards */
+.mb-tc__card--gold {
+  --medal: linear-gradient(135deg, #f6dc8a, #b08a24);
+  border-color: var(--iba-black);
+  background: var(--iba-black);
+  color: #ffffff;
+}
+.mb-tc__card--gold:hover {
+  border-color: #c9a227;
+}
+.mb-tc__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.mb-tc__medal {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--medal);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.35);
+}
+.mb-tc__tag {
+  padding: 4px 10px;
+  border: 1px solid #c9a227;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f0cf6a;
+}
+.mb-tc__name {
+  margin: 0 0 20px;
+  font-family: var(--bb-font);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.1;
+  color: inherit;
+}
+.mb-tc__label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.mb-tc__card--gold .mb-tc__label {
+  color: #f0cf6a;
+}
+.mb-tc__for {
+  margin: 4px 0 16px;
+  font-size: 17px;
+  line-height: 1.4;
+  color: inherit;
+}
+.mb-tc__why {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--bb-ink-muted);
+}
+.mb-tc__card--gold .mb-tc__why {
+  color: var(--bb-on-black-muted);
+}
+.mb-tc__go {
+  margin-top: auto;
+  padding-top: 24px;
+}
+.mb-tc__card--gold .pk-btn--ghost {
+  border-color: #c9a227;
+  color: #ffffff;
+}
+
+/* Memberships — ecosystem cards: the "Why join through IBA?" label, and the
+   last card, into the marketplace, set in red */
+.mb-mc__why {
+  margin: 14px 0 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.mb-mc__why + .mb-mc__text {
+  margin-top: 6px;
+}
+.mb-mc__card--market {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+}
+.mb-mc__card--market:hover {
+  border-color: var(--iba-red-deep);
+}
+.mb-mc__card--market .cx-mc__name,
+.mb-mc__card--market .mb-mc__text,
+.mb-mc__card--market .mb-mc__open {
+  color: #ffffff;
+}
+.mb-mc__card--market .mb-mc__open {
+  white-space: normal;
+  text-decoration: none;
+}
+
+/* Marketplace — search across the top, filters left, one row per partner */
+.mk {
+  display: grid;
+  gap: 24px;
+}
+.mk__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+}
+.mk__search:focus-within {
+  border-color: var(--bb-ink);
+}
+.mk__search svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: var(--bb-ink-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.mk__search input {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-family: var(--bb-font);
+  font-size: 17px;
+  color: var(--bb-ink);
+}
+.mk__body {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .mk__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.mk__filters {
+  display: grid;
+  gap: 28px;
+  position: sticky;
+  top: calc(var(--nav-h, 72px) + 24px);
+}
+@media (max-width: 860px) {
+  .mk__filters {
+    position: static;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+.mk__group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: grid;
+  gap: 4px;
+}
+.mk__group legend {
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.mk__check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 0;
+  font-size: 14px;
+  color: var(--bb-ink);
+  cursor: pointer;
+}
+.mk__check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--iba-red);
+}
+.mk__n {
+  margin-left: auto;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--bb-ink-muted);
+}
+.mk__clear {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--bb-font);
+  font-size: 14px;
+  color: var(--iba-red);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.mk__count {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--bb-ink-muted);
+}
+.mk__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--bb-line);
+}
+.mk__list li {
+  border-bottom: 1px solid var(--bb-line);
+}
+.mk__row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  padding: 20px 12px;
+  border: 0;
+  background: none;
+  font-family: var(--bb-font);
+  text-align: left;
+  color: var(--bb-ink);
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+.mk__row:hover {
+  background: var(--bb-surface-alt);
+}
+.mk__row:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: -2px;
+}
+.mk__logo {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--bb-line);
+  background: var(--bb-surface);
+  overflow: hidden;
+}
+.mk__logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+.mk__logo .mb-logo {
+  margin: 0;
+  height: auto;
+}
+.mk__logo .mb-logo__word {
+  display: none;
+}
+.mk__logo .mb-logo__mark {
+  width: 40px;
+  height: 40px;
+}
+.mk__logo .mb-logo img.mb-logo__crop {
+  width: 56px;
+  object-fit: cover;
+}
+.mk__mono {
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--iba-red);
+}
+.mk__main {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.mk__name {
+  font-size: 18px;
+}
+.mk__brief {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--bb-ink-muted);
+}
+.mk__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.mk__chip {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--bb-surface-alt);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bb-ink-muted);
+}
+.mk__chip--place {
+  background: var(--iba-red-soft);
+  color: var(--iba-red-deep);
+}
+.mk__go {
+  font-size: 14px;
+  color: var(--iba-red);
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .mk__row {
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .mk__logo {
+    width: 48px;
+    height: 48px;
+  }
+  .mk__logo img {
+    width: 34px;
+    height: 34px;
+  }
+  .mk__go {
+    display: none;
+  }
+}
+.mk-soon {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  padding: 24px;
+  border: 1px dashed var(--bb-line-strong);
+  color: var(--bb-ink-muted);
+}
+.mk-soon p {
+  margin: 0;
+}
+
+
+/* The review build's bar (npm run build:artifact only) */
+.rv {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  /* above the page, below the nav and its mobile drawer */
+  z-index: calc(var(--z-nav) - 1);
+  width: min(300px, calc(100vw - 32px));
+  border: 1px solid var(--iba-black);
+  background: var(--bb-surface);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  font-family: var(--bb-font);
+}
+.rv__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  background: var(--iba-black);
+  color: #ffffff;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+.rv__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f5a623;
+}
+.rv__list {
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+}
+.rv__list a {
+  display: grid;
+  gap: 2px;
+  padding: 8px 14px;
+  color: var(--bb-ink);
+  text-decoration: none;
+}
+.rv__list a:hover,
+.rv__list a[aria-current] {
+  background: var(--bb-surface-alt);
+}
+.rv__list a[aria-current] strong {
+  color: var(--iba-red);
+}
+.rv__list a[aria-current] strong,
+.rv__list a:hover strong {
+  text-decoration: none;
+}
+.rv__list strong {
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--bb-ink);
+}
+.rv__list span {
+  font-size: 12px;
+  color: var(--bb-ink-muted);
+}
+
+/* Web3 Corridor — the hero logo: the square artwork, faded round into the
+   black panel so it reads as light rather than a pasted tile */
+#corridor .pk-hero__copy {
+  position: relative;
+  z-index: 2;
+}
+.cx-logo {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 520px;
+  animation: cx-float 7s ease-in-out infinite;
+}
+.cx-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* round: wholly clear out to the lettering (80% of the way to the edge),
+     then gone by each edge, so the square — and its red corner — fall away */
+  -webkit-mask-image: radial-gradient(circle closest-side at 50% 50%, #000 80%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side at 50% 50%, #000 80%, transparent 100%);
+}
+@keyframes cx-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Web3 Corridor — the map in the network section, full width above the tiles */
+.cx-netmap {
+  max-width: 1040px;
+  margin: 0 auto 48px;
+}
+/* the expansion waits until the map is on screen (data-live, set once) */
+.cx-map:not([data-live]) .cx-map__arc,
+.cx-map:not([data-live]) .cx-map__flow,
+.cx-map:not([data-live]) .cx-map__node,
+.cx-map:not([data-live]) .cx-map__pulse {
+  animation-play-state: paused;
+}
+.cx-map__pulse {
+  opacity: 0;
+  animation: cx-fade 0.4s ease forwards;
+  animation-delay: calc(1.4s + var(--i) * 0.6s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cx-logo {
+    animation: none;
   }
 }
