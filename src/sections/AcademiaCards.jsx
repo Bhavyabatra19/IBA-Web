@@ -14,6 +14,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
+import { PENDING } from '../nav'
 
 /* line icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -38,8 +39,8 @@ const DOORS = [
   {
     key: 'students',
     tag: 'Learners',
-    title: 'For Learners',
-    body: 'Join the IBA Red Club: programmes, projects, placements.',
+    title: 'Global Exposure',
+    body: 'Internships, opportunities, and more.',
     cta: 'Join Red Club',
     href: '/red-club',
     img: '/images/card-students.jpg',
@@ -47,10 +48,12 @@ const DOORS = [
   {
     key: 'institutions',
     tag: 'Institutions',
-    title: 'For Institutions',
-    body: 'Bring Red Club programmes and campus labs to your university.',
+    title: 'Create Global Student Experiences',
+    body:
+      'Partner access into the IBA Web3 Corridor for IBA Red Club Experience Programs: Tokenization and Blockchain labs, academia, internships, and global networking.',
     cta: 'Request Prospectus',
-    href: '/connect',
+    /* the Red Club Experience Center page, once built (see PENDING in nav.js) */
+    href: PENDING.experienceCenter,
     img: '/images/card-institutions.jpg',
   },
 ]

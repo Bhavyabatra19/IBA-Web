@@ -48,6 +48,7 @@ export const TOPICS = [
   'Red Club / Verifyble (institution)',
   'Web3 Corridor',
   'Ecosystem partnership',
+  'Membership',
   /* ⚠ NAMING, carried over from nav.js: "Tech4Good" matches none of the four
      initiatives the site publishes (Emerging Technology Council, Blockchain
      Governance Council, The Green Chain, Tech Zero) and is most likely Tech
@@ -156,6 +157,7 @@ export const ROUTING = {
     'Red Club / Verifyble (institution)': 'education-institution',
     'Web3 Corridor': 'corridor',
     'Ecosystem partnership': 'partnerships',
+    Membership: 'partnerships',
     'Tech4Good / Green Chain Protocol': 'partnerships',
     'Media / Speaking': 'comms',
   },
@@ -226,6 +228,8 @@ export const PAGE_CONTEXT = {
   '/education': { topic: 'Red Club (learner)', phrase: 'IBA education programmes' },
   /* the current pages */
   '/expertise': { topic: 'Consulting', phrase: 'working with IBA' },
+  '/tokenization': { topic: 'RWA Tokenization', phrase: 'a tokenization project' },
+  '/memberships': { topic: 'Membership', phrase: 'an IBA membership' },
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },

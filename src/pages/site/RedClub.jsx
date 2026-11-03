@@ -2,19 +2,12 @@
 
 import { PageHero, Section, Cards, Bullets, Btn } from '../../components/Kit'
 import { Go } from '../../sections/service/ServiceBlocks'
-/* The hero graphic: the supplied artwork (public/images/rc-hero.jpg). The
-   drawn alternative is components/RedClubHolo.jsx. */
-const HeroImage = () => (
-  <figure className="rc-hero-img">
-    <img
-      src="/images/rc-hero.jpg"
-      alt="A graduation cap over a lit pedestal, linked to Experience Zone programmes, labs, projects and placements"
-      width="1400"
-      height="933"
-      decoding="async"
-    />
-  </figure>
-)
+import EzStairs from '../../components/EzStairs'
+/* The hero graphic: the client's infographic of four ascending blocks, its
+   arrow redrawn straight (components/EzStairs). It replaces the earlier
+   artwork (public/images/rc-hero.jpg); the drawn alternative is
+   components/RedClubHolo.jsx. */
+const HeroImage = () => <EzStairs />
 
 const JUMP = [
   ['#rc-about', 'About'],

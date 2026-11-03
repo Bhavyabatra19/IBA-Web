@@ -10,6 +10,7 @@ import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
 import { REGIONS_LINE } from '../data/facts'
+import IndiaPulse from '../components/IndiaPulse'
 
 export default function CorridorBand() {
   const root = useRef(null)
@@ -27,16 +28,20 @@ export default function CorridorBand() {
     <section className="cb band band--light band--own" ref={root} aria-labelledby="cb-title">
       <div className="cb__panel">
         {/* the corridor's reach: the supplied map artwork, the five regions
-            pinned and linked (public/images/flagship-map.jpg) */}
+            pinned on glass labels and linked (public/images/flagship-map-glass.jpg;
+            the earlier artwork, flagship-map.jpg, is kept) */}
         <div className="cb__globe cb__art">
           <img
-            src="/images/flagship-map.jpg"
+            src="/images/flagship-map-glass.jpg"
             alt="World map linking the Americas, Europe, Africa, the UAE and India"
             width="1832"
             height="859"
             loading="lazy"
             decoding="async"
           />
+          {/* India's cube, highlighted with a pin (by request); the map
+              names India itself, so no card */}
+          <IndiaPulse x={72.3} y={43.6} small />
         </div>
 
         <div className="cb__copy">

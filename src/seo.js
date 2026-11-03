@@ -83,9 +83,24 @@ export const SEO = {
 
   /* ---- the pages added from the content source ---- */
   '/expertise': {
-    title: 'Expertise | Web3 Solution Consulting Stack | IBA',
+    title: 'Expertise | Web3 Solution Advisory and Consulting Stack | IBA',
     description:
-      'Tokenization, standards, compliance and stablecoin structuring, plus power consulting for IDO, STO and IEO launches — from “should we?” to “it’s live, and it’s governed”.',
+      'Tokenization; standards, frameworks and compliance; stablecoin structuring; and advisory and global market expansion — from ‘Should we?’ to ‘It’s live, governed, and ready to scale.’',
+  },
+  '/tokenization': {
+    title: 'Tokenization | Turn Real-World Assets into Market Opportunities | IBA',
+    description:
+      'Tokenization can connect traditionally illiquid assets to digital markets, creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access.',
+  },
+  '/memberships': {
+    title: 'Memberships | Web360 Club, Ecosystem & Cohort Memberships | IBA',
+    description:
+      'IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector: the Web360 Club tiers, ecosystem member services and cohort memberships.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | India Blockchain Alliance',
+    description:
+      'How India Blockchain Alliance collects, uses and protects the information you share with us through this website, and the rights you have over it.',
   },
   '/ecosystem': {
     title: 'IBA Ecosystem | Initiatives, Partners, Councils & People',
@@ -98,9 +113,9 @@ export const SEO = {
       'Tech4Good, Green Chain Protocol, Verifyble, IBA Red Club, the Web3 Corridor and the India AI Alliance.',
   },
   '/corridor': {
-    title: 'Web3 Corridor | Global Innovation Corridor Initiative | IBA',
+    title: 'Web3 Corridor | Bridging Global Regions | IBA',
     description:
-      'A global innovation platform connecting ' + REGIONS_LINE + ' — core dimensions, country corridors and the forum launching at WTC 2026 in Barcelona.',
+      'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets.',
   },
   '/red-club': {
     title: 'IBA Experience Zone | Where Builders Get Ready',

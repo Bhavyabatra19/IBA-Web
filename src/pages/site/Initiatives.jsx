@@ -63,7 +63,7 @@ const INITIATIVES = [
     list: [
       'Core dimensions, from Web3 and tokenization to startup investment and women in emerging technologies',
       'The UAE as the activation hub, with India, Africa and Europe as ecosystem partners',
-      'Global Innovation Corridor Forum launching at WTC 2026, November, Barcelona',
+      'Global Innovation Corridor Forum launching in November 2026, Barcelona',
     ],
     page: { href: '/corridor', label: 'Explore the Corridor' },
   },

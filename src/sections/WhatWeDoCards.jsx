@@ -38,9 +38,10 @@ const CARDS = [
     title: 'Web3 Advisory',
     body:
       'Policy, compliance, standards, taxation, forensics and risk mitigation, the right blockchain decision before a single line of code is written.',
-    cta: 'See Expertise',
+    cta: 'Know more',
     href: '/expertise#consulting-stack',
-    img: '/images/card-advisory.jpg',
+    /* the client's photo (by request); the earlier card-advisory.jpg is kept */
+    img: '/images/card-advisory-team.webp',
   },
   {
     key: 'build',
@@ -48,9 +49,11 @@ const CARDS = [
     title: 'Tokenization',
     body:
       'Asset selection, token design, issuance structure and tokenomics for real-world and digital assets, taking an asset from idea to a compliant, investable token.',
-    cta: 'See the Consulting Stack',
-    href: '/expertise#consulting-stack',
-    img: '/images/card-tokenization.jpg',
+    cta: 'Know more',
+    /* the Tokenization page's End-to-End Framework section */
+    href: '/tokenization#framework',
+    /* the client's photo (by request); the earlier card-tokenization.jpg is kept */
+    img: '/images/card-tokenization-team.jpg',
   },
 ]
 
@@ -94,7 +97,8 @@ export default function WhatWeDoCards() {
                 </span>
                 <h3 className="wd__title">{c.title}</h3>
                 <p className="wd__text">{c.body}</p>
-                <Go className="wd__go" href={c.href}>
+                {/* both cards read "Know more", so the accessible name says which */}
+                <Go className="wd__go" href={c.href} aria-label={`Know more about ${c.title}`}>
                   {c.cta} <span aria-hidden="true">→</span>
                 </Go>
               </div>

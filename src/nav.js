@@ -54,7 +54,23 @@
 export const PENDING = {
   privacy: '/privacy',
   terms: '/terms',
+  /* ⚠ The Red Club Experience Center page is still to be created. Until it
+     exists this falls back to the Connect page; once its route is in App.jsx,
+     change this one value and every link to it (the home page's Knowledge Hub
+     "Request Prospectus") follows. */
+  experienceCenter: '/connect',
 }
+
+/**
+ * The label on the way in, everywhere it appears.
+ *
+ * "Member Login", not "Sign In": IBA is an alliance of 800+ members, and the
+ * label should say what the account actually is. It lives here because the
+ * brief asks for it to be identical in the nav, the footer, the modal heading,
+ * the transactional emails and the empty states — and five copies of a word are
+ * five chances for one of them to drift. Declared above NAV, which uses it.
+ */
+export const MEMBER_LOGIN = 'Member Login'
 
 export const NAV = [
   /* The tabs as the content source sets them out. Every href is page-
@@ -156,6 +172,29 @@ export const NAV = [
     ],
   },
   { key: 'redclub', label: 'Experience Zone', href: '/red-club' },
+  /* Memberships sits directly before the Web3 Corridor flagship tab. */
+  {
+    key: 'memberships',
+    label: 'Memberships',
+    href: '/memberships',
+    groups: [
+      {
+        title: 'Members',
+        items: [
+          { label: MEMBER_LOGIN, icon: 'lock', desc: 'Sign in to your member account.', href: '/library#login' },
+          { label: 'Become a Member', icon: 'users', desc: 'Join the alliance, free.', href: '/library#signup' },
+        ],
+      },
+      {
+        title: 'Memberships',
+        items: [
+          { label: 'Web360 Club', icon: 'globe', desc: 'Bronze, Silver and Gold tiers.', href: '/memberships#web360' },
+          { label: 'Ecosystem Memberships', icon: 'link', desc: 'Services from partner companies.', href: '/memberships#ecosystem-members' },
+          { label: 'Cohort Memberships', icon: 'users', desc: 'For institutes and their students.', href: '/memberships#cohort-memberships' },
+        ],
+      },
+    ],
+  },
   {
     key: 'corridor',
     label: 'Web3 Corridor',
@@ -166,24 +205,16 @@ export const NAV = [
         title: 'The Initiative',
         items: [
           { label: 'Global Innovation Corridor', icon: 'globe', desc: 'What the corridor is and why it exists.', href: '/corridor' },
-          { label: 'Core Dimensions', icon: 'layers', desc: 'How the corridors work.', href: '/corridor#how-corridors-work' },
-          { label: 'Country Corridors', icon: 'pin', desc: 'Where the corridor reaches.', href: '/corridor#country-corridors' },
+          { label: 'The Network', icon: 'layers', desc: 'How the corridor connects.', href: '/corridor#how-corridors-work' },
+          { label: 'Focus Pillars', icon: 'layers', desc: 'Where the corridor focuses.', href: '/corridor#focus-pillars' },
+          { label: 'Corridor Partners', icon: 'pin', desc: 'India, the UAE, Spain and Zambia.', href: '/corridor#country-corridors' },
         ],
       },
       {
         title: 'Take Part',
         items: [
           { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor partner.', href: '/corridor#join-corridor' },
-        ],
-      },
-      /* ⚠ Both memberships land on the corridor's join form until they have
-         pages of their own; the descriptions are placeholders to confirm. */
-      {
-        title: 'Memberships',
-        items: [
-          { label: 'Partner Members', icon: 'link', desc: 'Organisations partnering on the corridor.', href: '/corridor#join-corridor' },
-          { label: 'Web360 Members', icon: 'globe', desc: 'Individual members across the network.', href: '/corridor#join-corridor' },
+          { label: 'Join the Corridor', icon: 'handshake', desc: 'Membership through the Web360 Club.', href: '/corridor#join-corridor' },
         ],
       },
     ],
@@ -237,16 +268,6 @@ export const CONTACT = {
   },
 }
 
-/**
- * The label on the way in, everywhere it appears.
- *
- * "Member Login", not "Sign In": IBA is an alliance of 800+ members, and the
- * label should say what the account actually is. It lives here because the
- * brief asks for it to be identical in the nav, the footer, the modal heading,
- * the transactional emails and the empty states — and five copies of a word are
- * five chances for one of them to drift.
- */
-export const MEMBER_LOGIN = 'Member Login'
 
 /**
  * Footer columns, as the footer design sets them out: five lists, the last
@@ -294,9 +315,9 @@ export const FOOTER = [
     title: 'Web3 Corridor',
     items: [
       { label: 'Global Innovation Corridor', href: '/corridor' },
-      { label: 'Core Dimensions', href: '/corridor#how-corridors-work' },
+      { label: 'The Network', href: '/corridor#how-corridors-work' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
-      { label: 'Country Corridors', href: '/corridor#country-corridors' },
+      { label: 'Corridor Partners', href: '/corridor#country-corridors' },
       { label: 'Join the Corridor', href: '/corridor#join-corridor' },
     ],
   },

@@ -35,7 +35,7 @@
  */
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { NAV, MEMBER_LOGIN, tabItems } from '../nav'
+import { NAV, tabItems } from '../nav'
 import {
   gsap,
   ScrollTrigger,
@@ -73,9 +73,6 @@ const ICONS = {
 /** Whether a tab has anything to disclose — flat items or grouped ones. */
 const hasPanel = (tab) => tabItems(tab).length > 0
 
-/** Where a tab sits in the mobile drawer. Everything without a flag keeps its
-    order in NAV, because Array.prototype.sort is stable. */
-const drawerRank = (tab) => (tab.top ? 0 : tab.pill ? 1 : 2)
 
 export default function Nav() {
   const root = useRef(null)
@@ -316,23 +313,10 @@ export default function Nav() {
             ))}
           </nav>
 
+          {/* The bar's one action (by request). Member Login moved under the
+              Memberships tab. */}
           <div className="nav__util">
-            {/* The bar's two actions are now the same vocabulary as the rest of
-                the site's: white secondary, red primary. It was a bare text
-                link, which made the pair read as a link and a button rather
-                than as two buttons of different rank. */}
-            <a
-              className="btn btn--ghost btn--sm"
-              href="/library#login"
-              onClick={(e) => go(e, '/library#login')}
-            >
-              {MEMBER_LOGIN}
-            </a>
-            <a
-              className="btn btn--primary btn--sm"
-              href="/connect"
-              data-enquiry=""
-            >
+            <a className="btn btn--primary btn--sm" href="/connect" data-enquiry="">
               Connect With Us
             </a>
           </div>
@@ -400,21 +384,23 @@ export default function Nav() {
                       All of {panel.label} <span aria-hidden="true">→</span>
                     </a>
                   </li>
-                  <li>
-                    <a href="/connect" data-enquiry="">
-                      Connect With Us
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/library#signup" onClick={(e) => go(e, '/library#signup')}>
-                      Become a Member
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/library#login" onClick={(e) => go(e, '/library#login')}>
-                      {MEMBER_LOGIN}
-                    </a>
-                  </li>
+                  {/* Connect With Us is kept in the Expertise panel only (by request) */}
+                  {panel.key === 'expertise' && (
+                    <li>
+                      <a href="/connect" data-enquiry="">
+                        Connect With Us
+                      </a>
+                    </li>
+                  )}
+                  {/* Member Login now lives under the Memberships tab (by
+                      request), which lists Become a Member itself */}
+                  {panel.key !== 'memberships' && (
+                    <li>
+                      <a href="/library#signup" onClick={(e) => go(e, '/library#signup')}>
+                        Become a Member
+                      </a>
+                    </li>
+                  )}
                 </ul>
               </aside>
             </div>
@@ -424,14 +410,9 @@ export default function Nav() {
 
       {/* ---------------------------- mobile ---------------------------- */}
       <div className="drawer" id="nav-drawer" data-open={drawer ? '' : undefined} hidden={!drawer}>
-        {/* Home, then the flagship, then the rest in their bar order — the
-            brief puts Web3 Corridor above the others here, where the bar puts
-            it last, and Home belongs at the top of a menu wherever it appears.
-            Sorted rather than reordered in the tree, so the bar keeps its own
-            order, and ranked from the data so neither position is a key this
-            file has to recognise. */}
+        {/* the tabs in the same order as the desktop bar (by request) */}
         <div className="drawer__scroll">
-          {[...NAV].sort((a, b) => drawerRank(a) - drawerRank(b)).map((tab) => {
+          {NAV.map((tab) => {
             const items = tabItems(tab)
             /* No panel to disclose, so no accordion — just the destination. */
             if (!items.length) {
@@ -495,14 +476,9 @@ export default function Nav() {
           })}
         </div>
 
+        {/* the foot of the mobile menu keeps Connect With Us; Member Login is
+            under Memberships above (by request) */}
         <div className="drawer__foot">
-          <a
-            className="btn btn--ghost btn--block"
-            href="/library#login"
-            onClick={(e) => go(e, '/library#login')}
-          >
-            {MEMBER_LOGIN}
-          </a>
           <a
             className="btn btn--primary btn--block"
             href="/connect"

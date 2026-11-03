@@ -67,7 +67,9 @@ export function Btn({ href = '#', enquiry, variant = 'primary', children }) {
 }
 
 /** The page's opening panel: dark, hero width, with the red beam. */
-export function PageHero({ eyebrow, title, lede, actions, aside, id }) {
+/* `still`: content under the actions that must not animate in (the About
+   hero's figures, which have to sit on one line from the first frame) */
+export function PageHero({ eyebrow, title, lede, actions, still, aside, id }) {
   const ref = useRef(null)
   useRise(ref)
   return (
@@ -91,6 +93,7 @@ export function PageHero({ eyebrow, title, lede, actions, aside, id }) {
               {actions}
             </div>
           )}
+          {still}
         </div>
         {aside && (
           <div className="pk-hero__aside" data-rise>
@@ -210,11 +213,12 @@ function CardLink({ href, children }) {
 }
 
 /** Stat tiles: { value, label, count?, prefix?, suffix?, decimals? } */
-export function Stats({ items, dark = false }) {
+/* `still`: no rise as the figures come into view */
+export function Stats({ items, dark = false, still = false }) {
   return (
     <ul className={`pk-stats${dark ? ' pk-stats--dark' : ''}`}>
       {items.map((s) => (
-        <li className="pk-stat" key={s.label} data-rise>
+        <li className="pk-stat" key={s.label} data-rise={still ? undefined : true}>
           <strong
             {...(s.count != null
               ? { 'data-count': s.count, 'data-prefix': s.prefix || '', 'data-suffix': s.suffix || '' }

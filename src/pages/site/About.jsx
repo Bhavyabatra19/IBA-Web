@@ -1,27 +1,13 @@
 /** About — who we are, vision, mission, impact, and the founder. */
 
-import { PageHero, Section, Cards, Stats, SubHead } from '../../components/Kit'
+import { PageHero, Section, Stats } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import FloatingCubes from '../../components/FloatingCubes'
 import VisionMission from '../../sections/VisionMission'
 import FounderLetter from '../../sections/FounderLetter'
+import MissionPillars from '../../components/MissionPillars'
+import IbaFramework from '../../components/IbaFramework'
 import { FACTS, REGIONS_LINE } from '../../data/facts'
-
-const PILLARS = [
-  { icon: <><path d="M3 11v3a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1Z" /><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12" /></>, title: 'Advocate', text: 'Shape regulatory frameworks, global standards and taxation policy through our councils and our work with governments.' },
-  { icon: <path d="M13 2 4 14h7l-1 8 9-12h-7Z" />, title: 'Enable', text: 'Deliver the advisory, consulting and technical capability organisations need to move from intent to production.' },
-  { icon: <><path d="M2 9.5 12 5l10 4.5L12 14Z" /><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5M22 9.5V15" /></>, title: 'Educate', text: 'Build the talent pipeline through the IBA Red Club, Experience Centers and industry-led programmes.' },
-  { icon: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></>, title: 'Connect', text: 'Open cross-border corridors so capital, talent and projects can find each other across jurisdictions.' },
-]
-
-const CORE = [
-  { title: 'Largest Industry Ecosystem', text: 'The most extensive blockchain and Web3 technologies network, spanning every major global market.' },
-  { title: 'Policy, Advocacy & Standards', text: 'Shaping regulatory frameworks and global blockchain standards.' },
-  { title: 'Globally Focused', text: 'On-ground presence and deep regulatory expertise across emerging and established markets worldwide.' },
-  { title: 'Resource Building', text: 'Capacity building, talent development and knowledge transfer at scale.' },
-  { title: 'SDG Aligned', text: 'Every initiative mapped to the UN Sustainable Development Goals, anchored by Tech Zero.' },
-  { title: 'Sectoral Expertise', text: 'Specialized knowledge across high-impact industry verticals.' },
-]
 
 export default function About() {
   return (
@@ -37,9 +23,12 @@ export default function About() {
         ]}
         /* the floating cubes on the right; the figures move under the copy */
         aside={<FloatingCubes />}
-        actions={
+        /* the figures, without any animation (by request), so all four sit on
+           one line from the moment the page opens */
+        still={
           <div className="about-stats">
             <Stats
+              still
               items={[
                 { value: FACTS.members.text, count: FACTS.members.n, suffix: FACTS.members.suffix, label: 'Global Members' },
                 { value: FACTS.advisors.text, count: FACTS.advisors.n, suffix: FACTS.advisors.suffix, label: 'Global Advisories' },
@@ -80,11 +69,34 @@ export default function About() {
         }}
       />
 
-      <Section id="mission-pillars" tone="dark" eyebrow="Our Mission" title="How the Mission Runs">
-        <Cards items={PILLARS} cols={4} />
+      <Section
+        id="mission-pillars"
+        tone="dark"
+        eyebrow="Our Mission"
+        title="Governance and Operating Model"
+        lede="Our Web3 Corridors—the rails connecting markets, capital, and ecosystems globally."
+      >
+        <MissionPillars />
       </Section>
 
-      <Section id="impact" tone="red" eyebrow="Impact, Measured, Executed" title="Impact, Not Announcements">
+      {/* the framework, in its own white section (by request), after the
+          client's reference: the hub and its four pills. It comes before
+          the Impact figures (by request). */}
+      <Section
+        id="iba-framework"
+        tone="card"
+        eyebrow="The IBA Framework"
+        title="Multi-Dimensional IBA Framework with One Connected Web3 Ecosystem."
+      >
+        <IbaFramework />
+      </Section>
+
+      <Section
+        id="impact"
+        tone="red"
+        eyebrow="Impact, Measured, Executed"
+        title="Building what matters, real outcomes with lasting impact"
+      >
         <Stats
           items={[
             { value: FACTS.tokenized.text, count: FACTS.tokenized.n, prefix: FACTS.tokenized.prefix, suffix: FACTS.tokenized.suffix, label: 'Tokenized Assets' },
@@ -93,11 +105,9 @@ export default function About() {
             { value: FACTS.partners.text, count: FACTS.partners.n, suffix: FACTS.partners.suffix, label: 'Ecosystem Partners' },
           ]}
         />
-        <SubHead>The IBA Core: Six Dimensions That Define Our Leadership</SubHead>
-        <Cards items={CORE} cols={3} />
       </Section>
 
-      <Section id="team" eyebrow="Founder" title="Message From the Founder">
+      <Section id="team" eyebrow="Founder" title="Welcome to IBA">
         <FounderLetter
           linkedin={CONTACT.linkedin.href}
           lead="I spent over two decades inside the world’s financial system before I chose to help rebuild it."

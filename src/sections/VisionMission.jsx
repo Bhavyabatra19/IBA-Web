@@ -9,8 +9,8 @@
  *
  * Each card keeps its own anchor (#vision, #mission) for the nav links.
  * Photos: Unsplash, under the Unsplash License, saved in public/images:
- *   ab-vision.jpg   supplied artwork: a red eye ringed by orbits and cubes
- *   ab-mission.jpg  supplied artwork: a red target with a dart, ringed by orbits
+ *   Futuristic Team Meeting with Holographic Globe.png   supplied Vision artwork
+ *   Cinematic Global Tech Strategy Meeting.png  supplied Mission artwork
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -62,8 +62,8 @@ export default function VisionMission({ vision, mission }) {
   }, [open])
 
   const cards = [
-    { key: 'vision', tag: 'Our Vision', img: '/images/ab-vision.jpg', ...vision },
-    { key: 'mission', tag: 'Our Mission', img: '/images/ab-mission.jpg', ...mission },
+    { key: 'vision', tag: 'Our Vision', img: '/images/Futuristic%20Team%20Meeting%20with%20Holographic%20Globe.png', ...vision },
+    { key: 'mission', tag: 'Our Mission', img: '/images/Cinematic%20Global%20Tech%20Strategy%20Meeting.png', ...mission },
   ]
 
   return (

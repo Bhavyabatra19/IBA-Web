@@ -11,12 +11,15 @@ import Home from './pages/Home'
    kept so nothing is lost, and can be deleted once the new pages are signed off. */
 import About from './pages/site/About'
 import Expertise from './pages/site/Expertise'
+import Tokenization from './pages/site/Tokenization'
 import Ecosystem from './pages/site/Ecosystem'
 import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
 import RedClub from './pages/site/RedClub'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
+import Privacy from './pages/site/Privacy'
+import Memberships from './pages/site/Memberships'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
 import { SEO } from './seo'
@@ -34,12 +37,15 @@ const PAGES = {
   '/': Home,
   '/about': About,
   '/expertise': Expertise,
+  '/tokenization': Tokenization,
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,
+  '/privacy': Privacy,
+  '/memberships': Memberships,
 }
 
 /**

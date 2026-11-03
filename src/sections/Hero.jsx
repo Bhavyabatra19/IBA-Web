@@ -1,19 +1,45 @@
 /**
  * 2.1 — Hero. Black band crossed by a single red light beam.
  *
- * No pin, no scrub. Under the copy, silver coins travel an arch across the
+ * No pin, no scrub. Under the copy, glass coins travel an arch across the
  * bottom of the panel, tumbling as they go; the second half of the headline
  * rolls through the alliance's claims. Both run only while on screen.
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, reducedMotion, whileOnScreen, isMobile } from '../lib/scroll'
-import CoinStack from '../components/CoinStack'
+import { Go } from './service/ServiceBlocks'
+
+/**
+ * The coins: the client's eight real-world-asset coins, from their own
+ * transparent render (public/images/hero-rwa-coins), left to right as they sat
+ * in it. Each is that render's pixels — colour and alpha — split apart where
+ * the coins touched; nothing else was changed. Agriculture and Green Assets
+ * overlapped at one point of their rims, so Green Assets (in front) keeps its
+ * whole rim and Agriculture loses only the few pixels of it that lay behind. The
+ * outline is the coin's metal plus an ellipse fitted to it, so the dark lower
+ * rim, which is near the background's colour, is not lost. `w`/`h` are each
+ * image's pixel size and `d` its coin's diameter in those pixels; every coin
+ * is scaled so that diameter is one --coin, so all of them are the same size.
+ * (The earlier glass crypto coins are kept in public/images/hero-coins.)
+ */
+const COINS = [
+  { src: 'coin-1.png', w: 324, h: 287, d: 301 }, // Gold
+  { src: 'coin-2.png', w: 304, h: 282, d: 291 }, // Real Estate
+  { src: 'coin-3.png', w: 298, h: 279, d: 288 }, // Carbon Credits
+  { src: 'coin-4.png', w: 301, h: 268, d: 279 }, // Bonds & Debt
+  { src: 'coin-5.png', w: 280, h: 278, d: 269 }, // Commodities
+  { src: 'coin-6.png', w: 307, h: 273, d: 279 }, // Infrastructure
+  { src: 'coin-7.png', w: 299, h: 259, d: 274 }, // Agriculture (d before its overlap trim)
+  { src: 'coin-8.png', w: 287, h: 285, d: 282 }, // Green Assets
+]
+/** On a phone, six of the eight, as before (the arch is shorter there). */
+const PHONE_COINS = COINS.slice(1, 7)
 
 const PHRASES = [
-  'largest tokenized ecosystem',
   'most comprehensive Web3 ecosystem',
-  'largest globalised think tank',
+  'global tokenized economy',
+  'premier global think tank',
 ]
 
 /** How long a phrase holds before the next one rolls in. */
@@ -38,7 +64,10 @@ const TRAVEL = 16
 function measureArch(el, coins) {
   const w = el.clientWidth
   const h = el.clientHeight
-  const coin = coins[0]?.offsetWidth || 110
+  /* every coin's diameter is one --coin; each image adds its glow around that,
+     so the diameter is read back from an image's width and its --cw */
+  const cw = coins[0] ? parseFloat(coins[0].style.getPropertyValue('--cw')) : 0
+  const coin = (cw && coins[0].offsetWidth / cw) || 110
   const block = el.parentElement.querySelector('.hero__bottom')
   const top = block
     ? block.getBoundingClientRect().bottom - el.getBoundingClientRect().top
@@ -67,19 +96,26 @@ function placeCoins(coins, g, t) {
     // evenly spaced along the arch, all moving left → right over the crest
     const u = (i / n + t / TRAVEL) % 1
     const phi = -g.phiMax + u * 2 * g.phiMax
-    // offsets from the panel centre, where every .coin starts
+    // offsets from the panel centre, where every .hero__coin starts
     const x = g.R * Math.sin(phi)
     const y = g.h / 2 + g.c - g.R * Math.cos(phi)
     /* Each coin leans along the arch and tumbles on its own phase, like
-       coins tossed in a row — never fully side-on, so the face always shows. */
-    const rz = (phi * 180) / Math.PI * 0.6 + Math.sin(t * 0.9 + i) * 12
-    const ry = Math.sin(t * 1.3 + i * 1.7) * 62
-    const rx = 28 + Math.sin(t * 1.05 + i * 2.3) * 26
+       coins tossed in a row. The coins are flat images whose tilt is already
+       in their pixels, so the tumble swings either side of that pose rather
+       than adding a base tilt, and stays small enough that the flat image
+       never turns far enough to give itself away. These asset coins are
+       already drawn at an angle, with their depth in the pixels; a wide turn
+       squashed them flat (by request: they "don't look 3D"), so the turn is
+       kept to a few degrees and the lean along the arch is gentler. */
+    const rz = (phi * 180) / Math.PI * 0.35 + Math.sin(t * 0.9 + i) * 6
+    const ry = Math.sin(t * 1.3 + i * 1.7) * 12
+    const rx = Math.sin(t * 1.05 + i * 2.3) * 6
     /* Written straight to style rather than through gsap.set: this runs for
        every coin on every frame, and a pre-built string skips GSAP's parsing
-       and caching. Same order GSAP uses — translate, Z, Y, X. */
+       and caching. Same order GSAP uses — translate, Z, Y, X — after a
+       per-coin perspective, so each turns about its own centre. */
     el.style.transform =
-      `translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)` +
+      `perspective(1200px) translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)` +
       ` rotate(${rz.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)` +
       ` rotateX(${rx.toFixed(2)}deg)`
   }
@@ -89,13 +125,13 @@ export default function Hero() {
   const roller = useRef(null)
   const orbit = useRef(null)
   const [at, setAt] = useState(0)
-  const [coinCount] = useState(() => (isMobile() ? 6 : 9))
+  const [coins] = useState(() => (isMobile() ? PHONE_COINS : COINS))
 
   /* the coin arch — on the GSAP ticker, which already drives Lenis */
   useEffect(() => {
     const el = orbit.current
     if (!el) return
-    const coins = gsap.utils.toArray('.coin', el)
+    const coins = gsap.utils.toArray('.hero__coin', el)
     let t = 0
     let g = measureArch(el, coins)
 
@@ -128,7 +164,7 @@ export default function Hero() {
       gsap.ticker.remove(tick)
       ro.disconnect()
     }
-  }, [coinCount])
+  }, [coins])
 
   useEffect(() => {
     const el = roller.current
@@ -145,22 +181,22 @@ export default function Hero() {
     }
   }, [])
 
-  /* The window takes the height of the phrase on show, so a one-line phrase
-     pulls the copy below up instead of leaving the longest phrase's gap.
-     The space it gives up is handed to the bottom of the copy block, so the
-     block's total height never changes: it can be centred in the hero (and in
-     the coin wheel) without the headline drifting as phrases roll. Re-measured
-     on resize, since the line breaks move with the width. */
+  /* The window is always as tall as the tallest phrase, so the copy below
+     never moves as phrases roll (by request: it used to take each phrase's
+     own height, and the paragraph and button jumped whenever a two-line
+     phrase came in). On a wide screen every phrase is one line (see the
+     stylesheet), so there is no gap; on a phone a short phrase leaves the
+     longest one's space. Re-measured on resize, since line breaks move with
+     the width. */
   useLayoutEffect(() => {
     const el = roller.current
     if (!el) return
     const block = el.closest('.hero__bottom')
     const fit = () => {
-      const phrase = el.children[at]
-      if (!phrase) return
+      if (!el.children.length) return
       const tallest = Math.max(...Array.from(el.children, (c) => c.offsetHeight))
-      el.style.height = `${phrase.offsetHeight}px`
-      if (block) block.style.paddingBottom = `${tallest - phrase.offsetHeight}px`
+      el.style.height = `${tallest}px`
+      if (block) block.style.paddingBottom = '0px'
     }
     fit()
     /* Watch the phrases themselves, not just the heading: the window has a
@@ -180,10 +216,19 @@ export default function Hero() {
     <section className="hero band band--dark" id="hero">
       <div className="hero__beam" aria-hidden="true" />
       <div className="hero__orbit" ref={orbit} aria-hidden="true">
-        {/* The edge is stacked round discs, not strips: strips are flat
-            facets, and few enough of them to run smoothly made the edge a
-            visible polygon. Discs are round at every tilt, and fewer layers. */}
-        <CoinStack count={coinCount} segments={8} rim="discs" float={false} />
+        {/* sized in --coin units, width and height both, so the arch can be
+            measured before the images have loaded */}
+        {coins.map((c) => (
+          <img
+            key={c.src}
+            className="hero__coin"
+            src={`/images/hero-rwa-coins/${c.src}`}
+            alt=""
+            draggable="false"
+            decoding="async"
+            style={{ '--cw': c.w / c.d, '--ch': c.h / c.d }}
+          />
+        ))}
       </div>
 
       <div className="hero__inner wrap">
@@ -223,9 +268,9 @@ export default function Hero() {
           </p>
 
           <div className="hero__ctas">
-            <a className="btn btn--ghost" href="/ecosystem#people">
-              Explore Memberships
-            </a>
+            <Go className="btn btn--ghost" href="/about#impact">
+              View Impact
+            </Go>
           </div>
         </div>
       </div>

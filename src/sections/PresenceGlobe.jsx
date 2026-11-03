@@ -22,6 +22,7 @@ import presence from '../data/presence.json'
    and are cut out by the even-odd fill. */
 import LAND from '../data/land-110m.json'
 import { FACTS } from '../data/facts'
+import IndiaPulse from '../components/IndiaPulse'
 
 /* ------------------------------------------------------------------ */
 /* the arch                                                            */
@@ -103,7 +104,7 @@ export default function PresenceGlobe() {
             Global Presence
           </p>
           <h2 className="pg__title" id="pg-title" data-rise>
-            Present in {FACTS.countries.text} Countries
+            Building the infrastructure to connect the world’s Web3 ecosystems
           </h2>
           <p className="pg__lede" data-rise>
             IBA operates where policy, capital and code meet, with members,
@@ -126,6 +127,8 @@ export default function PresenceGlobe() {
             loading="lazy"
             decoding="async"
           />
+          {/* India, highlighted over the map (by request) */}
+          <IndiaPulse x={70.4} y={56.6} label="India" card="right" />
           <figcaption className="sr-only">
             {FACTS.countries.text} countries, {FACTS.affiliations.text} global affiliations,{' '}
             {FACTS.members.text} global members
