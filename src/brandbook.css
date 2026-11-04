@@ -13039,3 +13039,23 @@ main {
   font-size: 14px;
   color: var(--bb-ink-muted);
 }
+
+/* Cards with a thumbnail (the Resources library): the image runs edge to
+   edge across the top, in the same 542:462 frame as the home knowledge
+   base so the headline artwork is never cropped */
+.pk-card--media {
+  padding-top: 0;
+  overflow: hidden;
+}
+.pk-card__media {
+  align-self: stretch;
+  margin: 0 -24px 8px;
+  aspect-ratio: 542 / 462;
+  background: var(--bb-surface-alt, #f2f2f2);
+}
+.pk-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

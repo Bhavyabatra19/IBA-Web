@@ -1,0 +1,76 @@
+{
+  "items": [
+    {
+      "title": "From Crypto to Credibility: Raj Kapoor’s Blockchain Vision for India",
+      "summary": "How IBA’s founder makes the case for blockchain beyond crypto, and for India as a credible leader in the technology.",
+      "link": "https://voyagersworld.in/2025/08/18/from-crypto-to-credibility-raj-kapoors-blockchain-vision-for-india/",
+      "thumbnail": "/images/kb-voyagers-vision.jpg",
+      "platform": "Voyagers World",
+      "format": "Article",
+      "topic": "Leadership & Vision",
+      "level": "Introductory",
+      "date": "2025-08-18",
+      "featured": true
+    },
+    {
+      "title": "IBA Founder Raj Kapoor: India Can Dominate Web3 Despite Past Missed Opportunities",
+      "summary": "On CoinGeek Backstage: India missed the Web1 and Web2 buses, but has the talent and resources to lead Web3.",
+      "link": "https://coingeek.com/iba-founder-raj-kapoor-india-can-dominate-web3-despite-past-missed-opportunities-in-internet-evolution-video/",
+      "thumbnail": "/images/kb-coingeek-web3.jpg",
+      "platform": "CoinGeek",
+      "format": "Video Interview",
+      "topic": "Leadership & Vision",
+      "level": "Introductory",
+      "date": "",
+      "featured": true
+    },
+    {
+      "title": "Raj Kapoor on India, Web3 and the Future of Blockchain",
+      "summary": "IBA’s founder on India’s place in Web3, the alliance’s mission and where blockchain goes next.",
+      "link": "https://www.youtube.com/watch?v=O9NtJdbwEXE",
+      "thumbnail": "/images/kb-youtube-talk.jpg",
+      "platform": "YouTube",
+      "format": "Video",
+      "topic": "Leadership & Vision",
+      "level": "Introductory",
+      "date": "",
+      "featured": true
+    },
+    {
+      "title": "The STO Foundation (Tokenized Asset Foundation) Appoints Raj Kapoor as Chief Strategy Advisor",
+      "summary": "The Tokenized Asset Foundation names IBA’s founder, a global blockchain and AI leader, as its Chief Strategy Advisor.",
+      "link": "https://www.einpresswire.com/article/936353469/the-sto-foundation-tokenized-asset-foundation-appoints-global-blockchain-ai-leader-raj-kapoor-as-chief-strategy-advisor",
+      "thumbnail": "/images/kb-sto-foundation.jpg",
+      "platform": "EIN Presswire",
+      "format": "Press Release",
+      "topic": "Tokenization & RWA",
+      "level": "Introductory",
+      "date": "",
+      "featured": true
+    },
+    {
+      "title": "India Blockchain Alliance: Raj Kapoor’s Mission to Accelerate India’s Blockchain Ecosystem",
+      "summary": "How IBA’s founder is building the alliance to accelerate blockchain adoption and talent across India.",
+      "link": "https://finance.yahoo.com/news/india-blockchain-alliance-raj-kapoor-123000487.html",
+      "thumbnail": "/images/kb-yahoo-iba.jpg",
+      "platform": "Yahoo Finance",
+      "format": "News",
+      "topic": "Leadership & Vision",
+      "level": "Introductory",
+      "date": "",
+      "featured": true
+    },
+    {
+      "title": "Clean Energy Meets Innovation: Raj Kapoor on Biogas, Sustainability and the Blockchain Opportunity",
+      "summary": "IBA’s founder with the World Biogas Association, on where clean energy, sustainability and blockchain meet.",
+      "link": "https://www.worldbiogasassociation.org/raj-kapoor/",
+      "thumbnail": "/images/kb-wba-profile.jpg",
+      "platform": "World Biogas Association",
+      "format": "Profile",
+      "topic": "ESG & Sustainability",
+      "level": "Introductory",
+      "date": "",
+      "featured": true
+    }
+  ]
+}

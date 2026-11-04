@@ -3,8 +3,9 @@
  * the IBA Directory and more), where to find our content, and the
  * searchable catalogue.
  *
- * The catalogue below is the source's sample list, and its cards do
- * not open an item yet — each needs a real URL (`href`) when published.
+ * The catalogue lists every resource in src/data/resources.json, which the
+ * admin console (/admin) edits; each card shows its thumbnail and opens its
+ * link in a new tab.
  */
 
 import { useMemo, useRef, useState } from 'react'
@@ -12,21 +13,11 @@ import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import { FACTS } from '../../data/facts'
 import LibrarySearch from '../../components/LibrarySearch'
+import DATA from '../../data/resources.json'
 
-const RESOURCES = [
-  { title: 'Reading the Room: Blockchain Regulation Across Global Markets in 2026', desc: 'A jurisdiction-by-jurisdiction snapshot of what actually applies today.', format: 'Report / Whitepaper', topic: 'Policy & Regulation', level: 'Practitioner', source: 'IBA Original', date: '2026-08-02', duration: 22, views: 4100 },
-  { title: 'Tokenizing Real Estate: Lessons from DNA Real Estate', desc: 'How a $473M issuance handled legal wrapper, listing and governance.', format: 'Case Study', topic: 'Tokenization & RWA', level: 'Advanced', source: 'IBA Original', date: '2026-07-14', duration: 14, views: 2870 },
-  { title: 'What Is a Web3 Corridor?', desc: 'A plain explanation of the Global Innovation Corridor Initiative.', format: 'Article', topic: 'Web3 Corridor', level: 'Introductory', source: 'Medium', date: '2026-08-20', duration: 6, views: 6210 },
-  { title: 'Inside the IBA Red Club Blockchain Lab', desc: 'A campus walkthrough of the smart-contract auditing environment.', format: 'Video', topic: 'Knowledge & Skilling', level: 'Introductory', source: 'YouTube', date: '2026-06-30', duration: 11, views: 3320 },
-  { title: 'Enterprise Blockchain Without the Hype', desc: 'Where blockchain actually beats a database, and where it doesn’t.', format: 'Playbook', topic: 'Enterprise Blockchain', level: 'Practitioner', source: 'IBA Original', date: '2026-05-18', duration: 18, views: 5010 },
-  { title: 'Green Chain Protocol: Verifying Climate Claims On-Chain', desc: 'How carbon and impact accounting gets the same rigor as a credential.', format: 'Report / Whitepaper', topic: 'ESG & Green Chain', level: 'Advanced', source: 'Council Publication', date: '2026-04-27', duration: 26, views: 1890 },
-  { title: 'AI + Blockchain: What Institutions Are Actually Building', desc: 'A field report from the IBA Red Club AI Lab network.', format: 'Webinar / Recording', topic: 'AI & Emerging Tech', level: 'Practitioner', source: 'IBA Original', date: '2026-08-05', duration: 47, views: 2210 },
-  { title: 'Verifyble Explained: Data and Digital Assets You Control', desc: 'How on-chain verification secures data and simplifies digital asset management.', format: 'Article', topic: 'Data Security & Digital Assets', level: 'Introductory', source: 'Medium', date: '2026-03-11', duration: 7, views: 4780 },
-  { title: 'BFSI on Chain: Sixteen Use Cases, Ranked by Readiness', desc: 'A sector deep dive into trade finance, KYC and claims management.', format: 'Report / Whitepaper', topic: 'Sector Deep Dives', level: 'Advanced', source: 'IBA Original', date: '2026-02-19', duration: 31, views: 1660 },
-  { title: 'Inside the Global Innovation Corridor', desc: 'The core dimensions, the partner regions and the road to the Barcelona forum.', format: 'Webinar / Recording', topic: 'Web3 Corridor', level: 'Practitioner', source: 'IBA Original', date: '2026-07-29', duration: 38, views: 2990 },
-  { title: 'A Founder Playbook: Legal Advisory Before You Tokenize', desc: 'The questions to answer before a single token is minted.', format: 'Playbook', topic: 'Policy & Regulation', level: 'Introductory', source: 'IBA Original', date: '2026-06-08', duration: 15, views: 3510 },
-  { title: 'From Campus to Career: Red Club Placement Outcomes', desc: 'How the Four Building Blocks connect to real hiring pipelines.', format: 'Video', topic: 'Knowledge & Skilling', level: 'Introductory', source: 'YouTube', date: '2026-01-22', duration: 9, views: 2040 },
-]
+/* Every resource in the shared list (src/data/resources.json, edited at
+   /admin); the home page's knowledge base shows the featured ones. */
+const RESOURCES = DATA.items
 
 const uniq = (k) => [...new Set(RESOURCES.map((r) => r[k]))].sort()
 const FILTERS = [
@@ -37,14 +28,19 @@ const FILTERS = [
     label: 'Level',
     options: ['Introductory', 'Practitioner', 'Advanced'],
   },
-  { key: 'source', label: 'Source', options: uniq('source') },
+  { key: 'platform', label: 'Platform', options: uniq('platform') },
 ]
+/* undated items sit after the dated ones, in list order */
+const byDate = (dir) => (a, b) => {
+  if (!a.date || !b.date) return (a.date ? -1 : 0) - (b.date ? -1 : 0)
+  return dir * a.date.localeCompare(b.date)
+}
 const SORTS = {
-  newest: (a, b) => b.date.localeCompare(a.date),
-  oldest: (a, b) => a.date.localeCompare(b.date),
-  views: (a, b) => b.views - a.views,
+  newest: byDate(-1),
+  oldest: byDate(1),
 }
 const fmtDate = (d) =>
+  d &&
   new Date(d).toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'short',
@@ -53,7 +49,7 @@ const fmtDate = (d) =>
 
 export default function Library() {
   const [q, setQ] = useState('')
-  const [f, setF] = useState({ format: '', topic: '', level: '', source: '' })
+  const [f, setF] = useState({ format: '', topic: '', level: '', platform: '' })
   const [sort, setSort] = useState('newest')
   const catalogue = useRef(null)
 
@@ -62,13 +58,13 @@ export default function Library() {
     return RESOURCES.filter(
       (r) =>
         Object.entries(f).every(([k, v]) => !v || r[k] === v) &&
-        (!needle || `${r.title} ${r.desc} ${r.topic}`.toLowerCase().includes(needle)),
+        (!needle || `${r.title} ${r.summary} ${r.topic} ${r.platform}`.toLowerCase().includes(needle)),
     ).sort(SORTS[sort])
   }, [q, f, sort])
 
   /* the "where to find us" cards jump to the catalogue, pre-filtered */
   const showFormat = (format) => {
-    setF({ format, topic: '', level: '', source: '' })
+    setF({ format, topic: '', level: '', platform: '' })
     catalogue.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -146,7 +142,7 @@ export default function Library() {
               title: 'Watch Webinars',
               text: 'Recorded sessions with IBA experts and partners.',
               cta: 'Watch webinars',
-              on: () => showFormat('Webinar / Recording'),
+              on: () => showFormat('Video'),
             },
           ].map((c) => (
             <article className="pk-card" key={c.title} data-rise>
@@ -207,7 +203,6 @@ export default function Library() {
               <select value={sort} onChange={(e) => setSort(e.target.value)}>
                 <option value="newest">Sort: Newest</option>
                 <option value="oldest">Sort: Oldest</option>
-                <option value="views">Sort: Most Viewed</option>
               </select>
             </label>
           </div>
@@ -220,11 +215,13 @@ export default function Library() {
             <Cards
               cols={3}
               items={list.map((r) => ({
+                img: r.thumbnail,
                 tag: r.format,
                 title: r.title,
-                text: r.desc,
-                sub: `${r.topic} · ${r.level}`,
-                cta: `${r.source} · ${fmtDate(r.date)} · ${r.duration} min`,
+                text: r.summary,
+                sub: [r.topic, r.level].filter(Boolean).join(' · '),
+                href: r.link,
+                cta: [r.platform, fmtDate(r.date)].filter(Boolean).join(' · '),
               }))}
             />
           ) : (

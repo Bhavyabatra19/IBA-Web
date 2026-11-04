@@ -149,7 +149,7 @@ export const SubHead = ({ children, lede }) => (
 )
 
 /**
- * A grid of cards: { num?, icon?, logo?, logoAlt?, tag?, title, text?, focus?,
+ * A grid of cards: { img?, num?, icon?, logo?, logoAlt?, tag?, title, text?, focus?,
  * outcome?, list?, href?, cta? }. A card with an href is a link from edge to
  * edge. `logo` is an image path, shown where the icon would be.
  */
@@ -157,7 +157,12 @@ export function Cards({ items, cols = 3 }) {
   return (
     <div className={`pk-cards pk-cards--${cols}`}>
       {items.map((c) => (
-        <article className={`pk-card${c.href ? ' pk-card--link' : ''}`} key={c.title} data-rise>
+        <article className={`pk-card${c.href ? ' pk-card--link' : ''}${c.img ? ' pk-card--media' : ''}`} key={c.title} data-rise>
+          {c.img && (
+            <div className="pk-card__media" aria-hidden="true">
+              <img src={c.img} alt="" loading="lazy" decoding="async" />
+            </div>
+          )}
           {(c.num || c.icon || c.logo || c.tag) && (
             <div className="pk-card__top">
               {c.logo && (
