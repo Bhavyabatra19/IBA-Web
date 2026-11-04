@@ -1,15 +1,16 @@
 /**
  * Expertise — the four core capabilities as a four-point wheel (after the
- * client's reference): "One Web3 Corridor" at the hub, one coloured segment
- * per capability, and the four cards set around it at the corners. Hover,
+ * client's reference): a dark panel, "One Web3 Corridor" on a silver hub, one
+ * glass segment per capability (red, silver, red, black) in a glowing red
+ * halo, and the four dark glass cards round it, each wired to the wheel. Hover,
  * focus or a tap on a card (or a segment) steps that segment out and shows
  * the full statement in the strip below; until someone does, it steps
  * through them on its own (only while on screen). Narrow screens: the wheel
- * above the cards. Styles in brandbook.css (.cqi, .cco__detail). Reduced
+ * above the cards, no wires. Styles in brandbook.css (.cco, .cqi). Reduced
  * motion: no stepping, no movement.
  */
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { reducedMotion } from '../lib/scroll'
 
 const CAPABILITIES = [
@@ -74,27 +75,32 @@ const CAPABILITIES = [
 
 const STEP_MS = 5000
 
-/* One glass tone per capability, alternating red with white and black round
-   the wheel. `glass` is the body, lit from the top left; `q` is the accent
-   the card and detail strip use; `ink` draws the icon on top. */
+/* One glass tone per segment, round the wheel from the top left: red,
+   silver, red, black. `glass` is the body, lit from the top left; `q` is the
+   accent; `ink` draws the icon on top. */
+const RED = { glass: ['#ff3a42', '#d10f18', '#5a0409'], q: '#d71920', ink: '#fff' }
 const TONES = [
-  { glass: ['#ff3b42', '#d71920', '#6e080d'], q: '#d71920', ink: '#fff' },
-  { glass: ['#ffffff', '#f4f0f0', '#cfc6c7'], q: '#ffffff', ink: '#b3131b' },
-  { glass: ['#e8343c', '#a3121a', '#4a050a'], q: '#a3121a', ink: '#fff' },
-  { glass: ['#4a4345', '#161113', '#000'], q: '#1c1618', ink: '#fff' },
+  RED,
+  { glass: ['#ffffff', '#d4cfd0', '#6f6a6b'], q: '#d4cfd0', ink: '#1c1618' },
+  { glass: ['#ff3a42', '#c4101a', '#4e0408'], q: '#c4101a', ink: '#fff' },
+  { glass: ['#3c3638', '#121012', '#000'], q: '#121012', ink: '#fff' },
 ]
+/* the cards' icon tiles: red glass, except the black one (as in the reference) */
+const cardTone = (i) => (i === 3 ? TONES[3] : RED)
 const toneVars = (t) => ({ '--q': t.q, '--ink': t.ink, '--q-hi': t.glass[0], '--q-lo': t.glass[2] })
 
 /* The wheel: four ring segments around "One Web3 Corridor", each with a
-   pill-shaped tab, its icon in the middle — the first top-left with its tab left,
-   the rest the same shape turned a quarter at a time (a pinwheel). The
-   active segment steps out from the centre; hovering or tapping a segment
-   picks it, the same as its card. */
+   pill-shaped tab ending in a red bead, its icon in the middle — the first
+   top-left with its tab left, the rest the same shape turned a quarter at a
+   time (a pinwheel). The active segment steps out from the centre; hovering
+   or tapping a segment picks it, the same as its card. */
 const C = 200 // centre
 const R_IN = 58
 const R_OUT = 122
+const PAD = 40 // room round the wheel for the halo
+const VIEW = 400 + PAD * 2
 const TAB = { x: 22, y: 151, w: 118, h: 46 } // the first tab, left of the ring
-const TAB_END = { x: 46, y: 174 } // a dot at the tab's outer end
+const TAB_END = { x: 46, y: 174 } // the bead at the tab's outer end
 
 /* a point turned k quarter-turns clockwise about the centre */
 const turn = (x, y, k) => {
@@ -110,7 +116,7 @@ const SEGMENT = (() => {
 
 function WheelArt({ active, onPick }) {
   return (
-    <svg viewBox="0 0 400 400" role="presentation">
+    <svg viewBox={`${-PAD} ${-PAD} ${VIEW} ${VIEW}`} role="presentation">
       <defs>
         {/* one segment's outline (tab and ring together), for the gloss */}
         <clipPath id="cqi-shape">
@@ -127,31 +133,42 @@ function WheelArt({ active, onPick }) {
               <stop offset="1" stopColor={t.glass[2]} />
             </linearGradient>
             <linearGradient id={`cqi-gloss-${i}`} gradientUnits="userSpaceOnUse" x1={C} y1={i < 2 ? 30 : 200} x2={C} y2={i < 2 ? 180 : 350} gradientTransform={`rotate(${-90 * i} ${C} ${C})`}>
-              <stop stopColor="#fff" stopOpacity=".5" />
-              <stop offset=".46" stopColor="#fff" stopOpacity=".1" />
+              <stop stopColor="#fff" stopOpacity=".55" />
+              <stop offset=".46" stopColor="#fff" stopOpacity=".12" />
               <stop offset=".6" stopColor="#fff" stopOpacity=".02" />
               <stop offset="1" stopColor="#fff" stopOpacity="0" />
             </linearGradient>
           </g>
         ))}
-        <radialGradient id="cqi-hub" cx=".38" cy=".3" r=".8">
+        <radialGradient id="cqi-hub" cx=".38" cy=".3" r=".85">
           <stop stopColor="#fff" />
-          <stop offset=".6" stopColor="#f7f3f3" />
-          <stop offset="1" stopColor="#e2d9da" />
+          <stop offset=".55" stopColor="#e6e2e3" />
+          <stop offset="1" stopColor="#8f898a" />
         </radialGradient>
         <linearGradient id="cqi-hubGloss" x1="0" y1="0" x2="0" y2="1">
           <stop stopColor="#fff" stopOpacity=".95" />
           <stop offset="1" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
+        <radialGradient id="cqi-bead" cx=".35" cy=".3" r=".75">
+          <stop stopColor="#ff9da1" />
+          <stop offset=".35" stopColor="#ef1c26" />
+          <stop offset="1" stopColor="#5e0409" />
+        </radialGradient>
+        <filter id="cqi-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         <filter id="cqi-blur" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="26" />
+          <feGaussianBlur stdDeviation="30" />
         </filter>
       </defs>
-      {/* a soft red and black glow behind the glass, for it to sit over */}
-      <g className="cqi__aura" filter="url(#cqi-blur)" aria-hidden="true">
-        <circle cx="150" cy="150" r="90" fill="#d71920" />
-        <circle cx="255" cy="255" r="80" fill="#1c1618" />
-      </g>
+      {/* a red glow behind the wheel, and the glowing halo round it */}
+      <circle className="cqi__aura" cx={C} cy={C} r="150" fill="#d71920" filter="url(#cqi-blur)" />
+      <circle className="cqi__halo" cx={C} cy={C} r={R_OUT + 22} filter="url(#cqi-glow)" />
+      <circle className="cqi__halo cqi__halo--faint" cx={C} cy={C} r={R_OUT + 34} />
       {CAPABILITIES.map((cap, i) => {
         const [ix, iy] = turn(TAB_END.x, TAB_END.y, i)
         const [nx, ny] = turn(C - 63, C - 63, i)
@@ -172,30 +189,92 @@ function WheelArt({ active, onPick }) {
                 <path d={SEGMENT} />
               </g>
               {/* the gloss: a bright sheen over the upper half, cut to the shape */}
-              <rect className="cqi__gloss" width="400" height="400" fill={`url(#cqi-gloss-${i})`} clipPath="url(#cqi-shape)" />
+              <rect className="cqi__gloss" x="0" y="0" width="400" height="400" fill={`url(#cqi-gloss-${i})`} clipPath="url(#cqi-shape)" />
             </g>
-            <g className="cqi__segIcon" transform={`translate(${nx - 15} ${ny - 15}) scale(1.25)`}>
+            <g className="cqi__segIcon" transform={`translate(${nx - 16} ${ny - 16}) scale(1.35)`}>
               {cap.icon}
             </g>
-            <circle className="cqi__tabDot" cx={ix} cy={iy} r="5" />
+            {/* the bead: glossy red, with a point of light */}
+            <circle className="cqi__bead" cx={ix} cy={iy} r="9" fill="url(#cqi-bead)" />
+            <circle className="cqi__beadHi" cx={ix - 3} cy={iy - 3.5} r="2.6" />
           </g>
         )
       })}
       {/* the gaps between segments, then the hub over the middle */}
       <path className="cqi__gap" d={`M${C} ${C - R_OUT - 4}V${C + R_OUT + 4}M${C - R_OUT - 4} ${C}H${C + R_OUT + 4}`} />
+      <circle className="cqi__hubGlow" cx={C} cy={C} r="58" filter="url(#cqi-glow)" />
       <circle className="cqi__hub" cx={C} cy={C} r="52" fill="url(#cqi-hub)" />
       <ellipse className="cqi__hubGloss" cx={C} cy={C - 24} rx="36" ry="20" fill="url(#cqi-hubGloss)" />
       <circle className="cqi__hubRing" cx={C} cy={C} r="43" />
-      <text className="cqi__hubTop" x={C} y={C - 4} textAnchor="middle">ONE WEB3</text>
-      <text className="cqi__hubBottom" x={C} y={C + 13} textAnchor="middle">CORRIDOR</text>
+      <text className="cqi__hubText" x={C} y={C - 3} textAnchor="middle">ONE WEB3</text>
+      <text className="cqi__hubText" x={C} y={C + 14} textAnchor="middle">CORRIDOR</text>
     </svg>
   )
+}
+
+/* The red dotted wave along the foot of the panel: a run of dotted sine
+   lines, each a little lower and fainter than the last. */
+const WAVES = Array.from({ length: 12 }, (_, k) => {
+  const y = 120 + k * 9
+  return `M0 ${y}C260 ${y - 70} 520 ${y + 60} 800 ${y - 10}S1340 ${y - 80} 1600 ${y}`
+})
+const Wave = () => (
+  <svg className="cqi__wave" viewBox="0 0 1600 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    {WAVES.map((d, k) => (
+      <path key={k} d={d} style={{ opacity: 0.55 - k * 0.04 }} />
+    ))}
+  </svg>
+)
+
+/* The connectors, measured: from a dot on each card's inner edge, a short
+   level run, a slant toward the wheel, and a level stub onto the ring beside
+   that card's quarter. Only in the three-column layout. */
+function useWires(root) {
+  const [wires, setWires] = useState([])
+  useLayoutEffect(() => {
+    const el = root.current
+    if (!el) return
+    const wide = window.matchMedia('(min-width: 901px)')
+    const measure = () => {
+      const wheel = el.querySelector('.cqi__wheel')
+      if (!wide.matches || !wheel) return setWires([])
+      const o = el.getBoundingClientRect()
+      const w = wheel.getBoundingClientRect()
+      const s = w.width / VIEW
+      const cx = w.left - o.left + (C + PAD) * s
+      const cy = w.top - o.top + (C + PAD) * s
+      const r = (R_OUT + 22) * s
+      setWires(
+        [...el.querySelectorAll('.cqi__card')].map((card) => {
+          const b = card.getBoundingClientRect()
+          const left = b.left + b.width / 2 < o.left + cx
+          const dir = left ? 1 : -1
+          const sx = (left ? b.right : b.left) - o.left
+          const sy = b.top - o.top + b.height / 2
+          const ey = cy + (sy < cy ? -0.55 : 0.55) * r
+          const ex = cx - dir * (r * 0.835 + 6)
+          return { sx, sy, d: `M${sx} ${sy}h${dir * 34}L${ex - dir * 28} ${ey}H${ex}` }
+        })
+      )
+    }
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    wide.addEventListener('change', measure)
+    document.fonts?.ready.then(measure)
+    return () => {
+      ro.disconnect()
+      wide.removeEventListener('change', measure)
+    }
+  }, [root])
+  return wires
 }
 
 export default function CoreCapabilities() {
   const [active, setActive] = useState(0)
   const [touched, setTouched] = useState(false)
   const map = useRef(null)
+  const wires = useWires(map)
   const c = CAPABILITIES[active]
   const pick = (i) => {
     setTouched(true)
@@ -218,6 +297,15 @@ export default function CoreCapabilities() {
   return (
     <div className="cco">
       <div className="cqi" ref={map} data-rise>
+        <Wave />
+        <svg className="cqi__wires" aria-hidden="true">
+          {wires.map((w, i) => (
+            <g key={i} className={i === active ? 'is-active' : undefined}>
+              <path d={w.d} />
+              <circle cx={w.sx} cy={w.sy} r="4.5" />
+            </g>
+          ))}
+        </svg>
         <div className="cqi__wheel" aria-hidden="true">
           <WheelArt active={active} onPick={pick} />
         </div>
@@ -226,7 +314,7 @@ export default function CoreCapabilities() {
             type="button"
             key={cap.key}
             className={`cqi__card cqi__card--${i + 1}${i === active ? ' is-active' : ''}`}
-            style={toneVars(TONES[i])}
+            style={toneVars(cardTone(i))}
             aria-pressed={i === active}
             aria-controls="cco-detail"
             onMouseEnter={() => pick(i)}
@@ -247,7 +335,7 @@ export default function CoreCapabilities() {
       {/* the chosen capability, in full */}
       <div className="cco__detail" id="cco-detail" aria-live="polite">
         <div className="cco__detailIn" key={c.key}>
-          <span className="cqi__bigIcon" aria-hidden="true" style={toneVars(TONES[active])}>
+          <span className="cqi__bigIcon" aria-hidden="true" style={toneVars(cardTone(active))}>
             <svg viewBox="0 0 24 24">{c.icon}</svg>
           </span>
           <div>
