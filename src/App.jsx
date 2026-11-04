@@ -19,7 +19,6 @@ import RedClub from './pages/site/RedClub'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
-import Memberships from './pages/site/Memberships'
 import ReviewBar from './components/ReviewBar'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
@@ -46,7 +45,6 @@ const PAGES = {
   '/library': Library,
   '/connect': Connect,
   '/privacy': Privacy,
-  '/memberships': Memberships,
 }
 
 /**

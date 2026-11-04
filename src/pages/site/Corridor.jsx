@@ -2,7 +2,8 @@
  * Web3 Corridor — after the client's design (IBA Site Review, 11-02-2026,
  * 07:30 PM): Bridging Global Regions, the network, corridor partners, three
  * core objectives, focus pillars, what the corridor opens, services, the
- * forum and membership. The hero image is kept as it was (by request).
+ * forum and the memberships (Web360 Club, ecosystem and cohort; see
+ * Memberships.jsx). The hero image is kept as it was (by request).
  *
  * ⚠ The design was captured mid-animation, so a few items were hidden. Those
  * are filled as noted below (marked "to confirm") and need IBA's sign-off.
@@ -10,6 +11,7 @@
 
 import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
 import CorridorNetwork from '../../components/CorridorNetwork'
+import MembershipSections from './Memberships'
 
 /* the hero graphic: the client's Web3 Corridor logo, cut out of its own
    ground (public/images/web3-corridor-logo.webp; styles .w3l) */
@@ -136,7 +138,7 @@ export default function Corridor() {
         lede="Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next. One corridor for shared Web3 resources, capital, partnerships and markets, home to more than 2.8 billion people."
         actions={
           <>
-            <Btn href="/memberships">
+            <Btn href="#web360">
               Become a Member <span aria-hidden="true">→</span>
             </Btn>
             <Btn href="#country-corridors" variant="ghost">
@@ -215,22 +217,8 @@ export default function Corridor() {
         </div>
       </Section>
 
-      {/* ⚠ to confirm: the design's heading for this block was hidden */}
-      <Section
-        id="join-corridor"
-        eyebrow="Membership · Web360 Club"
-        title="Join the corridor through the Web360 Club"
-        lede="Membership runs through the Web360 Club, and every stage is earned: Bronze for starters and early builders, Silver for multi-country growth, and Gold, invite-only, for global activations."
-      >
-        <div className="pk-actions" data-rise>
-          <Btn href="/memberships#web360">
-            See the Web360 Club Tiers <span aria-hidden="true">→</span>
-          </Btn>
-          <Btn enquiry="Web3 Corridor" variant="ghost">
-            Get in Touch
-          </Btn>
-        </div>
-      </Section>
+      {/* the memberships, folded in from the old /memberships page */}
+      <MembershipSections />
     </div>
   )
 }
