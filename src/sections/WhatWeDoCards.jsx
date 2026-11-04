@@ -40,8 +40,8 @@ const CARDS = [
       'Policy, compliance, standards, taxation, forensics and risk mitigation, the right blockchain decision before a single line of code is written.',
     cta: 'Know more',
     href: '/expertise#consulting-stack',
-    /* the client's photo (by request); the earlier card-advisory.jpg is kept */
-    img: '/images/card-advisory-team.webp',
+    /* the same art as the reference site: the advisory team over a holographic map */
+    img: '/images/card-advisory-art.jpg',
   },
   {
     key: 'build',
@@ -52,8 +52,8 @@ const CARDS = [
     cta: 'Know more',
     /* the Tokenization page's End-to-End Framework section */
     href: '/tokenization#framework',
-    /* the client's photo (by request); the earlier card-tokenization.jpg is kept */
-    img: '/images/card-tokenization-team.jpg',
+    /* the same art as the reference site: the team over a tokenized-property model */
+    img: '/images/card-tokenization-art.jpg',
   },
 ]
 
@@ -70,7 +70,7 @@ export default function WhatWeDoCards() {
   }, [])
 
   return (
-    <section className="wd wd--duo band band--light band--own" ref={root} aria-labelledby="wd-title">
+    <section className="wd wd--duo wd--art band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
         <p className="hero__kicker wd__eyebrow" id="wd-title" data-rise>
           <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
