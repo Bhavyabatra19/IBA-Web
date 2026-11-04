@@ -12987,7 +12987,13 @@ main {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .kb--six .wd__media {
-  aspect-ratio: 16 / 9;
+  /* the client's thumbnails carry their own headline, so the frame takes
+     their shape (542 × 462) and shows them whole, never cropped */
+  aspect-ratio: 542 / 462;
+}
+.kb--six .wd__photo {
+  object-fit: cover;
+  object-position: center;
 }
 @media (max-width: 1100px) {
   .kb--six .wd__grid {

@@ -3,11 +3,11 @@
  * & Investor, Web360 Tokenization & Institutions, Indo–UAE Startup
  * Xchange), each with its three tier cards and a compare table, from the
  * client's Corridor membership reference (11-04-2026). The cards reuse the
- * site's tier card (.mbr-tier, TierShield); the tabs and price are styled
- * in brandbook.css (.cpl).
+ * site's tier card (.mbr-tier, TierShield); the tabs are styled in
+ * brandbook.css (.cpl).
  *
- * ⚠ Gold (Founder) gives a fee with no billing term, and the Xchange tiers
- * have no published price ("On enquiry"): both to confirm with IBA.
+ * No prices anywhere on the site (by request, 11-04-2026): the cards give
+ * who each tier is for and what it includes; terms are shared on enquiry.
  */
 
 import { useState } from 'react'
@@ -41,8 +41,6 @@ const PLANS = {
       metal: 'bronze',
       name: 'Bronze',
       sub: 'Starters & Early Builders',
-      price: '$2,000',
-      period: '/ year',
       audience: 'Founders, operators, MSMEs and early-stage businesses',
       summary: 'Build international exposure with the Web360 community, expert access and market-entry guidance.',
       benefits: [
@@ -62,8 +60,6 @@ const PLANS = {
       metal: 'silver',
       name: 'Silver',
       sub: 'Growth Plan for Founders',
-      price: '$3,500',
-      period: '/ year',
       audience: 'Registered startups pursuing multi-country expansion',
       summary: 'Bronze inclusions plus founder-focused visibility, investor readiness and growth support.',
       benefits: [
@@ -82,8 +78,6 @@ const PLANS = {
       metal: 'gold',
       name: 'Gold',
       sub: 'Growth & Accelerator Plan',
-      price: '$5,000',
-      period: 'club fee',
       audience: 'High-growth founders and fundraising-focused ventures',
       summary: 'Silver inclusions plus curated investor access, structured milestone reviews and expansion support.',
       benefits: [
@@ -105,8 +99,6 @@ const PLANS = {
       metal: 'bronze',
       name: 'Bronze Plus',
       sub: 'Tokenization Starter Pack',
-      price: '$3,500',
-      period: '/ year',
       audience: 'Founders, issuers, advisors, professionals and small businesses',
       summary: 'Join the tokenized markets ecosystem with resources, directories, learning and advisory.',
       benefits: [
@@ -127,8 +119,6 @@ const PLANS = {
       metal: 'silver',
       name: 'Silver Plus',
       sub: 'Tokenization Pro Pack',
-      price: '$5,000',
-      period: '/ year',
       audience: 'Tokenization businesses seeking leads and visibility',
       summary: 'Bronze Plus inclusions with enhanced business development, expert reviews and promotional reach.',
       benefits: [
@@ -148,8 +138,6 @@ const PLANS = {
       metal: 'gold',
       name: 'Gold Plus',
       sub: 'Corporate & Institutional Pack',
-      price: '$7,000',
-      period: '/ year',
       audience: 'Tokenization platforms, law firms, banks, institutions and established vendors',
       summary: 'An enterprise-oriented package for market presence, sponsorship and high-value introductions.',
       benefits: [
@@ -171,7 +159,6 @@ const PLANS = {
       metal: 'bronze',
       name: 'Bronze',
       sub: 'Network Access',
-      price: 'On enquiry',
       audience: 'Founder-led ventures exploring India ↔ UAE expansion',
       summary: 'A year-round starting point for corridor briefings, events and peer community.',
       benefits: [
@@ -185,7 +172,6 @@ const PLANS = {
       metal: 'silver',
       name: 'Silver',
       sub: 'Hands-on Market Entry',
-      price: 'On enquiry',
       audience: 'Startups needing guided compliance and commercial introductions',
       summary: 'Bronze access with practical market-entry clinics, curated introductions and named support.',
       benefits: [
@@ -200,7 +186,6 @@ const PLANS = {
       metal: 'gold',
       name: 'Gold',
       sub: '12-week Launch Sprint',
-      price: 'On enquiry',
       audience: 'Startups ready for a structured India ↔ UAE launch',
       summary: 'Silver access plus a focused 12-week sprint from validation to launch.',
       benefits: [
@@ -287,9 +272,6 @@ export default function CorridorPlans() {
               </div>
               <h3 className="mbr-tier__name">{p.name}</h3>
               <p className="cpl__sub">{p.sub}</p>
-              <p className="cpl__price">
-                {p.price} {p.period && <small>{p.period}</small>}
-              </p>
               <p className="mbr-tier__label">Designed for</p>
               <p className="mbr-tier__who">{p.audience}</p>
               <p className="mbr-tier__why">{p.summary}</p>
