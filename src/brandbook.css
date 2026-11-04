@@ -12459,11 +12459,11 @@ main {
 .cqi {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 370px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 310px) minmax(0, 1fr);
   grid-template-areas: "a w b" "d w c";
-  gap: 26px 44px;
+  gap: 26px 20px;
   align-items: center;
-  padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px) clamp(40px, 5vw, 72px);
+  padding: clamp(28px, 4vw, 56px) clamp(18px, 2.4vw, 32px) clamp(40px, 5vw, 72px);
   overflow: hidden;
 }
 .cqi__wave {
