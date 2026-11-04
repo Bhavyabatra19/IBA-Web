@@ -22,9 +22,9 @@ const DOORS = [
     cta: 'Know more',
   },
   {
-    tag: 'For students',
-    title: 'From classroom knowledge to industry-ready capability',
-    text: 'Programmes, live projects, internships, mentors, career support and verifiable credentials that take students from learning to industry-ready.',
+    tag: 'For individual learners',
+    title: 'From curiosity to industry-ready capability',
+    text: 'Programmes, live projects, mentors, career support and verifiable credentials for anyone building Web3 skills, whether you are studying, working or starting out.',
     href: '/red-club/students',
     cta: 'Know more',
   },
@@ -79,7 +79,7 @@ export default function RedClub() {
         id="rc-paths"
         eyebrow="Know more"
         title="Two ways into Red Club"
-        lede="Red Club works with institutions and their students together: as an institution builds its Red Club capabilities, students gain a more practical and connected learning environment."
+        lede="Red Club works with institutions and with individual learners: institutions build Experience Centers on campus, and learners at any stage build practical Web3 skills, projects and networks."
       >
         <Cards cols={2} items={DOORS} />
       </Section>
