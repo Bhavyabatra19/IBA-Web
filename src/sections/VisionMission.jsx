@@ -8,9 +8,9 @@
  * this band sits right under the hero.
  *
  * Each card keeps its own anchor (#vision, #mission) for the nav links.
- * Photos: Unsplash, under the Unsplash License, saved in public/images:
- *   Futuristic Team Meeting with Holographic Globe.png   supplied Vision artwork
- *   Cinematic Global Tech Strategy Meeting.png  supplied Mission artwork
+ * Images: the same art as the reference site, saved in public/images:
+ *   ab-vision-art.jpg    Vision: the team round a holographic globe
+ *   ab-mission-art.jpg   Mission: a strategy meeting over a corridor map
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -62,8 +62,8 @@ export default function VisionMission({ vision, mission }) {
   }, [open])
 
   const cards = [
-    { key: 'vision', tag: 'Our Vision', img: '/images/Futuristic%20Team%20Meeting%20with%20Holographic%20Globe.png', ...vision },
-    { key: 'mission', tag: 'Our Mission', img: '/images/Cinematic%20Global%20Tech%20Strategy%20Meeting.png', ...mission },
+    { key: 'vision', tag: 'Our Vision', img: '/images/ab-vision-art.jpg', ...vision },
+    { key: 'mission', tag: 'Our Mission', img: '/images/ab-mission-art.jpg', ...mission },
   ]
 
   return (
