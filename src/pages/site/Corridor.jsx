@@ -23,8 +23,8 @@ const HeroMap = () => (
       className="w3l__img"
       src="/images/web3-corridor-globe.webp"
       alt=""
-      width="784"
-      height="788"
+      width="765"
+      height="765"
       decoding="async"
       fetchpriority="high"
     />

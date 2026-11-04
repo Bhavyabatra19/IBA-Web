@@ -232,6 +232,8 @@ export const PAGE_CONTEXT = {
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
+  '/red-club/institutions': { topic: 'Red Club / Verifyble (institution)', phrase: 'a Red Club Experience Center' },
+  '/red-club/learners': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
   '/corridor': { topic: 'Web3 Corridor', phrase: 'Web3 Corridor' },
   '/studio': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/library': { topic: 'Something else', phrase: 'the IBA Library' },

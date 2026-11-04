@@ -113,9 +113,19 @@ export const SEO = {
       'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets, and the Web360 Club, ecosystem and cohort memberships.',
   },
   '/red-club': {
-    title: 'IBA Red Club | Experience Centers for Institutions and Students',
+    title: 'IBA Red Club | Experience Centers for Institutions and Learners',
     description:
-      'The IBA Red Club Experience Centers connect universities, educators and students to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways.',
+      'The IBA Red Club Experience Centers connect universities, educators and learners to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways.',
+  },
+  '/red-club/institutions': {
+    title: 'IBA Red Club for Institutions | Experience Centers on Campus',
+    description:
+      'Red Club Experience Centers for universities: curriculum, labs, joint research, industry projects, certifications and international pathways, run as a partnership with IBA.',
+  },
+  '/red-club/learners': {
+    title: 'IBA Red Club for Learners | Industry-Ready Web3 Skills',
+    description:
+      'Programmes, live projects, internships, mentorship, career support and verifiable credentials that take learners from curiosity to industry-ready capability.',
   },
 }
 
