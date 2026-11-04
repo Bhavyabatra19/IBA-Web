@@ -171,7 +171,7 @@ export const NAV = [
       },
     ],
   },
-  { key: 'redclub', label: 'Experience Zone', href: '/red-club' },
+  { key: 'redclub', label: 'Red Club', href: '/red-club' },
   /* Memberships sits directly before the Web3 Corridor flagship tab. */
   {
     key: 'memberships',
