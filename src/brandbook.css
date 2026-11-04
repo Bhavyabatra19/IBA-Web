@@ -12671,3 +12671,7 @@ main {
   border-radius: 8px;
   background: #fff;
 }
+
+/* About, Welcome to IBA: the founder's short note under the opening quote (after the reference site). */
+.fl2__note { display: grid; gap: .9rem; }
+.fl2__note p { margin: 0; font-size: clamp(1rem, .95rem + .2vw, 1.1rem); line-height: 1.7; color: #3d3936; }
