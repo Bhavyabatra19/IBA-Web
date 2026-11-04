@@ -14,8 +14,8 @@ const CHANGES = [
   { label: 'Expertise', href: '/expertise', note: 'Advisory and Consulting Stack wheel' },
   { label: 'Tokenization', href: '/tokenization', note: 'New page' },
   { label: 'Ecosystem', href: '/ecosystem', note: 'Partners, standards, associates' },
-  { label: 'Web3 Corridor', href: '/corridor', note: 'Now holds the memberships' },
-  { label: 'Memberships', href: '/corridor#web360', note: 'Moved into Web3 Corridor; tab removed' },
+  { label: 'Web3 Corridor', href: '/corridor', note: 'Rebuilt: regions, operating model, Xchange' },
+  { label: 'Membership Plans', href: '/corridor#memberships', note: 'Founder, tokenization and Xchange tiers' },
 ]
 
 export default function ReviewBar() {

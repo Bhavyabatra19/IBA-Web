@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/memberships",
-      "destination": "/corridor#web360",
+      "destination": "/corridor#memberships",
       "permanent": false
     },
     {

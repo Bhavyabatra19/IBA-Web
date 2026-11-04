@@ -197,26 +197,17 @@ export const NAV = [
       {
         title: 'The Initiative',
         items: [
-          { label: 'One Global Corridor', icon: 'globe', desc: 'One corridor connecting its partner countries.', href: '/corridor' },
-          { label: 'Corridor Partners', icon: 'pin', desc: 'The countries in the corridor.', href: '/corridor#country-corridors' },
-          { label: 'What the Corridor Opens', icon: 'layers', desc: 'Resources, partnerships, growth and expansion.', href: '/corridor#corridor-opens' },
-        ],
-      },
-      {
-        title: 'Take Part',
-        items: [
-          { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#web360' },
+          { label: 'The Web3 Corridor', icon: 'globe', desc: 'Five regions, one connected ecosystem.', href: '/corridor#about' },
+          { label: 'Operating Model', icon: 'layers', desc: 'Support beyond a membership badge.', href: '/corridor#operating-model' },
+          { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
         ],
       },
       {
         title: 'Memberships',
         items: [
-          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/corridor#web360' },
-          /* no separate matrix section yet: the Web360 tiers set out what each includes */
-          { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#web360' },
-          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/corridor#ecosystem-members' },
-          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and learners.', href: '/corridor#cohort-memberships' },
+          { label: 'Membership Plans', icon: 'users', desc: 'Founder, tokenization and Xchange tiers.', href: '/corridor#memberships' },
+          { label: 'Compare Plans', icon: 'link', desc: 'Benefits by tier, at a glance.', href: '/corridor#compare' },
+          { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/corridor#journey' },
         ],
       },
     ],
@@ -316,10 +307,10 @@ export const FOOTER = [
     title: 'Web3 Corridor',
     items: [
       { label: 'Global Innovation Corridor', href: '/corridor' },
-      { label: 'The Network', href: '/corridor#how-corridors-work' },
-      { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
-      { label: 'Corridor Partners', href: '/corridor#country-corridors' },
-      { label: 'Join the Corridor', href: '/corridor#web360' },
+      { label: 'The Corridor', href: '/corridor#about' },
+      { label: 'Membership Plans', href: '/corridor#memberships' },
+      { label: 'Startup Xchange', href: '/corridor#xchange' },
+      { label: 'How to Join', href: '/corridor#journey' },
     ],
   },
   {
