@@ -1,7 +1,7 @@
 /**
  * Web3 Corridor membership plans — three tracks behind tabs (Web360 Founder
  * & Investor, Web360 Tokenization & Institutions, Indo–UAE Startup
- * Xchange), each with its three tier cards and a compare table, from the
+ * Xchange), each with its three tier cards, from the
  * client's Corridor membership reference (11-04-2026). The cards reuse the
  * site's tier card (.mbr-tier, TierShield); the tabs are styled in
  * brandbook.css (.cpl).
@@ -12,8 +12,7 @@
 
 import { useState } from 'react'
 import TierShield from './TierShield'
-import { Bullets, SubHead } from './Kit'
-import { Table } from '../sections/service/ServiceBlocks'
+import { Bullets } from './Kit'
 
 const ENQUIRY = 'Membership'
 
@@ -200,43 +199,6 @@ const PLANS = {
   ],
 }
 
-/* 1 = included for the tier, 0 = not specified for it */
-const COMPARE = {
-  club: [
-    ['Member webinars & events', [1, 1, 1]],
-    ['Verified badge & member pricing', [1, 1, 1]],
-    ['GTM advisory', [1, 1, 1]],
-    ['Corporate vault', [1, 1, 1]],
-    ['Podcast company feature', [0, 1, 1]],
-    ['Two complimentary Dubai event entries', [0, 1, 1]],
-    ['Investor-ready deck / plan review', [0, 1, 1]],
-    ['Curated expert meetings', [0, 0, 1]],
-    ['Six-month expert board support', [0, 0, 1]],
-    ['Weekly strategy and KPI reviews', [0, 0, 1]],
-  ],
-  token: [
-    ['Portal, directories and RWA resources', [1, 1, 1]],
-    ['Verified badge & learning access', [1, 1, 1]],
-    ['Tokenization GTM advisory', [1, 1, 1]],
-    ['Vendor listing and issuer profile', [1, 1, 1]],
-    ['Enhanced listing / active business development', [0, 1, 1]],
-    ['Branded media / Member Spotlight eligibility', [0, 1, 1]],
-    ['Tokenomics white-paper mentor sessions', [0, 1, 1]],
-    ['Detailed project reviews', [0, 1, 1]],
-    ['Sponsorship / prospective client opportunities', [0, 0, 1]],
-    ['Six-month expert board advisor', [0, 0, 1]],
-  ],
-  xchange: [
-    ['Events and briefings', [1, 1, 1]],
-    ['Founder community', [1, 1, 1]],
-    ['Compliance clinics', [0, 1, 1]],
-    ['Curated introductions', [0, 1, 1]],
-    ['Named concierge', [0, 1, 1]],
-    ['12-week launch sprint', [0, 0, 1]],
-    ['Demo day and soft landing', [0, 0, 1]],
-  ],
-}
-
 export default function CorridorPlans() {
   const [track, setTrack] = useState('club')
   const current = TRACKS.find((t) => t.key === track)
@@ -282,14 +244,6 @@ export default function CorridorPlans() {
             </li>
           ))}
         </ul>
-
-        <div id="compare">
-          <SubHead lede="✓ included for the tier; — not specified for it.">Compare benefits at a glance</SubHead>
-          <Table
-            head={['Benefit', ...plans.map((p) => p.name)]}
-            rows={COMPARE[track].map(([label, v]) => [label, ...v.map((x) => (x ? '✓' : '—'))])}
-          />
-        </div>
       </div>
     </div>
   )
