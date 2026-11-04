@@ -43,7 +43,7 @@ const DOORS = [
     body: 'Internships, opportunities, and more.',
     cta: 'Join Red Club',
     href: '/red-club',
-    img: '/images/card-students.jpg',
+    img: '/images/card-students-art.jpg', // the same art as the reference site
   },
   {
     key: 'institutions',
@@ -54,7 +54,7 @@ const DOORS = [
     cta: 'Request Prospectus',
     /* the Red Club Experience Center page, once built (see PENDING in nav.js) */
     href: PENDING.experienceCenter,
-    img: '/images/card-institutions.jpg',
+    img: '/images/card-institutions-art.jpg', // the same art as the reference site
   },
 ]
 
@@ -72,7 +72,7 @@ export default function AcademiaCards() {
 
   return (
     <section
-      className="wd wd--two band band--light band--own"
+      className="wd wd--two wd--art band band--light band--own"
       ref={root}
       aria-labelledby="ac-title"
     >
