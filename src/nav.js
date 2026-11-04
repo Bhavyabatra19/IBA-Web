@@ -208,7 +208,6 @@ export const NAV = [
         title: 'Memberships',
         items: [
           { label: 'Membership Plans', icon: 'users', desc: 'Founder, tokenization and Xchange tiers.', href: '/corridor#memberships' },
-          { label: 'Compare Plans', icon: 'link', desc: 'Benefits by tier, at a glance.', href: '/corridor#compare' },
           { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/corridor#journey' },
         ],
       },

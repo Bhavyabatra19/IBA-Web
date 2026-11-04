@@ -12866,8 +12866,8 @@ main {
 }
 
 /* Web3 Corridor membership plans (components/CorridorPlans.jsx): the
-   pathway tabs in the on-page tab style, the tier cards in the site's tier
-   card, a price line, and the compare table under them */
+   pathway tabs in the on-page tab style and the tier cards in the site's
+   tier card */
 .cpl__tabs {
   display: flex;
   flex-wrap: wrap;
@@ -12902,7 +12902,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  margin: 0 0 48px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -12951,31 +12951,6 @@ main {
   flex: none;
   margin-bottom: 8px;
 }
-/* the compare table: the benefit as plain running text in a wide first
-   column, the ticks centred under their tier, and room for the table on a
-   phone without forcing it wider than the screen */
-#compare .edu__table {
-  min-width: 34rem;
-}
-#compare .edu__table tbody th {
-  width: 46%;
-  font-family: var(--bb-font);
-  text-transform: none;
-  font-size: 15px;
-  line-height: 22px;
-}
-#compare .edu__table thead th:not(:first-child),
-#compare .edu__table td {
-  text-align: center;
-}
-#compare .edu__table th,
-#compare .edu__table td {
-  padding-block: 14px;
-}
-#compare .edu__table td {
-  font-size: 16px;
-  color: var(--bb-ink);
-}
 /* three hero figures, three columns */
 #corridor .about-stats .pk-stats {
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -13006,36 +12981,48 @@ main {
   }
 }
 
-/* Web3 Corridor — Partnership with The Block: the portrait films side by
-   side (one, or two as they arrive), each at phone proportions with its
-   caption below */
+/* Web3 Corridor — Partnership with The Block: each film full width (by
+   request), in a wide dark frame; the portrait film whole in the middle,
+   its blurred poster filling the sides (components/BlockFilm.jsx) */
 .w3p-films {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 340px));
   gap: 24px;
 }
-.w3p-films--1 {
-  grid-template-columns: minmax(0, 340px);
-}
-.w3p-film {
+.bfilm {
+  position: relative;
+  overflow: hidden;
   margin: 0;
-}
-.w3p-film__video {
-  display: block;
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
+  height: min(78vh, 720px);
+  min-height: 420px;
   background: #0b0b0b;
-  border: 1px solid var(--bb-line);
 }
-.w3p-film__cap {
-  margin-top: 12px;
-  font-size: 14px;
-  color: var(--bb-ink-muted);
+.bfilm__ground {
+  position: absolute;
+  inset: -40px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(36px) brightness(0.45) saturate(1.1);
+  transform: scale(1.1);
+}
+.bfilm__video {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
 }
 @media (max-width: 680px) {
-  .w3p-films {
-    grid-template-columns: minmax(0, 1fr);
+  .bfilm {
+    height: auto;
+    min-height: 0;
+  }
+  .bfilm__video {
+    width: 100%;
+    height: auto;
   }
 }
 

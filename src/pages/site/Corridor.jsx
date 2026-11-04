@@ -4,7 +4,7 @@
  * set out in the site's own blocks: the five regions and the network map,
  * the operating model, the membership plans (Web360 Founder & Investor,
  * Web360 Tokenization & Institutions and the Indo–UAE Startup Xchange, with
- * a compare table; components/CorridorPlans), the Xchange and its 12-week
+ * components/CorridorPlans), the Xchange and its 12-week
  * Gold cohort, the membership journey, the partnership with The Block
  * (video), the Global Innovation Corridor Forum at WTC 2026, the questions
  * and the ask.
@@ -16,6 +16,7 @@ import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/
 import { Steps, Faq } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
 import CorridorPlans from '../../components/CorridorPlans'
+import BlockFilm from '../../components/BlockFilm'
 
 const ENQUIRY = 'Web3 Corridor'
 
@@ -161,7 +162,7 @@ export default function Corridor() {
         actions={
           <>
             <Btn href="#memberships">
-              Compare Membership Plans <Arrow />
+              Explore Membership Plans <Arrow />
             </Btn>
             <Btn href="#about" variant="ghost">
               Discover the Corridor
@@ -243,20 +244,10 @@ export default function Corridor() {
         title="Partnership with The Block"
         lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
       >
-        <div className={`w3p-films w3p-films--${BLOCK_VIDEOS.length}`} data-rise>
+        {/* full width, each film in turn; muted autoplay while in view */}
+        <div className="w3p-films">
           {BLOCK_VIDEOS.map((v) => (
-            <figure className="w3p-film" key={v.src}>
-              <video
-                className="w3p-film__video"
-                src={v.src}
-                poster={v.poster}
-                controls
-                playsInline
-                preload="metadata"
-                aria-label={v.label}
-              />
-              <figcaption className="w3p-film__cap">{v.label}</figcaption>
-            </figure>
+            <BlockFilm key={v.src} {...v} />
           ))}
         </div>
       </Section>
