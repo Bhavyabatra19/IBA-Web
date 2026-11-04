@@ -12582,3 +12582,13 @@ main {
     transition: none;
   }
 }
+
+/* Initiatives page: an initiative's own logo, above its text. */
+.pk-init__logo {
+  display: block;
+  width: clamp(120px, 14vw, 168px);
+  height: auto;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px -18px rgba(120, 20, 25, .55);
+}

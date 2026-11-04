@@ -5,6 +5,8 @@
  * buttons with no destination yet. Only real destinations are shown: the
  * India AI Alliance's website, and Red Club and the Corridor's own pages. Add
  * `site` / `linkedin` to an entry below as each address is supplied.
+ *
+ * LOGOS. An entry with `logo` shows its mark above its text.
  */
 
 import { PageHero, Section, Bullets, Btn, Prose } from '../../components/Kit'
@@ -39,6 +41,7 @@ const INITIATIVES = [
     id: 'init-verifyble',
     sub: 'Data security and digital asset management',
     title: 'Verifyble',
+    logo: '/logos/initiatives/verifyble.jpg',
     text: "IBA's platform for data security and digital asset management, helping any organisation or individual secure, verify and manage data and digital assets on-chain.",
     list: [
       'Data security: tamper-evident records that can be verified by anyone you choose to share them with',
@@ -94,7 +97,11 @@ export default function Initiatives() {
       {INITIATIVES.map((it, i) => (
         <Section id={it.id} key={it.id} eyebrow={it.sub} title={it.title} tone={i % 2 ? 'card' : 'plain'}>
           <div className="pk-split">
-            <Prose paras={[it.text]} />
+            <div>
+              {/* the initiative's own mark, where one has been supplied */}
+              {it.logo && <img className="pk-init__logo" src={it.logo} alt={`${it.title} logo`} loading="lazy" decoding="async" data-rise />}
+              <Prose paras={[it.text]} />
+            </div>
             <div className="pk-init" data-rise>
               {it.list && <Bullets items={it.list} />}
               <div className="pk-actions">
