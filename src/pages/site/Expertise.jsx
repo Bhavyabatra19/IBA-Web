@@ -2,6 +2,7 @@
 
 import { PageHero, Section, Cards, Quote, Btn } from '../../components/Kit'
 import { REGIONS_LINE } from '../../data/facts'
+import CoreCapabilities from '../../components/CoreCapabilities'
 
 /* The hero image: the client's Pinterest reference (pin.it/4IGXSzIxE),
    cropped to the graphic, tinted to IBA red, with the original brand's mark
@@ -23,13 +24,6 @@ const INITIATIVES = [
   { title: 'IBA Red Club', sub: 'The talent pipeline for Web3 and AI', text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.', href: '/initiatives#init-red-club', cta: 'Learn more' },
   { title: 'Web3 Corridor', sub: 'Global Innovation Corridor Initiative', text: 'A global innovation platform connecting ' + REGIONS_LINE + ' through innovation, technology, investment and partnerships.', href: '/initiatives#init-web3-corridor', cta: 'Learn more' },
   { title: 'India AI Alliance', sub: 'Details to be added', text: 'Description of the India AI Alliance to be supplied.', href: '/initiatives#init-india-ai-alliance', cta: 'Learn more' },
-]
-
-const STACK = [
-  { title: 'Tokenization', text: 'Asset selection, token design, issuance structure and tokenomics for real-world and digital assets. We take an asset from idea to a compliant, investable token.' },
-  { title: 'Standards', text: 'Technical and operating standards that make solutions interoperable, auditable and ready to scale across platforms and markets.' },
-  { title: 'Frameworks & Compliance', text: 'Regulatory mapping, governance frameworks and compliance design across jurisdictions, built in from the first day of the project.' },
-  { title: 'Stablecoins Structuring', text: 'Reserve, issuance and redemption design for stablecoin models, aligned with regulatory expectations in each market.' },
 ]
 
 const POWER = [
@@ -92,7 +86,8 @@ export default function Expertise() {
         title="Web3 Solution Consulting Stack"
         lede="Four areas of expertise that cover what an organisation needs to move from an idea to a governed, working product. Each one can be engaged on its own, or together as a single programme."
       >
-        <Cards items={STACK} cols={4} />
+        {/* the four capabilities as a dark glass wheel (components/CoreCapabilities) */}
+        <CoreCapabilities />
       </Section>
 
       <Section
