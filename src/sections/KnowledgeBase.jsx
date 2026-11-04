@@ -7,17 +7,20 @@
  * KIND of item it is — article, recording, report — since that is what a
  * reader decides on first.
  *
- * Photos: Unsplash, under the Unsplash License (free for commercial use, no
- * attribution required), saved locally in public/images:
- *   kb-corridor.jpg    itsiken             unsplash.com/photos/pmYoy3WaFPU
- *   kb-ai.jpg          Immo Wegmann        unsplash.com/photos/w69Z8K-HGQU
- *   kb-regulation.jpg  Sasun Bughdaryan    unsplash.com/photos/FaTLrG5-ViE
- *   kb-forum.jpg       Alexandre Pellaes   unsplash.com/photos/6vAjp0pscX0
+ * Items: real coverage of IBA and its founder (by request, 11-04-2026), each
+ * opening the source in a new tab. The tag is the platform; the icon and the
+ * meta line give the format. Thumbnails are generated in the site's light
+ * studio style (public/images/kb-*.jpg: a silver and red platform with glass
+ * tiles carrying red line icons, the item's format on the main tile), not
+ * taken from the sources.
+ *
+ * ⚠ The CoinGeek date is to confirm: the source pages could not be opened
+ * when this was set. Headlines for the YouTube, Yahoo Finance and World
+ * Biogas items follow the client's thumbnail artwork.
  */
 
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
-import { Go } from './service/ServiceBlocks'
 
 /* format icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -40,48 +43,88 @@ const ICONS = {
       <path d="M18 34v-6M24 34V20M30 34v-10" />
     </>
   ),
+  interview: (
+    <>
+      <path d="M6 10h24v16H16l-6 5v-5H6Z" />
+      <path d="M22 30h4v-0M30 18h12v16h-4v5l-6-5H22v-4" />
+    </>
+  ),
+  profile: (
+    <>
+      <circle cx="24" cy="17" r="7" />
+      <path d="M10 40c1.5-8 7-12 14-12s12.5 4 14 12" />
+    </>
+  ),
+  press: (
+    <>
+      <path d="M8 20h8l18-10v28L16 28H8Z" />
+      <path d="M16 28l3 10h5l-3-10M38 18l4-3M38 30l4 3M39 24h5" />
+    </>
+  ),
 }
 
 const ITEMS = [
   {
     kind: 'article',
     format: 'Article',
-    title: 'What Is a Web3 Corridor?',
-    body: 'A plain explanation of the Global Innovation Corridor Initiative.',
-    source: 'Medium',
-    date: '20 Aug 2026',
-    img: '/images/card-globe.jpg',
+    platform: 'Voyagers World',
+    title: 'From Crypto to Credibility: Raj Kapoor’s Blockchain Vision for India',
+    body: 'How IBA’s founder makes the case for blockchain beyond crypto, and for India as a credible leader in the technology.',
+    date: '18 Aug 2025',
+    img: '/images/kb-voyagers-vision.jpg',
+    href: 'https://voyagersworld.in/2025/08/18/from-crypto-to-credibility-raj-kapoors-blockchain-vision-for-india/',
     tint: 'red',
   },
   {
-    kind: 'webinar',
-    format: 'Webinar / Recording',
-    title: 'AI + Blockchain: What Institutions Are Actually Building',
-    body: 'A field report from the IBA Red Club AI Lab network.',
-    source: 'IBA Original',
-    date: '5 Aug 2026',
-    img: '/images/card-ai.jpg',
+    kind: 'interview',
+    format: 'Video Interview',
+    platform: 'CoinGeek',
+    title: 'IBA Founder Raj Kapoor: India Can Dominate Web3 Despite Past Missed Opportunities',
+    body: 'On CoinGeek Backstage: India missed the Web1 and Web2 buses, but has the talent and resources to lead Web3.',
+    date: '2023',
+    img: '/images/kb-coingeek-web3.jpg',
+    href: 'https://coingeek.com/iba-founder-raj-kapoor-india-can-dominate-web3-despite-past-missed-opportunities-in-internet-evolution-video/',
     tint: 'ink',
   },
   {
-    kind: 'report',
-    format: 'Report / Whitepaper',
-    title: 'Reading the Room: Blockchain Regulation Across Global Markets in 2026',
-    body: 'A jurisdiction-by-jurisdiction snapshot of what actually applies today.',
-    source: 'IBA Original',
-    date: '2 Aug 2026',
-    img: '/images/card-compliance.jpg',
+    kind: 'webinar',
+    format: 'Video',
+    platform: 'YouTube',
+    title: 'Raj Kapoor on India, Web3 and the Future of Blockchain',
+    body: 'IBA’s founder on India’s place in Web3, the alliance’s mission and where blockchain goes next.',
+    img: '/images/kb-youtube-talk.jpg',
+    href: 'https://www.youtube.com/watch?v=O9NtJdbwEXE',
     tint: 'deep',
   },
   {
-    kind: 'webinar',
-    format: 'Webinar / Recording',
-    title: 'Inside the Global Innovation Corridor',
-    body: 'The core dimensions, the partner regions and the road to the Barcelona forum.',
-    source: 'IBA Original',
-    date: '29 Jul 2026',
-    img: '/images/card-forum.jpg',
+    kind: 'press',
+    format: 'Press Release',
+    platform: 'EIN Presswire',
+    title: 'The STO Foundation (Tokenized Asset Foundation) Appoints Raj Kapoor as Chief Strategy Advisor',
+    body: 'The Tokenized Asset Foundation names IBA’s founder, a global blockchain and AI leader, as its Chief Strategy Advisor.',
+    img: '/images/kb-sto-foundation.jpg',
+    href: 'https://www.einpresswire.com/article/936353469/the-sto-foundation-tokenized-asset-foundation-appoints-global-blockchain-ai-leader-raj-kapoor-as-chief-strategy-advisor',
     tint: 'warm',
+  },
+  {
+    kind: 'article',
+    format: 'News',
+    platform: 'Yahoo Finance',
+    title: 'India Blockchain Alliance: Raj Kapoor’s Mission to Accelerate India’s Blockchain Ecosystem',
+    body: 'How IBA’s founder is building the alliance to accelerate blockchain adoption and talent across India.',
+    img: '/images/kb-yahoo-iba.jpg',
+    href: 'https://finance.yahoo.com/news/india-blockchain-alliance-raj-kapoor-123000487.html',
+    tint: 'red',
+  },
+  {
+    kind: 'profile',
+    format: 'Profile',
+    platform: 'World Biogas Association',
+    title: 'Clean Energy Meets Innovation: Raj Kapoor on Biogas, Sustainability and the Blockchain Opportunity',
+    body: 'IBA’s founder with the World Biogas Association, on where clean energy, sustainability and blockchain meet.',
+    img: '/images/kb-wba-profile.jpg',
+    href: 'https://www.worldbiogasassociation.org/raj-kapoor/',
+    tint: 'ink',
   },
 ]
 
@@ -98,7 +141,7 @@ export default function KnowledgeBase() {
   }, [])
 
   return (
-    <section className="wd wd--two kb band band--light band--own" ref={root} id="library" aria-labelledby="kb-title">
+    <section className="wd wd--two kb kb--six band band--light band--own" ref={root} id="library" aria-labelledby="kb-title">
       <div className="wd__inner">
         <header className="kb__head">
           <p className="hero__kicker wd__eyebrow" data-rise>
@@ -127,7 +170,7 @@ export default function KnowledgeBase() {
                 <span className="wd__tint" />
               </div>
               <div className="wd__body">
-                <span className="wd__tag">{it.format}</span>
+                <span className="wd__tag">{it.platform}</span>
                 {/* the icon, below the label (by request), not on the photo */}
                 <span className="wd__badge wd__badge--inline" aria-hidden="true">
                   <svg className="wd__icon" viewBox="0 0 48 48">
@@ -135,16 +178,21 @@ export default function KnowledgeBase() {
                   </svg>
                 </span>
                 <h3 className="wd__title kb__card-title">
-                  {/* the whole card is the link; the title carries it */}
-                  <Go className="kb__link" href="/library">
+                  {/* the whole card is the link; it opens the source in a new tab */}
+                  <a className="kb__link" href={it.href} target="_blank" rel="noopener noreferrer">
                     {it.title}
-                  </Go>
+                    <span className="sr-only"> (opens on {it.platform} in a new tab)</span>
+                  </a>
                 </h3>
                 <p className="wd__text">{it.body}</p>
                 <p className="kb__meta">
-                  <span>{it.source}</span>
-                  <span aria-hidden="true">·</span>
-                  <time>{it.date}</time>
+                  <span>{it.format}</span>
+                  {it.date && (
+                    <>
+                      <span aria-hidden="true">·</span>
+                      <span>{it.date}</span>
+                    </>
+                  )}
                 </p>
               </div>
             </article>

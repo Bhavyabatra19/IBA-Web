@@ -1,17 +1,23 @@
 /**
- * Web3 Corridor — after the client's design (IBA Site Review, 11-02-2026,
- * 07:30 PM): Bridging Global Regions, the network, corridor partners, three
- * core objectives, focus pillars, what the corridor opens, services, the
- * forum and the memberships (Web360 Club, ecosystem and cohort; see
- * Memberships.jsx). The hero image is kept as it was (by request).
+ * Web3 Corridor — the corridor and its memberships, with the content of the
+ * client's "IBA Web3 Corridor · Complete Membership" reference (11-04-2026)
+ * set out in the site's own blocks: the five regions and the network map,
+ * the operating model, the membership plans (Web360 Founder & Investor,
+ * Web360 Tokenization & Institutions and the Indo–UAE Startup Xchange, with
+ * a compare table; components/CorridorPlans), the Xchange and its 12-week
+ * Gold cohort, the membership journey, the partnership with The Block
+ * (video), the Global Innovation Corridor Forum at WTC 2026, the questions
+ * and the ask.
  *
- * ⚠ The design was captured mid-animation, so a few items were hidden. Those
- * are filled as noted below (marked "to confirm") and need IBA's sign-off.
+ * The hero keeps the heading and the turning globe (by request).
  */
 
-import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
+import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/Kit'
+import { Steps, Faq } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
-import MembershipSections from './Memberships'
+import CorridorPlans from '../../components/CorridorPlans'
+
+const ENQUIRY = 'Web3 Corridor'
 
 /* the hero graphic: the globe from the client's Web3 Corridor logo, cut
    out of its own ground and cropped above the wordmark, which now sits in
@@ -31,97 +37,109 @@ const HeroMap = () => (
   </div>
 )
 
-const NETWORK = [
-  { icon: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z" /></>, title: 'Global Connection', text: 'Join through one country and reach every partner in the corridor.' },
-  { icon: <><ellipse cx="12" cy="6" rx="7" ry="3" /><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" /></>, title: 'Asset Pooling', text: 'Pool capital and real-world assets across borders through tokenization.' },
-  { icon: <><path d="M3 17 9 11l4 4 8-8" /><path d="M15 7h6v6" /></>, title: 'Capital & Investment', text: 'Vetted deal flow for investors, and funding paths for founders.' },
-  { icon: <path d="M8 7l-5 5 5 5M16 7l5 5-5 5" />, title: 'Technology Transfer', text: 'India’s developer depth, shared with every market in the corridor.' },
-]
-
 const FIGURES = [
-  { value: '2.8B+', label: 'People across the corridor' },
-  { value: '4', label: 'Partner regions, the Americas next' },
-  { value: '1,250+', label: 'Active Web3 ventures in India' },
-  { value: '$1T', label: 'Opportunity the corridor maps' },
+  { value: '5', label: 'Connected geographic regions' },
+  { value: '3', label: 'Distinct membership pathways' },
+  { value: '9', label: 'Membership tiers' },
 ]
 
-/* simple flags, drawn */
-const FLAGS = {
-  india: (
-    <svg viewBox="0 0 36 24">
-      <rect width="36" height="8" fill="#ff9933" />
-      <rect y="8" width="36" height="8" fill="#ffffff" />
-      <rect y="16" width="36" height="8" fill="#138808" />
-      <circle cx="18" cy="12" r="3" fill="none" stroke="#000080" strokeWidth="0.8" />
-    </svg>
-  ),
-  uae: (
-    <svg viewBox="0 0 36 24">
-      <rect width="36" height="8" fill="#00732f" />
-      <rect y="8" width="36" height="8" fill="#ffffff" />
-      <rect y="16" width="36" height="8" fill="#000000" />
-      <rect width="9" height="24" fill="#ff0000" />
-    </svg>
-  ),
-  spain: (
-    <svg viewBox="0 0 36 24">
-      <rect width="36" height="24" fill="#aa151b" />
-      <rect y="6" width="36" height="12" fill="#f1bf00" />
-    </svg>
-  ),
-  zambia: (
-    <svg viewBox="0 0 36 24">
-      <rect width="36" height="24" fill="#198a00" />
-      <rect x="24" y="10" width="4" height="14" fill="#de2010" />
-      <rect x="28" y="10" width="4" height="14" fill="#000000" />
-      <rect x="32" y="10" width="4" height="14" fill="#ef7d00" />
-      <path d="M27 5h6l-3 3Z" fill="#ef7d00" />
-    </svg>
-  ),
-}
-
-const PARTNERS = [
-  { flag: 'india', role: 'Technical Engine & Implementation Hub', name: 'India', where: 'Home of IBA', text: 'One of the world’s largest blockchain developer pools and 1,250+ active Web3 ventures.' },
-  { flag: 'uae', role: 'Financial Hub & Global Launchpad', name: 'United Arab Emirates', where: 'Dubai', text: 'Regulatory clarity, capital access and free-zone campuses incubating Web3 startups.' },
-  { flag: 'spain', role: 'Governance & Mature Market Integration', name: 'Spain', where: 'Europe', text: 'Institutional compliance, standards and Europe’s lead on Web3 regulation.' },
-  { flag: 'zambia', role: 'High-Growth Adoption & Real-World Utility', name: 'Zambia', where: 'Africa', text: 'Mobile-first innovation, unbanked growth and real-world DeFi, with fast-growing developer talent.' },
+const REGIONS = [
+  { num: '01 / India', title: 'Technical engine', text: 'Developer talent, innovation, implementation and startup capability.' },
+  { num: '02 / UAE', title: 'Launchpad', text: 'Capital access, regulatory navigation and cross-border business setup.' },
+  { num: '03 / Europe', title: 'Standards', text: 'Institutional compliance, governance and mature market integration.' },
+  { num: '04 / Americas', title: 'Infrastructure', text: 'Institutional capital, tokenization and practical adoption.' },
+  { num: '05 / Africa', title: 'Utility', text: 'Mobile innovation, access and real-world Web3 applications.' },
 ]
 
-/* ⚠ to confirm: the design shows Connect and Transfer; the third card was
-   hidden, so it carries the earlier third objective */
-const OBJECTIVES = [
-  { num: '01', title: 'Connect', text: 'A sustainable innovation corridor connecting nations with global technology, investment and innovation.' },
-  { num: '02', title: 'Transfer', text: 'Technology transfer, knowledge exchange and capacity building in emerging technologies.' },
-  { num: '03', title: 'Create Pathways', text: 'For startups, SMEs, innovation hubs, women entrepreneurs and young innovators to access markets and funding.' },
+const MODEL = [
+  { num: '01', title: 'Tokenization', text: 'Tokenized business solutions, RWA education, issuer visibility and tokenomics support.' },
+  { num: '02', title: 'Business setup', text: 'Entity structuring, KYC/KYB and regulatory framework navigation.' },
+  { num: '03', title: 'Advisory & mentoring', text: 'Expert guidance, investor readiness, founder support and GTM planning.' },
+  { num: '04', title: 'Global visibility', text: 'Events, media, podcasts, ecosystem directories and introductions.' },
+  { num: '05', title: 'Go-to-market', text: 'Market-entry strategy, channel access and cross-border scaling pathways.' },
+  { num: '06', title: 'Capital & community', text: 'Curated investor rooms, peer networks, collaboration and funding preparation.' },
 ]
 
-/* ⚠ to confirm: the lower row's titles were partly hidden in the design */
-const FOCUS = [
-  { title: 'Web3 Technologies & Digital Transformation', text: 'Literacy, adoption and digital skills.' },
-  { title: 'Blockchain, Web3 & Tokenization', text: 'Digital identity, tokenization and smart contracts.' },
-  { title: 'Hubs & Co-Working Ecosystems', text: 'Hub development, startup incubation and collaborative workspaces.' },
-  { title: 'Startups & Investment', text: 'Acceleration, investor readiness and market access.' },
-  { title: 'Women in Emerging Tech', text: 'Leadership, skills, entrepreneurship and mentorship.' },
-  { title: 'Capacity Building', text: 'Certifications, training and academic partnerships.' },
+const DIRECTIONS = [
+  {
+    tag: 'India → UAE',
+    title: 'Enter Dubai and the wider Gulf',
+    text: 'For India-based startups: a path from diagnosing readiness to choosing structure, setting up compliantly and landing customers.',
+    list: ['Readiness', 'Structure', 'Setup & compliance', 'Customers'],
+  },
+  {
+    tag: 'UAE → India',
+    title: 'Build your presence in India',
+    text: 'For UAE-based startups pursuing Indian distribution, teams and customers, with market thesis, entity and tax planning, local network development and pilots.',
+    list: ['Market thesis', 'Entity & tax', 'Local network', 'Pilot & scale'],
+  },
 ]
 
-const OPENS = [
-  { num: '01', title: 'Web3 Resources', text: 'Templates, frameworks and learning on RWA, tokenomics and regulation.' },
-  { num: '02', title: 'Partnerships', text: 'Investors, family offices, mentors and members in every partner country.' },
-  { num: '03', title: 'Growth', text: 'Advisory, mentoring and investor readiness, from founder to fundable venture.' },
-  { num: '04', title: 'Expansion', text: 'Business setup, go-to-market plans and visibility in new markets.' },
+const XCHANGE = [
+  { title: 'Corridor concierge', text: 'A named cross-border point of contact for eligible higher-tier members.' },
+  { title: 'Soft-landing desk', text: 'On-ground launch coordination, market navigation and partner access.' },
+  { title: 'Founder rooms', text: 'Closed-door peer problem-solving and curated business introductions.' },
+  { title: 'Regulatory radar', text: 'Plain-language briefings on regulatory changes affecting cross-border plans.' },
+  { title: 'Buyer pathways', text: 'Introductions to enterprise buyers, channels and market participants.' },
+  { title: 'Two-market perks', text: 'Partner offers and founder community connections across India and the UAE.' },
 ]
 
-/* ⚠ to confirm: cards 02 and 03 were hidden in the design (only their last
-   words show), and 01's text was partly hidden */
-const SERVICES = [
-  { num: '01', title: 'Tech Support', text: 'Technical support and development resources for corridor businesses.' },
-  { num: '02', title: 'Compliance & KYC', text: 'Regulatory guidance and onboarding, including advanced KYC and KYB.' },
-  { num: '03', title: 'Investor Access', text: 'Introductions to investors and funding across borders, plus expert mentor sessions.' },
-  { num: '04', title: 'Global Visibility', text: 'Marketing, networking and forums that put you in front of global decision-makers and investors.' },
-  { num: '05', title: 'Go-To-Market Plans', text: 'Blueprints to launch and scale in high-demand markets, with separate tokenization plans.' },
-  { num: '06', title: 'Asset Pooling', text: 'Cross-border pooling of capital and tokenized real-world assets.' },
+const SPRINT = [
+  { n: 'Weeks 01–03', name: 'Validate', body: 'Test the cross-border market thesis and readiness to enter the destination market.' },
+  { n: 'Weeks 04–08', name: 'Build', body: 'Develop the market-entry structure, local support and launch foundations.' },
+  { n: 'Weeks 09–12', name: 'Launch', body: 'Execute the market-facing sprint with demo day and soft-landing support.' },
 ]
+
+const JOURNEY = [
+  { n: '01', name: 'Apply', body: 'Share your organisation, sector and cross-border market goal.' },
+  { n: '02', name: 'Assess', body: 'Discuss fit in a 30-minute conversation for the Xchange programme.' },
+  { n: '03', name: 'Select', body: 'Choose the appropriate membership tier and geographic track.' },
+  { n: '04', name: 'Activate', body: 'Meet your corridor lead and begin the relevant engagement pathway.' },
+]
+
+const FAQ = [
+  {
+    q: 'Are Web360 Club and Indo–UAE Startup Xchange the same membership?',
+    a: 'No. Web360 Club runs founder/investor and tokenization tracks; the Indo–UAE Startup Xchange is a separate membership with its own tiers, pricing and benefits.',
+  },
+  {
+    q: 'Are the Web360 membership prices annual?',
+    a: 'Founder Bronze and Silver are $2,000 and $3,500 a year, and Founder Gold is a $5,000 club fee. Tokenization Bronze Plus, Silver Plus and Gold Plus are $3,500, $5,000 and $7,000 a year.',
+  },
+  {
+    q: 'What does the Indo–UAE Startup Xchange cost?',
+    a: 'Xchange fees are indicative and shared on enquiry. Contact the programme team for a quotation and confirmation of terms.',
+  },
+  {
+    q: 'Do all members get a dedicated concierge?',
+    a: 'No. A named corridor concierge is included for Xchange Silver and Gold, not Bronze. Priority access on certain Web360 tiers is described separately.',
+  },
+  {
+    q: 'Does membership guarantee investment, licensing or customers?',
+    a: 'No. Investor introductions, regulatory guidance, market access and launch support are programme benefits, not assured funding, approvals or sales.',
+  },
+  {
+    q: 'What is the difference between Gold and Gold Plus?',
+    a: 'Web360 founder Gold is an accelerator and fundraising-focused tier. Gold Plus is a separate tokenization-oriented corporate and institutional membership with sponsorship, visibility and business-development benefits.',
+  },
+  {
+    q: 'Are tax and foreign investment figures legal advice?',
+    a: 'No. Regulatory figures shared through the Xchange programme are indicative and not legal or tax advice. Obtain current jurisdiction-specific advice before acting.',
+  },
+]
+
+/* The Block, Dubai: the partnership films (public/videos, compressed from
+   the client's originals to 720px wide). Add the second film here when it
+   arrives: { src, poster, label }. */
+const BLOCK_VIDEOS = [
+  {
+    src: '/videos/iba-the-block-1.mp4',
+    poster: '/images/iba-the-block-1-poster.jpg',
+    label: 'IBA at The Block, Dubai',
+  },
+]
+
+const Arrow = () => <span aria-hidden="true">→</span>
 
 export default function Corridor() {
   return (
@@ -129,7 +147,7 @@ export default function Corridor() {
       <PageHero
         id="corridor"
         aside={<HeroMap />}
-        eyebrow="IBA Web3 Corridor · A high-velocity initiative by India Blockchain Alliance"
+        eyebrow="India Blockchain Alliance · Web360 Club"
         title={
           <>
             Bridging
@@ -140,72 +158,111 @@ export default function Corridor() {
             <span className="w3p-hero__name">Web3 Corridor</span>
           </>
         }
-        lede="Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next. One corridor for shared Web3 resources, capital, partnerships and markets, home to more than 2.8 billion people."
+        lede={[
+          'One connected ecosystem. Multiple pathways to capital, tokenization, partnerships and cross-border growth.',
+          'Explore founder and investor programmes, tokenization-focused memberships and the dedicated India–UAE Startup Xchange, and choose the level of access that fits your next move.',
+        ]}
         actions={
           <>
-            <Btn href="#web360">
-              Become a Member <span aria-hidden="true">→</span>
+            <Btn href="#memberships">
+              Compare Membership Plans <Arrow />
             </Btn>
-            <Btn href="#country-corridors" variant="ghost">
-              Meet the Corridor Partners
+            <Btn href="#about" variant="ghost">
+              Discover the Corridor
             </Btn>
           </>
+        }
+        still={
+          <div className="about-stats">
+            <Stats still items={FIGURES} />
+          </div>
         }
       />
 
       <Section
-        id="how-corridors-work"
+        id="about"
         tone="dark"
-        eyebrow="The Network"
-        title="A corridor for shared growth."
-        lede="Connecting Africa, the UAE, India and Europe through innovation, technology, investment and partnerships, with IBA as the central catalyst."
+        eyebrow="The Web3 Corridor"
+        title="Where global opportunity becomes an actionable pathway."
+        lede="The IBA Web3 Corridor connects India, the UAE, Europe, the Americas and Africa. Its model combines technology transfer, capital access, regulatory navigation, entrepreneurial development and partner networks."
       >
         {/* the network map, live: pulsing pins and light along the routes */}
         <CorridorNetwork />
-        <Cards items={NETWORK} cols={4} />
-        <Stats items={FIGURES} />
+        <Cards items={REGIONS} cols={5} />
       </Section>
 
-      <Section id="country-corridors" eyebrow="Corridor Partners" title="Four regions, one corridor">
-        <ul className="w3p-partners">
-          {PARTNERS.map((p) => (
-            <li className="w3p-partner" key={p.name} data-rise>
-              <span className="w3p-flag" aria-hidden="true">
-                {FLAGS[p.flag]}
-              </span>
-              <p className="w3p-partner__role">{p.role}</p>
-              <h3 className="w3p-partner__name">{p.name}</h3>
-              <p className="w3p-partner__where">{p.where}</p>
-              <p className="w3p-partner__text">{p.text}</p>
-            </li>
+      <Section
+        id="operating-model"
+        eyebrow="The operating model"
+        title="Support beyond a membership badge."
+        lede="Across the programmes, IBA positions membership as a progression of capability, visibility and cross-border access."
+      >
+        <Cards items={MODEL} cols={3} />
+      </Section>
+
+      <Section
+        id="memberships"
+        eyebrow="Web360 Club · Membership plans"
+        title="Find the membership built for your ambition."
+        lede="Choose a pathway to see its tiers. The programmes have different objectives, benefits and pricing."
+      >
+        <CorridorPlans />
+      </Section>
+
+      <Section
+        id="xchange"
+        tone="dark"
+        eyebrow="Indo–UAE Startup Xchange"
+        title="Build in one market. Belong in both."
+        lede="A distinct, year-round membership for startups moving between India and the UAE, combining setup, compliance, market access, capital, talent and founder community."
+      >
+        <Cards items={DIRECTIONS} cols={2} />
+        <Cards items={XCHANGE} cols={3} />
+        <SubHead lede="Founder-led; incorporated or incorporation-ready; a scalable product or service; and a clear cross-border objective. The programme runs two cohorts a year of 20–25 startups each, with sponsor scholarship opportunities.">
+          Who can apply
+        </SubHead>
+      </Section>
+
+      <Section
+        id="xchange-cohort"
+        eyebrow="The Gold Xchange cohort"
+        title="A 12-week route from decision to market signal."
+        lede="The Gold launch sprint runs in three phases."
+      >
+        <Steps items={SPRINT} />
+      </Section>
+
+      <Section
+        id="journey"
+        eyebrow="Membership journey"
+        title="From application to corridor activation."
+        lede="Entry runs in four steps. Web360 membership selection and access are curated or gated by tier."
+      >
+        <Steps items={JOURNEY} />
+      </Section>
+
+      <Section
+        id="the-block"
+        eyebrow="Partnership · Dubai"
+        title="Partnership with The Block"
+        lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
+      >
+        <div className={`w3p-films w3p-films--${BLOCK_VIDEOS.length}`} data-rise>
+          {BLOCK_VIDEOS.map((v) => (
+            <figure className="w3p-film" key={v.src}>
+              <video
+                className="w3p-film__video"
+                src={v.src}
+                poster={v.poster}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={v.label}
+              />
+              <figcaption className="w3p-film__cap">{v.label}</figcaption>
+            </figure>
           ))}
-        </ul>
-      </Section>
-
-      <Section id="corridor-objectives" eyebrow="The Corridor Objectives" title="Three Core Objectives">
-        <Cards items={OBJECTIVES} cols={3} />
-      </Section>
-
-      <Section id="focus-pillars" eyebrow="Focus Pillars" title="Where the Corridor Focuses">
-        <Cards items={FOCUS} cols={3} />
-      </Section>
-
-      <Section
-        id="corridor-opens"
-        eyebrow="Build. Fund. Scale."
-        title="What the Corridor Opens"
-        lede="One infrastructure for cross-border tech and business: startups become founders, founders become fundable ventures, and ventures graduate into the Corridor Club."
-      >
-        <Cards items={OPENS} cols={4} />
-      </Section>
-
-      <Section
-        id="corridor-services"
-        eyebrow="Corridor Services"
-        title="Services Across the Network"
-        lede="Advanced support stacks that speed up tech and business outcomes for every corridor venture."
-      >
-        <Cards items={SERVICES} cols={3} />
+        </div>
       </Section>
 
       <Section
@@ -216,14 +273,32 @@ export default function Corridor() {
         lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and set the roadmap."
       >
         <div className="pk-actions" data-rise>
-          <Btn enquiry="Web3 Corridor">
-            Participate in WTC 2026 <span aria-hidden="true">→</span>
+          <Btn enquiry={ENQUIRY}>
+            Participate in WTC 2026 <Arrow />
           </Btn>
         </div>
       </Section>
 
-      {/* the memberships, folded in from the old /memberships page */}
-      <MembershipSections />
+      <Section id="corridor-faq" eyebrow="Frequently asked questions" title="Before you choose.">
+        <Faq items={FAQ} />
+      </Section>
+
+      <Section
+        id="contact"
+        tone="red"
+        eyebrow="Next step"
+        title="Your next market starts with the right corridor."
+        lede="Explore your membership fit across Web360 founder programmes, tokenization plans or the Indo–UAE Startup Xchange, and tell us your preferred track, tier and target markets."
+      >
+        <div className="pk-actions" data-rise>
+          <Btn enquiry={ENQUIRY}>
+            Enquire About Membership <Arrow />
+          </Btn>
+          <Btn href="#memberships" variant="ghost">
+            Review All Plans
+          </Btn>
+        </div>
+      </Section>
     </div>
   )
 }

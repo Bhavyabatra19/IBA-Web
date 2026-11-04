@@ -1,12 +1,14 @@
 /**
- * The IBA Library — where to find our content and the searchable catalogue.
+ * The IBA Library — membership of the alliance (what it opens: the library,
+ * the IBA Directory and more), where to find our content, and the
+ * searchable catalogue.
  *
  * The catalogue below is the source's sample list, and its cards do
  * not open an item yet — each needs a real URL (`href`) when published.
  */
 
 import { useMemo, useRef, useState } from 'react'
-import { PageHero, Section, Cards } from '../../components/Kit'
+import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import { FACTS } from '../../data/facts'
 import LibrarySearch from '../../components/LibrarySearch'
@@ -79,6 +81,48 @@ export default function Library() {
         title="An Open Knowledge Base, Built by the Community"
         lede={`Articles, videos, research, policy briefs and recorded sessions, developed by IBA's industry experts and contributed by our ${FACTS.advisors.text} global advisors and ${FACTS.members.text} members, open to the wider community. Free with a member account, no paywall.`}
       />
+
+      {/* Membership, on white between the hero and the red band (by request):
+          formal, for serious learners, and without leading on price —
+          "complimentary, by application" says it once */}
+      <Section
+        id="membership"
+        tone="card"
+        eyebrow="IBA Membership"
+        title="Membership of the Alliance"
+        lede={`Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions across ${FACTS.countries.text} countries.`}
+      >
+        <Cards
+          cols={4}
+          items={[
+            {
+              title: 'The Complete Library',
+              text: 'Every article, research paper, policy brief and recorded session, curated by IBA’s experts and advisors.',
+            },
+            {
+              title: 'The IBA Directory',
+              text: 'A verified register of members, advisors, institutions and partners across the alliance, for introductions that carry weight.',
+            },
+            {
+              title: 'Briefings & Gatherings',
+              text: 'Invitations to member briefings, roundtables and the alliance’s events across its partner regions.',
+            },
+            {
+              title: 'A Verified Member Profile',
+              text: 'Standing within a community of practitioners, researchers and decision-makers in blockchain and Web3.',
+            },
+          ]}
+        />
+        <div className="pk-actions lib-member__actions" data-rise>
+          <Btn enquiry="Membership">
+            Apply for Membership <span aria-hidden="true">→</span>
+          </Btn>
+          <Btn href="#catalogue" variant="ghost">
+            Explore the Library
+          </Btn>
+          <p className="lib-member__note">Membership is complimentary, by application.</p>
+        </div>
+      </Section>
 
       <Section eyebrow="Where to Find Us" title="Read, Follow and Watch" tone="red">
         <div className="pk-cards pk-cards--3">
