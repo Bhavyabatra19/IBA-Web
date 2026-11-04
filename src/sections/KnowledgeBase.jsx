@@ -14,8 +14,9 @@
  * tiles carrying red line icons, the item's format on the main tile), not
  * taken from the sources.
  *
- * ⚠ Titles for the Yahoo Finance and YouTube items, and the CoinGeek date,
- * are to confirm: the source pages could not be opened when this was set.
+ * ⚠ The CoinGeek date is to confirm: the source pages could not be opened
+ * when this was set. Headlines for the YouTube, Yahoo Finance and World
+ * Biogas items follow the client's thumbnail artwork.
  */
 
 import { useLayoutEffect, useRef } from 'react'
@@ -89,8 +90,8 @@ const ITEMS = [
     kind: 'webinar',
     format: 'Video',
     platform: 'YouTube',
-    title: 'Raj Kapoor on Blockchain, Web3 and the India Blockchain Alliance',
-    body: 'IBA’s founder on the alliance, its mission and where blockchain and Web3 go next.',
+    title: 'Raj Kapoor on India, Web3 and the Future of Blockchain',
+    body: 'IBA’s founder on India’s place in Web3, the alliance’s mission and where blockchain goes next.',
     img: '/images/kb-youtube-talk.jpg',
     href: 'https://www.youtube.com/watch?v=O9NtJdbwEXE',
     tint: 'deep',
@@ -109,8 +110,8 @@ const ITEMS = [
     kind: 'article',
     format: 'News',
     platform: 'Yahoo Finance',
-    title: 'India Blockchain Alliance and Founder Raj Kapoor',
-    body: 'Yahoo Finance coverage of the India Blockchain Alliance and the work of its founder, Raj Kapoor.',
+    title: 'India Blockchain Alliance: Raj Kapoor’s Mission to Accelerate India’s Blockchain Ecosystem',
+    body: 'How IBA’s founder is building the alliance to accelerate blockchain adoption and talent across India.',
     img: '/images/kb-yahoo-iba.jpg',
     href: 'https://finance.yahoo.com/news/india-blockchain-alliance-raj-kapoor-123000487.html',
     tint: 'red',
@@ -119,8 +120,8 @@ const ITEMS = [
     kind: 'profile',
     format: 'Profile',
     platform: 'World Biogas Association',
-    title: 'Raj Kapoor',
-    body: 'IBA’s founder in the World Biogas Association’s directory of people working on sustainability and climate.',
+    title: 'Clean Energy Meets Innovation: Raj Kapoor on Biogas, Sustainability and the Blockchain Opportunity',
+    body: 'IBA’s founder with the World Biogas Association, on where clean energy, sustainability and blockchain meet.',
     img: '/images/kb-wba-profile.jpg',
     href: 'https://www.worldbiogasassociation.org/raj-kapoor/',
     tint: 'ink',

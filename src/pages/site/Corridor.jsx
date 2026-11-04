@@ -5,7 +5,9 @@
  * the operating model, the membership plans (Web360 Founder & Investor,
  * Web360 Tokenization & Institutions and the Indo–UAE Startup Xchange, with
  * a compare table; components/CorridorPlans), the Xchange and its 12-week
- * Gold cohort, the membership journey, the questions and the ask.
+ * Gold cohort, the membership journey, the partnership with The Block
+ * (video), the Global Innovation Corridor Forum at WTC 2026, the questions
+ * and the ask.
  *
  * The hero keeps the heading and the turning globe (by request).
  */
@@ -126,6 +128,17 @@ const FAQ = [
   },
 ]
 
+/* The Block, Dubai: the partnership films (public/videos, compressed from
+   the client's originals to 720px wide). Add the second film here when it
+   arrives: { src, poster, label }. */
+const BLOCK_VIDEOS = [
+  {
+    src: '/videos/iba-the-block-1.mp4',
+    poster: '/images/iba-the-block-1-poster.jpg',
+    label: 'IBA at The Block, Dubai',
+  },
+]
+
 const Arrow = () => <span aria-hidden="true">→</span>
 
 export default function Corridor() {
@@ -226,6 +239,44 @@ export default function Corridor() {
         lede="Entry runs in four steps. Web360 membership selection and access are curated or gated by tier."
       >
         <Steps items={JOURNEY} />
+      </Section>
+
+      <Section
+        id="the-block"
+        eyebrow="Partnership · Dubai"
+        title="Partnership with The Block"
+        lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
+      >
+        <div className={`w3p-films w3p-films--${BLOCK_VIDEOS.length}`} data-rise>
+          {BLOCK_VIDEOS.map((v) => (
+            <figure className="w3p-film" key={v.src}>
+              <video
+                className="w3p-film__video"
+                src={v.src}
+                poster={v.poster}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={v.label}
+              />
+              <figcaption className="w3p-film__cap">{v.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        id="corridor-forum"
+        tone="red"
+        eyebrow="Launch · WTC 2026 · November · Barcelona"
+        title="Global Innovation Corridor Forum"
+        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and set the roadmap."
+      >
+        <div className="pk-actions" data-rise>
+          <Btn enquiry={ENQUIRY}>
+            Participate in WTC 2026 <Arrow />
+          </Btn>
+        </div>
       </Section>
 
       <Section id="corridor-faq" eyebrow="Frequently asked questions" title="Before you choose.">

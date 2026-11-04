@@ -200,6 +200,8 @@ export const NAV = [
           { label: 'The Web3 Corridor', icon: 'globe', desc: 'Five regions, one connected ecosystem.', href: '/corridor#about' },
           { label: 'Operating Model', icon: 'layers', desc: 'Support beyond a membership badge.', href: '/corridor#operating-model' },
           { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
+          { label: 'Partnership with The Block', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
+          { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
         ],
       },
       {
