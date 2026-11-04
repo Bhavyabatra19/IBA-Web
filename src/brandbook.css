@@ -12678,3 +12678,7 @@ main {
 
 /* Home, What We Do and Knowledge Hub: the 9:4 art (after the reference site), shown whole. */
 .wd.wd.wd--art .wd__media { aspect-ratio: 9 / 4; }
+
+/* Home, Flagship Programme: "IBA Global Initiative" always on the second line, unbroken. */
+.cb__titleLine { display: block; white-space: nowrap; }
+@media (max-width: 380px) { .cb__titleLine { white-space: normal; } }

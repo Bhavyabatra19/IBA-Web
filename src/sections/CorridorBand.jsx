@@ -53,7 +53,9 @@ export default function CorridorBand() {
             Flagship Programme
           </p>
           <h2 className="cb__title" id="cb-title" data-rise>
-            Web3 Corridor: IBA Global Initiative
+            Web3 Corridor:{' '}
+            {/* always its own, second line (by request) */}
+            <span className="cb__titleLine">IBA Global Initiative</span>
           </h2>
           <p className="cb__lede" data-rise>
             A global innovation platform connecting {REGIONS_LINE}, built to
