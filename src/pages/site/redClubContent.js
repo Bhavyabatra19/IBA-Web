@@ -23,12 +23,12 @@ export const PROPOSITION = [
 ]
 
 export const EXPERIENCE = [
-  { num: '01 — Learn', title: 'Build knowledge', text: 'Understand blockchain, Web3, digital assets and tokenisation through accessible learning and industry-led programmes.' },
-  { num: '02 — Experience', title: 'Learn by doing', text: 'Engage with practical challenges, live projects and experience-centre initiatives that connect concepts to real applications.' },
-  { num: '03 — Connect', title: 'Find your people', text: 'Build relationships with peers, mentors, practitioners, founders and organisations across the IBA ecosystem.' },
-  { num: '04 — Build', title: 'Turn ideas into action', text: 'Explore use cases, collaborate on solutions and develop the confidence to contribute to Web3 projects.' },
-  { num: '05 — Grow', title: 'Access opportunities', text: 'Discover pathways to mentorship, events, industry exposure, collaboration and professional development.' },
-  { num: '06 — Lead', title: 'Shape what comes next', text: 'Progress from learner to contributor, builder and community leader in a fast-evolving digital economy.' },
+  { num: 'Learn', title: 'Build knowledge', text: 'Understand blockchain, Web3, digital assets and tokenisation through accessible learning and industry-led programmes.' },
+  { num: 'Experience', title: 'Learn by doing', text: 'Engage with practical challenges, live projects and experience-centre initiatives that connect concepts to real applications.' },
+  { num: 'Connect', title: 'Find your people', text: 'Build relationships with peers, mentors, practitioners, founders and organisations across the IBA ecosystem.' },
+  { num: 'Build', title: 'Turn ideas into action', text: 'Explore use cases, collaborate on solutions and develop the confidence to contribute to Web3 projects.' },
+  { num: 'Grow', title: 'Access opportunities', text: 'Discover pathways to mentorship, events, industry exposure, collaboration and professional development.' },
+  { num: 'Lead', title: 'Shape what comes next', text: 'Progress from learner to contributor, builder and community leader in a fast-evolving digital economy.' },
 ]
 
 export const WHO = [
