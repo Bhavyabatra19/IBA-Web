@@ -1,12 +1,12 @@
 /** About — who we are, vision, mission, impact, and the founder. */
 
-import { PageHero, Section, Stats } from '../../components/Kit'
+import { PageHero, Section, Stats, Cards } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import FloatingCubes from '../../components/FloatingCubes'
 import VisionMission from '../../sections/VisionMission'
 import FounderLetter from '../../sections/FounderLetter'
 import MissionPillars from '../../components/MissionPillars'
-import IbaFramework from '../../components/IbaFramework'
+import { FRAMEWORK } from '../../data/framework'
 import { FACTS, REGIONS_LINE } from '../../data/facts'
 
 export default function About() {
@@ -79,16 +79,25 @@ export default function About() {
         <MissionPillars />
       </Section>
 
-      {/* the framework, in its own white section (by request), after the
-          client's reference: the hub and its four pills. It comes before
-          the Impact figures (by request). */}
+      {/* the framework, in its own white section (by request), laid out like
+          the rest of the site: the four dimensions as a two-by-two card
+          grid, each readable in full at once. It comes before the Impact
+          figures (by request). */}
       <Section
         id="iba-framework"
         tone="card"
         eyebrow="The IBA Framework"
         title="Multi-Dimensional IBA Framework with One Connected Web3 Ecosystem."
       >
-        <IbaFramework />
+        <Cards
+          cols={2}
+          items={FRAMEWORK.map((f, i) => ({
+            num: String(i + 1).padStart(2, '0'),
+            icon: f.icon,
+            title: f.title,
+            text: f.text,
+          }))}
+        />
       </Section>
 
       <Section
