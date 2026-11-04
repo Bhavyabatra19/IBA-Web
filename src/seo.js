@@ -118,9 +118,9 @@ export const SEO = {
       'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets.',
   },
   '/red-club': {
-    title: 'IBA Experience Zone | Where Builders Get Ready',
+    title: 'IBA Red Club | Experience Centers for Institutions and Students',
     description:
-      'Certified programmes, Blockchain and AI labs, the Experience Zone Wallet, the Investor Ready Programme, an AI tool for businesses and a 30-60-90 day plan.',
+      'The IBA Red Club Experience Centers connect universities, educators and students to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways.',
   },
 }
 
