@@ -1,7 +1,8 @@
 /**
- * Memberships — after the client's design (IBA Site Review, 11-02-2026):
- * the hero, the Web360 Club tiers, the ecosystem members' services, and the
- * cohort memberships for institutes and students.
+ * Memberships — the Web360 Club tiers, the ecosystem members' services, and
+ * the cohort memberships for institutes and students. No page of its own:
+ * the Web3 Corridor page renders these sections as its membership block
+ * (by request, 11-04-2026), and /memberships redirects there.
  *
  * ⚠ COPY TO CONFIRM: the design's ecosystem-member cards are too faint in the
  * supplied PDF to read in full. Their names, logos and links are from the
@@ -10,7 +11,7 @@
  * design's own placeholders, kept as drawn.
  */
 
-import { PageHero, Section, Btn } from '../../components/Kit'
+import { Section } from '../../components/Kit'
 import CardRail from '../../components/CardRail'
 import TierShield from '../../components/TierShield'
 import { Go } from '../../sections/service/ServiceBlocks'
@@ -77,37 +78,14 @@ const COHORTS = [
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
-export default function Memberships() {
+export default function MembershipSections() {
   return (
     <div className="mbr">
-      <PageHero
-        id="memberships"
-        aside={
-          <div className="mbr-hero-art" aria-hidden="true">
-            <img src="/images/membership-hero.png" alt="" />
-          </div>
-        }
-        eyebrow="IBA Memberships"
-        title="Memberships"
-        lede="IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector."
-        actions={
-          <>
-            <Btn href="#web360">Web360 Club</Btn>
-            <Btn href="#ecosystem-members" variant="ghost">
-              Ecosystem Memberships
-            </Btn>
-            <Btn href="/library#login" variant="ghost">
-              Member Login
-            </Btn>
-          </>
-        }
-      />
-
       <Section
         id="web360"
-        eyebrow="Web360 Club"
-        title="Find the tier that fits where you are"
-        lede="IBA’s own memberships, from founders finding their fit to the leaders shaping the industry worldwide."
+        eyebrow="Membership · Web360 Club"
+        title="Join the corridor through the Web360 Club"
+        lede="Membership runs through the Web360 Club, and every stage is earned: Bronze for starters and early builders, Silver for multi-country growth, and Gold, invite-only, for global activations."
       >
         <CardRail label="Web360 Club tiers" cols={3}>
           {TIERS.map((t) => (

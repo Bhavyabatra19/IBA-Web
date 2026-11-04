@@ -12751,3 +12751,29 @@ main {
   color: var(--bb-ink-muted);
 }
 
+
+/* Web3 Corridor hero — the name under "Bridging Global Regions:" in plain
+   Questrial (by request): the hero heading's thickening stroke and tight
+   tracking taken off, so it reads as the font itself */
+.pk-hero__title .w3p-hero__name {
+  -webkit-text-stroke: 0;
+  letter-spacing: 0;
+  font-family: 'Questrial', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+}
+
+/* Stats on black (by request, 11-04-2026): red figures on the dark grounds
+   were hard to read, so there the figure is white and its caption larger
+   and brighter. Stats on white keep the red figure (§03 above). */
+.pk-hero .pk-stat strong,
+.pk-sec--dark .pk-stat strong,
+.pk-stats--dark .pk-stat strong {
+  color: #ffffff;
+}
+.pk-hero .pk-stat span,
+.pk-sec--dark .pk-stat span,
+.pk-stats--dark .pk-stat span {
+  font-size: 18px;
+  line-height: 26px;
+  color: rgba(255, 255, 255, 0.82);
+}

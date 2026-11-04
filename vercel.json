@@ -1,7 +1,23 @@
 {
+  "redirects": [
+    {
+      "source": "/memberships",
+      "destination": "/corridor#web360",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/:a/assets/:path*", "destination": "/assets/:path*" },
-    { "source": "/:a/:b/assets/:path*", "destination": "/assets/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/:a/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/:a/:b/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

@@ -92,11 +92,6 @@ export const SEO = {
     description:
       'Tokenization can connect traditionally illiquid assets to digital markets, creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access.',
   },
-  '/memberships': {
-    title: 'Memberships | Web360 Club, Ecosystem & Cohort Memberships | IBA',
-    description:
-      'IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector: the Web360 Club tiers, ecosystem member services and cohort memberships.',
-  },
   '/privacy': {
     title: 'Privacy Policy | India Blockchain Alliance',
     description:
@@ -115,7 +110,7 @@ export const SEO = {
   '/corridor': {
     title: 'Web3 Corridor | Bridging Global Regions | IBA',
     description:
-      'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets.',
+      'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets, and the Web360 Club, ecosystem and cohort memberships.',
   },
   '/red-club': {
     title: 'IBA Red Club | Experience Centers for Institutions and Students',

@@ -229,7 +229,6 @@ export const PAGE_CONTEXT = {
   /* the current pages */
   '/expertise': { topic: 'Consulting', phrase: 'working with IBA' },
   '/tokenization': { topic: 'RWA Tokenization', phrase: 'a tokenization project' },
-  '/memberships': { topic: 'Membership', phrase: 'an IBA membership' },
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
