@@ -11165,8 +11165,9 @@ main {
   width: 100%;
   height: auto;
   max-width: none;
-  /* a very slow turn (by request): once every three minutes */
-  animation: w3l-spin 180s linear infinite;
+  /* a slow turn (by request): once every 40 seconds — slow enough to stay
+     calm, fast enough that it reads as turning (180s looked still) */
+  animation: w3l-spin 40s linear infinite;
 }
 @keyframes w3l-spin {
   to {
