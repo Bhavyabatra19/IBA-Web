@@ -9,8 +9,8 @@ import { PageHero, Section, Form, Btn } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 
 const WAYS = [
-  { title: 'Global Exposure', text: 'Join the IBA Startup Club: learning, internships, opportunities.', enquiry: 'Red Club (learner)', cta: 'Join Startup Club' },
-  { title: 'Create Student Experience', text: 'Partner with IBA Red Club Experience Programmes: tokenisation labs, blockchain learning, internships, global networking.', enquiry: 'Red Club / Verifyble (institution)', cta: 'Request Prospectus' },
+  { title: 'For Learners', text: 'Join the IBA Red Club: programmes, projects, placements.', enquiry: 'Red Club (learner)', cta: 'Join Red Club' },
+  { title: 'For Institutions', text: 'Bring Red Club programmes and campus labs to your university.', enquiry: 'Red Club / Verifyble (institution)', cta: 'Request Prospectus' },
   { title: 'For Enterprises & Governments', text: 'Scope an advisory or delivery engagement.', enquiry: 'Consulting', cta: 'Book a Call' },
   { title: 'For Partners', text: 'Join the ecosystem or the Global Innovation Corridor.', enquiry: 'Ecosystem partnership', cta: 'Partner With Us' },
 ]
@@ -80,35 +80,11 @@ export default function Connect() {
             consent="I agree to the Privacy Policy and to being contacted about my enquiry."
             fields={[
               { name: 'name', label: 'Name' },
-              { name: 'org', label: 'Organisation', autoComplete: 'organization' },
-              {
-                name: 'website',
-                label: 'Organisation website',
-                inputMode: 'url',
-                autoComplete: 'url',
-                placeholder: 'yourcompany.com',
-                pattern: '(https?://)?[^\\s\\/]+\\.\\S+',
-                title: 'A web address, e.g. yourcompany.com',
-              },
-              {
-                name: 'linkedin',
-                label: 'Company LinkedIn page',
-                inputMode: 'url',
-                placeholder: 'linkedin.com/company/your-company',
-                pattern: '(https?://)?([a-zA-Z]+\\.)?[lL]inked[iI]n\\.com/\\S+',
-                title: 'Your LinkedIn page address, e.g. linkedin.com/company/your-company',
-              },
+              { name: 'org', label: 'Organisation and Website' },
               { name: 'email', label: 'Work email', type: 'email' },
               { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false },
               { name: 'topic', label: "I'm interested in", type: 'select', wide: true, options: INTERESTS },
               { name: 'message', label: 'Message', type: 'textarea' },
-              {
-                name: 'document',
-                label: 'Upload document',
-                type: 'file',
-                accept: '.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.png,.jpg,.jpeg',
-                hint: 'Company profile, pitch deck or info deck · PDF, Word, PowerPoint, Excel or image',
-              },
             ]}
           />
         </div>

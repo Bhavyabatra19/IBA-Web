@@ -9,10 +9,12 @@ import { navigate, usePath } from '../lib/router'
 import { scrollToTop } from '../lib/scroll'
 
 const CHANGES = [
-  { label: 'Memberships', href: '/memberships', note: 'Web360 tiers, ecosystem members, cohort' },
-  { label: 'Marketplace', href: '/marketplace', note: 'New: partner directory' },
-  { label: 'Web3 Corridor', href: '/corridor', note: 'India as the hub' },
-  { label: 'Navbar', href: '/', note: 'Member Login out, Membership in' },
+  { label: 'Home', href: '/', note: 'New hero coins, Impact band, nav' },
+  { label: 'About', href: '/about', note: 'Welcome to IBA, governance model' },
+  { label: 'Expertise', href: '/expertise', note: 'Advisory and Consulting Stack wheel' },
+  { label: 'Tokenization', href: '/tokenization', note: 'New page' },
+  { label: 'Ecosystem', href: '/ecosystem', note: 'Partners, standards, associates' },
+  { label: 'Web3 Corridor', href: '/corridor', note: 'Four regions, one corridor' },
 ]
 
 export default function ReviewBar() {

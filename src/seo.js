@@ -32,7 +32,7 @@
  * previews as unfinished.
  */
 
-import { FACTS } from './data/facts'
+import { FACTS, REGIONS_LINE } from './data/facts'
 
 /* No brand suffix is appended anywhere. Every title below already names IBA or
    the Alliance, which is the brief's own pattern — appending one would give
@@ -83,9 +83,24 @@ export const SEO = {
 
   /* ---- the pages added from the content source ---- */
   '/expertise': {
-    title: 'Expertise | Web3 Solution Consulting Stack | IBA',
+    title: 'Expertise | Web3 Solution Advisory and Consulting Stack | IBA',
     description:
-      'Tokenization, standards, compliance and stablecoin structuring, plus power consulting for IDO, STO and IEO launches — from “should we?” to “it’s live, and it’s governed”.',
+      'Tokenization; standards, frameworks and compliance; stablecoin structuring; and advisory and global market expansion — from ‘Should we?’ to ‘It’s live, governed, and ready to scale.’',
+  },
+  '/tokenization': {
+    title: 'Tokenization | Turn Real-World Assets into Market Opportunities | IBA',
+    description:
+      'Tokenization can connect traditionally illiquid assets to digital markets, creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access.',
+  },
+  '/memberships': {
+    title: 'Memberships | Web360 Club, Ecosystem & Cohort Memberships | IBA',
+    description:
+      'IBA offers a range of memberships through its partner ecosystem, each built for a different stage and sector: the Web360 Club tiers, ecosystem member services and cohort memberships.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | India Blockchain Alliance',
+    description:
+      'How India Blockchain Alliance collects, uses and protects the information you share with us through this website, and the rights you have over it.',
   },
   '/ecosystem': {
     title: 'IBA Ecosystem | Initiatives, Partners, Councils & People',
@@ -97,25 +112,10 @@ export const SEO = {
     description:
       'Tech4Good, Green Chain Protocol, Verifyble, IBA Red Club, the Web3 Corridor and the India AI Alliance.',
   },
-  '/memberships': {
-    title: 'Memberships | The IBA Circle, IBA Block & TAF | IBA',
-    description:
-      'The IBA Circle, IBA Block. and Tokenized Asset Foundation memberships, from founder programmes to virtual asset packages, through India Blockchain Alliance.',
-  },
-  '/marketplace': {
-    title: 'Partner Marketplace | IBA Ecosystem',
-    description:
-      'Every partner company in the India Blockchain Alliance ecosystem and the services they offer members, searchable by offering and location.',
-  },
-  '/privacy': {
-    title: 'Privacy Policy | India Blockchain Alliance',
-    description:
-      'How India Blockchain Alliance collects, uses and protects the information you share through this website, and the rights you have over it.',
-  },
   '/corridor': {
-    title: 'Web3 Corridor | One Global Corridor | IBA',
+    title: 'Web3 Corridor | Bridging Global Regions | IBA',
     description:
-      'One global corridor bringing countries together for Web3 resources, partnerships, growth and expansion — its partner countries, the forum at WTC 2026 in Barcelona, and membership.',
+      'Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next: one corridor for shared Web3 resources, capital, partnerships and markets.',
   },
   '/red-club': {
     title: 'IBA Experience Zone | Where Builders Get Ready',

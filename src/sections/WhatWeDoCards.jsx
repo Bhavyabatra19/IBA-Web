@@ -5,8 +5,10 @@
  * a photo header in a red hue, with an icon badge; the copy sits beneath. On
  * hover the card turns red and the photo eases in.
  *
- * Photos: the supplied artwork, saved locally in public/images (card-*.jpg)
- * and shown uncropped at 9:4 (.wd--art in brandbook.css).
+ * Photos: Unsplash, under the Unsplash License (free for commercial use, no
+ * attribution required), saved locally in public/images:
+ *   wd-advise.jpg  Vitaly Gariev     unsplash.com/photos/8k5j5z6ZYT4
+ *   wd-build.jpg   GuerrillaBuzz     unsplash.com/photos/7hA2wqBcSF8
  */
 
 import { useLayoutEffect, useRef } from 'react'
@@ -36,9 +38,10 @@ const CARDS = [
     title: 'Web3 Advisory',
     body:
       'Policy, compliance, standards, taxation, forensics and risk mitigation, the right blockchain decision before a single line of code is written.',
-    cta: 'See Expertise',
+    cta: 'Know more',
     href: '/expertise#consulting-stack',
-    img: '/images/card-advisory.jpg',
+    /* the same art as the reference site: the advisory team over a holographic map */
+    img: '/images/card-advisory-art.jpg',
   },
   {
     key: 'build',
@@ -46,9 +49,11 @@ const CARDS = [
     title: 'Tokenization',
     body:
       'Asset selection, token design, issuance structure and tokenomics for real-world and digital assets, taking an asset from idea to a compliant, investable token.',
-    cta: 'See the Consulting Stack',
-    href: '/expertise#consulting-stack',
-    img: '/images/card-tokenization.jpg',
+    cta: 'Know more',
+    /* the Tokenization page's End-to-End Framework section */
+    href: '/tokenization#framework',
+    /* the same art as the reference site: the team over a tokenized-property model */
+    img: '/images/card-tokenization-art.jpg',
   },
 ]
 
@@ -92,7 +97,8 @@ export default function WhatWeDoCards() {
                 </span>
                 <h3 className="wd__title">{c.title}</h3>
                 <p className="wd__text">{c.body}</p>
-                <Go className="wd__go" href={c.href}>
+                {/* both cards read "Know more", so the accessible name says which */}
+                <Go className="wd__go" href={c.href} aria-label={`Know more about ${c.title}`}>
                   {c.cta} <span aria-hidden="true">→</span>
                 </Go>
               </div>

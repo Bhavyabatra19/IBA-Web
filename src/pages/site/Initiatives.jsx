@@ -5,6 +5,8 @@
  * buttons with no destination yet. Only real destinations are shown: the
  * India AI Alliance's website, and Red Club and the Corridor's own pages. Add
  * `site` / `linkedin` to an entry below as each address is supplied.
+ *
+ * LOGOS. An entry with `logo` shows its mark above its text.
  */
 
 import { PageHero, Section, Bullets, Btn, Prose } from '../../components/Kit'
@@ -65,7 +67,7 @@ const INITIATIVES = [
     list: [
       'Core dimensions, from Web3 and tokenization to startup investment and women in emerging technologies',
       'The UAE as the activation hub, with India, Africa and Europe as ecosystem partners',
-      'Global Innovation Corridor Forum launching at WTC 2026, November, Barcelona',
+      'Global Innovation Corridor Forum launching in November 2026, Barcelona',
     ],
     page: { href: '/corridor', label: 'Explore the Corridor' },
   },

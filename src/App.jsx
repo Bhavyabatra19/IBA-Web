@@ -11,6 +11,7 @@ import Home from './pages/Home'
    kept so nothing is lost, and can be deleted once the new pages are signed off. */
 import About from './pages/site/About'
 import Expertise from './pages/site/Expertise'
+import Tokenization from './pages/site/Tokenization'
 import Ecosystem from './pages/site/Ecosystem'
 import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
@@ -19,7 +20,6 @@ import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
 import Memberships from './pages/site/Memberships'
-import Marketplace from './pages/site/Marketplace'
 import ReviewBar from './components/ReviewBar'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
@@ -38,15 +38,15 @@ const PAGES = {
   '/': Home,
   '/about': About,
   '/expertise': Expertise,
+  '/tokenization': Tokenization,
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,
-  '/memberships': Memberships,
-  '/marketplace': Marketplace,
   '/red-club': RedClub,
   '/library': Library,
   '/connect': Connect,
   '/privacy': Privacy,
+  '/memberships': Memberships,
 }
 
 /**
@@ -173,7 +173,6 @@ export default function App() {
           control on the site goes through, so it must not be inside the tree
           App remounts on a route change. */}
       <Enquiry />
-      {/* the review build's guide to what changed; never in the site build */}
       {import.meta.env.VITE_ARTIFACT === '1' && <ReviewBar />}
     </>
   )

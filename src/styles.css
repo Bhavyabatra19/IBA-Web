@@ -2141,7 +2141,8 @@ em {
   --line: rgba(255, 255, 255, 0.3);
   --line-soft: rgba(255, 255, 255, 0.18);
   --surface: rgba(255, 255, 255, 0.08);
-  background: var(--red);
+  /* the shared black-to-red gradient (brandbook.css) */
+  background: var(--bb-red-black, var(--red));
   color: #ffffff;
   position: relative;
   overflow: hidden;
@@ -6962,12 +6963,8 @@ em {
 }
 
 /* ============================== responsive ========================== */
-/* The six tabs plus two utility actions stop fitting well before the layout
-   grid does, so the bar collapses to the drawer at its own, wider breakpoint.
-   It went up with the sixth tab: the row was already the widest thing on the
-   page, and Home added a label to it. Down to 1025px the bar is compacted
-   instead (brandbook.css, "Navbar on laptops"), so 13–14" laptops keep it. */
-@media (max-width: 1024px) {
+/* Keep the full navigation on desktop and switch to the drawer at tablet width. */
+@media (max-width: 960px) {
   .nav__tabs,
   .nav__util {
     display: none;
@@ -7614,9 +7611,9 @@ body:has(.nav--home:not([data-condensed])) {
 /* the old top/bottom scrim is replaced by a soft centre pool: it keeps the
    type legible where the beam crosses it without hiding the beam elsewhere */
 /* The coin wheel. Under the centre pool and the copy, so a coin passing behind
-   the headline is dimmed rather than fighting it. The coins themselves are the
-   About hero's silver CSS coins (components/CoinStack.jsx); Hero.jsx places
-   them every frame. */
+   the headline is dimmed rather than fighting it. The coins are images cut
+   from one render (public/images/hero-coins); Hero.jsx places them every
+   frame. */
 .hero__orbit {
   position: absolute;
   inset: 0;
@@ -7624,42 +7621,18 @@ body:has(.nav--home:not([data-condensed])) {
   pointer-events: none;
   /* --coin is set on .hero, which also needs it for its min-height */
 }
-/* Performance, for coins that move every frame. The travelling glint is a
-   separate animated layer per coin, and the 38px blurred drop shadow has to be
-   re-rasterised whenever a coin's transform changes — together they were most
-   of the frame. The wheel's own motion carries the light changes instead. */
-.hero__orbit .coin__spec {
-  display: none;
-}
-.hero__orbit .coin__face--front {
-  box-shadow: inset 0 0 0 1.5px rgba(10, 10, 10, 0.3);
-}
-/* Plain silver. The shared plate paints the brand's red bouncing in low and
-   right as its top layer; here it is the same plate without that layer. */
-.hero__orbit .coin__plate {
-  background: conic-gradient(
-      from 200deg at 50% 50%,
-      rgba(255, 255, 255, 0.24),
-      rgba(10, 10, 10, 0.34) 19%,
-      rgba(255, 255, 255, 0.3) 37%,
-      rgba(10, 10, 10, 0.3) 56%,
-      rgba(255, 255, 255, 0.22) 75%,
-      rgba(10, 10, 10, 0.34) 90%,
-      rgba(255, 255, 255, 0.24)
-    ),
-    radial-gradient(62% 30% at 50% 103%, rgba(214, 226, 240, 0.5), transparent 72%),
-    radial-gradient(
-      126% 118% at 27% 17%,
-      #ffffff 0%,
-      #f4f6f9 7%,
-      #dde2e8 17%,
-      #b6bdc5 29%,
-      #848b93 42%,
-      #4e5359 57%,
-      #26292d 74%,
-      #131519 88%,
-      #0a0b0d 100%
-    );
+/* One coin, centred in the panel; Hero.jsx moves it from there. Sized in
+   --coin units so that every coin's diameter is one --coin, whatever its
+   size in the render; the image runs past that by its glow. */
+.hero__coin {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: calc(var(--coin) * var(--cw));
+  height: calc(var(--coin) * var(--ch));
+  max-width: none;
+  user-select: none;
+  will-change: transform;
 }
 .hero::before {
   z-index: 2;
@@ -7924,116 +7897,198 @@ main {
 }
 
 /* ==================================================================
-   IMPACT BAND — the headline figures as one sentence, in a dark panel
-   the width of the hero (Home.jsx: after the counters)
+   IMPACT BAND — the headline figures, set quietly: a split header, four
+   figures between hairlines with line icons that draw themselves in, and a
+   slow ticker of the record along the foot (Home.jsx: after the counters).
+   The panel's inset, padding, ground and type scale come from brandbook.css.
    ================================================================== */
 .ib.band.band--light {
   padding-block: clamp(1rem, 2.5vw, 2rem);
 }
 .ib__panel {
   position: relative;
-  isolation: isolate;
-  margin-inline: var(--hero-inset);
-  border-radius: 28px;
   overflow: hidden;
-  /* the gradient: near-black, warming toward a deep red at the foot */
-  background: linear-gradient(180deg, #0b0a0a 0%, #120b0c 55%, #2a0d11 100%);
-  color: #ffffff;
 }
 
-/* --- ground: glows (gradient) under a dot grid (pattern) --- */
-.ib__bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-.ib__glow {
-  position: absolute;
-  inset: 0;
-  background:
-    /* the main pool, rising from under the button */
-    radial-gradient(60% 75% at 50% 112%, rgba(215, 25, 32, 0.5), transparent 70%),
-    /* a cooler lift in the top-left, so the panel has a diagonal */
-    radial-gradient(42% 55% at 6% -8%, rgba(255, 74, 80, 0.16), transparent 70%),
-    /* a faint counter-glow top-right */
-    radial-gradient(34% 45% at 100% 0%, rgba(150, 30, 42, 0.18), transparent 70%);
-}
-/* a thin line of red light along the top edge */
-.ib__glow::after {
-  content: '';
-  position: absolute;
-  inset: 0 12% auto;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 74, 80, 0.75), transparent);
-}
-/* The pattern: a dot grid, densest in the middle and faded out before every
-   edge by the radial mask, so it reads as texture, not as a frame. */
-.ib__dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.26) 1.2px, transparent 1.7px);
-  background-size: 22px 22px;
-  background-position: center;
-  -webkit-mask-image: radial-gradient(ellipse 70% 80% at 50% 45%, #000 20%, transparent 85%);
-  mask-image: radial-gradient(ellipse 70% 80% at 50% 45%, #000 20%, transparent 85%);
-}
-
-/* --- copy --- */
-.ib__copy {
+/* --- header: title left, lede and link right --- */
+.ib__head {
   display: grid;
-  justify-items: center;
-  gap: clamp(0.9rem, 1.6vw, 1.3rem);
-  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 5vw, 4rem);
-  text-align: center;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 24px 64px;
+  align-items: end;
 }
-/* the eyebrow is the hero's pill (.hero__kicker); its margin is the hero's
-   spacing, and the grid gap already spaces it here */
-.ib__copy .hero__kicker {
-  margin: 0;
+.ib__eyebrow {
+  margin: 0 0 16px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
 }
 .ib__title {
-  max-width: 22em;
+  max-width: 16em;
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.6rem, 0.95rem + 2.2vw, 3rem);
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  color: #ffffff;
   text-wrap: balance;
 }
-.ib__nowrap {
-  white-space: nowrap;
+.ib__accent {
+  color: var(--iba-red);
+}
+.ib__aside {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
 }
 .ib__lede {
-  max-width: 40rem;
+  max-width: 28rem;
   margin: 0;
-  font-size: clamp(0.95rem, 0.88rem + 0.3vw, 1.1rem);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.68);
 }
-.ib__cta {
-  margin-top: 0.6rem;
-  padding: 0.95rem 2.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1rem;
-  color: #ffffff;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+/* --- the four figures, between hairlines --- */
+.ib__figs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(40px, 5vw, 64px) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--bb-line);
+  border-bottom: 1px solid var(--bb-line);
+  list-style: none;
 }
-.ib__cta:hover {
-  background: var(--red);
-  border-color: var(--red);
+.ib__fig {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 32px 28px 36px;
+}
+.ib__fig + .ib__fig {
+  border-left: 1px solid var(--bb-line);
+}
+/* a red rule that grows across the top on hover */
+.ib__fig::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--iba-red);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.ib__fig:hover::before {
+  transform: scaleX(1);
+}
+.ib__icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 20px;
+  fill: none;
+  stroke: var(--iba-red);
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.ib__fig:hover .ib__icon {
+  transform: translateY(-4px);
+}
+.ib__k {
+  display: inline-block;
+  font-size: clamp(2.5rem, 1.8rem + 2vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--bb-ink);
+  font-variant-numeric: tabular-nums;
+}
+.ib__label {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+.ib__note {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--bb-ink-muted);
+}
+
+/* --- ticker --- */
+.ib__ticker {
+  margin-top: 24px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ib__track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ib__track li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 48px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  color: var(--bb-ink-muted);
+}
+.ib__track li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--iba-red);
+}
+.ib__track b {
+  color: var(--bb-ink);
+}
+
+@media (max-width: 1023px) {
+  .ib__head {
+    grid-template-columns: 1fr;
+  }
+  .ib__figs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ib__fig:nth-child(3) {
+    border-left: 0;
+  }
+  .ib__fig:nth-child(n + 3) {
+    border-top: 1px solid var(--bb-line);
+  }
 }
 @media (max-width: 560px) {
-  .ib__nowrap {
-    white-space: normal;
+  .ib__figs {
+    grid-template-columns: 1fr;
+  }
+  .ib__fig {
+    padding: 24px 4px 28px;
+  }
+  .ib__fig + .ib__fig {
+    border-left: 0;
+    border-top: 1px solid var(--bb-line);
+  }
+}
+/* still: the ticker becomes a wrapped list */
+@media (prefers-reduced-motion: reduce) {
+  .ib__ticker {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ib__track {
+    flex-wrap: wrap;
+    width: auto;
+    row-gap: 10px;
+  }
+  .ib__track li[aria-hidden] {
+    display: none;
   }
 }
 
@@ -8255,14 +8310,6 @@ main {
 }
 .cb__title {
   color: #161412;
-}
-/* keep "IBA Global Initiative" together on its own line */
-.cb__title-line {
-  display: block;
-  white-space: nowrap;
-}
-@media (max-width: 380px) {
-  .cb__title-line { white-space: normal; }
 }
 .cb__lede {
   color: #5f5a54;
@@ -9355,35 +9402,4 @@ main {
   .ft__h {
     white-space: nowrap;
   }
-}
-
-/* Asset coins (the home hero): a copper mark raised on the silver, inside a
-   dark band that carries the asset's name round the lower rim */
-.coin--asset .coin__glyph {
-  width: 50%;
-  height: 50%;
-}
-.coin--asset .coin__glyph--lip {
-  color: rgba(0, 0, 0, 0.75);
-}
-.coin--asset .coin__glyph--cut {
-  color: #eaa877;
-}
-.coin__label {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.coin__band {
-  fill: none;
-  stroke: rgba(14, 14, 16, 0.82);
-  stroke-width: 11px;
-}
-.coin__label text {
-  font-family: var(--bb-font, 'Questrial', sans-serif);
-  font-size: 8.5px;
-  letter-spacing: 0.14em;
-  fill: #f3dcc7;
 }

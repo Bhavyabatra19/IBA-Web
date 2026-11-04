@@ -1,151 +1,153 @@
-/** PartnerCarousel — the Ecosystem page's Key Partners as a two-row glass
-    carousel: scroll-snapped columns, prev/next arrows, page dots, and a slow
-    autoplay that pauses on hover, focus, off-screen and reduced motion. */
+/**
+ * The Ecosystem page's Key Partners, as a paged carousel (after the client's
+ * reference): red glass tiles on a red gradient panel, each with the logo on
+ * a white rounded square and the name beneath, twelve to a page, with
+ * previous / next buttons and page dots.
+ *
+ * Motion: every logo floats on its own clock; a page's tiles rise in, in a
+ * stagger, when it comes into view; a tile lifts on hover. The pages advance
+ * on their own every few seconds, pausing while the pointer or focus is on
+ * the carousel. Reduced motion: no float, no autoplay, no slide animation.
+ *
+ * Partners come from data/partners.js (shared with the home marquee); one
+ * without a logo shows its initials.
+ */
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { initials } from '../data/partners'
+import { useEffect, useRef, useState } from 'react'
+import { PARTNERS, initials } from '../data/partners'
+import { reducedMotion } from '../lib/scroll'
 
-const TONES = ['red', 'ink', 'deep']
-const AUTOPLAY_MS = 4500
+const PER_PAGE = 12
+const AUTOPLAY_MS = 6000
 
-/* the sheen follows the pointer: --mx/--my drive a radial highlight, and a
-   small tilt is set from the pointer's offset from the tile's centre */
-const onTileMove = (e) => {
-  const el = e.currentTarget
-  const r = el.getBoundingClientRect()
-  const x = (e.clientX - r.left) / r.width
-  const y = (e.clientY - r.top) / r.height
-  el.style.setProperty('--mx', `${x * 100}%`)
-  el.style.setProperty('--my', `${y * 100}%`)
-  el.style.setProperty('--rx', `${(0.5 - y) * 8}deg`)
-  el.style.setProperty('--ry', `${(x - 0.5) * 8}deg`)
-}
-const onTileLeave = (e) => {
-  const el = e.currentTarget
-  el.style.setProperty('--rx', '0deg')
-  el.style.setProperty('--ry', '0deg')
-}
+/* At most twelve to a page, spread evenly across the pages that needs (by
+   request: twelve-at-a-time left a last page holding one partner alone) */
+const PAGE_COUNT = Math.ceil(PARTNERS.length / PER_PAGE)
+const PAGES = Array.from({ length: PAGE_COUNT }, (_, i) =>
+  PARTNERS.slice(
+    Math.round((i * PARTNERS.length) / PAGE_COUNT),
+    Math.round(((i + 1) * PARTNERS.length) / PAGE_COUNT)
+  )
+)
 
-export default function PartnerCarousel({ partners, moreHref = '#become-a-partner' }) {
-  const track = useRef(null)
-  const root = useRef(null)
-  const [pages, setPages] = useState(1)
+export default function PartnerCarousel() {
   const [page, setPage] = useState(0)
-  const paused = useRef(false)
-  const visible = useRef(false)
+  const [paused, setPaused] = useState(false)
+  const root = useRef(null)
+  const drag = useRef(null)
+  const count = PAGES.length
 
-  const measure = useCallback(() => {
-    const t = track.current
-    if (!t) return
-    const n = Math.max(1, Math.round(t.scrollWidth / t.clientWidth))
-    setPages(n)
-    const max = t.scrollWidth - t.clientWidth
-    setPage(max > 0 ? Math.round((t.scrollLeft / max) * (n - 1)) : 0)
-  }, [])
+  const go = (n) => setPage(((n % count) + count) % count)
 
-  const go = useCallback((i) => {
-    const t = track.current
-    if (!t) return
-    const max = t.scrollWidth - t.clientWidth
-    const n = Math.max(1, Math.round(t.scrollWidth / t.clientWidth))
-    const target = ((i + n) % n) / Math.max(1, n - 1)
-    t.scrollTo({ left: target * max, behavior: 'smooth' })
-  }, [])
-
+  /* autoplay — only while on screen, not paused, and motion allowed */
   useEffect(() => {
-    const t = track.current
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(t)
-    t.addEventListener('scroll', measure, { passive: true })
-    const io = new IntersectionObserver(([e]) => (visible.current = e.isIntersecting), { threshold: 0.3 })
-    io.observe(root.current)
-    return () => {
-      ro.disconnect()
-      io.disconnect()
-      t.removeEventListener('scroll', measure)
-    }
-  }, [measure])
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const id = setInterval(() => {
-      if (!paused.current && visible.current && !document.hidden) go(page + 1)
+    if (paused || reducedMotion()) return
+    const el = root.current
+    let visible = false
+    let timer = 0
+    const io = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting
+    })
+    io.observe(el)
+    timer = setInterval(() => {
+      if (visible && !document.hidden) setPage((p) => (p + 1) % count)
     }, AUTOPLAY_MS)
-    return () => clearInterval(id)
-  }, [go, page])
+    return () => {
+      clearInterval(timer)
+      io.disconnect()
+    }
+  }, [paused, count, page])
 
-  const hold = (v) => () => (paused.current = v)
+  /* swipe: a horizontal drag of 50px or more turns the page */
+  const onPointerDown = (e) => {
+    drag.current = { x: e.clientX, y: e.clientY }
+  }
+  const onPointerUp = (e) => {
+    const d = drag.current
+    drag.current = null
+    if (!d) return
+    const dx = e.clientX - d.x
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(e.clientY - d.y)) go(page + (dx < 0 ? 1 : -1))
+  }
 
   return (
     <div
-      className="pc"
+      className="pcx"
       ref={root}
-      data-rise
       role="region"
       aria-roledescription="carousel"
-      aria-label="Key partners"
-      onMouseEnter={hold(true)}
-      onMouseLeave={hold(false)}
-      onFocus={hold(true)}
-      onBlur={hold(false)}
+      aria-label="Ecosystem partners"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
+      }}
+      onKeyDown={(e) => {
+        if (e.key === 'ArrowRight') go(page + 1)
+        if (e.key === 'ArrowLeft') go(page - 1)
+      }}
     >
-      <div className="pc__glow" aria-hidden="true">
-        <span />
-        <span />
-        <span />
+      <div className="pcx__viewport" onPointerDown={onPointerDown} onPointerUp={onPointerUp}>
+        <div className="pcx__track" style={{ transform: `translateX(${-page * 100}%)` }}>
+          {PAGES.map((items, p) => (
+            <ul
+              className={`pcx__page${p === page ? ' is-current' : ''}`}
+              key={p}
+              aria-label={`Page ${p + 1} of ${count}`}
+              aria-hidden={p !== page || undefined}
+              inert={p !== page ? '' : undefined}
+            >
+              {items.map(({ name, logo }, i) => (
+                <li className="pcx__tile" key={name} style={{ '--i': i }}>
+                  <span className="pcx__badge" style={{ '--float': `${4.2 + (i % 5) * 0.55}s`, '--delay': `${-(i * 0.7)}s` }}>
+                    {logo ? (
+                      <img className="pcx__logo" src={logo} alt="" loading="lazy" decoding="async" />
+                    ) : (
+                      <span className="pcx__mono" aria-hidden="true">
+                        {initials(name)}
+                      </span>
+                    )}
+                  </span>
+                  <span className="pcx__name">{name}</span>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
 
-      <ul className="pc__track" ref={track} tabIndex={0}>
-        {partners.map(({ name, logo }, i) => (
-          <li
-            className="pc__tile"
-            key={name}
-            style={{ '--i': i % 12 }}
-            onPointerMove={onTileMove}
-            onPointerLeave={onTileLeave}
-          >
-            <span className="pc__mark">
-              {logo ? (
-                <img className="eco__logo" src={logo} alt="" loading="lazy" decoding="async" />
-              ) : (
-                <span className={`eco__mono eco__mono--${TONES[i % TONES.length]}`} aria-hidden="true">
-                  {initials(name)}
-                </span>
-              )}
-            </span>
-            <span className="pc__name">{name}</span>
-          </li>
-        ))}
-        <li className="pc__tile pc__tile--more">
-          <span>And more partners joining every quarter.</span>
-          <a href={moreHref}>
-            Become a Partner <span aria-hidden="true">→</span>
-          </a>
-        </li>
-      </ul>
-
-      <div className="pc__nav">
-        <button type="button" className="pc__arrow" onClick={() => go(page - 1)} aria-label="Previous partners">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+      <div className="pcx__controls">
+        <button type="button" className="pcx__arrow" onClick={() => go(page - 1)} aria-label="Previous partners">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 5 8 12l7 7" />
+          </svg>
         </button>
-        <div className="pc__dots" role="tablist" aria-label="Choose a page">
-          {Array.from({ length: pages }, (_, i) => (
+        <div className="pcx__dots">
+          {PAGES.map((_, p) => (
             <button
-              key={i}
               type="button"
-              role="tab"
-              aria-selected={i === page}
-              aria-label={`Page ${i + 1} of ${pages}`}
-              className={`pc__dot${i === page ? ' is-on' : ''}`}
-              onClick={() => go(i)}
+              key={p}
+              className={`pcx__dot${p === page ? ' is-current' : ''}`}
+              onClick={() => go(p)}
+              aria-label={`Show page ${p + 1} of ${count}`}
+              aria-current={p === page || undefined}
             />
           ))}
         </div>
-        <button type="button" className="pc__arrow" onClick={() => go(page + 1)} aria-label="Next partners">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        <button type="button" className="pcx__arrow" onClick={() => go(page + 1)} aria-label="Next partners">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m9 5 7 7-7 7" />
+          </svg>
         </button>
       </div>
+
+      <p className="pcx__more">
+        And more partners joining every quarter.{' '}
+        <a href="#become-a-partner">
+          Become a Partner <span aria-hidden="true">→</span>
+        </a>
+      </p>
     </div>
   )
 }

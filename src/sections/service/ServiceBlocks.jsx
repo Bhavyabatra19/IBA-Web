@@ -27,7 +27,7 @@ import {
   reducedMotion,
 } from "../../lib/scroll";
 import { whileOnScreen } from "../../lib/scroll";
-import { currentPath, navigate, parseHref } from "../../lib/router";
+import { navigate, parseHref } from "../../lib/router";
 import { scrollToId } from "../../lib/scroll";
 import HeroArt from "../../components/HeroArt";
 import Closing from "../Closing";
@@ -46,7 +46,7 @@ export function Go({ href, className, children, ...rest }) {
     const { path, hash, external } = parseHref(href);
     if (external) return;
     e.preventDefault();
-    if (path && path !== currentPath()) {
+    if (path && path !== window.location.pathname) {
       navigate(href);
       return;
     }

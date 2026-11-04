@@ -36,7 +36,7 @@ export default function SectorExpertise() {
           ]}
         />
         <Panels items={SECTORS} />
-        <Cta label="Scope a Project With Us" />
+        <Cta label="Discuss your Project" />
       </Band>
     </ServicePage>
   )

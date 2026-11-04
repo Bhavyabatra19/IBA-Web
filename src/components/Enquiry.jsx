@@ -40,7 +40,6 @@ import {
   wantsEnquiry,
 } from '../lib/enquiryStore'
 import { lockScroll, unlockScroll } from '../lib/scroll'
-import { currentPath } from '../lib/router'
 
 /* Everything that can hold focus, in DOM order. The list is the standard one;
    `:not([disabled])` matters because the submit button IS disabled while a
@@ -73,7 +72,7 @@ export default function Enquiry() {
          the page would scroll away underneath the opening modal. Taking the
          click on the way down means the React handler never runs at all. */
       e.stopPropagation()
-      const page = contextFor(currentPath())
+      const page = contextFor(window.location.pathname)
       openEnquiry({
         /* the trigger's own topic wins; the page's is the fallback */
         topic: el.dataset.enquiry || page.topic,
@@ -88,7 +87,7 @@ export default function Enquiry() {
   /* ?enquiry=open, so a campaign or an email can link straight to the form. */
   useEffect(() => {
     if (wantsEnquiry()) {
-      const page = contextFor(currentPath())
+      const page = contextFor(window.location.pathname)
       openEnquiry({ topic: page.topic, phrase: page.phrase })
     }
   }, [])
@@ -171,10 +170,6 @@ export default function Enquiry() {
         aria-modal="true"
         aria-labelledby="enq-title"
         ref={panel}
-        /* lockScroll stops Lenis, and a stopped Lenis still takes every wheel
-           and touch event and cancels it — including the ones meant for this
-           panel's own overflow. This tells it to leave the panel's alone. */
-        data-lenis-prevent
       >
         <button type="button" className="enq__x" onClick={close} aria-label="Close">
           <svg viewBox="0 0 16 16" aria-hidden="true">

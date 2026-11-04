@@ -1,37 +1,20 @@
 /**
  * About — Vision and Mission, as two cards built like the home page's
- * Academia & Students cards (.wd--two): photo header toned into the brand,
- * tag and the lead line, then the opening of the copy clamped
- * to five lines and a Read more button, the icon in the corner; the whole text opens in a popup (a
+ * Academia & Students cards (.wd--two): photo header toned into the brand
+ * (no icon badge, as on the reference site), tag and the lead line, then the opening of the copy clamped
+ * to five lines and a Read more button; the whole text opens in a popup (a
  * native <dialog>: focus kept inside, Esc and the backdrop close it, the page
  * behind does not scroll). The photos load straight away (not lazily), as
  * this band sits right under the hero.
  *
  * Each card keeps its own anchor (#vision, #mission) for the nav links.
- * Photos: Unsplash, under the Unsplash License, saved in public/images:
- *   ab-vision.jpg   supplied artwork: a team around a holographic globe
- *   ab-mission.jpg  supplied artwork: a team around tokenized assets in glass cubes
+ * Images: the same art as the reference site, saved in public/images:
+ *   ab-vision-art.jpg    Vision: the team round a holographic globe
+ *   ab-mission-art.jpg   Mission: a strategy meeting over a corridor map
  */
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap, revealRise, reducedMotion, lockScroll, unlockScroll } from '../lib/scroll'
-
-/* line icons, drawn on a 48 grid in currentColor */
-const ICONS = {
-  vision: (
-    <>
-      <path d="M4 24s7.5-12 20-12 20 12 20 12-7.5 12-20 12S4 24 4 24Z" />
-      <circle cx="24" cy="24" r="6" />
-    </>
-  ),
-  mission: (
-    <>
-      <circle cx="24" cy="24" r="16" />
-      <circle cx="24" cy="24" r="9" />
-      <circle cx="24" cy="24" r="2.5" />
-    </>
-  ),
-}
 
 export default function VisionMission({ vision, mission }) {
   const root = useRef(null)
@@ -62,8 +45,8 @@ export default function VisionMission({ vision, mission }) {
   }, [open])
 
   const cards = [
-    { key: 'vision', tag: 'Our Vision', img: '/images/ab-vision.jpg', ...vision },
-    { key: 'mission', tag: 'Our Mission', img: '/images/ab-mission.jpg', ...mission },
+    { key: 'vision', tag: 'Our Vision', img: '/images/ab-vision-art.jpg', ...vision },
+    { key: 'mission', tag: 'Our Mission', img: '/images/ab-mission-art.jpg', ...mission },
   ]
 
   return (
@@ -99,12 +82,6 @@ export default function VisionMission({ vision, mission }) {
                 >
                   Read more <span aria-hidden="true">→</span>
                 </button>
-                {/* the icon in the card's bottom-right corner, as on the home cards */}
-                <span className="wd__badge wd__badge--inline" aria-hidden="true">
-                  <svg className="wd__icon" viewBox="0 0 48 48">
-                    {ICONS[c.key]}
-                  </svg>
-                </span>
               </div>
             </article>
           ))}

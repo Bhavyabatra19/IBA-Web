@@ -13,12 +13,14 @@ import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { CONTACT } from '../nav'
 import { waLink } from '../enquiry'
 
-/* each row opens the site's enquiry form already set to that topic */
+/* each row opens the site's enquiry form already set to the nearest of its
+   topics (enquiry.js has no Memberships or UAE Experience Center topic yet,
+   so those go to Ecosystem partnership and RWA Tokenization) */
 const TOPICS = [
   { label: 'Memberships', note: 'Exclusive Web3 access, experiences and opportunities', topic: 'Ecosystem partnership' },
   { label: 'Partnerships', note: 'Grow your brand and services in the IBA Web3 ecosystem', topic: 'Ecosystem partnership' },
   { label: 'Consulting and Advisory', note: 'Strategy, tokenization, execution and expansion, built to scale', topic: 'Consulting' },
-  { label: 'UAE Experience Center', note: 'Tokenize real-world assets and meet the right investors', topic: 'Red Club / Verifyble (institution)' },
+  { label: 'UAE Experience Center – The Block', note: 'Tokenize real-world assets and meet the right investors', topic: 'RWA Tokenization' },
   { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', topic: 'Red Club (learner)' },
 ]
 
@@ -55,13 +57,9 @@ export default function GetInTouch() {
           <p className="git__lede" data-rise>
             Connecting Economies. Block by Block.
             <br />
-            Talk to our team about memberships, corridors, consulting or the Red Club.
+            Talk to our team about consulting, tokenization, corridors, membership, the UAE
+            Experience Center or the Red Club.
           </p>
-          <div className="git__actions" data-rise>
-            <a className="git__btn git__btn--primary" href="#connect" data-enquiry="">
-              Connect With Us <span aria-hidden="true">→</span>
-            </a>
-          </div>
           {/* the direct lines, as three icon buttons — email, phone, WhatsApp;
               the address itself is the label (screen readers, hover tooltip) */}
           <ul className="git__lines git__lines--icons" data-rise>

@@ -23,10 +23,9 @@
  *    `pill` renders as the flagship. None of the three is a hand-written case
  *    here, so the bar follows nav.js wherever it goes.
  *
- * Member Login is not in the nav. It sits on the Memberships page, which the
- * Membership tab leads to, as a link to the sign-in form — not a modal: the
- * real forms are pages (7.2, 7.3), and a modal holding a second, shorter copy
- * of them is how the two versions start disagreeing.
+ * Member Login is a link to /library/sign-in, not a modal. It used to open one;
+ * the real forms are pages now (7.2, 7.3), and a modal holding a second, shorter
+ * copy of them is how the two versions start disagreeing.
  *
  * Connect With Us — in the bar and at the foot of the drawer — opens the 8.1
  * enquiry overlay. Neither button has a handler for it: both carry
@@ -45,7 +44,7 @@ import {
   lockScroll,
   unlockScroll,
 } from '../lib/scroll'
-import { currentPath, navigate, parseHref, usePath } from '../lib/router'
+import { navigate, parseHref, usePath } from '../lib/router'
 import { useEnquiry } from '../lib/enquiryStore'
 
 /** Line icons for the panel links (the `icon` field in nav.js), on a 24 grid. */
@@ -74,9 +73,6 @@ const ICONS = {
 /** Whether a tab has anything to disclose — flat items or grouped ones. */
 const hasPanel = (tab) => tabItems(tab).length > 0
 
-/** Where a tab sits in the mobile drawer. Everything without a flag keeps its
-    order in NAV, because Array.prototype.sort is stable. */
-const drawerRank = (tab) => (tab.top ? 0 : tab.pill ? 1 : 2)
 
 export default function Nav() {
   const root = useRef(null)
@@ -222,7 +218,7 @@ export default function Nav() {
 
     /* A page change: App handles the scroll once the new page has laid out,
        since there is nothing here to scroll to yet. */
-    if (path && path !== currentPath()) {
+    if (path && path !== window.location.pathname) {
       navigate(href)
       return
     }
@@ -317,14 +313,10 @@ export default function Nav() {
             ))}
           </nav>
 
+          {/* The bar's one action (by request). Member Login moved under the
+              Memberships tab. */}
           <div className="nav__util">
-            {/* One action in the bar. Member Login moved to the Memberships
-                page, which the Membership tab leads to. */}
-            <a
-              className="btn btn--primary btn--sm"
-              href="/connect"
-              data-enquiry=""
-            >
+            <a className="btn btn--primary btn--sm" href="/connect" data-enquiry="">
               Connect With Us
             </a>
           </div>
@@ -357,12 +349,14 @@ export default function Nav() {
               <div className="nav__panelGroups">
                 {(panel.groups || [{ title: panel.label, items: panel.items }]).map((g, i) => (
                   <div className="nav__panelGroup" key={g.title || i}>
-                    {/* an untitled group keeps the heading's space, so its
-                        links line up with the columns beside it */}
+                    {/* a group without a heading keeps the heading's space, so
+                        its links line up with the groups beside it */}
                     {g.title ? (
                       <h3 className="nav__panelGroupTitle">{g.title}</h3>
                     ) : (
-                      <div className="nav__panelGroupTitle" aria-hidden="true">&nbsp;</div>
+                      <div className="nav__panelGroupTitle" aria-hidden="true">
+                        {' '}
+                      </div>
                     )}
                     <ul className="nav__panelList">
                       {g.items.map((it) => (
@@ -417,14 +411,9 @@ export default function Nav() {
 
       {/* ---------------------------- mobile ---------------------------- */}
       <div className="drawer" id="nav-drawer" data-open={drawer ? '' : undefined} hidden={!drawer}>
-        {/* Home, then the flagship, then the rest in their bar order — the
-            brief puts Web3 Corridor above the others here, where the bar puts
-            it last, and Home belongs at the top of a menu wherever it appears.
-            Sorted rather than reordered in the tree, so the bar keeps its own
-            order, and ranked from the data so neither position is a key this
-            file has to recognise. */}
+        {/* the tabs in the same order as the desktop bar (by request) */}
         <div className="drawer__scroll">
-          {[...NAV].sort((a, b) => drawerRank(a) - drawerRank(b)).map((tab) => {
+          {NAV.map((tab) => {
             const items = tabItems(tab)
             /* No panel to disclose, so no accordion — just the destination. */
             if (!items.length) {
@@ -488,6 +477,8 @@ export default function Nav() {
           })}
         </div>
 
+        {/* the foot of the mobile menu keeps Connect With Us; Member Login is
+            under Memberships above (by request) */}
         <div className="drawer__foot">
           <a
             className="btn btn--primary btn--block"

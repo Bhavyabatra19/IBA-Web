@@ -109,7 +109,7 @@ export default function KnowledgeBase() {
             Open Knowledge Base
           </p>
           <h2 className="kb__title" id="kb-title" data-rise>
-            Open to the Community
+            Powered by the Community
           </h2>
           <p className="kb__lede" data-rise>
             An open-source knowledge base of articles, videos, research and policy

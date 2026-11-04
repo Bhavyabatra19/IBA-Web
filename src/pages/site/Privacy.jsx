@@ -1,20 +1,8 @@
-/**
- * Privacy Policy — a basic notice describing what the site actually does.
- *
- * Written against the site as built: the forms open the reader's own email
- * app (there is no form backend), nothing is stored in the browser on the
- * routed pages, and there are no analytics or advertising scripts. When any
- * of that changes (a form endpoint, analytics, member accounts) this page
- * must change with it. ⚠ Have it reviewed by IBA's legal counsel before
- * launch; it is a starting point, not legal advice.
- */
+/** Privacy Policy — the text as published at iba-web-sd4a.vercel.app/privacy. */
 
 import { PageHero, Section, Bullets } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 
-const UPDATED = '20 October 2026'
-
-/** The policy, one block per heading, in reading order. */
 const SECTIONS = [
   {
     id: 'who-we-are',
@@ -37,9 +25,7 @@ const SECTIONS = [
     id: 'how-forms-work',
     title: 'How Our Forms Work',
     paras: [
-      'Our forms do not send anything to a server. When you submit one, your own email app opens with your details written into a message to ' +
-        CONTACT.email.label +
-        '. Nothing reaches us unless you press send, and you can review or change the message first. If you attach a document, you attach it to that email yourself.',
+      `Our forms do not send anything to a server. When you submit one, your own email app opens with your details written into a message to ${CONTACT.email.label}. Nothing reaches us unless you press send, and you can review or change the message first. If you attach a document, you attach it to that email yourself.`,
     ],
   },
   {
@@ -51,7 +37,7 @@ const SECTIONS = [
       'To send you IBA research and event updates, only if you have asked for them. You can unsubscribe at any time.',
       'To keep the website secure and working.',
     ],
-    after: 'We do not sell your personal information, and we do not use it for advertising.',
+    after: ['We do not sell your personal information, and we do not use it for advertising.'],
   },
   {
     id: 'sharing',
@@ -103,7 +89,22 @@ const SECTIONS = [
 export default function Privacy() {
   return (
     <div>
-      <PageHero id="privacy-page" eyebrow={`Last updated ${UPDATED}`} title="Privacy Policy" lede="How India Blockchain Alliance collects, uses and protects the information you share with us through this website." />
+      <PageHero
+        id="privacy-page"
+        eyebrow={
+          <>
+            <span className="pv-shield" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2.8 19.5 5.6v5.9c0 4.6-3.1 8.4-7.5 9.7-4.4-1.3-7.5-5.1-7.5-9.7V5.6L12 2.8Z" />
+                <path d="M8.6 12.1l2.4 2.4 4.6-4.8" />
+              </svg>
+            </span>
+            Last updated 20 October 2026
+          </>
+        }
+        title="Privacy Policy"
+        lede="How India Blockchain Alliance collects, uses and protects the information you share with us through this website."
+      />
 
       <section className="band band--light pv" aria-label="Privacy Policy">
         <article className="pv__doc">
@@ -112,21 +113,36 @@ export default function Privacy() {
               <h2>{s.title}</h2>
               {s.paras?.map((p) => <p key={p}>{p}</p>)}
               {s.list && <Bullets items={s.list} />}
-              {s.after && <p>{s.after}</p>}
+              {s.after?.map((p) => <p key={p}>{p}</p>)}
             </section>
           ))}
         </article>
       </section>
 
-      <Section id="privacy-contact" title="Contact Us" lede="Questions about this policy or your information? Get in touch.">
-        <ul className="pk-lines">
+      <Section id="privacy-contact" center title="Contact Us" lede="Questions about this policy or your information? Get in touch.">
+        <ul className="pvc">
           <li data-rise>
-            <span>Email</span>
-            <a href={`mailto:${CONTACT.email.label}?subject=${encodeURIComponent('Privacy request')}`}>{CONTACT.email.label}</a>
+            <a className="pvc__card" href={`mailto:${CONTACT.email.label}?subject=${encodeURIComponent('Privacy request')}`}>
+              <span className="pvc__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3.5 6.5 8.5 6.5 8.5-6.5" />
+                </svg>
+              </span>
+              <span className="pvc__label">Email</span>
+              <span className="pvc__value">{CONTACT.email.label}</span>
+            </a>
           </li>
           <li data-rise>
-            <span>Phone</span>
-            <a href={CONTACT.phone.href}>{CONTACT.phone.label}</a>
+            <a className="pvc__card" href={CONTACT.phone.href}>
+              <span className="pvc__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 3.5h3.2l1.6 4.2-2.1 1.3a11 11 0 0 0 5.3 5.3l1.3-2.1 4.2 1.6V17a2.5 2.5 0 0 1-2.7 2.5C9.6 19 5 14.4 4.5 6.2A2.5 2.5 0 0 1 5 3.5Z" />
+                </svg>
+              </span>
+              <span className="pvc__label">Phone</span>
+              <span className="pvc__value">{CONTACT.phone.label}</span>
+            </a>
           </li>
         </ul>
       </Section>
