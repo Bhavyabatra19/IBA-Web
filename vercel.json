@@ -9,6 +9,11 @@
       "source": "/red-club/students",
       "destination": "/red-club/learners",
       "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -21,7 +26,7 @@
       "destination": "/assets/:path*"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/|admin/).*)",
       "destination": "/index.html"
     }
   ]

@@ -7,19 +7,18 @@
  * KIND of item it is — article, recording, report — since that is what a
  * reader decides on first.
  *
- * Items: real coverage of IBA and its founder (by request, 11-04-2026), each
- * opening the source in a new tab. The tag is the platform; the icon and the
+ * Items: the featured entries of the shared resources list (src/data/
+ * resources.json, edited in the admin console at /admin), each opening the
+ * source in a new tab. The tag is the platform; the icon and the
  * meta line give the format. Thumbnails are the client's artwork
  * (public/images/kb-*.jpg, cut from their six-up sheet), each carrying its
  * own headline, so the card frame takes their shape and never crops them.
  *
- * ⚠ The CoinGeek date is to confirm: the source pages could not be opened
- * when this was set. Headlines for the YouTube, Yahoo Finance and World
- * Biogas items follow the client's thumbnail artwork.
  */
 
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
+import RESOURCES from '../data/resources.json'
 
 /* format icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -62,70 +61,34 @@ const ICONS = {
   ),
 }
 
-const ITEMS = [
-  {
-    kind: 'article',
-    format: 'Article',
-    platform: 'Voyagers World',
-    title: 'From Crypto to Credibility: Raj Kapoor’s Blockchain Vision for India',
-    body: 'How IBA’s founder makes the case for blockchain beyond crypto, and for India as a credible leader in the technology.',
-    date: '18 Aug 2025',
-    img: '/images/kb-voyagers-vision.jpg',
-    href: 'https://voyagersworld.in/2025/08/18/from-crypto-to-credibility-raj-kapoors-blockchain-vision-for-india/',
-    tint: 'red',
-  },
-  {
-    kind: 'interview',
-    format: 'Video Interview',
-    platform: 'CoinGeek',
-    title: 'IBA Founder Raj Kapoor: India Can Dominate Web3 Despite Past Missed Opportunities',
-    body: 'On CoinGeek Backstage: India missed the Web1 and Web2 buses, but has the talent and resources to lead Web3.',
-    date: '2023',
-    img: '/images/kb-coingeek-web3.jpg',
-    href: 'https://coingeek.com/iba-founder-raj-kapoor-india-can-dominate-web3-despite-past-missed-opportunities-in-internet-evolution-video/',
-    tint: 'ink',
-  },
-  {
-    kind: 'webinar',
-    format: 'Video',
-    platform: 'YouTube',
-    title: 'Raj Kapoor on India, Web3 and the Future of Blockchain',
-    body: 'IBA’s founder on India’s place in Web3, the alliance’s mission and where blockchain goes next.',
-    img: '/images/kb-youtube-talk.jpg',
-    href: 'https://www.youtube.com/watch?v=O9NtJdbwEXE',
-    tint: 'deep',
-  },
-  {
-    kind: 'press',
-    format: 'Press Release',
-    platform: 'EIN Presswire',
-    title: 'The STO Foundation (Tokenized Asset Foundation) Appoints Raj Kapoor as Chief Strategy Advisor',
-    body: 'The Tokenized Asset Foundation names IBA’s founder, a global blockchain and AI leader, as its Chief Strategy Advisor.',
-    img: '/images/kb-sto-foundation.jpg',
-    href: 'https://www.einpresswire.com/article/936353469/the-sto-foundation-tokenized-asset-foundation-appoints-global-blockchain-ai-leader-raj-kapoor-as-chief-strategy-advisor',
-    tint: 'warm',
-  },
-  {
-    kind: 'article',
-    format: 'News',
-    platform: 'Yahoo Finance',
-    title: 'India Blockchain Alliance: Raj Kapoor’s Mission to Accelerate India’s Blockchain Ecosystem',
-    body: 'How IBA’s founder is building the alliance to accelerate blockchain adoption and talent across India.',
-    img: '/images/kb-yahoo-iba.jpg',
-    href: 'https://finance.yahoo.com/news/india-blockchain-alliance-raj-kapoor-123000487.html',
-    tint: 'red',
-  },
-  {
-    kind: 'profile',
-    format: 'Profile',
-    platform: 'World Biogas Association',
-    title: 'Clean Energy Meets Innovation: Raj Kapoor on Biogas, Sustainability and the Blockchain Opportunity',
-    body: 'IBA’s founder with the World Biogas Association, on where clean energy, sustainability and blockchain meet.',
-    img: '/images/kb-wba-profile.jpg',
-    href: 'https://www.worldbiogasassociation.org/raj-kapoor/',
-    tint: 'ink',
-  },
-]
+/* The items: the featured entries of the shared resources list
+   (src/data/resources.json), edited at /admin. Up to six, in list order. */
+const ICON_FOR = {
+  'Video Interview': 'interview',
+  Podcast: 'interview',
+  Video: 'webinar',
+  'Webinar / Recording': 'webinar',
+  'Report / Whitepaper': 'report',
+  'Press Release': 'press',
+  Profile: 'profile',
+}
+const fmtDate = (d) =>
+  d ? new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : ''
+const TINTS = ['red', 'ink', 'deep', 'warm']
+const ITEMS = RESOURCES.items
+  .filter((r) => r.featured)
+  .slice(0, 6)
+  .map((r, i) => ({
+    kind: ICON_FOR[r.format] || 'article',
+    format: r.format,
+    platform: r.platform,
+    title: r.title,
+    body: r.summary,
+    date: fmtDate(r.date),
+    img: r.thumbnail,
+    href: r.link,
+    tint: TINTS[i % TINTS.length],
+  }))
 
 export default function KnowledgeBase() {
   const root = useRef(null)

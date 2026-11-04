@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>IBA Admin · Resources</title>
+    <link rel="icon" href="/iba-logo.webp" />
+    <!--
+      The IBA admin console (Decap CMS). It edits src/data/resources.json —
+      the one list behind the Resources library and the home page's
+      knowledge base — and uploads thumbnails to public/images/resources.
+      Every save is a commit to GitHub; Vercel then redeploys the site.
+      Sign-in is GitHub OAuth through /api/auth and /api/callback (see
+      ADMIN.md for the one-time setup).
+    -->
+    <script>window.CMS_MANUAL_INIT = true</script>
+    <script src="https://unpkg.com/decap-cms@3.17.1/dist/decap-cms.js"></script>
+  </head>
+  <body>
+    <script>
+      var FORMATS = ['Article', 'News', 'Video', 'Video Interview', 'Webinar / Recording', 'Podcast',
+        'Report / Whitepaper', 'Case Study', 'Playbook', 'Press Release', 'Profile']
+      var TOPICS = ['Leadership & Vision', 'Policy & Regulation', 'Tokenization & RWA', 'Web3 Corridor',
+        'Knowledge & Skilling', 'Enterprise Blockchain', 'AI & Emerging Tech', 'ESG & Sustainability',
+        'Data Security & Digital Assets', 'Sector Deep Dives']
+      var LEVELS = ['Introductory', 'Practitioner', 'Advanced']
+
+      CMS.init({
+        config: {
+          load_config_file: false,
+          backend: {
+            name: 'github',
+            repo: 'Bhavyabatra19/IBA-Web',
+            branch: 'main',
+            base_url: window.location.origin,
+            auth_endpoint: 'api/auth',
+            commit_messages: {
+              update: 'Resources: update {{slug}} (admin console)',
+              uploadMedia: 'Resources: upload {{path}} (admin console)',
+            },
+          },
+          site_url: window.location.origin,
+          display_url: window.location.origin,
+          logo_url: '/iba-logo.webp',
+          media_folder: 'public/images/resources',
+          public_folder: '/images/resources',
+          collections: [
+            {
+              name: 'resources',
+              label: 'Resources',
+              description:
+                'The Resources library and the home page knowledge base. Every item needs a title, summary, link and thumbnail. Switch on “Feature on the home page” for up to six items; the library shows them all.',
+              editor: { preview: false },
+              files: [
+                {
+                  name: 'library',
+                  label: 'Resources library & home page hub',
+                  file: 'src/data/resources.json',
+                  fields: [
+                    {
+                      name: 'items',
+                      label: 'Resources',
+                      label_singular: 'Resource',
+                      widget: 'list',
+                      min: 1,
+                      collapsed: true,
+                      summary: '{{fields.title}} · {{fields.platform}}',
+                      fields: [
+                        { name: 'title', label: 'Title', widget: 'string', required: true },
+                        {
+                          name: 'summary',
+                          label: 'Summary',
+                          widget: 'text',
+                          required: true,
+                          hint: 'One or two sentences on what the reader will find.',
+                        },
+                        {
+                          name: 'link',
+                          label: 'Link',
+                          widget: 'string',
+                          required: true,
+                          pattern: ['^https?://\\S+$', 'Enter the full link, starting with https://'],
+                          hint: 'Opens in a new tab when the card is clicked.',
+                        },
+                        {
+                          name: 'thumbnail',
+                          label: 'Thumbnail',
+                          widget: 'image',
+                          required: true,
+                          choose_url: false,
+                          hint: 'JPG or PNG, about 1084 × 924 px (the cards show it at 542:462, uncropped).',
+                        },
+                        { name: 'platform', label: 'Platform', widget: 'string', required: true, hint: 'Shown as the tag, e.g. CoinGeek, YouTube, IBA Original.' },
+                        { name: 'format', label: 'Format', widget: 'select', options: FORMATS, required: true },
+                        { name: 'topic', label: 'Topic', widget: 'select', options: TOPICS, required: true },
+                        { name: 'level', label: 'Level', widget: 'select', options: LEVELS, default: 'Introductory', required: true },
+                        {
+                          name: 'date',
+                          label: 'Date published',
+                          widget: 'datetime',
+                          required: false,
+                          format: 'YYYY-MM-DD',
+                          date_format: 'DD MMM YYYY',
+                          time_format: false,
+                          default: '',
+                        },
+                        {
+                          name: 'featured',
+                          label: 'Feature on the home page',
+                          widget: 'boolean',
+                          default: false,
+                          required: false,
+                          hint: 'The home page shows the first six featured items, in list order.',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      })
+    </script>
+  </body>
+</html>
