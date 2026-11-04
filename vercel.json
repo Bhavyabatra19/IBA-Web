@@ -4,6 +4,11 @@
       "source": "/memberships",
       "destination": "/corridor#web360",
       "permanent": false
+    },
+    {
+      "source": "/red-club/students",
+      "destination": "/red-club/learners",
+      "permanent": true
     }
   ],
   "rewrites": [

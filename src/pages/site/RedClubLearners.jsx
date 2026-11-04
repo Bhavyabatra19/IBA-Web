@@ -1,13 +1,13 @@
 /**
- * IBA Red Club for students (/red-club/students) — the "Know more" page
- * behind the overview's students door: the student advantage, what members
- * get, the member journey and the wider student ecosystem. Copy in
+ * IBA Red Club for learners (/red-club/learners) — the "Know more" page
+ * behind the overview's learners door: the learner advantage, what members
+ * get, the member journey and the wider learner ecosystem. Copy in
  * redClubContent.js.
  */
 
 import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { Go, Steps, Faq } from '../../sections/service/ServiceBlocks'
-import { LEARNER, STUDENT_BENEFITS, MEMBER_JOURNEY, STUDENT_ECOSYSTEM, WHO, FAQ } from './redClubContent'
+import { LEARNER, LEARNER_BENEFITS, MEMBER_JOURNEY, LEARNER_ECOSYSTEM, WHO, FAQ } from './redClubContent'
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
@@ -20,27 +20,27 @@ const JUMP = [
   ['/red-club/institutions', 'For Institutions →'],
 ]
 
-const STUDENT_FAQ = FAQ.filter((f) =>
+const LEARNER_FAQ = FAQ.filter((f) =>
   ['Do I need prior blockchain experience?', 'Are internships and placements guaranteed?', 'What can members gain?'].includes(f.q)
 )
 
-/* the "Who it's for" card for students and emerging talent, with its list */
-const STUDENT_GETS = WHO.filter((w) => w.title === 'Students & emerging talent').concat(
+/* the "Who it's for" cards for learners and emerging talent, with their lists */
+const LEARNER_GETS = WHO.filter((w) => w.title === 'Learners & emerging talent').concat(
   WHO.filter((w) => w.title === 'Developers & technologists')
 )
 
-export default function RedClubStudents() {
+export default function RedClubLearners() {
   return (
     <div>
       <PageHero
-        id="red-club-students"
+        id="red-club-learners"
         aside={
           <div className="rc-hero-art" aria-hidden="true">
             <img src="/images/ac-students.jpg" alt="" decoding="async" fetchpriority="high" />
           </div>
         }
-        eyebrow="IBA Red Club · For Students"
-        title="Students build the future."
+        eyebrow="IBA Red Club · For Learners"
+        title="Learners build the future."
         lede="From classroom knowledge to industry-ready capability: a structured combination of learning, applied projects, mentoring, career support and international exposure."
         actions={
           <>
@@ -48,7 +48,7 @@ export default function RedClubStudents() {
               Enquire About Membership <Arrow />
             </Btn>
             <Btn href="#rc-advantage" variant="ghost">
-              Discover Student Opportunities
+              Discover Learner Opportunities
             </Btn>
           </>
         }
@@ -64,11 +64,11 @@ export default function RedClubStudents() {
 
       <Section
         id="rc-advantage"
-        eyebrow="Student advantage"
+        eyebrow="Learner advantage"
         title="From classroom knowledge to industry-ready capability"
-        lede="Students can engage with a structured combination of learning, applied projects, mentoring, career support and international exposure."
+        lede="Learners can engage with a structured combination of learning, applied projects, mentoring, career support and international exposure."
       >
-        <Cards cols={4} items={STUDENT_BENEFITS} />
+        <Cards cols={4} items={LEARNER_BENEFITS} />
       </Section>
 
       <Section
@@ -78,7 +78,7 @@ export default function RedClubStudents() {
         title="For curious minds and builders"
         lede="Whether you're exploring Web3 or already building, Red Club is a place to learn, contribute and grow."
       >
-        <Cards cols={2} items={STUDENT_GETS} />
+        <Cards cols={2} items={LEARNER_GETS} />
       </Section>
 
       <Section
@@ -90,12 +90,12 @@ export default function RedClubStudents() {
         <Steps items={MEMBER_JOURNEY} />
       </Section>
 
-      <Section id="rc-ecosystem" eyebrow="Extended student ecosystem" title="Digital credentials, communities and career tools">
-        <Cards cols={3} items={STUDENT_ECOSYSTEM} />
+      <Section id="rc-ecosystem" eyebrow="Extended learner ecosystem" title="Digital credentials, communities and career tools">
+        <Cards cols={3} items={LEARNER_ECOSYSTEM} />
       </Section>
 
       <Section id="rc-faq" eyebrow="Frequently asked" title="Good to know.">
-        <Faq items={STUDENT_FAQ} />
+        <Faq items={LEARNER_FAQ} />
       </Section>
 
       <Section

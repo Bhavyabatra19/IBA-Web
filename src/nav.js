@@ -216,7 +216,7 @@ export const NAV = [
           /* no separate matrix section yet: the Web360 tiers set out what each includes */
           { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#web360' },
           { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/corridor#ecosystem-members' },
-          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and students.', href: '/corridor#cohort-memberships' },
+          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and learners.', href: '/corridor#cohort-memberships' },
         ],
       },
     ],

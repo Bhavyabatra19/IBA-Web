@@ -1,7 +1,7 @@
 /**
  * IBA Red Club — the overview: what Red Club is, what members get and who
  * it is for, then a door each to the detail for institutions and for
- * students (/red-club/institutions, /red-club/students). Kept short by
+ * learners (/red-club/institutions, /red-club/learners). Kept short by
  * request; the rest of the reference copy lives on those two pages. Copy in
  * redClubContent.js.
  */
@@ -25,12 +25,12 @@ const DOORS = [
     tag: 'For individual learners',
     title: 'From curiosity to industry-ready capability',
     text: 'Programmes, live projects, mentors, career support and verifiable credentials for anyone building Web3 skills, whether you are studying, working or starting out.',
-    href: '/red-club/students',
+    href: '/red-club/learners',
     cta: 'Know more',
   },
 ]
 
-/* the general questions; the institution and student ones are on their pages */
+/* the general questions; the institution and learner ones are on their pages */
 const OVERVIEW_FAQ = FAQ.filter((f) =>
   ['Who can join Red Club?', 'Do I need prior blockchain experience?', 'What can members gain?', 'How is Red Club connected to IBA?'].includes(f.q)
 )
@@ -50,17 +50,17 @@ export default function RedClub() {
           <>
             Where institutions lead.
             <br />
-            Students build the future.
+            Learners build the future.
           </>
         }
-        lede="The IBA Red Club Experience Centers connect universities, educators and students to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways."
+        lede="The IBA Red Club Experience Centers connect universities, educators and learners to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways."
         actions={
           <>
             <Btn href="/red-club/institutions">
               For Institutions <Arrow />
             </Btn>
-            <Btn href="/red-club/students" variant="ghost">
-              For Students
+            <Btn href="/red-club/learners" variant="ghost">
+              For Learners
             </Btn>
           </>
         }
@@ -70,7 +70,7 @@ export default function RedClub() {
         id="rc-about"
         eyebrow="About Red Club"
         title="Where the next wave of Web3 talent comes together."
-        lede="Red Club is a learning, collaboration and opportunity network within the India Blockchain Alliance ecosystem, and its institution-facing skills and innovation initiative within the IBA Web3 Corridor: a launchpad for students, developers, professionals, founders and entrepreneurs who want to take an active role in building the Web3 economy."
+        lede="Red Club is a learning, collaboration and opportunity network within the India Blockchain Alliance ecosystem, and its institution-facing skills and innovation initiative within the IBA Web3 Corridor: a launchpad for learners, developers, professionals, founders and entrepreneurs who want to take an active role in building the Web3 economy."
       >
         <Cards cols={4} items={HIGHLIGHTS} />
       </Section>

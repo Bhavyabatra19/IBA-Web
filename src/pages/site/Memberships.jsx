@@ -1,6 +1,6 @@
 /**
  * Memberships — the Web360 Club tiers, the ecosystem members' services, and
- * the cohort memberships for institutes and students. No page of its own:
+ * the cohort memberships for institutes and learners. No page of its own:
  * the Web3 Corridor page renders these sections as its membership block
  * (by request, 11-04-2026), and /memberships redirects there.
  *
@@ -71,7 +71,7 @@ const PARTNERS = [
 
 const COHORTS = [
   { name: 'Red Club Experience Zone', who: 'B2B · For institutes' },
-  { name: 'Student Experience', who: 'For students' },
+  { name: 'Learner Experience', who: 'For learners' },
   { name: 'Membership 03', who: '' },
   { name: 'Membership 04', who: '' },
 ]
@@ -155,8 +155,8 @@ export default function MembershipSections() {
       <Section
         id="cohort-memberships"
         eyebrow="Cohort Memberships"
-        title="Memberships for institutes and their students"
-        lede="Cohort memberships through the IBA Red Club Experience Zone, for institutes and the students they enrol. Details are coming soon."
+        title="Memberships for institutes and their learners"
+        lede="Cohort memberships through the IBA Red Club Experience Zone, for institutes and the learners they enrol. Details are coming soon."
       >
         <CardRail label="Cohort memberships" cols={4}>
           {COHORTS.map((c) => (

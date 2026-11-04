@@ -31,11 +31,11 @@ const JUMP = [
   ['#rc-centers', 'Experience Centers'],
   ['#rc-membership', 'Membership'],
   ['#rc-operating-model', 'How It Works'],
-  ['/red-club/students', 'For Students →'],
+  ['/red-club/learners', 'For Learners →'],
 ]
 
 const INSTITUTION_FAQ = FAQ.filter((f) =>
-  ['Is Red Club only for students?', 'Are all labs and certifications included in membership?', 'How does the Red Club connect to the Web3 Corridor?'].includes(f.q)
+  ['Is Red Club only for learners?', 'Are all labs and certifications included in membership?', 'How does the Red Club connect to the Web3 Corridor?'].includes(f.q)
 )
 
 export default function RedClubInstitutions() {
@@ -50,7 +50,7 @@ export default function RedClubInstitutions() {
         }
         eyebrow="IBA Red Club · For Institutions"
         title="Where institutions lead."
-        lede="More than a campus club, an institutional growth platform: Red Club positions participating institutions as emerging-technology enablers, connects academic programmes with industry requirements and supports meaningful student outcomes."
+        lede="More than a campus club, an institutional growth platform: Red Club positions participating institutions as emerging-technology enablers, connects academic programmes with industry requirements and supports meaningful learner outcomes."
         actions={
           <>
             <Btn enquiry={INSTITUTION}>
@@ -85,7 +85,7 @@ export default function RedClubInstitutions() {
         tone="dark"
         eyebrow="Institutional advantage"
         title="More than a campus club. An institutional growth platform."
-        lede="The Red Club model is designed to position participating institutions as emerging-technology enablers, connect academic programmes with industry requirements and support meaningful student outcomes."
+        lede="The Red Club model is designed to position participating institutions as emerging-technology enablers, connect academic programmes with industry requirements and support meaningful learner outcomes."
       >
         <Cards cols={4} items={INSTITUTION_BENEFITS} />
         <SubHead lede="Leadership in emerging-tech innovation, credible industry research papers, opportunities for joint technology patents, technology entrepreneurship programmes, consulting engagements and international pathways.">
@@ -95,9 +95,9 @@ export default function RedClubInstitutions() {
 
       <Section
         id="rc-journey"
-        eyebrow="The institution-to-student connection"
+        eyebrow="The institution-to-learner connection"
         title="One connected journey. Shared outcomes."
-        lede="As an institution builds its Red Club capabilities, students gain access to a more practical and connected learning environment."
+        lede="As an institution builds its Red Club capabilities, learners gain access to a more practical and connected learning environment."
       >
         <Steps items={CONNECTED_JOURNEY} />
       </Section>
@@ -153,7 +153,7 @@ export default function RedClubInstitutions() {
         title="Clear responsibilities for a functioning campus partnership"
       >
         <Groups items={OPERATING_MODEL} cols={2} />
-        <SubHead lede="IBA supplies programme, project and ecosystem capabilities; the institution enables campus infrastructure, faculty engagement and student participation. Together, they can create a sustained bridge from academic learning to industry practice.">
+        <SubHead lede="IBA supplies programme, project and ecosystem capabilities; the institution enables campus infrastructure, faculty engagement and learner participation. Together, they can create a sustained bridge from academic learning to industry practice.">
           Practical partnership model
         </SubHead>
       </Section>
@@ -176,14 +176,14 @@ export default function RedClubInstitutions() {
         tone="red"
         eyebrow="Build the next generation of Web3 talent"
         title="Bring the IBA Red Club to your institution."
-        lede="Explore an Experience Center, tailor emerging-technology programmes and connect your students to a broader industry and global learning ecosystem."
+        lede="Explore an Experience Center, tailor emerging-technology programmes and connect your learners to a broader industry and global learning ecosystem."
       >
         <div className="pk-actions" data-rise>
           <Btn enquiry={INSTITUTION}>
             Enquire About Partnership <Arrow />
           </Btn>
-          <Btn href="/red-club/students" variant="ghost">
-            See What Students Get
+          <Btn href="/red-club/learners" variant="ghost">
+            See What Learners Get
           </Btn>
         </div>
       </Section>

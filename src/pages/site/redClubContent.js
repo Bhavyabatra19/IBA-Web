@@ -1,8 +1,8 @@
 /**
  * IBA Red Club — the copy for the overview (/red-club) and its two detail
- * pages (/red-club/institutions, /red-club/students), from the client's two
+ * pages (/red-club/institutions, /red-club/learners), from the client's two
  * reference pages (11-04-2026): "IBA Red Club · Web3 Corridor" (the
- * institution and student programme) and "Red Club smart webpage" (the
+ * institution and learner programme) and "Red Club smart webpage" (the
  * community and membership journey).
  */
 
@@ -33,7 +33,7 @@ export const EXPERIENCE = [
 
 export const WHO = [
   {
-    title: 'Students & emerging talent',
+    title: 'Learners & emerging talent',
     text: 'For curious minds ready to develop future-facing skills and discover career pathways.',
     list: ['Foundational and applied Web3 learning', 'Mentorship and peer community', 'Exposure to industry use cases and projects'],
   },
@@ -69,10 +69,10 @@ export const INSTITUTION_BENEFITS = [
   { title: 'Joint certifications', text: 'Explore professional certification and joint credential opportunities.' },
   { title: 'International participation', text: 'Engage in global events, overseas academic sessions and networking.' },
   { title: 'Blockchain-enabled university', text: 'Explore blockchain credentialing and digitally verifiable achievements.' },
-  { title: 'Campus placement support', text: 'Connect student readiness with internships, career assistance and placement recommendations.' },
+  { title: 'Campus placement support', text: 'Connect learner readiness with internships, career assistance and placement recommendations.' },
 ]
 
-export const STUDENT_BENEFITS = [
+export const LEARNER_BENEFITS = [
   { num: 'Learn', title: 'World-class programmes', text: 'Technical and non-technical blockchain training, integrated modules, diploma pathways and professional certifications.' },
   { num: 'Build', title: 'Live projects', text: 'Industry cases, capstones, problem statements and hands-on project opportunities.' },
   { num: 'Experience', title: 'Internships', text: 'Virtual and on-site opportunities, including domestic and international pathways.' },
@@ -86,14 +86,14 @@ export const STUDENT_BENEFITS = [
 export const CONNECTED_JOURNEY = [
   { n: '01', name: 'Institution joins', body: 'Establish Red Club participation and objectives.' },
   { n: '02', name: 'Campus activates', body: 'Coordinate faculty, infrastructure and programmes.' },
-  { n: '03', name: 'Students learn', body: 'Expert-led modules, certifications and lab exploration.' },
-  { n: '04', name: 'Students build', body: 'Projects, research, hackathons and internships.' },
+  { n: '03', name: 'Learners upskill', body: 'Expert-led modules, certifications and lab exploration.' },
+  { n: '04', name: 'Learners build', body: 'Projects, research, hackathons and internships.' },
   { n: '05', name: 'Talent connects', body: 'Mentoring, career support and global pathways.' },
 ]
 
 export const CENTERS = [
   { title: 'Training', text: 'Certified technical and non-technical learning programmes across blockchain concepts.' },
-  { title: 'Projects', text: 'Live assignments for enrolled certification students and collaborative problem solving.' },
+  { title: 'Projects', text: 'Live assignments for enrolled certification learners and collaborative problem solving.' },
   { title: 'Research', text: 'Blockchain-related research, consulting and academic-industry projects.' },
   { title: 'Placements', text: 'Domestic and international placement recommendations and assistance.' },
 ]
@@ -112,8 +112,8 @@ export const PROGRAMMES = [
   { title: 'Applied impact', text: 'Live online sessions, industry case studies, capstone projects, hands-on practice and current skillsets.' },
 ]
 
-export const STUDENT_ECOSYSTEM = [
-  { title: 'IBA Student Clubs', text: 'Access to labs and sandbox environments for experimentation with tokenization, blockchain and AI.' },
+export const LEARNER_ECOSYSTEM = [
+  { title: 'IBA Learner Clubs', text: 'Access to labs and sandbox environments for experimentation with tokenization, blockchain and AI.' },
   { title: 'Credentialing services', text: 'Blockchain-enabled wallets, portfolios, badges and microcredentials, including GreenCredentials and verifiable credentials for education and employment checks.' },
   { title: 'Social & professional networks', text: 'Verified networking, learner communities, content sharing and employability connections.' },
   { title: 'Immersive learning support', text: 'Web3-enabled courses, virtual experiences and gamified emerging-technology environments.' },
@@ -170,7 +170,7 @@ export const OPERATING_MODEL = [
     items: [
       'Space and logistics for the Experience Center',
       'Equipment, internet connectivity and cloud storage',
-      'Promotion of programmes among students',
+      'Promotion of programmes among learners',
       'Faculty for on-site training as mutually convenient',
       'Support for college fests and hackathons',
       'Maintenance of trained faculty for IBA lab technology',
@@ -185,10 +185,10 @@ export const SUSTAINABILITY = [
 ]
 
 export const FAQ = [
-  { q: 'Who can join Red Club?', a: "Red Club is designed for students, developers, professionals, founders, entrepreneurs and organisations interested in blockchain, Web3 and the digital economy. Final eligibility and membership categories should be confirmed against the programme's current terms." },
+  { q: 'Who can join Red Club?', a: "Red Club is designed for learners, developers, professionals, founders, entrepreneurs and organisations interested in blockchain, Web3 and the digital economy. Final eligibility and membership categories should be confirmed against the programme's current terms." },
   { q: 'Do I need prior blockchain experience?', a: 'No prior experience is assumed. The programme can welcome newcomers as well as experienced builders through appropriate learning and engagement pathways.' },
   { q: 'What can members gain?', a: 'Depending on the membership tier and programme calendar, members may benefit from learning, mentorship, industry exposure, networking, events, practical projects and ecosystem opportunities.' },
-  { q: 'Is Red Club only for students?', a: 'No. Red Club runs an institution-led Experience Center model that benefits students, faculty and the wider industry–academia ecosystem.' },
+  { q: 'Is Red Club only for learners?', a: 'No. Red Club runs an institution-led Experience Center model that benefits learners, faculty and the wider industry–academia ecosystem.' },
   { q: 'Are internships and placements guaranteed?', a: 'No. Red Club offers internship opportunities, recommendations and placement assistance, not guaranteed placements or employment outcomes.' },
   { q: 'Are all labs and certifications included in membership?', a: 'No. Several courses, certification fees, credentialing fees and advanced lab capabilities are excluded or optional. The exact scope should be confirmed in an institutional agreement.' },
   { q: 'How does the Red Club connect to the Web3 Corridor?', a: 'Red Club sits within the IBA Web3 Corridor, with an emphasis on international learning, overseas academic collaboration, industry networking and cross-border pathways.' },

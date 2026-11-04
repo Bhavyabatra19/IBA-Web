@@ -17,7 +17,7 @@ import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
 import RedClub from './pages/site/RedClub'
 import RedClubInstitutions from './pages/site/RedClubInstitutions'
-import RedClubStudents from './pages/site/RedClubStudents'
+import RedClubLearners from './pages/site/RedClubLearners'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
@@ -45,7 +45,7 @@ const PAGES = {
   '/corridor': Corridor,
   '/red-club': RedClub,
   '/red-club/institutions': RedClubInstitutions,
-  '/red-club/students': RedClubStudents,
+  '/red-club/learners': RedClubLearners,
   '/library': Library,
   '/connect': Connect,
   '/privacy': Privacy,
