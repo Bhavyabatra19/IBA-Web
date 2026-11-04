@@ -12777,3 +12777,66 @@ main {
   line-height: 26px;
   color: rgba(255, 255, 255, 0.82);
 }
+
+/* Red Club detail pages: the hero photograph, faded into the black ground
+   like the other pages' hero art */
+.rc-hero-art {
+  width: min(100%, 520px);
+  justify-self: end;
+}
+.rc-hero-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  -webkit-mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(50% 50% at 50% 50%, #000 60%, transparent 100%);
+}
+@media (max-width: 860px) {
+  .rc-hero-art {
+    width: min(100%, 420px);
+    justify-self: center;
+  }
+}
+
+/* Red Club community band (by request): half the height of a red band —
+   less padding, and on wide screens the button beside the copy rather
+   than under it */
+#rc-community .pk-sec__panel {
+  padding-block: 28px;
+}
+#rc-community .pk-actions {
+  margin-top: 0;
+}
+@media (min-width: 1024px) {
+  #rc-community .pk-sec__panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 48px;
+    padding-block: 32px;
+  }
+  /* one line for the heading, so the band is two short rows of copy */
+  #rc-community .pk-head__title {
+    font-size: 32px;
+    line-height: 40px;
+    text-wrap: wrap;
+  }
+  #rc-community .pk-head,
+  #rc-community .pk-head__lede,
+  #rc-community .pk-head__title {
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 1023px) {
+  #rc-community .pk-sec__panel {
+    padding-block: 24px;
+  }
+  #rc-community .pk-head__title {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  #rc-community .pk-head__lede {
+    margin-bottom: 0;
+  }
+}

@@ -117,6 +117,16 @@ export const SEO = {
     description:
       'The IBA Red Club Experience Centers connect universities, educators and students to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways.',
   },
+  '/red-club/institutions': {
+    title: 'IBA Red Club for Institutions | Experience Centers on Campus',
+    description:
+      'Red Club Experience Centers for universities: curriculum, labs, joint research, industry projects, certifications and international pathways, run as a partnership with IBA.',
+  },
+  '/red-club/students': {
+    title: 'IBA Red Club for Students | Industry-Ready Web3 Skills',
+    description:
+      'Programmes, live projects, internships, mentorship, career support and verifiable credentials that take students from classroom knowledge to industry-ready capability.',
+  },
 }
 
 /**
