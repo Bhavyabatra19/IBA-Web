@@ -103,12 +103,8 @@ const FAQ = [
     a: 'No. Web360 Club runs founder/investor and tokenization tracks; the Indo–UAE Startup Xchange is a separate membership with its own tiers, pricing and benefits.',
   },
   {
-    q: 'Are the Web360 membership prices annual?',
-    a: 'Founder Bronze and Silver are $2,000 and $3,500 a year, and Founder Gold is a $5,000 club fee. Tokenization Bronze Plus, Silver Plus and Gold Plus are $3,500, $5,000 and $7,000 a year.',
-  },
-  {
-    q: 'What does the Indo–UAE Startup Xchange cost?',
-    a: 'Xchange fees are indicative and shared on enquiry. Contact the programme team for a quotation and confirmation of terms.',
+    q: 'How are membership terms shared?',
+    a: 'Terms for every Web360 and Indo–UAE Startup Xchange tier are shared on enquiry and confirmed by the programme team.',
   },
   {
     q: 'Do all members get a dedicated concierge?',
@@ -204,7 +200,7 @@ export default function Corridor() {
         id="memberships"
         eyebrow="Web360 Club · Membership plans"
         title="Find the membership built for your ambition."
-        lede="Choose a pathway to see its tiers. The programmes have different objectives, benefits and pricing."
+        lede="Choose a pathway to see its tiers. The programmes have different objectives and benefits."
       >
         <CorridorPlans />
       </Section>

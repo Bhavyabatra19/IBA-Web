@@ -9,10 +9,9 @@
  *
  * Items: real coverage of IBA and its founder (by request, 11-04-2026), each
  * opening the source in a new tab. The tag is the platform; the icon and the
- * meta line give the format. Thumbnails are generated in the site's light
- * studio style (public/images/kb-*.jpg: a silver and red platform with glass
- * tiles carrying red line icons, the item's format on the main tile), not
- * taken from the sources.
+ * meta line give the format. Thumbnails are the client's artwork
+ * (public/images/kb-*.jpg, cut from their six-up sheet), each carrying its
+ * own headline, so the card frame takes their shape and never crops them.
  *
  * ⚠ The CoinGeek date is to confirm: the source pages could not be opened
  * when this was set. Headlines for the YouTube, Yahoo Finance and World
