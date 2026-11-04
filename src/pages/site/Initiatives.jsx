@@ -54,6 +54,7 @@ const INITIATIVES = [
     id: 'init-red-club',
     sub: 'The talent pipeline for Web3 and AI',
     title: 'IBA Red Club',
+    logo: '/logos/initiatives/red-club.jpg',
     text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.',
     list: ['Certified programmes and on-campus labs', 'Live industry projects with mentors', 'Internships and placements'],
     page: { href: '/red-club', label: 'Explore Red Club' },

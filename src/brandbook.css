@@ -12592,3 +12592,13 @@ main {
   border-radius: 18px;
   box-shadow: 0 14px 30px -18px rgba(120, 20, 25, .55);
 }
+
+/* A card's logo, where the icon would be (e.g. Red Club on the Ecosystem partner cards). */
+.pk-card__logo {
+  display: block;
+  width: 56px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+}

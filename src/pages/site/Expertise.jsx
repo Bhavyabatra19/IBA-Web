@@ -103,8 +103,7 @@ const OUTCOMES = [
   { num: '06', title: 'Growth and Expansion', text: 'Access to cross-border corridors that connect you with local partners, investors, institutions, and market-entry pathways—enabling faster expansion, stronger partnerships, and compliant entry into new jurisdictions.' },
 ]
 
-/* IBA Initiatives. ⚠ IBA Red Club has no logo in the project yet and shows a
-   monogram until its mark is supplied (set `logo`). */
+/* IBA Initiatives. An entry without a `logo` shows a monogram (`mono`). */
 const OUTCOME_ICONS = [
   <><path d="M3 12s3.2-5.5 9-5.5 9 5.5 9 5.5-3.2 5.5-9 5.5S3 12 3 12Z" /><circle cx="12" cy="12" r="2.5" /><path d="m10.5 12 1.2 1.2 2.5-2.8" /></>,
   <><path d="m12 2.5 8 3v6c0 4.7-3.3 8.2-8 10-4.7-1.8-8-5.3-8-10v-6Z" /><path d="m8.5 12.2 2.4 2.4 4.8-5" /></>,
@@ -118,7 +117,7 @@ const INITIATIVES = [
   { title: 'Tech4Good', logo: '/images/t4g.jpeg', sub: 'Technology in service of outcomes that matter', text: "IBA's impact initiative, applying blockchain and emerging technology to problems where the return is social rather than commercial. Anchors the alliance's SDG alignment.", href: '/initiatives#init-tech4good' },
   { title: 'Green Chain Protocol', logo: '/logos/initiatives/green-chain.png', sub: 'Making green finance and governance verifiable', text: 'A blockchain ecosystem focused on ESG, aligned with COP28, showcasing and growing Web3 projects in sustainability.', href: '/initiatives#init-green-chain' },
   { title: 'Verifyble', logo: '/logos/initiatives/verifyble.jpg', sub: 'Data security and digital asset management', text: "IBA's platform for data security and digital asset management, helping any organisation or individual secure, verify and manage data and digital assets on-chain.", href: '/initiatives#init-verifyble' },
-  { title: 'IBA Red Club', mono: 'RC', sub: 'The talent pipeline for Web3 and AI', text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.', href: '/initiatives#init-red-club' },
+  { title: 'IBA Red Club', logo: '/logos/initiatives/red-club.jpg', sub: 'The talent pipeline for Web3 and AI', text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.', href: '/initiatives#init-red-club' },
   { title: 'Web3 Corridor', logo: '/images/web3.jpeg', sub: 'Global Innovation Corridor Initiative', text: 'A global innovation platform connecting ' + REGIONS_LINE + ' through innovation, technology, investment and partnerships.', href: '/initiatives#init-web3-corridor' },
   /* ⚠ India AI Alliance is left out until its description is supplied (by
      request: no placeholder copy on the page). Its logo is in the project:
