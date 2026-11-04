@@ -10,7 +10,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { gsap, revealRise, reducedMotion, buildCounters } from '../lib/scroll'
 import { Go } from '../sections/service/ServiceBlocks'
-import { CONTACT, LEGAL } from '../nav'
+import { CONTACT } from '../nav'
 
 /* the block mark every eyebrow carries */
 const Block = () => (
@@ -67,7 +67,9 @@ export function Btn({ href = '#', enquiry, variant = 'primary', children }) {
 }
 
 /** The page's opening panel: dark, hero width, with the red beam. */
-export function PageHero({ eyebrow, title, lede, actions, aside, id }) {
+/* `still`: content under the actions that must not animate in (the About
+   hero's figures, which have to sit on one line from the first frame) */
+export function PageHero({ eyebrow, title, lede, actions, still, aside, id }) {
   const ref = useRef(null)
   useRise(ref)
   return (
@@ -91,6 +93,7 @@ export function PageHero({ eyebrow, title, lede, actions, aside, id }) {
               {actions}
             </div>
           )}
+          {still}
         </div>
         {aside && (
           <div className="pk-hero__aside" data-rise>
@@ -146,8 +149,9 @@ export const SubHead = ({ children, lede }) => (
 )
 
 /**
- * A grid of cards: { num?, icon?, tag?, title, text?, focus?, outcome?, list?,
- * href?, cta? }. A card with an href is a link from edge to edge.
+ * A grid of cards: { num?, icon?, logo?, logoAlt?, tag?, title, text?, focus?,
+ * outcome?, list?, href?, cta? }. A card with an href is a link from edge to
+ * edge. `logo` is an image path, shown where the icon would be.
  */
 export function Cards({ items, cols = 3 }) {
   return (
@@ -213,11 +217,12 @@ function CardLink({ href, children }) {
 }
 
 /** Stat tiles: { value, label, count?, prefix?, suffix?, decimals? } */
-export function Stats({ items, dark = false }) {
+/* `still`: no rise as the figures come into view */
+export function Stats({ items, dark = false, still = false }) {
   return (
     <ul className={`pk-stats${dark ? ' pk-stats--dark' : ''}`}>
       {items.map((s) => (
-        <li className="pk-stat" key={s.label} data-rise>
+        <li className="pk-stat" key={s.label} data-rise={still ? undefined : true}>
           <strong
             {...(s.count != null
               ? { 'data-count': s.count, 'data-prefix': s.prefix || '', 'data-suffix': s.suffix || '' }
@@ -274,18 +279,6 @@ export const Quote = ({ children, by, photo }) => (
   </figure>
 )
 
-/* A consent line, with "Privacy Policy" in it made a link to the policy. */
-const consentText = (c) =>
-  c.split(/(Privacy Policy)/).map((part, i) =>
-    part === 'Privacy Policy' ? (
-      <Go href={LEGAL.privacy} key={i}>
-        {part}
-      </Go>
-    ) : (
-      part
-    ),
-  )
-
 /**
  * A form.
  *
@@ -295,12 +288,7 @@ const consentText = (c) =>
  * log-in) passes `notice` instead, which is shown on submit and says plainly
  * that it is not live yet.
  *
- * fields: { name, label, type?, options?, required?, wide?, hint?, ...input }
- *
- * Anything else on a field (placeholder, pattern, title, accept, inputMode,
- * autoComplete) goes straight onto the input. A `file` field cannot travel in
- * a mailto link, so the message names the file and the confirmation asks the
- * reader to attach it before sending.
+ * fields: { name, label, type?, options?, required?, wide? }
  */
 export function Form({ fields, submit, subject, consent, notice }) {
   const [status, setStatus] = useState(null)
@@ -312,62 +300,45 @@ export function Form({ fields, submit, subject, consent, notice }) {
       return
     }
     const data = new FormData(e.currentTarget)
-    const files = fields
-      .filter((f) => f.type === 'file')
-      .map((f) => data.get(f.name)?.name)
-      .filter(Boolean)
     const body = fields
       .filter((f) => f.type !== 'password')
-      .map((f) => {
-        const v = data.get(f.name)
-        if (f.type === 'file') return `${f.label}: ${v?.name ? `${v.name} (attached)` : '—'}`
-        return `${f.label}: ${v || '—'}`
-      })
+      .map((f) => `${f.label}: ${data.get(f.name) || '—'}`)
       .join('\n')
     window.location.href =
       `mailto:${CONTACT.email.label}?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`
-    setStatus(
-      files.length
-        ? `Your email app has opened with these details filled in — attach ${files.join(', ')} to the email, press send, and the IBA team will reply within two working days.`
-        : 'Your email app has opened with these details filled in — press send and the IBA team will reply within two working days.',
-    )
+    setStatus('Your email app has opened with these details filled in — press send and the IBA team will reply within two working days.')
   }
 
   return (
     <form className="pk-form" onSubmit={onSubmit} data-rise>
       <div className="pk-form__grid">
-        {fields.map(({ hint, options, wide, ...f }) => {
-          /* whatever is left after the Form's own keys goes on the input */
-          const { name, label, type, required, ...input } = f
-          return (
-            <label className={`pk-field${wide || type === 'textarea' || type === 'file' ? ' pk-field--wide' : ''}`} key={name}>
-              <span>
-                {label}
-                {required !== false && <i aria-hidden="true"> *</i>}
-              </span>
-              {type === 'select' ? (
-                <select name={name} required={required !== false} defaultValue="">
-                  <option value="" disabled>
-                    Select one
-                  </option>
-                  {options.map((o) => (
-                    <option key={o}>{o}</option>
-                  ))}
-                </select>
-              ) : type === 'textarea' ? (
-                <textarea name={name} rows="4" required={required !== false} />
-              ) : (
-                <input name={name} type={type || 'text'} required={required !== false} {...input} />
-              )}
-              {hint && <small className="pk-field__hint">{hint}</small>}
-            </label>
-          )
-        })}
+        {fields.map((f) => (
+          <label className={`pk-field${f.wide || f.type === 'textarea' ? ' pk-field--wide' : ''}`} key={f.name}>
+            <span>
+              {f.label}
+              {f.required !== false && <i aria-hidden="true"> *</i>}
+            </span>
+            {f.type === 'select' ? (
+              <select name={f.name} required={f.required !== false} defaultValue="">
+                <option value="" disabled>
+                  Select one
+                </option>
+                {f.options.map((o) => (
+                  <option key={o}>{o}</option>
+                ))}
+              </select>
+            ) : f.type === 'textarea' ? (
+              <textarea name={f.name} rows="4" required={f.required !== false} />
+            ) : (
+              <input name={f.name} type={f.type || 'text'} required={f.required !== false} />
+            )}
+          </label>
+        ))}
       </div>
       {[].concat(consent || []).map((c, i) => (
         <label className="pk-check" key={c}>
-          <input type="checkbox" required={i === 0} /> <span>{consentText(c)}</span>
+          <input type="checkbox" required={i === 0} /> <span>{c}</span>
         </label>
       ))}
       <button className="pk-btn pk-btn--primary" type="submit">

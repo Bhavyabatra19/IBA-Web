@@ -20,7 +20,7 @@ import { FACTS } from './data/facts'
 export const CRED_STATS = [
   { to: FACTS.members.n, suffix: FACTS.members.suffix, label: 'Global Members' },
   { to: FACTS.advisors.n, suffix: FACTS.advisors.suffix, label: 'Global Advisories' },
-  { to: FACTS.countries.n, suffix: '', label: 'Countries', lead: 'Presence in' },
+  { to: FACTS.countries.n, suffix: '', label: 'Countries', lead: 'Active in' },
   { to: FACTS.affiliations.n, suffix: FACTS.affiliations.suffix, label: 'Global Affiliations' },
 ]
 
@@ -55,6 +55,7 @@ export const IMPACT_SECONDARY = [
 export const TOKENOMICS = [
   { project: 'DNA Real Estate', sector: 'Real Estate', usdM: 473 },
   { project: 'KULA', sector: 'Impact Projects', usdM: 110 },
+  { project: 'nGRND', sector: 'Gold', usdM: 160 },
   { project: 'FRE8', sector: 'Logistics', usdM: 250 },
 ]
 

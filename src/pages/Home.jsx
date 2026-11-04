@@ -14,7 +14,7 @@ import GetInTouch from '../sections/GetInTouch'
  *
  *   Hero             dark    centred, with the rolling claim
  *   Credibility      light   the four figures, as cards
- *   Impact band      dark    the headline figures as one sentence
+ *   Impact band      light   four figures with drawn line icons
  *   Corridor band    light   the flagship programme, left-aligned
  *   What we do       light   train, advise, build — three cards
  *   Academia cards   light   students and institutions — two cards

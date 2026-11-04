@@ -19,7 +19,6 @@ const L = (f) => `/logos/partners/${f}.jpg`
 export const PARTNERS = [
   { name: 'TheBlock.', logo: '/logos/eco/theblock-ae.png' },
   { name: 'Token Asset Foundation (STO)', logo: L('token-asset-foundation') },
-  { name: 'World Token Congress', logo: L('world-token-congress') },
   { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png' },
   { name: 'Integra', logo: L('integra') },
   { name: 'Kula', logo: L('kula') },
@@ -42,6 +41,7 @@ export const PARTNERS = [
   { name: 'ArthaChain', logo: L('arthachain') },
   { name: 'Edza AI', logo: L('edza-ai') },
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
+  { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
   /* no logo supplied yet — shown as monograms on the Ecosystem page only */
   { name: 'The Circle' },

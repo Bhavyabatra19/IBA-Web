@@ -35,7 +35,7 @@ import {
   Go,
 } from './library/FormBlocks'
 import { COUNTRIES } from '../library'
-import { CONTACT, LEGAL } from '../nav'
+import { CONTACT, PENDING } from '../nav'
 import {
   CONTACT_METHODS,
   FAILED,
@@ -78,26 +78,13 @@ const RULES = {
       : /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
         ? ''
         : "That doesn't look like an email address.",
-  organisation: (v) => (v.trim() ? '' : 'Please tell us your organisation.'),
-  /* Loose on purpose, like email: a scheme is optional because nobody types
-     one, so this only asks for something shaped like a domain. */
-  website: (v) =>
-    !v.trim()
-      ? 'Please add your organisation’s website.'
-      : /^(https?:\/\/)?[^\s/.]+\.[^\s]+$/i.test(v.trim())
-        ? ''
-        : "That doesn't look like a web address.",
-  linkedin: (v) =>
-    !v.trim()
-      ? 'Please add your company’s LinkedIn page.'
-      : /^(https?:\/\/)?([a-z]{2,3}\.)?linkedin\.com\/\S+$/i.test(v.trim())
-        ? ''
-        : 'Please paste the full LinkedIn page address, e.g. linkedin.com/company/your-company.',
+  organisation: (v) => (v.trim() ? '' : 'Please tell us your organisation and its website.'),
   topic: (v) => (v ? '' : 'Pick the closest match — you can explain below.'),
   message: (v) => (v.trim() ? '' : 'Tell us what you’re working on.'),
   consent: (v) => (v ? '' : 'We need your agreement before we can reply.'),
+  /* optional: checked only when a file has been chosen */
   document: (f) => {
-    if (!f || !f.name) return 'Please attach your company profile, pitch deck or info deck.'
+    if (!f || !f.name) return ''
     const ext = f.name.split('.').pop().toLowerCase()
     if (!DOC_TYPES.includes(ext)) return 'Please attach a PDF, Word, PowerPoint, Excel or image file.'
     if (f.size > DOC_MAX_MB * 1024 * 1024) return `That file is over ${DOC_MAX_MB} MB — please attach a smaller one.`
@@ -282,7 +269,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
         onChange={recheck('phone')}
       />
       <Text
-        label="Organisation"
+        label="Organisation and Website"
         name="organisation"
         autoComplete="organization"
         required
@@ -291,33 +278,6 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
         defaultValue={kept.organisation}
         onBlur={() => check('organisation')}
         onChange={recheck('organisation')}
-      />
-      <Text
-        label="Organisation website"
-        name="website"
-        type="url"
-        autoComplete="url"
-        inputMode="url"
-        placeholder="yourcompany.com"
-        required
-        mark="required"
-        error={errors.website}
-        defaultValue={kept.website}
-        onBlur={() => check('website')}
-        onChange={recheck('website')}
-      />
-      <Text
-        label="Company LinkedIn page"
-        name="linkedin"
-        type="url"
-        inputMode="url"
-        placeholder="linkedin.com/company/your-company"
-        required
-        mark="required"
-        error={errors.linkedin}
-        defaultValue={kept.linkedin}
-        onBlur={() => check('linkedin')}
-        onChange={recheck('linkedin')}
       />
       <Select
         label="I'm interested in"
@@ -355,16 +315,14 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
         onBlur={() => check('message')}
         onChange={recheck('message')}
       />
-      {/* the company profile / pitch deck — kept with the enquiry; it is sent
-          once the form has a server to send to (see submitEnquiry). A file
-          input cannot be refilled, so a reopened modal asks for it again. */}
+      {/* optional supporting document — kept with the enquiry; it is sent once
+          the form has a server to send to (see submitEnquiry) */}
       <FileField
         label="Upload document"
         name="document"
         accept={DOC_TYPES.map((t) => '.' + t).join(',')}
-        required
         mark="required"
-        hint={`Company profile, pitch deck or info deck · PDF, Word, PowerPoint, Excel or image · up to ${DOC_MAX_MB} MB`}
+        hint={`Optional · PDF, Word, PowerPoint, Excel or image · up to ${DOC_MAX_MB} MB`}
         error={errors.document}
         onPick={() => check('document')}
       />
@@ -386,7 +344,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
           onChange={recheck('consent')}
           label={
             <>
-              I agree to the <Go href={LEGAL.privacy}>Privacy Policy</Go> and to being
+              I agree to the <Go href={PENDING.privacy}>Privacy Policy</Go> and to being
               contacted about my enquiry
             </>
           }

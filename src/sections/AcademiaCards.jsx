@@ -5,13 +5,16 @@
  * photo header toned into the brand, glass icon badge, red on hover. Two
  * columns instead of three, and a wider header to suit them.
  *
- * Photos: the supplied artwork, saved locally in public/images (card-*.jpg)
- * and shown uncropped at 9:4 (.wd--art in brandbook.css).
+ * Photos: Unsplash, under the Unsplash License (free for commercial use, no
+ * attribution required), saved locally in public/images:
+ *   ac-students.jpg      Christian Lendl    unsplash.com/photos/nxBucBB_ihQ
+ *   ac-institutions.jpg  Matthieu Joannon   unsplash.com/photos/m8MSzLd2Y4Q
  */
 
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
+import { PENDING } from '../nav'
 
 /* line icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -37,19 +40,21 @@ const DOORS = [
     key: 'students',
     tag: 'Learners',
     title: 'Global Exposure',
-    body: 'Join the IBA Startup Club: learning, internships, opportunities.',
-    cta: 'Join Startup Club',
+    body: 'Internships, opportunities, and more.',
+    cta: 'Join Red Club',
     href: '/red-club',
-    img: '/images/card-students.jpg',
+    img: '/images/card-students-art.jpg', // the same art as the reference site
   },
   {
     key: 'institutions',
     tag: 'Institutions',
-    title: 'Create Student Experience',
-    body: 'Partner with IBA Red Club Experience Programmes: tokenisation labs, blockchain learning, internships, global networking.',
+    title: 'Create Global Student Experiences',
+    body:
+      'Partner access into the IBA Web3 Corridor for IBA Red Club Experience Programs: Tokenization and Blockchain labs, academia, internships, and global networking.',
     cta: 'Request Prospectus',
-    href: '/connect',
-    img: '/images/card-institutions.jpg',
+    /* the Red Club Experience Center page, once built (see PENDING in nav.js) */
+    href: PENDING.experienceCenter,
+    img: '/images/card-institutions-art.jpg', // the same art as the reference site
   },
 ]
 

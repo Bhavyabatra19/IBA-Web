@@ -74,7 +74,7 @@ export default function ConsultingStack() {
           ]}
         />
         <Tags items={STACK_TOOLS} label="Blockchain platforms and frameworks IBA works with" />
-        <Cta label="Scope a Project With Us" />
+        <Cta label="Discuss your Project" />
       </Band>
     </ServicePage>
   )

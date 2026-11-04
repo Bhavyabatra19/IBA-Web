@@ -48,6 +48,7 @@ export const TOPICS = [
   'Red Club / Verifyble (institution)',
   'Web3 Corridor',
   'Ecosystem partnership',
+  'Membership',
   /* ⚠ NAMING, carried over from nav.js: "Tech4Good" matches none of the four
      initiatives the site publishes (Emerging Technology Council, Blockchain
      Governance Council, The Green Chain, Tech Zero) and is most likely Tech
@@ -68,11 +69,9 @@ export const CONTACT_METHODS = ['Email', 'Phone', 'WhatsApp']
  * the endpoint must add it; a honeypot alone stops the crude bots only.
  *
  * Deliberately named like a real field. `name="_hp"` is a pattern the scrapers
- * know to skip. Not named after anything the form really asks for: next to the
- * real website field, a browser's autofill could match a "company_website"
- * honeypot and flag a person as a bot.
+ * know to skip.
  */
-export const HONEYPOT = 'referral_code'
+export const HONEYPOT = 'company_website'
 
 /* ---- the three ways the form can end ---- */
 
@@ -158,6 +157,7 @@ export const ROUTING = {
     'Red Club / Verifyble (institution)': 'education-institution',
     'Web3 Corridor': 'corridor',
     'Ecosystem partnership': 'partnerships',
+    Membership: 'partnerships',
     'Tech4Good / Green Chain Protocol': 'partnerships',
     'Media / Speaking': 'comms',
   },
@@ -228,6 +228,8 @@ export const PAGE_CONTEXT = {
   '/education': { topic: 'Red Club (learner)', phrase: 'IBA education programmes' },
   /* the current pages */
   '/expertise': { topic: 'Consulting', phrase: 'working with IBA' },
+  '/tokenization': { topic: 'RWA Tokenization', phrase: 'a tokenization project' },
+  '/memberships': { topic: 'Membership', phrase: 'an IBA membership' },
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
@@ -256,13 +258,13 @@ export const CONNECT_SUB =
 export const QUICK_PATHS = [
   {
     who: 'For Learners',
-    body: 'Join the IBA Startup Club: learning, internships, opportunities.',
-    cta: 'Join Startup Club',
+    body: 'Join the IBA Red Club: programmes, projects, placements.',
+    cta: 'Join Red Club',
     topic: 'Red Club (learner)',
   },
   {
     who: 'For Institutions',
-    body: 'Partner with IBA Red Club Experience Programmes: tokenisation labs, blockchain learning, internships, global networking.',
+    body: 'Bring Verifyble and campus labs to your university.',
     cta: 'Request Prospectus',
     topic: 'Red Club / Verifyble (institution)',
   },

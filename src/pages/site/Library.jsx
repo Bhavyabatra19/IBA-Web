@@ -9,7 +9,7 @@ import { useMemo, useRef, useState } from 'react'
 import { PageHero, Section, Cards } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import { FACTS } from '../../data/facts'
-import LibraryHolo from '../../components/LibraryHolo'
+import LibrarySearch from '../../components/LibrarySearch'
 
 const RESOURCES = [
   { title: 'Reading the Room: Blockchain Regulation Across Global Markets in 2026', desc: 'A jurisdiction-by-jurisdiction snapshot of what actually applies today.', format: 'Report / Whitepaper', topic: 'Policy & Regulation', level: 'Practitioner', source: 'IBA Original', date: '2026-08-02', duration: 22, views: 4100 },
@@ -74,7 +74,7 @@ export default function Library() {
     <div>
       <PageHero
         id="library"
-        aside={<LibraryHolo />}
+        aside={<LibrarySearch />}
         eyebrow="The IBA Library"
         title="An Open Knowledge Base, Built by the Community"
         lede={`Articles, videos, research, policy briefs and recorded sessions, developed by IBA's industry experts and contributed by our ${FACTS.advisors.text} global advisors and ${FACTS.members.text} members, open to the wider community. Free with a member account, no paywall.`}
