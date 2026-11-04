@@ -8064,3 +8064,278 @@ main {
     animation: none;
   }
 }
+
+/* ==================================================================
+   Expertise — Web3 Solution Consulting Stack: the four capabilities as a
+   dark glass wheel (CoreCapabilities.jsx), with the detail strip below.
+   ================================================================== */
+.cco {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid rgba(24, 24, 27, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #fff 0%, #faf9f8 55%, #f5f1ef 100%);
+  color: #181416;
+  box-shadow: 0 24px 70px -48px rgba(42, 16, 18, 0.3);
+}
+/* the detail strip under the map */
+.cco__detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 24px;
+  padding: clamp(24px, 3vw, 36px) clamp(24px, 4vw, 56px);
+  border-top: 1px solid rgba(61, 42, 42, 0.1);
+  background: rgba(255, 255, 255, 0.74);
+}
+.cco__detailIn {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 32px);
+  align-items: start;
+  animation: cco-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes cco-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.cco__big {
+  font-size: clamp(44px, 2rem + 2.4vw, 72px);
+  font-weight: 300;
+  line-height: 0.9;
+  color: #d71920;
+}
+.cco__title {
+  margin: 0 0 6px;
+  font-size: clamp(20px, 1rem + 0.5vw, 24px);
+  font-weight: 500;
+  color: #211a1b;
+}
+.cco__lead {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #b71920;
+}
+.cco__text {
+  margin: 0;
+  max-width: 62rem;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #62595a;
+}
+.cco__dots {
+  display: flex;
+  gap: 8px;
+}
+.cco__dots button {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(52, 37, 38, 0.2);
+  cursor: pointer;
+  transition: width 0.35s ease, background-color 0.3s ease;
+}
+.cco__dots button.is-active {
+  width: 30px;
+  background: #d71920;
+}
+.cco__dots button:focus-visible {
+  outline: 2px solid #d71920;
+  outline-offset: 3px;
+}
+@media (max-width: 900px) {
+  .cco__detail,
+  .cco__detailIn {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cco__detailIn { animation: none; }
+}
+.cco__detail {
+  align-items: center;
+}
+/* The four-point wheel, dark (after the client's reference): a black panel
+   lit red, dark glass cards round a glass wheel in a red halo. */
+.cco {
+  border-color: rgba(255, 255, 255, .06);
+  background:
+    radial-gradient(ellipse 60% 70% at 50% 42%, rgba(215, 25, 32, .22), transparent 60%),
+    radial-gradient(ellipse 40% 50% at 100% 0%, rgba(215, 25, 32, .28), transparent 60%),
+    radial-gradient(ellipse 40% 50% at 0% 100%, rgba(215, 25, 32, .2), transparent 60%),
+    #070506;
+  color: #fff;
+  box-shadow: 0 30px 80px -40px rgba(60, 6, 10, .6);
+}
+.cqi {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 310px) minmax(0, 1fr);
+  grid-template-areas: "a w b" "d w c";
+  gap: 26px 20px;
+  align-items: center;
+  padding: clamp(28px, 4vw, 56px) clamp(18px, 2.4vw, 32px) clamp(40px, 5vw, 72px);
+  overflow: hidden;
+}
+.cqi__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 46%;
+  pointer-events: none;
+}
+.cqi__wave path { fill: none; stroke: #e1121c; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 0 7; }
+.cqi__wheel { position: relative; z-index: 1; grid-area: w; }
+.cqi__wheel svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+/* the wheel */
+.cqi__aura { opacity: .45; pointer-events: none; }
+.cqi__halo { fill: none; stroke: #ff1f2a; stroke-width: 2.5; opacity: .85; pointer-events: none; }
+.cqi__halo--faint { stroke-width: 1; opacity: .3; }
+.cqi__seg {
+  cursor: pointer;
+  opacity: .9;
+  filter: drop-shadow(0 0 10px rgba(255, 30, 40, .28)) drop-shadow(0 8px 12px rgba(0, 0, 0, .5));
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .35s ease, filter .35s ease;
+}
+.cqi__seg:hover { opacity: .97; }
+.cqi__seg.is-active {
+  opacity: 1;
+  transform: translate(var(--dx), var(--dy));
+  filter: drop-shadow(0 0 18px rgba(255, 30, 40, .55)) drop-shadow(0 14px 18px rgba(0, 0, 0, .6));
+}
+.cqi__glass { opacity: .95; }
+.cqi__gloss { pointer-events: none; }
+.cqi__segIcon { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.cqi__bead { pointer-events: none; filter: drop-shadow(0 0 4px rgba(255, 40, 50, .8)); }
+.cqi__beadHi { fill: #fff; opacity: .85; pointer-events: none; }
+.cqi__gap { stroke: #0b0809; stroke-width: 6; pointer-events: none; }
+.cqi__hubGlow { fill: none; stroke: #ff1f2a; stroke-width: 3; opacity: .9; }
+.cqi__hub { stroke: rgba(255, 255, 255, .85); stroke-width: 3; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5)); }
+.cqi__hubGloss { opacity: .8; pointer-events: none; }
+.cqi__hubRing { fill: none; stroke: #d71920; stroke-width: 2; stroke-dasharray: 5 5; animation: cqi-spin 30s linear infinite; transform-origin: 200px 200px; }
+@keyframes cqi-spin { to { transform: rotate(360deg); } }
+.cqi__hubText { fill: #161113; font-family: inherit; font-size: 13.5px; font-weight: 800; letter-spacing: .02em; }
+
+/* the cards: dark glass, a red light along the top edge */
+.cqi__card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  padding: 22px 24px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02) 55%, rgba(215, 25, 32, .05));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 20px 40px -24px rgba(0, 0, 0, .8);
+  color: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.cqi__card::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 14%;
+  right: 14%;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #ff2d36, transparent);
+  box-shadow: 0 0 14px 2px rgba(255, 30, 40, .55);
+  opacity: .75;
+  transition: opacity .25s ease;
+}
+.cqi__card--1 { grid-area: a; }
+.cqi__card--2 { grid-area: b; }
+.cqi__card--3 { grid-area: c; }
+.cqi__card--4 { grid-area: d; }
+/* the left-hand cards carry their icon on the side toward the wheel */
+.cqi__card--1 .cqi__head, .cqi__card--4 .cqi__head { flex-direction: row-reverse; justify-content: space-between; }
+.cqi__card:hover, .cqi__card.is-active {
+  border-color: rgba(255, 50, 58, .7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 0 28px -4px rgba(255, 30, 40, .45), 0 20px 40px -24px rgba(0, 0, 0, .8);
+}
+.cqi__card:hover::before, .cqi__card.is-active::before { opacity: 1; }
+.cqi__card.is-active { transform: translateY(-2px); }
+.cqi__card:focus-visible { outline: 2px solid #ff2d36; outline-offset: 3px; }
+.cqi__head { display: flex; align-items: center; gap: 14px; }
+.cqi__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+}
+/* the card and detail icons in the same glass as the wheel */
+.cqi__icon, .cqi__bigIcon {
+  border: 1px solid rgba(255, 255, 255, .28);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .45), rgba(255, 255, 255, .08) 50%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(145deg, var(--q-hi), var(--q) 45%, var(--q-lo));
+  box-shadow: 0 0 18px -4px rgba(255, 30, 40, .5), 0 10px 20px -12px rgba(0, 0, 0, .8);
+}
+.cqi__icon svg { width: 28px; height: 28px; fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.cqi__name { color: #fff; font-size: clamp(17px, 1rem + .4vw, 22px); font-weight: 700; line-height: 1.25; }
+.cqi__lead { color: rgba(255, 255, 255, .82); font-size: 15px; line-height: 1.55; }
+
+/* the detail strip, dark to match */
+.cco__detail { border-top-color: rgba(255, 255, 255, .08); background: rgba(255, 255, 255, .03); }
+.cco__title { color: #fff; }
+.cco__lead { color: #ff5a60; }
+.cco__text { color: rgba(255, 255, 255, .72); }
+.cco__dots button { background: rgba(255, 255, 255, .25); }
+.cco__dots button.is-active { background: #ff2d36; }
+.cqi__bigIcon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 18px; }
+.cqi__bigIcon svg { width: 38px; height: 38px; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 560px) { .cqi__bigIcon { width: 54px; height: 54px; border-radius: 14px; } .cqi__bigIcon svg { width: 28px; height: 28px; } }
+@media (max-width: 1100px) {
+  .cqi { gap: 22px 28px; }
+  .cqi__card { padding: 18px; }
+}
+@media (max-width: 900px) {
+  .cqi {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "w w" "a b" "d c";
+  }
+  .cqi__wheel { justify-self: center; width: min(100%, 360px); }
+  .cqi__card--1 .cqi__head, .cqi__card--4 .cqi__head { flex-direction: row; justify-content: flex-start; }
+}
+@media (max-width: 560px) {
+  .cqi { grid-template-columns: 1fr; grid-template-areas: "w" "a" "b" "c" "d"; padding: 20px 18px 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cqi__seg, .cqi__card { transition: none; }
+  .cqi__hubRing { animation: none; }
+}
+
+/* Initiative logos: above an initiative's text on the Initiatives page, and
+   on a card where the icon would be (Verifyble, Red Club). */
+.pk-init__logo {
+  display: block;
+  width: clamp(120px, 14vw, 168px);
+  height: auto;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px -18px rgba(120, 20, 25, .55);
+}
+.pk-card__logo {
+  display: block;
+  width: 56px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+}

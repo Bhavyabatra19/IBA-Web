@@ -135,7 +135,6 @@ export const NAV = [
         title: 'Connect',
         items: [
           { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
-          { label: 'Member Directory', icon: 'lock', desc: 'Find members across the alliance.', href: '/ecosystem#member-directory' },
         ],
       },
       {
@@ -174,7 +173,7 @@ export const NAV = [
       },
     ],
   },
-  { key: 'redclub', label: 'Experience Zone', href: '/red-club' },
+  { key: 'redclub', label: 'Red Club', href: '/red-club' },
   /* Every membership, and the way in for existing members (Member Login sits
      on that page now, not in the bar). */
   { key: 'membership', label: 'Membership', href: '/memberships' },
@@ -279,7 +278,7 @@ export const MEMBER_LOGIN = 'Member Login'
  * section that answers it; where a section has no anchor of its own, at the
  * page that holds it.
  *
- *   Key Partners / Member Directory  the Ecosystem page's organisations list
+ *   Key Partners                     the Ecosystem page's organisations list
  *   Corridor Partners                the partner countries, on /corridor
  *   Newsletter signup                an email, until a list provider is wired
  *                                    up; a form that pretended to subscribe
@@ -310,7 +309,6 @@ export const FOOTER = [
     items: [
       { label: 'Key Partners', href: '/ecosystem#organisations' },
       { label: 'People', href: '/ecosystem#people' },
-      { label: 'Member Directory', href: '/ecosystem#member-directory' },
       { label: 'Become a Partner', href: '/ecosystem#become-a-partner' },
     ],
   },

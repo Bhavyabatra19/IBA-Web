@@ -1,6 +1,6 @@
-/** Ecosystem — initiatives, key partners, councils, people, directory, partnering. */
+/** Ecosystem — initiatives, key partners, councils, people, partnering. */
 
-import { PageHero, Section, Cards, Form, Btn, Prose } from '../../components/Kit'
+import { PageHero, Section, Cards, Form, Btn } from '../../components/Kit'
 import PartnerCarousel from '../../components/PartnerCarousel'
 import { PARTNERS } from '../../data/partners'
 import { FACTS } from '../../data/facts'
@@ -33,7 +33,7 @@ const PEOPLE = [
 
 const PARTNER_TYPES = [
   { title: 'Ecosystem Partner', text: 'List your product, integrate with IBA infrastructure, access the member network.' },
-  { title: 'Institutional Partner', text: 'Bring a Red Club Experience Center to your campus.' },
+  { title: 'Institutional Partner', logo: '/logos/initiatives/red-club.jpg', logoAlt: 'IBA Red Club logo', text: 'Bring a Red Club Experience Center to your campus.' },
   { title: 'Government & Policy Partner', text: 'Co-develop frameworks, standards and public infrastructure projects.' },
   { title: 'Corridor Partner', text: 'Join the Global Innovation Corridor as a technology, investment, hub or talent partner.' },
 ]
@@ -91,29 +91,6 @@ export default function Ecosystem() {
         </div>
       </Section>
 
-      <Section
-        id="member-directory" tone="dark"
-        eyebrow="Members Only"
-        title="Member Directory"
-        lede="Find and connect with members, advisors and partners across the alliance. The directory is available to IBA members only."
-      >
-        <div className="pk-lock" data-rise>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <rect x="5" y="11" width="14" height="10" rx="2" />
-            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-          </svg>
-          <Prose
-            lead="The directory is locked"
-            paras={['Log in with your member account to browse the directory. Not a member yet? Joining is free.']}
-          />
-          <div className="pk-actions">
-            <Btn href="/library#login">Member Login</Btn>
-            <Btn href="/library#signup" variant="ghost">
-              Become a Member
-            </Btn>
-          </div>
-        </div>
-      </Section>
 
       <Section id="become-a-partner" eyebrow="Become a Partner" title="Partner With IBA">
         <div className="pk-split">
