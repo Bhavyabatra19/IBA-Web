@@ -13,16 +13,18 @@ import { PageHero, Section, Cards, Stats, Btn } from '../../components/Kit'
 import CorridorNetwork from '../../components/CorridorNetwork'
 import MembershipSections from './Memberships'
 
-/* the hero graphic: the client's Web3 Corridor logo, cut out of its own
-   ground (public/images/web3-corridor-logo.webp; styles .w3l) */
+/* the hero graphic: the globe from the client's Web3 Corridor logo, cut
+   out of its own ground and cropped above the wordmark, which now sits in
+   the heading instead (public/images/web3-corridor-globe.webp, cut from
+   web3-corridor-logo.webp; styles .w3l) */
 const HeroMap = () => (
   <div className="w3l">
     <img
       className="w3l__img"
-      src="/images/web3-corridor-logo.webp"
-      alt="Web3 Corridor"
+      src="/images/web3-corridor-globe.webp"
+      alt=""
       width="784"
-      height="896"
+      height="788"
       decoding="async"
       fetchpriority="high"
     />
@@ -132,7 +134,10 @@ export default function Corridor() {
           <>
             Bridging
             <br />
-            Global Regions
+            Global Regions:
+            <br />
+            {/* the initiative's name in plain Questrial: no stroke, open tracking */}
+            <span className="w3p-hero__name">Web3 Corridor</span>
           </>
         }
         lede="Mapping a trillion-dollar opportunity across India, the UAE, Africa and Europe, with the Americas next. One corridor for shared Web3 resources, capital, partnerships and markets, home to more than 2.8 billion people."
