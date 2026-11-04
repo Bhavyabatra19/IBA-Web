@@ -347,9 +347,17 @@ export default function Nav() {
             <div className="nav__panelIn wrap">
               {/* the links, in labelled groups (a flat tab is one group) */}
               <div className="nav__panelGroups">
-                {(panel.groups || [{ title: panel.label, items: panel.items }]).map((g) => (
-                  <div className="nav__panelGroup" key={g.title}>
-                    <h3 className="nav__panelGroupTitle">{g.title}</h3>
+                {(panel.groups || [{ title: panel.label, items: panel.items }]).map((g, i) => (
+                  <div className="nav__panelGroup" key={g.title || i}>
+                    {/* a group without a heading keeps the heading's space, so
+                        its links line up with the groups beside it */}
+                    {g.title ? (
+                      <h3 className="nav__panelGroupTitle">{g.title}</h3>
+                    ) : (
+                      <div className="nav__panelGroupTitle" aria-hidden="true">
+                        {' '}
+                      </div>
+                    )}
                     <ul className="nav__panelList">
                       {g.items.map((it) => (
                         <li key={it.label}>
@@ -384,23 +392,16 @@ export default function Nav() {
                       All of {panel.label} <span aria-hidden="true">→</span>
                     </a>
                   </li>
-                  {/* Connect With Us is kept in the Expertise panel only (by request) */}
-                  {panel.key === 'expertise' && (
-                    <li>
-                      <a href="/connect" data-enquiry="">
-                        Connect With Us
-                      </a>
-                    </li>
-                  )}
-                  {/* Member Login now lives under the Memberships tab (by
-                      request), which lists Become a Member itself */}
-                  {panel.key !== 'memberships' && (
-                    <li>
-                      <a href="/library#signup" onClick={(e) => go(e, '/library#signup')}>
-                        Become a Member
-                      </a>
-                    </li>
-                  )}
+                  <li>
+                    <a href="/connect" data-enquiry="">
+                      Connect With Us
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/memberships" onClick={(e) => go(e, '/memberships')}>
+                      Become a Member
+                    </a>
+                  </li>
                 </ul>
               </aside>
             </div>

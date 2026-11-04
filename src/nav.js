@@ -94,9 +94,14 @@ export const NAV = [
       {
         title: 'Purpose',
         items: [
-          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
           { label: 'Mission', icon: 'target', desc: 'The infrastructure of trust, and how we build it.', href: '/about#mission' },
-          { label: 'Impact', icon: 'chart', desc: 'The figures behind the alliance.', href: '/about#impact' },
+          { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
+        ],
+      },
+      {
+        title: 'Impact',
+        items: [
+          { label: 'Our Presence', icon: 'globe', desc: 'The countries and figures behind the alliance.', href: '/about#impact' },
         ],
       },
     ],
@@ -139,10 +144,15 @@ export const NAV = [
         ],
       },
       {
-        title: 'Get Involved',
+        title: 'Connect',
         items: [
           { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
           { label: 'Member Directory', icon: 'lock', desc: 'Find members across the alliance.', href: '/ecosystem#member-directory' },
+        ],
+      },
+      {
+        title: 'Get Involved',
+        items: [
           { label: 'Become a Partner', icon: 'handshake', desc: 'Partner with IBA.', href: '/ecosystem#become-a-partner' },
         ],
       },
@@ -166,35 +176,20 @@ export const NAV = [
         items: [
           { label: 'Videos', icon: 'play', desc: 'Walkthroughs and explainers.', href: '/library#catalogue' },
           { label: 'Webinars', icon: 'video', desc: 'Recorded sessions with IBA experts.', href: '/library#catalogue' },
+        ],
+      },
+      /* no heading: a third column continuing Watch & Read */
+      {
+        items: [
           { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
         ],
       },
     ],
   },
   { key: 'redclub', label: 'Red Club', href: '/red-club' },
-  /* Memberships sits directly before the Web3 Corridor flagship tab. */
-  {
-    key: 'memberships',
-    label: 'Memberships',
-    href: '/memberships',
-    groups: [
-      {
-        title: 'Members',
-        items: [
-          { label: MEMBER_LOGIN, icon: 'lock', desc: 'Sign in to your member account.', href: '/library#login' },
-          { label: 'Become a Member', icon: 'users', desc: 'Join the alliance, free.', href: '/library#signup' },
-        ],
-      },
-      {
-        title: 'Memberships',
-        items: [
-          { label: 'Web360 Club', icon: 'globe', desc: 'Bronze, Silver and Gold tiers.', href: '/memberships#web360' },
-          { label: 'Ecosystem Memberships', icon: 'link', desc: 'Services from partner companies.', href: '/memberships#ecosystem-members' },
-          { label: 'Cohort Memberships', icon: 'users', desc: 'For institutes and their students.', href: '/memberships#cohort-memberships' },
-        ],
-      },
-    ],
-  },
+  /* Membership is a plain tab, directly before the Web3 Corridor flagship;
+     the memberships themselves are listed under the Corridor. */
+  { key: 'membership', label: 'Membership', href: '/memberships' },
   {
     key: 'corridor',
     label: 'Web3 Corridor',
@@ -204,17 +199,26 @@ export const NAV = [
       {
         title: 'The Initiative',
         items: [
-          { label: 'Global Innovation Corridor', icon: 'globe', desc: 'What the corridor is and why it exists.', href: '/corridor' },
-          { label: 'The Network', icon: 'layers', desc: 'How the corridor connects.', href: '/corridor#how-corridors-work' },
-          { label: 'Focus Pillars', icon: 'layers', desc: 'Where the corridor focuses.', href: '/corridor#focus-pillars' },
-          { label: 'Corridor Partners', icon: 'pin', desc: 'India, the UAE, Spain and Zambia.', href: '/corridor#country-corridors' },
+          { label: 'One Global Corridor', icon: 'globe', desc: 'One corridor connecting its partner countries.', href: '/corridor' },
+          { label: 'Corridor Partners', icon: 'pin', desc: 'The countries in the corridor.', href: '/corridor#country-corridors' },
+          { label: 'What the Corridor Opens', icon: 'layers', desc: 'Resources, partnerships, growth and expansion.', href: '/corridor#corridor-opens' },
         ],
       },
       {
         title: 'Take Part',
         items: [
           { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Membership through the Web360 Club.', href: '/corridor#join-corridor' },
+          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#join-corridor' },
+        ],
+      },
+      {
+        title: 'Memberships',
+        items: [
+          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/memberships#web360' },
+          /* no separate matrix section yet: the Web360 tiers set out what each includes */
+          { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/memberships#web360' },
+          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships#ecosystem-members' },
+          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and students.', href: '/memberships#cohort-memberships' },
         ],
       },
     ],
