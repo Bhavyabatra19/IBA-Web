@@ -2,15 +2,15 @@
  * Expertise — the four core capabilities as a four-point wheel (after the
  * client's reference): a dark panel, "One Web3 Corridor" on a silver hub, one
  * glass segment per capability (red, silver, red, black) in a glowing red
- * halo, and the four dark glass cards round it, each wired to the wheel. Hover,
+ * halo, and the four dark glass cards round it. Hover,
  * focus or a tap on a card (or a segment) steps that segment out and shows
  * the full statement in the strip below; until someone does, it steps
  * through them on its own (only while on screen). Narrow screens: the wheel
- * above the cards, no wires. Styles in brandbook.css (.cco, .cqi). Reduced
+ * above the cards. Styles in brandbook.css (.cco, .cqi). Reduced
  * motion: no stepping, no movement.
  */
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { reducedMotion } from '../lib/scroll'
 
 const CAPABILITIES = [
@@ -226,55 +226,10 @@ const Wave = () => (
   </svg>
 )
 
-/* The connectors, measured: from a dot on each card's inner edge, a short
-   level run, a slant toward the wheel, and a level stub onto the ring beside
-   that card's quarter. Only in the three-column layout. */
-function useWires(root) {
-  const [wires, setWires] = useState([])
-  useLayoutEffect(() => {
-    const el = root.current
-    if (!el) return
-    const wide = window.matchMedia('(min-width: 901px)')
-    const measure = () => {
-      const wheel = el.querySelector('.cqi__wheel')
-      if (!wide.matches || !wheel) return setWires([])
-      const o = el.getBoundingClientRect()
-      const w = wheel.getBoundingClientRect()
-      const s = w.width / VIEW
-      const cx = w.left - o.left + (C + PAD) * s
-      const cy = w.top - o.top + (C + PAD) * s
-      const r = (R_OUT + 22) * s
-      setWires(
-        [...el.querySelectorAll('.cqi__card')].map((card) => {
-          const b = card.getBoundingClientRect()
-          const left = b.left + b.width / 2 < o.left + cx
-          const dir = left ? 1 : -1
-          const sx = (left ? b.right : b.left) - o.left
-          const sy = b.top - o.top + b.height / 2
-          const ey = cy + (sy < cy ? -0.55 : 0.55) * r
-          const ex = cx - dir * (r * 0.835 + 6)
-          return { sx, sy, d: `M${sx} ${sy}h${dir * 34}L${ex - dir * 28} ${ey}H${ex}` }
-        })
-      )
-    }
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(el)
-    wide.addEventListener('change', measure)
-    document.fonts?.ready.then(measure)
-    return () => {
-      ro.disconnect()
-      wide.removeEventListener('change', measure)
-    }
-  }, [root])
-  return wires
-}
-
 export default function CoreCapabilities() {
   const [active, setActive] = useState(0)
   const [touched, setTouched] = useState(false)
   const map = useRef(null)
-  const wires = useWires(map)
   const c = CAPABILITIES[active]
   const pick = (i) => {
     setTouched(true)
@@ -298,14 +253,6 @@ export default function CoreCapabilities() {
     <div className="cco">
       <div className="cqi" ref={map} data-rise>
         <Wave />
-        <svg className="cqi__wires" aria-hidden="true">
-          {wires.map((w, i) => (
-            <g key={i} className={i === active ? 'is-active' : undefined}>
-              <path d={w.d} />
-              <circle cx={w.sx} cy={w.sy} r="4.5" />
-            </g>
-          ))}
-        </svg>
         <div className="cqi__wheel" aria-hidden="true">
           <WheelArt active={active} onPick={pick} />
         </div>
