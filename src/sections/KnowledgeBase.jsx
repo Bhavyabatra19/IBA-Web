@@ -9,9 +9,10 @@
  *
  * Items: real coverage of IBA and its founder (by request, 11-04-2026), each
  * opening the source in a new tab. The tag is the platform; the icon and the
- * meta line give the format. Thumbnails are generated in the site's
- * black-and-red theme (public/images/kb-*.jpg: node network, glow, glass
- * panel with the format icon), not taken from the sources.
+ * meta line give the format. Thumbnails are generated in the site's light
+ * studio style (public/images/kb-*.jpg: a silver and red platform with glass
+ * tiles carrying red line icons, the item's format on the main tile), not
+ * taken from the sources.
  *
  * ⚠ Titles for the Yahoo Finance and YouTube items, and the CoinGeek date,
  * are to confirm: the source pages could not be opened when this was set.
