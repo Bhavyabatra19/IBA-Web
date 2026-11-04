@@ -33,7 +33,7 @@ const PEOPLE = [
 
 const PARTNER_TYPES = [
   { title: 'Ecosystem Partner', text: 'List your product, integrate with IBA infrastructure, access the member network.' },
-  { title: 'Institutional Partner', text: 'Bring a Red Club Experience Center to your campus.' },
+  { title: 'Institutional Partner', logo: '/logos/initiatives/red-club.jpg', logoAlt: 'IBA Red Club logo', text: 'Bring a Red Club Experience Center to your campus.' },
   { title: 'Government & Policy Partner', text: 'Co-develop frameworks, standards and public infrastructure projects.' },
   { title: 'Corridor Partner', text: 'Join the Global Innovation Corridor as a technology, investment, hub or talent partner.' },
 ]

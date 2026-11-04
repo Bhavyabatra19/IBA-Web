@@ -39,6 +39,7 @@ const INITIATIVES = [
     id: 'init-verifyble',
     sub: 'Data security and digital asset management',
     title: 'Verifyble',
+    logo: '/logos/initiatives/verifyble.jpg',
     text: "IBA's platform for data security and digital asset management, helping any organisation or individual secure, verify and manage data and digital assets on-chain.",
     list: [
       'Data security: tamper-evident records that can be verified by anyone you choose to share them with',
@@ -51,6 +52,7 @@ const INITIATIVES = [
     id: 'init-red-club',
     sub: 'The talent pipeline for Web3 and AI',
     title: 'IBA Red Club',
+    logo: '/logos/initiatives/red-club.jpg',
     text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.',
     list: ['Certified programmes and on-campus labs', 'Live industry projects with mentors', 'Internships and placements'],
     page: { href: '/red-club', label: 'Explore Red Club' },
@@ -94,7 +96,11 @@ export default function Initiatives() {
       {INITIATIVES.map((it, i) => (
         <Section id={it.id} key={it.id} eyebrow={it.sub} title={it.title} tone={i % 2 ? 'card' : 'plain'}>
           <div className="pk-split">
-            <Prose paras={[it.text]} />
+            <div>
+              {/* the initiative's own mark, where one has been supplied */}
+              {it.logo && <img className="pk-init__logo" src={it.logo} alt={`${it.title} logo`} loading="lazy" decoding="async" data-rise />}
+              <Prose paras={[it.text]} />
+            </div>
             <div className="pk-init" data-rise>
               {it.list && <Bullets items={it.list} />}
               <div className="pk-actions">

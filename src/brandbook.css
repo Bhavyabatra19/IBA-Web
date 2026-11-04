@@ -8320,3 +8320,22 @@ main {
   .cqi__seg, .cqi__card { transition: none; }
   .cqi__hubRing { animation: none; }
 }
+
+/* Initiative logos: above an initiative's text on the Initiatives page, and
+   on a card where the icon would be (Verifyble, Red Club). */
+.pk-init__logo {
+  display: block;
+  width: clamp(120px, 14vw, 168px);
+  height: auto;
+  margin-bottom: 22px;
+  border-radius: 18px;
+  box-shadow: 0 14px 30px -18px rgba(120, 20, 25, .55);
+}
+.pk-card__logo {
+  display: block;
+  width: 56px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+}
