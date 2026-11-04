@@ -74,8 +74,16 @@ const CAPABILITIES = [
 
 const STEP_MS = 5000
 
-/* one colour per capability, all from the brand palette */
-const COLORS = ['#d71920', '#3a2a2b', '#9e141b', '#ef5a5f']
+/* One glass tone per capability, alternating red with white and black round
+   the wheel. `glass` is the body, lit from the top left; `q` is the accent
+   the card and detail strip use; `ink` draws the icon on top. */
+const TONES = [
+  { glass: ['#ff3b42', '#d71920', '#6e080d'], q: '#d71920', ink: '#fff' },
+  { glass: ['#ffffff', '#f4f0f0', '#cfc6c7'], q: '#ffffff', ink: '#b3131b' },
+  { glass: ['#e8343c', '#a3121a', '#4a050a'], q: '#a3121a', ink: '#fff' },
+  { glass: ['#4a4345', '#161113', '#000'], q: '#1c1618', ink: '#fff' },
+]
+const toneVars = (t) => ({ '--q': t.q, '--ink': t.ink, '--q-hi': t.glass[0], '--q-lo': t.glass[2] })
 
 /* The wheel: four ring segments around "One Web3 Corridor", each with a
    pill-shaped tab, its icon in the middle — the first top-left with its tab left,
@@ -103,6 +111,47 @@ const SEGMENT = (() => {
 function WheelArt({ active, onPick }) {
   return (
     <svg viewBox="0 0 400 400" role="presentation">
+      <defs>
+        {/* one segment's outline (tab and ring together), for the gloss */}
+        <clipPath id="cqi-shape">
+          <rect x={TAB.x} y={TAB.y} width={TAB.w} height={TAB.h} rx={TAB.h / 2} />
+          <path d={SEGMENT} />
+        </clipPath>
+        {/* the gradients are drawn in each segment's turned space, so each is
+            turned back to keep the light coming from the top left */}
+        {TONES.map((t, i) => (
+          <g key={i}>
+            <linearGradient id={`cqi-glass-${i}`} gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="330" y2="330" gradientTransform={`rotate(${-90 * i} ${C} ${C})`}>
+              <stop stopColor={t.glass[0]} />
+              <stop offset=".45" stopColor={t.glass[1]} />
+              <stop offset="1" stopColor={t.glass[2]} />
+            </linearGradient>
+            <linearGradient id={`cqi-gloss-${i}`} gradientUnits="userSpaceOnUse" x1={C} y1={i < 2 ? 30 : 200} x2={C} y2={i < 2 ? 180 : 350} gradientTransform={`rotate(${-90 * i} ${C} ${C})`}>
+              <stop stopColor="#fff" stopOpacity=".5" />
+              <stop offset=".46" stopColor="#fff" stopOpacity=".1" />
+              <stop offset=".6" stopColor="#fff" stopOpacity=".02" />
+              <stop offset="1" stopColor="#fff" stopOpacity="0" />
+            </linearGradient>
+          </g>
+        ))}
+        <radialGradient id="cqi-hub" cx=".38" cy=".3" r=".8">
+          <stop stopColor="#fff" />
+          <stop offset=".6" stopColor="#f7f3f3" />
+          <stop offset="1" stopColor="#e2d9da" />
+        </radialGradient>
+        <linearGradient id="cqi-hubGloss" x1="0" y1="0" x2="0" y2="1">
+          <stop stopColor="#fff" stopOpacity=".95" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <filter id="cqi-blur" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="26" />
+        </filter>
+      </defs>
+      {/* a soft red and black glow behind the glass, for it to sit over */}
+      <g className="cqi__aura" filter="url(#cqi-blur)" aria-hidden="true">
+        <circle cx="150" cy="150" r="90" fill="#d71920" />
+        <circle cx="255" cy="255" r="80" fill="#1c1618" />
+      </g>
       {CAPABILITIES.map((cap, i) => {
         const [ix, iy] = turn(TAB_END.x, TAB_END.y, i)
         const [nx, ny] = turn(C - 63, C - 63, i)
@@ -113,13 +162,17 @@ function WheelArt({ active, onPick }) {
           <g
             key={cap.key}
             className={`cqi__seg${i === active ? ' is-active' : ''}`}
-            style={{ '--q': COLORS[i], '--dx': `${dx}px`, '--dy': `${dy}px` }}
+            style={{ ...toneVars(TONES[i]), '--dx': `${dx}px`, '--dy': `${dy}px` }}
             onMouseEnter={() => onPick(i)}
             onClick={() => onPick(i)}
           >
             <g transform={`rotate(${90 * i} ${C} ${C})`}>
-              <rect x={TAB.x} y={TAB.y} width={TAB.w} height={TAB.h} rx={TAB.h / 2} />
-              <path d={SEGMENT} />
+              <g className="cqi__glass" fill={`url(#cqi-glass-${i})`}>
+                <rect x={TAB.x} y={TAB.y} width={TAB.w} height={TAB.h} rx={TAB.h / 2} />
+                <path d={SEGMENT} />
+              </g>
+              {/* the gloss: a bright sheen over the upper half, cut to the shape */}
+              <rect className="cqi__gloss" width="400" height="400" fill={`url(#cqi-gloss-${i})`} clipPath="url(#cqi-shape)" />
             </g>
             <g className="cqi__segIcon" transform={`translate(${nx - 15} ${ny - 15}) scale(1.25)`}>
               {cap.icon}
@@ -130,7 +183,8 @@ function WheelArt({ active, onPick }) {
       })}
       {/* the gaps between segments, then the hub over the middle */}
       <path className="cqi__gap" d={`M${C} ${C - R_OUT - 4}V${C + R_OUT + 4}M${C - R_OUT - 4} ${C}H${C + R_OUT + 4}`} />
-      <circle className="cqi__hub" cx={C} cy={C} r="52" />
+      <circle className="cqi__hub" cx={C} cy={C} r="52" fill="url(#cqi-hub)" />
+      <ellipse className="cqi__hubGloss" cx={C} cy={C - 24} rx="36" ry="20" fill="url(#cqi-hubGloss)" />
       <circle className="cqi__hubRing" cx={C} cy={C} r="43" />
       <text className="cqi__hubTop" x={C} y={C - 4} textAnchor="middle">ONE WEB3</text>
       <text className="cqi__hubBottom" x={C} y={C + 13} textAnchor="middle">CORRIDOR</text>
@@ -172,7 +226,7 @@ export default function CoreCapabilities() {
             type="button"
             key={cap.key}
             className={`cqi__card cqi__card--${i + 1}${i === active ? ' is-active' : ''}`}
-            style={{ '--q': COLORS[i] }}
+            style={toneVars(TONES[i])}
             aria-pressed={i === active}
             aria-controls="cco-detail"
             onMouseEnter={() => pick(i)}
@@ -193,7 +247,7 @@ export default function CoreCapabilities() {
       {/* the chosen capability, in full */}
       <div className="cco__detail" id="cco-detail" aria-live="polite">
         <div className="cco__detailIn" key={c.key}>
-          <span className="cqi__bigIcon" aria-hidden="true" style={{ '--q': COLORS[active] }}>
+          <span className="cqi__bigIcon" aria-hidden="true" style={toneVars(TONES[active])}>
             <svg viewBox="0 0 24 24">{c.icon}</svg>
           </span>
           <div>

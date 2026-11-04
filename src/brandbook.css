@@ -12456,18 +12456,29 @@ main {
 }
 .cqi__wheel { grid-area: w; }
 .cqi__wheel svg { display: block; width: 100%; height: auto; overflow: visible; }
-.cqi__seg { cursor: pointer; transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .35s ease; opacity: .62; }
-.cqi__seg rect, .cqi__seg path { fill: var(--q); }
-.cqi__seg:hover { opacity: .85; }
+/* Glass: each segment's body is a lit gradient (set in the SVG) with a gloss
+   over its upper half; inactive ones sit back slightly, the active one lifts
+   out with a deeper shadow. */
+.cqi__aura { opacity: .22; pointer-events: none; }
+.cqi__seg {
+  cursor: pointer;
+  opacity: .9;
+  filter: drop-shadow(0 6px 10px rgba(30, 10, 12, .18));
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .35s ease, filter .35s ease;
+}
+.cqi__seg:hover { opacity: .96; }
 .cqi__seg.is-active {
   opacity: 1;
   transform: translate(var(--dx), var(--dy));
-  filter: drop-shadow(0 10px 14px rgba(120, 20, 25, .3));
+  filter: drop-shadow(0 16px 20px rgba(60, 8, 12, .38));
 }
-.cqi__tabDot { fill: #fff; opacity: .9; pointer-events: none; }
-.cqi__segIcon { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.cqi__glass { opacity: .94; }
+.cqi__gloss { pointer-events: none; }
+.cqi__tabDot { fill: var(--ink); opacity: .9; pointer-events: none; }
+.cqi__segIcon { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .cqi__gap { stroke: #f8f6f5; stroke-width: 7; pointer-events: none; }
-.cqi__hub { fill: #fff; stroke: #f8f6f5; stroke-width: 8; filter: drop-shadow(0 6px 14px rgba(45, 23, 25, .16)); }
+.cqi__hub { stroke: rgba(255, 255, 255, .9); stroke-width: 6; filter: drop-shadow(0 8px 16px rgba(45, 23, 25, .22)); }
+.cqi__hubGloss { opacity: .8; pointer-events: none; }
 .cqi__hubRing { fill: none; stroke: #d71920; stroke-width: 1.5; stroke-dasharray: 4 5; animation: cqi-spin 30s linear infinite; transform-origin: 200px 200px; }
 @keyframes cqi-spin { to { transform: rotate(360deg); } }
 .cqi__hubTop, .cqi__hubBottom { fill: #2a1d1e; font: 700 11px/1 Arial, sans-serif; letter-spacing: .14em; }
@@ -12495,7 +12506,7 @@ main {
 .cqi__card--1, .cqi__card--4 { text-align: right; }
 .cqi__card--1 .cqi__head, .cqi__card--4 .cqi__head { flex-direction: row-reverse; }
 .cqi__card:hover, .cqi__card.is-active {
-  border-color: var(--q);
+  border-color: #d71920;
   background: #fff;
   box-shadow: 0 12px 28px -18px rgba(120, 20, 25, .45);
 }
@@ -12509,14 +12520,21 @@ main {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: var(--q);
 }
-.cqi__icon svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+/* the card and detail icons in the same glass as their segment */
+.cqi__icon, .cqi__bigIcon {
+  border: 1px solid rgba(255, 255, 255, .7);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, .08) 50%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(145deg, var(--q-hi), var(--q) 45%, var(--q-lo));
+  box-shadow: 0 8px 18px -12px rgba(60, 8, 12, .55), inset 0 0 0 1px rgba(0, 0, 0, .06);
+}
+.cqi__icon svg { width: 20px; height: 20px; fill: none; stroke: var(--ink); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .cqi__name { color: #2a1d1e; font-size: 15px; font-weight: 600; line-height: 1.3; }
 .cqi__lead { color: #716667; font-size: 13px; line-height: 1.5; }
 /* the detail strip leads with the capability's icon */
-.cqi__bigIcon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 18px; background: var(--q); box-shadow: 0 12px 26px -16px rgba(120, 20, 25, .6); }
-.cqi__bigIcon svg { width: 38px; height: 38px; fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.cqi__bigIcon { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 18px; }
+.cqi__bigIcon svg { width: 38px; height: 38px; fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 560px) { .cqi__bigIcon { width: 54px; height: 54px; border-radius: 14px; } .cqi__bigIcon svg { width: 28px; height: 28px; } }
 @media (max-width: 900px) {
   .cqi {
