@@ -186,9 +186,8 @@ export const NAV = [
     ],
   },
   { key: 'redclub', label: 'Red Club', href: '/red-club' },
-  /* Membership is a plain tab, directly before the Web3 Corridor flagship;
-     the memberships themselves are listed under the Corridor. */
-  { key: 'membership', label: 'Membership', href: '/memberships' },
+  /* No Membership tab (by request): the memberships live on the Web3
+     Corridor page and are listed under its tab. */
   {
     key: 'corridor',
     label: 'Web3 Corridor',
@@ -207,17 +206,17 @@ export const NAV = [
         title: 'Take Part',
         items: [
           { label: 'Corridor Forum', icon: 'chat', desc: "The corridor's flagship gathering.", href: '/corridor#corridor-forum' },
-          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#join-corridor' },
+          { label: 'Join the Corridor', icon: 'handshake', desc: 'Become a corridor member.', href: '/corridor#web360' },
         ],
       },
       {
         title: 'Memberships',
         items: [
-          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/memberships#web360' },
+          { label: 'Web360 Club', icon: 'globe', desc: "IBA's own memberships.", href: '/corridor#web360' },
           /* no separate matrix section yet: the Web360 tiers set out what each includes */
-          { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/memberships#web360' },
-          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/memberships#ecosystem-members' },
-          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and students.', href: '/memberships#cohort-memberships' },
+          { label: 'Membership Matrix', icon: 'link', desc: 'What each tier includes.', href: '/corridor#web360' },
+          { label: 'Ecosystem Memberships', icon: 'users', desc: 'The IBA Circle, IBA Block., Tokenized Asset Foundation and more.', href: '/corridor#ecosystem-members' },
+          { label: 'Cohort Memberships', icon: 'book', desc: 'Red Club Experience Zone for institutes and students.', href: '/corridor#cohort-memberships' },
         ],
       },
     ],
@@ -320,7 +319,7 @@ export const FOOTER = [
       { label: 'The Network', href: '/corridor#how-corridors-work' },
       { label: 'Corridor Forum', href: '/corridor#corridor-forum' },
       { label: 'Corridor Partners', href: '/corridor#country-corridors' },
-      { label: 'Join the Corridor', href: '/corridor#join-corridor' },
+      { label: 'Join the Corridor', href: '/corridor#web360' },
     ],
   },
   {
