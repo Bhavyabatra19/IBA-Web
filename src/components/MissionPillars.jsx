@@ -1,5 +1,5 @@
 /**
- * About — the four mission pillars (Advocate, Connect, Enable, Educate) as
+ * About — the four mission pillars (Advocate, Connect, Educate, Enable) as
  * frosted glass cards over the client's red light-arcs image
  * (public/images/mission-bg.jpg). Each icon is drawn for its pillar and sits
  * in a neon ring with an orbiting spark.
@@ -49,22 +49,6 @@ export const PILLARS = [
     full: 'Our corridors facilitate connections to bring together governments, institutions, investors, enterprises, and innovators to create trusted pathways for market entry, tokenization, investment, and cross-border collaboration. We build pathways between jurisdictions with policy, capital, technology, and market access working together. Promoting institutional and commercial rails, easing Web3 ecosystems to move between markets—turning fragmented opportunities into connected, scalable corridors for the digital economy.',
   },
   {
-    key: 'enable',
-    title: 'Enable',
-    /* a rocket lifting off: intent to production */
-    icon: (
-      <>
-        <path d="M12 2.5c3 2.2 4.5 5.4 4.5 9.2V16h-9v-4.3c0-3.8 1.5-7 4.5-9.2Z" />
-        <circle cx="12" cy="9.5" r="1.8" className="mp__fill" />
-        <path d="M7.5 12.5 5 15v3l2.5-2M16.5 12.5 19 15v3l-2.5-2" />
-        <path d="M10.5 18.5 12 21.5l1.5-3" className="mp__wave" />
-      </>
-    ),
-    short:
-      'Advisory, tokenization expertise and technical capability that turn Web3 ambition into production-ready reality.',
-    full: 'We bridge the gap between intent, infrastructure, and adoption. Enabling Web3 ambition to evolve into production-ready reality through sophisticated infrastructure with structured strategy for growth and scale. IBA provides the strategic advisory, tokenization expertise, consulting, and technical capabilities organizations need to design, build, and deploy blockchain solutions at scale—from market strategy and ecosystem design to technology implementation and launch.',
-  },
-  {
     key: 'educate',
     title: 'Educate',
     /* a graduation cap, its tassel hanging */
@@ -79,6 +63,22 @@ export const PILLARS = [
     short:
       'A steady pool of trained Web3 talent, built through the Red Club, Experience Centers and industry-led programs.',
     full: 'Creating a systematic talent pool with enhanced holistic learning programs to enhance education with practical experiences and industry validation for real-world opportunities. Building a steady resource of trained Web3 talent by connecting students, developers, professionals, and entrepreneurs with practical skills, expert mentors, live projects, and industry networks through the Red Club and Experience Centers programs, and industry-led programs—equipping learners to develop, deploy, and scale blockchain and tokenization solutions across global ecosystems.',
+  },
+  {
+    key: 'enable',
+    title: 'Enable',
+    /* a rocket lifting off: intent to production */
+    icon: (
+      <>
+        <path d="M12 2.5c3 2.2 4.5 5.4 4.5 9.2V16h-9v-4.3c0-3.8 1.5-7 4.5-9.2Z" />
+        <circle cx="12" cy="9.5" r="1.8" className="mp__fill" />
+        <path d="M7.5 12.5 5 15v3l2.5-2M16.5 12.5 19 15v3l-2.5-2" />
+        <path d="M10.5 18.5 12 21.5l1.5-3" className="mp__wave" />
+      </>
+    ),
+    short:
+      'Advisory, tokenization expertise and technical capability that turn Web3 ambition into production-ready reality.',
+    full: 'We bridge the gap between intent, infrastructure, and adoption. Enabling Web3 ambition to evolve into production-ready reality through sophisticated infrastructure with structured strategy for growth and scale. IBA provides the strategic advisory, tokenization expertise, consulting, and technical capabilities organizations need to design, build, and deploy blockchain solutions at scale—from market strategy and ecosystem design to technology implementation and launch.',
   },
 ]
 

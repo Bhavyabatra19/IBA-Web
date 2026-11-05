@@ -1,8 +1,7 @@
 /**
- * A portrait film shown full width (Web3 Corridor, Partnership with The
- * Block). The frame spans the section; the film sits whole in the middle,
- * and the sides carry its poster, blurred and darkened, so a 9:16 film
- * fills a wide frame without cropping it.
+ * A portrait film (Web3 Corridor, TheBlock Experience), shown at its own
+ * shape with no frame or background behind it, side by side with the other
+ * film (content review, 11-05).
  *
  * It starts muted and looped once half of it is on screen, and pauses when
  * it scrolls away (by request). The player's own controls are always there
@@ -56,7 +55,6 @@ export default function BlockFilm({ src, poster, label }) {
 
   return (
     <figure className="bfilm" data-rise>
-      <span className="bfilm__ground" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
       <video
         ref={video}
         className="bfilm__video"

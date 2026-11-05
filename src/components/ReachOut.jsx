@@ -94,8 +94,42 @@ export const channels = (phrase) => [
  *   where the dialog's own h2 already exists and a second one would break the
  *   heading order a screen reader navigates by.
  */
-export default function ReachOut({ phrase, heading = 'Or reach us directly', as = 'h2' }) {
+export default function ReachOut({ phrase, heading = 'Or reach us directly', as = 'h2', iconsOnly = false }) {
   const Heading = as
+  /* the Let's Talk form (content review, 11-05): the channels as icons only,
+     no address or number printed; each still names itself to assistive tech
+     and on hover */
+  if (iconsOnly) {
+    return (
+      <div className="reach reach--icons">
+        <Heading className={as === 'h2' ? 'reach__h display' : 'eyebrow'}>{heading}</Heading>
+        <ul className="reach__iconRow">
+          {channels(phrase).map((c) => (
+            <li key={c.k}>
+              <a
+                href={c.href}
+                aria-label={`${c.k}: ${c.v}`}
+                title={`${c.k}: ${c.v}`}
+                {...(c.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+              >
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  {c.icon}
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
   return (
     <div className="reach">
       <Heading className={as === 'h2' ? 'reach__h display' : 'eyebrow'}>{heading}</Heading>

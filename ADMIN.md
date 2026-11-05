@@ -44,3 +44,19 @@ Optional: set `OAUTH_GITHUB_SCOPE` to `public_repo` to ask GitHub for narrower a
 | `src/data/resources.json` | The resources list it edits |
 | `public/images/resources/` | Where uploaded thumbnails go |
 | `api/auth.js`, `api/callback.js` | GitHub sign-in |
+
+# Let's Talk form → email
+
+The enquiry form posts to `api/enquiry.js`, which emails each enquiry to **hello@indiablockchainalliance.org** through [Resend](https://resend.com), with **Reply-To** set to the person who wrote. Until it is set up, the form tells visitors it is not connected and offers "Email us instead", so no enquiry is lost silently.
+
+## One-time setup
+
+1. Create a Resend account and **add the domain** `indiablockchainalliance.org` (Resend → Domains). Add the DNS records it shows at the domain's DNS provider and wait for it to verify.
+2. Create an **API key** (Resend → API Keys, "Sending access").
+3. In Vercel → the IBA-Web project → Settings → Environment Variables (Production), add:
+   - `RESEND_API_KEY` = the API key
+   - `ENQUIRY_FROM` = `IBA Website <website@indiablockchainalliance.org>` (any address on the verified domain)
+   - optional: `ENQUIRY_TO` to send somewhere other than hello@indiablockchainalliance.org
+4. Redeploy, then send a test enquiry from the site.
+
+Without `ENQUIRY_FROM` on a verified domain, Resend only delivers to the email address of the Resend account itself, which is useful for a first test.

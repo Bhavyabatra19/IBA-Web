@@ -32,12 +32,13 @@
 import { useCallback, useEffect, useRef } from 'react'
 import ReachOut from './ReachOut'
 import EnquiryForm from '../sections/EnquiryForm'
-import { ENQUIRY, contextFor } from '../enquiry'
+import { ENQUIRY, TYPE_TOPICS, contextFor } from '../enquiry'
 import {
   closeEnquiry,
   openEnquiry,
   useEnquiry,
   wantsEnquiry,
+  enquiryType,
 } from '../lib/enquiryStore'
 import { lockScroll, unlockScroll } from '../lib/scroll'
 
@@ -86,9 +87,10 @@ export default function Enquiry() {
 
   /* ?enquiry=open, so a campaign or an email can link straight to the form. */
   useEffect(() => {
-    if (wantsEnquiry()) {
+    const typed = TYPE_TOPICS[enquiryType()]
+    if (wantsEnquiry() || typed) {
       const page = contextFor(window.location.pathname)
-      openEnquiry({ topic: page.topic, phrase: page.phrase })
+      openEnquiry({ topic: typed || page.topic, phrase: page.phrase })
     }
   }, [])
 
@@ -151,7 +153,7 @@ export default function Enquiry() {
   if (!open) return null
 
   return (
-    <div className="enq" role="presentation">
+    <div className="enq" role="presentation" data-lenis-prevent="">
       {/* A real button under the panel rather than a click handler on the
           backdrop div: a div that closes on click is invisible to anyone not
           using a pfointer, and it swallows the drag that ends outside the panel
@@ -187,7 +189,7 @@ export default function Enquiry() {
         <div className="enq__body">
           {/* first in the DOM — see the note at the top of this file */}
           <div className="enq__reach">
-            <ReachOut phrase={phrase} heading="Or reach us directly" as="p" />
+            <ReachOut phrase={phrase} heading="Or reach us directly" as="p" iconsOnly />
           </div>
           <div className="enq__formPane">
             <EnquiryForm topic={topic} phrase={phrase} onDone={close} />

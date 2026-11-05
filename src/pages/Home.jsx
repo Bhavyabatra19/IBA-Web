@@ -1,13 +1,13 @@
 import Hero from '../sections/Hero'
 import Credibility from '../sections/Credibility'
 import ImpactBand from '../sections/ImpactBand'
-import CorridorBand from '../sections/CorridorBand'
 import WhatWeDoCards from '../sections/WhatWeDoCards'
 import AcademiaCards from '../sections/AcademiaCards'
 import PresenceGlobe from '../sections/PresenceGlobe'
 import EcosystemMarquee from '../sections/EcosystemMarquee'
 import KnowledgeBase from '../sections/KnowledgeBase'
 import GetInTouch from '../sections/GetInTouch'
+import MembershipBand from '../sections/MembershipBand'
 
 /**
  * The home page, in the supplied running order.
@@ -52,14 +52,18 @@ export default function Home() {
 
   return (
     <div>
+      {/* the order from the content review (11-05-2026): who IBA is, what
+          it does, where it operates (the Web3 Corridor and Global Presence,
+          one section), proof, who is with it, how to join, learning,
+          insights, contact */}
       <Hero />
       <Credibility />
-      <ImpactBand />
-      <CorridorBand />
       <WhatWeDoCards />
-      <AcademiaCards />
       <PresenceGlobe />
+      <ImpactBand />
       <EcosystemMarquee />
+      <MembershipBand />
+      <AcademiaCards />
       <KnowledgeBase />
       <GetInTouch />
     </div>

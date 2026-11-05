@@ -31,12 +31,12 @@ const LEARNER_GETS = WHO.filter((w) => w.title === 'Learners & emerging talent')
 
 export default function RedClubLearners() {
   return (
-    <div>
+    <div className="rc-page">
       <PageHero
         id="red-club-learners"
         aside={
           <div className="rc-hero-art" aria-hidden="true">
-            <img src="/images/ac-students.jpg" alt="" decoding="async" fetchpriority="high" />
+            <img src="/images/card-students.jpg" alt="" decoding="async" fetchpriority="high" />
           </div>
         }
         eyebrow="IBA Red Club · For Learners"
@@ -78,6 +78,9 @@ export default function RedClubLearners() {
         title="For curious minds and builders"
         lede="Whether you're exploring Web3 or already building, Red Club is a place to learn, contribute and grow."
       >
+        <figure className="rc-figure" data-rise>
+          <img src="/images/card-students-art.jpg" alt="Learners working together, with masterclasses, learning paths, workshops and research around them" loading="lazy" decoding="async" />
+        </figure>
         <Cards cols={2} items={LEARNER_GETS} />
       </Section>
 

@@ -2844,14 +2844,14 @@ em {
 .drawer__acc {
   border-bottom: 1px solid var(--line-soft);
 }
-.drawer__acc h2 {
+.drawer__acc .drawer__head {
   margin: 0;
   font: inherit;
 }
 /* the accordion head and the plain link (Home) are the same row — one has a
    chevron to turn, the other just goes somewhere */
-.drawer__acc h2 button,
-.drawer__acc h2 a {
+.drawer__acc .drawer__head button,
+.drawer__acc .drawer__head a {
   width: 100%;
   display: flex;
   align-items: center;
@@ -2871,19 +2871,19 @@ em {
   cursor: pointer;
   text-align: left;
 }
-.drawer__acc h2 button svg {
+.drawer__acc .drawer__head button svg {
   width: 13px;
   flex: none;
   color: var(--red);
   transition: transform 0.45s var(--ease-out);
 }
 /* the page being read, marked the same way in both halves of the nav */
-.drawer__acc h2 a[aria-current='page'],
-.drawer__acc[data-current] h2 button {
+.drawer__acc .drawer__head a[aria-current='page'],
+.drawer__acc[data-current] .drawer__head button {
   color: var(--red);
 }
 /* the plus rotates into a minus */
-.drawer__acc[data-open] h2 button svg {
+.drawer__acc[data-open] .drawer__head button svg {
   transform: rotate(135deg);
 }
 /* 0fr → 1fr animates the row to its content height with no measured pixels */

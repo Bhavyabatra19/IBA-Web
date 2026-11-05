@@ -12,10 +12,9 @@
  */
 
 import { useLayoutEffect, useRef } from 'react'
-import { gsap, revealRise, reducedMotion, whileOnScreen } from '../lib/scroll'
-import { Go } from './service/ServiceBlocks'
+import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { FACTS } from '../data/facts'
-import { IMPACT_SECONDARY, TOKENOMICS, usd } from '../content'
+import { TOKENOMICS, usd } from '../content'
 
 /* line icons, 24px grid; the effect gives each stroke pathLength=1 so one
    dash tween draws them all */
@@ -48,17 +47,19 @@ const ICONS = {
   ),
 }
 
+/* Each figure once on the home page (content review): the members,
+   advisors, countries and affiliations sit in the strip under the hero, so
+   this band carries the tokenization record. */
+const n = (v, prefix = '', suffix = '') => ({ n: v, prefix, suffix, text: `${prefix}${v}${suffix}` })
 const FIGURES = [
   { fig: FACTS.tokenized, label: 'Tokenized Assets', note: 'Real-world value brought on-chain', icon: 'coin' },
-  { fig: FACTS.countries, label: 'Countries', note: 'Across five regions and growing', icon: 'globe' },
-  { fig: FACTS.partners, label: 'Ecosystem Partners', note: 'Builders, funds and institutions', icon: 'network' },
+  { fig: n(12, '$', 'B+'), label: 'Consortium AUM', note: 'Assets under management across the consortium', icon: 'network' },
   { fig: FACTS.sectors, label: 'Tokenization Sectors', note: 'From real estate to gold and logistics', icon: 'layers' },
+  { fig: n(11), label: 'Impact Projects', note: 'Tokenized for measurable social and climate outcomes', icon: 'globe' },
 ]
 
-const TICKER = [
-  ...IMPACT_SECONDARY.map((s) => ({ k: s.k, v: s.v })),
-  ...TOKENOMICS.map((t) => ({ k: usd(t.usdM), v: t.project })),
-]
+/* the tokenization record, one card per project (content review) */
+const PROJECTS = TOKENOMICS.map((t) => ({ ...t, line: `${t.sector} tokenization · ${usd(t.usdM)}` }))
 
 /** Count a [data-count] figure from 0, keeping its decimals and affixes. */
 function countUp(el, duration) {
@@ -114,10 +115,6 @@ export default function ImpactBand() {
         cleanups.push(() => item.removeEventListener('mouseenter', replay))
       })
 
-      // the ticker only runs while the band is on screen
-      const track = el.querySelector('.ib__track')
-      const tick = gsap.to(track, { xPercent: -50, duration: 48, ease: 'none', repeat: -1, paused: true })
-      cleanups.push(whileOnScreen(el, () => tick.play(), () => tick.pause()))
     }, root)
     return () => {
       cleanups.forEach((fn) => fn())
@@ -145,9 +142,6 @@ export default function ImpactBand() {
             <p className="ib__lede" data-rise>
               The alliance in figures — what has been tokenized, where, and with whom.
             </p>
-            <Go className="ib__cta" href="/about#impact" data-rise>
-              View Impact <span aria-hidden="true">→</span>
-            </Go>
           </div>
         </header>
 
@@ -166,18 +160,14 @@ export default function ImpactBand() {
           ))}
         </ul>
 
-        <div className="ib__ticker" data-rise>
-          <ul className="ib__track">
-            {/* twice over, so the loop has no seam; the copy is hidden from AT */}
-            {[0, 1].map((pass) =>
-              TICKER.map((t) => (
-                <li key={`${pass}-${t.v}`} aria-hidden={pass ? 'true' : undefined}>
-                  <b>{t.k}</b> {t.v}
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
+        <ul className="ib__projects">
+          {PROJECTS.map((p) => (
+            <li className="ib__project" key={p.project} data-rise>
+              <span className="ib__projectName">{p.project}</span>
+              <span className="ib__projectLine">{p.line}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )

@@ -21,7 +21,7 @@ import presence from '../data/presence.json'
    under 0.6 deg² dropped. Holes (inland seas, lakes) are rings of their own
    and are cut out by the even-odd fill. */
 import LAND from '../data/land-110m.json'
-import { FACTS } from '../data/facts'
+import { Go } from './service/ServiceBlocks'
 import IndiaPulse from '../components/IndiaPulse'
 
 /* ------------------------------------------------------------------ */
@@ -70,13 +70,15 @@ const place = (lon, lat) => {
 
 const byCountry = Object.fromEntries(presence.countries.map((c) => [c.country, c]))
 
-/* The figures, each standing on a real market. Stems differ in height so the
-   labels never sit in a row; the UAE's sits to the left of its stem, since
-   India's is just to its right. */
-const PINS = [
-  { at: 'Spain', value: FACTS.countries.text, label: 'Countries', stem: 'mid' },
-  { at: 'United Arab Emirates', value: FACTS.affiliations.text, label: 'Global Affiliations', stem: 'short', side: 'left' },
-  { at: 'India', value: FACTS.members.text, label: 'Global Members', stem: 'tall' },
+/* The corridor's five hubs on the map artwork (x, y as % of the image, on
+   its glowing points), each with its role in the corridor (content review:
+   the map named India alone). */
+const HUBS = [
+  { label: 'Americas', sub: 'Infrastructure', x: 27.5, y: 64.2, card: 'right' },
+  { label: 'Europe', sub: 'Standards', x: 51, y: 37.4, card: 'above' },
+  { label: 'Africa', sub: 'Utility', x: 57.4, y: 63.2, card: 'right' },
+  { label: 'UAE', sub: 'Launchpad', x: 63.6, y: 49, card: 'above' },
+  { label: 'India', sub: 'Technical engine', x: 70.4, y: 56.6, card: 'right' },
 ]
 
 export default function PresenceGlobe() {
@@ -101,37 +103,41 @@ export default function PresenceGlobe() {
               <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
               <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
             </svg>
-            Global Presence
+            Flagship Programme · Global Presence
           </p>
           <h2 className="pg__title" id="pg-title" data-rise>
-            Building the infrastructure to connect the world’s Web3 ecosystems
+            Web3 Corridor: IBA Global Initiative
           </h2>
           <p className="pg__lede" data-rise>
-            IBA operates where policy, capital and code meet, with members,
-            advisors, affiliations and active programmes spanning every major
-            region, scaling today’s footprint into a single global Web3 Corridor
-            network.
+            IBA operates where policy, capital and code meet: India as the
+            technical engine, the UAE as the launchpad, Europe for standards,
+            Africa for real-world utility and the Americas for infrastructure,
+            one global Web3 Corridor network for technology transfer,
+            investment, entrepreneurship and ecosystem collaboration.
           </p>
+          <Go className="ib__cta pg__cta" href="/corridor" data-rise>
+            Explore Web3 Corridor
+          </Go>
         </header>
 
-        {/* the supplied map artwork: a glossy red world on white with the
-            three headline figures as glass cards. The figures in it match
-            data/facts.js; they are repeated as text for screen readers. ⚠ If
-            a figure changes, this image must be updated too. */}
+        {/* the supplied map artwork, with its three figure cards painted out
+            (public/images/presence-map-hubs.jpg; the figures already sit in
+            the strip under the hero, content review) and a pin on each of the
+            corridor's five hubs, with what happens there */}
         <figure className="pg__art" data-rise>
           <img
-            src="/images/presence-map.jpg"
+            src="/images/presence-map-hubs.jpg"
             alt=""
             width="1888"
             height="833"
             loading="lazy"
             decoding="async"
           />
-          {/* India, highlighted over the map (by request) */}
-          <IndiaPulse x={70.4} y={56.6} label="India" card="right" />
+          {HUBS.map((h) => (
+            <IndiaPulse key={h.label} x={h.x} y={h.y} label={h.label} sub={h.sub} card={h.card} small />
+          ))}
           <figcaption className="sr-only">
-            {FACTS.countries.text} countries, {FACTS.affiliations.text} global affiliations,{' '}
-            {FACTS.members.text} global members
+            IBA's hubs: {HUBS.map((h) => `${h.label}, ${h.sub}`).join('; ')}.
           </figcaption>
         </figure>
       </div>

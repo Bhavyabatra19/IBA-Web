@@ -15,6 +15,7 @@ const Arrow = () => <span aria-hidden="true">→</span>
 
 const DOORS = [
   {
+    img: '/images/card-institutions.jpg',
     tag: 'For institutions',
     title: 'More than a campus club. An institutional growth platform.',
     text: 'Experience Centers on campus: curriculum, labs, research, industry projects and international pathways, run as a partnership between IBA and the institution.',
@@ -22,6 +23,7 @@ const DOORS = [
     cta: 'Know more',
   },
   {
+    img: '/images/card-students.jpg',
     tag: 'For individual learners',
     title: 'From curiosity to industry-ready capability',
     text: 'Programmes, live projects, mentors, career support and verifiable credentials for anyone building Web3 skills, whether you are studying, working or starting out.',
@@ -41,7 +43,7 @@ const WHO_SHORT = WHO.map(({ title, text }) => ({ title, text }))
 
 export default function RedClub() {
   return (
-    <div>
+    <div className="rc-page">
       <PageHero
         id="red-club"
         aside={<EzStairs />}

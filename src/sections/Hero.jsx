@@ -244,7 +244,11 @@ export default function Hero() {
 
           <h1 className="hero__title">
             <span className="hero__lead">Building the world’s</span>
-            {/* one sentence for assistive tech, not every variant in turn */}
+            {/* the heading's one sentence, for search engines and assistive
+                tech alike: "Building the world's most comprehensive Web3
+                ecosystem". The rotating phrases are drawn from data-text by
+                CSS, so they are not text in the H1 (content review, 11-05) */}
+            {' '}
             <span className="sr-only">{PHRASES[0]}</span>
             {/* every phrase shares one grid cell; the window's height follows
                 the phrase on show (see the layout effect above) */}
@@ -252,10 +256,9 @@ export default function Hero() {
               {PHRASES.map((p, i) => (
                 <span
                   key={p}
+                  data-text={p}
                   className={`hero__phrase${i === at ? ' is-in' : i === prev ? ' is-out' : ''}`}
-                >
-                  {p}
-                </span>
+                />
               ))}
             </span>
           </h1>
@@ -267,10 +270,15 @@ export default function Hero() {
             Web3 Corridor network.
           </p>
 
+          {/* two actions above the fold (content review, Raj): membership,
+              and a conversation with the team */}
           <div className="hero__ctas">
-            <Go className="btn btn--ghost" href="/about#impact">
-              View Impact
+            <Go className="btn btn--primary" href="/library#membership">
+              Become a Member
             </Go>
+            <a className="btn btn--ghost" href="/connect" data-enquiry="">
+              Talk to Our Team
+            </a>
           </div>
         </div>
       </div>

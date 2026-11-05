@@ -73,8 +73,8 @@ export default function About() {
         id="mission-pillars"
         tone="dark"
         eyebrow="Our Mission"
-        title="Governance and Operating Model"
-        lede="Our Web3 Corridors—the rails connecting markets, capital, and ecosystems globally."
+        title="Operating Model"
+        lede="Our Web3 Corridors: the rails connecting markets, capital, and ecosystems globally."
       >
         <MissionPillars />
       </Section>

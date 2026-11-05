@@ -12619,3 +12619,263 @@ main {
   height: 100%;
   object-fit: cover;
 }
+
+/* Home hero: the rotating phrases are drawn from data-text, so the H1's text
+   is one sentence (content review, 11-05) */
+.hero__phrase::before {
+  content: attr(data-text);
+}
+
+/* Home impact band: the tokenization record as four project cards under the
+   figures (content review), in place of the scrolling ticker */
+.ib__projects {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ib__project {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border: 1px solid var(--bb-line);
+  border-left: 3px solid var(--iba-red);
+  background: #ffffff;
+}
+.ib__projectName {
+  font-size: 18px;
+  color: var(--bb-ink);
+}
+.ib__projectLine {
+  font-size: 14px;
+  color: var(--bb-ink-muted);
+}
+@media (max-width: 1000px) {
+  .ib__projects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .ib__projects {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Home "What IBA does": five pillars (content review), three across, two on
+   a tablet, one on a phone */
+.wd--pillars .wd__grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 1100px) {
+  .wd--pillars .wd__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 680px) {
+  .wd--pillars .wd__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Home "In the Media": the way into the library under the cards */
+.kb__more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* Home: the Web3 Corridor and Global Presence as one section (content
+   review): the corridor's button under the presence copy */
+.pg__head .pg__cta {
+  margin-top: 20px;
+}
+
+/* Expertise — the founder's quote in italics, a point larger (content
+   review, 11-05) */
+#founder-quote .pk-quote blockquote {
+  font-style: italic;
+  font-size: clamp(19.3px, calc(0.9rem + 0.45vw + 1.3px), 23.3px);
+}
+/* Expertise — IBA Initiatives: each logo on its own, larger, without the
+   white tile behind it (content review, 11-05) */
+.icx .icx__card .icx__logo {
+  display: flex;
+  align-items: center;
+  width: auto;
+  max-width: 160px;
+  height: 72px;
+  margin-bottom: 14px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.icx .icx__card .icx__logo img {
+  display: block;
+  width: auto;
+  max-width: 160px;
+  height: 72px;
+  object-fit: contain;
+}
+
+/* Ecosystem — Key Partners formatted symmetrically (content review, 11-05):
+   every row centred, so a page of 9 or 10 reads as a balanced block rather
+   than a full row and a short one at the left, and every tile one size */
+.pcx__page {
+  --pcx-cols: 6;
+  --pcx-gap: clamp(10px, 1.4vw, 22px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: var(--pcx-gap);
+}
+.pcx__page > .pcx__tile {
+  flex: 0 0 calc((100% - (var(--pcx-cols) - 1) * var(--pcx-gap)) / var(--pcx-cols));
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.pcx__tile .pcx__name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25;
+}
+@media (max-width: 1100px) {
+  .pcx__page {
+    --pcx-cols: 4;
+  }
+}
+@media (max-width: 640px) {
+  .pcx__page {
+    --pcx-cols: 3;
+    --pcx-gap: 8px;
+  }
+}
+
+/* Red Club pages (content review, 11-05): less space between sections, and
+   a wide graphic where a section carries one */
+.rc-page .pk-sec__panel {
+  padding-block: 56px;
+}
+@media (max-width: 760px) {
+  .rc-page .pk-sec__panel {
+    padding-block: 36px;
+  }
+}
+.rc-page #rc-community .pk-sec__panel {
+  padding-block: 32px;
+}
+.rc-figure {
+  margin: 0 0 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.rc-figure img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 934 / 360;
+  object-fit: cover;
+}
+/* the overview's two doors: a wide image, not the library's thumbnail frame */
+#rc-paths .pk-card__media {
+  aspect-ratio: 16 / 8;
+}
+
+/* Web3 Corridor map: India is the source every route flows out of, so its
+   pin is the strongest (content review, 11-05) */
+.cnm__pin--source .cnm__core {
+  r: 8px;
+}
+.cnm__pin--source .cnm__ring {
+  stroke-width: 3;
+}
+/* the outflow from India reads first: brighter, heavier routes and larger
+   lights than the arcs drawn into the map artwork */
+.cnm__route {
+  stroke: rgba(255, 96, 104, 0.95);
+  stroke-width: 3.2;
+  stroke-dasharray: 10 8;
+  filter: drop-shadow(0 0 6px rgba(255, 50, 60, 0.95));
+}
+.cnm__spark {
+  r: 12px;
+}
+
+/* Web3 Corridor — TheBlock Experience (content review, 11-05): the films
+   side by side, each at its own portrait shape, with no black frame or
+   blurred background behind it */
+.w3p-films {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 340px));
+  justify-content: center;
+  gap: 32px;
+}
+.bfilm {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  background: none;
+}
+.bfilm__video {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  aspect-ratio: 9 / 16;
+  box-shadow: 0 18px 40px -22px rgba(17, 17, 17, 0.45);
+}
+@media (max-width: 680px) {
+  .w3p-films {
+    grid-template-columns: minmax(0, 340px);
+  }
+}
+
+/* Let's Talk (content review, 11-05): the form scrolls like a page — the
+   whole overlay scrolls with the window's own scrollbar, rather than the
+   panel scrolling inside itself with a thin bar of its own — and the
+   contact channels are icons only */
+.enq {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  place-items: start center;
+}
+.enq__scrim {
+  position: fixed;
+}
+.enq__panel {
+  max-height: none;
+  overflow: visible;
+  margin-block: auto;
+}
+.reach__iconRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.reach__iconRow a {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  color: #ff4a50;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.reach__iconRow a:hover,
+.reach__iconRow a:focus-visible {
+  border-color: #ff4a50;
+  background: rgba(255, 74, 80, 0.12);
+}
+.reach__iconRow svg {
+  width: 22px;
+  height: 22px;
+}

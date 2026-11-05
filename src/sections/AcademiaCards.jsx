@@ -14,7 +14,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
-import { PENDING } from '../nav'
 
 /* line icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -39,10 +38,11 @@ const DOORS = [
   {
     key: 'students',
     tag: 'Learners',
-    title: 'Global Exposure',
-    body: 'Internships, opportunities, and more.',
+    title: 'Red Club for Learners',
+    body:
+      'Blockchain and AI programmes, live industry projects, mentors, internships and verifiable credentials, from curiosity to industry-ready capability.',
     cta: 'Join Red Club',
-    href: '/red-club',
+    href: '/red-club/learners',
     img: '/images/card-students-art.jpg', // the same art as the reference site
   },
   {
@@ -51,9 +51,8 @@ const DOORS = [
     title: 'Create Global Student Experiences',
     body:
       'Partner access into the IBA Web3 Corridor for IBA Red Club Experience Programs: Tokenization and Blockchain labs, academia, internships, and global networking.',
-    cta: 'Request Prospectus',
-    /* the Red Club Experience Center page, once built (see PENDING in nav.js) */
-    href: PENDING.experienceCenter,
+    cta: 'Bring Red Club to Your Campus',
+    href: '/red-club/institutions',
     img: '/images/card-institutions-art.jpg', // the same art as the reference site
   },
 ]
@@ -82,7 +81,7 @@ export default function AcademiaCards() {
             <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
             <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
           </svg>
-          Knowledge Hub
+          Red Club &amp; Learning
         </p>
 
         <div className="wd__grid">

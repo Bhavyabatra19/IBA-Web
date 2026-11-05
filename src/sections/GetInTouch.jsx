@@ -16,12 +16,14 @@ import { waLink } from '../enquiry'
 /* each row opens the site's enquiry form already set to the nearest of its
    topics (enquiry.js has no Memberships or UAE Experience Center topic yet,
    so those go to Ecosystem partnership and RWA Tokenization) */
+/* each card carries its intent in the link (/connect?type=…, content
+   review) as well as in data-enquiry, so it routes even as a plain link */
 const TOPICS = [
-  { label: 'Memberships', note: 'Exclusive Web3 access, experiences and opportunities', topic: 'Ecosystem partnership' },
-  { label: 'Partnerships', note: 'Grow your brand and services in the IBA Web3 ecosystem', topic: 'Ecosystem partnership' },
-  { label: 'Consulting and Advisory', note: 'Strategy, tokenization, execution and expansion, built to scale', topic: 'Consulting' },
-  { label: 'UAE Experience Center – The Block', note: 'Tokenize real-world assets and meet the right investors', topic: 'RWA Tokenization' },
-  { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', topic: 'Red Club (learner)' },
+  { label: 'Memberships', note: 'Exclusive Web3 access, experiences and opportunities', type: 'membership', topic: 'Membership' },
+  { label: 'Partnerships', note: 'Grow your brand and services in the IBA Web3 ecosystem', type: 'partnership', topic: 'Ecosystem partnership' },
+  { label: 'Consulting and Advisory', note: 'Strategy, tokenization, execution and expansion, built to scale', type: 'consulting', topic: 'Consulting' },
+  { label: 'UAE Experience Center – The Block', note: 'Tokenize real-world assets and meet the right investors', type: 'the-block', topic: 'RWA Tokenization' },
+  { label: 'Learning Hub', note: 'Red Club programmes, tokenization labs and Corridor talent', type: 'learning', topic: 'Red Club (learner)' },
 ]
 
 export default function GetInTouch() {
@@ -103,7 +105,7 @@ export default function GetInTouch() {
             <ul className="git__topics">
               {TOPICS.map((t) => (
                 <li key={t.label}>
-                  <a href="/connect" data-enquiry={t.topic}>
+                  <a href={`/connect?type=${t.type}`} data-enquiry={t.topic}>
                     <span>
                       <strong>{t.label}</strong>
                       <small>{t.note}</small>

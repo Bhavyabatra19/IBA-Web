@@ -92,6 +92,7 @@ export default function Library() {
           cols={4}
           items={[
             {
+              tag: 'Free Access',
               title: 'The Complete Library',
               text: 'Every article, research paper, policy brief and recorded session, curated by IBA’s experts and advisors.',
             },
@@ -121,7 +122,7 @@ export default function Library() {
       </Section>
 
       <Section eyebrow="Where to Find Us" title="Read, Follow and Watch" tone="red">
-        <div className="pk-cards pk-cards--3">
+        <div className="pk-cards pk-cards--4">
           {[
             {
               tag: 'Articles',
@@ -144,11 +145,22 @@ export default function Library() {
               cta: 'Watch webinars',
               on: () => showFormat('Video'),
             },
+            {
+              /* content review: pictures of IBA's events and conferences,
+                 once the gallery is ready */
+              tag: 'Gallery',
+              title: 'See the Gallery',
+              text: 'Moments from IBA events, conferences and gatherings across the corridor.',
+              cta: 'Coming soon',
+              soon: true,
+            },
           ].map((c) => (
             <article className="pk-card" key={c.title} data-rise>
               <span className="wd__tag">{c.tag}</span>
               <h3 className="pk-card__title">
-                {c.href ? (
+                {c.soon ? (
+                  c.title
+                ) : c.href ? (
                   <a className="pk-card__link" href={c.href} target="_blank" rel="noreferrer noopener">
                     {c.title}
                   </a>
@@ -159,8 +171,8 @@ export default function Library() {
                 )}
               </h3>
               <p className="pk-card__text">{c.text}</p>
-              <span className="pk-card__cta" aria-hidden="true">
-                {c.cta} <span>→</span>
+              <span className="pk-card__cta" aria-hidden={c.soon ? undefined : 'true'}>
+                {c.cta} {!c.soon && <span>→</span>}
               </span>
             </article>
           ))}
@@ -171,6 +183,11 @@ export default function Library() {
         <div className="pk-sec__panel">
           <header className="pk-head">
             <h2 className="pk-head__title">Browse the Library</h2>
+            <p className="pk-head__lede">
+              Articles, research, reports, interviews and videos from across the
+              blockchain and Web3 industry, not only from IBA, selected by the
+              IBA team and updated regularly.
+            </p>
           </header>
 
           <div className="pk-filters">

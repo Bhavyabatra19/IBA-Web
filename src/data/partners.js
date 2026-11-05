@@ -18,7 +18,7 @@ const L = (f) => `/logos/partners/${f}.jpg`
 
 export const PARTNERS = [
   { name: 'TheBlock.', logo: '/logos/eco/theblock-ae.png' },
-  { name: 'Token Asset Foundation (STO)', logo: L('token-asset-foundation') },
+  { name: 'Tokenized Asset Foundation', logo: L('token-asset-foundation') },
   { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png' },
   { name: 'Integra', logo: L('integra') },
   { name: 'Kula', logo: L('kula') },
