@@ -198,10 +198,15 @@ export const NAV = [
         ],
       },
       {
-        title: 'Pathways & Tiers',
+        title: 'Web360 Club',
         items: [
-          { label: 'Founder & Investor', icon: 'layers', desc: 'Web360 Club: deal flow, advisory, growth.', href: '/membership#plans-club' },
-          { label: 'Tokenization & Institutions', icon: 'link', desc: 'Web360 Club: RWA, issuers and corporates.', href: '/membership#plans-token' },
+          { label: 'Founder & Investor', icon: 'layers', desc: 'Deal flow, advisory and international growth.', href: '/membership#plans-club' },
+          { label: 'Tokenization & Institutions', icon: 'link', desc: 'RWA, issuers, vendors and corporates.', href: '/membership#plans-token' },
+        ],
+      },
+      {
+        title: 'India ↔ UAE',
+        items: [
           { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/membership#plans-xchange' },
         ],
       },
@@ -218,8 +223,19 @@ export const NAV = [
         items: [
           { label: 'The Web3 Corridor', icon: 'globe', desc: 'Five regions, one connected ecosystem.', href: '/corridor#about' },
           { label: 'Operating Model', icon: 'layers', desc: 'Support beyond a membership badge.', href: '/corridor#operating-model' },
+        ],
+      },
+      {
+        title: 'Programmes',
+        items: [
           { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
-          { label: 'Partnership with The Block', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
+          { label: 'Gold Xchange Cohort', icon: 'spark', desc: 'A 12-week route to market signal.', href: '/corridor#xchange-cohort' },
+        ],
+      },
+      {
+        title: 'Take Part',
+        items: [
+          { label: 'TheBlock Experience', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
           { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
         ],
       },
