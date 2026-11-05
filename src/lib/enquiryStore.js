@@ -149,7 +149,8 @@ export const SEND_FAILED = 'send-failed'
 export const NO_ENDPOINT = 'no-endpoint'
 
 /**
- * ⚠ THERE IS NO ENDPOINT. This resolves to NO_ENDPOINT, every time.
+ * Sends to /api/enquiry, which emails the IBA inbox (see api/enquiry.js).
+ * NO_ENDPOINT now means the mail service is not configured yet.
  *
  * TODO, in this order, because the second is worthless without the first:
  *   1. POST to the enquiry endpoint. Store the submission in the CRM or a
@@ -169,5 +170,26 @@ export async function submitEnquiry(fields) {
      filled it is told nothing — it gets the same resolve a person gets, because
      an error is feedback and feedback is what lets a bot tune itself. */
   if (fields[HONEYPOT]) return SENT
-  return NO_ENDPOINT
+  /* /api/enquiry emails the enquiry to the IBA inbox (content review,
+     11-05). 503 means the mail service is not set up yet (RESEND_API_KEY,
+     see ADMIN.md): the form then shows its "email us instead" panel. A file
+     cannot travel as JSON, so a document is sent as a flag only. */
+  const payload = Object.fromEntries(
+    Object.entries(fields).map(([k, v]) => [k, typeof File !== 'undefined' && v instanceof File ? Boolean(v.size) : v])
+  )
+  try {
+    const r = await fetch('/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    /* only the function's own confirmation counts: a static host answering
+       the path with an HTML page is not a sent enquiry */
+    const data = await r.json().catch(() => null)
+    if (r.ok && data && data.ok) return SENT
+    if (r.status === 503 || r.status === 404 || !data) return NO_ENDPOINT
+    return SEND_FAILED
+  } catch {
+    return SEND_FAILED
+  }
 }

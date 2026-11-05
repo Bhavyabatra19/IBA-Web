@@ -12834,3 +12834,48 @@ main {
     grid-template-columns: minmax(0, 340px);
   }
 }
+
+/* Let's Talk (content review, 11-05): the form scrolls like a page — the
+   whole overlay scrolls with the window's own scrollbar, rather than the
+   panel scrolling inside itself with a thin bar of its own — and the
+   contact channels are icons only */
+.enq {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  place-items: start center;
+}
+.enq__scrim {
+  position: fixed;
+}
+.enq__panel {
+  max-height: none;
+  overflow: visible;
+  margin-block: auto;
+}
+.reach__iconRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.reach__iconRow a {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  color: #ff4a50;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.reach__iconRow a:hover,
+.reach__iconRow a:focus-visible {
+  border-color: #ff4a50;
+  background: rgba(255, 74, 80, 0.12);
+}
+.reach__iconRow svg {
+  width: 22px;
+  height: 22px;
+}
