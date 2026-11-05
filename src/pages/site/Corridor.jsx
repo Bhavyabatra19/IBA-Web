@@ -53,12 +53,12 @@ const REGIONS = [
 ]
 
 const MODEL = [
-  { num: '01', title: 'Tokenization', text: 'Tokenized business solutions, RWA education, issuer visibility and tokenomics support.' },
-  { num: '02', title: 'Business setup', text: 'Entity structuring, KYC/KYB and regulatory framework navigation.' },
-  { num: '03', title: 'Advisory & mentoring', text: 'Expert guidance, investor readiness, founder support and GTM planning.' },
-  { num: '04', title: 'Global visibility', text: 'Events, media, podcasts, ecosystem directories and introductions.' },
-  { num: '05', title: 'Go-to-market', text: 'Market-entry strategy, channel access and cross-border scaling pathways.' },
-  { num: '06', title: 'Capital & community', text: 'Curated investor rooms, peer networks, collaboration and funding preparation.' },
+  { title: 'Tokenization', text: 'Tokenized business solutions, RWA education, issuer visibility and tokenomics support.' },
+  { title: 'Business setup', text: 'Entity structuring, KYC/KYB and regulatory framework navigation.' },
+  { title: 'Advisory & mentoring', text: 'Expert guidance, investor readiness, founder support and GTM planning.' },
+  { title: 'Global visibility', text: 'Events, media, podcasts, ecosystem directories and introductions.' },
+  { title: 'Go-to-market', text: 'Market-entry strategy, channel access and cross-border scaling pathways.' },
+  { title: 'Capital & community', text: 'Curated investor rooms, peer networks, collaboration and funding preparation.' },
 ]
 
 const DIRECTIONS = [
@@ -224,7 +224,10 @@ export default function Corridor() {
         id="xchange-cohort"
         eyebrow="The Gold Xchange cohort"
         title="A 12-week route from decision to market signal."
-        lede="The Gold launch sprint runs in three phases."
+        lede={[
+          'Gold members of the Indo–UAE Startup Xchange enter a structured 12-week launch sprint: a guided route from the decision to enter the other market to the first real signal from it, with corridor support at every stage.',
+          'The programme runs two cohorts a year of 20–25 startups each, and closes with a demo day and soft-landing support in the destination market.',
+        ]}
       >
         <Steps items={SPRINT} />
       </Section>
@@ -236,12 +239,17 @@ export default function Corridor() {
         lede="Entry runs in four steps. Web360 membership selection and access are curated or gated by tier."
       >
         <Steps items={JOURNEY} />
+        <div className="pk-actions" data-rise>
+          <Btn enquiry="Membership">
+            Become a Member <Arrow />
+          </Btn>
+        </div>
       </Section>
 
       <Section
         id="the-block"
         eyebrow="Partnership · Dubai"
-        title="Partnership with The Block"
+        title="TheBlock Experience"
         lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
       >
         {/* full width, each film in turn; muted autoplay while in view */}

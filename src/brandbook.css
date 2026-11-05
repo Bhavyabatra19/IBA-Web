@@ -12786,3 +12786,51 @@ main {
 #rc-paths .pk-card__media {
   aspect-ratio: 16 / 8;
 }
+
+/* Web3 Corridor map: India is the source every route flows out of, so its
+   pin is the strongest (content review, 11-05) */
+.cnm__pin--source .cnm__core {
+  r: 8px;
+}
+.cnm__pin--source .cnm__ring {
+  stroke-width: 3;
+}
+/* the outflow from India reads first: brighter, heavier routes and larger
+   lights than the arcs drawn into the map artwork */
+.cnm__route {
+  stroke: rgba(255, 96, 104, 0.95);
+  stroke-width: 3.2;
+  stroke-dasharray: 10 8;
+  filter: drop-shadow(0 0 6px rgba(255, 50, 60, 0.95));
+}
+.cnm__spark {
+  r: 12px;
+}
+
+/* Web3 Corridor — TheBlock Experience (content review, 11-05): the films
+   side by side, each at its own portrait shape, with no black frame or
+   blurred background behind it */
+.w3p-films {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 340px));
+  justify-content: center;
+  gap: 32px;
+}
+.bfilm {
+  height: auto;
+  min-height: 0;
+  overflow: visible;
+  background: none;
+}
+.bfilm__video {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  aspect-ratio: 9 / 16;
+  box-shadow: 0 18px 40px -22px rgba(17, 17, 17, 0.45);
+}
+@media (max-width: 680px) {
+  .w3p-films {
+    grid-template-columns: minmax(0, 340px);
+  }
+}
