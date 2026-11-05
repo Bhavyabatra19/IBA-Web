@@ -2,20 +2,17 @@
  * Web3 Corridor — the corridor and its memberships, with the content of the
  * client's "IBA Web3 Corridor · Complete Membership" reference (11-04-2026)
  * set out in the site's own blocks: the five regions and the network map,
- * the operating model, the membership plans (Web360 Founder & Investor,
- * Web360 Tokenization & Institutions and the Indo–UAE Startup Xchange, with
- * components/CorridorPlans), the Xchange and its 12-week
- * Gold cohort, the membership journey, the partnership with The Block
- * (video), the Global Innovation Corridor Forum at WTC 2026, the questions
- * and the ask.
+ * the operating model, the three membership pathways in brief (the plans,
+ * how to join and the questions are on the Membership page), the Xchange
+ * and its 12-week Gold cohort, TheBlock Experience (video), the Global
+ * Innovation Corridor Forum at WTC 2026 and the ask.
  *
  * The hero keeps the heading and the turning globe (by request).
  */
 
 import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/Kit'
-import { Steps, Faq } from '../../sections/service/ServiceBlocks'
+import { Steps } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
-import CorridorPlans from '../../components/CorridorPlans'
 import BlockFilm from '../../components/BlockFilm'
 
 const ENQUIRY = 'Web3 Corridor'
@@ -91,40 +88,6 @@ const SPRINT = [
   { n: 'Weeks 09–12', name: 'Launch', body: 'Execute the market-facing sprint with demo day and soft-landing support.' },
 ]
 
-const JOURNEY = [
-  { n: '01', name: 'Apply', body: 'Share your organisation, sector and cross-border market goal.' },
-  { n: '02', name: 'Assess', body: 'Discuss fit in a 30-minute conversation for the Xchange programme.' },
-  { n: '03', name: 'Select', body: 'Choose the appropriate membership tier and geographic track.' },
-  { n: '04', name: 'Activate', body: 'Meet your corridor lead and begin the relevant engagement pathway.' },
-]
-
-const FAQ = [
-  {
-    q: 'Are Web360 Club and Indo–UAE Startup Xchange the same membership?',
-    a: 'No. Web360 Club runs founder/investor and tokenization tracks; the Indo–UAE Startup Xchange is a separate membership with its own tiers, pricing and benefits.',
-  },
-  {
-    q: 'How are membership terms shared?',
-    a: 'Terms for every Web360 and Indo–UAE Startup Xchange tier are shared on enquiry and confirmed by the programme team.',
-  },
-  {
-    q: 'Do all members get a dedicated concierge?',
-    a: 'No. A named corridor concierge is included for Xchange Silver and Gold, not Bronze. Priority access on certain Web360 tiers is described separately.',
-  },
-  {
-    q: 'Does membership guarantee investment, licensing or customers?',
-    a: 'No. Investor introductions, regulatory guidance, market access and launch support are programme benefits, not assured funding, approvals or sales.',
-  },
-  {
-    q: 'What is the difference between Gold and Gold Plus?',
-    a: 'Web360 founder Gold is an accelerator and fundraising-focused tier. Gold Plus is a separate tokenization-oriented corporate and institutional membership with sponsorship, visibility and business-development benefits.',
-  },
-  {
-    q: 'Are tax and foreign investment figures legal advice?',
-    a: 'No. Regulatory figures shared through the Xchange programme are indicative and not legal or tax advice. Obtain current jurisdiction-specific advice before acting.',
-  },
-]
-
 /* The Block, Dubai: the partnership films (public/videos, compressed from
    the client's originals to 720px wide). Add the second film here when it
    arrives: { src, poster, label }. */
@@ -161,8 +124,8 @@ export default function Corridor() {
         ]}
         actions={
           <>
-            <Btn href="#memberships">
-              Explore Membership Plans <Arrow />
+            <Btn href="/membership">
+              Explore Membership <Arrow />
             </Btn>
             <Btn href="#about" variant="ghost">
               Discover the Corridor
@@ -197,13 +160,27 @@ export default function Corridor() {
         <Cards items={MODEL} cols={3} />
       </Section>
 
+      {/* the plans live on the Membership page now (a main nav item,
+          content review); the corridor keeps the three pathways in brief */}
       <Section
         id="memberships"
-        eyebrow="Web360 Club · Membership plans"
-        title="Find the membership built for your ambition."
-        lede="Choose a pathway to see its tiers. The programmes have different objectives and benefits."
+        eyebrow="Corridor memberships"
+        title="Three pathways into the corridor."
+        lede="Web360 Club for founders and investors, Web360 Club for tokenization and institutions, and the Indo–UAE Startup Xchange, each with three tiers."
       >
-        <CorridorPlans />
+        <Cards
+          cols={3}
+          items={[
+            { tag: 'Web360 Club', title: 'Founder & Investor', text: 'Investor relations, deal flow, advisory and international growth.', href: '/membership#plans', cta: 'See the tiers' },
+            { tag: 'Web360 Club', title: 'Tokenization & Institutions', text: 'Tokenization, RWA, issuer, vendor and corporate plans.', href: '/membership#plans', cta: 'See the tiers' },
+            { tag: 'India ↔ UAE', title: 'Indo–UAE Startup Xchange', text: 'Market entry between India and the UAE, with a 12-week Gold launch sprint.', href: '/membership#plans', cta: 'See the tiers' },
+          ]}
+        />
+        <div className="pk-actions" data-rise>
+          <Btn href="/membership">
+            Explore Membership <Arrow />
+          </Btn>
+        </div>
       </Section>
 
       <Section
@@ -230,20 +207,6 @@ export default function Corridor() {
         ]}
       >
         <Steps items={SPRINT} />
-      </Section>
-
-      <Section
-        id="journey"
-        eyebrow="Membership journey"
-        title="From application to corridor activation."
-        lede="Entry runs in four steps. Web360 membership selection and access are curated or gated by tier."
-      >
-        <Steps items={JOURNEY} />
-        <div className="pk-actions" data-rise>
-          <Btn enquiry="Membership">
-            Become a Member <Arrow />
-          </Btn>
-        </div>
       </Section>
 
       <Section
@@ -274,10 +237,6 @@ export default function Corridor() {
         </div>
       </Section>
 
-      <Section id="corridor-faq" eyebrow="Frequently asked questions" title="Before you choose.">
-        <Faq items={FAQ} />
-      </Section>
-
       <Section
         id="contact"
         tone="red"
@@ -289,7 +248,7 @@ export default function Corridor() {
           <Btn enquiry={ENQUIRY}>
             Enquire About Membership <Arrow />
           </Btn>
-          <Btn href="#memberships" variant="ghost">
+          <Btn href="/membership#plans" variant="ghost">
             Review All Plans
           </Btn>
         </div>

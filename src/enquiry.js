@@ -246,6 +246,7 @@ export const PAGE_CONTEXT = {
   '/tokenization': { topic: 'RWA Tokenization', phrase: 'a tokenization project' },
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
+  '/membership': { topic: 'Membership', phrase: 'IBA membership' },
   '/red-club': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },
   '/red-club/institutions': { topic: 'Red Club / Verifyble (institution)', phrase: 'a Red Club Experience Center' },
   '/red-club/learners': { topic: 'Red Club (learner)', phrase: 'the IBA Red Club' },

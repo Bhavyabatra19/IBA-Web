@@ -15,6 +15,7 @@ import Tokenization from './pages/site/Tokenization'
 import Ecosystem from './pages/site/Ecosystem'
 import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
+import Membership from './pages/site/Membership'
 import RedClub from './pages/site/RedClub'
 import RedClubInstitutions from './pages/site/RedClubInstitutions'
 import RedClubLearners from './pages/site/RedClubLearners'
@@ -43,6 +44,7 @@ const PAGES = {
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,
+  '/membership': Membership,
   '/red-club': RedClub,
   '/red-club/institutions': RedClubInstitutions,
   '/red-club/learners': RedClubLearners,

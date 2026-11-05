@@ -182,6 +182,31 @@ export const NAV = [
   { key: 'redclub', label: 'Red Club', href: '/red-club' },
   /* No Membership tab (by request): the memberships live on the Web3
      Corridor page and are listed under its tab. */
+  /* Membership as a main tab (content review, 11-05-2026), with its own page;
+     each pathway link opens the plans on that pathway's tab */
+  {
+    key: 'membership',
+    label: 'Membership',
+    href: '/membership',
+    groups: [
+      {
+        title: 'Join the Alliance',
+        items: [
+          { label: 'Membership of the Alliance', icon: 'users', desc: 'The library, the IBA Directory and more.', href: '/membership#alliance' },
+          { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/membership#join' },
+          { label: 'Membership FAQ', icon: 'chat', desc: 'Before you choose.', href: '/membership#membership-faq' },
+        ],
+      },
+      {
+        title: 'Pathways & Tiers',
+        items: [
+          { label: 'Founder & Investor', icon: 'layers', desc: 'Web360 Club: deal flow, advisory, growth.', href: '/membership#plans-club' },
+          { label: 'Tokenization & Institutions', icon: 'link', desc: 'Web360 Club: RWA, issuers and corporates.', href: '/membership#plans-token' },
+          { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/membership#plans-xchange' },
+        ],
+      },
+    ],
+  },
   {
     key: 'corridor',
     label: 'Web3 Corridor',
@@ -196,13 +221,6 @@ export const NAV = [
           { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
           { label: 'Partnership with The Block', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
           { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
-        ],
-      },
-      {
-        title: 'Memberships',
-        items: [
-          { label: 'Membership Plans', icon: 'users', desc: 'Founder, tokenization and Xchange tiers.', href: '/corridor#memberships' },
-          { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/corridor#journey' },
         ],
       },
     ],
@@ -303,9 +321,9 @@ export const FOOTER = [
     items: [
       { label: 'Global Innovation Corridor', href: '/corridor' },
       { label: 'The Corridor', href: '/corridor#about' },
-      { label: 'Membership Plans', href: '/corridor#memberships' },
+      { label: 'Membership', href: '/membership' },
       { label: 'Startup Xchange', href: '/corridor#xchange' },
-      { label: 'How to Join', href: '/corridor#journey' },
+      { label: 'How to Join', href: '/membership#join' },
     ],
   },
   {

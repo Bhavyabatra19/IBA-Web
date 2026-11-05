@@ -66,6 +66,9 @@ export function navigate(to) {
      the caller scrolls to it — re-rendering the page under the reader to move
      them a few hundred pixels would throw away every ScrollTrigger first. */
   if (changedPage) window.dispatchEvent(new Event(ROUTE))
+  /* pushState never fires hashchange; say so, for anything that reads the
+     hash (the Membership plans open a pathway's tab from it) */
+  if (url.hash) window.dispatchEvent(new Event('app:hash'))
   return true
 }
 
