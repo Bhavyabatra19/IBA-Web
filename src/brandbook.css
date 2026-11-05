@@ -12691,3 +12691,69 @@ main {
 .pg__head .pg__cta {
   margin-top: 20px;
 }
+
+/* Expertise — the founder's quote in italics, a point larger (content
+   review, 11-05) */
+#founder-quote .pk-quote blockquote {
+  font-style: italic;
+  font-size: clamp(19.3px, calc(0.9rem + 0.45vw + 1.3px), 23.3px);
+}
+/* Expertise — IBA Initiatives: each logo on its own, larger, without the
+   white tile behind it (content review, 11-05) */
+.icx .icx__card .icx__logo {
+  display: flex;
+  align-items: center;
+  width: auto;
+  max-width: 160px;
+  height: 72px;
+  margin-bottom: 14px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.icx .icx__card .icx__logo img {
+  display: block;
+  width: auto;
+  max-width: 160px;
+  height: 72px;
+  object-fit: contain;
+}
+
+/* Ecosystem — Key Partners formatted symmetrically (content review, 11-05):
+   every row centred, so a page of 9 or 10 reads as a balanced block rather
+   than a full row and a short one at the left, and every tile one size */
+.pcx__page {
+  --pcx-cols: 6;
+  --pcx-gap: clamp(10px, 1.4vw, 22px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: var(--pcx-gap);
+}
+.pcx__page > .pcx__tile {
+  flex: 0 0 calc((100% - (var(--pcx-cols) - 1) * var(--pcx-gap)) / var(--pcx-cols));
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.pcx__tile .pcx__name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25;
+}
+@media (max-width: 1100px) {
+  .pcx__page {
+    --pcx-cols: 4;
+  }
+}
+@media (max-width: 640px) {
+  .pcx__page {
+    --pcx-cols: 3;
+    --pcx-gap: 8px;
+  }
+}

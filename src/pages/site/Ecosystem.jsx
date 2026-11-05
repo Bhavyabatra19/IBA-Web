@@ -95,11 +95,51 @@ const Associates = () => (
   </div>
 )
 
+/* the four ways to partner, each with a line icon (content review: icons
+   on every box, no Red Club logo on one of them) */
 const PARTNER_TYPES = [
-  { title: 'Ecosystem Partner', text: 'List your product, integrate with IBA infrastructure, access the member network.' },
-  { title: 'Institutional Partner', logo: '/logos/initiatives/red-club.jpg', logoAlt: 'IBA Red Club logo', text: 'Bring a Red Club Experience Center to your campus.' },
-  { title: 'Government & Policy Partner', text: 'Co-develop frameworks, standards and public infrastructure projects.' },
-  { title: 'Corridor Partner', text: 'Join the Global Innovation Corridor as a technology, investment, hub or talent partner.' },
+  {
+    title: 'Ecosystem Partner',
+    icon: (
+      <>
+        <circle cx="12" cy="5" r="2.2" />
+        <circle cx="5" cy="18" r="2.2" />
+        <circle cx="19" cy="18" r="2.2" />
+        <path d="M10.9 6.9 6.1 16.1M13.1 6.9l4.8 9.2M7.2 18h9.6" />
+      </>
+    ),
+    text: 'List your product, integrate with IBA infrastructure, access the member network.',
+  },
+  {
+    title: 'Institutional Partner',
+    icon: (
+      <>
+        <path d="M2.5 9 12 4.5 21.5 9 12 13.5Z" />
+        <path d="M6.5 11v4.5c0 1.5 2.5 3 5.5 3s5.5-1.5 5.5-3V11M21.5 9v6" />
+      </>
+    ),
+    text: 'Bring a Red Club Experience Center to your campus.',
+  },
+  {
+    title: 'Government & Policy Partner',
+    icon: (
+      <>
+        <path d="M3 9.5 12 4l9 5.5Z" />
+        <path d="M5.5 10v7.5M10 10v7.5M14 10v7.5M18.5 10v7.5M3.5 20h17" />
+      </>
+    ),
+    text: 'Co-develop frameworks, standards and public infrastructure projects.',
+  },
+  {
+    title: 'Corridor Partner',
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M3.5 12h17M12 3.5c2.4 2.4 3.6 5.2 3.6 8.5s-1.2 6.1-3.6 8.5c-2.4-2.4-3.6-5.2-3.6-8.5s1.2-6.1 3.6-8.5Z" />
+      </>
+    ),
+    text: 'Join the Global Innovation Corridor as a technology, investment, hub or talent partner.',
+  },
 ]
 
 export default function Ecosystem() {

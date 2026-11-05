@@ -98,12 +98,6 @@ export const NAV = [
           { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
         ],
       },
-      {
-        title: 'Impact',
-        items: [
-          { label: 'Our Presence', icon: 'globe', desc: 'The countries and figures behind the alliance.', href: '/about#impact' },
-        ],
-      },
     ],
   },
   {
