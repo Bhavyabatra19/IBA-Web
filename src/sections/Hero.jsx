@@ -273,7 +273,7 @@ export default function Hero() {
           {/* two actions above the fold (content review, Raj): membership,
               and a conversation with the team */}
           <div className="hero__ctas">
-            <Go className="btn btn--primary" href="/library#membership">
+            <Go className="btn btn--primary" href="/membership">
               Become a Member
             </Go>
             <a className="btn btn--ghost" href="/connect" data-enquiry="">

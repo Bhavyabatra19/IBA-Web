@@ -10,7 +10,7 @@
  * who each tier is for and what it includes; terms are shared on enquiry.
  */
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TierShield from './TierShield'
 import { Bullets } from './Kit'
 
@@ -199,13 +199,39 @@ const PLANS = {
   ],
 }
 
+/* #plans-club, #plans-token, #plans-xchange: a link can open a pathway's
+   tab (the Membership menu does) */
+const fromHash = () => {
+  const m = typeof window !== 'undefined' && window.location.hash.match(/^#plans-(club|token|xchange)$/)
+  return m ? m[1] : null
+}
+
 export default function CorridorPlans() {
-  const [track, setTrack] = useState('club')
+  const [track, setTrack] = useState(() => fromHash() || 'club')
   const current = TRACKS.find((t) => t.key === track)
   const plans = PLANS[track]
 
+  useEffect(() => {
+    const onHash = () => {
+      const t = fromHash()
+      if (t) setTrack(t)
+    }
+    window.addEventListener('hashchange', onHash)
+    window.addEventListener('app:route', onHash)
+    window.addEventListener('app:hash', onHash)
+    return () => {
+      window.removeEventListener('hashchange', onHash)
+      window.removeEventListener('app:route', onHash)
+      window.removeEventListener('app:hash', onHash)
+    }
+  }, [])
+
   return (
     <div className="cpl">
+      {/* the pathway anchors the menu links to */}
+      {TRACKS.map((t) => (
+        <span key={t.key} id={`plans-${t.key}`} className="cpl__anchor" aria-hidden="true" />
+      ))}
       <div className="cpl__tabs" role="tablist" aria-label="Membership pathways">
         {TRACKS.map((t) => (
           <button

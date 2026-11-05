@@ -398,7 +398,7 @@ export default function Nav() {
                     </a>
                   </li>
                   <li>
-                    <a href="/corridor#memberships" onClick={(e) => go(e, '/corridor#memberships')}>
+                    <a href="/membership" onClick={(e) => go(e, '/membership')}>
                       Become a Member
                     </a>
                   </li>

@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/memberships",
-      "destination": "/corridor#memberships",
+      "destination": "/membership",
       "permanent": false
     },
     {

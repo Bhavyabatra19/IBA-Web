@@ -57,8 +57,8 @@ export default function MembershipBand() {
         <Btn enquiry="Membership">
           Become a Member <span aria-hidden="true">→</span>
         </Btn>
-        <Btn href="/corridor#memberships" variant="ghost">
-          Explore Membership Plans
+        <Btn href="/membership" variant="ghost">
+          Explore Membership
         </Btn>
       </div>
     </Section>

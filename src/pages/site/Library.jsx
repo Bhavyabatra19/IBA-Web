@@ -114,8 +114,8 @@ export default function Library() {
           <Btn enquiry="Membership">
             Apply for Membership <span aria-hidden="true">→</span>
           </Btn>
-          <Btn href="#catalogue" variant="ghost">
-            Explore the Library
+          <Btn href="/membership" variant="ghost">
+            Explore Membership
           </Btn>
           <p className="lib-member__note">Membership is complimentary, by application.</p>
         </div>
