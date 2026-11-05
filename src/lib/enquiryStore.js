@@ -76,6 +76,9 @@ const writeParam = (on) => {
 export const wantsEnquiry = () =>
   new URL(window.location.href).searchParams.get(ENQUIRY.param) === 'open'
 
+/** ?type=membership etc.: the intent a link carries (see TYPE_TOPICS) */
+export const enquiryType = () => new URL(window.location.href).searchParams.get('type')
+
 /* ------------------------------------------------------------------ */
 
 let returnTo = null

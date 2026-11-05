@@ -352,7 +352,7 @@ export default function Nav() {
                     {/* a group without a heading keeps the heading's space, so
                         its links line up with the groups beside it */}
                     {g.title ? (
-                      <h3 className="nav__panelGroupTitle">{g.title}</h3>
+                      <p className="nav__panelGroupTitle">{g.title}</p>
                     ) : (
                       <div className="nav__panelGroupTitle" aria-hidden="true">
                         {' '}
@@ -385,7 +385,7 @@ export default function Nav() {
               {/* the grey side column: the section's own page and the two
                   ways in, as quiet links */}
               <aside className="nav__panelSide">
-                <h3 className="nav__panelGroupTitle">Get Started</h3>
+                <p className="nav__panelGroupTitle">Get Started</p>
                 <ul>
                   <li>
                     <a href={panel.href} onClick={(e) => go(e, panel.href)}>
@@ -419,7 +419,7 @@ export default function Nav() {
             if (!items.length) {
               return (
                 <section className="drawer__acc" key={tab.key} data-pill={tab.pill ? '' : undefined}>
-                  <h2>
+                  <div className="drawer__head">
                     <a
                       href={tab.href}
                       aria-current={isCurrent(tab) ? 'page' : undefined}
@@ -427,7 +427,7 @@ export default function Nav() {
                     >
                       {tab.label}
                     </a>
-                  </h2>
+                  </div>
                 </section>
               )
             }
@@ -444,7 +444,7 @@ export default function Nav() {
                    claim about the wrong element. */
                 data-current={isCurrent(tab) ? '' : undefined}
               >
-                <h2>
+                <div className="drawer__head">
                   <button
                     type="button"
                     aria-expanded={isOpen}
@@ -455,7 +455,7 @@ export default function Nav() {
                       <path d="M6 1v10M1 6h10" fill="none" stroke="currentColor" strokeWidth="1.4" />
                     </svg>
                   </button>
-                </h2>
+                </div>
                 {/* 0fr → 1fr animates a grid row to its content height without
                     ever needing a measured pixel value */}
                 <div className="drawer__accBody">

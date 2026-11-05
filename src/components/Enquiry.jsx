@@ -32,12 +32,13 @@
 import { useCallback, useEffect, useRef } from 'react'
 import ReachOut from './ReachOut'
 import EnquiryForm from '../sections/EnquiryForm'
-import { ENQUIRY, contextFor } from '../enquiry'
+import { ENQUIRY, TYPE_TOPICS, contextFor } from '../enquiry'
 import {
   closeEnquiry,
   openEnquiry,
   useEnquiry,
   wantsEnquiry,
+  enquiryType,
 } from '../lib/enquiryStore'
 import { lockScroll, unlockScroll } from '../lib/scroll'
 
@@ -86,9 +87,10 @@ export default function Enquiry() {
 
   /* ?enquiry=open, so a campaign or an email can link straight to the form. */
   useEffect(() => {
-    if (wantsEnquiry()) {
+    const typed = TYPE_TOPICS[enquiryType()]
+    if (wantsEnquiry() || typed) {
       const page = contextFor(window.location.pathname)
-      openEnquiry({ topic: page.topic, phrase: page.phrase })
+      openEnquiry({ topic: typed || page.topic, phrase: page.phrase })
     }
   }, [])
 

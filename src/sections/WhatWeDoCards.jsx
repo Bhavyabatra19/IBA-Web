@@ -29,6 +29,24 @@ const ICONS = {
       <path d="M6 14 24 24 42 14M24 24v20" />
     </>
   ),
+  corridor: (
+    <>
+      <circle cx="24" cy="24" r="16" />
+      <path d="M8 24h32M24 8c5 4.5 7.5 9.8 7.5 16S29 35.5 24 40c-5-4.5-7.5-9.8-7.5-16S19 12.5 24 8Z" />
+    </>
+  ),
+  block: (
+    <>
+      <path d="M24 6 39 14.5v19L24 42 9 33.5v-19Z" />
+      <path d="M9 14.5 24 23l15-8.5M24 23v19" />
+    </>
+  ),
+  redclub: (
+    <>
+      <path d="M6 18 24 9l18 9-18 9Z" />
+      <path d="M13 21.5v9c0 2.8 5 5.5 11 5.5s11-2.7 11-5.5v-9M42 18v11" />
+    </>
+  ),
 }
 
 const CARDS = [
@@ -55,6 +73,36 @@ const CARDS = [
     /* the same art as the reference site: the team over a tokenized-property model */
     img: '/images/card-tokenization-art.jpg',
   },
+  {
+    key: 'corridor',
+    tag: 'Five regions, one network',
+    title: 'Web3 Corridor',
+    body:
+      'One corridor across India, the UAE, Europe, Africa and the Americas: market access, capital, technology transfer and memberships for cross-border growth.',
+    cta: 'Know more',
+    href: '/corridor',
+    img: '/images/card-globe.jpg',
+  },
+  {
+    key: 'block',
+    tag: 'Dubai launchpad',
+    title: 'UAE Experience Center, The Block',
+    body:
+      'IBA at The Block, Dubai: a workspace and community for virtual-asset companies, with a real-time experience of the UAE ecosystem and investor access.',
+    cta: 'Know more',
+    href: '/corridor#the-block',
+    img: '/images/the-block-card.jpg',
+  },
+  {
+    key: 'redclub',
+    tag: 'Talent for Web3',
+    title: 'Red Club',
+    body:
+      'Experience Centers on campus and programmes for learners: blockchain and AI training, live projects, mentorship and international pathways.',
+    cta: 'Know more',
+    href: '/red-club',
+    img: '/images/card-students-art.jpg',
+  },
 ]
 
 export default function WhatWeDoCards() {
@@ -70,14 +118,14 @@ export default function WhatWeDoCards() {
   }, [])
 
   return (
-    <section className="wd wd--duo wd--art band band--light band--own" ref={root} aria-labelledby="wd-title">
+    <section className="wd wd--duo wd--art wd--pillars band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
         <p className="hero__kicker wd__eyebrow" id="wd-title" data-rise>
           <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
             <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
           </svg>
-          What We Do
+          What IBA Does
         </p>
 
         <div className="wd__grid">
@@ -97,7 +145,7 @@ export default function WhatWeDoCards() {
                 </span>
                 <h3 className="wd__title">{c.title}</h3>
                 <p className="wd__text">{c.body}</p>
-                {/* both cards read "Know more", so the accessible name says which */}
+                {/* every card reads "Know more", so the accessible name says which */}
                 <Go className="wd__go" href={c.href} aria-label={`Know more about ${c.title}`}>
                   {c.cta} <span aria-hidden="true">→</span>
                 </Go>

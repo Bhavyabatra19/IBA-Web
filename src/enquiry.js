@@ -38,6 +38,21 @@ export const ENQUIRY = {
  * the dropdown and not in ROUTING is an enquiry that silently falls to the
  * default inbox, and the two lists drifting apart is exactly how that happens.
  */
+/**
+ * Intent in the link (content review, 11-05-2026): /connect?type=membership
+ * and the like open the form on the matching topic, so the contact cards
+ * route by intent even when followed as plain links.
+ */
+export const TYPE_TOPICS = {
+  membership: 'Membership',
+  partnership: 'Ecosystem partnership',
+  consulting: 'Consulting',
+  'the-block': 'RWA Tokenization',
+  learning: 'Red Club (learner)',
+  institution: 'Red Club / Verifyble (institution)',
+  corridor: 'Web3 Corridor',
+}
+
 export const TOPICS = [
   'Consulting',
   'Web3 Advisory',

@@ -1,5 +1,7 @@
 /**
- * Open knowledge base — four recent library items, two up, then the sign-up.
+ * In the Media — the featured press and media items (relabelled from "Open
+ * Knowledge Base" in the content review, since they are coverage, not the
+ * library), with the way into the IBA Library below.
  * Light band, after the ecosystem marquee.
  *
  * Built from the what-we-do card (.wd__*): photo header toned into the
@@ -111,16 +113,15 @@ export default function KnowledgeBase() {
               <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
               <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
             </svg>
-            Open Knowledge Base
+            In the Media
           </p>
           <h2 className="kb__title" id="kb-title" data-rise>
-            Powered by the Community
+            IBA in the News
           </h2>
           <p className="kb__lede" data-rise>
-            An open-source knowledge base of articles, videos, research and policy
-            briefs, developed by IBA’s ecosystem experts and advisors for the wider
-            blockchain community, searchable, categorised and free to every
-            registered member.
+            Interviews, features and announcements on IBA and its work across
+            blockchain, tokenization and the Web3 Corridor. For briefs, reports
+            and research from across the industry, browse the IBA Library.
           </p>
         </header>
 
@@ -161,6 +162,12 @@ export default function KnowledgeBase() {
           ))}
         </div>
 
+        {/* the library itself, one click away (content review) */}
+        <div className="kb__more" data-rise>
+          <a className="btn btn--primary" href="/library#catalogue">
+            Browse the IBA Library
+          </a>
+        </div>
       </div>
     </section>
   )
