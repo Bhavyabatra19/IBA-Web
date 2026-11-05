@@ -40,12 +40,12 @@ const INSTITUTION_FAQ = FAQ.filter((f) =>
 
 export default function RedClubInstitutions() {
   return (
-    <div>
+    <div className="rc-page">
       <PageHero
         id="red-club-institutions"
         aside={
           <div className="rc-hero-art" aria-hidden="true">
-            <img src="/images/ac-institutions.jpg" alt="" decoding="async" fetchpriority="high" />
+            <img src="/images/rc-hero.jpg" alt="" decoding="async" fetchpriority="high" />
           </div>
         }
         eyebrow="IBA Red Club · For Institutions"
@@ -109,6 +109,9 @@ export default function RedClubInstitutions() {
         title="A hands-on hub for Industry 4.0 skills"
         lede="The Experience Center concept brings together tokenization, blockchain and AI learning environments for applied research, innovation, training and collaboration."
       >
+        <figure className="rc-figure" data-rise>
+          <img src="/images/card-institutions-art.jpg" alt="Institution leaders around a model of a campus Experience Center" loading="lazy" decoding="async" />
+        </figure>
         <Cards cols={4} items={CENTERS} />
       </Section>
 

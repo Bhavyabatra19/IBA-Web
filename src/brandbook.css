@@ -12757,3 +12757,32 @@ main {
     --pcx-gap: 8px;
   }
 }
+
+/* Red Club pages (content review, 11-05): less space between sections, and
+   a wide graphic where a section carries one */
+.rc-page .pk-sec__panel {
+  padding-block: 56px;
+}
+@media (max-width: 760px) {
+  .rc-page .pk-sec__panel {
+    padding-block: 36px;
+  }
+}
+.rc-page #rc-community .pk-sec__panel {
+  padding-block: 32px;
+}
+.rc-figure {
+  margin: 0 0 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.rc-figure img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 934 / 360;
+  object-fit: cover;
+}
+/* the overview's two doors: a wide image, not the library's thumbnail frame */
+#rc-paths .pk-card__media {
+  aspect-ratio: 16 / 8;
+}
