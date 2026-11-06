@@ -120,13 +120,13 @@ export default function WhatWeDoCards() {
   return (
     <section className="wd wd--duo wd--art wd--pillars band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
-        <p className="hero__kicker wd__eyebrow" id="wd-title" data-rise>
-          <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
-            <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
-          </svg>
-          What IBA Does
-        </p>
+        {/* the section's main heading (by request), set like the other home
+            section titles: the site's H2 face, size and colour, centred */}
+        <header className="kb__head wd__head">
+          <h2 className="kb__title" id="wd-title" data-rise>
+            What IBA Does
+          </h2>
+        </header>
 
         <div className="wd__grid">
           {CARDS.map((c) => (

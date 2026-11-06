@@ -12879,3 +12879,9 @@ main {
   width: 22px;
   height: 22px;
 }
+
+/* Home "What IBA Does": its heading over the pillars, with the same gap to
+   the cards as the other home sections */
+.wd__head {
+  margin-bottom: 0;
+}
