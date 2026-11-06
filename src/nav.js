@@ -98,6 +98,15 @@ export const NAV = [
           { label: 'Vision', icon: 'eye', desc: 'A world where value moves at the speed of trust.', href: '/about#vision' },
         ],
       },
+      /* a third column, like the other tabs: the two About sections that had
+         no menu link (Impact stays out, by request) */
+      {
+        title: 'How We Work',
+        items: [
+          { label: 'Operating Model', icon: 'layers', desc: 'Advocate, Connect, Educate, Enable.', href: '/about#mission-pillars' },
+          { label: 'The IBA Framework', icon: 'link', desc: 'One connected Web3 ecosystem.', href: '/about#iba-framework' },
+        ],
+      },
     ],
   },
   {
