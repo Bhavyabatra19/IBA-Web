@@ -115,8 +115,9 @@ export default function PresenceGlobe() {
             one global Web3 Corridor network for technology transfer,
             investment, entrepreneurship and ecosystem collaboration.
           </p>
-          <Go className="ib__cta pg__cta" href="/corridor" data-rise>
-            Explore Web3 Corridor
+          {/* the section's call to action (by request): join, not explore */}
+          <Go className="ib__cta pg__cta" href="/membership" data-rise>
+            Join the Alliance
           </Go>
         </header>
 
