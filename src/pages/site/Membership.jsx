@@ -42,11 +42,13 @@ const OPENS = [
   },
 ]
 
+/* the four steps, as the homepage's membership section had them (moved
+   here by request, 11-06) */
 const JOURNEY = [
-  { n: '01', name: 'Apply', body: 'Share your organisation, sector and cross-border market goal.' },
-  { n: '02', name: 'Assess', body: 'Discuss fit in a short conversation with the IBA team (30 minutes for the Xchange programme).' },
-  { n: '03', name: 'Select', body: 'Choose the appropriate membership tier and geographic track.' },
-  { n: '04', name: 'Activate', body: 'Meet your corridor lead and begin the relevant engagement pathway.' },
+  { n: '01', name: 'Apply', body: 'Share your organisation, sector and the markets you are building for.' },
+  { n: '02', name: 'Assess', body: 'A short conversation with the IBA team to find the right fit.' },
+  { n: '03', name: 'Select', body: 'Choose the membership pathway and tier that match your goals.' },
+  { n: '04', name: 'Activate', body: 'Meet your IBA lead and begin with the network, the library and the corridor.' },
 ]
 
 const FAQ = [
@@ -126,14 +128,16 @@ export default function Membership() {
       <Section
         id="join"
         tone="card"
-        eyebrow="How to join"
-        title="From application to activation."
-        lede="Entry runs in four steps. Web360 membership selection and access are curated or gated by tier."
+        eyebrow="IBA Membership"
+        title="How to join"
       >
         <Steps items={JOURNEY} />
         <div className="pk-actions" data-rise>
           <Btn enquiry={ENQUIRY}>
             Become a Member <Arrow />
+          </Btn>
+          <Btn href="#plans" variant="ghost">
+            Explore Pathways & Tiers
           </Btn>
         </div>
       </Section>
