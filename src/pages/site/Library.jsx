@@ -80,7 +80,7 @@ export default function Library() {
 
       {/* Membership, on white between the hero and the red band (by request):
           formal, for serious learners, and without leading on price —
-          "complimentary, by application" says it once */}
+          "Free access, by application" says it once */}
       <Section
         id="membership"
         tone="card"
@@ -117,7 +117,7 @@ export default function Library() {
           <Btn href="/membership" variant="ghost">
             Explore Membership
           </Btn>
-          <p className="lib-member__note">Membership is complimentary, by application.</p>
+          <p className="lib-member__note">Free access, by application.</p>
         </div>
       </Section>
 
