@@ -47,6 +47,13 @@ const ICONS = {
       <path d="M13 21.5v9c0 2.8 5 5.5 11 5.5s11-2.7 11-5.5v-9M42 18v11" />
     </>
   ),
+  expand: (
+    <>
+      <circle cx="24" cy="24" r="15" />
+      <path d="M9 24h30M24 9c4.5 4 6.8 9 6.8 15S28.5 35 24 39" />
+      <path d="M31 13h8v8M39 13 29 23" />
+    </>
+  ),
 }
 
 const CARDS = [
@@ -102,6 +109,17 @@ const CARDS = [
     cta: 'Know more',
     href: '/red-club',
     img: '/images/card-students-art.jpg',
+  },
+  /* ⚠ PLACEHOLDER (by request, 11-06): the copy, link and image wait for
+     IBA's data on UAE market expansion */
+  {
+    key: 'expand',
+    tag: 'Coming soon',
+    title: 'UAE Market Expansion',
+    body: 'Details coming soon: how IBA helps companies enter and grow in the UAE market.',
+    cta: 'Know more',
+    href: '/connect',
+    img: '/images/card-partnership.jpg',
   },
 ]
 
