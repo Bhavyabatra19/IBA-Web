@@ -14,7 +14,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { FACTS } from '../data/facts'
-import { TOKENOMICS, usd } from '../content'
 
 /* line icons, 24px grid; the effect gives each stroke pathLength=1 so one
    dash tween draws them all */
@@ -57,9 +56,6 @@ const FIGURES = [
   { fig: FACTS.sectors, label: 'Tokenization Sectors', note: 'From real estate to gold and logistics', icon: 'layers' },
   { fig: n(11), label: 'Impact Projects', note: 'Tokenized for measurable social and climate outcomes', icon: 'globe' },
 ]
-
-/* the tokenization record, one card per project (content review) */
-const PROJECTS = TOKENOMICS.map((t) => ({ ...t, line: `${t.sector} tokenization · ${usd(t.usdM)}` }))
 
 /** Count a [data-count] figure from 0, keeping its decimals and affixes. */
 function countUp(el, duration) {
@@ -160,14 +156,6 @@ export default function ImpactBand() {
           ))}
         </ul>
 
-        <ul className="ib__projects">
-          {PROJECTS.map((p) => (
-            <li className="ib__project" key={p.project} data-rise>
-              <span className="ib__projectName">{p.project}</span>
-              <span className="ib__projectLine">{p.line}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   )

@@ -60,9 +60,10 @@ export default function Home() {
       <Credibility />
       <WhatWeDoCards />
       <PresenceGlobe />
+      {/* membership in brief, a black band under the corridor map (by request) */}
+      <MembershipBand />
       <ImpactBand />
       <EcosystemMarquee />
-      <MembershipBand />
       <AcademiaCards />
       <KnowledgeBase />
       <GetInTouch />

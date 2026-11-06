@@ -12626,42 +12626,6 @@ main {
   content: attr(data-text);
 }
 
-/* Home impact band: the tokenization record as four project cards under the
-   figures (content review), in place of the scrolling ticker */
-.ib__projects {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.ib__project {
-  display: grid;
-  gap: 6px;
-  padding: 18px 20px;
-  border: 1px solid var(--bb-line);
-  border-left: 3px solid var(--iba-red);
-  background: #ffffff;
-}
-.ib__projectName {
-  font-size: 18px;
-  color: var(--bb-ink);
-}
-.ib__projectLine {
-  font-size: 14px;
-  color: var(--bb-ink-muted);
-}
-@media (max-width: 1000px) {
-  .ib__projects {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 560px) {
-  .ib__projects {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Home "What IBA does": five pillars (content review), three across, two on
    a tablet, one on a phone */
@@ -12884,4 +12848,49 @@ main {
    the cards as the other home sections */
 .wd__head {
   margin-bottom: 0;
+}
+
+/* Home membership band (black, under the corridor map): the carousel's
+   cards on the dark ground, Know more at each card's foot, and the round
+   arrows in white */
+.mbb .mbb__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  height: 100%;
+}
+.mbb .mbb__card .pk-card__text {
+  flex: 1;
+}
+.mbb__go {
+  display: inline-flex;
+  gap: 6px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid currentColor;
+  color: #ffffff;
+  font-size: 15px;
+}
+.mbb__go:hover {
+  color: #ff4a50;
+}
+.mbb .rail__controls {
+  justify-content: center;
+}
+.mbb .rail__arrow {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #ffffff;
+}
+.mbb .rail__arrow:hover {
+  border-color: #ff4a50;
+  background: #ff4a50;
+}
+.mbb .rail__arrow svg {
+  stroke: currentColor;
+}
+@media (max-width: 760px) {
+  .mbb .rail__track {
+    grid-auto-columns: 82%;
+  }
 }

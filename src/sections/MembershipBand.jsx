@@ -1,64 +1,74 @@
 /**
- * Home — membership (content review, 11-05-2026: "Membership is invisible"):
- * the tiers in brief, what membership opens, and how to join, with the way
- * into the full plans on the Web3 Corridor page. No prices (by request).
+ * Home — membership in brief (by request, 11-06): a black band under the
+ * Web3 Corridor map with a carousel of the ways to join, each card's "Know
+ * more" going to its part of the Membership page (the pathway links open
+ * the plans on that pathway's tab). It replaces the longer membership
+ * section that sat lower on the page. No prices (by request).
  */
 
-import { Section, SubHead, Cards, Btn } from '../components/Kit'
-import { Steps } from './service/ServiceBlocks'
+import { Section, Btn } from '../components/Kit'
+import CardRail from '../components/CardRail'
+import { Go } from './service/ServiceBlocks'
 
-const TIERS = [
+const SLIDES = [
   {
-    num: 'Bronze',
-    title: 'Starters & early builders',
-    text: 'International exposure, expert access and market-entry guidance for founders, operators and early-stage businesses.',
+    tag: 'Free access',
+    title: 'Membership of the Alliance',
+    text: 'The complete IBA Library, the IBA Directory, member briefings and a verified profile in the network.',
+    href: '/membership#alliance',
   },
   {
-    num: 'Silver',
-    title: 'Growth across markets',
-    text: 'Investor readiness, matched introductions and founder visibility for registered startups expanding into new countries.',
+    tag: 'Web360 Club',
+    title: 'Founder & Investor',
+    text: 'Investor relations, deal flow, advisory and international growth, from early builders to global leaders.',
+    href: '/membership#plans-club',
   },
   {
-    num: 'Gold',
-    title: 'Global leaders · by invitation',
-    text: 'Curated investor access, board-level advisory and milestone reviews for high-growth ventures and institutions.',
+    tag: 'Web360 Club',
+    title: 'Tokenization & Institutions',
+    text: 'Plans for tokenization businesses, issuers, vendors, platforms and institutions in tokenized markets.',
+    href: '/membership#plans-token',
   },
-]
-
-const BENEFITS = [
-  { title: 'The IBA Library', text: 'Every article, research paper, policy brief and recorded session.' },
-  { title: 'The IBA Directory', text: 'A verified register of members, advisors, institutions and partners.' },
-  { title: 'Corridor Access', text: 'Market entry, capital and partners across five regions.' },
-  { title: 'Briefings & Events', text: 'Member briefings, roundtables and the alliance’s global events.' },
-]
-
-const JOIN = [
-  { n: '01', name: 'Apply', body: 'Share your organisation, sector and the markets you are building for.' },
-  { n: '02', name: 'Assess', body: 'A short conversation with the IBA team to find the right fit.' },
-  { n: '03', name: 'Select', body: 'Choose the membership pathway and tier that match your goals.' },
-  { n: '04', name: 'Activate', body: 'Meet your IBA lead and begin with the network, the library and the corridor.' },
+  {
+    tag: 'India ↔ UAE',
+    title: 'Indo–UAE Startup Xchange',
+    text: 'Market entry between India and the UAE: setup, compliance, introductions and a 12-week launch sprint.',
+    href: '/membership#plans-xchange',
+  },
+  {
+    tag: 'Four steps',
+    title: 'How to Join',
+    text: 'Apply, a short conversation with the IBA team, choose your pathway and tier, and meet your IBA lead.',
+    href: '/membership#join',
+  },
 ]
 
 export default function MembershipBand() {
   return (
     <Section
       id="membership"
-      tone="card"
+      tone="dark"
       eyebrow="IBA Membership"
       title="Join the Alliance"
-      lede="Membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor, with a pathway for every stage of growth."
+      lede="One network across the IBA Web3 Corridor, with a pathway for every stage of growth."
     >
-      <Cards cols={3} items={TIERS} />
-      <SubHead>What membership opens</SubHead>
-      <Cards cols={4} items={BENEFITS} />
-      <SubHead>How to join</SubHead>
-      <Steps items={JOIN} />
+      <div className="mbb">
+        <CardRail label="Ways to join IBA" cols={3}>
+          {SLIDES.map((s) => (
+            <li className="pk-card mbb__card" key={s.title}>
+              <span className="wd__tag">{s.tag}</span>
+              <h3 className="pk-card__title">{s.title}</h3>
+              <p className="pk-card__text">{s.text}</p>
+              <Go className="mbb__go" href={s.href} aria-label={`Know more about ${s.title}`}>
+                Know more <span aria-hidden="true">→</span>
+              </Go>
+            </li>
+          ))}
+        </CardRail>
+      </div>
       <div className="pk-actions" data-rise>
-        <Btn enquiry="Membership">
-          Become a Member <span aria-hidden="true">→</span>
-        </Btn>
-        <Btn href="/membership" variant="ghost">
-          Explore Membership
+        <Btn href="/membership">
+          Explore Membership <span aria-hidden="true">→</span>
         </Btn>
       </div>
     </Section>
