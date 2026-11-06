@@ -109,7 +109,7 @@ export default function Membership() {
         tone="card"
         eyebrow="Membership of the Alliance"
         title="What membership opens"
-        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. Membership of the alliance is complimentary, by application."
+        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. Membership of the alliance is free access, by application."
       >
         <Cards cols={4} items={OPENS} />
       </Section>
