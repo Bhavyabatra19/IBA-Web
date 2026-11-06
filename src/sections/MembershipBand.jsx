@@ -49,7 +49,7 @@ export default function MembershipBand() {
       id="membership"
       tone="dark"
       eyebrow="IBA Membership"
-      title="Join the Alliance"
+      title="Be Part of the Movement"
       lede="One network across the IBA Web3 Corridor, with a pathway for every stage of growth."
     >
       <div className="mbb">
