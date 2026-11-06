@@ -13174,3 +13174,41 @@ main {
 .fl2__more {
   white-space: nowrap;
 }
+/* the founder's "Read the full note": label and arrow on one line (the
+   shared button stacks its contents in a column) */
+.fl2__more {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.fl2__more span {
+  display: inline-block;
+}
+
+/* the asset-class icons as 3D coin medallions (images), larger than the
+   line icons were, with a soft shadow under each and a slow float */
+img.ib__sectorIcon {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 14px rgba(120, 10, 18, 0.28));
+  animation: pcx-float 5.5s ease-in-out infinite;
+}
+.ib__sector:nth-child(2n) img.ib__sectorIcon {
+  animation-delay: -1.8s;
+}
+.ib__sector:nth-child(3n) img.ib__sectorIcon {
+  animation-delay: -3.4s;
+}
+@media (max-width: 760px) {
+  img.ib__sectorIcon {
+    width: 72px;
+    height: 72px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  img.ib__sectorIcon {
+    animation: none;
+  }
+}
