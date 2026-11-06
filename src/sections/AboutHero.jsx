@@ -1,9 +1,9 @@
 /**
- * 3.1 — About hero. Dark band.
+ * 3.1, About hero. Dark band.
  *
  * The pinned coin-door piece. The page's own words carry it: the opening
  * statement sits in the ring's hole and dissolves as the halves part, the claim
- * the page is built on — "we are not a vendor, we are an alliance" — is what
+ * the page is built on, "we are not a vendor, we are an alliance", is what
  * the open doors reveal, and the halves then interlock into the mark.
  *
  * The choreography itself lives in lib/coinHero.js.
@@ -23,7 +23,7 @@ export default function AboutHero() {
   const root = useRef(null)
   const tiltRef = useRef(null)
   /* Coin count stays even so the split takes exact halves. Rim segment count
-     drops on mobile — that's where the strip elements actually cost something. */
+     drops on mobile, that's where the strip elements actually cost something. */
   const profile = () => (window.innerWidth < 760 ? { coins: 8, segments: 14 } : { coins: 10, segments: 24 })
   const [{ coins: coinCount, segments }, setProfile] = useState(profile)
 
@@ -51,7 +51,7 @@ export default function AboutHero() {
       buildCoinHeroTimeline(el)
 
       /* The strip is on screen from the first frame, so it counts on mount
-         rather than on a trigger — held back until the copy around it has
+         rather than on a trigger, held back until the copy around it has
          started arriving. */
       buildCounters(el, { immediate: true, delay: 0.55 })
 
@@ -73,7 +73,7 @@ export default function AboutHero() {
     return () => ctx.revert()
   }, [coinCount])
 
-  /* subtle pointer parallax on the whole stage — quickTo keeps it off the GC */
+  /* subtle pointer parallax on the whole stage, quickTo keeps it off the GC */
   useEffect(() => {
     const el = tiltRef.current
     if (!el || reducedMotion() || isCoarse()) return
@@ -97,7 +97,7 @@ export default function AboutHero() {
           The glow and the grid are on the scroll timeline (see coinHero.js) and
           are left exactly as they were. What is new is the air around them: the
           same lit top and bottom, and the same outlined word, that the section
-          landing heroes carry — so /about opens in the same room they do.
+          landing heroes carry, so /about opens in the same room they do.
 
           The word is last, so the vignette does not paint over it: the top of
           that gradient is nearly opaque black, which is where the word is. It
@@ -110,7 +110,7 @@ export default function AboutHero() {
       </div>
 
       {/* ---------- scene 3 typography (revealed between the doors) ----------
-          The claim, unchanged — the em-dash that joined its two halves is now
+          The claim, unchanged, the em-dash that joined its two halves is now
           the break between the statement and what backs it up. */}
       <div className="chero__reveal">
         <p className="chero__reveal-item eyebrow">The Alliance</p>
@@ -173,14 +173,14 @@ export default function AboutHero() {
 
         {/* The four numbers, inline. They are the evidence for the paragraph
             above them, so they belong in the same block of copy rather than in
-            a bar underneath — which is where they used to be, as a repeat of
+            a bar underneath, which is where they used to be, as a repeat of
             the home page's strip. */}
         <ul className="chero__stats" data-rise>
           {CRED_STATS.map((s) => (
             <li key={s.label}>
               {s.lead && <span className="chero__statLead">{s.lead}</span>}
               {/* the final value is in the markup, so it is correct before the
-                  counter runs — and stays correct if it never does */}
+                  counter runs, and stays correct if it never does */}
               <span className="chero__statK" data-count={s.to} data-suffix={s.suffix}>
                 {s.to}
                 {s.suffix}

@@ -1,9 +1,9 @@
 /**
- * Tokenization — where the Expertise page's "Know more" goes.
+ * Tokenization, where the Expertise page's "Know more" goes.
  *
  * The copy is the client's "Tokenization · India Blockchain Alliance" page
  * (supplied as a PDF), set in the site's own section and card designs (by
- * request: like the Expertise, Ecosystem and About pages) — the Impact band,
+ * request: like the Expertise, Ecosystem and About pages), the Impact band,
  * the standard icon cards and the Our Mission glass cards. Its own header
  * and footer are left out; the site's are used instead.
  *
@@ -109,7 +109,7 @@ const EXPANSION = [
 
 /* Why the Market Needs Infrastructure, as a Web3 graphic (by request): the
    traditional market as a broken grey chain, a token hub in the middle, and
-   the connected stack as a live red chain — each point a block on its chain */
+   the connected stack as a live red chain, each point a block on its chain */
 const Chain = ({ items, live, title }) => (
   <div className={`tkc__side${live ? ' tkc__side--live' : ''}`}>
     <h3 className="tkc__title">{title}</h3>
@@ -159,7 +159,7 @@ export default function Tokenization() {
             Turn real-world assets into <em className="tkp-hl">new market opportunities.</em>
           </>
         }
-        lede="Tokenization can connect traditionally illiquid assets to digital markets—creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access."
+        lede="Tokenization can connect traditionally illiquid assets to digital markets, creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access."
         actions={
           <>
             <Btn href="#framework">
@@ -251,7 +251,7 @@ export default function Tokenization() {
         id="market-expansion"
         eyebrow="Ecosystem and Market Expansion"
         title="Tokenization scales when the ecosystem connects."
-        lede="Issuers need more than technology. They need a network of asset owners, brokers, marketplaces, investors, service providers and institutional partners—supported by regulatory engagement and access to priority markets."
+        lede="Issuers need more than technology. They need a network of asset owners, brokers, marketplaces, investors, service providers and institutional partners, supported by regulatory engagement and access to priority markets."
       >
         <Cards items={EXPANSION} cols={3} />
       </Section>
@@ -261,7 +261,7 @@ export default function Tokenization() {
         tone="dark"
         eyebrow="India Blockchain Alliance"
         title="Move from tokenization concept to a market-ready program."
-        lede="Explore the asset, regulatory, technology and ecosystem requirements for your initiative—and identify the partners and markets needed to take it forward."
+        lede="Explore the asset, regulatory, technology and ecosystem requirements for your initiative and identify the partners and markets needed to take it forward."
       >
         <div className="pk-actions" data-rise>
           <Btn enquiry={ENQUIRY}>

@@ -1,5 +1,5 @@
 /**
- * Web3 Corridor — the corridor and its memberships, with the content of the
+ * Web3 Corridor, the corridor and its memberships, with the content of the
  * client's "IBA Web3 Corridor · Complete Membership" reference (11-04-2026)
  * set out in the site's own blocks: the five regions and the network map,
  * the operating model, the three membership pathways in brief (the plans,

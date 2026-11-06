@@ -35,7 +35,7 @@ import {
 } from './lib/scroll'
 
 /* Flat, and keyed by the exact path. Two levels is not a hierarchy worth a
-   matcher — when a third level arrives, that is the moment to grow one. */
+   matcher, when a third level arrives, that is the moment to grow one. */
 const PAGES = {
   '/': Home,
   '/about': About,
@@ -54,7 +54,7 @@ const PAGES = {
 }
 
 /**
- * Every route needs a row in the SEO table, or it inherits the fallback — which
+ * Every route needs a row in the SEO table, or it inherits the fallback, which
  * is the home page's title on a page that is not the home page.
  *
  * Checked in development only, and by comparing the two lists rather than by
@@ -77,12 +77,12 @@ export default function App() {
   useLayoutEffect(() => initSmoothScroll(), [])
   useEffect(() => refreshOnLoad(), [])
 
-  /* 9 — the title, description, canonical and share tags for this route. A
+  /* 9, the title, description, canonical and share tags for this route. A
      layout effect so the title has changed before the new page paints; a reader
      watching the tab should not see the old page's name on the new one. */
   useLayoutEffect(() => applySeo(path), [path])
 
-  /* A pinned hero cannot be restored into halfway through — the browser would
+  /* A pinned hero cannot be restored into halfway through, the browser would
      drop the reader into the middle of the sequence with no way to read it. */
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
@@ -103,7 +103,7 @@ export default function App() {
   /**
    * Landing on an anchor of a page that has only just mounted.
    *
-   * Scrolling once — on the next frame, or on the first refresh — lands in the
+   * Scrolling once, on the next frame, or on the first refresh, lands in the
    * wrong place. The home page's hero pins for five viewports, and until that
    * spacer exists every section below it measures ~4500px too high. The spacer
    * appears partway through mounting, and mounting is one long blocked frame:
@@ -112,7 +112,7 @@ export default function App() {
    *
    * So land, and keep landing on every refresh for a short window. Nothing
    * between the first attempt and the last is ever painted, because the thread
-   * never yields — the correction is free, and it is the only approach that is
+   * never yields, the correction is free, and it is the only approach that is
    * right regardless of when the spacer arrives. The reader touching the wheel
    * ends it immediately; being dragged back to an anchor you have just scrolled
    * away from is worse than landing short.
@@ -126,7 +126,7 @@ export default function App() {
     ScrollTrigger.refresh()
 
     /* Wait for the document to stop growing, then scroll once. Height is the
-       honest signal — it is what the pin spacer changes, and it settles whether
+       honest signal, it is what the pin spacer changes, and it settles whether
        the delay came from the pin, a web font or an image. Three still frames
        is enough to call it, and the deadline stops a page that never settles
        from stranding the reader at the top. */
@@ -160,15 +160,15 @@ export default function App() {
             already exist by the time Nav's effect looks for them. */}
         <Nav />
         {/* Keyed on the path, so React replaces the page rather than trying to
-            reconcile one document into another — which would leave the old
+            reconcile one document into another, which would leave the old
             page's refs and GSAP contexts attached to the new page's nodes. */}
         <main key={path}>
           <Page />
         </main>
-        {/* the red closing band — home carries its own (GetInTouch) */}
+        {/* the red closing band, home carries its own (GetInTouch) */}
         {path !== '/' && <CtaBand />}
         <Footer />
-        {/* Last in the DOM, so it is last in tab order — a reader tabbing the
+        {/* Last in the DOM, so it is last in tab order, a reader tabbing the
             page reaches it after the footer rather than before the content. */}
         <ScrollTop />
       </div>

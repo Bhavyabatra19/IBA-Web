@@ -5,7 +5,7 @@
  *
  * Nodes are distributed on three Fibonacci shells and joined to their nearest
  * neighbours, so the connections describe an actual structure rather than being
- * drawn at random — which is the difference between this reading as a network
+ * drawn at random, which is the difference between this reading as a network
  * and reading as confetti.
  *
  * Everything is deterministic. No Math.random anywhere: the same lattice comes
@@ -212,7 +212,7 @@ export function buildCore({ quality = 'high' } = {}) {
   const tmp = new THREE.Color()
 
   /* Opacity and energy both drive the same handful of material properties, so
-     they are held here and applied together — otherwise whichever setter ran
+     they are held here and applied together, otherwise whichever setter ran
      last would clobber the other's contribution. */
   let opacity = 1
   let energy = 0

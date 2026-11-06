@@ -4,7 +4,7 @@
  * One scroll authority for the whole page.
  *
  * Lenis is driven by the GSAP ticker and drives ScrollTrigger.update, so the
- * page has exactly one RAF loop — the 3D scene renders from that same loop
+ * page has exactly one RAF loop, the 3D scene renders from that same loop
  * rather than starting a second one. Two loops is how scrubbed WebGL ends up
  * a frame behind the DOM.
  */
@@ -22,7 +22,7 @@ gsap.config({ nullTargetWarn: false })
 export const EASE = {
   /** camera and depth moves */
   camera: 'power2.inOut',
-  /** matter reorganising — the forming and splitting beats */
+  /** matter reorganising, the forming and splitting beats */
   matter: 'power3.inOut',
   /** entrances */
   rise: 'power3.out',
@@ -44,13 +44,12 @@ export const isMobile = () => typeof window !== 'undefined' && window.innerWidth
 /**
  * Boot smooth scrolling. Returns a teardown.
  * Under reduced motion this is a no-op and the browser's native scroll is left
- * alone — hijacking scroll is itself a motion effect.
+ * alone, hijacking scroll is itself a motion effect.
  */
 /**
  * The live Lenis instance, or null under reduced motion / before boot.
  * Held at module scope because the overlays (nav drawer, auth modal) and the
- * anchor links have to talk to the same scroll authority the page runs on —
- * a second instance, or touching window.scrollTo behind Lenis's back, is how
+ * anchor links have to talk to the same scroll authority the page runs on, * a second instance, or touching window.scrollTo behind Lenis's back, is how
  * a locked overlay ends up scrolling the page underneath it anyway.
  */
 let lenis = null
@@ -118,7 +117,7 @@ export function scrollToTop({ immediate = true } = {}) {
  * Send the page to an in-page anchor through the scroll authority.
  *
  * A native hash jump would move the scroll position out from under Lenis,
- * which then eases back from wherever it thought it was — so every nav link
+ * which then eases back from wherever it thought it was, so every nav link
  * routes through here instead. Returns false if the target does not exist,
  * letting the caller fall back to normal link behaviour.
  */
@@ -137,12 +136,12 @@ export function scrollToId(hash, { immediate = false } = {}) {
   if (lenis) lenis.scrollTo(el, { offset: -navH, duration: immediate ? 0 : 1.2, immediate })
   else el.scrollIntoView({ behavior: immediate || reducedMotion() ? 'auto' : 'smooth' })
 
-  /* the hash still belongs in the URL — just without the browser's jump */
+  /* the hash still belongs in the URL, just without the browser's jump */
   if (history.replaceState) history.replaceState(null, '', hash)
   return true
 }
 
-/** Re-measure once fonts land — web font metrics move every trigger. */
+/** Re-measure once fonts land, web font metrics move every trigger. */
 export function refreshOnLoad() {
   const refresh = () => ScrollTrigger.refresh()
   if (document.fonts?.ready) document.fonts.ready.then(refresh)
@@ -164,7 +163,7 @@ export function refreshOnLoad() {
  * 122, because the clip box is no longer exactly one line tall: .line carries
  * 0.15em of bottom padding so descenders are not cut off, and the text has to
  * start below that padding or its top edge shows through before the reveal.
- * Mirrored by the `.js [data-clip] .line__inner` rule in the stylesheet — the
+ * Mirrored by the `.js [data-clip] .line__inner` rule in the stylesheet, the
  * two must stay equal, or the no-JS state and the first frame disagree.
  */
 export const CLIP_FROM = 122
@@ -173,7 +172,7 @@ export const CLIP_FROM = 122
  * Where a section's reveal fires, for every section on the site.
  *
  * These were written out at the call sites and had drifted to five different
- * pairs — 80/76, 78/74, 76/72, 74/70, 72/68. No section meant anything by its
+ * pairs, 80/76, 78/74, 76/72, 74/70, 72/68. No section meant anything by its
  * own number, and the result was that scrolling the page felt uneven: the same
  * kind of block arriving at a slightly different depth each time is a thing a
  * reader feels without being able to name it.
@@ -181,7 +180,7 @@ export const CLIP_FROM = 122
  * The heading goes first and the rest of the block follows it four points
  * later, so the section reads top-down rather than arriving all at once.
  *
- * A section that genuinely needs its own threshold still passes `start` — the
+ * A section that genuinely needs its own threshold still passes `start`, the
  * credibility bar does, because it is a strip a few lines tall sitting close
  * under the fold, and the shared value would have it play off screen.
  */
@@ -192,8 +191,7 @@ export const REVEAL_RISE = 'top 74%'
  * Clip-reveal for headline lines wrapped in .line > .line__inner.
  *
  * The `gsap.set` is not redundant. The start state is declared in CSS as a
- * PERCENTAGE transform, and getComputedStyle resolves percentages to pixels —
- * so GSAP parses the matrix, records y in px, and believes yPercent is already
+ * PERCENTAGE transform, and getComputedStyle resolves percentages to pixels, * so GSAP parses the matrix, records y in px, and believes yPercent is already
  * 0. Animating to yPercent: 0 is then a no-op and the line never arrives.
  * Restating it here puts GSAP's own transform record in percent units first.
  */
@@ -220,7 +218,7 @@ export function revealLines(scope, opts = {}) {
  * An IntersectionObserver rather than a ScrollTrigger, for the reason nav.js
  * sets out at length: a ScrollTrigger records a document position at the moment
  * it is created, and anything created before the home hero installs its
- * five-viewport pin is recorded roughly a pin's worth too high — and because
+ * five-viewport pin is recorded roughly a pin's worth too high, and because
  * those stale positions also decide refresh order, later refreshes do not
  * correct them. A gate that is wrong in that direction never opens, and the
  * thing it was gating simply never runs.
@@ -228,7 +226,7 @@ export function revealLines(scope, opts = {}) {
  * An observer is answered by the browser from live geometry every time. It
  * cannot be stale, and it does not care what else on the page has resized.
  *
- * This is only ever the right tool for "is it visible" — anything that needs a
+ * This is only ever the right tool for "is it visible", anything that needs a
  * position WITHIN the scroll still wants a ScrollTrigger.
  */
 export function whileOnScreen(el, on, off) {
@@ -246,11 +244,11 @@ export function whileOnScreen(el, on, off) {
 
 /**
  * Everything waiting to be revealed, each with what to do when it arrives:
- * show(el, passed) — `passed` is true when the reader is already beyond it.
+ * show(el, passed), `passed` is true when the reader is already beyond it.
  *
  * Why not a ScrollTrigger per section (as this used to be): a trigger
  * records a position when created, and on these pages that position was
- * often stale (see whileOnScreen) — and the reveal was per SECTION, staggered
+ * often stale (see whileOnScreen), and the reveal was per SECTION, staggered
  * over every item in it, so a long section stayed blank for seconds. Jumping
  * to an anchor (/expertise#consulting-stack) made it worst: the sections
  * skipped over, and the one landed on, sat empty until their triggers caught
@@ -306,8 +304,8 @@ function whenArrives(el, show) {
     window.addEventListener('resize', queueSweep, { passive: true })
   }
   queueSweep()
-  /* the page keeps settling after mount — fonts, images, an anchor jump that
-     lands a few frames later — so look again a few times over the first
+  /* the page keeps settling after mount, fonts, images, an anchor jump that
+     lands a few frames later, so look again a few times over the first
      second and a half, in case nothing scrolls */
   for (const t of [120, 400, 900, 1500]) setTimeout(queueSweep, t)
 }
@@ -336,10 +334,10 @@ export function revealRise(scope, opts = {}) {
 }
 
 /**
- * The [data-count] figures (stat cards, impact numbers) — left as written.
+ * The [data-count] figures (stat cards, impact numbers), left as written.
  *
  * They used to reset to 0 and count up as they came into view. Anyone who
- * scrolled past quickly, or caught a screenshot, saw 0 — not the figure. So
+ * scrolled past quickly, or caught a screenshot, saw 0, not the figure. So
  * the number in the markup is the number on screen, always; the card around
  * it still rises in with its section, which is the entrance.
  *

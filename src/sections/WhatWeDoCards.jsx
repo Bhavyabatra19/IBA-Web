@@ -1,5 +1,5 @@
 /**
- * What we do — Web3 Advisory and Tokenization — as two cards. Light band.
+ * What we do, Web3 Advisory and Tokenization, as two cards. Light band.
  *
  * Follows the flagship-programme panel, at the hero's width. Each card has
  * a photo header in a red hue, with an icon badge; the copy sits beneath. On

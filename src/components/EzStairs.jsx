@@ -3,8 +3,8 @@
  * ascending neon blocks (Programmes, Projects, Labs, Placements) ending in an
  * upward arrow (public/images/ez-stairs/base.png).
  *
- * The render's own arrow was drawn in perspective — sheared, its head skewed
- * — so it has been erased from the render (only where it stood clear of the
+ * The render's own arrow was drawn in perspective, sheared, its head skewed
+ *, so it has been erased from the render (only where it stood clear of the
  * top block; every block pixel is the render's own) and redrawn here as
  * geometry: perfectly vertical, symmetrical about one centre line, with a
  * level arrowhead. It keeps the original's place and proportions: the same
@@ -19,7 +19,7 @@
  * without the shared round fade, which dimmed the arrow in the top-right
  * corner.
  *
- * Motion, as on the other heroes — every layer only ADDS light, so the
+ * Motion, as on the other heroes, every layer only ADDS light, so the
  * picture underneath keeps its pixels:
  *   - the whole graphic floats gently
  *   - the block edges, label borders and risers breathe, and a band of light

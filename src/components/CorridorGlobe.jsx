@@ -1,5 +1,5 @@
 /**
- * The Flagship Programme graphic — a grey globe, with red only on the moving dots, turning slowly inside its
+ * The Flagship Programme graphic, a grey globe, with red only on the moving dots, turning slowly inside its
  * orbits, after the reference the client supplied.
  *
  * The land is the same Natural Earth data the presence map uses

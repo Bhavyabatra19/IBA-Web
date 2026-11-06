@@ -2,12 +2,12 @@
  * The Studio section, as content.
  *
  * One page rather than four, because the brief sets 6.1–6.4 as H2s under a
- * single H1 — Clients, Government Projects, Corridors and Councils are four
+ * single H1, Clients, Government Projects, Corridors and Councils are four
  * views of one ecosystem, not four services you would pick between. The nav's
  * five Studio items are anchors into it.
  *
  * ⚠ EVERY NAME IN CLIENTS AND GOVERNMENT IS A REAL ORGANISATION.
- * They render as typeset text, never as logo files — the same rule the home
+ * They render as typeset text, never as logo files, the same rule the home
  * page's Trusted By band carries. Before this goes live: confirm each
  * organisation has agreed to be listed and to the wording of that listing, then
  * swap each cell for a licensed asset. Do NOT substitute scraped logo files;
@@ -15,7 +15,7 @@
  */
 
 /* ================================================================== */
-/* 6.0 — the landing                                                  */
+/* 6.0, the landing                                                  */
 /* ================================================================== */
 
 export const STUDIO_INTRO =
@@ -29,8 +29,8 @@ export const STUDIO_INTRO =
  * and two are on pages that already hold the material rather than second copies
  * of it made to keep the reader inside one section.
  *
- * ⚠ Products is the weak one. What the brief describes — the tokenized asset
- * platforms and the white-label deployments — is real, but it is written up
+ * ⚠ Products is the weak one. What the brief describes, the tokenized asset
+ * platforms and the white-label deployments, is real, but it is written up
  * under Expertise, and the partner products meant to sit beside it are marked
  * "confirm which partners have approved being named". Until that list exists,
  * this card points at the track record rather than at a page that would be
@@ -84,7 +84,7 @@ export const STUDIO_SECTIONS = [
 ]
 
 /* ================================================================== */
-/* 6.1 — clients                                                      */
+/* 6.1, clients                                                      */
 /* ================================================================== */
 
 /**
@@ -95,7 +95,7 @@ export const STUDIO_SECTIONS = [
  *
  * `domain` is the company's own domain, and it is what scripts/fetch-logos.mjs
  * fetches a mark for into public/logos/. An entry WITHOUT one renders as its
- * typeset name — which is the correct outcome, not a gap to be filled in with a
+ * typeset name, which is the correct outcome, not a gap to be filled in with a
  * guess. A wrong domain puts another company's logo on IBA's client wall, so
  * the rule here is: if the domain is not known, leave it out. The names below
  * with no domain are the ones nobody has confirmed yet.
@@ -104,7 +104,7 @@ export const CLIENT_GROUPS = [
   {
     key: 'enterprise',
     label: 'Enterprise',
-    /* VERIFY: several of these are abbreviations as supplied — MOI, IETSA,
+    /* VERIFY: several of these are abbreviations as supplied, MOI, IETSA,
        afoma. Expand or correct them here before launch. */
     items: [
       { name: 'PwC', domain: 'pwc.com' },
@@ -209,7 +209,7 @@ export const CLIENT_GROUPS = [
 export const logoKey = (domain) => domain.replace(/[^a-z0-9]+/gi, '-')
 
 /* ================================================================== */
-/* 6.2 — government projects                                          */
+/* 6.2, government projects                                          */
 /* ================================================================== */
 
 export const GOV_PROJECTS = [
@@ -255,7 +255,7 @@ export const GOV_CLIENTS = [
 ]
 
 /* ================================================================== */
-/* 6.3 — web3 corridors                                               */
+/* 6.3, web3 corridors                                               */
 /* ================================================================== */
 
 /**
@@ -263,22 +263,22 @@ export const GOV_CLIENTS = [
  *
  * Named TEASER because that is now all it is: section 7 gives the corridors a
  * page of their own, and corridor.js carries the definition the flagship page
- * opens with. This line stays short on purpose — the Ecosystem page's job is to
+ * opens with. This line stays short on purpose, the Ecosystem page's job is to
  * say the corridors exist and hand the reader to the page about them.
  */
 export const CORRIDOR_TEASER =
-  "Web3 Corridors are IBA's structured cross-border programs — connecting regulators, capital, talent and projects between markets that should be trading with each other and mostly aren't yet."
+  "Web3 Corridors are IBA's structured cross-border programs, connecting regulators, capital, talent and projects between markets that should be trading with each other and mostly aren't yet."
 
 /**
  * Both corridors are named and neither is written yet.
  *
- * The brief supplies "description placeholder — objectives, partners, current
+ * The brief supplies "description placeholder, objectives, partners, current
  * programmes, how to participate" for both, so that is exactly what ships: the
  * corridor, the four headings its copy will fill, and each marked outstanding.
  * Inventing plausible objectives for a real cross-border program is how a
  * website ends up making a commitment nobody at IBA agreed to.
  *
- * Read by two pages — the Ecosystem band and the flagship corridor page — from
+ * Read by two pages, the Ecosystem band and the flagship corridor page, from
  * here rather than written out on both.
  */
 export const CORRIDORS = [
@@ -295,7 +295,7 @@ export const CORRIDORS = [
 ]
 
 /* ================================================================== */
-/* 6.4 — councils & affiliations                                      */
+/* 6.4, councils & affiliations                                      */
 /* ================================================================== */
 
 export const COUNCILS = [
@@ -305,6 +305,6 @@ export const COUNCILS = [
   'Tech Zero',
 ]
 
-/** The count is CRED_STATS' "Global Affiliations" — see content.js. */
+/** The count is CRED_STATS' "Global Affiliations", see content.js. */
 export const COUNCILS_NOTE =
   'Plus 70+ global affiliations. The Blockchain Governance Council is also where the policy, compliance, taxation and standards work behind IBA’s legal advisory is developed.'

@@ -1,7 +1,7 @@
 /**
- * The page kit — the parts every inner page is built from, in the home page's
+ * The page kit, the parts every inner page is built from, in the home page's
  * theme: hero-width rounded panels on the light grey ground, the gradient
- * eyebrow, Questrial headings, square cards — see brandbook.css.
+ * eyebrow, Questrial headings, square cards, see brandbook.css.
  *
  * Pages hand these components content and nothing else, so the theme lives in
  * one place (the `.pk` block in styles.css) and a page file reads as its copy.
@@ -289,7 +289,7 @@ export const Quote = ({ children, by, photo }) => (
  *
  * ⚠ THERE IS NO BACKEND. Rather than pretend to send, an enquiry form opens
  * the reader's email app with every field already written into a message to
- * IBA — `subject` names the form. A form that cannot work that way (sign-up,
+ * IBA, `subject` names the form. A form that cannot work that way (sign-up,
  * log-in) passes `notice` instead, which is shown on submit and says plainly
  * that it is not live yet.
  *
@@ -307,12 +307,12 @@ export function Form({ fields, submit, subject, consent, notice }) {
     const data = new FormData(e.currentTarget)
     const body = fields
       .filter((f) => f.type !== 'password')
-      .map((f) => `${f.label}: ${data.get(f.name) || '—'}`)
+      .map((f) => `${f.label}: ${data.get(f.name) || 'Not provided'}`)
       .join('\n')
     window.location.href =
       `mailto:${CONTACT.email.label}?subject=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`
-    setStatus('Your email app has opened with these details filled in — press send and the IBA team will reply within two working days.')
+    setStatus('Your email app has opened with these details filled in, press send and the IBA team will reply within two working days.')
   }
 
   return (

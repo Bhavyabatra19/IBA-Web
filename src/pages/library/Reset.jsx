@@ -1,5 +1,5 @@
 /**
- * Password reset request — the screen behind "Forgot password?" on 7.3.
+ * Password reset request, the screen behind "Forgot password?" on 7.3.
  *
  * The email this sends is EMAIL_RESET in library.js, and it is shown on this
  * page rather than only living in a spec: the copy is written, nothing sends it
@@ -20,7 +20,7 @@ export default function Reset() {
     e.preventDefault()
     /* TODO: POST to the reset endpoint, which sends EMAIL_RESET. Do not show a
        "check your inbox" confirmation until something is actually sending. */
-    setNotice('No email was sent — password reset is not connected yet. Email hello@indiablockchainalliance.org and we will reset it by hand.')
+    setNotice('No email was sent, password reset is not connected yet. Email hello@indiablockchainalliance.org and we will reset it by hand.')
   }
 
   return (

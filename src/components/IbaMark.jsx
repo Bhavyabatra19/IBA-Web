@@ -1,7 +1,7 @@
 /**
  * IbaMark.jsx
  * ------------------------------------------------------------------
- * Just the blocks of the IBA lockup — a 2x2 grid of I / chain link / B / A.
+ * Just the blocks of the IBA lockup, a 2x2 grid of I / chain link / B / A.
  *
  * The nav and footer use the supplied bitmap, which is right for a lockup that
  * sits still on a white bar. This is the mark for the one place the lockup has

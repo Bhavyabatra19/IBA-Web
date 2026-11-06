@@ -20,7 +20,7 @@ import * as THREE from 'three'
 import { buildEnvironment } from './env'
 import { buildHeroObject } from './heroArt'
 
-/** Where the camera sits for each object — they are not the same size. */
+/** Where the camera sits for each object, they are not the same size. */
 const FRAMING = {
   services: { z: 7.0, fov: 34, y: 0.1 },
   studio: { z: 7.4, fov: 36, y: 0 },
@@ -65,7 +65,7 @@ export function createHeroScene(canvas, { kind, quality = 'high' } = {}) {
   /**
    * @param {object} R
    * @param {number} R.op    0..1 entrance opacity
-   * @param {number} R.t     seconds — drives the idle drift
+   * @param {number} R.t     seconds, drives the idle drift
    * @param {number} R.scrub 0..1 how far the hero has scrolled away
    */
   function apply(R) {

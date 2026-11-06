@@ -1,5 +1,5 @@
 /**
- * Membership (/membership) — a main nav item (content review, 11-05-2026:
+ * Membership (/membership), a main nav item (content review, 11-05-2026:
  * "membership should be its own section with tiers and benefits, plus a main
  * nav item"). One page for every way to join IBA: membership of the
  * alliance (the library, the directory and more), the three pathways and

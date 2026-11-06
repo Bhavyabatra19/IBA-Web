@@ -1,5 +1,5 @@
 /**
- * Initiatives — one band per programme IBA builds and runs.
+ * Initiatives, one band per programme IBA builds and runs.
  *
  * ⚠ LINKS. The source gives most initiatives "Visit Website" and "LinkedIn"
  * buttons with no destination yet. Only real destinations are shown: the

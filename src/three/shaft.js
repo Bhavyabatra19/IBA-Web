@@ -4,8 +4,8 @@
  * The diagonal shaft of red light the hero sits in.
  *
  * It was a CSS gradient on the band, and it could not stay one. The hero's
- * background paints OVER the canvas — the renderer clears to opaque black, so
- * nothing beneath the stage is ever visible — which meant the light lay in
+ * background paints OVER the canvas, the renderer clears to opaque black, so
+ * nothing beneath the stage is ever visible, which meant the light lay in
  * front of the coin like haze on a lens instead of behind it like a lamp in a
  * room. The only way for the object to be lit from behind is for the light to
  * be in the scene with it, so here it is: one plane, well back, additive.
@@ -38,7 +38,7 @@ const lerp = (a, b, t) => a + (b - a) * t
  *
  * The two scales are the whole thing, and getting the balance between them
  * backwards is what went wrong twice. A broad band at a middling alpha floods
- * the frame — it reads as a red picture. A narrow band alone reads as a wire.
+ * the frame, it reads as a red picture. A narrow band alone reads as a wire.
  * What light actually does is almost nothing across most of its spread, then a
  * climb over the last few percent to a core that is bright and thin.
  *
@@ -53,10 +53,10 @@ const lerp = (a, b, t) => a + (b - a) * t
  * 0.22 in the LINEAR buffer, and this texture is sRGB: 0.5 here lands just under
  * that once converted, so the line is bright but barely feeds the bloom. Above
  * it the pass takes over, spreads the core into a halo and multiplies it by a
- * strength that climbs to 0.78 by the end of the sequence — which is how a
+ * strength that climbs to 0.78 by the end of the sequence, which is how a
  * hairline turns into a floodlight.
  *
- * The beam has a red of its own — #7e3139 — and it is deliberately NOT the
+ * The beam has a red of its own, #7e3139, and it is deliberately NOT the
  * brand's --red. This is light in a room rather than a mark on a page: it wants
  * to be muted and to sit back, where the brand red has to carry a button and a
  * link and hold its own against white type. Nothing else on the site uses this
@@ -75,8 +75,8 @@ function paintBands(ctx, size) {
     const core = CORE * bell(d, CORE_W)
     const a = Math.min(1, core + HAZE * bell(d, HAZE_W))
     /* 0 out in the haze, 1 at the centre of the line. Both ends are #7e3139 at
-       two lightnesses rather than two colours — taken down for the haze, up for
-       the core — so the beam is one hue the whole way through it. */
+       two lightnesses rather than two colours, taken down for the haze, up for
+       the core, so the beam is one hue the whole way through it. */
     const heat = core / CORE
     const r = Math.round(lerp(88, 152, heat))
     const gr = Math.round(lerp(34, 62, heat))
@@ -91,15 +91,14 @@ function paintBands(ctx, size) {
 /**
  * Along the shaft: lit the whole way, and strongest past the middle.
  *
- * It reaches both edges of the frame rather than fading to nothing inside it —
- * a beam that stops in mid-air is a streak, and the reference runs corner to
+ * It reaches both edges of the frame rather than fading to nothing inside it, * a beam that stops in mid-air is a streak, and the reference runs corner to
  * corner. The asymmetry is what gives it a direction: brightest around three
  * fifths along, easing off toward the far end.
  */
 function fadeEnds(ctx, size) {
   ctx.globalCompositeOperation = 'destination-in'
   const g = ctx.createLinearGradient(0, 0, size, 0)
-  /* Sampled along a curve for the same reason the bands are — a handful of
+  /* Sampled along a curve for the same reason the bands are, a handful of
      stops here would put creases ACROSS the beam, which is the more obvious of
      the two. Peak at 0.62 along, easing to a lit but dimmer pair of ends. */
   for (let i = 0; i <= 60; i++) {
@@ -115,7 +114,7 @@ function fadeEnds(ctx, size) {
 
 function buildTexture() {
   /* 512, not 256. The beam is stretched over most of the frame, so every texel
-     across it covers several screen pixels — and a soft gradient asked to cross
+     across it covers several screen pixels, and a soft gradient asked to cross
      that many pixels in eight-bit colour is where banding comes from. */
   const size = 512
   const canvas = document.createElement('canvas')
@@ -160,14 +159,14 @@ export function buildShaft() {
      The height is what sets the scale of the two falloffs, and it is the number
      to change if the beam wants to be wider or tighter. The frame is about nine
      units tall at this depth, so at 13 the faint haze spreads across most of it
-     and the bright core lands at about four tenths of a unit — a hairline. */
+     and the bright core lands at about four tenths of a unit, a hairline. */
   const geo = new THREE.PlaneGeometry(56, 13)
   const mesh = new THREE.Mesh(geo, mat)
   mesh.position.set(0.5, 0.3, -8)
   /* Positive Z takes +X up the screen: the beam rises to the right. Measured
      off the reference, which climbs about 610px over 1546. */
   mesh.rotation.z = THREE.MathUtils.degToRad(21.5)
-  /* Drawn before the object, and never culled — its bounding sphere is huge and
+  /* Drawn before the object, and never culled, its bounding sphere is huge and
      mostly off-screen, which is exactly the case frustum culling gets wrong. */
   mesh.renderOrder = -1
   mesh.frustumCulled = false

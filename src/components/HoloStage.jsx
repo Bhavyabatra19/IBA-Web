@@ -6,7 +6,7 @@
  * on the pedestal's top (around x 300, y 380 in the 600-wide frame), and its
  * own card labels and icons.
  *
- * Original SVG artwork — sharp at any size, no third-party image. Styles
+ * Original SVG artwork, sharp at any size, no third-party image. Styles
  * and motion in brandbook.css (.lh); reduced motion holds it still.
  */
 

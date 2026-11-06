@@ -1,7 +1,7 @@
 /**
  * The Library (Resources) hero's graphic: the searchable catalogue. An
- * isometric grid of floating resource tiles — articles, videos, reports,
- * webinars — with a silver magnifying glass hovering over it, its lens
+ * isometric grid of floating resource tiles, articles, videos, reports,
+ * webinars, with a silver magnifying glass hovering over it, its lens
  * glowing IBA Red; the tile it has found lifts out of the grid in red.
  *
  * Its own look, not the pedestal stage the Red Club hero stands on.

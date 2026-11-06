@@ -1,14 +1,14 @@
 /**
- * 8.2 — Or reach us directly.
+ * 8.2, Or reach us directly.
  *
  * The left pane of the enquiry modal, and the same block again as a section on
  * the Connect page. Four channels, one availability line, and every value comes
- * from CONTACT in nav.js — which the footer and the closing band also read, so
+ * from CONTACT in nav.js, which the footer and the closing band also read, so
  * a number corrected once is corrected in five places.
  *
  * It exists because a form is the slowest way to reach anyone. Someone who
  * wants to call should not have to scroll past eight fields to find the number,
- * which is also why the mobile layout puts this pane FIRST — see 8.1.
+ * which is also why the mobile layout puts this pane FIRST, see 8.1.
  *
  * The WhatsApp opener carries the page's own topic: the person answering sees
  * where the enquiry came from before they have read a word of it.
@@ -21,14 +21,14 @@ import { AVAILABILITY, waLink } from '../enquiry'
    It is red like the other three now: four channels in a row are one control,
    and the odd one out read as a badge rather than as the fourth of a set. The
    glyph is still the handset-in-a-bubble, so it is still recognised without
-   being read — which was the only thing the green was buying. */
+   being read, which was the only thing the green was buying. */
 
 /**
  * The four channels, drawn once.
  *
  * Exported because the closing band sets the same four out in full at the foot
  * of every page, and the footer repeats them as a row of marks directly under
- * it. The values already came from one place — CONTACT in nav.js — and now the
+ * it. The values already came from one place, CONTACT in nav.js, and now the
  * glyphs and the WhatsApp wording do too, so a mark that changes here changes
  * in all three and none of them can end up showing a different set.
  *
@@ -60,7 +60,7 @@ export const channels = (phrase) => [
     v: CONTACT.whatsapp.label,
     href: waLink(phrase),
     external: true,
-    /* the handset in the speech bubble, drawn rather than fetched — a brand
+    /* the handset in the speech bubble, drawn rather than fetched, a brand
        glyph nobody has to load and nothing can fail to serve */
     icon: (
       <>
@@ -90,7 +90,7 @@ export const channels = (phrase) => [
  * @param {string} [p.heading] the H2. The modal has its own heading above this
  *   pane, so there it is a quieter label; the Connect page gives it the brief's
  *   "Or reach us directly" as a real section head.
- * @param {boolean} [p.as] heading level — 'h2' on the page, 'p' in the modal
+ * @param {boolean} [p.as] heading level, 'h2' on the page, 'p' in the modal
  *   where the dialog's own h2 already exists and a second one would break the
  *   heading order a screen reader navigates by.
  */
@@ -157,7 +157,7 @@ export default function ReachOut({ phrase, heading = 'Or reach us directly', as 
               {/* The number is a link on a phone and plain text on a desktop,
                   where nothing would happen if it were tapped. The stylesheet
                   turns the pointer off above the breakpoint rather than the
-                  markup changing — the href stays, so it is still copyable and
+                  markup changing, the href stays, so it is still copyable and
                   still announced. */}
               <span className="reach__v">{c.v}</span>
             </a>

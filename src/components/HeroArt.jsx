@@ -6,17 +6,15 @@
  * Same contract as three/Stage.jsx: the scene module is imported dynamically so
  * three is never on the critical path, and the object is an addition to a hero
  * that already reads without it. If three never lands, if WebGL is missing, or
- * if the context is lost, the hero is exactly the hero the page had before —
- * there is nothing to fall back to because nothing was taken away.
+ * if the context is lost, the hero is exactly the hero the page had before, * there is nothing to fall back to because nothing was taken away.
  *
  * Reduced motion still gets the object, held still. The preference is about
  * movement, not about pictures, and a silent metal object is not what it is
- * asking us to remove — so the scene is built, one frame is drawn at a resolved
+ * asking us to remove, so the scene is built, one frame is drawn at a resolved
  * state, and no ticker is ever started.
  *
  * Below the layout's own breakpoint the hero copy takes the full width and
- * there is no column left to draw into, so the canvas is not mounted at all —
- * see the media query on `.heroArt`. It is checked here too, because a hidden
+ * there is no column left to draw into, so the canvas is not mounted at all, * see the media query on `.heroArt`. It is checked here too, because a hidden
  * canvas that still holds a WebGL context and renders every frame is the
  * expensive kind of invisible.
  */
@@ -64,7 +62,7 @@ export default function HeroArt({ kind }) {
     let visible = false
     let started = 0
 
-    /* What the entrance writes and the frame reads — no scroll position is read
+    /* What the entrance writes and the frame reads, no scroll position is read
        inside the scene, and no animation state is kept there. */
     const R = { op: 0, t: 0, scrub: 0 }
 
@@ -83,7 +81,7 @@ export default function HeroArt({ kind }) {
         .then(({ createHeroScene }) => {
           if (disposed) return
           scene = createHeroScene(canvas, { kind, quality: pickQuality() })
-          /* an unknown kind builds nothing — leave the hero as it was */
+          /* an unknown kind builds nothing, leave the hero as it was */
           if (!scene) return
 
           const size = () => {
@@ -108,8 +106,7 @@ export default function HeroArt({ kind }) {
           gsap.to(R, { op: 1, duration: 1.2, ease: 'power2.out' })
 
           /* How far the hero has scrolled away, 0..1. Each object spends it
-             differently — the stack spreads, the network opens, the shelf fans
-             — so the reader's own scrolling resolves the object rather than
+             differently, the stack spreads, the network opens, the shelf fans, so the reader's own scrolling resolves the object rather than
              merely sliding it up the screen. */
           st = ScrollTrigger.create({
             trigger: root,
@@ -139,7 +136,7 @@ export default function HeroArt({ kind }) {
             scene.render()
             if (!painted) {
               painted = true
-              /* only once a real frame exists — fading in on `then` would show
+              /* only once a real frame exists, fading in on `then` would show
                  an empty box for a frame or two */
               root.dataset.live = 'true'
             }
@@ -155,7 +152,7 @@ export default function HeroArt({ kind }) {
     }
 
     /* Built when the hero is a viewport away. On these pages that is
-       immediately — the hero is the top of the page — but the observer keeps
+       immediately, the hero is the top of the page, but the observer keeps
        the work off the first paint. */
     io = new IntersectionObserver(
       (entries) => {

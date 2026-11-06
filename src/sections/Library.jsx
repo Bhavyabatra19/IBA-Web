@@ -1,10 +1,10 @@
 ﻿/**
- * 2.7 — Library teaser. Light band.
+ * 2.7, Library teaser. Light band.
  *
  * The shelf shown as the thing itself: a window onto the Library, with the four
  * kinds of document in it and the gate along the bottom. These are documents,
- * so showing what is actually on the shelf — and exactly what the account is
- * for — is a stronger reason to make one than a stock image of a screen.
+ * so showing what is actually on the shelf, and exactly what the account is
+ * for, is a stronger reason to make one than a stock image of a screen.
  *
  * And the window is used rather than merely shown: a query types itself into
  * the search field and the rows it lands on light up. What the picture is
@@ -83,7 +83,7 @@ export default function Library() {
          Nothing below this runs under reduced motion, and nothing below it is
          in the markup either: the shelf's resting state is the shelf, and every
          attribute this writes is added by the animation. So the still version
-         is not a degraded one — it is the picture the band shipped with. */
+         is not a degraded one, it is the picture the band shipped with. */
       const field = fieldRef.current
       const query = queryRef.current
       const rows = rowsRef.current
@@ -105,8 +105,7 @@ export default function Library() {
         else delete rows.dataset.found
       }
 
-      /* The caret and the entered-text colour are the field's, not the text's —
-         they say the box is being typed into, which stays true between one
+      /* The caret and the entered-text colour are the field's, not the text's, they say the box is being typed into, which stays true between one
          query being cleared and the next one starting. */
       field.dataset.typing = ''
 
@@ -116,7 +115,7 @@ export default function Library() {
         const n = Math.round(cursor.at)
         query.textContent = n === 0 ? PLACEHOLDER : text.slice(0, n)
         /* the placeholder is not entered text, and must not be coloured as if
-           it were — the one thing the field cannot tell from the text alone */
+           it were, the one thing the field cannot tell from the text alone */
         if (n === 0) query.dataset.empty = ''
         else delete query.dataset.empty
       }
@@ -143,7 +142,7 @@ export default function Library() {
 
          Watched rather than measured. This band sits below the hero's
          five-viewport pin, and a ScrollTrigger created before that pin exists
-         records a position a pin's worth too high — a gate wrong in that
+         records a position a pin's worth too high, a gate wrong in that
          direction never opens, and the window never types. See whileOnScreen. */
       stopWatching = whileOnScreen(el, () => tl.play(), () => tl.pause())
     }, root)
@@ -164,7 +163,7 @@ export default function Library() {
                 <i />
                 <i />
               </span>
-              {/* aria-hidden, so the typing is never announced — it is a
+              {/* aria-hidden, so the typing is never announced, it is a
                   picture of a search, and a live region here would read a
                   half-typed word out four times a minute */}
               <span className="lib__search" aria-hidden="true" ref={fieldRef}>
@@ -205,7 +204,7 @@ export default function Library() {
                 <rect x="3.2" y="7" width="9.6" height="7" rx="2" />
                 <path d="M5.6 7V5.2a2.4 2.4 0 014.8 0V7" strokeLinecap="round" />
               </svg>
-              Free access — sign in to download
+              Free access, sign in to download
             </p>
           </div>
         </div>
@@ -225,7 +224,7 @@ export default function Library() {
           <p className="lede" data-rise>
             An open-source knowledge base of articles, videos, research and policy
             briefs, developed by IBA’s industry experts and advisors for the wider
-            blockchain community — searchable, categorised and free to every
+            blockchain community, searchable, categorised and free to every
             registered member.
           </p>
           {/* the band is the teaser; 7.1 is the page it teases */}

@@ -1,4 +1,4 @@
-/** Privacy Policy — the text as published at iba-web-sd4a.vercel.app/privacy. */
+/** Privacy Policy, the text as published at iba-web-sd4a.vercel.app/privacy. */
 
 import { PageHero, Section, Bullets } from '../../components/Kit'
 import { CONTACT } from '../../nav'

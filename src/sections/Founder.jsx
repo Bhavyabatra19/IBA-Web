@@ -1,7 +1,7 @@
 /**
  * The founder's line. Light band.
  *
- * One quote, set large, with the attribution under it — the book's Quote style
+ * One quote, set large, with the attribution under it, the book's Quote style
  * from section 03: 28/38, a red 4px rule above, and the name and role beneath.
  *
  * It sits directly under the hero because that is where the layout puts it, and

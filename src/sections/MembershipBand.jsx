@@ -1,5 +1,5 @@
 /**
- * Home — membership in brief (by request, 11-06): a black band under the
+ * Home, membership in brief (by request, 11-06): a black band under the
  * Web3 Corridor map with a carousel of the ways to join, each card's "Know
  * more" going to its part of the Membership page (the pathway links open
  * the plans on that pathway's tab). It replaces the longer membership

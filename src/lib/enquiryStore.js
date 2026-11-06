@@ -1,7 +1,7 @@
 /**
  * The enquiry, as one piece of state the whole site can reach.
  *
- * Roughly forty controls open this form — the nav, the closing band on every
+ * Roughly forty controls open this form, the nav, the closing band on every
  * page, and every Book a Call, Request Pricing, Request Prospectus and Partner
  * With Us across ten inner pages. Threading that through React context would
  * mean a provider wrapping the app and every one of those controls consuming
@@ -14,7 +14,7 @@
  *     mounted at the moment it is clicked
  *   · `values`, because 8.1 asks for "field entries persist if reopened in the
  *     same session". They survive closing the modal AND navigating between
- *     pages, which a component's own state cannot — App remounts the page on
+ *     pages, which a component's own state cannot, App remounts the page on
  *     every route change
  *   · `returnTo`, the element focus goes back to on close
  *
@@ -49,7 +49,7 @@ const subscribe = (fn) => {
 
 /** The whole store. Reads are cheap and the object identity only changes on a
     real change, so a component re-renders when something it cares about moved
-    and not on every keystroke — see `remember`. */
+    and not on every keystroke, see `remember`. */
 export const useEnquiry = () => useSyncExternalStore(subscribe, () => state, () => state)
 
 /* ------------------------------------------------------------------ */
@@ -61,7 +61,7 @@ export const useEnquiry = () => useSyncExternalStore(subscribe, () => state, () 
  *
  * replaceState rather than pushState: the modal is a state of the page, not a
  * place. Pushing would make Back close the form instead of leaving the page,
- * which is a trap on the first click of a session — there would be nowhere to
+ * which is a trap on the first click of a session, there would be nowhere to
  * go back TO.
  */
 const writeParam = (on) => {
@@ -94,7 +94,7 @@ export function openEnquiry({ topic, phrase, from } = {}) {
   emit({
     open: true,
     /* A trigger with no topic of its own does not wipe one the reader already
-       chose — reopening from the nav after picking "Legal Advisory" should not
+       chose, reopening from the nav after picking "Legal Advisory" should not
        silently reset the dropdown. */
     topic: topic || state.topic,
     phrase: phrase || state.phrase,
@@ -106,7 +106,7 @@ export function closeEnquiry() {
   emit({ open: false })
   writeParam(false)
   /* Focus goes back where it came from. Deferred a frame so it lands after the
-     modal has unmounted — moving focus to an element while a dialog is still up
+     modal has unmounted, moving focus to an element while a dialog is still up
      is what makes a screen reader announce the dialog again on the way out. */
   const el = returnTo
   returnTo = null
@@ -116,7 +116,7 @@ export function closeEnquiry() {
 /**
  * Keep what has been typed, without re-rendering anything.
  *
- * The fields are uncontrolled — they hold their own text — and this is only the
+ * The fields are uncontrolled, they hold their own text, and this is only the
  * copy that survives a close. So it mutates `values` in place rather than going
  * through emit: a re-render per keystroke would be a re-render of the whole
  * modal for a value nothing on screen is reading.
@@ -154,7 +154,7 @@ export const NO_ENDPOINT = 'no-endpoint'
  *
  * TODO, in this order, because the second is worthless without the first:
  *   1. POST to the enquiry endpoint. Store the submission in the CRM or a
- *      database AS WELL AS sending the mail — 8.5 is explicit that email-only
+ *      database AS WELL AS sending the mail, 8.5 is explicit that email-only
  *      handling loses leads, and it does: a mail that bounces, is filtered or
  *      is deleted leaves no record that anyone ever wrote in.
  *   2. Verify the Turnstile / invisible reCAPTCHA token server-side. The
@@ -167,7 +167,7 @@ export const NO_ENDPOINT = 'no-endpoint'
  */
 export async function submitEnquiry(fields) {
   /* The honeypot: a field no person can see and no person fills in. A bot that
-     filled it is told nothing — it gets the same resolve a person gets, because
+     filled it is told nothing, it gets the same resolve a person gets, because
      an error is feedback and feedback is what lets a bot tune itself. */
   if (fields[HONEYPOT]) return SENT
   /* /api/enquiry emails the enquiry to the IBA inbox (content review,

@@ -2,18 +2,18 @@
  * The Services section, as content.
  *
  * Seven pages' worth of copy, held here rather than typed into seven
- * components — the same reason nav.js holds the IA and content.js holds the
+ * components, the same reason nav.js holds the IA and content.js holds the
  * figures. A page file should say what shape its content takes; this file says
  * what the content is.
  *
  * The RWA page's track record and aggregate are NOT restated here. They are the
  * same numbers the About page publishes, so they are imported from content.js
- * at the point of use — a second copy is how "$5B+" and "USD 993 Million" end
+ * at the point of use, a second copy is how "$5B+" and "USD 993 Million" end
  * up disagreeing across two pages.
  */
 
 /* ================================================================== */
-/* 4.0 — the landing page                                             */
+/* 4.0, the landing page                                             */
 /* ================================================================== */
 
 /**
@@ -22,7 +22,7 @@
  * Education is last and is the odd one out on purpose: the twelve before it are
  * disciplines IBA practises for organisations, and it is the one thing on the
  * bar delivered to people. It is on the bar because the section now carries the
- * Red Club — see EXPERTISE_STUDENTS.
+ * Red Club, see EXPERTISE_STUDENTS.
  */
 export const SERVICE_SPECTRUM = [
   'Policy',
@@ -42,10 +42,10 @@ export const SERVICE_SPECTRUM = [
 
 /**
  * The five, plus Sector Expertise. `wide` is the sixth's band beneath the
- * others — a property of the tile rather than a special case in the page.
+ * others, a property of the tile rather than a special case in the page.
  *
  * `short` is the name with the words that only matter in a sentence taken off,
- * for the hero's rail — six full names on one row set six labels wrapping to
+ * for the hero's rail, six full names on one row set six labels wrapping to
  * three lines each, and the rail is read as a sequence, not as prose.
  */
 export const SERVICES = [
@@ -111,7 +111,7 @@ export const servicePath = (slug) => `/services/${slug}`
  * choose between things that are not alternatives.
  *
  * It carries its own `href` because it is the one item here that does not live
- * under /services — the Red Club has a page in the Education section, and
+ * under /services, the Red Club has a page in the Education section, and
  * pointing at it is better than a second copy of it.
  */
 export const EXPERTISE_STUDENTS = [
@@ -126,13 +126,13 @@ export const EXPERTISE_STUDENTS = [
 ]
 
 /* ================================================================== */
-/* 4.1 — the consulting stack                                         */
+/* 4.1, the consulting stack                                         */
 /* ================================================================== */
 
 export const STACK_CAPABILITIES = [
   {
     name: 'Strategy Assessments',
-    body: 'By assessing your goals, we do in-depth research on the applicability of blockchain technology and its business impact — prioritising your business architecture and potential case studies.',
+    body: 'By assessing your goals, we do in-depth research on the applicability of blockchain technology and its business impact, prioritising your business architecture and potential case studies.',
   },
   {
     name: 'Blockchain Solution Consultancy',
@@ -180,7 +180,7 @@ export const STACK_STEPS = [
   {
     n: '05',
     name: 'Assets & Solutions',
-    body: 'Proprietary software add-ons — including redaction, key management and hardware security modules — give you greater control and customisation.',
+    body: 'Proprietary software add-ons, including redaction, key management and hardware security modules, give you greater control and customisation.',
   },
   {
     n: '06',
@@ -240,7 +240,7 @@ export const STACK_TOOLS = [
 ]
 
 /* ================================================================== */
-/* 4.2 — web3 advisory                                                */
+/* 4.2, web3 advisory                                                */
 /* ================================================================== */
 
 export const WEB3_CAPABILITIES = [
@@ -254,7 +254,7 @@ export const WEB3_CAPABILITIES = [
 
 export const WEB3_OFFERINGS = [
   {
-    name: 'IDO / STO / IEO — Marketing',
+    name: 'IDO / STO / IEO, Marketing',
     items: [
       'Product Validation Analysis',
       'Roadmap & Marketing Strategy',
@@ -269,7 +269,7 @@ export const WEB3_OFFERINGS = [
     ],
   },
   {
-    name: 'IDO / STO / IEO — Technical',
+    name: 'IDO / STO / IEO, Technical',
     items: [
       'Platform and Smart Contract Creation',
       'Coding, Testing and Implementation',
@@ -280,7 +280,7 @@ export const WEB3_OFFERINGS = [
     ],
   },
   {
-    name: 'IDO / STO / IEO — Financial',
+    name: 'IDO / STO / IEO, Financial',
     items: [
       'Book Building and Book Running Services',
       'Escrow Services',
@@ -350,7 +350,7 @@ export const WEB3_PILLARS = [
 ]
 
 /* ================================================================== */
-/* 4.3 — legal advisory                                               */
+/* 4.3, legal advisory                                               */
 /* ================================================================== */
 
 export const LEGAL_SERVICES = [
@@ -371,7 +371,7 @@ export const LEGAL_DISCLAIMER =
   'IBA facilitates access to qualified legal counsel and provides regulatory research and advisory support. Nothing on this page constitutes legal advice or creates an attorney-client relationship. Engagements are subject to a signed scope of work.'
 
 /* ================================================================== */
-/* 4.4 — RWA tokenization                                             */
+/* 4.4, RWA tokenization                                             */
 /* ================================================================== */
 
 export const RWA_LIFECYCLE = [
@@ -384,7 +384,7 @@ export const RWA_LIFECYCLE = [
 ]
 
 /* ================================================================== */
-/* 4.5 — white label solutions                                        */
+/* 4.5, white label solutions                                        */
 /* ================================================================== */
 
 export const WHITE_LABEL = [
@@ -437,7 +437,7 @@ export const WHITE_LABEL = [
 ]
 
 /* ================================================================== */
-/* 4.6 — sector expertise                                             */
+/* 4.6, sector expertise                                             */
 /* ================================================================== */
 
 /**
@@ -558,7 +558,7 @@ export const SECTORS = [
   },
   {
     name: 'Social Media',
-    /* the brief is cut off after "bridge" — the rest of this list is pending */
+    /* the brief is cut off after "bridge", the rest of this list is pending */
     pending: true,
     items: [
       'Blockchain-enabled contracting platforms',

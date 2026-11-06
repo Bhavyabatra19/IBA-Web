@@ -1,7 +1,7 @@
 /**
  * The Red Club hero's graphic: a graduation cap in IBA Red floating over
  * the shared stage (HoloStage), with what the club offers rising around it
- * as floating cards — programmes, labs, projects, placements. Original
+ * as floating cards, programmes, labs, projects, placements. Original
  * artwork in the style of the other inner heroes.
  */
 

@@ -1,5 +1,5 @@
 /**
- * 3.2 and 3.3 — the vision and the mission, as content.
+ * 3.2 and 3.3, the vision and the mission, as content.
  *
  * Kept out of About.jsx because these two are the paragraphs most likely to be
  * rewritten by someone who is not editing a React file, and one of them is
@@ -13,22 +13,22 @@
  * the positioning in the decks, not quoted from an approved vision statement."
  *
  * It ships because a vision section with no vision in it is worse than a draft
- * the page is honest about — but it is the one paragraph on this site written
+ * the page is honest about, but it is the one paragraph on this site written
  * FOR IBA rather than BY IBA, and it is signed as such on the page. Replace the
  * text here and delete `draft` when the approved wording arrives; the note
  * disappears with it.
  */
 export const VISION = {
   statement:
-    'A world where value moves as freely as information — where economies connect on open, verifiable infrastructure, and where the people building it are trained, credentialed and connected regardless of which country they were born in.',
+    'A world where value moves as freely as information, where economies connect on open, verifiable infrastructure, and where the people building it are trained, credentialed and connected regardless of which country they were born in.',
   support:
-    'Blockchain’s promise was never speculation. It was trust without a gatekeeper. IBA exists to make that promise operational — in policy, in enterprise systems, in public infrastructure, and in classrooms.',
+    'Blockchain’s promise was never speculation. It was trust without a gatekeeper. IBA exists to make that promise operational, in policy, in enterprise systems, in public infrastructure, and in classrooms.',
   draft: true,
 }
 
 export const MISSION = {
   statement:
-    'To advance the development, adoption and implementation of blockchain technology across Asia, MENA and beyond — by shaping policy, building capability, connecting economies and holding every initiative to a measurable standard of impact.',
+    'To advance the development, adoption and implementation of blockchain technology across Asia, MENA and beyond, by shaping policy, building capability, connecting economies and holding every initiative to a measurable standard of impact.',
 }
 
 /**
@@ -60,7 +60,7 @@ export const MISSION_PILLARS = [
 ]
 
 /**
- * ⚠ 3.6 asks for a grid of 8–12 advisor cards — "names, photos and one-line
+ * ⚠ 3.6 asks for a grid of 8–12 advisor cards, "names, photos and one-line
  * credentials to be supplied". None have been.
  *
  * So the grid is not built with eight invented advisors, or eight grey
@@ -71,4 +71,4 @@ export const MISSION_PILLARS = [
  */
 export const ADVISORS = []
 export const ADVISORS_PENDING =
-  'Advisor profiles — names, photographs and credentials — to be supplied.'
+  'Advisor profiles, names, photographs and credentials, to be supplied.'

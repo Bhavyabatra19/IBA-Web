@@ -1,4 +1,4 @@
-/** About — who we are, vision, mission, impact, and the founder. */
+/** About, who we are, vision, mission, impact, and the founder. */
 
 import { PageHero, Section, Stats, Cards } from '../../components/Kit'
 import { CONTACT } from '../../nav'
@@ -119,12 +119,26 @@ export default function About() {
       <Section id="team" eyebrow="Founder" title="Welcome to IBA">
         <FounderLetter
           linkedin={CONTACT.linkedin.href}
-          lead="I spent over two decades inside the world’s financial system before I chose to help rebuild it."
+          lead="Every great nation is defined by the infrastructure it chooses to build."
+          /* condensed from the founder's message (11-06); the complete note
+             opens from "Read the full note" */
           note={[
-            'Twenty-five years in banking taught me something the industry rarely says out loud: trust was never actually free.',
-            'I founded the India Blockchain Alliance because I believe that era is ending — and India will not just witness that ending, it will architect what comes next.',
-            'This Alliance exists for one reason: to make sure India does not adopt the future of finance — it defines it. We are not here to speculate. We are here to structure.',
-            'The rails of the next financial system are being laid right now. I intend for them to run through India — and I invite you to help lay them with us.',
+            'A century ago, it was railways and ports. A generation ago, it was telecom and software. Today, it is trust itself: how value moves, how ownership is proven, and how a promise made in Mumbai is honoured in Nairobi, Dubai or Frankfurt.',
+            'India has already shown the world what digital public infrastructure can achieve at scale. The next chapter is being written now, and India must not merely participate in it. India must author it. That is why the India Blockchain Alliance exists.',
+            'The Alliance brings together founders, regulators, enterprises and investors so that innovation and integrity move forward together, across a corridor connecting Africa, the UAE, India and Europe.',
+            'The future will not be handed to us. It will be built, block by block, partnership by partnership. Let us build it together.',
+          ]}
+          full={[
+            'A century ago, it was railways and ports. A generation ago, it was telecom and software. Today, it is trust itself: how value moves, how ownership is proven, and how a promise made in Mumbai is honoured in Nairobi, Dubai or Frankfurt without friction or doubt.',
+            'That is the infrastructure India must now lead. And that is why the India Blockchain Alliance exists.',
+            'India has already shown the world what digital public infrastructure can achieve at scale. The next chapter is being written now, and India must not merely participate in it. India must author it.',
+            'The last digital revolution connected people. The next one will connect value, and India will not wait to be invited.',
+            'Real-world assets, from land and energy to carbon credits and royalties, are moving onto programmable rails. Capital that was once locked and reserved for a privileged few is becoming accessible, transparent and global. This is a rewiring of how economies work.',
+            'But technology alone does not build a future. People, institutions and trust do. The Alliance brings together founders, regulators, enterprises and investors so that innovation and integrity move forward together. Regulation is not the enemy of innovation. Clarity is its fuel.',
+            'Our vision reaches beyond borders. Across the corridor connecting Africa, the UAE, India and Europe, we see capital, ideas and opportunity flowing as freely as information does today.',
+            "To the builders I say, build boldly, and build responsibly. To the institutions, help lead this transformation, don't just witness it. And to the policymakers: give us clear frameworks, and India's talent will do the rest. And to every young Indian who feels too far from the centre of the world to change it: the centre has moved. It is wherever you choose to build.",
+            "India's greatest export in the coming decade will be trust, engineered at scale. The future will not be handed to us. It will be built, block by block, partnership by partnership.",
+            'Let us build it together.',
           ]}
         />
       </Section>

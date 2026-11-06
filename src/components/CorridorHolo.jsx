@@ -2,7 +2,7 @@
  * The Web3 Corridor hero's graphic: a dark glossy globe with silver land,
  * the corridor's five regions pinned at their real coordinates, and the
  * corridor routes arcing between them in IBA Red, with light travelling
- * along each — the UAE as the hub, as the corridor copy describes it.
+ * along each, the UAE as the hub, as the corridor copy describes it.
  *
  * Land is Natural Earth (data/land-110m.json) in the same orthographic
  * projection as the other globes, turned so all five regions face the
@@ -57,7 +57,7 @@ function landPath() {
   return d
 }
 
-/* the five regions — the same places as data/presence.json */
+/* the five regions, the same places as data/presence.json */
 const PLACES = {
   INDIA: { lat: 22, lon: 79, dx: 14, dy: 18, anchor: 'start' },
   UAE: { lat: 24, lon: 54, dx: 12, dy: -14, anchor: 'start' },

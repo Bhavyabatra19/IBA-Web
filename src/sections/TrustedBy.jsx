@@ -1,20 +1,20 @@
 /**
- * 2.5 — Trusted By. Light band.
+ * 2.5, Trusted By. Light band.
  *
  * ⚠ THESE ARE TYPESET WORDMARKS, NOT OFFICIAL LOGOS.
  * Each name renders as text. Before this goes live: confirm every organisation
  * has agreed to be listed, then swap each item for a licensed asset. Do not
- * substitute scraped logo files — that is a trademark problem, not a design one.
+ * substitute scraped logo files, that is a trademark problem, not a design one.
  *
  * The claim and the line that qualifies it share the top row, and the two
  * marquees run under them. Which row is ministries and which is industry is
- * carried by the rows' aria-labels alone — it is deliberately not printed, so
+ * carried by the rows' aria-labels alone, it is deliberately not printed, so
  * the two strips read as one wall of names rather than as two lists.
  *
  * The track holds the list twice and translates -50%, which is what makes the
  * loop seamless; duplicating in markup rather than cloning in JS keeps it
  * working with no script at all. The spacing between items is a margin on the
- * items and not a gap on the track, and that is load-bearing — see .marquee__row.
+ * items and not a gap on the track, and that is load-bearing, see .marquee__row.
  */
 
 import { useLayoutEffect, useRef } from 'react'

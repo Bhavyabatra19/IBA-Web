@@ -1,5 +1,5 @@
 /**
- * Information architecture — one source of truth for the nav and the footer.
+ * Information architecture, one source of truth for the nav and the footer.
  *
  * The nav and the footer are the same map of the site shown at two different
  * altitudes, so they are generated from one structure rather than written
@@ -7,12 +7,12 @@
  * header and missing from the footer.
  *
  * `href` is where the item goes TODAY. Most destinations are not pages yet, so
- * they resolve to the section currently carrying their content — when one
+ * they resolve to the section currently carrying their content, when one
  * becomes a real page, only the href here changes.
  *
  * Every href is page-qualified: `/#library`, never `#library`. A bare hash
  * means "somewhere on the page you are already on", which is silently wrong
- * from /about — the reader clicks Library and nothing happens.
+ * from /about, the reader clicks Library and nothing happens.
  *
  * ---------------------------------------------------------------------------
  * The shape is six tabs sorted by what a visitor is trying to do rather than
@@ -21,25 +21,25 @@
  *   Home        the way back, said out loud. The lockup has always gone here
  *               and still does; a named tab beside it is the version people
  *               look for rather than the one they have to know about
- *   About       who are you and are you real — vision, mission, footprint,
+ *   About       who are you and are you real, vision, mission, footprint,
  *               people, numbers
  *   Expertise   everything IBA sells or delivers, split by BUYER rather than by
  *               feature: enterprises and governments on one side, institutions
  *               and students on the other. Red Club sits here because it is a
  *               programme people enrol in
- *   Ecosystem   everything IBA convenes rather than sells — initiatives,
+ *   Ecosystem   everything IBA convenes rather than sells, initiatives,
  *               partner products, organisations, councils, and the people in
  *               them
  *   Resources   the library: free, searchable, and the main reason to make an
  *               account
  *   Web3        the flagship cross-border programme, pulled out of Ecosystem
- *   Corridor    deliberately — one level down would waste it. It is the one
+ *   Corridor    deliberately, one level down would waste it. It is the one
  *               highlighted tab, and it carries `pill` to say so
  *
  * A tab has either `items` (a flat list), `groups` (lists under headings), or
  * neither. Only Expertise is grouped, and it has to be: the split by audience
  * IS the information, and a flat list of seven would hide it. Home has neither,
- * deliberately — a dropdown under it would list the home page's own sections,
+ * deliberately, a dropdown under it would list the home page's own sections,
  * which are the five tabs standing next to it.
  */
 
@@ -67,7 +67,7 @@ export const PENDING = {
  * "Member Login", not "Sign In": IBA is an alliance of 800+ members, and the
  * label should say what the account actually is. It lives here because the
  * brief asks for it to be identical in the nav, the footer, the modal heading,
- * the transactional emails and the empty states — and five copies of a word are
+ * the transactional emails and the empty states, and five copies of a word are
  * five chances for one of them to drift. Declared above NAV, which uses it.
  */
 export const MEMBER_LOGIN = 'Member Login'
@@ -262,7 +262,7 @@ export const tabItems = (tab) =>
  * rk@, connect@ and iba@indiablockchainalliance.org, and +91 9004140003. If
  * any is still monitored, it needs a forward.
  *
- * The WhatsApp number follows the phone, as it always has — section 8.2's open
+ * The WhatsApp number follows the phone, as it always has, section 8.2's open
  * question about whether IBA wants a separate WhatsApp Business line is still
  * open, and now applies to the new number.
  */
@@ -280,14 +280,14 @@ export const CONTACT = {
    * is intended: "confirm whether +91 9004140003 is the WhatsApp number, or
    * whether IBA wants a separate WhatsApp Business line for enquiries."
    *
-   * If a Business line is opened, change `number` here and nothing else — the
+   * If a Business line is opened, change `number` here and nothing else, the
    * modal, the footer and the closing band all build their links from it. It is
    * digits only, with the country code and no punctuation, because that is the
    * only form wa.me accepts.
    */
   whatsapp: { label: '+91 8420045940', number: '918420045940' },
   /**
-   * ⚠ THIS IS A PERSONAL PROFILE, not a company page — /in/ rather than
+   * ⚠ THIS IS A PERSONAL PROFILE, not a company page, /in/ rather than
    * /company/. It is the value section 8.2 supplies, so it is the value used;
    * but the closing band and the footer both label this link "India Blockchain
    * Alliance", which is an organisation. Confirm which of the two IBA wants
@@ -308,7 +308,7 @@ export const CONTACT = {
  *
  *   Key Partners                     the Ecosystem page's organisations list
  *   Core Dimensions                  how corridors work, on /corridor
- *   Corridor Forum                   /corridor — the forum has no section yet
+ *   Corridor Forum                   /corridor, the forum has no section yet
  *   Newsletter signup                an email, until a list provider is wired
  *                                    up; a form that pretended to subscribe
  *                                    would be worse than a plain link

@@ -1,20 +1,20 @@
 /**
- * 9 — Titles and descriptions, one per route.
+ * 9, Titles and descriptions, one per route.
  *
  * This is a single-page app: the server sends one index.html to every URL, and
  * without this every page on the site would share that file's one title. So the
  * table is keyed by the exact path in PAGES (App.jsx) and applied on every route
- * change — see lib/seo.js.
+ * change, see lib/seo.js.
  *
  * ⚠ THE TABLE MUST COVER EVERY ROUTE IN PAGES. Two pages sharing a title is the
  * duplicate-title problem this section exists to prevent, and the silent way to
  * cause it is to add a route and not add a row here. App.jsx warns in the
- * console during development when the two lists disagree — it is the only place
+ * console during development when the two lists disagree, it is the only place
  * that can, since it is the file that owns PAGES.
  *
  * `brief: true` marks the ten the client supplied, word for word. The rest are
- * written to the same pattern — `Name | what it is`, then a sentence that says
- * what is actually on the page — because the site has twenty routes and the
+ * written to the same pattern, `Name | what it is`, then a sentence that says
+ * what is actually on the page, because the site has twenty routes and the
  * brief covers ten of them.
  *
  * ---------------------------------------------------------------------------
@@ -35,7 +35,7 @@
 import { FACTS, REGIONS_LINE } from './data/facts'
 
 /* No brand suffix is appended anywhere. Every title below already names IBA or
-   the Alliance, which is the brief's own pattern — appending one would give
+   the Alliance, which is the brief's own pattern, appending one would give
    half the pages the word twice. */
 export const SITE_NAME = 'India Blockchain Alliance'
 
@@ -43,7 +43,7 @@ export const SITE_NAME = 'India Blockchain Alliance'
  * The default, and what an unknown path gets.
  *
  * An unknown path renders the home page (see PAGES) rather than a 404, so it
- * gets the home page's title — and `noindex`, because a URL that does not exist
+ * gets the home page's title, and `noindex`, because a URL that does not exist
  * should not collect search results under a title that says it does. When there
  * is a real 404 page, this becomes its row.
  */
@@ -66,7 +66,7 @@ export const SEO = {
     brief: true,
     title: 'About IBA | Vision, Mission & Global Presence',
     description:
-      `Who we are, what we're building, and where we operate — across ${FACTS.countries.text} countries, ${FACTS.affiliations.text} affiliations and 16+ industry verticals.`,
+      `Who we are, what we're building, and where we operate, across ${FACTS.countries.text} countries, ${FACTS.affiliations.text} affiliations and 16+ industry verticals.`,
   },
   '/library': {
     brief: true,
@@ -85,7 +85,7 @@ export const SEO = {
   '/expertise': {
     title: 'Expertise | Web3 Solution Advisory and Consulting Stack | IBA',
     description:
-      'Tokenization; standards, frameworks and compliance; stablecoin structuring; and advisory and global market expansion — from ‘Should we?’ to ‘It’s live, governed, and ready to scale.’',
+      'Tokenization; standards, frameworks and compliance; stablecoin structuring; and advisory and global market expansion: from ‘Should we?’ to ‘It’s live, governed, and ready to scale.’',
   },
   '/tokenization': {
     title: 'Tokenization | Turn Real-World Assets into Market Opportunities | IBA',
@@ -138,7 +138,7 @@ export const SEO = {
  * ⚠ SUPPLIED BUT HOMELESS.
  *
  * The brief gives Initiatives a title and a description, and there is no
- * initiatives page — the four are a section of /about, and nav.js points every
+ * initiatives page, the four are a section of /about, and nav.js points every
  * initiative link at /about#initiatives. A title cannot be set for a fragment,
  * so this pair is parked here rather than dropped: the moment Initiatives
  * becomes a route, this becomes its row.
@@ -148,7 +148,7 @@ export const AWAITING_ROUTE = {
     brief: true,
     title: 'IBA Initiatives | Tech4Good, Green Chain Protocol, Verifyble & Red Club',
     description:
-      'Four programmes built and run by the India Blockchain Alliance — impact, green finance, on-chain credentialing and talent.',
+      'Four programmes built and run by the India Blockchain Alliance, impact, green finance, on-chain credentialing and talent.',
   },
 }
 

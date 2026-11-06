@@ -9,7 +9,7 @@
  * and a second environment map, for a picture the viewer reads as continuous.
  *
  * `apply(rig)` is the only way anything moves. It takes the plain object the
- * timelines in rig.js write to and copies it onto the scene — no scroll
+ * timelines in rig.js write to and copies it onto the scene, no scroll
  * position is read here, and no animation state is stored here.
  */
 
@@ -24,7 +24,7 @@ import { buildEnvironment } from './env'
 import { buildCoin } from './coin'
 import { buildCore } from './core'
 import { buildShaft } from './shaft'
-/* ./matter — the fragment and the shards — is no longer imported. The sequence
+/* ./matter, the fragment and the shards, is no longer imported. The sequence
    opens on the coin now, so nothing ever showed them; built anyway they were a
    subdivided icosahedron and a 190-instance mesh uploaded to the GPU on the
    page that can least afford it. The file is kept, and rig.js says why. */
@@ -34,7 +34,7 @@ const SPLIT_D = 1.05
 /**
  * The split at which the cut faces start being drawn.
  *
- * At 0.004 the halves are 0.008 units apart — under a pixel at this camera
+ * At 0.004 the halves are 0.008 units apart, under a pixel at this camera
  * distance, so the faces appear on the frame the gap between them becomes
  * something a reader could see through. Below it they are hidden, because a
  * plane seen exactly edge-on is not a picture of anything: see the note on the
@@ -113,7 +113,7 @@ export function createScene(canvas, { quality = 'high' } = {}) {
   const pointer = { x: 0, y: 0 }
 
   function apply(R) {
-    /* camera — a real dolly, plus a restrained pointer parallax so the frame
+    /* camera, a real dolly, plus a restrained pointer parallax so the frame
        is never completely dead while the reader is not scrolling */
     camera.position.set(R.cam.x + pointer.x * 0.34, R.cam.y + pointer.y * 0.24, R.cam.z)
     if (camera.fov !== R.cam.fov) {

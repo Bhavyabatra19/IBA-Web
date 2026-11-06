@@ -1,7 +1,7 @@
 ﻿/**
  * ImpactSlab.jsx
  * ------------------------------------------------------------------
- * One solid slab over three flat planes falling away beneath it — the drawing
+ * One solid slab over three flat planes falling away beneath it, the drawing
  * that sits in the Impact panel, on the home page and again on /about.
  *
  * The slab is the realised thing and the planes are what it was resolved from,
@@ -9,7 +9,7 @@
  * their alpha, so the stack darkens toward the middle on its own rather than
  * needing a shadow drawn under it.
  *
- * Strictly red / black / white — the reference's second hue on the right face
+ * Strictly red / black / white, the reference's second hue on the right face
  * is taken here as a drop in lightness instead, which is the palette's rule.
  *
  * The component owns its own animation rather than leaving it to whichever
@@ -36,7 +36,7 @@ export default function ImpactSlab() {
       /* ---- the drawing assembles, then breathes ----
          The planes rise into place and the slab descends onto them, which is
          the same reading as the picture: measurement settling into a result.
-         Once landed, the stack drifts — the slab up, the planes down, so the
+         Once landed, the stack drifts, the slab up, the planes down, so the
          gaps open and close rather than the whole thing sliding as a block. */
       gsap
         .timeline({
@@ -48,7 +48,7 @@ export default function ImpactSlab() {
 
       /* Paused off screen. An infinite tween left running behind the viewport
          is work the reader never sees. Built fresh per tween rather than
-         sharing one object — GSAP writes back onto a scrollTrigger config. */
+         sharing one object, GSAP writes back onto a scrollTrigger config. */
       const whileOnScreen = () => ({
         trigger: el,
         start: 'top 96%',

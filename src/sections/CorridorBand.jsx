@@ -1,5 +1,5 @@
 /**
- * Flagship programme — the Web3 Corridor, as a left-aligned dark panel.
+ * Flagship programme, the Web3 Corridor, as a left-aligned dark panel.
  *
  * Follows the impact band, in the same frame (hero width, same corner), with
  * its own ground. The copy keeps to the left; the right holds a dotted world

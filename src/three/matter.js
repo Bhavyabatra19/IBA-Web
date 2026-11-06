@@ -2,7 +2,7 @@
  * matter.js
  * ------------------------------------------------------------------
  * ⚠ NOT IN USE. The hero opens on the coin now, so the two states this file
- * draws — the fragment and the shards — were removed from the storyboard and
+ * draws, the fragment and the shards, were removed from the storyboard and
  * scene.js no longer imports it. Nothing here runs and nothing here ships.
  *
  * It is kept rather than deleted because this project is not under version
@@ -13,7 +13,7 @@
  * The first two states: the raw fragment, and the pieces that carry it into
  * a disc.
  *
- * The shards do not appear from nowhere — every one of them starts at a point
+ * The shards do not appear from nowhere, every one of them starts at a point
  * ON the fragment's surface and ends at a point on the coin's silhouette. The
  * fragment then fades while they are already in flight, so the eye reads one
  * object coming apart rather than two objects swapping places.
@@ -35,7 +35,7 @@ const rand = (i, salt = 0) => {
 /* the primitive fragment                                              */
 /* ------------------------------------------------------------------ */
 
-/** Low-frequency displacement along the normal — cast metal, not a sphere. */
+/** Low-frequency displacement along the normal, cast metal, not a sphere. */
 function roughen(geo, amp, freq) {
   const p = geo.attributes.position
   const n = geo.attributes.normal

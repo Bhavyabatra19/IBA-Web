@@ -1,5 +1,5 @@
 /**
- * 3.4 — Global Presence.
+ * 3.4, Global Presence.
  *
  * The map is an ENHANCEMENT and the list underneath is the information. That is
  * the brief's own rule and it decides the whole component: every country is in
@@ -7,7 +7,7 @@
  * exists, and whether or not a reader can see it. Nothing is only on the map.
  *
  * ---------------------------------------------------------------------------
- * DATA. One JSON config — data/presence.json — with the schema the brief sets
+ * DATA. One JSON config, data/presence.json, with the schema the brief sets
  * out: country, ISO code, region, presence type, count. Nothing is hardcoded
  * into the drawing, so the nine countries still to be supplied are a data edit
  * and not a component change.
@@ -16,24 +16,23 @@
  *   iso2      ISO 3166-1 alpha-2, or null for an entry that is not one country
  *             ("LATAM markets" is a region reached through a corridor)
  *   region    one of regionOrder, which is also the order the list is grouped in
- *   lat, lon  where the marker goes. Real coordinates — see WorldMap
+ *   lat, lon  where the marker goes. Real coordinates, see WorldMap
  *   presence  any of: Headquarters · Members · Advisors · Affiliate ·
  *             Active Programme · Corridor
- *   count     a number when one is known, null otherwise — and null RENDERS
+ *   count     a number when one is known, null otherwise, and null RENDERS
  *             NOTHING rather than a zero
  *   note      one line of context, optional
  *
  * ⚠ FIVE OF FOURTEEN. `total` says 14 and the file lists the five the source
  * decks evidence. The section says so on the page rather than quietly showing
- * five and letting the headline claim fourteen — a map with nine countries
+ * five and letting the headline claim fourteen, a map with nine countries
  * missing is worse than a map that admits it.
  *
  * ---------------------------------------------------------------------------
  * ⚠ ONE DEVIATION FROM THE SPEC, and it is deliberate.
  *
  * The brief asks for active countries FILLED red. Filling a country needs that
- * country's boundary polygon, and this map is drawn from continent outlines —
- * there are no per-country shapes in the project, and adding them means a
+ * country's boundary polygon, and this map is drawn from continent outlines, * there are no per-country shapes in the project, and adding them means a
  * TopoJSON boundary dataset and the loader for it. Two reasons that is not the
  * right trade today: nine of the fourteen countries are unknown, so most of the
  * fill would be missing anyway; and the brief's own Markers row asks for a dot
@@ -67,9 +66,9 @@ const byRegion = REGIONS.map((region) => ({
 })).filter((g) => g.items.length > 0)
 
 export default function GlobalPresence() {
-  /* Hovered or focused — what the tooltip is showing. */
+  /* Hovered or focused, what the tooltip is showing. */
   const [active, setActive] = useState(null)
-  /* Clicked — what the list below is filtered to. The brief marks this
+  /* Clicked, what the list below is filtered to. The brief marks this
      optional; it is here because with five entries the filter is the only thing
      that makes clicking a marker do anything, and a marker that looks pressable
      and is not is worse than one that is plainly decorative. */
@@ -88,7 +87,7 @@ export default function GlobalPresence() {
           <p className="eyebrow" data-rise>
             Global Presence
           </p>
-          {/* an h2, not the h1 the brief gives it — the page already has one,
+          {/* an h2, not the h1 the brief gives it, the page already has one,
               and two would leave a screen reader without a single title */}
           <h2 className="h2 display" data-clip>
             <span className="line">
@@ -101,7 +100,7 @@ export default function GlobalPresence() {
             </span>
           </h2>
           <p className="gp__intro" data-rise>
-            IBA operates where policy, capital and code meet — with members, advisors,
+            IBA operates where policy, capital and code meet, with members, advisors,
             affiliations and active programmes across Asia, MENA, Europe, Africa and
             the Americas.
           </p>
@@ -133,7 +132,7 @@ export default function GlobalPresence() {
                       onClick={() => setOnly(only === c.country ? null : c.country)}
                     >
                       <span className="sr-only">
-                        {c.country} — {c.presence.join(', ')}
+                        {c.country}, {c.presence.join(', ')}
                       </span>
                     </button>
 
@@ -165,7 +164,7 @@ export default function GlobalPresence() {
             <h3 className="gp__listH">Where we are</h3>
             {only && (
               <button type="button" className="gp__clear" onClick={() => setOnly(null)}>
-                Showing {only} — show all
+                Showing {only}, show all
               </button>
             )}
           </div>

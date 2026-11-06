@@ -1,7 +1,7 @@
 /**
  * The Expertise hero's graphic, after the reference the client supplied: a
  * dark, glossy globe with silver land, turning slowly inside thin orbit
- * rings — one in IBA Red with a dot riding it — and three frosted icon
+ * rings, one in IBA Red with a dot riding it, and three frosted icon
  * buttons in front (advise → / tokenize ⇄ / connect ∞).
  *
  * Same projection as CorridorGlobe (Natural Earth land, orthographic, far
@@ -53,7 +53,7 @@ function landPath(lon0) {
 const ring = (cx, cy, rx, ry) =>
   `M${cx - rx} ${cy}a${rx} ${ry} 0 1 0 ${rx * 2} 0a${rx} ${ry} 0 1 0 ${-rx * 2} 0`
 
-/* The rings as the reference draws them — not centred on the globe, but
+/* The rings as the reference draws them, not centred on the globe, but
    orbits seen in perspective, all tilted up to the right:
    [cx, cy, rx, ry, rotation, red] */
 const RINGS = [

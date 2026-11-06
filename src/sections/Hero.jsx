@@ -1,5 +1,5 @@
 /**
- * 2.1 — Hero. Black band crossed by a single red light beam.
+ * 2.1, Hero. Black band crossed by a single red light beam.
  *
  * No pin, no scrub. Under the copy, glass coins travel an arch across the
  * bottom of the panel, tumbling as they go; the second half of the headline
@@ -13,7 +13,7 @@ import { Go } from './service/ServiceBlocks'
 /**
  * The coins: the client's eight real-world-asset coins, from their own
  * transparent render (public/images/hero-rwa-coins), left to right as they sat
- * in it. Each is that render's pixels — colour and alpha — split apart where
+ * in it. Each is that render's pixels, colour and alpha, split apart where
  * the coins touched; nothing else was changed. Agriculture and Green Assets
  * overlapped at one point of their rims, so Green Assets (in front) keeps its
  * whole rim and Agriculture loses only the few pixels of it that lay behind. The
@@ -49,17 +49,17 @@ const DWELL = 3200
 const TRAVEL = 16
 
 /**
- * The arch, measured on resize (never per frame — a layout read after the
+ * The arch, measured on resize (never per frame, a layout read after the
  * transform writes would force a style recalc every frame).
  *
  * It is the top of a large wheel whose centre sits below the panel, as in
  * the reference: coins rise out of the bottom-left edge, crest under the
  * copy, and sink out of the bottom-right. Solved from two numbers:
- *   A — how high the crest rises above the panel's bottom edge: up to
+ *   A, how high the crest rises above the panel's bottom edge: up to
  *       the button row at the foot of the copy block;
- *   W — the arch's half-width where it meets the bottom edge.
+ *   W, the arch's half-width where it meets the bottom edge.
  * For a circle through those three points, R − c = A and R² − c² = W², so
- * R + c = W² / A — which gives the radius R and the centre's depth c.
+ * R + c = W² / A, which gives the radius R and the centre's depth c.
  */
 function measureArch(el, coins) {
   const w = el.clientWidth
@@ -112,7 +112,7 @@ function placeCoins(coins, g, t) {
     const rx = Math.sin(t * 1.05 + i * 2.3) * 6
     /* Written straight to style rather than through gsap.set: this runs for
        every coin on every frame, and a pre-built string skips GSAP's parsing
-       and caching. Same order GSAP uses — translate, Z, Y, X — after a
+       and caching. Same order GSAP uses, translate, Z, Y, X, after a
        per-coin perspective, so each turns about its own centre. */
     el.style.transform =
       `perspective(1200px) translate3d(${x.toFixed(2)}px,${y.toFixed(2)}px,0)` +
@@ -127,7 +127,7 @@ export default function Hero() {
   const [at, setAt] = useState(0)
   const [coins] = useState(() => (isMobile() ? PHONE_COINS : COINS))
 
-  /* the coin arch — on the GSAP ticker, which already drives Lenis */
+  /* the coin arch, on the GSAP ticker, which already drives Lenis */
   useEffect(() => {
     const el = orbit.current
     if (!el) return
@@ -201,7 +201,7 @@ export default function Hero() {
     fit()
     /* Watch the phrases themselves, not just the heading: the window has a
        fixed inline height, so when the web font lands and the glyphs grow,
-       the heading does not resize — only the phrases do. Measuring once at
+       the heading does not resize, only the phrases do. Measuring once at
        mount left the window sized to the fallback font, cutting descenders. */
     const ro = new ResizeObserver(fit)
     ro.observe(el.parentElement)
@@ -234,12 +234,12 @@ export default function Hero() {
       <div className="hero__inner wrap">
         <div className="hero__bottom">
           <p className="hero__kicker">
-            {/* a block — the chain's unit, and the shape of the IBA mark */}
+            {/* a block, the chain's unit, and the shape of the IBA mark */}
             <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
               <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
             </svg>
-            One Alliance. Infinite Possibilities.
+            Rewriting the Rules with Web3.
           </p>
 
           <h1 className="hero__title">

@@ -1,14 +1,14 @@
 ﻿/**
  * The vocabulary an inner page is written in.
  *
- * Ten pages share one set of parts — a hero, alternating bands, tiles, a
+ * Ten pages share one set of parts, a hero, alternating bands, tiles, a
  * numbered timeline, chips, panels, a closing call to action. Kept in one file
  * because none of them means anything alone: they are the grammar of these
  * sections, not ten independent components.
  *
  * It is named for Services because Services is where it was first needed, and
  * the `svc__` class prefix is the same accident. Education's three pages are
- * built from exactly these parts — a second set under an `edu__` prefix would
+ * built from exactly these parts, a second set under an `edu__` prefix would
  * be the same components with a different spelling, and the two would drift.
  * Only the blocks Education actually introduced (doors, a table, paired rows)
  * carry the `edu__` prefix, because only those are new shapes.
@@ -39,7 +39,7 @@ import Closing from "../Closing";
 /**
  * An internal link that goes through the router rather than reloading the site.
  * Every service page links to other pages, so this is the one place that
- * knows how — the nav's own handler is bound up with closing its panels.
+ * knows how, the nav's own handler is bound up with closing its panels.
  */
 export function Go({ href, className, children, ...rest }) {
   const onClick = (e) => {
@@ -112,7 +112,7 @@ export function Head({ eyebrow, lines, note }) {
  * @param {string} [p.back]   href of the page this one sits under
  * @param {string} [p.backLabel] what that page is called
  * @param {string} [p.art]    a hero object: 'services' | 'studio' | 'library'
- * @param {object} [p.showcase] switches the hero to the centred showcase — see
+ * @param {object} [p.showcase] switches the hero to the centred showcase, see
  *   `ShowcaseHero` for its shape. Only a section's landing page carries one: a
  *   showcase is an entrance, and nine of these ten pages are read by someone who
  *   is already inside.
@@ -139,7 +139,7 @@ export function ServicePage({
          document fires every element off the first trigger, so everything below
          the fold has already played by the time it is scrolled to.
 
-         The closing band is excluded because it runs its own pass — it is a
+         The closing band is excluded because it runs its own pass, it is a
          section of the home page first, and two passes on the same elements
          would tween the same properties from two triggers. */
       gsap.utils.toArray("section:not(.close)", el).forEach((sec) => {
@@ -179,7 +179,7 @@ export function ServicePage({
 
       {/* Every page ends on the ask. It is rendered by the shell rather than
           listed at the foot of twelve page files, so a page cannot be written
-          without one — and so the band, its id and its contact details stay one
+          without one, and so the band, its id and its contact details stay one
           thing across the whole site. */}
       <Closing />
     </div>
@@ -245,19 +245,19 @@ function PageHero({ eyebrow, lines, sub, spectrum, intro, back, backLabel, art }
  * The entrance to a section: the same copy as the standard hero, centred, with
  * the section's own subject drawn under it.
  *
- * Three things carry it, and none of them is an image — there is no photograph
+ * Three things carry it, and none of them is an image, there is no photograph
  * of consulting, and a stock one would be worse than nothing:
  *
  *   · the word itself, set enormous and in outline behind the headline, so the
  *     section names itself at a size the H1 cannot be set at
  *   · a console tilted away from the reader, which is the section's contents
- *     shown as an object — the six services on one rail, in order, over the
+ *     shown as an object, the six services on one rail, in order, over the
  *     disciplines they are practised in
  *   · red light under the console and above the headline, which is the only
  *     colour on the band and is what ties the two halves into one picture
  *
- * The console is real text — the same six names and the same twelve
- * disciplines, marked up as a list — because it is the hero's content, not a
+ * The console is real text, the same six names and the same twelve
+ * disciplines, marked up as a list, because it is the hero's content, not a
  * decoration of it. A reader who cannot see it still reads it, and it is still
  * there when the fonts fail.
  *
@@ -265,13 +265,13 @@ function PageHero({ eyebrow, lines, sub, spectrum, intro, back, backLabel, art }
  * @param {string} [p.ghost]  the outlined word behind the headline
  * @param {object} [p.cta]    `{ label, href }`, under the copy
  * @param {Array}  [p.rail]   one node per entry: `{ n, name, note?, href? }`.
- *   A node with an `href` is a link into the page — the Studio's rail is its
- *   contents list — and one without is a label, which is what the Services rail
+ *   A node with an `href` is a link into the page, the Studio's rail is its
+ *   contents list, and one without is a label, which is what the Services rail
  *   is, since every name on it already has a tile of its own below.
  * @param {string} [p.label]  the console's own caption, above the rail
  * @param {React.ReactNode} [p.visual] a drawing under the copy, in place of the
  *   console. The Web3 Corridor page's subject is a map, and a map is not a list
- *   of six things — so that one page hands its own object in rather than being
+ *   of six things, so that one page hands its own object in rather than being
  *   made to express itself as a rail it does not have.
  */
 export function ShowcaseHero({
@@ -288,7 +288,7 @@ export function ShowcaseHero({
 }) {
   const railRef = useRef(null);
 
-  /* The rail draws itself and then carries a signal along it — both are CSS
+  /* The rail draws itself and then carries a signal along it, both are CSS
      animations, and this only says when they may run.
 
      [data-live] is the switch: it is set here and nowhere else, so under
@@ -326,7 +326,7 @@ export function ShowcaseHero({
       )}
 
       <div className="wrap svc__showCopy">
-        {/* the rounded bracket the headline sits inside — drawn on the copy box
+        {/* the rounded bracket the headline sits inside, drawn on the copy box
             rather than the band, so it holds the type at every width */}
         <span className="svc__showFrame" aria-hidden="true" />
         {eyebrow && (
@@ -393,7 +393,7 @@ export function ShowcaseHero({
                   );
                   return (
                     /* its place in the order, for the stagger the nodes arrive
-                       on — the rail fills the way it is read */
+                       on, the rail fills the way it is read */
                     <li key={r.n} style={{ '--i': i }}>
                       {r.href ? (
                         <Go className="svc__railLink" href={r.href}>
@@ -431,8 +431,8 @@ export function ShowcaseHero({
  *
  * Six cards in a grid make the reader take in six things at once and choose;
  * a rail hands them one at a time and lets them keep going, which is how a
- * list of six is actually read. It scrolls natively — wheel, trackpad, touch,
- * and the arrows — so nothing here reimplements scrolling. All the buttons do
+ * list of six is actually read. It scrolls natively, wheel, trackpad, touch,
+ * and the arrows, so nothing here reimplements scrolling. All the buttons do
  * is move it by exactly one card.
  *
  * That step is measured from the cards themselves rather than assumed: the
@@ -458,7 +458,7 @@ export function Index({ items, label }) {
       setAt({
         start: el.scrollLeft <= 2,
         end: el.scrollLeft >= max - 2,
-        /* Nothing to scroll at all — a group short enough to fit, or a wide
+        /* Nothing to scroll at all, a group short enough to fit, or a wide
            enough window. Two arrows that are both dead is worse than no arrows:
            it offers a control and then refuses it. */
         still: max <= 2,
@@ -552,7 +552,7 @@ export function Tiles({ items, cols = 3 }) {
   );
 }
 
-/** Named things with no description — a capability list, set as cards. */
+/** Named things with no description, a capability list, set as cards. */
 export function Chips({ items }) {
   return (
     <ul className="svc__chips">
@@ -578,7 +578,7 @@ export function Tags({ items, label }) {
 
 /**
  * An ordered process. The rule down the left is the timeline; the numbers are
- * information, not decoration — step 4 cannot happen before step 3.
+ * information, not decoration, step 4 cannot happen before step 3.
  */
 export function Steps({ items }) {
   return (
@@ -604,7 +604,7 @@ export function Steps({ items }) {
  * alongside. Six paragraphs printed at once are six things to choose between;
  * one at a time, in order, is the sequence the engagement actually is.
  *
- * Every description is in the DOM, all six, whichever one is showing — they are
+ * Every description is in the DOM, all six, whichever one is showing, they are
  * stacked and cross-faded rather than swapped, so nothing is ever missing from
  * the page for a reader who is not looking at it.
  *
@@ -627,7 +627,7 @@ export function Orbit({ items, hold = 4 }) {
      has to follow from the count rather than be a number of its own: six names
      sit 60° apart and four sit 90°, so a fixed falloff would show three of the
      six and one of the four. At 1.6 steps, the pair either side of the reading
-     point is always just legible and the rest are always gone — the wheel looks
+     point is always just legible and the rest are always gone, the wheel looks
      the same whatever is on it. */
   const falloff = step * 1.6;
 
@@ -638,7 +638,7 @@ export function Orbit({ items, hold = 4 }) {
      into ±180 would send an item the long way round every time it crossed the
      back of the circle.
 
-     `--n` is that angle folded into ±180 — the item's real bearing from the
+     `--n` is that angle folded into ±180, the item's real bearing from the
      reading point. Everything that describes the item rather than its position
      is measured from it: how legible it is, and how far its text is tilted. On
      the raw angle the tilt accumulates a lap at a time, which is how 01 came
@@ -666,7 +666,7 @@ export function Orbit({ items, hold = 4 }) {
       /* The advance is `onRepeat`, not a callback at the end of the timeline.
          A callback placed on the exact end time sits on the boundary the
          playhead jumps across when the timeline loops, so it fires on the first
-         lap and is skipped on the ones after it — the wheel turned once and
+         lap and is skipped on the ones after it, the wheel turned once and
          then stood still. `onRepeat` is called once per lap, by the lap.
 
          Forward, always: the wheel turns one way and the sequence reads in
@@ -686,7 +686,7 @@ export function Orbit({ items, hold = 4 }) {
          resting that on GSAP finding nothing to do. */
       tl.to({ t: 0 }, { t: 1, duration: hold, ease: "none" });
 
-      /* Held by whether it is on screen, watched rather than measured — see
+      /* Held by whether it is on screen, watched rather than measured, see
          whileOnScreen. Nothing turns behind the viewport. */
       let held = false;
       const release = whileOnScreen(
@@ -698,7 +698,7 @@ export function Orbit({ items, hold = 4 }) {
       );
 
       /* A reader who takes hold of it keeps it: there is no resuming, because
-         someone who has chosen a step is reading that step, not waiting — and
+         someone who has chosen a step is reading that step, not waiting, and
          `held` is what stops scrolling it off screen and back from undoing
          that. */
       const stop = () => {
@@ -721,7 +721,7 @@ export function Orbit({ items, hold = 4 }) {
 
   /* Jumping to a step picks the nearest turn that puts it at the reading point,
      so a click on 05 while 01 is showing goes back one rather than forward
-     five. Auto-advance does not use this — see the note above. */
+     five. Auto-advance does not use this, see the note above. */
   const goTo = (j) => {
     const base = -j * step;
     turn.current = base + 360 * Math.round((turn.current - base) / 360);
@@ -769,7 +769,7 @@ export function Orbit({ items, hold = 4 }) {
   );
 }
 
-/** Two parallel checklists — the tech process, which runs as two tracks. */
+/** Two parallel checklists, the tech process, which runs as two tracks. */
 export function Tracks({ items }) {
   return (
     <div className="svc__tracks">
@@ -788,7 +788,7 @@ export function Tracks({ items }) {
   );
 }
 
-/** A group heading with its list under it — the offerings and the white label. */
+/** A group heading with its list under it, the offerings and the white label. */
 export function Groups({ items, cols = 2 }) {
   return (
     <ul className="svc__groups" data-cols={cols}>
@@ -819,7 +819,7 @@ export function Groups({ items, cols = 2 }) {
  * The sector panels.
  *
  * A real <button> per panel with aria-expanded, and the body kept in the DOM so
- * it is findable on the page and printable — the 0fr/1fr grid animates it
+ * it is findable on the page and printable, the 0fr/1fr grid animates it
  * closed without needing a measured height, and `hidden` would take it out of
  * find-in-page along with the animation.
  */
@@ -862,7 +862,7 @@ export function Panels({ items }) {
                   ))}
                 </ul>
                 {p.pending && (
-                  /* said plainly rather than quietly truncated — a reader can
+                  /* said plainly rather than quietly truncated, a reader can
                      see this is unfinished, so it cannot ship by accident */
                   <p className="svc__pending">
                     Further capabilities to be supplied.
@@ -881,7 +881,7 @@ export function Panels({ items }) {
  * Questions and their answers.
  *
  * The same disclosure as `Panels` and deliberately the same classes, because it
- * is the same control — but a question is a sentence, not a heading, so it drops
+ * is the same control, but a question is a sentence, not a heading, so it drops
  * the display face and the uppercasing, and the body is prose rather than a row
  * of chips. `data-faq` on the list is what switches those two things.
  */
@@ -930,8 +930,7 @@ export function Faq({ items }) {
 /**
  * Counted figures, in a row.
  *
- * The final value is in the markup, so it is correct before the counter runs —
- * and stays correct if it never does.
+ * The final value is in the markup, so it is correct before the counter runs, * and stays correct if it never does.
  */
 export function Stats({ items, cols = 3 }) {
   return (
@@ -1033,7 +1032,7 @@ export function Pairs({ items }) {
 /**
  * Whether a call to action is an ENQUIRY or a destination.
  *
- * `#connect` is the site's long-standing way of saying "the ask" — every page
+ * `#connect` is the site's long-standing way of saying "the ask", every page
  * ends on its own connect band, and that is what these pointed at. Section 8.1
  * makes the ask an overlay instead, so that one href now means "open the
  * enquiry form" and everything else still means what it says.
@@ -1042,7 +1041,7 @@ export function Pairs({ items }) {
  * a real band, so it survives with no JS and a middle-click still opens it. The
  * delegated listener in Enquiry.jsx takes only the plain left click.
  *
- * `topic` is optional and, when given, wins over the page's own default — which
+ * `topic` is optional and, when given, wins over the page's own default, which
  * Verifyble needs, since that page carries both an institution ask and a
  * student one and PAGE_CONTEXT can only answer for the page.
  */
@@ -1057,7 +1056,7 @@ const asEnquiry = (href, topic) =>
  * The default is a bare hash, not `/#connect`: every page these appear on now
  * ends on its own connect band, so with no JS the ask is a scroll to the foot of
  * the page the reader is already on rather than a trip to the home page's copy
- * of it. With JS it opens the enquiry overlay — see asEnquiry.
+ * of it. With JS it opens the enquiry overlay, see asEnquiry.
  */
 export function Cta({ label, href = "#connect", note, topic }) {
   return (
@@ -1074,7 +1073,7 @@ export function Cta({ label, href = "#connect", note, topic }) {
  * A closing call to action with more than one way out.
  *
  * `tone` ranks them rather than their order doing it: the primary and the ghost
- * are buttons on one row, and a `link` is the tertiary — a route for a reader
+ * are buttons on one row, and a `link` is the tertiary, a route for a reader
  * who is not ready to commit to either, which should not be wearing the same
  * weight as the two that are the point of the page.
  */
@@ -1142,13 +1141,13 @@ export function Jump({ items, label }) {
  * the top of studio.js before this ships.
  *
  * Every cell carries the name; a client with a confirmed domain carries its
- * mark above it. Not one or the other — what gets fetched is a favicon, and a
+ * mark above it. Not one or the other, what gets fetched is a favicon, and a
  * favicon is a mark without a wordmark, so several are unreadable alone (KPMG's
  * is a plain gradient square). The name under it makes every cell identifiable,
  * makes the 29 with marks and the 59 without read as one wall, and keeps the
  * page honest when a logo fails to load.
  *
- * The name is real text, so the image is `alt=""` — decorative, because the
+ * The name is real text, so the image is `alt=""`, decorative, because the
  * information is already there and a screen reader should not hear it twice.
  *
  * Most of this list has no confirmed domain and renders name-only. That is the
@@ -1188,8 +1187,7 @@ export function LogoWall({ groups, manifest = {}, allLabel = "All" }) {
 
       {shown.map((g) => (
         <section className="stu__group" key={g.key} aria-label={g.label}>
-          {/* the group heading only earns its place when both are on screen —
-              filtered to one, the chip above already says which */}
+          {/* the group heading only earns its place when both are on screen, filtered to one, the chip above already says which */}
           {!filter && <h3 className="stu__groupName">{g.label}</h3>}
           <ul className="stu__marks">
             {g.items.map(({ name, domain }) => {
@@ -1197,8 +1195,8 @@ export function LogoWall({ groups, manifest = {}, allLabel = "All" }) {
               return (
                 <li key={name} data-mark={file ? "" : undefined}>
                   {file && (
-                    /* The app is served from the domain root — path routing
-                       already requires that — so the public path is absolute. */
+                    /* The app is served from the domain root, path routing
+                       already requires that, so the public path is absolute. */
                     <img
                       src={`/logos/${file}`}
                       alt=""
@@ -1245,7 +1243,7 @@ export function Pending({ items }) {
 /**
  * The band that hands a reader to the other section when they are on the wrong
  * one. Services points at Education, and each Education page points at the other
- * door — the same shape every time, so it is one component.
+ * door, the same shape every time, so it is one component.
  */
 export function Cross({ title, body, cta, href }) {
   return (

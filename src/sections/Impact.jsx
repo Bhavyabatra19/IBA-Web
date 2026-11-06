@@ -1,5 +1,5 @@
 ﻿/**
- * 2.4 — Impact band. Dark.
+ * 2.4, Impact band. Dark.
  *
  * A 2×2 of counted stats beside one panel that holds the stated portfolio.
  *
@@ -25,7 +25,7 @@ export default function Impact() {
       buildCounters(el)
       revealLines(el, { trigger: el })
       revealRise(el, { trigger: el })
-      /* the drawing animates itself — see components/ImpactSlab */
+      /* the drawing animates itself, see components/ImpactSlab */
     }, root)
     return () => ctx.revert()
   }, [])
@@ -52,7 +52,7 @@ export default function Impact() {
             {PRIMARY.map((s) => (
               <div className="impact__card" key={s.label} data-rise>
                 {/* the final value is in the markup, so it is correct before the
-                    counter runs — and stays correct if it never does */}
+                    counter runs, and stays correct if it never does */}
                 <span
                   className="impact__k"
                   data-count={s.to}

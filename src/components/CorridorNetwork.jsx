@@ -1,7 +1,7 @@
 /**
  * The Web3 Corridor's network map, made live (by request): the client's
  * glowing world map (public/images/corridor-network-map.webp) with an SVG
- * drawn over it in the image's own pixels (1260 × 640) — each region's pin
+ * drawn over it in the image's own pixels (1260 × 640), each region's pin
  * pulses, light runs out of India along a route to every other region, and the whole
  * map breathes slowly. Reduced motion: the map and routes, still.
  * Styles in brandbook.css (.cnm).

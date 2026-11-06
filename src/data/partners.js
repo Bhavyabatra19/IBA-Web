@@ -1,5 +1,5 @@
 /**
- * The partner list — one source for the home page's marquee and the
+ * The partner list, one source for the home page's marquee and the
  * Ecosystem page's Key Partners wall.
  *
  * Logos in public/logos/partners come from the folder IBA supplied
@@ -11,7 +11,7 @@
  *   1632936119627.jpeg      an "eZ" mark with no name
  *   1739422591472.jpeg      an "A" mark with no name
  * ⚠ "Power" is matched to 1720871479371.jpeg (a power-button mark) by its
- *   look alone — confirm.
+ *   look alone, confirm.
  */
 
 const L = (f) => `/logos/partners/${f}.jpg`
@@ -43,7 +43,7 @@ export const PARTNERS = [
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
   { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
-  /* no logo supplied yet — shown as monograms on the Ecosystem page only */
+  /* no logo supplied yet, shown as monograms on the Ecosystem page only */
   { name: 'The Circle' },
   { name: 'AgoraX' },
   { name: 'Ira Blocks' },

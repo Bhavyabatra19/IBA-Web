@@ -1,12 +1,12 @@
 /**
- * In the Media — the featured press and media items (relabelled from "Open
+ * In the Media, the featured press and media items (relabelled from "Open
  * Knowledge Base" in the content review, since they are coverage, not the
  * library), with the way into the IBA Library below.
  * Light band, after the ecosystem marquee.
  *
  * Built from the what-we-do card (.wd__*): photo header toned into the
  * brand, glass icon badge for the format, red on hover. The badge shows what
- * KIND of item it is — article, recording, report — since that is what a
+ * KIND of item it is, article, recording, report, since that is what a
  * reader decides on first.
  *
  * Items: the featured entries of the shared resources list (src/data/

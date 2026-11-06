@@ -1,5 +1,5 @@
 /**
- * Impact, measured — headline proof points, set quietly.
+ * Impact, measured, headline proof points, set quietly.
  *
  * Sits between the counters and the Web3 Corridor. A split header (title
  * left, lede and link right) over four figures divided by hairlines, each
@@ -188,7 +188,7 @@ export default function ImpactBand() {
           </div>
           <div className="ib__aside">
             <p className="ib__lede" data-rise>
-              The alliance in figures — what has been tokenized, where, and with whom.
+              The alliance in figures: what has been tokenized, where, and with whom.
             </p>
           </div>
         </header>

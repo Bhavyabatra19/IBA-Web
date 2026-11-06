@@ -10,7 +10,7 @@
  *
  * It is deliberately named for what it is. A module called `auth` or `session`
  * with `isLoggedIn()` in it is how a placeholder ends up trusted by the next
- * person to touch the codebase — and how real material ends up filed behind a
+ * person to touch the codebase, and how real material ends up filed behind a
  * localStorage boolean.
  *
  * When the real backend lands:
@@ -26,7 +26,7 @@ import { useEffect, useState } from 'react'
 const KEY = 'iba:library-preview'
 const CHANGED = 'iba:library-preview-change'
 
-/** Read the preview name, or null. Storage can throw — private mode, blocked. */
+/** Read the preview name, or null. Storage can throw, private mode, blocked. */
 function read() {
   try {
     const raw = localStorage.getItem(KEY)
@@ -42,7 +42,7 @@ export function startPreview(name) {
   try {
     localStorage.setItem(KEY, JSON.stringify({ firstName: first }))
   } catch {
-    /* nothing to do — the dashboard falls back to a generic greeting */
+    /* nothing to do, the dashboard falls back to a generic greeting */
   }
   window.dispatchEvent(new Event(CHANGED))
 }
@@ -60,7 +60,7 @@ export function endPreview() {
  * The preview, as React state.
  *
  * Reads null on the first render and fills in from an effect rather than
- * reading storage in the initialiser — the value has to survive being wrong for
+ * reading storage in the initialiser, the value has to survive being wrong for
  * one frame either way, and this keeps the module safe to import anywhere.
  */
 export function usePreview() {

@@ -1,5 +1,5 @@
 /**
- * About — Vision and Mission, as two cards built like the home page's
+ * About, Vision and Mission, as two cards built like the home page's
  * Academia & Students cards (.wd--two): photo header toned into the brand
  * (no icon badge, as on the reference site), tag and the lead line, then the opening of the copy clamped
  * to five lines and a Read more button; the whole text opens in a popup (a
@@ -65,7 +65,7 @@ export default function VisionMission({ vision, mission }) {
             <article className={`wd__card wd__card--${c.key}`} id={c.key} key={c.key} data-rise>
               <div className="wd__media" aria-hidden="true">
                 {/* the first band under the hero, so loaded straight away rather
-                    than lazily — a lazy photo here showed as an empty box */}
+                    than lazily, a lazy photo here showed as an empty box */}
                 <img className="wd__photo vm__photo" src={c.img} alt="" decoding="async" />
                 <span className="wd__tint" />
               </div>

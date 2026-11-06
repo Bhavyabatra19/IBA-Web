@@ -1,11 +1,11 @@
 ﻿/**
- * 2.8 — Closing CTA band. Dark.
+ * 2.8, Closing CTA band. Dark.
  *
  * The last thing on the page is the ask, so the ask is the whole layout: the
  * claim, one line under it, the action, and then the three ways to actually
  * reach IBA as cards rather than a row of links a reader has to squint at.
  *
- * This band used to claim the WebGL stage — the object returned here, held open
+ * This band used to claim the WebGL stage, the object returned here, held open
  * behind the type with a slow drift. It no longer does; the stage is live in
  * the hero alone. What is left in its place is a static field, warm in the same
  * way the hero's is, so the page still closes on the ground it started from.
@@ -58,7 +58,7 @@ const Cube = ({ x, y, s, r = 0, o = 1 }) => (
 
 /* Low and to the edges, out of the band the contact list runs down. They were
    a right-hand cluster when the right half was theirs; now that it carries the
-   ways to reach IBA, the blocks fall to the floor and the frame's edges — where
+   ways to reach IBA, the blocks fall to the floor and the frame's edges, where
    they still set the scene without sitting behind a phone number.
 
    Size and opacity move together, so the small faint ones sit back and the
@@ -97,7 +97,7 @@ const CUBE_FIELD = (
         <stop stopColor="#ff8a76" stopOpacity=".55" />
         <stop offset="1" stopColor="#ff8a76" stopOpacity="0" />
       </linearGradient>
-      {/* a gradient, not a flat fill — a solid ellipse shows its own outline */}
+      {/* a gradient, not a flat fill, a solid ellipse shows its own outline */}
       <radialGradient id="cbPool">
         <stop stopColor="#d71920" stopOpacity=".3" />
         <stop offset=".5" stopColor="#d71920" stopOpacity=".13" />
@@ -124,7 +124,7 @@ const CUBE_FIELD = (
       </mask>
     </defs>
 
-    {/* the pool the grid sits in — the light the whole cluster is lit by */}
+    {/* the pool the grid sits in, the light the whole cluster is lit by */}
     <ellipse cx="1230" cy="770" rx="520" ry="290" fill="url(#cbPool)" />
 
     {/* A perspective floor under the cluster, converging on one vanishing point.
@@ -155,7 +155,7 @@ const CUBE_FIELD = (
 
 export default function Closing() {
   const root = useRef(null)
-  /* The WhatsApp opener says what this page is about — see PAGE_CONTEXT. Read
+  /* The WhatsApp opener says what this page is about, see PAGE_CONTEXT. Read
      at render rather than passed in: this band is rendered by ServicePage for
      ten pages that would otherwise each have to tell it where they are. */
   const { phrase } = contextFor(window.location.pathname)
@@ -180,34 +180,30 @@ export default function Closing() {
       <div className="wrap close__grid">
         <div className="close__inner">
           <p className="eyebrow" data-rise>Get In Touch</p>
-          {/* the column step: this head now shares its row with the cubes, and
-              at the full step "Rewriting the Rules." wraps inside its own
-              .line — which is the one thing the clip-reveal cannot take */}
+          {/* IBA's one tagline (by request, 11-06), a line per phrase for
+              the clip-reveal */}
           <h2 className="h2 h2--col display" data-clip>
             <span className="line">
-              <span className="line__inner">IBA — Connecting</span>
-            </span>
-            <span className="line">
-              <span className="line__inner">Economies.</span>
+              <span className="line__inner">Rewriting the Rules</span>
             </span>
             <span className="line">
               <span className="line__inner">
-                <em>Rewriting the Rules.</em>
+                <em>with Web3.</em>
               </span>
             </span>
           </h2>
           <p className="close__sub" data-rise>
-            Connecting Economies. Block by Block. Talk to our team about membership,
+            Talk to our team about membership,
             corridors, consulting or the Red Club.
           </p>
           {/* 8.1: the closing-band CTA is one of the enquiry triggers. The href
               is the real page, so it still works with no JS and still opens in a
               tab on a modified click; the delegated listener in Enquiry.jsx
-              intercepts the plain one and opens the overlay instead — which is
+              intercepts the plain one and opens the overlay instead, which is
               the point, since the reader is at the foot of a page they were
               reading and should not lose it. */}
           {/* Black, not primary. Section 06: the Black button is "the button on
-              the red CTA band" — a red button on a red ground is not a button,
+              the red CTA band", a red button on a red ground is not a button,
               and the book's CTA diagram shows exactly this pairing. */}
           <a className="btn btn--black" href="/connect" data-enquiry="" data-rise>
             Connect With Us

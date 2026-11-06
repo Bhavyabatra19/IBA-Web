@@ -1,29 +1,28 @@
 /**
  * The Education section, as content.
  *
- * Three pages — the chooser, the student door, the institution door — held here
+ * Three pages, the chooser, the student door, the institution door, held here
  * for the same reason services.js holds the seven service pages: a page file
  * should say what shape its content takes, and this file says what it is.
  *
  * The Red Club's stat strip is NOT restated here. It is the same four figures
  * the home page and About already publish, so it is imported from content.js at
- * the point of use — a second copy is how "800+" and "850+" end up disagreeing
+ * the point of use, a second copy is how "800+" and "850+" end up disagreeing
  * across three pages.
  */
 
 /* ================================================================== */
-/* 5.0 — the chooser                                                  */
+/* 5.0, the chooser                                                  */
 /* ================================================================== */
 
 /** Every education page's path, in one place, so the nav and the router agree. */
 export const educationPath = (slug) => (slug ? `/education/${slug}` : '/education')
 
 export const EDU_INTRO =
-  'The Fourth Industrial Revolution is the integration of AI, robotics, IoT and big data into industry — blurring the lines between the physical, digital and biological worlds. The skills to operate in it are not optional. IBA builds them from both ends.'
+  'The Fourth Industrial Revolution is the integration of AI, robotics, IoT and big data into industry, blurring the lines between the physical, digital and biological worlds. The skills to operate in it are not optional. IBA builds them from both ends.'
 
 /**
- * The two doors. Split by who is standing at them rather than by feature —
- * a student and a registrar are not shopping for the same thing, and asking
+ * The two doors. Split by who is standing at them rather than by feature, * a student and a registrar are not shopping for the same thing, and asking
  * them to read one page and work out which half is theirs is the failure this
  * section exists to avoid.
  */
@@ -33,7 +32,7 @@ export const EDU_DOORS = [
     who: "I'm a Student",
     audience: 'For students',
     name: 'IBA Red Club',
-    body: 'Join the IBA Red Club. Certified training, live industry projects, mentorship, internships and placement assistance — with every credential issued to a blockchain-enabled career wallet you own.',
+    body: 'Join the IBA Red Club. Certified training, live industry projects, mentorship, internships and placement assistance, with every credential issued to a blockchain-enabled career wallet you own.',
     cta: 'Explore IBA Red Club',
     href: '/education/red-club',
   },
@@ -49,7 +48,7 @@ export const EDU_DOORS = [
 ]
 
 /**
- * What the section delivers, whichever door it is entered by — the bar in the
+ * What the section delivers, whichever door it is entered by, the bar in the
  * landing hero's console.
  *
  * Every term is named further down its own page and nowhere invented here:
@@ -70,16 +69,16 @@ export const EDU_STRANDS = [
 ]
 
 /* ================================================================== */
-/* 5.1 — IBA Red Club, for students                                   */
+/* 5.1, IBA Red Club, for students                                   */
 /* ================================================================== */
 
 export const RC_INTRO =
-  "The IBA Red Club is where students stop reading about blockchain and AI and start shipping with them. Certified programs taught by practitioners, live projects with real problem statements, mentors from 14 countries, and credentials you carry with you — not ones that sit in someone else's database."
+  "The IBA Red Club is where students stop reading about blockchain and AI and start shipping with them. Certified programs taught by practitioners, live projects with real problem statements, mentors from 14 countries, and credentials you carry with you, not ones that sit in someone else's database."
 
 export const RC_BLOCKS = [
   {
     name: 'Training',
-    body: 'World-class certified training programs across all blockchain concepts — technical and non-technical. Contextual content, expert-led live sessions, periodic assessment.',
+    body: 'World-class certified training programs across all blockchain concepts, technical and non-technical. Contextual content, expert-led live sessions, periodic assessment.',
   },
   {
     name: 'Projects',
@@ -87,7 +86,7 @@ export const RC_BLOCKS = [
   },
   {
     name: 'Research',
-    body: 'Blockchain-related research and consulting projects, run jointly with IBA and your institution — with the opportunity to contribute to published work and joint patents.',
+    body: 'Blockchain-related research and consulting projects, run jointly with IBA and your institution, with the opportunity to contribute to published work and joint patents.',
   },
   {
     name: 'Placements',
@@ -152,7 +151,7 @@ export const RC_ACCESS = [
   },
   {
     name: 'Internships',
-    body: 'Virtual and on-site internship opportunities for full-course students — domestic and international.',
+    body: 'Virtual and on-site internship opportunities for full-course students, domestic and international.',
   },
   {
     name: 'Mentorship',
@@ -164,11 +163,11 @@ export const RC_ACCESS = [
   },
   {
     name: 'AI Career Tools',
-    body: 'Skills Passport, mock interviews, multilingual practice sessions and automated resume feedback — built to move job readiness and soft skills, not just marks.',
+    body: 'Skills Passport, mock interviews, multilingual practice sessions and automated resume feedback, built to move job readiness and soft skills, not just marks.',
   },
   {
     name: 'Networking',
-    body: 'Verified professional networking, content creation and discovery on Web3 social platforms — community without data exploitation.',
+    body: 'Verified professional networking, content creation and discovery on Web3 social platforms, community without data exploitation.',
   },
   {
     name: 'Learning Content',
@@ -195,20 +194,19 @@ export const RC_JOIN = [
   },
   {
     n: '02',
-    name: 'Your campus is not — yet',
+    name: 'Your campus is not, yet',
     body: "Sign up as an individual member, or tell us who to talk to at your college. We'll take it from there.",
   },
 ]
 
 /**
  * VERIFY: the brief supplies these answers as a placeholder and asks for them to
- * be confirmed before launch. The wording on placement is deliberately blunt —
- * assistance and recommendations, never a guarantee — and must not be softened.
+ * be confirmed before launch. The wording on placement is deliberately blunt, * assistance and recommendations, never a guarantee, and must not be softened.
  */
 export const RC_FAQ = [
   {
     q: 'Do I need a coding background?',
-    a: 'No — the program runs technical and non-technical tracks.',
+    a: 'No, the program runs technical and non-technical tracks.',
   },
   {
     q: 'What does membership cost?',
@@ -224,24 +222,24 @@ export const RC_FAQ = [
   },
   {
     q: "Can I join if my college isn't a partner?",
-    a: 'Yes — individual membership is available.',
+    a: 'Yes, individual membership is available.',
   },
 ]
 
 /* ================================================================== */
-/* 5.2 — Verifyble, for institutions                                  */
+/* 5.2, Verifyble, for institutions                                  */
 /* ================================================================== */
 
 export const VFY_INTRO = [
-  "With the rapid advancement of artificial intelligence and its transformative impact across industries, institutions need more than a guest lecture series. Verifyble is IBA's institutional membership and credentialing infrastructure — a hub for research, innovation and skill development that sits inside your campus and carries your name alongside ours.",
+  "With the rapid advancement of artificial intelligence and its transformative impact across industries, institutions need more than a guest lecture series. Verifyble is IBA's institutional membership and credentialing infrastructure, a hub for research, innovation and skill development that sits inside your campus and carries your name alongside ours.",
   'Developed in partnership with global blockchain industry organisations, Verifyble covers two things at once: the credentials your learners carry out, and the labs, faculty capability and industry connections that make those credentials mean something.',
 ]
 
 export const VFY_CREDENTIALING = [
-  'The IBA Seal of Trust — the standard behind every IBA certification and badge',
-  'Blockchain-enabled career wallets — learners hold and carry their own records',
-  'GreenCredentials — secure credentials, badges and microcredentials issued to on-chain wallets and portfolios',
-  'Verifiable Credentials (VCs) — for higher education and employment verification, authenticated across platforms',
+  'The IBA Seal of Trust, the standard behind every IBA certification and badge',
+  'Blockchain-enabled career wallets, learners hold and carry their own records',
+  'GreenCredentials, secure credentials, badges and microcredentials issued to on-chain wallets and portfolios',
+  'Verifiable Credentials (VCs), for higher education and employment verification, authenticated across platforms',
   'A platform for your institute to issue blockchain credentials under its own name',
 ]
 
@@ -307,7 +305,7 @@ export const VFY_LABS = [
   {
     name: 'AI Lab',
     items: [
-      'Access to AI coding environments — Python, Jupyter and more',
+      'Access to AI coding environments, Python, Jupyter and more',
       'Generative AI tools: image generation, text summarisers, code generation',
       'Industry-grade projects across Computer Vision, NLP and ML Ops',
       'Faculty FDPs on prompt engineering, ML and DL',
@@ -349,7 +347,7 @@ export const VFY_VALUE = [
 
 /**
  * The outcome, and the vehicle that gets there. The brief sets these as two
- * columns and they are read as pairs — an ambition on its own is a slogan, and
+ * columns and they are read as pairs, an ambition on its own is a slogan, and
  * a program on its own is a line item.
  */
 export const VFY_OUTCOME = [
@@ -482,7 +480,7 @@ export const VFY_ENGAGEMENT_NOTE =
 /**
  * The terms, not the figures.
  *
- * The brief is explicit that pricing does not go on the page — the bands, the
+ * The brief is explicit that pricing does not go on the page, the bands, the
  * per-student fee and the surcharge all sit behind Request Pricing. What is
  * published here is what a registrar needs in order to decide whether to ask.
  */

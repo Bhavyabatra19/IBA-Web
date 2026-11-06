@@ -19,7 +19,7 @@
  * rescales every position parameter in the file.
  *
  * `.to()` only, never `.fromTo()`. fromTo defaults to immediateRender:true,
- * which writes its from-value the moment the tween is constructed — in a
+ * which writes its from-value the moment the tween is constructed, in a
  * paused, scrubbed timeline that pins the property for the whole sequence.
  */
 
@@ -31,7 +31,7 @@ import { EASE } from './lib/scroll'
  *
  * There were five. The sequence opened on a rough fragment that turned, then
  * shattered into shards that flew into the shape of the disc, then struck the
- * coin and turned it square to the reader — four fifths of the pin spent
+ * coin and turned it square to the reader, four fifths of the pin spent
  * arriving at the object rather than showing it. It now opens ON that object,
  * seated and closed, and the two states that remain are what it then does:
  * the seam opens, and the halves part.
@@ -60,7 +60,7 @@ export const stageAt = (pct) => {
 export function makeRig(mode = 'hero') {
   const hero = mode === 'hero'
   return {
-    /* The coin, as two halves that can part — and the frame the hero opens on:
+    /* The coin, as two halves that can part, and the frame the hero opens on:
        present, square to the reader, and shut. It used to arrive turned away
        and seat itself over the first third of the pin; it is now already
        seated, so `spinY` and `tilt` start where that beat left them and the
@@ -78,7 +78,7 @@ export function makeRig(mode = 'hero') {
 }
 
 /* ================================================================== */
-/* HERO — blockchain → future                                          */
+/* HERO, blockchain → future                                          */
 /* ================================================================== */
 /**
  * The two durations are the old ones scaled by 100/70, because the three
@@ -121,7 +121,7 @@ export function buildHeroTimeline(R) {
 }
 
 /* ================================================================== */
-/* BREAK OPEN — the same object, read close up                         */
+/* BREAK OPEN, the same object, read close up                         */
 /* ================================================================== */
 export function buildBreakTimeline(R) {
   const tl = gsap.timeline({ paused: true, defaults: { ease: 'none' } })
@@ -140,7 +140,7 @@ export function buildBreakTimeline(R) {
 }
 
 /* ================================================================== */
-/* Reduced motion — the same states, delivered without a scrub          */
+/* Reduced motion, the same states, delivered without a scrub          */
 /* ================================================================== */
 /**
  * Resolve a rig to a fixed point on its timeline. Used when the reader has

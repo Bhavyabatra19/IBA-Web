@@ -1,9 +1,9 @@
 ﻿/**
- * 7.1 — The IBA Library, before sign-in.
+ * 7.1, The IBA Library, before sign-in.
  *
  * The public face of the gate. Its whole job is to be worth making an account
  * for, so what is inside is listed in full and the terms of the account are
- * stated on the page rather than left to the privacy policy — "we don't sell
+ * stated on the page rather than left to the privacy policy, "we don't sell
  * your data" is the objection being answered, and it belongs next to the button.
  *
  * A reader who already has a preview session is sent to the dashboard instead
@@ -35,14 +35,14 @@ export default function Library() {
           <em>Library</em>
         </>,
       ]}
-      sub="Free resources from the alliance. Searchable, categorised, no paywall — free with IBA membership."
+      sub="Free resources from the alliance. Searchable, categorised, no paywall, free with IBA membership."
       intro={LIB_BODY}
       /* The shelves as a rail, so what is behind the gate is visible before the
-         account is asked for — the whole argument of this page. The button
+         account is asked for, the whole argument of this page. The button
          follows the reader's session for the same reason the one below does:
          asking someone with a preview to sign up again is asking twice. */
       showcase={{
-        /* The page's own claim rather than its name — the H1 already says
+        /* The page's own claim rather than its name, the H1 already says
            Library, and the word behind it should add something. */
         ghost: 'No Paywall',
         cta: preview

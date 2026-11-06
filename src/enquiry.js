@@ -1,12 +1,12 @@
 /**
- * 8 — Connect With Us, as content.
+ * 8, Connect With Us, as content.
  *
  * One enquiry, reachable from about forty places on the site, so everything the
  * enquiry knows about itself lives here: the topics, the desks they route to,
  * the reach-out channels, the WhatsApp wording, and the copy for each state the
  * form can end in.
  *
- * ⚠ NOTHING SUBMITS. There is no endpoint — see submitEnquiry in lib/enquiry.js.
+ * ⚠ NOTHING SUBMITS. There is no endpoint, see submitEnquiry in lib/enquiry.js.
  * SUCCESS and FAILED below are written and built and currently unreachable; the
  * form ends on UNWIRED instead, which says what actually happened. When an
  * endpoint exists, that third branch is the only thing to delete.
@@ -15,7 +15,7 @@
 import { CONTACT } from './nav'
 
 /* ================================================================== */
-/* 8.1 — the modal                                                    */
+/* 8.1, the modal                                                    */
 /* ================================================================== */
 
 export const ENQUIRY = {
@@ -27,7 +27,7 @@ export const ENQUIRY = {
 }
 
 /* ================================================================== */
-/* 8.4 — the form                                                     */
+/* 8.4, the form                                                     */
 /* ================================================================== */
 
 /**
@@ -79,7 +79,7 @@ export const CONTACT_METHODS = ['Email', 'Phone', 'WhatsApp']
  * The field the spam bots fill in and people never see.
  *
  * A honeypot is half of the protection and the cheap half. The other half is a
- * server-side challenge — Turnstile or invisible reCAPTCHA — which cannot be
+ * server-side challenge, Turnstile or invisible reCAPTCHA, which cannot be
  * done from here because there is no server to verify the token. Whoever wires
  * the endpoint must add it; a honeypot alone stops the crude bots only.
  *
@@ -91,7 +91,7 @@ export const HONEYPOT = 'company_website'
 /* ---- the three ways the form can end ---- */
 
 export const SUCCESS = {
-  title: "Thanks — we've got it.",
+  title: "Thanks, we've got it.",
   body: 'Someone from the IBA team will be in touch within two working days.',
   urgent: "If it's urgent, WhatsApp us on",
 }
@@ -110,11 +110,11 @@ export const FAILED = {
  */
 export const UNWIRED = {
   title: 'This form is not connected yet.',
-  body: 'Nothing was sent, and we would rather say so than show you a confirmation for an enquiry nobody received. Your message is still in the form — copy it into an email or a WhatsApp message and it will reach the same people.',
+  body: 'Nothing was sent, and we would rather say so than show you a confirmation for an enquiry nobody received. Your message is still in the form, copy it into an email or a WhatsApp message and it will reach the same people.',
 }
 
 /**
- * The auto-reply. Not rendered by this app — it is copy for whoever wires the
+ * The auto-reply. Not rendered by this app, it is copy for whoever wires the
  * mail provider, exported rather than left in a document so the wording is
  * versioned beside the form that triggers it.
  *
@@ -122,24 +122,24 @@ export const UNWIRED = {
  * answer to "I'm interested in".
  */
 export const EMAIL_AUTOREPLY = {
-  subject: "We've received your enquiry — India Blockchain Alliance",
+  subject: "We've received your enquiry, India Blockchain Alliance",
   body: [
     'Thanks for getting in touch.',
     'Your enquiry about {topic} has reached the IBA team and we’ll come back to you within two working days.',
     'If it’s time-sensitive, reply to this email or message us on WhatsApp at +91 8420045940.',
   ],
-  signoff: '— Team IBA',
+  signoff: 'Team IBA',
 }
 
 /* ================================================================== */
-/* 8.5 — routing                                                      */
+/* 8.5, routing                                                      */
 /* ================================================================== */
 
 /**
  * Which desk an enquiry belongs to, as configuration rather than as branches.
  *
  * ⚠ NO ADDRESSES SUPPLIED. The brief asks IBA for a destination per desk and
- * says, until then, to point everything at the default inbox — which is what
+ * says, until then, to point everything at the default inbox, which is what
  * `email: null` does here. The map is still worth having now: when the six
  * addresses arrive, this is a six-line edit and no logic changes.
  *
@@ -150,18 +150,17 @@ export const ROUTING = {
   default: { key: 'default', desk: 'Default inbox', email: null },
   desks: [
     { key: 'advisory', desk: 'Advisory / delivery team', email: null },
-    { key: 'education-student', desk: 'Education team — student intake', email: null },
+    { key: 'education-student', desk: 'Education team, student intake', email: null },
     {
       key: 'education-institution',
-      desk: 'Education team — institutional partnerships',
+      desk: 'Education team, institutional partnerships',
       email: null,
     },
     { key: 'corridor', desk: 'Corridor programme lead', email: null },
     { key: 'partnerships', desk: 'Partnerships', email: null },
     { key: 'comms', desk: 'Comms', email: null },
   ],
-  /* Every topic in TOPICS appears here. "Something else" is absent on purpose —
-     it is the default, and listing it would suggest a desk it does not have. */
+  /* Every topic in TOPICS appears here. "Something else" is absent on purpose, it is the default, and listing it would suggest a desk it does not have. */
   byTopic: {
     Consulting: 'advisory',
     'Web3 Advisory': 'advisory',
@@ -189,7 +188,7 @@ export const routeAddress = (topic) =>
   routeFor(topic).email || ROUTING.default.email || CONTACT.email.label
 
 /* ================================================================== */
-/* 8.2 — reaching IBA directly                                        */
+/* 8.2, reaching IBA directly                                        */
 /* ================================================================== */
 
 export const AVAILABILITY =
@@ -206,7 +205,7 @@ export const AVAILABILITY =
  * context: an empty "…talk about" reads as a message that failed to finish.
  */
 export const waMessage = (phrase) =>
-  `Hi IBA — I came from your website and I'd like to talk about ${phrase || '[ ]'}`
+  `Hi IBA, I came from your website and I'd like to talk about ${phrase || '[ ]'}`
 
 export const waLink = (phrase) =>
   `https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(waMessage(phrase))}`
@@ -219,8 +218,7 @@ export const waLink = (phrase) =>
  * What a CTA means on the page it is on.
  *
  * `topic` pre-selects the dropdown; `phrase` is what the WhatsApp message says
- * the reader wants to talk about. Two fields because they are two registers —
- * "Red Club / Verifyble (institution)" is a routing key and would read as
+ * the reader wants to talk about. Two fields because they are two registers, * "Red Club / Verifyble (institution)" is a routing key and would read as
  * machinery in a sentence a human is about to send.
  *
  * A CTA can always name its own topic and override this (Verifyble's Request
@@ -258,11 +256,11 @@ export const PAGE_CONTEXT = {
 export const contextFor = (path) => PAGE_CONTEXT[path] || { topic: '', phrase: '' }
 
 /* ================================================================== */
-/* 8.3 — the Connect page                                             */
+/* 8.3, the Connect page                                             */
 /* ================================================================== */
 
 export const CONNECT_SUB =
-  "Whether you're a government, an enterprise, a university, a founder or a learner — start with a conversation."
+  "Whether you're a government, an enterprise, a university, a founder or a learner, start with a conversation."
 
 /**
  * The four quick paths, above the form.
