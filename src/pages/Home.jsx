@@ -2,7 +2,6 @@ import Hero from '../sections/Hero'
 import Credibility from '../sections/Credibility'
 import ImpactBand from '../sections/ImpactBand'
 import WhatWeDoCards from '../sections/WhatWeDoCards'
-import AcademiaCards from '../sections/AcademiaCards'
 import PresenceGlobe from '../sections/PresenceGlobe'
 import EcosystemMarquee from '../sections/EcosystemMarquee'
 import KnowledgeBase from '../sections/KnowledgeBase'
@@ -54,8 +53,9 @@ export default function Home() {
     <div>
       {/* the order from the content review (11-05-2026): who IBA is, what
           it does, where it operates (the Web3 Corridor and Global Presence,
-          one section), proof, who is with it, how to join, learning,
-          insights, contact */}
+          one section), membership in brief, proof, who is with it, insights,
+          contact (the Red Club & Learning section was removed by request;
+          Red Club remains a What IBA Does pillar) */}
       <Hero />
       <Credibility />
       <WhatWeDoCards />
@@ -64,7 +64,6 @@ export default function Home() {
       <MembershipBand />
       <ImpactBand />
       <EcosystemMarquee />
-      <AcademiaCards />
       <KnowledgeBase />
       <GetInTouch />
     </div>
