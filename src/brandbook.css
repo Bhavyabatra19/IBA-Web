@@ -12965,3 +12965,28 @@ main {
     letter-spacing: 0.08em;
   }
 }
+
+/* Home "IBA in the News": one moving line of cards (CardRail, autoplay) in
+   place of the grid, each card as tall as the tallest */
+.kb .rail {
+  margin-top: 8px;
+}
+.kb .kb__slide {
+  display: flex;
+}
+.kb .kb__slide > .wd__card {
+  width: 100%;
+}
+.kb .rail__controls {
+  justify-content: center;
+}
+@media (max-width: 1100px) {
+  .kb .rail__track {
+    grid-auto-columns: calc((100% - 16px) / 2);
+  }
+}
+@media (max-width: 680px) {
+  .kb .rail__track {
+    grid-auto-columns: 86%;
+  }
+}

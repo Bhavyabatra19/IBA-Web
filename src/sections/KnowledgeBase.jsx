@@ -21,6 +21,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import RESOURCES from '../data/resources.json'
+import CardRail from '../components/CardRail'
 
 /* format icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -79,7 +80,7 @@ const fmtDate = (d) =>
 const TINTS = ['red', 'ink', 'deep', 'warm']
 const ITEMS = RESOURCES.items
   .filter((r) => r.featured)
-  .slice(0, 6)
+  .slice(0, 12)
   .map((r, i) => ({
     kind: ICON_FOR[r.format] || 'article',
     format: r.format,
@@ -125,9 +126,11 @@ export default function KnowledgeBase() {
           </p>
         </header>
 
-        <div className="wd__grid">
+        {/* one line that moves on by itself (by request), with arrows */}
+        <CardRail label="IBA in the news" cols={3} autoplay={4500}>
           {ITEMS.map((it) => (
-            <article className={`wd__card kb__card kb__card--${it.tint}`} key={it.title} data-rise>
+            <li className="kb__slide" key={it.title}>
+            <article className={`wd__card kb__card kb__card--${it.tint}`}>
               <div className="wd__media" aria-hidden="true">
                 <img className="wd__photo" src={it.img} alt="" loading="lazy" decoding="async" />
                 <span className="wd__tint" />
@@ -159,8 +162,9 @@ export default function KnowledgeBase() {
                 </p>
               </div>
             </article>
+            </li>
           ))}
-        </div>
+        </CardRail>
 
         {/* the library itself, one click away (content review) */}
         <div className="kb__more" data-rise>
