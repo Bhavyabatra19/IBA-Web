@@ -1,9 +1,9 @@
 /**
- * 8.1 — the enquiry overlay.
+ * 8.1, the enquiry overlay.
  *
  * Rendered once, by App, and opened from everywhere. A modal on desktop and a
  * full-height sheet on mobile; the page behind stays exactly where it was,
- * which is the whole reason this is not a page — a reader halfway down the
+ * which is the whole reason this is not a page, a reader halfway down the
  * Verifyble tiers who clicks Request Pricing should still be halfway down the
  * Verifyble tiers when they close it.
  *
@@ -22,8 +22,7 @@
  *
  * ---------------------------------------------------------------------------
  * The reach-out pane comes FIRST in the DOM, and that ordering is load-bearing
- * in two directions. On mobile it stacks first, which is 8.1's requirement —
- * someone in a hurry can call or WhatsApp without scrolling past a form. On
+ * in two directions. On mobile it stacks first, which is 8.1's requirement, * someone in a hurry can call or WhatsApp without scrolling past a form. On
  * desktop it is the left pane, which is where it reads. So the order is the
  * markup's and the columns are the grid's, and neither needs a media query to
  * reorder anything.
@@ -101,7 +100,7 @@ export default function Enquiry() {
   const close = useCallback(() => closeEnquiry(), [])
 
   /* The page behind does not scroll. lockScroll stops Lenis and sets the class
-     the reduced-motion path needs, and it counts — the mobile drawer uses the
+     the reduced-motion path needs, and it counts, the mobile drawer uses the
      same pair, and the drawer's Connect With Us opens this. */
   useEffect(() => {
     if (!open) return
@@ -110,7 +109,7 @@ export default function Enquiry() {
   }, [open])
 
   /* Focus into the panel on open, and held there until it closes. Focus going
-     back to the trigger is closeEnquiry's job — it is the only thing that knows
+     back to the trigger is closeEnquiry's job, it is the only thing that knows
      which control opened this. */
   useEffect(() => {
     if (!open) return
@@ -133,7 +132,7 @@ export default function Enquiry() {
       const first = items[0]
       const last = items[items.length - 1]
       /* Wrap at both ends. Without this, tabbing past the last control lands in
-         the page behind the overlay — which is still there, still scrolled to
+         the page behind the overlay, which is still there, still scrolled to
          where it was, and now taking keystrokes the reader thinks are going to
          the form. */
       if (e.shiftKey && document.activeElement === first) {
@@ -187,7 +186,7 @@ export default function Enquiry() {
         </div>
 
         <div className="enq__body">
-          {/* first in the DOM — see the note at the top of this file */}
+          {/* first in the DOM, see the note at the top of this file */}
           <div className="enq__reach">
             <ReachOut phrase={phrase} heading="Or reach us directly" as="p" iconsOnly />
           </div>

@@ -1,7 +1,7 @@
 /**
- * 2.2 — Credibility bar. Warm light band, four white cards.
+ * 2.2, Credibility bar. Warm light band, four white cards.
  *
- * `band--own` so the light band after it keeps its top padding — this is a
+ * `band--own` so the light band after it keeps its top padding, this is a
  * different ground from its neighbours, not a continuation of either.
  */
 
@@ -10,7 +10,7 @@ import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { CRED_STATS as STATS } from '../content'
 
 /**
- * The figures count up (by request), here only — the site-wide counter in
+ * The figures count up (by request), here only, the site-wide counter in
  * lib/scroll stays off, for the reason given there: a figure caught mid-count
  * reads as the wrong number. So a figure counts only once it is well inside
  * the viewport, and one the page loads already scrolled past simply shows its
@@ -91,7 +91,7 @@ export default function Credibility() {
           {STATS.map((s) => (
             <div className="cred__item" key={s.label} data-rise>
               {/* the final value is in the markup, so it is correct before the
-                  counter ever runs — and stays correct if it never does */}
+                  counter ever runs, and stays correct if it never does */}
               <span className="cred__k" data-count={s.to} data-suffix={s.suffix}>
                 {s.to}
                 {s.suffix}

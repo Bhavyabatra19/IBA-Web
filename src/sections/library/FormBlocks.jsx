@@ -67,7 +67,7 @@ export function FormNotice({ children }) {
  * asterisk, because 8.4 asks for it and because six of its eight are.
  *
  * `mark` picks which. The asterisk is `aria-hidden` and paired with a legend
- * above the form — an asterisk alone is a convention, not an explanation, and
+ * above the form, an asterisk alone is a convention, not an explanation, and
  * a screen reader already has `required` on the input itself.
  */
 function Mark({ required, mark }) {
@@ -131,8 +131,7 @@ export function Text({ label, name, type = 'text', hint, required, error, mark, 
  * A choice among three, as radios.
  *
  * A dropdown would hide two of the three options behind a click for no saving
- * in space, and this is the one field on the form that is genuinely optional —
- * so all of it is visible and none of it is pre-selected. "Email" chosen by
+ * in space, and this is the one field on the form that is genuinely optional, * so all of it is visible and none of it is pre-selected. "Email" chosen by
  * default is an answer the reader never gave.
  */
 export function Radio({ legend, name, options, hint, defaultValue, onChange }) {
@@ -170,7 +169,7 @@ export function Radio({ legend, name, options, hint, defaultValue, onChange }) {
  * catches skip anything the browser reports as unrendered, and a field they
  * skip catches nothing. `tabIndex={-1}` and `aria-hidden` keep it away from
  * everyone reaching the form by keyboard or by screen reader, and
- * `autoComplete="off"` stops a browser helpfully filling it in — which would
+ * `autoComplete="off"` stops a browser helpfully filling it in, which would
  * flag a real person as a bot.
  *
  * It is half the protection. See submitEnquiry for the other half.
@@ -189,7 +188,7 @@ export function Honeypot({ name }) {
  *
  * The corridor enquiry is the first form on the site to ask an open question,
  * and "what you're looking for" is the field the reply is actually written
- * from — so it is a textarea rather than another single line, and it wears the
+ * from, so it is a textarea rather than another single line, and it wears the
  * same `.field` the inputs do.
  */
 export function Area({ label, name, hint, required, error, mark, rows = 4, ...rest }) {
@@ -284,7 +283,7 @@ export function Select({
 }) {
   const id = useId()
   /* Controlled only when a `value` is actually given. `onChange` is passed
-     either way — it was inside this branch once, which silently dropped the
+     either way, it was inside this branch once, which silently dropped the
      handler on every uncontrolled select on the site. */
   const bind = value === undefined ? { defaultValue } : { value }
   return (
@@ -361,7 +360,7 @@ export function Check({ label, name, required, defaultChecked, error, onBlur, on
  * The interests multi-select, as toggle chips.
  *
  * A native multiple-select needs ctrl-click to pick a second option, which most
- * readers never discover — so six things you can tap are six buttons. It is a
+ * readers never discover, so six things you can tap are six buttons. It is a
  * real fieldset with real checkboxes underneath, so it submits and reads to a
  * screen reader like the checkbox group it is.
  */
@@ -404,7 +403,7 @@ export function Multi({ legend, name, options, hint }) {
  * The third-party sign-up buttons.
  *
  * Rendered disabled with the reason on them rather than as live buttons that
- * do nothing — a Google button that silently fails is worse than no button.
+ * do nothing, a Google button that silently fails is worse than no button.
  */
 export function Federated({ providers }) {
   return (
@@ -420,7 +419,7 @@ export function Federated({ providers }) {
         ))}
       </div>
       <small className="field__hint">
-        Not connected yet — use the form above.
+        Not connected yet, use the form above.
       </small>
     </div>
   )

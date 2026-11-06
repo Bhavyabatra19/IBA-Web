@@ -1,5 +1,5 @@
 /**
- * About — the four mission pillars (Advocate, Connect, Educate, Enable) as
+ * About, the four mission pillars (Advocate, Connect, Educate, Enable) as
  * frosted glass cards over the client's red light-arcs image
  * (public/images/mission-bg.jpg). Each icon is drawn for its pillar and sits
  * in a neon ring with an orbiting spark.
@@ -46,7 +46,7 @@ export const PILLARS = [
     ),
     short:
       'Corridors that bring governments, institutions, investors and innovators together, with trusted pathways between markets.',
-    full: 'Our corridors facilitate connections to bring together governments, institutions, investors, enterprises, and innovators to create trusted pathways for market entry, tokenization, investment, and cross-border collaboration. We build pathways between jurisdictions with policy, capital, technology, and market access working together. Promoting institutional and commercial rails, easing Web3 ecosystems to move between markets—turning fragmented opportunities into connected, scalable corridors for the digital economy.',
+    full: 'Our corridors facilitate connections to bring together governments, institutions, investors, enterprises, and innovators to create trusted pathways for market entry, tokenization, investment, and cross-border collaboration. We build pathways between jurisdictions with policy, capital, technology, and market access working together. Promoting institutional and commercial rails, easing Web3 ecosystems to move between markets, turning fragmented opportunities into connected, scalable corridors for the digital economy.',
   },
   {
     key: 'educate',
@@ -62,7 +62,7 @@ export const PILLARS = [
     ),
     short:
       'A steady pool of trained Web3 talent, built through the Red Club, Experience Centers and industry-led programs.',
-    full: 'Creating a systematic talent pool with enhanced holistic learning programs to enhance education with practical experiences and industry validation for real-world opportunities. Building a steady resource of trained Web3 talent by connecting students, developers, professionals, and entrepreneurs with practical skills, expert mentors, live projects, and industry networks through the Red Club and Experience Centers programs, and industry-led programs—equipping learners to develop, deploy, and scale blockchain and tokenization solutions across global ecosystems.',
+    full: 'Creating a systematic talent pool with enhanced holistic learning programs to enhance education with practical experiences and industry validation for real-world opportunities. Building a steady resource of trained Web3 talent by connecting students, developers, professionals, and entrepreneurs with practical skills, expert mentors, live projects, and industry networks through the Red Club and Experience Centers programs, and industry-led programs, equipping learners to develop, deploy, and scale blockchain and tokenization solutions across global ecosystems.',
   },
   {
     key: 'enable',
@@ -78,7 +78,7 @@ export const PILLARS = [
     ),
     short:
       'Advisory, tokenization expertise and technical capability that turn Web3 ambition into production-ready reality.',
-    full: 'We bridge the gap between intent, infrastructure, and adoption. Enabling Web3 ambition to evolve into production-ready reality through sophisticated infrastructure with structured strategy for growth and scale. IBA provides the strategic advisory, tokenization expertise, consulting, and technical capabilities organizations need to design, build, and deploy blockchain solutions at scale—from market strategy and ecosystem design to technology implementation and launch.',
+    full: 'We bridge the gap between intent, infrastructure, and adoption. Enabling Web3 ambition to evolve into production-ready reality through sophisticated infrastructure with structured strategy for growth and scale. IBA provides the strategic advisory, tokenization expertise, consulting, and technical capabilities organizations need to design, build, and deploy blockchain solutions at scale, from market strategy and ecosystem design to technology implementation and launch.',
   },
 ]
 

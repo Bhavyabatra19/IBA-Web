@@ -1,5 +1,5 @@
 /**
- * Expertise — the four core capabilities as a four-point wheel (after the
+ * Expertise, the four core capabilities as a four-point wheel (after the
  * client's reference): a dark panel, "One Web3 Corridor" on a silver hub, one
  * glass segment per capability (red, silver, red, black) in a glowing red
  * halo, and the four dark glass cards round it. Hover,
@@ -90,7 +90,7 @@ const cardTone = (i) => (i === 3 ? TONES[3] : RED)
 const toneVars = (t) => ({ '--q': t.q, '--ink': t.ink, '--q-hi': t.glass[0], '--q-lo': t.glass[2] })
 
 /* The wheel: four ring segments around "One Web3 Corridor", each with a
-   pill-shaped tab ending in a red bead, its icon in the middle — the first
+   pill-shaped tab ending in a red bead, its icon in the middle, the first
    top-left with its tab left, the rest the same shape turned a quarter at a
    time (a pinwheel). The active segment steps out from the centre; hovering
    or tapping a segment picks it, the same as its card. */

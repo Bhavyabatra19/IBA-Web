@@ -5,14 +5,14 @@
  *
  * Each says what its section is, rather than being a generic ornament:
  *
- *   services — a stack. Six slabs, one per service, twisting as they rise.
+ *   services, a stack. Six slabs, one per service, twisting as they rise.
  *              The page is called The Consulting Stack; this is that word.
- *   studio   — a network. Nodes on shells, joined to their nearest neighbours,
+ *   studio, a network. Nodes on shells, joined to their nearest neighbours,
  *              which is what an ecosystem of 75+ partners looks like.
- *   library  — a shelf. Documents fanned like files in a drawer, one pulled
+ *   library, a shelf. Documents fanned like files in a drawer, one pulled
  *              proud of the rest.
  *
- * Everything is deterministic — no Math.random — for the reason core.js gives:
+ * Everything is deterministic, no Math.random, for the reason core.js gives:
  * an object that reshuffles itself between reloads cannot be art-directed, and
  * a scrubbed animation that does it cannot be scrubbed.
  *
@@ -48,7 +48,7 @@ function silverMaterial(extra = {}) {
 }
 
 /* ================================================================== */
-/* services — the stack                                               */
+/* services, the stack                                               */
 /* ================================================================== */
 
 function buildStack({ quality }) {
@@ -62,7 +62,7 @@ function buildStack({ quality }) {
 
   const slabs = []
   for (let i = 0; i < COUNT; i++) {
-    /* One slab is red — the service you are on. It is the only accent in the
+    /* One slab is red, the service you are on. It is the only accent in the
        object, so the eye lands on it before it reads the stack. */
     const accent = i === 2
     const mat = accent
@@ -118,7 +118,7 @@ function buildStack({ quality }) {
 }
 
 /* ================================================================== */
-/* studio — the network                                               */
+/* studio, the network                                               */
 /* ================================================================== */
 
 const GOLDEN = Math.PI * (1 + Math.sqrt(5))
@@ -187,7 +187,7 @@ function buildNetwork({ quality }) {
   const e = new THREE.Euler()
   const s = new THREE.Vector3()
   for (let i = 0; i < nodes.length; i++) {
-    /* a few deliberately larger nodes give the cloud a hierarchy — a field of
+    /* a few deliberately larger nodes give the cloud a hierarchy, a field of
        identical dots reads as noise */
     const big = rand(i, 5) > 0.86
     const r = (0.032 + rand(i, 2) * 0.026) * (big ? 2.4 : 1)
@@ -220,7 +220,7 @@ function buildNetwork({ quality }) {
   lines.frustumCulled = false
   group.add(lines)
 
-  /* IBA at the centre of its own ecosystem — the one warm thing in the object */
+  /* IBA at the centre of its own ecosystem, the one warm thing in the object */
   const coreGeo = new THREE.IcosahedronGeometry(0.2, 1)
   disposables.push(coreGeo)
   const coreMat = new THREE.MeshStandardMaterial({
@@ -258,7 +258,7 @@ function buildNetwork({ quality }) {
 }
 
 /* ================================================================== */
-/* library — the shelf                                                */
+/* library, the shelf                                                */
 /* ================================================================== */
 
 function buildShelf({ quality }) {
@@ -282,7 +282,7 @@ function buildShelf({ quality }) {
           envMapIntensity: 1.5,
           emissive: new THREE.Color(RED),
           /* Low. Pushed up it stops being a lit object and becomes a flat red
-             rectangle — the highlight raking across it is what says "card". */
+             rectangle, the highlight raking across it is what says "card". */
           emissiveIntensity: 0.1,
           transparent: true,
         })
@@ -329,7 +329,7 @@ function buildShelf({ quality }) {
         )
         c.rotation.set(0.05, -a + Math.sin(t * 0.4 + phase) * 0.02, 0)
       }
-      /* Seen along the fan, not down its throat — square-on, the front card
+      /* Seen along the fan, not down its throat, square-on, the front card
          covers the six behind it and the object has no depth to read.
          Turned toward the key rather than away from it: the other way round,
          the faces are lit only by env.js's crimson rim and every card comes

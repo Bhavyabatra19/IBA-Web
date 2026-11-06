@@ -1,5 +1,5 @@
 /**
- * The IBA Framework — its four dimensions, each with its number, icon
+ * The IBA Framework, its four dimensions, each with its number, icon
  * (24-unit line drawing) and description. Shown on About as the site's
  * standard card grid (by request: the section laid out like the rest of the
  * site); it replaces the earlier hub-and-pills graphic (IbaFramework.jsx).
@@ -9,7 +9,7 @@ export const FRAMEWORK = [
   {
     title: 'Interoperable Web3 Ecosystem',
     tone: 'light',
-    text: 'IBA helps organizations navigate diverse jurisdictions and unlock cross-border opportunities in the Web3 economy. Connecting policymakers, institutions, investors, technology providers, and innovators, we enable market entry, advance tokenization initiatives, and foster trusted pathways for blockchain adoption—bridging local ecosystems to build a more connected, interoperable global digital economy.',
+    text: 'IBA helps organizations navigate diverse jurisdictions and unlock cross-border opportunities in the Web3 economy. Connecting policymakers, institutions, investors, technology providers, and innovators, we enable market entry, advance tokenization initiatives, and foster trusted pathways for blockchain adoption, bridging local ecosystems to build a more connected, interoperable global digital economy.',
     icon: (
       <>
         <path d="M12 3.5 16 6v4.5l-4 2.5-4-2.5V6Z" />
@@ -21,7 +21,7 @@ export const FRAMEWORK = [
   {
     title: 'Decentralized Global Focus',
     tone: 'dark',
-    text: 'IBA combines on-the-ground presence, regulatory expertise, and institutional partnerships across emerging and established markets to build cross-border Web3 Corridors. Connecting jurisdictions, global financial markets, capital, technology, and talent, we create structured pathways for market access, cross-border investment, and tokenization of real-world assets—bridging traditional finance and decentralized ecosystems to unlock institutional opportunities and accelerate the growth of an interconnected global digital economy.',
+    text: 'IBA combines on-the-ground presence, regulatory expertise, and institutional partnerships across emerging and established markets to build cross-border Web3 Corridors. Connecting jurisdictions, global financial markets, capital, technology, and talent, we create structured pathways for market access, cross-border investment, and tokenization of real-world assets, bridging traditional finance and decentralized ecosystems to unlock institutional opportunities and accelerate the growth of an interconnected global digital economy.',
     icon: (
       <>
         <circle cx="12" cy="12" r="9" />
@@ -32,7 +32,7 @@ export const FRAMEWORK = [
   {
     title: 'Resource & Sectoral Expertise',
     tone: 'light',
-    text: 'Mobilize and strengthen talent, capabilities, and industry expertise needed to accelerate blockchain adoption and tokenization at scale. Through capacity building, industry-led training, strategic consulting, advisory, and mentoring, IBA empowers organizations and professionals to identify high-value use cases, develop sector-specific Web3 solutions, and translate innovation into real-world applications—driving adoption, unlocking new opportunities, and scaling impact across industries and global ecosystems.',
+    text: 'Mobilize and strengthen talent, capabilities, and industry expertise needed to accelerate blockchain adoption and tokenization at scale. Through capacity building, industry-led training, strategic consulting, advisory, and mentoring, IBA empowers organizations and professionals to identify high-value use cases, develop sector-specific Web3 solutions, and translate innovation into real-world applications, driving adoption, unlocking new opportunities, and scaling impact across industries and global ecosystems.',
     icon: (
       <>
         <circle cx="12" cy="8" r="3" />
@@ -47,7 +47,7 @@ export const FRAMEWORK = [
   {
     title: 'Policy, Advocacy, and Standards',
     tone: 'dark',
-    text: 'Advance responsible Web3 adoption by shaping regulatory frameworks, contributing to global blockchain standards and fostering policy dialogue among governments, regulators, institutions and industry leaders. IBA promotes regulatory clarity, interoperability and trusted frameworks for blockchain innovation and tokenization, helping align emerging technologies with evolving market needs. Guided by the UN Sustainable Development Goals (SDGs) and anchored by Tech Zero, IBA encourages sustainable, inclusive and responsible Web3 initiatives—connecting policy, technology and real-world impact to support a more transparent, accessible and sustainable digital economy.',
+    text: 'Advance responsible Web3 adoption by shaping regulatory frameworks, contributing to global blockchain standards and fostering policy dialogue among governments, regulators, institutions and industry leaders. IBA promotes regulatory clarity, interoperability and trusted frameworks for blockchain innovation and tokenization, helping align emerging technologies with evolving market needs. Guided by the UN Sustainable Development Goals (SDGs) and anchored by Tech Zero, IBA encourages sustainable, inclusive and responsible Web3 initiatives, connecting policy, technology and real-world impact to support a more transparent, accessible and sustainable digital economy.',
     icon: (
       <>
         <path d="M13 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h5" />

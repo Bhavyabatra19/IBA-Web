@@ -6,11 +6,11 @@
  * pages: on every route change the title, the description, the canonical and
  * the share tags are rewritten from the table in seo.js.
  *
- * Tags are created on first use and then reused — the alternative, clearing and
+ * Tags are created on first use and then reused, the alternative, clearing and
  * re-adding them per navigation, churns the head on every click for no gain.
  *
  * ⚠ This runs after the page has loaded, so it is invisible to anything that
- * reads raw HTML — which is most crawlers other than Google, and EVERY social
+ * reads raw HTML, which is most crawlers other than Google, and EVERY social
  * link preview. See the note at the top of seo.js for the two ways to fix that;
  * both are deployment work rather than changes here.
  */
@@ -73,8 +73,7 @@ export function applySeo(path) {
   meta('property', 'og:title', page.title)
   meta('property', 'og:description', page.description)
   meta('property', 'og:url', window.location.origin + path)
-  /* ⚠ NO SHARE IMAGE. There is no og:image because there is no artwork for one
-     — a 1200×630 card is a design job, not a code one. Without it a shared link
+  /* ⚠ NO SHARE IMAGE. There is no og:image because there is no artwork for one, a 1200×630 card is a design job, not a code one. Without it a shared link
      renders as a plain text row. The logo is the wrong thing to substitute: at
      card size it crops to an unreadable square. */
   meta('name', 'twitter:card', 'summary_large_image')

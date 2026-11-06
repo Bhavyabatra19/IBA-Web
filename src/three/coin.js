@@ -5,7 +5,7 @@
  *
  * Geometry, not a texture. The profile is revolved with LatheGeometry over
  * half a turn, and the flat cut face is a ShapeGeometry of the same profile's
- * cross-section — so when the halves separate you are looking at a solid
+ * cross-section, so when the halves separate you are looking at a solid
  * object that has been divided, not at two hollow shells.
  *
  *   LatheGeometry maps a profile point (r, y) at angle φ to
@@ -16,7 +16,7 @@
  *
  * The face carries no letterform, numeral, or existing crypto mark. Its design
  * is a raised rim, two concentric half-rings, a ring of radial index notches,
- * and a central aperture — a real hole through the profile, so the lattice
+ * and a central aperture, a real hole through the profile, so the lattice
  * inside is visible as a glint before the coin ever opens.
  */
 
@@ -67,7 +67,7 @@ function latheProfile() {
 
 /**
  * The flat cut face, as a 2D outline in (z, y).
- * It is the profile mirrored through z = 0 — an annulus cross-section, which
+ * It is the profile mirrored through z = 0, an annulus cross-section, which
  * is two closed loops, so it is built as a Shape with a hole rather than as a
  * single self-touching contour.
  */
@@ -136,7 +136,7 @@ function buildRings(side) {
 }
 
 /**
- * Radial index notches around the field. Instanced — they are the only part
+ * Radial index notches around the field. Instanced, they are the only part
  * of the object with a meaningful count, and they read as machining rather
  * than as ornament.
  */
@@ -157,7 +157,7 @@ function buildNotches(side, count) {
     pos.set(Math.cos(phi) * r, Math.sin(phi) * r, FIELD - 0.004)
     e.set(0, 0, phi)
     q.setFromEuler(e)
-    // every fourth notch is longer — an index mark, so the ring has a readable
+    // every fourth notch is longer, an index mark, so the ring has a readable
     // rhythm instead of being a uniform texture
     scl.set(i % 4 === 0 ? 1.55 : 1, 1, 1)
     m.compose(pos, q, scl)
@@ -174,18 +174,18 @@ function buildNotches(side, count) {
 /**
  * Polished silver, struck rather than brushed.
  *
- * It was noticeably rougher and more anisotropic — a machined, satin finish.
+ * It was noticeably rougher and more anisotropic, a machined, satin finish.
  * The look being matched is a minted coin: a mirror that carries a hard-edged
  * highlight and drops to near-black where it turns away from the light. Three
  * numbers do that, and they all pull the same way:
  *
- *   · roughness down. Roughness is the width of a reflected highlight — at 0.29
+ *   · roughness down. Roughness is the width of a reflected highlight, at 0.29
  *     every source arrives as a soft patch, which is satin. Lower is a streak
  *     with an edge.
  *   · anisotropy down, not off. It stretches the highlight along the brushing
  *     direction, which is what said "machined"; at 0.28 the trace of it is left
  *     as a grain in the field without smearing the specular into a band.
- *   · envMapIntensity up. A metal has no colour of its own — it is entirely the
+ *   · envMapIntensity up. A metal has no colour of its own, it is entirely the
  *     room, scaled by this. Up is what turns the brighter env into a brighter
  *     coin rather than the same coin in a brighter room.
  *
@@ -201,7 +201,7 @@ function buildNotches(side, count) {
  * Widening it is what makes the object read as struck metal.
  *
  * Anisotropy went back up with it. It smears the highlight along one direction,
- * which breaks a specular up rather than concentrating it — on a coin that is
+ * which breaks a specular up rather than concentrating it, on a coin that is
  * the machining, and it is working against the shine rather than with it.
  */
 export function buildCoinMaterial({ quality = 'high' } = {}) {
@@ -211,7 +211,7 @@ export function buildCoinMaterial({ quality = 'high' } = {}) {
     roughness: 0.36,
     anisotropy: quality === 'low' ? 0 : 0.75,
     anisotropyRotation: 0,
-    /* A clearcoat is a second, sharper reflection laid over the first — which
+    /* A clearcoat is a second, sharper reflection laid over the first, which
        is exactly the thing being removed. Kept only as a trace, so the surface
        still has a sealed quality rather than looking like raw cast metal. */
     clearcoat: 0.1,
@@ -223,16 +223,15 @@ export function buildCoinMaterial({ quality = 'high' } = {}) {
 }
 
 /**
- * The interior cut face. Still darker and rougher than the struck surface —
- * the inside of a coin is not polished — but lifted with it, or the halves
+ * The interior cut face. Still darker and rougher than the struck surface, * the inside of a coin is not polished, but lifted with it, or the halves
  * would open onto a hole rather than onto metal.
  */
 export function buildCutMaterial() {
   return new THREE.MeshPhysicalMaterial({
     color: 0x8d959d,
     metalness: 1.0,
-    /* still rougher than the struck face above — the inside of a coin is not
-       polished — but the gap between the two narrowed as the face came down */
+    /* still rougher than the struck face above, the inside of a coin is not
+       polished, but the gap between the two narrowed as the face came down */
     roughness: 0.48,
     envMapIntensity: 1,
     transparent: true,
@@ -276,14 +275,14 @@ export function buildCoin({ quality = 'high' } = {}) {
      * The cut face.
      *
      * Its normal points along ±X and the camera sits on the Z axis, so while
-     * the coin is shut this plane is exactly edge-on — it should project to
+     * the coin is shut this plane is exactly edge-on, it should project to
      * nothing at all. What it actually produced was a dark hairline straight
      * down the middle of the coin: two coplanar faces at x = 0, both in a
      * material deliberately darker than the coin, z-fighting for the same
      * fragments and picked up by anti-aliasing.
      *
      * There is nothing to see here until the halves part, so the scene shows
-     * these two meshes only once they have — see coin.caps in scene.js.
+     * these two meshes only once they have, see coin.caps in scene.js.
      */
     const capMesh = new THREE.Mesh(cap, cutMat)
     capMesh.visible = false

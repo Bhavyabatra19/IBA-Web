@@ -9,7 +9,7 @@
  * changing them. Styles in brandbook.css (.inp). Reduced motion: still.
  */
 
-export default function IndiaPulse({ x, y, label = 'India', sub, card, small }) {
+export default function IndiaPulse({ x, y, label = 'India', sub, card, cardSm, small }) {
   return (
     <span className={`inp${small ? ' inp--small' : ''}`} style={{ left: `${x}%`, top: `${y}%` }} aria-hidden="true">
       <span className="inp__glow" />
@@ -19,7 +19,7 @@ export default function IndiaPulse({ x, y, label = 'India', sub, card, small }) 
           <circle cx="12" cy="11.2" r="4" />
         </svg>
         {card && (
-          <span className={`inp__card inp__card--${card}`}>
+          <span className={`inp__card inp__card--${card}${cardSm ? ` inp__card--sm-${cardSm}` : ''}`}>
             <span className="inp__leader" />
             <b>{label}</b>
             {sub && <small>{sub}</small>}

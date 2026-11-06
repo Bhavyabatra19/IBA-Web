@@ -1,5 +1,5 @@
 /**
- * Built by experts, across the ecosystem — partner chips in two marquees that
+ * Built by experts, across the ecosystem, partner chips in two marquees that
  * run against each other, as frosted glass cards on a dark red band lit by
  * sweeping arcs (after the client's reference). After the presence globe.
  *

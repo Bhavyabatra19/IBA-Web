@@ -1,11 +1,11 @@
 ﻿/**
- * 2.6 — Verifyble. Dark band.
+ * 2.6, Verifyble. Dark band.
  *
  * Copy and the four things Verifyble carries on the left; a drawn diagram of
  * the same four on the right.
  *
  * This band used to claim the WebGL stage and pin for three viewports while the
- * coin opened. It no longer does either — the section is a normal band now, and
+ * coin opened. It no longer does either, the section is a normal band now, and
  * the stage is live only in the hero and the closing. The icons in the diagram
  * are the same fragments as the list beside it, so the two cannot drift.
  */
@@ -45,8 +45,8 @@ const ICONS = {
 }
 
 /* What used to be one long sentence listing four things. A paragraph is the
-   wrong shape for a list — the reader has to hold four items in a clause to
-   count them — so the four are the list and the paragraph is the one line that
+   wrong shape for a list, the reader has to hold four items in a clause to
+   count them, so the four are the list and the paragraph is the one line that
    says what they add up to.
 
    The order is the diagram's, not a ranking: these four are the four satellites
@@ -218,7 +218,7 @@ export default function Verifyble() {
       /* ---- then it issues, endlessly ----
          The rings breathe out of phase, innermost leading, which reads as a
          signal leaving the node rather than the whole diagram resizing.
-         Paused off screen — an infinite tween behind the viewport is work the
+         Paused off screen, an infinite tween behind the viewport is work the
          reader never sees. Built per tween: GSAP writes onto a trigger config. */
       const whileOnScreen = () => ({
         trigger: el,
@@ -261,16 +261,16 @@ export default function Verifyble() {
   return (
     <section className="vfy section band band--dark" ref={root} id="verifyble">
       <div className="wrap">
-        {/* Everything the band says is in the left column — the claim, the four
-            things Verifyble carries, the way through — and the object it all
+        {/* Everything the band says is in the left column, the claim, the four
+            things Verifyble carries, the way through, and the object it all
             describes is beside it. The column takes the wider share of the row,
             because the four are set two by two inside it. */}
         <div className="vfy__inner">
           <div className="vfy__copy">
-            <p className="eyebrow" data-rise>Our Product — For Institutions</p>
+            <p className="eyebrow" data-rise>Our Product, For Institutions</p>
             <h2 className="h2 h2--col display" data-clip>
               <span className="line">
-                <span className="line__inner">Verifyble —</span>
+                <span className="line__inner">Verifyble , </span>
               </span>
               <span className="line">
                 <span className="line__inner">
@@ -283,7 +283,7 @@ export default function Verifyble() {
             </p>
 
             {/* The rise is per item rather than on the list, so the four arrive
-                one after another — the same order the diagram assembles its
+                one after another, the same order the diagram assembles its
                 four nodes in, beside them. */}
             <ul className="vfy__list">
               {INCLUDES.map((it) => (

@@ -1,5 +1,5 @@
 /**
- * 8.4 — the enquiry form.
+ * 8.4, the enquiry form.
  *
  * One component, two homes: inside the modal and inline on the Connect page.
  * Same fields, same validation, same handler, because 8.4 says so and because
@@ -10,15 +10,15 @@
  * end to say six things were wrong makes the reader hunt for six fields; a form
  * that speaks as you leave each one is answering while there is still context
  * for the answer. So: a field is checked when it is left, and re-checked on
- * every keystroke ONLY once it is already in error — which is what lets a
+ * every keystroke ONLY once it is already in error, which is what lets a
  * message clear the moment it stops being true, without a field turning red
  * while it is still being typed into for the first time.
  *
  * Required fields are marked with an asterisk AND a legend above the form.
  * Colour alone would be the whole marking for a reader who cannot see it.
  *
- * The fields are uncontrolled — they hold their own text and nothing re-renders
- * per keystroke — and every change is mirrored into the store so a closed and
+ * The fields are uncontrolled, they hold their own text and nothing re-renders
+ * per keystroke, and every change is mirrored into the store so a closed and
  * reopened modal comes back with what was typed. See remember().
  */
 
@@ -67,7 +67,7 @@ import {
  * on submit is a form that lied twice.
  *
  * The email pattern is deliberately loose. Anything stricter rejects addresses
- * that are perfectly valid — new TLDs, plus-addressing, apostrophes — and the
+ * that are perfectly valid, new TLDs, plus-addressing, apostrophes, and the
  * only check that actually proves an address works is sending to it.
  */
 const RULES = {
@@ -79,7 +79,7 @@ const RULES = {
         ? ''
         : "That doesn't look like an email address.",
   organisation: (v) => (v.trim() ? '' : 'Please tell us your organisation and its website.'),
-  topic: (v) => (v ? '' : 'Pick the closest match — you can explain below.'),
+  topic: (v) => (v ? '' : 'Pick the closest match, you can explain below.'),
   message: (v) => (v.trim() ? '' : 'Tell us what you’re working on.'),
   consent: (v) => (v ? '' : 'We need your agreement before we can reply.'),
   /* optional: checked only when a file has been chosen */
@@ -87,7 +87,7 @@ const RULES = {
     if (!f || !f.name) return ''
     const ext = f.name.split('.').pop().toLowerCase()
     if (!DOC_TYPES.includes(ext)) return 'Please attach a PDF, Word, PowerPoint, Excel or image file.'
-    if (f.size > DOC_MAX_MB * 1024 * 1024) return `That file is over ${DOC_MAX_MB} MB — please attach a smaller one.`
+    if (f.size > DOC_MAX_MB * 1024 * 1024) return `That file is over ${DOC_MAX_MB} MB, please attach a smaller one.`
     return ''
   },
 }
@@ -144,7 +144,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
 
   const submit = async (e) => {
     e.preventDefault()
-    /* On submit every rule runs again — blur is skipped by anyone who tabs
+    /* On submit every rule runs again, blur is skipped by anyone who tabs
        straight to the button or fills the form from a password manager. */
     const failed = Object.keys(RULES).filter((n) => !check(n))
     if (failed.length) {
@@ -199,7 +199,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
   if (outcome === NO_ENDPOINT || outcome === SEND_FAILED) {
     /* Two panels, one shape. FAILED is what a reader sees once there is a
        server that can fail; NO_ENDPOINT is what is true today. Neither claims
-       the other's story — see UNWIRED in enquiry.js. */
+       the other's story, see UNWIRED in enquiry.js. */
     const copy = outcome === NO_ENDPOINT ? UNWIRED : FAILED
     return (
       <div className="enq__end" data-bad role="alert">
@@ -315,7 +315,7 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
         onBlur={() => check('message')}
         onChange={recheck('message')}
       />
-      {/* optional supporting document — kept with the enquiry; it is sent once
+      {/* optional supporting document, kept with the enquiry; it is sent once
           the form has a server to send to (see submitEnquiry) */}
       <FileField
         label="Upload document"

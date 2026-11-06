@@ -1,5 +1,5 @@
 ﻿/**
- * 5.0 — The Ecosystem landing.
+ * 5.0, The Ecosystem landing.
  *
  * One page, four bands, not four pages. The brief sets 6.1–6.4 as H2s under a
  * single H1, and it is right to: Clients, Government Projects, Corridors and
@@ -7,8 +7,7 @@
  * ecosystem wants to see it whole. The nav's five Studio items are anchors into
  * this page rather than five destinations.
  *
- * Its two headline figures — 75+ ecosystem partners, 70+ global affiliations —
- * are the counters the rest of the site already publishes, imported rather than
+ * Its two headline figures, 75+ ecosystem partners, 70+ global affiliations, * are the counters the rest of the site already publishes, imported rather than
  * restated. See the note at the top of content.js.
  *
  * ⚠ The client and government walls are typeset names, not logos. See the
@@ -31,7 +30,7 @@ import {
 } from '../../sections/service/ServiceBlocks'
 import { CRED_STATS, IMPACT_PRIMARY } from '../../content'
 /* Written by scripts/fetch-logos.mjs. Imported rather than fetched, so a client
-   with no mark renders its name from the first paint — no 404, no broken image. */
+   with no mark renders its name from the first paint, no 404, no broken image. */
 import LOGOS from '../../logos.json'
 import {
   CLIENT_GROUPS,
@@ -68,7 +67,7 @@ export default function Studio() {
       intro={STUDIO_INTRO}
       /* The four sections are the rail, and every node is a link: the console is
          this page's contents list as well as its picture, which is why the jump
-         list that used to sit under the figures below is gone — the same four
+         list that used to sit under the figures below is gone, the same four
          anchors twice inside one screen is one time too many. */
       showcase={{
         /* Not "Studio": the H1 is already that word, and the same word set
@@ -83,13 +82,13 @@ export default function Studio() {
     >
       {/* Shares the hero's dark ground rather than opening a band: it is the
           intro's two figures shown, not a section of its own. Two dark bands
-          meeting are spaced as one region — see .band--dark + .band--dark. */}
+          meeting are spaced as one region, see .band--dark + .band--dark. */}
       <Band tone="dark" id="reach">
         <Stats items={REACH} cols={2} />
       </Band>
 
       {/* The five ways in. Three of them are anchors further down this page and
-          two are on pages that already hold the material — so this is a table
+          two are on pages that already hold the material, so this is a table
           of contents for the ecosystem rather than a menu of five destinations
           that would each need building first. */}
       <Band tone="light" id="ways-in" className="band--own">

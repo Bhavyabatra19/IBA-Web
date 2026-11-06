@@ -2,8 +2,8 @@
  * The world, drawn as coastline outlines poured full of a dot pattern.
  *
  * It was written for the home page's Web3 Corridor band and lived inside it.
- * Section 7 asks for the same map again — "the global presence map, filtered to
- * corridor countries, with animated red arcs between endpoints" — and a second
+ * Section 7 asks for the same map again, "the global presence map, filtered to
+ * corridor countries, with animated red arcs between endpoints", and a second
  * copy of nineteen coastlines is a second copy that goes stale on its own. So
  * the map is a component and the two places that show it pass in what is on it.
  *
@@ -19,7 +19,7 @@
  *
  * Shape and grain are separate problems on purpose: the coastlines are polygons
  * in real lon/lat, and the dots are an SVG pattern poured into them through a
- * mask. Finer dots are one number and they cost nothing — the whole map is a
+ * mask. Finer dots are one number and they cost nothing, the whole map is a
  * dozen paths whatever the density.
  */
 
@@ -32,8 +32,8 @@ import { reducedMotion, whileOnScreen } from '../lib/scroll'
 
 /**
  * Equirectangular, and the whole of it: x is longitude, y is latitude upside
- * down. Everything on this map — every coastline vertex, every pin and every
- * arc endpoint — goes through these two lines, which is the only reason the
+ * down. Everything on this map, every coastline vertex, every pin and every
+ * arc endpoint, goes through these two lines, which is the only reason the
  * pins land where the land is.
  */
 export const X = (lon) => lon + 180
@@ -43,7 +43,7 @@ export const Y = (lat) => 78 - lat
    the empty Arctic are half the height of a full map and none of its meaning. */
 export const VB = { x: 0, y: -6, w: 360, h: 156 }
 
-/** Map units to a percentage of the frame — what positions anything in the DOM
+/** Map units to a percentage of the frame, what positions anything in the DOM
     layer over the drawing, since that layer is a box and not a viewBox. */
 export const pct = ({ lat, lon }) => ({
   left: `${((X(lon) - VB.x) / VB.w) * 100}%`,
@@ -62,7 +62,7 @@ const shape = (pts) =>
 
 /* Coarse but real: every vertex is an actual place. Accurate enough that the
    continents are recognisable at a glance and the pins sit on the right land,
-   which is all this has to be — it is a texture behind four labels, not an
+   which is all this has to be, it is a texture behind four labels, not an
    atlas. */
 export const LAND = [
   /* North America, from the Alaskan west tip clockwise */
@@ -165,19 +165,18 @@ export const WATER = [
 /**
  * The four endpoints of the two corridors, and the name and nothing else.
  *
- * Each carried a line under it — "Emerging Markets", "Innovation and Talent" —
- * and four of those turned a map into four paragraphs floating over one. What
+ * Each carried a line under it, "Emerging Markets", "Innovation and Talent", * and four of those turned a map into four paragraphs floating over one. What
  * the map has to say is where the corridors reach.
  *
  * `side` and `dy` place the LABEL; the dot is always on the coordinate and
  * never moves. Both are per market rather than worked out, because the only
- * thing that decides them is what else is nearby — and what is nearby is fixed.
+ * thing that decides them is what else is nearby, and what is nearby is fixed.
  *
  * India and the UAE are the reason `dy` exists. 79°E and 54°E is seven percent
  * of a world map apart, at almost the same latitude, and a label is wider than
  * that gap: side by side, each one reached across the other's dot. So they are
- * separated up and down instead — the UAE's label above its dot, India's below
- * — which is the one axis they have any room on.
+ * separated up and down instead, the UAE's label above its dot, India's below
+ *, which is the one axis they have any room on.
  */
 export const MARKETS = [
   { name: 'LATAM', lat: -10, lon: -55, side: 'left', dy: 0 },
@@ -206,7 +205,7 @@ export const CORRIDOR_ARCS = [
  *
  * A straight line between two pins reads as a ruler laid on a map; an arc reads
  * as a route. The lift is a fraction of the leg's own length, so a short hop
- * (India–UAE) stays shallow and a long one (Spain–LATAM) sweeps — which is what
+ * (India–UAE) stays shallow and a long one (Spain–LATAM) sweeps, which is what
  * makes three arcs on one map look like three different journeys rather than
  * three copies of one curve.
  *
@@ -227,7 +226,7 @@ const leg = ([a, b]) => {
   const dy = y2 - y1
   const len = Math.hypot(dx, dy) || 1
   const lift = len * 0.3
-  /* the perpendicular with the negative y — up the screen, whichever way round
+  /* the perpendicular with the negative y, up the screen, whichever way round
      the endpoints were given */
   const nx = dy / len
   const ny = -dx / len
@@ -246,11 +245,11 @@ const leg = ([a, b]) => {
  * @param {object} p
  * @param {Array}  [p.markets] which pins to show. Defaults to all four.
  * @param {Array}  [p.arcs]    pairs of market names to draw a route between.
- *   Empty by default — the home page's band is a map of where the corridors
+ *   Empty by default, the home page's band is a map of where the corridors
  *   reach, and the flagship page is the one that shows them travelling.
  * @param {string} [p.className] added to the map box.
  * @param {React.ReactNode} [p.children] anything else to lay over the drawing,
- *   in the same box the pins are positioned in — so a caller can place its own
+ *   in the same box the pins are positioned in, so a caller can place its own
  *   markers with the exported `pct()` and have them land on the same
  *   coordinates. The Global Presence map does exactly that: its markers are
  *   interactive and carry a tooltip, which is a different thing from the
@@ -265,7 +264,7 @@ export default function WorldMap({
 }) {
   const root = useRef(null)
   /* The pattern and the mask are referenced by url(#id), which is resolved
-     against the whole document — so two maps on one page would both draw
+     against the whole document, so two maps on one page would both draw
      through whichever mask was defined last. useId gives each instance its own;
      the strip is because React's ids contain colons and an SVG id is safer
      without them. */
@@ -277,7 +276,7 @@ export default function WorldMap({
      [data-live] is the switch, set here and nowhere else, so under reduced
      motion the routes are simply drawn and nothing travels along them. That is
      why there is no reduced-motion rule for the arcs in the stylesheet, and
-     must not be. [data-hold] parks them while the map is off screen — they are
+     must not be. [data-hold] parks them while the map is off screen, they are
      endless animations on a section the reader has left. */
   useLayoutEffect(() => {
     const el = root.current
@@ -318,7 +317,7 @@ export default function WorldMap({
             <circle cx="1.3" cy="1.3" r="0.52" fill="currentColor" />
           </pattern>
           <mask id={`land${uid}`}>
-            {/* white keeps, black cuts — so the seas are drawn the same way the
+            {/* white keeps, black cuts, so the seas are drawn the same way the
                 coastlines are, and stay in the same coordinate space */}
             {LAND.map((pts, i) => (
               <path key={`l${i}`} d={shape(pts)} fill="#fff" />

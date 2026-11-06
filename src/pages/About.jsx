@@ -1,13 +1,13 @@
 ﻿/**
- * /about — the alliance, in five movements.
+ * /about, the alliance, in five movements.
  *
  * Kept as one file rather than five section files: unlike the home page, whose
  * sections are independent set-pieces reordered and rewritten on their own,
  * this is a single document that reads top to bottom, and splitting it would
  * mean opening five files to follow one argument.
  *
- * Band rhythm alternates the same way the home page does — dark opening, light,
- * dark, light, dark — so the two pages feel like one site.
+ * Band rhythm alternates the same way the home page does, dark opening, light,
+ * dark, light, dark, so the two pages feel like one site.
  *
  * The section ids match the nav's About items exactly, so every entry in that
  * dropdown lands on the thing it names.
@@ -27,7 +27,7 @@ import GlobalPresence from '../sections/GlobalPresence'
 import IbaCore from '../sections/IbaCore'
 /* `Go` is the app's internal link, so the two buttons on this page scroll to the
    band at its foot rather than reloading the site to reach the home page's.
-   `Orbit` is the wheel the Consulting Stack's six steps are taken on — the four
+   `Orbit` is the wheel the Consulting Stack's six steps are taken on, the four
    initiatives are the same shape of thing and are taken the same way. */
 import { Go, Orbit } from '../sections/service/ServiceBlocks'
 import ImpactSlab from '../components/ImpactSlab'
@@ -36,7 +36,7 @@ import { IMPACT_PRIMARY, IMPACT_SECONDARY } from '../content'
 import { ADVISORS_PENDING, MISSION, MISSION_PILLARS, VISION } from '../about'
 
 /* ------------------------------------------------------------------ */
-/* 3.3 — initiatives                                                   */
+/* 3.3, initiatives                                                   */
 /* ------------------------------------------------------------------ */
 
 const INITIATIVES = [
@@ -48,7 +48,7 @@ const INITIATIVES = [
   {
     n: '02',
     name: 'Blockchain Governance Council',
-    body: 'An open global multi-stakeholder collaborative network that synergizes efforts with members and partners to co-develop innovative solutions around policy, frameworks, compliance, security, taxation and standards — empowering stakeholders to achieve their goals in the blockchain ecosystem.',
+    body: 'An open global multi-stakeholder collaborative network that synergizes efforts with members and partners to co-develop innovative solutions around policy, frameworks, compliance, security, taxation and standards, empowering stakeholders to achieve their goals in the blockchain ecosystem.',
   },
   {
     n: '03',
@@ -63,7 +63,7 @@ const INITIATIVES = [
 ]
 
 /* ------------------------------------------------------------------ */
-/* 3.4 — the team                                                      */
+/* 3.4, the team                                                      */
 /* ------------------------------------------------------------------ */
 
 /* The bios are marked pending rather than invented. `bio: null` renders the
@@ -115,7 +115,7 @@ export default function About() {
       <AboutHero />
 
       {/* ---------------- 3.2 Vision ---------------- */}
-      {/* Centred, in display type, with a red rule above it — the brief's own
+      {/* Centred, in display type, with a red rule above it, the brief's own
           treatment, and the right one: this is the only block on the site that
           is a single sentence asked to carry a whole section, so nothing sits
           beside it to divide the attention. */}
@@ -132,7 +132,7 @@ export default function About() {
             {VISION.support}
           </p>
           {/* Signed, not hidden. The brief marks this wording unapproved and a
-              reader of the live site would have no way to know — see VISION. */}
+              reader of the live site would have no way to know, see VISION. */}
           {VISION.draft && (
             <p className="vis__draft" data-rise>
               Drafted from IBA’s positioning. Awaiting confirmation of the approved
@@ -165,7 +165,7 @@ export default function About() {
           </div>
 
           {/* Four, numbered, because the statement above names them in this
-              order — the cards are that sentence opened out. */}
+              order, the cards are that sentence opened out. */}
           <ol className="mis__pillars">
             {MISSION_PILLARS.map((p) => (
               <li key={p.n} data-rise>
@@ -264,7 +264,7 @@ export default function About() {
                   supplied, so there is no grid: eight grey silhouettes standing
                   in for real people who have not agreed to be named is a worse
                   outcome than a line saying the profiles are coming. See
-                  ADVISORS in about.js — filling that array is the only edit. */}
+                  ADVISORS in about.js, filling that array is the only edit. */}
               <p className="ab__pending">{ADVISORS_PENDING}</p>
             </div>
             <Go className="btn btn--primary btn--sm" href="#connect" data-enquiry="">
@@ -279,14 +279,14 @@ export default function About() {
 
       {/* ---------------- 3.5 Impact ---------------- */}
       {/* band--own because Global Presence above it is dark too, and two dark
-          bands are otherwise spaced as one region — which is right when the
+          bands are otherwise spaced as one region, which is right when the
           second is a figure strip belonging to the first, and wrong here, where
           both are full sections with their own heads. */}
       <section className="section band band--dark band--own" id="impact-numbers">
         <div className="wrap">
           <div className="ab__head">
             <p className="eyebrow" data-rise>Impact</p>
-            {/* an h2, not the h1 the brief gives it — the page already has one,
+            {/* an h2, not the h1 the brief gives it, the page already has one,
                 and two would leave a screen reader without a single title */}
             <h2 className="h2 display" data-clip>
               <span className="line">
@@ -311,7 +311,7 @@ export default function About() {
               {IMPACT_PRIMARY.map((s) => (
                 <div className="impact__card" key={s.label} data-rise>
                   {/* the final value is in the markup, so it is correct before
-                      the counter runs — and stays correct if it never does */}
+                      the counter runs, and stays correct if it never does */}
                   <span
                     className="impact__k"
                     data-count={s.to}
@@ -350,7 +350,7 @@ export default function About() {
 
           <div className="ab__tokens">
             <h3 className="ab__tokensName" data-rise>
-              When Code Becomes Capital — <em>Tokenomics</em>
+              When Code Becomes Capital, <em>Tokenomics</em>
             </h3>
             <Tokenomics />
           </div>

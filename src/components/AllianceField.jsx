@@ -1,15 +1,15 @@
 ﻿/**
- * The About hero's scroll piece — scattered points drawing together into a
+ * The About hero's scroll piece, scattered points drawing together into a
  * connected network.
  *
  * The subject is the section's own claim: "We are not a vendor. We are an
- * alliance — a network of members, advisors, institutions, regulators and
+ * alliance, a network of members, advisors, institutions, regulators and
  * builders who move together." So the animation is that sentence: begins as
  * unrelated points, ends as one structure, and the links only exist once the
  * nodes have found each other. Nothing decorative is added on top.
  *
  * Everything is numbers until the last step. GSAP scrubs a plain array of
- * coordinates and one render pass writes them to the SVG — so links can follow
+ * coordinates and one render pass writes them to the SVG, so links can follow
  * moving nodes without reading a single computed style, and the idle drift is
  * a term in the same expression rather than a competing animation.
  */
@@ -23,14 +23,14 @@ const CX = W / 2
 const CY = H / 2
 
 /* Deterministic scatter. Random would re-roll on every mount and the sequence
-   would never be the same twice — which is fine for noise and wrong for a
+   would never be the same twice, which is fine for noise and wrong for a
    composition somebody has approved. */
 const rand = (i, salt) => {
   const v = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453
   return v - Math.floor(v)
 }
 
-/** hub, six around it, eleven on the rim — read as centre, core, network. */
+/** hub, six around it, eleven on the rim, read as centre, core, network. */
 const NODES = [{ x: CX, y: CY, r: 7.5, kind: 'hub' }]
 for (let i = 0; i < 6; i += 1) {
   const a = (i / 6) * Math.PI * 2 - Math.PI / 2
@@ -41,8 +41,8 @@ for (let i = 0; i < 11; i += 1) {
   NODES.push({ x: CX + Math.cos(a) * 374, y: CY + Math.sin(a) * 197, r: 3.4, kind: 'out' })
 }
 
-/* Each node also carries where it starts — flung out along its own radius, so
-   the convergence reads as gathering rather than as a shuffle — and its own
+/* Each node also carries where it starts, flung out along its own radius, so
+   the convergence reads as gathering rather than as a shuffle, and its own
    drift phase, so the field never breathes in unison. */
 NODES.forEach((n, i) => {
   const dx = n.x - CX
@@ -149,7 +149,7 @@ export default function AllianceField() {
       /* Links only once there is something to link. */
       tl.fromTo(linkGroup, { opacity: 0 }, { opacity: 1, duration: 0.55 }, 0.42)
 
-      /* A slow turn of the whole field — the difference between the points
+      /* A slow turn of the whole field, the difference between the points
          moving and us moving around them. */
       tl.fromTo(cam, { rotate: -5, scale: 1.1 }, { rotate: 3, scale: 1, duration: 1 }, 0)
 

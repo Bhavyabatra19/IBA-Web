@@ -1,5 +1,5 @@
 /**
- * 7.3 — Welcome back.
+ * 7.3, Welcome back.
  *
  * Three fields and two ways out: forgotten password, and no account yet.
  *
@@ -23,10 +23,10 @@ export default function SignIn() {
 
   const submit = (e) => {
     e.preventDefault()
-    /* TODO: POST to the real sign-in endpoint. Nothing is verified here — this
+    /* TODO: POST to the real sign-in endpoint. Nothing is verified here, this
        opens the same local preview the sign-up form does. */
     const email = String(new FormData(e.currentTarget).get('email') || '')
-    setNotice('Nothing was verified — there is no sign-in backend yet. Opening a local preview of the Library instead.')
+    setNotice('Nothing was verified, there is no sign-in backend yet. Opening a local preview of the Library instead.')
     startPreview(email.split('@')[0])
     setTimeout(() => navigate('/library/dashboard'), 1400)
   }

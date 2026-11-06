@@ -9,12 +9,12 @@
  *
  * It stays out of the way until the reader is a screen down. At the top of the
  * page it would be a button that does nothing, and the pages here open on a
- * hero that is the whole viewport — so the threshold is a viewport, not an
+ * hero that is the whole viewport, so the threshold is a viewport, not an
  * arbitrary number of pixels.
  *
  * The visibility is a plain scroll listener and deliberately not a
  * ScrollTrigger: this reads window.scrollY live, so it cannot be thrown off by
- * the home hero installing five viewports of pin spacer after it mounts — the
+ * the home hero installing five viewports of pin spacer after it mounts, the
  * failure nav.js documents and whileOnScreen exists to avoid.
  */
 

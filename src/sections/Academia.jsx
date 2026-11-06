@@ -3,8 +3,7 @@
  *
  * Two doors, and the split IS the content: a student enrols and an institution
  * buys, and a reader is one or the other before they are anything else. The
- * Education landing page makes the same split with the same two destinations —
- * this is that choice offered on the home page, where most people meet it.
+ * Education landing page makes the same split with the same two destinations, * this is that choice offered on the home page, where most people meet it.
  *
  * Deliberately two cards and nothing more. The pages behind them carry the
  * programmes, the tiers and the terms; repeating any of that here would be a

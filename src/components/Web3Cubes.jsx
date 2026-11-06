@@ -9,7 +9,7 @@
  * render's own. Each cube, with its platform and a margin of its own glow, is
  * also cut out as its own image (cube-*.png) and laid over the render at
  * exactly its place; the base has a matching soft hole under each, so at rest
- * the two add back up to the render, with no darker patch over the beam. The cut-outs float and turn slightly — a few
+ * the two add back up to the render, with no darker patch over the beam. The cut-outs float and turn slightly, a few
  * render pixels at most, less than their glow margin, so the cube underneath
  * never shows past its cut-out. Each carries its own edge pulse
  * (cube-*-glow.png: its crisp bright pixels), which moves with it.
@@ -24,7 +24,7 @@ const SRC = 1254 // the render is square, in px
 const DIR = '/images/w3-cubes'
 const pct = (v) => `${((v / SRC) * 100).toFixed(3)}%`
 
-/** [name, x, y, w, h (render px), float s, delay s, turn deg] — the WEB3
+/** [name, x, y, w, h (render px), float s, delay s, turn deg], the WEB3
     cube last, so it sits over its neighbours' margins as in the render. */
 const CUBES = [
   ['eth', 458, 38, 339, 302, 6.4, -0.8, 1.2],

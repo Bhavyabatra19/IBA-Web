@@ -1,5 +1,5 @@
 /**
- * Expertise — The Outcome as a timeline (after the client's reference): a red
+ * Expertise, The Outcome as a timeline (after the client's reference): a red
  * line across the middle with six dots, the numbered cards alternating above
  * and below it, each joined to its dot by a dashed connector. Odd items sit
  * above (dot near the card's left), even below (dot near its right), so the

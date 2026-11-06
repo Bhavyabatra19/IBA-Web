@@ -1,14 +1,22 @@
 /**
- * About — Welcome to IBA, the founder's message.
+ * About, Welcome to IBA, the founder's message.
  *
  * Laid out as the reference site's "Message From the Founder": a large
  * portrait on the left; on the right the opening line as a large quote, a
  * short note of a few lines under it, and the LinkedIn mark.
  *
+ * `full` (optional): the complete message, opened from "Read the full note"
+ * in a pop-up (a native <dialog>: Escape and the close button shut it,
+ * focus returns to the button).
+ *
  * Styles in brandbook.css (.fl2).
  */
+import { useRef } from 'react'
 
-export default function FounderLetter({ lead, note, linkedin }) {
+export default function FounderLetter({ lead, note, linkedin, full }) {
+  const dialog = useRef(null)
+  const open = () => dialog.current?.showModal()
+  const close = () => dialog.current?.close()
   return (
     <div className="fl2">
       <div className="fl2__intro">
@@ -43,7 +51,12 @@ export default function FounderLetter({ lead, note, linkedin }) {
             ))}
           </div>
 
-          <div data-rise>
+          <div className="fl2__actions" data-rise>
+            {full && (
+              <button type="button" className="btn btn--primary fl2__more" onClick={open}>
+                Read the full note <span aria-hidden="true">→</span>
+              </button>
+            )}
             {/* the LinkedIn mark, linked to Raj Kapoor's profile (by request,
                 in place of a "Connect on LinkedIn" button) */}
             <a
@@ -64,6 +77,37 @@ export default function FounderLetter({ lead, note, linkedin }) {
           </div>
         </div>
       </div>
+
+      {full && (
+        <dialog
+          className="fl2__dialog"
+          data-lenis-prevent=""
+          ref={dialog}
+          aria-labelledby="fl2-full-title"
+          onClick={(e) => e.target === dialog.current && close()}
+        >
+          <div className="fl2__dialogIn">
+            <button type="button" className="fl2__close" onClick={close} aria-label="Close the founder's note">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+              </svg>
+            </button>
+            <p className="fl2__dialogEyebrow">A message from our founder</p>
+            <h2 className="fl2__dialogTitle" id="fl2-full-title">
+              {lead}
+            </h2>
+            {full.map((p) => (
+              <p className="fl2__dialogText" key={p.slice(0, 32)}>
+                {p}
+              </p>
+            ))}
+            <p className="fl2__dialogSign">
+              <strong>Raj Kapoor</strong>
+              <span>Founder, India Blockchain Alliance</span>
+            </p>
+          </div>
+        </dialog>
+      )}
     </div>
   )
 }

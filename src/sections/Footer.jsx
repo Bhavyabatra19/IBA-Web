@@ -1,5 +1,5 @@
 /**
- * Global footer — a dark, rounded panel at the hero's width, so the page ends
+ * Global footer, a dark, rounded panel at the hero's width, so the page ends
  * in the same frame the hero opens it in.
  *
  * The brand and its line on the left, then five link columns (FOOTER in
@@ -60,12 +60,11 @@ export default function Footer() {
       <div className="ft__panel">
         <div className="ft__top">
           <div className="ft__brand">
-            <a className="ft__logo" href="/" onClick={(e) => go(e, '/')} aria-label="India Blockchain Alliance — home">
+            <a className="ft__logo" href="/" onClick={(e) => go(e, '/')} aria-label="India Blockchain Alliance home page">
               <img src="/iba-logo-blocks.png" alt="" />
             </a>
-            <p className="ft__triad">
-              Insights <i>|</i> Impact <i>|</i> Innovation
-            </p>
+            {/* IBA's one tagline (by request, 11-06) */}
+            <p className="ft__triad">Rewriting the Rules with Web3</p>
           </div>
 
           {FOOTER.map((col) => (
@@ -108,7 +107,7 @@ export default function Footer() {
         <div className="ft__strip">
           <p>
             © India Blockchain Alliance{' '}
-            {new Date().getFullYear()} · Connecting Economies. Block by Block.
+            {new Date().getFullYear()}
           </p>
           <div className="ft__legal">
             <a href={PENDING.privacy}>Privacy Policy</a>

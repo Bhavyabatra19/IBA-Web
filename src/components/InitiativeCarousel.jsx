@@ -1,5 +1,5 @@
 /**
- * Expertise — IBA Initiatives as a carousel of logo cards on a dark red
+ * Expertise, IBA Initiatives as a carousel of logo cards on a dark red
  * ground with arcs of light (by request). A native scroll-snap track, so it
  * shows three cards on a wide screen, two on a tablet and one on a phone
  * without any measuring; the arrows and dots move it a card at a time, and
@@ -7,7 +7,7 @@
  * focus is on it or it is off screen. Reduced motion: no autoplay.
  *
  * ⚠ LOGOS: only India AI Alliance has a logo in the project. The others show
- * a monogram badge until their marks are supplied — set `logo` below.
+ * a monogram badge until their marks are supplied, set `logo` below.
  */
 
 import { useEffect, useRef, useState } from 'react'

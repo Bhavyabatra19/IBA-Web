@@ -1,7 +1,7 @@
 /**
  * The Tokenization graphic: the client's render of a token on a glowing
  * platform, wired to five real-world assets (an institution, a building,
- * a certificate, gold and forest land) — public/images/tokenization-hero.webp,
+ * a certificate, gold and forest land), public/images/tokenization-hero.webp,
  * from the supplied PNG (kept beside it).
  *
  * Shown as supplied, like the other pages' hero renders, with its black

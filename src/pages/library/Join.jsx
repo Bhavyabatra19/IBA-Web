@@ -1,8 +1,8 @@
 ﻿/**
- * 7.2 — Join the IBA Library.
+ * 7.2, Join the IBA Library.
  *
  * The full field set, on a page rather than in the nav's modal: eight fields is
- * more than a modal should hold, and the modal stays what it is — a quick way
+ * more than a modal should hold, and the modal stays what it is, a quick way
  * back in for someone who already has an account.
  *
  * ⚠ Nothing is submitted anywhere. The button starts a local preview of the
@@ -33,10 +33,9 @@ export default function Join() {
   const submit = (e) => {
     e.preventDefault()
     /* TODO: POST to the real sign-up endpoint, then let the server decide where
-       the reader goes. Until one exists, do not pretend an account was made —
-       say what actually happened and open the preview. */
+       the reader goes. Until one exists, do not pretend an account was made, say what actually happened and open the preview. */
     const name = new FormData(e.currentTarget).get('name')
-    setNotice('No account was created — there is no sign-up backend yet. Opening a local preview of the Library instead.')
+    setNotice('No account was created, there is no sign-up backend yet. Opening a local preview of the Library instead.')
     startPreview(name)
     setTimeout(() => navigate('/library/dashboard'), 1400)
   }

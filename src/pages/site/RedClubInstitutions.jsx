@@ -1,5 +1,5 @@
 /**
- * IBA Red Club for institutions (/red-club/institutions) — the "Know more"
+ * IBA Red Club for institutions (/red-club/institutions), the "Know more"
  * page behind the overview's institutions door: the proposition, the
  * institutional advantage, the connected journey, the Experience Centers and
  * how a campus partnership runs. Copy in redClubContent.js.

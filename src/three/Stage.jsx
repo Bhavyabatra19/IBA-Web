@@ -4,8 +4,8 @@
  * The one canvas, and the only place three.js is loaded.
  *
  * The scene module is imported dynamically, so three (~600kB) is fetched after
- * first paint and never blocks the headline. Until it lands — or if WebGL is
- * unavailable, or the context is lost — a quiet still stands in, and the page
+ * first paint and never blocks the headline. Until it lands, or if WebGL is
+ * unavailable, or the context is lost, a quiet still stands in, and the page
  * remains completely readable.
  *
  * The render loop is the GSAP ticker, which is also what drives Lenis and
@@ -19,7 +19,7 @@ import { stageBus } from './stageBus'
 
 function pickQuality() {
   if (isMobile() || isCoarse()) return 'low'
-  // deviceMemory is Chromium-only; absent elsewhere, which is fine — this is a
+  // deviceMemory is Chromium-only; absent elsewhere, which is fine, this is a
   // downgrade hint, not a gate
   const mem = navigator.deviceMemory
   if (typeof mem === 'number' && mem <= 4) return 'low'
@@ -103,7 +103,7 @@ export default function Stage() {
         root.dataset.failed = 'true'
       })
 
-    /* pointer parallax — off on touch, where there is no hover to speak of */
+    /* pointer parallax, off on touch, where there is no hover to speak of */
     let onMove = null
     if (!still && !isCoarse()) {
       onMove = (e) => {

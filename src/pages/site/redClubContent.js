@@ -1,5 +1,5 @@
 /**
- * IBA Red Club — the copy for the overview (/red-club) and its two detail
+ * IBA Red Club, the copy for the overview (/red-club) and its two detail
  * pages (/red-club/institutions, /red-club/learners), from the client's two
  * reference pages (11-04-2026): "IBA Red Club · Web3 Corridor" (the
  * institution and learner programme) and "Red Club smart webpage" (the

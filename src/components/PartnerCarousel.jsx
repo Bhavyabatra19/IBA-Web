@@ -39,7 +39,7 @@ export default function PartnerCarousel() {
 
   const go = (n) => setPage(((n % count) + count) % count)
 
-  /* autoplay — only while on screen, not paused, and motion allowed */
+  /* autoplay, only while on screen, not paused, and motion allowed */
   useEffect(() => {
     if (paused || reducedMotion()) return
     const el = root.current

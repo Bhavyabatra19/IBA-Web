@@ -1,5 +1,5 @@
 /**
- * Floating cubes — the About hero's graphic: the client's render of glowing
+ * Floating cubes, the About hero's graphic: the client's render of glowing
  * brushed-metal cubes adrift on black, one of them lit red.
  *
  * The cubes are cut straight out of that one flat render
@@ -22,7 +22,7 @@ const BLOCKS = [
   ['block-1.png', 0, 368, 601, 625, 8, 20, 0], // large
   ['block-3.png', 637, 201, 512, 538, 6.5, 18, -4], // red
   // the white cube (by request, to pair with the red one): block-4 recoloured
-  // to brushed white — same shape and shading, its red glow turned white
+  // to brushed white, same shape and shading, its red glow turned white
   ['block-4-white.png', 588, 711, 521, 539, 7.5, 22, -1],
   ['block-5.png', 138, 929, 402, 433, 6, 15, -3], // small
 ]

@@ -8,7 +8,7 @@
  * Deliberately NOT the WebGL coin in three/coin.js. That one is the home page's
  * subject and lives on the shared canvas, which only one section may hold at a
  * time; this is DOM, so the About hero can run its own piece without taking the
- * stage away from anything — and the two never contend for the same rig.
+ * stage away from anything, and the two never contend for the same rig.
  *
  * Rim construction (the classic cylinder-side trick):
  *   rotate(a) translateY(-r) rotateX(90deg)
@@ -29,7 +29,7 @@ import { gsap, reducedMotion } from '../lib/scroll'
 /* Each returns <g> using currentColor, so one definition renders twice:
    a white copy offset down (the lit lower lip) under a dark copy. */
 const GLYPHS = {
-  /* Ethereum — the canonical six-facet mark */
+  /* Ethereum, the canonical six-facet mark */
   eth: (
     <g fill="currentColor">
       <path d="M32 4 L32 24.2 L49 32 Z" opacity="0.75" />
@@ -40,13 +40,13 @@ const GLYPHS = {
       <path d="M15 32 L32 40.6 L32 24.2 Z" opacity="0.6" />
     </g>
   ),
-  /* Bitcoin — filled outlines with even-odd counters. Built from strokes the
+  /* Bitcoin, filled outlines with even-odd counters. Built from strokes the
      two bowls overlap into a blob, so the bowls are explicit shapes here. */
   btc: (
     <g fill="currentColor" fillRule="evenodd">
       {/* ticks */}
       <path d="M26 6 h5 v9 h-5 z M34 6 h5 v9 h-5 z M26 49 h5 v9 h-5 z M34 49 h5 v9 h-5 z" />
-      {/* stem — also forms the left wall of both counters */}
+      {/* stem, also forms the left wall of both counters */}
       <path d="M16 14 h9 v36 h-9 z" />
       {/* bowls: outer starts at x=22 so the ring closes under the stem, while
           each counter starts at x=25 and is therefore wide enough to read */}
@@ -101,8 +101,8 @@ function CoinFace({ variant, glyph }) {
 }
 
 /**
- * @param rim  'strips' — the faceted cylinder above, true to any angle.
- *             'discs'  — `segments` round discs stacked through the thickness.
+ * @param rim  'strips', the faceted cylinder above, true to any angle.
+ *             'discs', `segments` round discs stacked through the thickness.
  *             Every disc is a circle, so the silhouette stays perfectly round
  *             at any tilt; it only reads as layers near edge-on (90°), which a
  *             coin that tumbles but never turns side-on does not reach. Fewer
@@ -131,7 +131,7 @@ export default function CoinStack({ count = 10, segments = 24, float = true, rim
     [count]
   )
 
-  /* Ambient float — deliberately unsynced from the scroll timeline. Off when
+  /* Ambient float, deliberately unsynced from the scroll timeline. Off when
      the owner already moves every coin each frame (the home hero's wheel):
      a second transform per coin there is only extra work. */
   useLayoutEffect(() => {

@@ -1,4 +1,4 @@
-/** Ecosystem — initiatives, key partners, councils, people, partnering. */
+/** Ecosystem, initiatives, key partners, councils, people, partnering. */
 
 import { PageHero, Section, Cards, Form, Btn } from '../../components/Kit'
 import EcoHolo from '../../components/EcoHolo'

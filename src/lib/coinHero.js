@@ -6,7 +6,7 @@
  * Four scenes over one pinned range, scrubbed 1:1 with the wheel:
  *
  *   Scene 1 (0–20%)   drift + camera push-in
- *   Scene 2 (20–45%)  the ring splits into two halves — red core ignites
+ *   Scene 2 (20–45%)  the ring splits into two halves, red core ignites
  *   Scene 3 (45–70%)  doors hold open, the alliance claim resolves between them
  *   Scene 4 (70–100%) halves glide back, interlock, become the mark
  *
@@ -18,14 +18,13 @@
  *     of drifting
  *
  * This is DOM choreography, so it lives beside the page's other DOM
- * choreography in lib/ rather than in rig.js — that file is the WebGL
+ * choreography in lib/ rather than in rig.js, that file is the WebGL
  * storyboard and deliberately imports no DOM at all.
  */
 
 import { gsap, EASE } from './scroll'
 
-/** The metallic interlock "click". No equivalent in the shared vocabulary —
-    it is the only hard-edged overshoot in the piece. */
+/** The metallic interlock "click". No equivalent in the shared vocabulary, it is the only hard-edged overshoot in the piece. */
 const CLICK = 'back.out(2.6)'
 
 /* Matches the `max-width: 760px` breakpoint that halves --coin in the
@@ -63,7 +62,7 @@ export function buildCoinHeroTimeline(root) {
   /* ---------------- base (scene 0) state ----------------
      The coins sit on a single ring rather than in a scattered pile. The ring is
      squashed vertically, which is what a circle looks like viewed from slightly
-     above — and Z tracks the ellipse so the lower coins really are nearer the
+     above, and Z tracks the ellipse so the lower coins really are nearer the
      camera than the upper ones.
 
      GSAP's transform order is translate → rotate(Z) → rotateY → rotateX, so
@@ -75,7 +74,7 @@ export function buildCoinHeroTimeline(root) {
   const coinSize = () => coins[0]?.offsetWidth || 260
   /* Radius has to clear the coins themselves or the ring reads as a clump.
      At 1.55x the disc width the arc spacing is ~70% of a coin, so they overlap
-     like links in a bracelet while the circle stays legible — and the hole in
+     like links in a bracelet while the circle stays legible, and the hole in
      the middle is where the headline sits. */
   const ringRadius = () => coinSize() * 1.55
   const SQUASH = 0.42 // vertical compression: a circle seen from above
@@ -113,7 +112,7 @@ export function buildCoinHeroTimeline(root) {
   const left = coins.filter((c) => c.dataset.side === 'left')
   const right = coins.filter((c) => c.dataset.side === 'right')
 
-  /* Where the halves interlock in scene 4 — one aligned stack, not the fan.
+  /* Where the halves interlock in scene 4, one aligned stack, not the fan.
      Collapsing the petal spread back to zero is what sells the "click". */
   const locked = {
     x: 0,
@@ -124,7 +123,7 @@ export function buildCoinHeroTimeline(root) {
     rotationY: -11,
   }
 
-  /* Every start state is written BEFORE the scrubbed timeline is built — a
+  /* Every start state is written BEFORE the scrubbed timeline is built, a
      scrub renders at progress 0 immediately, so a late set would be lost. */
   gsap.set(bloom, { opacity: 0, transformOrigin: '50% 50%' })
   gsap.set(revealItems, { opacity: 0, y: 48, scale: 0.94 })
@@ -147,7 +146,7 @@ export function buildCoinHeroTimeline(root) {
     },
   })
 
-  /* ================= SCENE 1 · 0–20% — DRIFT + PUSH IN ================= */
+  /* ================= SCENE 1 · 0–20%, DRIFT + PUSH IN ================= */
   tl.to(stack, { scale: 1.22, duration: 20, ease: EASE.camera }, 0)
     .to(
       coins,
@@ -167,7 +166,7 @@ export function buildCoinHeroTimeline(root) {
   tl.to(glow, { scale: 1.45, yPercent: 12, duration: 100, ease: EASE.drift }, 0)
   tl.to(grid, { yPercent: -9, opacity: 0.35, duration: 100 }, 0)
 
-  /* ================= SCENE 2 · 20–45% — SPLIT ================= */
+  /* ================= SCENE 2 · 20–45%, SPLIT ================= */
   const spread = (i) => 0.78 + i * 0.055
 
   /* Offsets stay relative to each coin's petal position, so the cluster keeps
@@ -202,7 +201,7 @@ export function buildCoinHeroTimeline(root) {
     .to(headline, { opacity: 0, scale: 1.16, y: -46, duration: 14, ease: EASE.camera }, 20)
     /* red light ignites in the opening. It starts small and tight so the glow
        still reads as coming FROM the seam rather than as the whole gap
-       brightening at once — which is the job the hard core line used to do. */
+       brightening at once, which is the job the hard core line used to do. */
     .fromTo(
       bloom,
       { scale: 0.18, opacity: 0 },
@@ -210,7 +209,7 @@ export function buildCoinHeroTimeline(root) {
       21
     )
 
-  /* ================= SCENE 3 · 45–70% — OPEN ================= */
+  /* ================= SCENE 3 · 45–70%, OPEN ================= */
   /* Absolute x here, not base-relative: the petal offsets are what left the
      inner coins overlapping the centre copy. Dropping them squares the two
      halves into clean doors that fully clear the revealed typography. */
@@ -252,7 +251,7 @@ export function buildCoinHeroTimeline(root) {
       47
     )
 
-  /* ================= SCENE 4 · 70–100% — CLOSE + EMBLEM ================= */
+  /* ================= SCENE 4 · 70–100%, CLOSE + EMBLEM ================= */
   tl.to(
     revealItems,
     {
@@ -265,7 +264,7 @@ export function buildCoinHeroTimeline(root) {
     },
     70
   )
-    /* both halves glide back and interlock — the petal fan collapses to a
+    /* both halves glide back and interlock, the petal fan collapses to a
        single aligned stack, which is what reads as "locked together" */
     .to(coins, { ...locked, duration: 22, ease: EASE.seat }, 72)
     /* the light shuts down as the halves close over it */

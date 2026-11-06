@@ -1,5 +1,5 @@
 /**
- * IBA's headline figures and footprint — the one source of truth.
+ * IBA's headline figures and footprint, the one source of truth.
  *
  * Every page, the SEO descriptions and the counters read from here, so a
  * figure is changed in one place and nowhere else. Before this file the site
@@ -36,7 +36,7 @@ export const FACTS = {
 }
 
 /**
- * Where IBA operates — the five regions of data/presence.json (India, the
+ * Where IBA operates, the five regions of data/presence.json (India, the
  * UAE, Spain for Europe, Zambia for Africa, LATAM for the Americas), in the
  * order the corridor copy names them.
  */
@@ -51,7 +51,7 @@ export const HQ_LINE = `Headquarters in India, with a presence in ${REGIONS.filt
   .replace(/, ([^,]*)$/, ' and $1')}`
 
 /**
- * The five regions as map pins, at real coordinates — the home page's
+ * The five regions as map pins, at real coordinates, the home page's
  * Flagship Programme map and the Web3 Corridor hero map both draw these.
  * side / dy place each label off its dot.
  */

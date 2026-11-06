@@ -1,5 +1,5 @@
 /**
- * 7 — Web3 Corridor, as content.
+ * 7, Web3 Corridor, as content.
  *
  * The flagship programme, and the one page on the site with a section of the
  * brief to itself. It is pulled out of the Ecosystem deliberately: a corridor is
@@ -7,26 +7,25 @@
  *
  * The two corridors themselves are NOT here. They are CORRIDORS in studio.js,
  * where the Ecosystem page already reads them, and both pages import that one
- * array — a corridor named on two pages under two spellings is the failure this
+ * array, a corridor named on two pages under two spellings is the failure this
  * file exists to avoid.
  */
 
 /* ================================================================== */
-/* 7.0 — the landing                                                  */
+/* 7.0, the landing                                                  */
 /* ================================================================== */
 
 /**
- * Two paragraphs, not one. The second is a claim about how IBA operates —
- * programmes, not events — and folding it onto the end of the definition is
+ * Two paragraphs, not one. The second is a claim about how IBA operates, * programmes, not events, and folding it onto the end of the definition is
  * what would bury it.
  */
 export const CORRIDOR_INTRO = [
-  'A Web3 Corridor is a structured cross-border programme that connects two or more markets across four dimensions: regulation, capital, talent and projects. It exists because the friction between emerging markets is rarely technical — it is regulatory ambiguity, missing introductions and no shared standard for what “credible” looks like.',
+  'A Web3 Corridor is a structured cross-border programme that connects two or more markets across four dimensions: regulation, capital, talent and projects. It exists because the friction between emerging markets is rarely technical, it is regulatory ambiguity, missing introductions and no shared standard for what “credible” looks like.',
   'IBA runs corridors as long-term programmes, not events.',
 ]
 
 /* ================================================================== */
-/* 7.1 — how corridors work                                           */
+/* 7.1, how corridors work                                           */
 /* ================================================================== */
 
 /**
@@ -37,7 +36,7 @@ export const CORRIDOR_INTRO = [
  * silently contradicts the paragraph above them.
  *
  * Unnumbered on purpose. They are four dimensions running at once, not four
- * stages — and the site's numbered block (`Steps`) would assert a sequence in
+ * stages, and the site's numbered block (`Steps`) would assert a sequence in
  * which capital comes after regulation and talent after both.
  */
 export const CORRIDOR_PILLARS = [
@@ -55,13 +54,13 @@ export const CORRIDOR_PILLARS = [
   },
   {
     name: 'Projects',
-    body: 'Sourcing and supporting the actual ventures that use the corridor — pilots, tokenized assets, public infrastructure and enterprise deployments.',
+    body: 'Sourcing and supporting the actual ventures that use the corridor, pilots, tokenized assets, public infrastructure and enterprise deployments.',
   },
 ]
 
 /**
  * ⚠ NOT WRITTEN. The brief marks the cadence a placeholder and says so in as
- * many words: "describe the recurring rhythm — delegations, roundtables, cohort
+ * many words: "describe the recurring rhythm, delegations, roundtables, cohort
  * intakes, reporting. To be supplied by IBA."
  *
  * So the four headings ship and the rhythm does not. A corridor that claims a
@@ -75,13 +74,13 @@ export const CORRIDOR_CADENCE = {
 }
 
 /* ================================================================== */
-/* 7.2 — join a corridor                                              */
+/* 7.2, join a corridor                                              */
 /* ================================================================== */
 
 /**
  * Who corridors are for, and the "I am a" dropdown on the form below.
  *
- * One list for both, because they ARE one list — the brief writes the field as
+ * One list for both, because they ARE one list, the brief writes the field as
  * "(dropdown, five options above)". Read as prose the entries need the sentence
  * after the name; read as options they need the name alone, which is why each
  * carries both rather than the dropdown slicing the label off a paragraph.
@@ -115,7 +114,7 @@ export const CORRIDOR_ROLES = CORRIDOR_AUDIENCES.map((a) => a.name)
 /**
  * The corridor field.
  *
- * The fourth option is what the page's secondary call to action does — see
+ * The fourth option is what the page's secondary call to action does, see
  * Corridor.jsx. "Propose a New Corridor" is not a second form, it is this
  * option on this one, and building it as a second form would be two enquiry
  * inboxes for the same enquiry.

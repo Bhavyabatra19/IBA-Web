@@ -6,7 +6,7 @@ import './kit.css'
 /* the brand guidelines (IBA Brand Guidelines v1.0), applied last so they
    override every earlier styling decision */
 import './brandbook.css'
-/* the site-wide floating motion (by request) — remove to switch it off */
+/* the site-wide floating motion (by request), remove to switch it off */
 import './float.css'
 
 /* Entrance states live behind `.js`, so if this bundle never runs the page is

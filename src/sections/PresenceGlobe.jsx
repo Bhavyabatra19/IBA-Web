@@ -1,5 +1,5 @@
 /**
- * Global presence — the headline, then the world drawn as the curved crown of
+ * Global presence, the headline, then the world drawn as the curved crown of
  * a globe, with the figures standing on it as pins. Light band.
  *
  * The map is Natural Earth's coastlines in real lon/lat (data/land-110m.json),
@@ -8,7 +8,7 @@
  * land on India, the UAE and Spain.
  *
  * The thickness is the land drawn again underneath itself, a little lower
- * each time and paler each time — the extruded look, from one shape — with
+ * each time and paler each time, the extruded look, from one shape, with
  * the layers blurred together so they blend into one soft shadow.
  */
 
@@ -17,7 +17,7 @@ import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { X, Y } from '../components/WorldMap'
 import presence from '../data/presence.json'
 /* Natural Earth 1:110m land (public domain), decoded once from the
-   world-atlas TopoJSON into [lon, lat] rings at 0.1° — Antarctica and specks
+   world-atlas TopoJSON into [lon, lat] rings at 0.1°, Antarctica and specks
    under 0.6 deg² dropped. Holes (inland seas, lakes) are rings of their own
    and are cut out by the even-odd fill. */
 import LAND from '../data/land-110m.json'
@@ -72,11 +72,12 @@ const byCountry = Object.fromEntries(presence.countries.map((c) => [c.country, c
 
 /* The corridor's five hubs on the map artwork (x, y as % of the image, on
    its glowing points), each with its role in the corridor (content review:
-   the map named India alone). */
+   the map named India alone). cardSm moves a tile on phones, where the map
+   is too small for the desktop placement. */
 const HUBS = [
   { label: 'Americas', sub: 'Infrastructure', x: 27.5, y: 64.2, card: 'right' },
-  { label: 'Europe', sub: 'Standards', x: 51, y: 37.4, card: 'above' },
-  { label: 'Africa', sub: 'Utility', x: 57.4, y: 63.2, card: 'right' },
+  { label: 'Europe', sub: 'Standards', x: 51, y: 37.4, card: 'above', cardSm: 'left' },
+  { label: 'Africa', sub: 'Utility', x: 57.4, y: 63.2, card: 'right', cardSm: 'below' },
   { label: 'UAE', sub: 'Launchpad', x: 63.6, y: 49, card: 'above' },
   { label: 'India', sub: 'Technical engine', x: 70.4, y: 56.6, card: 'right' },
 ]
@@ -115,8 +116,9 @@ export default function PresenceGlobe() {
             one global Web3 Corridor network for technology transfer,
             investment, entrepreneurship and ecosystem collaboration.
           </p>
-          <Go className="ib__cta pg__cta" href="/corridor" data-rise>
-            Explore Web3 Corridor
+          {/* the section's call to action (by request): join, not explore */}
+          <Go className="ib__cta pg__cta" href="/membership" data-rise>
+            Join the Alliance
           </Go>
         </header>
 
@@ -134,7 +136,7 @@ export default function PresenceGlobe() {
             decoding="async"
           />
           {HUBS.map((h) => (
-            <IndiaPulse key={h.label} x={h.x} y={h.y} label={h.label} sub={h.sub} card={h.card} small />
+            <IndiaPulse key={h.label} x={h.x} y={h.y} label={h.label} sub={h.sub} card={h.card} cardSm={h.cardSm} small />
           ))}
           <figcaption className="sr-only">
             IBA's hubs: {HUBS.map((h) => `${h.label}, ${h.sub}`).join('; ')}.

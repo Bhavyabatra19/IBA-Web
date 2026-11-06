@@ -1,10 +1,10 @@
 /**
- * 3.2 — The IBA Core. Light band.
+ * 3.2, The IBA Core. Light band.
  *
  * Six dimensions as a bento rather than a six-up grid. The point of the uneven
  * sizes is that they are not decorative: the widest claim gets the tallest
- * card, the two that are inherently wide subjects — a region, a set of
- * seventeen goals — get the wide cells, and the rest sit square. A 3x2 of
+ * card, the two that are inherently wide subjects, a region, a set of
+ * seventeen goals, get the wide cells, and the rest sit square. A 3x2 of
  * identical tiles said all six were the same size of claim.
  *
  * Extracted from About.jsx, which otherwise keeps its sections inline. That
@@ -31,14 +31,14 @@ import { gsap, ScrollTrigger, reducedMotion } from '../lib/scroll'
  * floating in the uncropped field would come out visibly smaller than its
  * neighbours for no reason a reader could see.
  *
- * `currentColor` is the card's own ink — near-black on the plain cards, white
- * on the red ones — so every neutral is an alpha of it. The one literal colour
+ * `currentColor` is the card's own ink, near-black on the plain cards, white
+ * on the red ones, so every neutral is an alpha of it. The one literal colour
  * is `.core__accent`, which flips the same way. Nothing is filled with an
  * opaque white, which is what lets a single drawing sit correctly on either
  * ground rather than needing a red variant of itself.
  *
  * Weight is carried by three classes rather than by a stroke-opacity on each
- * shape — l1 is the subject, l2 the structure around it, l3 the faintest
+ * shape, l1 is the subject, l2 the structure around it, l3 the faintest
  * scaffolding. The tiers are CSS variables, so the red cards can lift all three
  * at once: white at 0.1 on red is invisible, and hand-tuning forty opacity
  * attributes for two grounds is how a drawing ends up only working on one.
@@ -110,7 +110,7 @@ const ART = {
     </svg>
   ),
 
-  /* A framework with one clause settled and sealed — advocacy is the work of
+  /* A framework with one clause settled and sealed, advocacy is the work of
      closing them one at a time. */
   policy: (
     <svg viewBox="51 11 98 108" fill="none" aria-hidden="true">
@@ -151,7 +151,7 @@ const ART = {
     </svg>
   ),
 
-  /* Seventeen goals as a ring, anchored at the centre — which is what Tech Zero
+  /* Seventeen goals as a ring, anchored at the centre, which is what Tech Zero
      is in the sentence under it. */
   sdg: (
     <svg viewBox="52 17 96 96" fill="none" aria-hidden="true">
@@ -168,7 +168,7 @@ const ART = {
     </svg>
   ),
 
-  /* Sixteen verticals, held as a field rather than a list — the claim is
+  /* Sixteen verticals, held as a field rather than a list, the claim is
      breadth, and a list of sixteen names is not readable at this size. */
   sectors: (
     <svg viewBox="54 23 94 94" fill="none" aria-hidden="true">

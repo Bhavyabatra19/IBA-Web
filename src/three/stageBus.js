@@ -15,7 +15,7 @@ export const stageBus = {
   rig: null,
   /** whether a section that wants the canvas is currently on screen */
   live: false,
-  /** which section is holding it — for debugging and for the hero rail */
+  /** which section is holding it, for debugging and for the hero rail */
   owner: null,
   /** bumped whenever something changed that needs a redraw in on-demand mode */
   revision: 0,

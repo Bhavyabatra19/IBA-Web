@@ -2,7 +2,6 @@ import Hero from '../sections/Hero'
 import Credibility from '../sections/Credibility'
 import ImpactBand from '../sections/ImpactBand'
 import WhatWeDoCards from '../sections/WhatWeDoCards'
-import AcademiaCards from '../sections/AcademiaCards'
 import PresenceGlobe from '../sections/PresenceGlobe'
 import EcosystemMarquee from '../sections/EcosystemMarquee'
 import KnowledgeBase from '../sections/KnowledgeBase'
@@ -16,8 +15,8 @@ import MembershipBand from '../sections/MembershipBand'
  *   Credibility      light   the four figures, as cards
  *   Impact band      light   four figures with drawn line icons
  *   Corridor band    light   the flagship programme, left-aligned
- *   What we do       light   train, advise, build — three cards
- *   Academia cards   light   students and institutions — two cards
+ *   What we do       light   train, advise, build, three cards
+ *   Academia cards   light   students and institutions, two cards
  *   Presence globe   light   present in 14 countries, the curved map
  *   Ecosystem        light   partner chips in two opposing marquees
  *   Knowledge base   light   four library items, two up, and the sign-up
@@ -29,7 +28,7 @@ import MembershipBand from '../sections/MembershipBand'
  * These replace the earlier home bands (WebCorridor, WhatWeDo, Academia,
  * GlobalPresence, TrustedBy, Impact, Library, Closing). Their files are kept:
  * GlobalPresence and ImpactSlab still run on /about, and the rest are there
- * to reuse. The anchors they carried moved with them — #library is now the
+ * to reuse. The anchors they carried moved with them, #library is now the
  * knowledge base, #connect is get in touch.
  */
 export default function Home() {
@@ -40,7 +39,7 @@ export default function Home() {
    *
    * It scrubbed `background-position` on every dark band, and the only layer
    * that moved was the 84px grid in each band's ambient background. The brand
-   * guidelines took that background away — section 01 asks for flat colour and
+   * guidelines took that background away, section 01 asks for flat colour and
    * no gradients, so a dark band is now flat IBA Black (see the note in
    * styles.css). With no grid to move, the effect animated a property with
    * nothing in it: a ScrollTrigger per band, a scrub per frame, and no pixel
@@ -54,16 +53,17 @@ export default function Home() {
     <div>
       {/* the order from the content review (11-05-2026): who IBA is, what
           it does, where it operates (the Web3 Corridor and Global Presence,
-          one section), proof, who is with it, how to join, learning,
-          insights, contact */}
+          one section), membership in brief, proof, who is with it, insights,
+          contact (the Red Club & Learning section was removed by request;
+          Red Club remains a What IBA Does pillar) */}
       <Hero />
       <Credibility />
       <WhatWeDoCards />
       <PresenceGlobe />
+      {/* membership in brief, a black band under the corridor map (by request) */}
+      <MembershipBand />
       <ImpactBand />
       <EcosystemMarquee />
-      <MembershipBand />
-      <AcademiaCards />
       <KnowledgeBase />
       <GetInTouch />
     </div>

@@ -1,5 +1,5 @@
 /**
- * What we do — Web3 Advisory and Tokenization — as two cards. Light band.
+ * What we do, Web3 Advisory and Tokenization, as two cards. Light band.
  *
  * Follows the flagship-programme panel, at the hero's width. Each card has
  * a photo header in a red hue, with an icon badge; the copy sits beneath. On
@@ -45,6 +45,13 @@ const ICONS = {
     <>
       <path d="M6 18 24 9l18 9-18 9Z" />
       <path d="M13 21.5v9c0 2.8 5 5.5 11 5.5s11-2.7 11-5.5v-9M42 18v11" />
+    </>
+  ),
+  expand: (
+    <>
+      <circle cx="24" cy="24" r="15" />
+      <path d="M9 24h30M24 9c4.5 4 6.8 9 6.8 15S28.5 35 24 39" />
+      <path d="M31 13h8v8M39 13 29 23" />
     </>
   ),
 }
@@ -103,6 +110,17 @@ const CARDS = [
     href: '/red-club',
     img: '/images/card-students-art.jpg',
   },
+  /* ⚠ PLACEHOLDER (by request, 11-06): the copy, link and image wait for
+     IBA's data on UAE market expansion */
+  {
+    key: 'expand',
+    tag: 'Coming soon',
+    title: 'UAE Market Expansion',
+    body: 'Details coming soon: how IBA helps companies enter and grow in the UAE market.',
+    cta: 'Know more',
+    href: '/connect',
+    img: '/images/card-partnership.jpg',
+  },
 ]
 
 export default function WhatWeDoCards() {
@@ -120,13 +138,13 @@ export default function WhatWeDoCards() {
   return (
     <section className="wd wd--duo wd--art wd--pillars band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
-        <p className="hero__kicker wd__eyebrow" id="wd-title" data-rise>
-          <svg className="hero__kicker-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7L12 2.5Z" />
-            <path d="M3.5 7 12 11.5 20.5 7M12 11.5v10" />
-          </svg>
-          What IBA Does
-        </p>
+        {/* the section's main heading (by request), set like the other home
+            section titles: the site's H2 face, size and colour, centred */}
+        <header className="kb__head wd__head">
+          <h2 className="kb__title" id="wd-title" data-rise>
+            What IBA Does
+          </h2>
+        </header>
 
         <div className="wd__grid">
           {CARDS.map((c) => (

@@ -1,16 +1,15 @@
 /**
- * 8.3 — the Connect page.
+ * 8.3, the Connect page.
  *
  * For the reader who arrives from search or from the footer rather than from a
- * CTA — which means they have no topic, no page context and nothing pre-filled.
+ * CTA, which means they have no topic, no page context and nothing pre-filled.
  * That is the whole reason this page exists alongside the modal: everyone else
  * gets the overlay with their answer already chosen.
  *
  * The four quick paths come first and each opens the modal with its topic set,
  * because a reader who knows which of the four they are has already answered
  * the form's hardest question by clicking, and should not then be handed a list
- * of twelve. The inline form underneath is the same component the modal holds —
- * same fields, same validation, same handler, as 8.4 requires.
+ * of twelve. The inline form underneath is the same component the modal holds, * same fields, same validation, same handler, as 8.4 requires.
  *
  * It is a plain page rather than a ServicePage: a form is a task, and the long
  * scrolled hero those pages open with would put the first field below the fold.

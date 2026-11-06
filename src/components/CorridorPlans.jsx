@@ -1,5 +1,5 @@
 /**
- * Web3 Corridor membership plans — three tracks behind tabs (Web360 Founder
+ * Web3 Corridor membership plans, three tracks behind tabs (Web360 Founder
  * & Investor, Web360 Tokenization & Institutions, Indo–UAE Startup
  * Xchange), each with its three tier cards, from the
  * client's Corridor membership reference (11-04-2026). The cards reuse the

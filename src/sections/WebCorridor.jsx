@@ -1,14 +1,14 @@
 /**
  * Web3 Corridor feature band. Light.
  *
- * The flagship programme, sitting directly under the counters — so the reader
+ * The flagship programme, sitting directly under the counters, so the reader
  * meets the numbers that say IBA is real and then immediately the thing it most
  * wants to be known for.
  *
  * The map is components/WorldMap, which this band used to own outright. Section
  * 7 asks for the same map on the corridor page with routes drawn on it, and two
  * copies of nineteen coastlines would drift apart the first time either was
- * corrected — so the map moved out and this band passes it the four markets.
+ * corrected, so the map moved out and this band passes it the four markets.
  *
  * No arcs here, deliberately. This is where the corridors REACH; the flagship
  * page is where they travel, and giving the teaser the same picture as the page
@@ -46,11 +46,11 @@ export default function WebCorridor() {
           </p>
           <h2 className="h2 h2--col display" data-clip>
             <span className="line">
-              <span className="line__inner">Web3 Corridors —</span>
+              <span className="line__inner">Web3 Corridors , </span>
             </span>
             <span className="line">
               <span className="line__inner">
-                <em>Connecting Economies</em>
+                <em>Rewriting the Rules with Web3</em>
               </span>
             </span>
           </h2>

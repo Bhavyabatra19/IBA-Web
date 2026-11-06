@@ -1,7 +1,7 @@
 /**
  * The tokenization graphic: the home hero's real-world-asset coins (Gold,
  * Real Estate, Carbon Credits, Bonds & Debt, Commodities, Infrastructure,
- * Agriculture, Green Assets — public/images/hero-rwa-coins) in an overlapping
+ * Agriculture, Green Assets, public/images/hero-rwa-coins) in an overlapping
  * ring, after the client's reference: eight coins evenly round a circle, each
  * tilted along it and tucked under the next clockwise, so they read as one
  * wreath. Each floats gently on its own beat and the ring turns very slowly.

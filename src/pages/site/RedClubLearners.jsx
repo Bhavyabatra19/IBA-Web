@@ -1,5 +1,5 @@
 /**
- * IBA Red Club for learners (/red-club/learners) — the "Know more" page
+ * IBA Red Club for learners (/red-club/learners), the "Know more" page
  * behind the overview's learners door: the learner advantage, what members
  * get, the member journey and the wider learner ecosystem. Copy in
  * redClubContent.js.

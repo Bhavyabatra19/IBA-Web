@@ -1,8 +1,8 @@
 ﻿/**
- * 7.5 — The signed-in Library.
+ * 7.5, The signed-in Library.
  *
  * ⚠ THIS IS NOT A GATED AREA. There is no backend and nothing here is
- * protected — the route is reachable by anyone who types it. The banner at the
+ * protected, the route is reachable by anyone who types it. The banner at the
  * top of the page says so, and it stays until the real session lands. Do not
  * file confidential material behind this. See lib/previewSession.js.
  *
@@ -27,7 +27,7 @@ export default function Dashboard() {
         {/* Not dismissible: a notice that can be closed is a notice the next
             person to open this page will not see. It goes when the gate is real. */}
         <p className="dash__warning" role="status">
-          <strong>Preview only.</strong> There is no account system yet — this page is
+          <strong>Preview only.</strong> There is no account system yet, this page is
           public, nothing on it is gated, and no one is signed in. Do not put anything
           confidential here.
         </p>
@@ -72,7 +72,7 @@ export default function Dashboard() {
                 {LIB_TOPICS.map((c) => (
                   <li key={c}>
                     {/* every category resolves to the same place until the
-                        catalogue exists — said here rather than discovered */}
+                        catalogue exists, said here rather than discovered */}
                     <Go href="/connect">
                       {c}
                       <span aria-hidden="true">→</span>

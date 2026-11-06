@@ -12626,42 +12626,6 @@ main {
   content: attr(data-text);
 }
 
-/* Home impact band: the tokenization record as four project cards under the
-   figures (content review), in place of the scrolling ticker */
-.ib__projects {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.ib__project {
-  display: grid;
-  gap: 6px;
-  padding: 18px 20px;
-  border: 1px solid var(--bb-line);
-  border-left: 3px solid var(--iba-red);
-  background: #ffffff;
-}
-.ib__projectName {
-  font-size: 18px;
-  color: var(--bb-ink);
-}
-.ib__projectLine {
-  font-size: 14px;
-  color: var(--bb-ink-muted);
-}
-@media (max-width: 1000px) {
-  .ib__projects {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 560px) {
-  .ib__projects {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Home "What IBA does": five pillars (content review), three across, two on
    a tablet, one on a phone */
@@ -12878,4 +12842,335 @@ main {
 .reach__iconRow svg {
   width: 22px;
   height: 22px;
+}
+
+/* Home "What IBA Does": its heading over the pillars, with the same gap to
+   the cards as the other home sections */
+.wd__head {
+  margin-bottom: 0;
+}
+
+/* Home membership band (black, under the corridor map): the carousel's
+   cards on the dark ground, Know more at each card's foot, and the round
+   arrows in white */
+.mbb .mbb__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  height: 100%;
+}
+.mbb .mbb__card .pk-card__text {
+  flex: 1;
+}
+.mbb__go {
+  display: inline-flex;
+  gap: 6px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid currentColor;
+  color: #ffffff;
+  font-size: 15px;
+}
+.mbb__go:hover {
+  color: #ff4a50;
+}
+.mbb .rail__controls {
+  justify-content: center;
+}
+.mbb .rail__arrow {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #ffffff;
+}
+.mbb .rail__arrow:hover {
+  border-color: #ff4a50;
+  background: #ff4a50;
+}
+.mbb .rail__arrow svg {
+  stroke: currentColor;
+}
+@media (max-width: 760px) {
+  .mbb .rail__track {
+    grid-auto-columns: 82%;
+  }
+}
+
+/* Home impact band: the asset classes as a row of line icons with labels,
+   under the figures (by request) */
+.ib__sectors {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ib__sector {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 20px 12px;
+  text-align: center;
+}
+.ib__sectorIcon {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--iba-red);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ib__sectorLabel {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bb-ink);
+}
+@media (max-width: 760px) {
+  .ib__sectors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+@media (max-width: 420px) {
+  .ib__sectors {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+/* on smaller screens the row wraps centred, so an odd last item sits in the
+   middle rather than alone at the left */
+@media (max-width: 760px) {
+  .ib__sectors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ib__sector {
+    flex: 0 0 calc((100% - 16px) / 3);
+  }
+}
+@media (max-width: 420px) {
+  .ib__sector {
+    flex-basis: calc((100% - 8px) / 2);
+  }
+}
+@media (max-width: 760px) {
+  .ib__sector {
+    min-width: 0;
+    padding: 14px 4px;
+  }
+  .ib__sectorLabel {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Home "IBA in the News": one moving line of cards (CardRail, autoplay) in
+   place of the grid, each card as tall as the tallest */
+.kb .rail {
+  margin-top: 8px;
+}
+.kb .kb__slide {
+  display: flex;
+}
+.kb .kb__slide > .wd__card {
+  width: 100%;
+}
+.kb .rail__controls {
+  justify-content: center;
+}
+@media (max-width: 1100px) {
+  .kb .rail__track {
+    grid-auto-columns: calc((100% - 16px) / 2);
+  }
+}
+@media (max-width: 680px) {
+  .kb .rail__track {
+    grid-auto-columns: 86%;
+  }
+}
+
+/* Home Web3 Corridor map: each hub's label as a frosted glass tile (by
+   request: the white block sat heavily on the red map) — translucent, the
+   map blurred through it, a light sheen across the top, a thin white rim
+   and a soft red glow beneath; no solid fill, no side bar */
+.pg__art .inp__card {
+  gap: 3px;
+  padding: 9px 16px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-left: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.28) 55%, rgba(255, 255, 255, 0.18) 100%);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+    0 10px 28px -10px rgba(170, 10, 20, 0.45);
+}
+.pg__art .inp__card b {
+  color: #c4141b;
+}
+.pg__art .inp__card small {
+  color: #2b2725;
+}
+.pg__art .inp__leader {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 6px rgba(255, 60, 70, 0.6);
+}
+/* on phones the map is small: the tiles carry the region's name only (its
+   role is in the figure's caption), smaller and tighter, so the five never
+   overlap */
+@media (max-width: 760px) {
+  .pg__art .inp__card {
+    padding: 3px 7px 4px;
+    border-radius: 7px;
+  }
+  .pg__art .inp__card b {
+    font-size: 8.5px;
+    letter-spacing: 0.08em;
+  }
+  .pg__art .inp__card small {
+    display: none;
+  }
+  .pg__art .inp__card--right {
+    left: calc(100% + 8px);
+  }
+  .pg__art .inp__card--right .inp__leader {
+    width: 6px;
+  }
+  .pg__art .inp__card--above {
+    bottom: calc(100% + 6px);
+  }
+  .pg__art .inp__card--above .inp__leader {
+    height: 6px;
+  }
+}
+@media (max-width: 760px) {
+  /* Europe's tile to the left of its pin (over the Atlantic), Africa's
+     below it (over the continent), so no two tiles touch */
+  .pg__art .inp__card--sm-left {
+    left: auto;
+    right: calc(100% + 8px);
+    bottom: auto;
+    top: -4px;
+    translate: none;
+  }
+  .pg__art .inp__card--sm-left .inp__leader {
+    left: 100%;
+    right: auto;
+    top: 50%;
+    width: 6px;
+    height: 1.5px;
+  }
+  .pg__art .inp__card--sm-below {
+    left: 50%;
+    top: calc(100% + 18px);
+    bottom: auto;
+    translate: -50% 0;
+  }
+  .pg__art .inp__card--sm-below .inp__leader {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: 100%;
+    width: 1.5px;
+    height: 6px;
+  }
+}
+@media (max-width: 380px) {
+  .pg__art .inp__card {
+    padding: 2px 5px 3px;
+  }
+  .pg__art .inp__card b {
+    font-size: 7.5px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* About, the founder's note: "Read the full note" beside the LinkedIn mark,
+   and the full message in a pop-up (native <dialog>) */
+.fl2__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+.fl2__dialog {
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: #ffffff;
+  color: var(--bb-ink);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.fl2__dialog::backdrop {
+  background: rgba(6, 6, 8, 0.72);
+  backdrop-filter: blur(3px);
+}
+.fl2__dialogIn {
+  position: relative;
+  padding: clamp(28px, 5vw, 56px);
+  border-top: 4px solid var(--iba-red);
+}
+.fl2__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--bb-line);
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--bb-ink);
+  cursor: pointer;
+}
+.fl2__close svg {
+  width: 14px;
+  height: 14px;
+}
+.fl2__close:hover {
+  border-color: var(--iba-red);
+  color: var(--iba-red);
+}
+.fl2__dialogEyebrow {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.fl2__dialogTitle {
+  margin: 0 48px 24px 0;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
+}
+.fl2__dialogText {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #3c3833;
+}
+.fl2__dialogSign {
+  display: grid;
+  gap: 2px;
+  margin: 28px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--bb-line);
+}
+.fl2__dialogSign span {
+  font-size: 14px;
+  color: var(--bb-ink-muted);
+}
+.fl2__more {
+  white-space: nowrap;
 }

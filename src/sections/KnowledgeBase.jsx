@@ -1,12 +1,12 @@
 /**
- * In the Media — the featured press and media items (relabelled from "Open
+ * In the Media, the featured press and media items (relabelled from "Open
  * Knowledge Base" in the content review, since they are coverage, not the
  * library), with the way into the IBA Library below.
  * Light band, after the ecosystem marquee.
  *
  * Built from the what-we-do card (.wd__*): photo header toned into the
  * brand, glass icon badge for the format, red on hover. The badge shows what
- * KIND of item it is — article, recording, report — since that is what a
+ * KIND of item it is, article, recording, report, since that is what a
  * reader decides on first.
  *
  * Items: the featured entries of the shared resources list (src/data/
@@ -21,6 +21,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import RESOURCES from '../data/resources.json'
+import CardRail from '../components/CardRail'
 
 /* format icons, drawn on a 48 grid in currentColor */
 const ICONS = {
@@ -79,7 +80,7 @@ const fmtDate = (d) =>
 const TINTS = ['red', 'ink', 'deep', 'warm']
 const ITEMS = RESOURCES.items
   .filter((r) => r.featured)
-  .slice(0, 6)
+  .slice(0, 12)
   .map((r, i) => ({
     kind: ICON_FOR[r.format] || 'article',
     format: r.format,
@@ -125,9 +126,11 @@ export default function KnowledgeBase() {
           </p>
         </header>
 
-        <div className="wd__grid">
+        {/* one line that moves on by itself (by request), with arrows */}
+        <CardRail label="IBA in the news" cols={3} autoplay={4500}>
           {ITEMS.map((it) => (
-            <article className={`wd__card kb__card kb__card--${it.tint}`} key={it.title} data-rise>
+            <li className="kb__slide" key={it.title}>
+            <article className={`wd__card kb__card kb__card--${it.tint}`}>
               <div className="wd__media" aria-hidden="true">
                 <img className="wd__photo" src={it.img} alt="" loading="lazy" decoding="async" />
                 <span className="wd__tint" />
@@ -159,8 +162,9 @@ export default function KnowledgeBase() {
                 </p>
               </div>
             </article>
+            </li>
           ))}
-        </div>
+        </CardRail>
 
         {/* the library itself, one click away (content review) */}
         <div className="kb__more" data-rise>

@@ -1,12 +1,12 @@
 /**
- * Expertise — in the running order the client set:
+ * Expertise, in the running order the client set:
  *   hero · Web3 Solution Advisory and Consulting Stack (four core
  *   capabilities, each with an icon) · the founder's quote (text only, on a
  *   moving ground) · Tokenization (a black hero-style band, "Know more" to
  *   /tokenization) · the outcome · who we work with · IBA initiatives
  *   (a logo carousel).
  * Tones alternate so no two dark sections touch (by request): dark, white,
- * white, dark, grey, dark, white — and then the site's dark CTA band.
+ * white, dark, grey, dark, white, and then the site's dark CTA band.
  * The Power Consulting and How We Work blocks were taken off by request.
  */
 
@@ -95,12 +95,12 @@ const PARTNERS = [
 ]
 
 const OUTCOMES = [
-  { num: '01', title: 'Clarity and Trust', text: 'A clearly defined problem, a validated approach, and an honest assessment of whether blockchain is the right solution—before you invest in building.' },
+  { num: '01', title: 'Clarity and Trust', text: 'A clearly defined problem, a validated approach, and an honest assessment of whether blockchain is the right solution, before you invest in building.' },
   { num: '02', title: 'Compliance Confidence', text: 'Regulatory requirements mapped from the outset, ensuring your solution is designed for jurisdictional compliance and ready for regulator and auditor scrutiny.' },
   { num: '03', title: 'A Working Product', text: 'A built, audited, and deployment-ready solution, backed by robust governance and the expertise to operate, maintain, and scale it.' },
   { num: '04', title: 'Access to Capital', text: 'Compelling investment proposition, a fundraise-ready structure, and strategic investor connections to help unlock capital and accelerate growth.' },
   { num: '05', title: 'Market Launch and Outreach', text: 'A market-ready launch plan, defined target segments, a qualified prospect pipeline, partner introductions, scheduled outreach campaigns, and measurable targets for leads, conversions, and early customer acquisition.' },
-  { num: '06', title: 'Growth and Expansion', text: 'Access to cross-border corridors that connect you with local partners, investors, institutions, and market-entry pathways—enabling faster expansion, stronger partnerships, and compliant entry into new jurisdictions.' },
+  { num: '06', title: 'Growth and Expansion', text: 'Access to cross-border corridors that connect you with local partners, investors, institutions, and market-entry pathways, enabling faster expansion, stronger partnerships, and compliant entry into new jurisdictions.' },
 ]
 
 /* IBA Initiatives. An entry without a `logo` shows a monogram (`mono`). */
@@ -153,7 +153,7 @@ function TokenizationBand() {
             Turn real-world assets into new market opportunities.
           </h2>
           <p className="tkb__lede">
-            Tokenization can connect traditionally illiquid assets to digital markets—creating new
+            Tokenization can connect traditionally illiquid assets to digital markets, creating new
             possibilities for fractional ownership, capital formation, transparency and cross-border
             investor access.
           </p>
@@ -213,7 +213,7 @@ export default function Expertise() {
         center
         eyebrow="Core Capabilities. One Web3 Corridor"
         title="Web3 Solution Advisory and Consulting Stack"
-        lede="IBA’s core expertise is the operating model behind our Web3 Corridor—connecting strategy, tokenization, policy, compliance, capital, technology, talent, and market access into one coordinated pathway. Capabilities can be engaged independently or integrated as a single program, enabling organizations to move from opportunity to execution, compliant launch, and cross-border scale through a connected global ecosystem."
+        lede="IBA’s core expertise is the operating model behind our Web3 Corridor, connecting strategy, tokenization, policy, compliance, capital, technology, talent, and market access into one coordinated pathway. Capabilities can be engaged independently or integrated as a single program, enabling organizations to move from opportunity to execution, compliant launch, and cross-border scale through a connected global ecosystem."
       >
         <CoreCapabilities />
       </Section>
@@ -238,7 +238,7 @@ export default function Expertise() {
         center
         eyebrow="The Outcome"
         title="Your Next Move in Web3 Starts Here."
-        lede="We turn Web3 ambitions into actionable outcomes—equipping you with the strategy, capabilities, partnerships, and market access to build, launch, and scale with confidence."
+        lede="We turn Web3 ambitions into actionable outcomes, equipping you with the strategy, capabilities, partnerships, and market access to build, launch, and scale with confidence."
       >
         {/* simple numbered cards (by request, in place of the timeline) */}
         <Cards items={OUTCOMES.map(({ num, ...item }, i) => ({ ...item, icon: OUTCOME_ICONS[i] }))} cols={3} />

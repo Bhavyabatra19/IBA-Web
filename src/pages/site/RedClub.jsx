@@ -1,5 +1,5 @@
 /**
- * IBA Red Club — the overview: what Red Club is, what members get and who
+ * IBA Red Club, the overview: what Red Club is, what members get and who
  * it is for, then a door each to the detail for institutions and for
  * learners (/red-club/institutions, /red-club/learners). Kept short by
  * request; the rest of the reference copy lives on those two pages. Copy in

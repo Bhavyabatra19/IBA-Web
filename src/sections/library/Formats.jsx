@@ -1,9 +1,9 @@
 /**
- * "Every Format, One Free Account" — what is behind the gate.
+ * "Every Format, One Free Account", what is behind the gate.
  *
  * It was seven chips: the format names, set as bare pills, directly under a
  * hero whose console already lists the same seven names. Two problems with
- * that, and the second is the real one. It repeated itself — and a chip can
+ * that, and the second is the real one. It repeated itself, and a chip can
  * only ever say a word, so the band was asking a reader to make an account on
  * the strength of the phrase "Policy Brief".
  *
@@ -12,15 +12,14 @@
  * address; this is the band where that claim has to be made, and it cannot be
  * made in one word.
  *
- * The marks are drawn rather than fetched, in the site's own line vocabulary —
- * one stroke weight, one accent, no fills except where a shape is solid. Seven
+ * The marks are drawn rather than fetched, in the site's own line vocabulary, * one stroke weight, one accent, no fills except where a shape is solid. Seven
  * icon files would be seven requests for something that is a dozen paths.
  */
 
 const S = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' }
 
 /**
- * One mark per format, keyed by the format's own name — so a format with no
+ * One mark per format, keyed by the format's own name, so a format with no
  * mark renders its card without one rather than throwing.
  */
 const MARKS = {

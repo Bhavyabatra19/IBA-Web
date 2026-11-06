@@ -1,5 +1,5 @@
 /**
- * Connect — four ways in, the direct lines, and the enquiry form.
+ * Connect, four ways in, the direct lines, and the enquiry form.
  *
  * The email is CONTACT in nav.js (hello@indiablockchainalliance.org), the one
  * address used on every page.

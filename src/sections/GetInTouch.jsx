@@ -1,10 +1,10 @@
 /**
- * Get in touch — the ask, in a dark panel the width of the hero, after the
+ * Get in touch, the ask, in a dark panel the width of the hero, after the
  * knowledge base. Copy and the direct lines on the left; on the right a card
  * that starts an enquiry on the right topic.
  *
- * The panel reuses the hero's ground — IBA black crossed by the red light
- * beam — so the page closes in the same frame it opened in. Email and phone
+ * The panel reuses the hero's ground, IBA black crossed by the red light
+ * beam, so the page closes in the same frame it opened in. Email and phone
  * come from CONTACT in nav.js, the one place they are kept.
  */
 
@@ -52,17 +52,13 @@ export default function GetInTouch() {
             Get in Touch
           </p>
           <h2 className="git__title" id="git-title" data-rise>
-            IBA: Connecting Economies.
-            <br />
-            Rewriting the Rules.
+            Rewriting the Rules with Web3.
           </h2>
           <p className="git__lede" data-rise>
-            Connecting Economies. Block by Block.
-            <br />
             Talk to our team about consulting, tokenization, corridors, membership, the UAE
             Experience Center or the Red Club.
           </p>
-          {/* the direct lines, as three icon buttons — email, phone, WhatsApp;
+          {/* the direct lines, as three icon buttons, email, phone, WhatsApp;
               the address itself is the label (screen readers, hover tooltip) */}
           <ul className="git__lines git__lines--icons" data-rise>
             <li>

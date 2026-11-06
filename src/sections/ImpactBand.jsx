@@ -1,5 +1,5 @@
 /**
- * Impact, measured — headline proof points, set quietly.
+ * Impact, measured, headline proof points, set quietly.
  *
  * Sits between the counters and the Web3 Corridor. A split header (title
  * left, lede and link right) over four figures divided by hairlines, each
@@ -14,7 +14,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { FACTS } from '../data/facts'
-import { TOKENOMICS, usd } from '../content'
 
 /* line icons, 24px grid; the effect gives each stroke pathLength=1 so one
    dash tween draws them all */
@@ -58,8 +57,57 @@ const FIGURES = [
   { fig: n(11), label: 'Impact Projects', note: 'Tokenized for measurable social and climate outcomes', icon: 'globe' },
 ]
 
-/* the tokenization record, one card per project (content review) */
-const PROJECTS = TOKENOMICS.map((t) => ({ ...t, line: `${t.sector} tokenization · ${usd(t.usdM)}` }))
+/* the asset classes IBA tokenizes, as a row of line icons under the
+   figures (by request, in place of the project cards); 24px grid */
+const SECTORS = [
+  {
+    label: 'Precious Ores',
+    icon: (
+      <>
+        <path d="M7 4h10l4 5-9 11L3 9Z" />
+        <path d="M3 9h18M9.5 4 8 9l4 11 4-11-1.5-5" />
+      </>
+    ),
+  },
+  {
+    label: 'Real Estate',
+    icon: (
+      <>
+        <path d="M3 20.5h18M5 20.5V9l7-4.5L19 9v11.5" />
+        <path d="M9.5 20.5v-5h5v5M9 11.5h1.5M13.5 11.5H15" />
+      </>
+    ),
+  },
+  {
+    label: 'Consumables',
+    icon: (
+      <>
+        <path d="M5 8h14l-1.4 11.2a1.5 1.5 0 0 1-1.5 1.3H7.9a1.5 1.5 0 0 1-1.5-1.3Z" />
+        <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+      </>
+    ),
+  },
+  {
+    label: 'Infrastructure',
+    icon: (
+      <>
+        <path d="M2.5 17h19M4 17V9.5M20 17V9.5M2.5 9.5h19" />
+        <path d="M8 9.5V17M12 9.5V17M16 9.5V17M4 9.5 12 4l8 5.5" />
+        <path d="M2.5 20.5h19" />
+      </>
+    ),
+  },
+  {
+    label: 'Financial Services',
+    icon: (
+      <>
+        <rect x="3" y="6" width="18" height="12.5" rx="1.5" />
+        <path d="M3 10h18M6.5 14.5h4" />
+        <circle cx="16.5" cy="14.5" r="1.4" />
+      </>
+    ),
+  },
+]
 
 /** Count a [data-count] figure from 0, keeping its decimals and affixes. */
 function countUp(el, duration) {
@@ -140,7 +188,7 @@ export default function ImpactBand() {
           </div>
           <div className="ib__aside">
             <p className="ib__lede" data-rise>
-              The alliance in figures — what has been tokenized, where, and with whom.
+              The alliance in figures: what has been tokenized, where, and with whom.
             </p>
           </div>
         </header>
@@ -160,11 +208,13 @@ export default function ImpactBand() {
           ))}
         </ul>
 
-        <ul className="ib__projects">
-          {PROJECTS.map((p) => (
-            <li className="ib__project" key={p.project} data-rise>
-              <span className="ib__projectName">{p.project}</span>
-              <span className="ib__projectLine">{p.line}</span>
+        <ul className="ib__sectors" aria-label="Asset classes we tokenize">
+          {SECTORS.map((sec) => (
+            <li className="ib__sector" key={sec.label} data-rise>
+              <svg className="ib__sectorIcon" viewBox="0 0 24 24" aria-hidden="true">
+                {sec.icon}
+              </svg>
+              <span className="ib__sectorLabel">{sec.label}</span>
             </li>
           ))}
         </ul>

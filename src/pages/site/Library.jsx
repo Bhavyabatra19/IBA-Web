@@ -1,5 +1,5 @@
 /**
- * The IBA Library — membership of the alliance (what it opens: the library,
+ * The IBA Library, membership of the alliance (what it opens: the library,
  * the IBA Directory and more), where to find our content, and the
  * searchable catalogue.
  *
@@ -79,7 +79,7 @@ export default function Library() {
       />
 
       {/* Membership, on white between the hero and the red band (by request):
-          formal, for serious learners, and without leading on price —
+          formal, for serious learners, and without leading on price,
           "Free access, by application" says it once */}
       <Section
         id="membership"
@@ -182,7 +182,7 @@ export default function Library() {
       <section className="pk-sec pk-sec--plain band band--light band--own" id="catalogue" ref={catalogue}>
         <div className="pk-sec__panel">
           <header className="pk-head">
-            <h2 className="pk-head__title">Browse the Library</h2>
+            <h2 className="pk-head__title">Resources from the Industry Leaders</h2>
             <p className="pk-head__lede">
               Articles, research, reports, interviews and videos from across the
               blockchain and Web3 industry, not only from IBA, selected by the

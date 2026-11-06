@@ -1,27 +1,26 @@
 /**
- * 2.3 — What We Do. Light band.
+ * 2.3, What We Do. Light band.
  *
  * Three steps in a row, each led by a line icon, with a dashed link curving
- * between them — the layout of a "get started in three steps" block. The
+ * between them, the layout of a "get started in three steps" block. The
  * numbers encode a real order (advise before build, build before the
  * institution can teach it) so they are printed as steps rather than as a
  * grid of three equal options, and the links between them are what say so.
  *
- * The icons are the three files supplied for this section, in public/icons —
- * two people and a message for Advise, the pieces being fitted for Build, a
- * lit bulb for Educate — used AS THEY WERE SUPPLIED, not redrawn.
+ * The icons are the three files supplied for this section, in public/icons, * two people and a message for Advise, the pieces being fitted for Build, a
+ * lit bulb for Educate, used AS THEY WERE SUPPLIED, not redrawn.
  *
  * They are applied as CSS masks rather than placed as <img>: a mask takes the
  * file's alpha as the shape and paints it in whatever colour the element has,
  * so the same black-on-transparent PNG is the band's ink at rest and the
  * brand's red when its step is live. An <img> would be black in both states,
  * and the only way to recolour one is a filter chain nobody can read. The
- * price is that a masked span has no alt — which is right here: the tile is
+ * price is that a masked span has no alt, which is right here: the tile is
  * decoration beside a heading that already says the word.
  *
  * The section still walks its own order: one step is live at a time, 01 then
  * 02 then 03, and its tile tilts up as the live one. Hovering a step, or
- * tabbing into one, takes the focus and holds it there — the cycle never moves
+ * tabbing into one, takes the focus and holds it there, the cycle never moves
  * the focus off a step someone is actually reading.
  */
 
@@ -36,8 +35,8 @@ import {
 } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
 
-/* The app is served from the domain root — path routing already requires
-   that — so the public path is absolute. The file is named for the step. */
+/* The app is served from the domain root, path routing already requires
+   that, so the public path is absolute. The file is named for the step. */
 const icon = (key) => `/icons/${key}.png`
 
 /**
@@ -46,7 +45,7 @@ const icon = (key) => `/icons/${key}.png`
  * It ran Advise → Build → Educate, and the comment at the top of this file
  * still explains why that was an order rather than a list: advise before build,
  * build before the institution can teach it. The supplied layout runs Educate →
- * Advise → Build, which is a different argument — train the builders, de-risk
+ * Advise → Build, which is a different argument, train the builders, de-risk
  * the decision, ship the system. People first.
  *
  * Each step now carries a short claim of its own above the paragraph; those
@@ -66,7 +65,7 @@ const STEPS = [
     key: 'advise',
     name: 'Advise',
     claim: 'De-risk the decision',
-    body: 'Policy, compliance, standards, taxation, forensics and risk mitigation — the right blockchain decision before a single line of code is written.',
+    body: 'Policy, compliance, standards, taxation, forensics and risk mitigation, the right blockchain decision before a single line of code is written.',
     links: [{ label: 'See Expertise', href: '/services' }],
   },
   {
@@ -135,7 +134,7 @@ export default function WhatWeDo() {
       })
       tl.to({ t: 0 }, { t: 1, duration: DWELL, ease: 'none' })
 
-      /* watched rather than measured — see whileOnScreen */
+      /* watched rather than measured, see whileOnScreen */
       undo.push(whileOnScreen(el, () => tl.play(), () => tl.pause()))
 
       const hold = (i) => {
@@ -147,7 +146,7 @@ export default function WhatWeDo() {
         tl.play()
       }
 
-      /* pointer only where there is a pointer — on touch, an enter with no
+      /* pointer only where there is a pointer, on touch, an enter with no
          matching leave would hold the cycle for good on the first tap */
       if (!isCoarse()) {
         steps.forEach((step, i) => {

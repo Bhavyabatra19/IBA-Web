@@ -1,10 +1,10 @@
 ﻿/**
- * Primary navigation — five tabs, two utility actions.
+ * Primary navigation, five tabs, two utility actions.
  *
  * Every tab is a link to its own destination first and a dropdown second: the
  * panel opens on hover and on keyboard focus, and a click goes to the page.
  * A tab that opened a menu and went nowhere is the thing readers complain
- * about — clicking About has to reach /about.
+ * about, clicking About has to reach /about.
  *
  * Four things make this more than a bar of links:
  *
@@ -13,7 +13,7 @@
  *    treatment would have to be dark-on-dark or a permanent scrim; this way the
  *    bar belongs to whatever it is currently sitting on.
  * 2. Anchor navigation routes through the Lenis instance rather than the
- *    browser's hash jump — see scrollToId. The hero is pinned for five
+ *    browser's hash jump, see scrollToId. The hero is pinned for five
  *    viewports, and a native jump lands mid-pin with the smooth-scroller
  *    easing back to where it thought it was.
  * 3. The mega panel and the mobile drawer are the same IA from nav.js, so the
@@ -27,7 +27,7 @@
  * the real forms are pages now (7.2, 7.3), and a modal holding a second, shorter
  * copy of them is how the two versions start disagreeing.
  *
- * Connect With Us — in the bar and at the foot of the drawer — opens the 8.1
+ * Connect With Us, in the bar and at the foot of the drawer, opens the 8.1
  * enquiry overlay. Neither button has a handler for it: both carry
  * `data-enquiry` and one delegated listener in Enquiry.jsx does the work, the
  * same way the other forty triggers on the site do. Their href is the real
@@ -70,7 +70,7 @@ const ICONS = {
   pin: <><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z" /><circle cx="12" cy="9" r="2.5" /></>,
 }
 
-/** Whether a tab has anything to disclose — flat items or grouped ones. */
+/** Whether a tab has anything to disclose, flat items or grouped ones. */
 const hasPanel = (tab) => tabItems(tab).length > 0
 
 
@@ -105,7 +105,7 @@ export default function Nav() {
    * ScrollTrigger per band.
    *
    * A trigger records a document position when it is created, and the nav is
-   * built before the hero installs its five-viewport pin — so every band below
+   * built before the hero installs its five-viewport pin, so every band below
    * the hero gets recorded ~4500px too high, and because those stale positions
    * also decide refresh order, later refreshes never correct them. A rect is
    * measured now and cannot be stale.
@@ -113,7 +113,7 @@ export default function Nav() {
    * Deliberately a passive effect, not a layout one: passive effects run after
    * App's layout effect has started Lenis, so this callback is appended to the
    * ticker BEHIND Lenis's. Ahead of it, every frame would be measured against
-   * the previous frame's pin transform — which is a whole viewport wrong for
+   * the previous frame's pin transform, which is a whole viewport wrong for
    * as long as the hero is pinned.
    */
   useEffect(() => {
@@ -121,7 +121,7 @@ export default function Nav() {
     let bands = [...document.querySelectorAll('.band--light')]
 
     /* No scroll-position guard: setting the same boolean is a no-op in React,
-       so the only per-frame cost is three rects — and a guard would freeze
+       so the only per-frame cost is three rects, and a guard would freeze
        whatever the last moving frame happened to measure. */
     const read = () => {
       let over = false
@@ -191,8 +191,8 @@ export default function Nav() {
   /**
    * The enquiry overlay takes over from the bar.
    *
-   * Connect With Us appears twice here — in the bar and at the foot of the
-   * drawer — and both are `data-enquiry` triggers handled by one delegated
+   * Connect With Us appears twice here, in the bar and at the foot of the
+   * drawer, and both are `data-enquiry` triggers handled by one delegated
    * listener in Enquiry.jsx, which knows nothing about this component's state.
    * So the bar watches the overlay instead of the buttons telling it: the
    * drawer closes and any open mega panel closes, and two scroll locks never
@@ -210,7 +210,7 @@ export default function Nav() {
 
   const go = (e, href) => {
     const { path, hash, external } = parseHref(href)
-    if (external) return // mailto, tel, another site — the browser's business
+    if (external) return // mailto, tel, another site, the browser's business
 
     e.preventDefault()
     close()
@@ -223,7 +223,7 @@ export default function Nav() {
       return
     }
     /* Already on the page. The drawer's unlock runs in an effect cleanup, so
-       the scroll is queued behind it — starting Lenis and telling it to move
+       the scroll is queued behind it, starting Lenis and telling it to move
        in the same tick leaves it stopped at the destination. */
     if (path) navigate(href)
     if (hash) requestAnimationFrame(() => scrollToId(hash))
@@ -251,13 +251,12 @@ export default function Nav() {
    *
    * The hash is what settles it: Services resolves to /#what-we-do, a section of
    * the home page, and marking four tabs as the current page while the reader is
-   * on it would make the marker mean nothing. Only a whole-page destination —
-   * Home, About — can be current.
+   * on it would make the marker mean nothing. Only a whole-page destination, * Home, About, can be current.
    */
   const isCurrent = (tab) => {
     const { path: p, hash } = parseHref(tab.href)
     if (hash || !p) return false
-    /* A sub-page marks its parent tab too — reading /services/web3-advisory,
+    /* A sub-page marks its parent tab too, reading /services/web3-advisory,
        Services is still the section you are in. The trailing slash is what keeps
        "/" from prefixing every path on the site. */
     return path === p || (p !== '/' && path.startsWith(`${p}/`))
@@ -274,7 +273,7 @@ export default function Nav() {
       >
         <div className="nav__bar">
           <a className="nav__brand" href="/" onClick={(e) => go(e, '/')}>
-            <img src="/iba-logo-blocks.png" alt="India Blockchain Alliance — home" />
+            <img src="/iba-logo-blocks.png" alt="India Blockchain Alliance home page" />
           </a>
 
           <nav className="nav__tabs" aria-label="Primary">
@@ -289,7 +288,7 @@ export default function Nav() {
                   aria-controls={hasPanel(tab) ? `nav-panel-${tab.key}` : undefined}
                   aria-current={isCurrent(tab) ? 'page' : undefined}
                   data-active={openTab === tab.key ? '' : undefined}
-                  /* the flagship reads as a pill rather than a label — set from
+                  /* the flagship reads as a pill rather than a label, set from
                      the tree, so it can move tabs without touching this file */
                   data-pill={tab.pill ? '' : undefined}
                   onPointerEnter={(e) => hoverOpen(e, tab)}
@@ -334,8 +333,7 @@ export default function Nav() {
           </button>
         </div>
 
-        {/* One panel that swaps contents, not five that mount and unmount —
-            moving between tabs then reads as the panel changing rather than
+        {/* One panel that swaps contents, not five that mount and unmount, moving between tabs then reads as the panel changing rather than
             as it closing and a new one opening. */}
         {panel && (
           <div
@@ -415,7 +413,7 @@ export default function Nav() {
         <div className="drawer__scroll">
           {NAV.map((tab) => {
             const items = tabItems(tab)
-            /* No panel to disclose, so no accordion — just the destination. */
+            /* No panel to disclose, so no accordion, just the destination. */
             if (!items.length) {
               return (
                 <section className="drawer__acc" key={tab.key} data-pill={tab.pill ? '' : undefined}>
@@ -493,7 +491,7 @@ export default function Nav() {
   )
 }
 
-/** Live nav height in px — the triggers above are measured against it. */
+/** Live nav height in px, the triggers above are measured against it. */
 function navHeight() {
   const v = getComputedStyle(document.documentElement).getPropertyValue('--nav-h')
   return parseFloat(v) || 72
