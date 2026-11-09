@@ -75,11 +75,20 @@ const byCountry = Object.fromEntries(presence.countries.map((c) => [c.country, c
    the map named India alone). cardSm moves a tile on phones, where the map
    is too small for the desktop placement. */
 const HUBS = [
-  { label: 'Americas', sub: 'Infrastructure', x: 27.5, y: 64.2, card: 'right' },
-  { label: 'Europe', sub: 'Standards', x: 51, y: 37.4, card: 'above', cardSm: 'left' },
-  { label: 'Africa', sub: 'Utility', x: 57.4, y: 63.2, card: 'right', cardSm: 'below' },
-  { label: 'UAE', sub: 'Launchpad', x: 63.6, y: 49, card: 'above' },
+  { label: 'Americas', sub: 'Institutional capital', x: 27.5, y: 64.2, card: 'right' },
+  { label: 'Europe', sub: 'Compliance', x: 51, y: 37.4, card: 'above', cardSm: 'left' },
+  { label: 'Africa', sub: 'Mobile innovation', x: 57.4, y: 63.2, card: 'right', cardSm: 'below' },
+  { label: 'UAE', sub: 'Capital access', x: 63.6, y: 49, card: 'above' },
   { label: 'India', sub: 'Technical engine', x: 70.4, y: 56.6, card: 'right' },
+]
+
+/* each region's role in the corridor (content review, 11-06-2026) */
+const REGIONS = [
+  { name: 'India', text: 'Technical engine, building talent, innovation and startup capabilities.' },
+  { name: 'UAE', text: 'Enabling capital access, regulatory clarity and cross-border expansion.' },
+  { name: 'Europe', text: 'Strengthening compliance, governance and institutional market integration.' },
+  { name: 'Americas', text: 'Mobilizing institutional capital, advancing tokenization and driving adoption.' },
+  { name: 'Africa', text: 'Driving mobile innovation, accessibility and real-world Web3 adoption.' },
 ]
 
 export default function PresenceGlobe() {
@@ -110,12 +119,18 @@ export default function PresenceGlobe() {
             Web3 Corridor: IBA Global Initiative
           </h2>
           <p className="pg__lede" data-rise>
-            IBA operates where policy, capital and code meet: India as the
-            technical engine, the UAE as the launchpad, Europe for standards,
-            Africa for real-world utility and the Americas for infrastructure,
-            one global Web3 Corridor network for technology transfer,
-            investment, entrepreneurship and ecosystem collaboration.
+            One global Web3 Corridor network for technology transfer,
+            investment, entrepreneurship and ecosystem collaboration, with
+            each region playing its part.
           </p>
+          <ul className="pg__regions" data-rise>
+            {REGIONS.map((r) => (
+              <li className="pg__region" key={r.name}>
+                <span className="pg__regionName">{r.name}</span>
+                <span className="pg__regionText">{r.text}</span>
+              </li>
+            ))}
+          </ul>
           {/* the section's call to action (by request): join, not explore */}
           <Go className="ib__cta pg__cta" href="/membership" data-rise>
             Join the Alliance

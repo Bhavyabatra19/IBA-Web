@@ -1,11 +1,13 @@
 /**
  * Web3 Corridor, the corridor and its memberships, with the content of the
  * client's "IBA Web3 Corridor · Complete Membership" reference (11-04-2026)
- * set out in the site's own blocks: the five regions and the network map,
- * the operating model, the three membership pathways in brief (the plans,
- * how to join and the questions are on the Membership page), the Xchange
- * and its 12-week Gold cohort, TheBlock Experience (video), the Global
- * Innovation Corridor Forum at WTC 2026 and the ask.
+ * set out in the site's own blocks. Running order (content review,
+ * 11-06-2026): the hero; Corridor memberships, the three pathways as the
+ * home page's What IBA Does cards; Web360 Club Premium Programs (the
+ * Indo–UAE Startup Xchange and its Gold cohort), in brief and then each in
+ * full; the five regions and the network map; the operating model;
+ * TheBlock Experience (video); the Global Innovation Corridor Forum at
+ * WTC 2026; and the ask.
  *
  * The hero keeps the heading and the turning globe (by request).
  */
@@ -14,6 +16,7 @@ import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/
 import { Steps } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
 import BlockFilm from '../../components/BlockFilm'
+import PillarCards from '../../components/PillarCards'
 
 const ENQUIRY = 'Web3 Corridor'
 
@@ -42,11 +45,11 @@ const FIGURES = [
 ]
 
 const REGIONS = [
-  { num: '01 / India', title: 'Technical engine', text: 'Developer talent, innovation, implementation and startup capability.' },
-  { num: '02 / UAE', title: 'Launchpad', text: 'Capital access, regulatory navigation and cross-border business setup.' },
-  { num: '03 / Europe', title: 'Standards', text: 'Institutional compliance, governance and mature market integration.' },
-  { num: '04 / Americas', title: 'Infrastructure', text: 'Institutional capital, tokenization and practical adoption.' },
-  { num: '05 / Africa', title: 'Utility', text: 'Mobile innovation, access and real-world Web3 applications.' },
+  { num: '01 / India', title: 'Technical engine', text: 'Building talent, innovation and startup capabilities.' },
+  { num: '02 / UAE', title: 'Launchpad', text: 'Enabling capital access, regulatory clarity and cross-border expansion.' },
+  { num: '03 / Europe', title: 'Standards', text: 'Strengthening compliance, governance and institutional market integration.' },
+  { num: '04 / Americas', title: 'Infrastructure', text: 'Mobilizing institutional capital, advancing tokenization and driving adoption.' },
+  { num: '05 / Africa', title: 'Utility', text: 'Driving mobile innovation, accessibility and real-world Web3 adoption.' },
 ]
 
 const MODEL = [
@@ -99,6 +102,61 @@ const BLOCK_VIDEOS = [
   },
 ]
 
+/* Corridor memberships: the three pathways, as the home page's What IBA
+   Does cards (content review, 11-06-2026) */
+const PATHWAYS = [
+  {
+    key: 'founder',
+    tag: 'Web360 Club',
+    title: 'Founder & Investor',
+    body: 'Investor relations, deal flow, advisory and international growth for founders and the investors who back them.',
+    cta: 'See the tiers',
+    href: '/membership#plans',
+    img: '/images/corridor-founder.jpg',
+  },
+  {
+    key: 'institution',
+    tag: 'Web360 Club',
+    title: 'Tokenization & Institutions',
+    body: 'Tokenization, RWA, issuer, vendor and corporate plans for institutions bringing assets and services on-chain.',
+    cta: 'See the tiers',
+    href: '/membership#plans',
+    img: '/images/card-tokenization-art.jpg',
+  },
+  /* ⚠ links to the Expertise page's Global Market Expansion section, whose
+     content is on its way (content review, 11-06) */
+  {
+    key: 'expand',
+    tag: 'Cross-border growth',
+    title: 'Global Market Expansion',
+    body: 'Market-entry strategy, business setup, partner access and go-to-market support for scaling into new markets across the corridor.',
+    href: '/expertise#global-market-expansion',
+    img: '/images/corridor-expansion.jpg',
+  },
+]
+
+/* Web360 Club Premium Programs: a section of their own (content review) */
+const PREMIUM = [
+  {
+    key: 'exchange',
+    tag: 'Premium · India ↔ UAE',
+    title: 'Indo–UAE Startup Xchange',
+    body: 'A year-round membership for startups moving between India and the UAE: setup, compliance, market access, capital, talent and founder community.',
+    cta: 'Explore the Xchange',
+    href: '#xchange',
+    img: '/images/card-partnership.jpg',
+  },
+  {
+    key: 'medal',
+    tag: 'Premium · 12 weeks',
+    title: 'The Gold Xchange Cohort',
+    body: 'A structured 12-week launch sprint for Gold members, from the decision to enter the other market to its first real signal, closing with a demo day.',
+    cta: 'See the sprint',
+    href: '#xchange-cohort',
+    img: '/images/corridor-gold.jpg',
+  },
+]
+
 const Arrow = () => <span aria-hidden="true">→</span>
 
 export default function Corridor() {
@@ -120,7 +178,7 @@ export default function Corridor() {
         }
         lede={[
           'One connected ecosystem. Multiple pathways to capital, tokenization, partnerships and cross-border growth.',
-          'Explore founder and investor programmes, tokenization-focused memberships and the dedicated India–UAE Startup Xchange, and choose the level of access that fits your next move.',
+          'Explore founder and investor programmes, tokenization and institutional memberships, global market expansion and the Web360 Club premium programmes, and choose the level of access that fits your next move.',
         ]}
         actions={
           <>
@@ -138,6 +196,64 @@ export default function Corridor() {
           </div>
         }
       />
+
+      {/* Corridor memberships, straight under the hero (content review,
+          11-06): the three pathways as the home page's What IBA Does cards.
+          The plans themselves are on the Membership page. */}
+      <Section
+        id="memberships"
+        eyebrow="Corridor memberships"
+        title="Three pathways into the corridor."
+        lede="Choose the route that fits your next move: Web360 Club for founders and investors, Web360 Club for tokenization and institutions, or Global Market Expansion."
+      >
+        <div className="wd wd--duo wd--art wd--pillars">
+          <PillarCards cards={PATHWAYS} />
+        </div>
+        <div className="pk-actions" data-rise>
+          <Btn href="/membership">
+            Explore Membership <Arrow />
+          </Btn>
+        </div>
+      </Section>
+
+      {/* Web360 Club Premium Programs, a section of their own (content
+          review): the two programmes in brief, then each in full below */}
+      <Section
+        id="premium-programs"
+        tone="dark"
+        eyebrow="Web360 Club · Premium Programs"
+        title="Web360 Club Premium Programs"
+        lede="Two special programmes for founders ready to build across the India–UAE corridor: a year-round Xchange membership and its 12-week Gold cohort."
+      >
+        <div className="wd wd--duo wd--art wd--pillars wd--premium">
+          <PillarCards cards={PREMIUM} />
+        </div>
+      </Section>
+
+      <Section
+        id="xchange"
+        eyebrow="Premium Program · Indo–UAE Startup Xchange"
+        title="Build in one market. Belong in both."
+        lede="A distinct, year-round membership for startups moving between India and the UAE, combining setup, compliance, market access, capital, talent and founder community."
+      >
+        <Cards items={DIRECTIONS} cols={2} />
+        <Cards items={XCHANGE} cols={3} />
+        <SubHead lede="Founder-led; incorporated or incorporation-ready; a scalable product or service; and a clear cross-border objective. The programme runs two cohorts a year of 20–25 startups each, with sponsor scholarship opportunities.">
+          Who can apply
+        </SubHead>
+      </Section>
+
+      <Section
+        id="xchange-cohort"
+        eyebrow="Premium Program · The Gold Xchange Cohort"
+        title="A 12-week route from decision to market signal."
+        lede={[
+          'Gold members of the Indo–UAE Startup Xchange enter a structured 12-week launch sprint: a guided route from the decision to enter the other market to the first real signal from it, with corridor support at every stage.',
+          'The programme runs two cohorts a year of 20–25 startups each, and closes with a demo day and soft-landing support in the destination market.',
+        ]}
+      >
+        <Steps items={SPRINT} />
+      </Section>
 
       <Section
         id="about"
@@ -158,55 +274,6 @@ export default function Corridor() {
         lede="Across the programmes, IBA positions membership as a progression of capability, visibility and cross-border access."
       >
         <Cards items={MODEL} cols={3} />
-      </Section>
-
-      {/* the plans live on the Membership page now (a main nav item,
-          content review); the corridor keeps the three pathways in brief */}
-      <Section
-        id="memberships"
-        eyebrow="Corridor memberships"
-        title="Three pathways into the corridor."
-        lede="Web360 Club for founders and investors, Web360 Club for tokenization and institutions, and the Indo–UAE Startup Xchange, each with three tiers."
-      >
-        <Cards
-          cols={3}
-          items={[
-            { tag: 'Web360 Club', title: 'Founder & Investor', text: 'Investor relations, deal flow, advisory and international growth.', href: '/membership#plans', cta: 'See the tiers' },
-            { tag: 'Web360 Club', title: 'Tokenization & Institutions', text: 'Tokenization, RWA, issuer, vendor and corporate plans.', href: '/membership#plans', cta: 'See the tiers' },
-            { tag: 'India ↔ UAE', title: 'Indo–UAE Startup Xchange', text: 'Market entry between India and the UAE, with a 12-week Gold launch sprint.', href: '/membership#plans', cta: 'See the tiers' },
-          ]}
-        />
-        <div className="pk-actions" data-rise>
-          <Btn href="/membership">
-            Explore Membership <Arrow />
-          </Btn>
-        </div>
-      </Section>
-
-      <Section
-        id="xchange"
-        tone="dark"
-        eyebrow="Indo–UAE Startup Xchange"
-        title="Build in one market. Belong in both."
-        lede="A distinct, year-round membership for startups moving between India and the UAE, combining setup, compliance, market access, capital, talent and founder community."
-      >
-        <Cards items={DIRECTIONS} cols={2} />
-        <Cards items={XCHANGE} cols={3} />
-        <SubHead lede="Founder-led; incorporated or incorporation-ready; a scalable product or service; and a clear cross-border objective. The programme runs two cohorts a year of 20–25 startups each, with sponsor scholarship opportunities.">
-          Who can apply
-        </SubHead>
-      </Section>
-
-      <Section
-        id="xchange-cohort"
-        eyebrow="The Gold Xchange cohort"
-        title="A 12-week route from decision to market signal."
-        lede={[
-          'Gold members of the Indo–UAE Startup Xchange enter a structured 12-week launch sprint: a guided route from the decision to enter the other market to the first real signal from it, with corridor support at every stage.',
-          'The programme runs two cohorts a year of 20–25 startups each, and closes with a demo day and soft-landing support in the destination market.',
-        ]}
-      >
-        <Steps items={SPRINT} />
       </Section>
 
       <Section
@@ -242,7 +309,7 @@ export default function Corridor() {
         tone="red"
         eyebrow="Next step"
         title="Your next market starts with the right corridor."
-        lede="Explore your membership fit across Web360 founder programmes, tokenization plans or the Indo–UAE Startup Xchange, and tell us your preferred track, tier and target markets."
+        lede="Explore your membership fit across Web360 founder programmes, tokenization plans, global market expansion or the Web360 Club premium programmes, and tell us your preferred track, tier and target markets."
       >
         <div className="pk-actions" data-rise>
           <Btn enquiry={ENQUIRY}>
