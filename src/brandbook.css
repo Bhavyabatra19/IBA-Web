@@ -13267,3 +13267,141 @@ img.ib__sectorIcon {
 @media (max-width: 960px) {
   .w3p .wd.wd--duo.wd--pillars .wd__grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ==================================================================
+   Membership (pages/site/Membership.jsx), in the site's visual language
+   (content review, 11-09): 3D hero render, icon strip, glass cards on the
+   light arcs and the red gradient, and the tiers in a dark glass panel
+   ================================================================== */
+.mbp-art { width: min(100%, 480px); }
+
+/* the icon strip under the hero: four links, Tokenization's strip */
+.mbp-focus .tkp-focus__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.mbp-focus__link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: inherit;
+  text-decoration: none;
+}
+.mbp-focus__link .tkp-focus__icon { transition: transform 0.3s var(--ease-out), box-shadow 0.3s ease; }
+.mbp-focus__link:hover .tkp-focus__icon {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -8px rgba(215, 25, 32, 0.7);
+}
+.mbp-focus__link:hover .tkp-focus__label { color: var(--iba-red); }
+@media (max-width: 1100px) {
+  .mbp-focus .tkp-focus__list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .mbp-focus .tkp-focus__item:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 860px) {
+  .mbp-focus .tkp-focus__list { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* What membership opens: the red light-arcs ground of About's Our Mission */
+#alliance .pk-sec__panel {
+  background:
+    linear-gradient(180deg, rgba(5, 3, 4, 0.72) 0%, rgba(5, 3, 4, 0.35) 34%, rgba(5, 3, 4, 0.1) 60%, rgba(5, 3, 4, 0.45) 100%),
+    url('/images/mission-bg.jpg') center 60% / cover no-repeat,
+    #0a0304;
+}
+#alliance .pk-sec__panel::before { display: none; }
+#alliance .pk-head__lede,
+#join .pk-head__lede { color: rgba(255, 255, 255, 0.82); }
+
+/* How to join: the glass cards on the black-to-red gradient, with a faint
+   arc of light behind them */
+#join .pk-sec__panel {
+  background:
+    radial-gradient(70% 90% at 85% 110%, rgba(255, 70, 76, 0.35), transparent 60%),
+    radial-gradient(50% 60% at 10% 0%, rgba(255, 255, 255, 0.06), transparent 70%),
+    var(--bb-red-black);
+}
+#join .mp__title { white-space: pre; }
+
+/* Pathways & tiers: a dark glass panel in the white section, with the
+   block grid and a red glow, as the Tokenization infrastructure band */
+.mbp-plans {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(22px, 3vw, 44px);
+  border-radius: 28px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(55% 60% at 85% 10%, rgba(215, 25, 32, 0.32), transparent 70%),
+    radial-gradient(45% 55% at 5% 100%, rgba(215, 25, 32, 0.22), transparent 70%),
+    #08080a;
+  box-shadow: 0 40px 80px -40px rgba(10, 0, 0, 0.6);
+  color: #ffffff;
+}
+/* the pathway tabs as glass pills */
+.mbp-plans .cpl__tab {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.85);
+}
+.mbp-plans .cpl__tab:hover { border-color: rgba(255, 255, 255, 0.6); color: #ffffff; }
+.mbp-plans .cpl__tab[aria-selected='true'] {
+  border-color: transparent;
+  background: linear-gradient(135deg, #ff3a40, #a50e14);
+  box-shadow: 0 0 22px rgba(255, 50, 58, 0.45);
+  color: #ffffff;
+}
+.mbp-plans .cpl__intro { color: rgba(255, 255, 255, 0.75); }
+
+/* each tier a frosted glass card with a bright rim, as the mission cards */
+.mbp-plans .mbr-tier {
+  position: relative;
+  border: 0;
+  border-radius: 22px;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.02) 70%, rgba(255, 120, 125, 0.08) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 18px rgba(255, 50, 58, 0.12), 0 24px 40px -20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+.mbp-plans .mbr-tier::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.12) 30%, rgba(255, 255, 255, 0.04) 55%, rgba(255, 90, 96, 0.55) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+.mbp-plans .mbr-tier:hover {
+  transform: translateY(-6px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 50, 58, 0.3), 0 30px 50px -20px rgba(0, 0, 0, 0.9);
+}
+/* Gold: warmer glass and a gold rim */
+.mbp-plans .mbr-tier--gold {
+  background: linear-gradient(135deg, rgba(255, 220, 130, 0.16) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(120, 10, 16, 0.25) 100%);
+}
+.mbp-plans .mbr-tier--gold::before {
+  background: linear-gradient(135deg, #ffe9a8, rgba(217, 180, 74, 0.35) 30%, rgba(255, 255, 255, 0.05) 55%, #d9b44a 100%);
+}
+.mbp-plans .mbr-tier__name { color: #ffffff; }
+.mbp-plans .cpl__sub,
+.mbp-plans .mbr-tier__why,
+.mbp-plans .pk-bullets li { color: rgba(255, 255, 255, 0.74); }
+.mbp-plans .mbr-tier__who { color: #ffffff; }
+.mbp-plans .mbr-tier__label { color: #ff6a6f; }
+.mbp-plans .mbr-tier--gold .mbr-tier__label { color: #e6c766; }
+.mbp-plans .mbr-tier__cta {
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff3a40, #b3121a);
+  box-shadow: 0 10px 24px -10px rgba(255, 50, 58, 0.8);
+}
+.mbp-plans .mbr-tier__cta:hover { background: linear-gradient(135deg, #ff5257, #c8141d); }
+@media (prefers-reduced-motion: reduce) {
+  .mbp-plans .mbr-tier,
+  .mbp-plans .mbr-tier:hover { transform: none; }
+}
