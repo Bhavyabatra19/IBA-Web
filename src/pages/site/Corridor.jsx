@@ -17,6 +17,7 @@ import { Steps } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
 import BlockFilm from '../../components/BlockFilm'
 import PillarCards from '../../components/PillarCards'
+import { initials } from '../../data/partners'
 
 const ENQUIRY = 'Web3 Corridor'
 
@@ -157,6 +158,30 @@ const PREMIUM = [
   },
 ]
 
+/* Corridor partners: the third section (content review, 11-10). Logos
+   from public/logos; The Circle has none supplied yet, so it shows a
+   monogram until one arrives. */
+const CORRIDOR_PARTNERS = [
+  {
+    name: 'TheBlock',
+    logo: '/logos/eco/theblock-ae.png',
+    tag: 'Dubai · UAE Experience Centre',
+    text: 'A workspace and community for virtual-asset companies, giving corridor members a real-time experience of the UAE ecosystem.',
+    href: '#the-block',
+  },
+  {
+    name: 'TheCircle',
+    tag: 'Corridor partner',
+    text: 'Partnering with IBA across the Web3 Corridor network.',
+  },
+  {
+    name: 'Token Asset Foundation',
+    logo: '/logos/partners/token-asset-foundation.jpg',
+    tag: 'Tokenization standards',
+    text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
+  },
+]
+
 const Arrow = () => <span aria-hidden="true">→</span>
 
 export default function Corridor() {
@@ -213,6 +238,41 @@ export default function Corridor() {
           <Btn href="/membership">
             Explore Membership <Arrow />
           </Btn>
+        </div>
+      </Section>
+
+      {/* Corridor partners, the third section (content review, 11-10): a
+          dark glass panel in a white section, as the Membership tiers */}
+      <Section
+        id="corridor-partners"
+        eyebrow="Corridor partners"
+        title="Building the corridor together."
+        lede="The organisations working with IBA to connect markets, capital and infrastructure across the Web3 Corridor."
+      >
+        <div className="cpn-partners" data-rise>
+          <ul className="cpn-partners__list">
+            {CORRIDOR_PARTNERS.map((p) => (
+              <li className="cpn-partner" key={p.name}>
+                <span className="cpn-partner__logo">
+                  {p.logo ? (
+                    <img src={p.logo} alt={`${p.name} logo`} loading="lazy" decoding="async" />
+                  ) : (
+                    <span className="cpn-partner__mono" aria-hidden="true">
+                      {initials(p.name.replace(/^The(?=[A-Z])/, 'The '))}
+                    </span>
+                  )}
+                </span>
+                <span className="cpn-partner__tag">{p.tag}</span>
+                <h3 className="cpn-partner__name">{p.name}</h3>
+                <p className="cpn-partner__text">{p.text}</p>
+                {p.href && (
+                  <a className="cpn-partner__go" href={p.href}>
+                    Know more <Arrow />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       </Section>
 
