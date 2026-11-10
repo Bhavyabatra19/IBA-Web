@@ -67,10 +67,8 @@ const CARDS = [
     href: '/corridor#the-block',
     img: '/images/the-block-card.jpg',
   },
-  /* ⚠ the full content for this pillar is on its way (content review,
-     11-06); it will sit on the Expertise page at #global-market-expansion,
-     which this card already links to. Until that section exists the link
-     opens the Expertise page at the top. */
+  /* the full content for this pillar is the Expertise page's
+     #global-market-expansion section (the client's GTM page, 11-10) */
   {
     key: 'expand',
     tag: 'Grow across borders',

@@ -6,8 +6,8 @@
  * home page's What IBA Does cards; Web360 Club Premium Programs (the
  * Indo–UAE Startup Xchange and its Gold cohort), in brief and then each in
  * full; the five regions and the network map; the operating model;
- * TheBlock Experience (video); the Global Innovation Corridor Forum at
- * WTC 2026; and the ask.
+ * TheBlock Experience (video); and the ask. (The Global Innovation
+ * Corridor Forum / WTC 2026 band was taken off by request, 11-10-2026.)
  *
  * The hero keeps the heading and the turning globe (by request).
  */
@@ -124,8 +124,7 @@ const PATHWAYS = [
     href: '/membership#plans',
     img: '/images/card-tokenization-art.jpg',
   },
-  /* ⚠ links to the Expertise page's Global Market Expansion section, whose
-     content is on its way (content review, 11-06) */
+  /* links to the Expertise page's Global Market Expansion section */
   {
     key: 'expand',
     tag: 'Cross-border growth',
@@ -349,20 +348,6 @@ export default function Corridor() {
           {BLOCK_VIDEOS.map((v) => (
             <BlockFilm key={v.src} {...v} />
           ))}
-        </div>
-      </Section>
-
-      <Section
-        id="corridor-forum"
-        tone="red"
-        eyebrow="Launch · WTC 2026 · November · Barcelona"
-        title="Global Innovation Corridor Forum"
-        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and set the roadmap."
-      >
-        <div className="pk-actions" data-rise>
-          <Btn enquiry={ENQUIRY}>
-            Participate in WTC 2026 <Arrow />
-          </Btn>
         </div>
       </Section>
 
