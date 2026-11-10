@@ -73,7 +73,9 @@ export const PENDING = {
 export const MEMBER_LOGIN = 'Member Login'
 
 export const NAV = [
-  /* The tabs as the content source sets them out. Every href is page-
+  /* The tabs in the order of the content review (11-10-2026): Home,
+     About, Expertise, Web3 Corridor, Memberships, Ecosystem, Red Club,
+     Resources. The tabs as the content source sets them out. Every href is page-
      qualified, so a link works from any page. */
   { key: 'home', label: 'Home', href: '/', top: true },
   /* Panels are grouped (by request, after the client's reference): a short
@@ -135,67 +137,39 @@ export const NAV = [
     ],
   },
   {
-    key: 'ecosystem',
-    label: 'Ecosystem',
-    href: '/ecosystem',
+    key: 'corridor',
+    label: 'Web3 Corridor',
+    href: '/corridor',
+    pill: true,
     groups: [
       {
-        title: 'Explore',
+        title: 'The Initiative',
         items: [
-          { label: 'Key Partners', icon: 'link', desc: 'Our growing network of partners.', href: '/ecosystem#organisations' },
-          { label: 'Communities & Councils', icon: 'chat', desc: 'Where the standards get set.', href: '/ecosystem#communities' },
+          { label: 'The Web3 Corridor', icon: 'globe', desc: 'Five regions, one connected ecosystem.', href: '/corridor#about' },
+          { label: 'Operating Model', icon: 'layers', desc: 'Support beyond a membership badge.', href: '/corridor#operating-model' },
         ],
       },
       {
-        title: 'Connect',
+        title: 'Programmes',
         items: [
-          { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
+          { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
+          { label: 'Gold Xchange Cohort', icon: 'spark', desc: 'A 12-week route to market signal.', href: '/corridor#xchange-cohort' },
         ],
       },
       {
-        title: 'Get Involved',
+        title: 'Take Part',
         items: [
-          { label: 'Become a Partner', icon: 'handshake', desc: 'Partner with IBA.', href: '/ecosystem#become-a-partner' },
+          { label: 'TheBlock Experience', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
+          { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
         ],
       },
     ],
   },
-  {
-    key: 'resources',
-    label: 'Resources',
-    href: '/library',
-    /* the formats all land on the catalogue, which filters by format */
-    groups: [
-      {
-        title: 'The Library',
-        items: [
-          { label: 'The IBA Library', note: 'free account', icon: 'book', desc: 'Search the full open knowledge base.', href: '/library' },
-          { label: 'Articles', icon: 'doc', desc: 'Perspectives on tokenization, policy and Web3.', href: '/library#catalogue' },
-        ],
-      },
-      {
-        title: 'Watch & Read',
-        items: [
-          { label: 'Videos', icon: 'play', desc: 'Walkthroughs and explainers.', href: '/library#catalogue' },
-          { label: 'Webinars', icon: 'video', desc: 'Recorded sessions with IBA experts.', href: '/library#catalogue' },
-        ],
-      },
-      /* no heading: a third column continuing Watch & Read */
-      {
-        items: [
-          { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
-        ],
-      },
-    ],
-  },
-  { key: 'redclub', label: 'Red Club', href: '/red-club' },
-  /* No Membership tab (by request): the memberships live on the Web3
-     Corridor page and are listed under its tab. */
   /* Membership as a main tab (content review, 11-05-2026), with its own page;
      each pathway link opens the plans on that pathway's tab */
   {
     key: 'membership',
-    label: 'Membership',
+    label: 'Memberships',
     href: '/membership',
     groups: [
       {
@@ -222,30 +196,56 @@ export const NAV = [
     ],
   },
   {
-    key: 'corridor',
-    label: 'Web3 Corridor',
-    href: '/corridor',
-    pill: true,
+    key: 'ecosystem',
+    label: 'Ecosystem',
+    href: '/ecosystem',
     groups: [
       {
-        title: 'The Initiative',
+        title: 'Explore',
         items: [
-          { label: 'The Web3 Corridor', icon: 'globe', desc: 'Five regions, one connected ecosystem.', href: '/corridor#about' },
-          { label: 'Operating Model', icon: 'layers', desc: 'Support beyond a membership badge.', href: '/corridor#operating-model' },
+          { label: 'Key Partners', icon: 'link', desc: 'Our growing network of partners.', href: '/ecosystem#organisations' },
+          { label: 'Communities & Councils', icon: 'chat', desc: 'Where the standards get set.', href: '/ecosystem#communities' },
         ],
       },
       {
-        title: 'Programmes',
+        title: 'Connect',
         items: [
-          { label: 'Indo–UAE Startup Xchange', icon: 'pin', desc: 'Build in one market. Belong in both.', href: '/corridor#xchange' },
-          { label: 'Gold Xchange Cohort', icon: 'spark', desc: 'A 12-week route to market signal.', href: '/corridor#xchange-cohort' },
+          { label: 'People', icon: 'users', desc: 'Members, advisors and mentors.', href: '/ecosystem#people' },
         ],
       },
       {
-        title: 'Take Part',
+        title: 'Get Involved',
         items: [
-          { label: 'TheBlock Experience', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
-          { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
+          { label: 'Become a Partner', icon: 'handshake', desc: 'Partner with IBA.', href: '/ecosystem#become-a-partner' },
+        ],
+      },
+    ],
+  },
+  { key: 'redclub', label: 'Red Club', href: '/red-club' },
+  {
+    key: 'resources',
+    label: 'Resources',
+    href: '/library',
+    /* the formats all land on the catalogue, which filters by format */
+    groups: [
+      {
+        title: 'The Library',
+        items: [
+          { label: 'The IBA Library', note: 'free account', icon: 'book', desc: 'Search the full open knowledge base.', href: '/library' },
+          { label: 'Articles', icon: 'doc', desc: 'Perspectives on tokenization, policy and Web3.', href: '/library#catalogue' },
+        ],
+      },
+      {
+        title: 'Watch & Read',
+        items: [
+          { label: 'Videos', icon: 'play', desc: 'Walkthroughs and explainers.', href: '/library#catalogue' },
+          { label: 'Webinars', icon: 'video', desc: 'Recorded sessions with IBA experts.', href: '/library#catalogue' },
+        ],
+      },
+      /* no heading: a third column continuing Watch & Read */
+      {
+        items: [
+          { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
         ],
       },
     ],
