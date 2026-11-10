@@ -43,8 +43,8 @@ export const PARTNERS = [
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
   { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
+  { name: 'TheCircle', logo: '/logos/partners/thecircle.png' },
   /* no logo supplied yet, shown as monograms on the Ecosystem page only */
-  { name: 'The Circle' },
   { name: 'AgoraX' },
   { name: 'Ira Blocks' },
   { name: 'Adlam' },
