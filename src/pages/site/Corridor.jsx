@@ -159,8 +159,9 @@ const PREMIUM = [
 ]
 
 /* Corridor partners: the third section (content review, 11-10). Logos
-   from public/logos; The Circle has none supplied yet, so it shows a
-   monogram until one arrives. */
+   from public/logos. TheCircle's mark is cut from the supplied white
+   wordmark (thecircle-wordmark-white.png) and set in IBA Black, so it
+   reads on the white logo tile. */
 const CORRIDOR_PARTNERS = [
   {
     name: 'TheBlock',
@@ -171,6 +172,7 @@ const CORRIDOR_PARTNERS = [
   },
   {
     name: 'TheCircle',
+    logo: '/logos/partners/thecircle.png',
     tag: 'Corridor partner',
     text: 'Partnering with IBA across the Web3 Corridor network.',
   },
