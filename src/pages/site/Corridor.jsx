@@ -10,6 +10,10 @@
  * Corridor Forum / WTC 2026 band was taken off by request, 11-10-2026.)
  *
  * The hero keeps the heading and the turning globe (by request).
+ * Tones alternate light and dark, each dark band on a gradient ground as on
+ * the Expertise and Tokenization pages (by request: the page was flat):
+ * dark hero, white, grey (the partners' dark glass panel), dark, white,
+ * grey, dark, white, dark, white, and then the site's dark CTA band (brandbook.css, "Web3 Corridor grounds").
  */
 
 import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/Kit'
@@ -246,6 +250,7 @@ export default function Corridor() {
           dark glass panel in a white section, as the Membership tiers */}
       <Section
         id="corridor-partners"
+        tone="card"
         eyebrow="Corridor partners"
         title="Building the corridor together."
         lede="The organisations working with IBA to connect markets, capital and infrastructure across the Web3 Corridor."
@@ -306,6 +311,7 @@ export default function Corridor() {
 
       <Section
         id="xchange-cohort"
+        tone="card"
         eyebrow="Premium Program · The Gold Xchange Cohort"
         title="A 12-week route from decision to market signal."
         lede={[
@@ -339,6 +345,7 @@ export default function Corridor() {
 
       <Section
         id="the-block"
+        tone="dark"
         eyebrow="Partnership · Dubai"
         title="TheBlock Experience"
         lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
@@ -353,7 +360,7 @@ export default function Corridor() {
 
       <Section
         id="contact"
-        tone="red"
+        center
         eyebrow="Next step"
         title="Your next market starts with the right corridor."
         lede="Explore your membership fit across Web360 founder programmes, tokenization plans, global market expansion or the Web360 Club premium programmes, and tell us your preferred track, tier and target markets."
