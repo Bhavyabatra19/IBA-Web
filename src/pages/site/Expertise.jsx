@@ -10,7 +10,7 @@
  * The Power Consulting and How We Work blocks were taken off by request.
  */
 
-import { PageHero, Section, Cards, Quote, Btn } from '../../components/Kit'
+import { PageHero, Section, SubHead, Cards, Quote, Btn } from '../../components/Kit'
 import { REGIONS_LINE } from '../../data/facts'
 import CoreCapabilities from '../../components/CoreCapabilities'
 import TokenHero from '../../components/TokenHero'
@@ -101,6 +101,55 @@ const OUTCOMES = [
   { num: '04', title: 'Access to Capital', text: 'Compelling investment proposition, a fundraise-ready structure, and strategic investor connections to help unlock capital and accelerate growth.' },
   { num: '05', title: 'Market Launch and Outreach', text: 'A market-ready launch plan, defined target segments, a qualified prospect pipeline, partner introductions, scheduled outreach campaigns, and measurable targets for leads, conversions, and early customer acquisition.' },
   { num: '06', title: 'Growth and Expansion', text: 'Access to cross-border corridors that connect you with local partners, investors, institutions, and market-entry pathways, enabling faster expansion, stronger partnerships, and compliant entry into new jurisdictions.' },
+]
+
+/* Global Market Expansion: the client's "Global Market Entry & GTM"
+   page (11-10-2026). The corridor's Global Market Expansion cards link
+   here (#global-market-expansion). */
+const GTM_TIERS = [
+  {
+    num: 'Tier 01',
+    title: 'Explore',
+    sub: 'Market discovery & feasibility',
+    text: 'For teams evaluating where, when and whether to enter.',
+    list: ['Demand and competitor research', 'Regulatory landscape overview', 'Product-market fit and localisation', 'Customer personas and entry options'],
+    outcome: 'Market Insight Report, Competitor Matrix, Regulatory Brief, PMF Snapshot, Customer Persona Kit.',
+  },
+  {
+    num: 'Tier 02',
+    title: 'Engage',
+    sub: 'GTM strategy blueprint',
+    text: 'For companies preparing to test and establish a market.',
+    list: ['Region-specific GTM roadmap', 'ICP, positioning and messaging', 'Partner and channel mapping', 'Local hiring and legal considerations', 'Relevant ecosystem introductions'],
+    outcome: 'Localized GTM Deck, Partner Landscape Map, Talent Snapshot, Legal Playbook, Introductions Log.',
+  },
+  {
+    num: 'Tier 03',
+    title: 'Activate',
+    sub: 'Market-entry execution',
+    text: 'For businesses ready to build local commercial traction.',
+    list: ['Business development and outreach', 'Partner and representative enablement', 'Recruitment and event support', 'Investor engagement preparation', 'Soft-landing and GTM coordination'],
+    outcome: 'BD Tracker, Partner Engagement Dashboard, Recruitment Kit, Sales Collateral, Investor Brief.',
+  },
+  {
+    num: 'Tier 04',
+    title: 'Elevate',
+    sub: 'Regional growth & scale-up',
+    text: 'For established entrants building long-term regional operations.',
+    list: ['Demand generation and growth engine', 'Enterprise partnerships and M&A exploration', 'Capital raise readiness support', 'Product and support localisation', 'Regional operating roadmap'],
+    outcome: 'Growth Roadmap, Marketing Plan, Capital Raise Toolkit, Partnerships & M&A File, Localization Framework.',
+  },
+]
+
+const GTM_SERVICES = [
+  { num: '01', title: 'Market intelligence & entry strategy', text: 'Market sizing and prioritisation, competition, customer discovery, business planning, market vision and GTM roadmaps.' },
+  { num: '02', title: 'Regulatory, policy & risk navigation', text: 'Regulatory environment assessment, jurisdictional considerations, compliance design inputs, risk identification and mitigation planning. Specialist legal advice is scoped separately where required.' },
+  { num: '03', title: 'Corporate & financial advisory', text: 'Organic and inorganic growth options, commercial models, financial and operational modelling, expansion economics and investment readiness.' },
+  { num: '04', title: 'Partnerships & ecosystem development', text: 'Partner discovery, qualification, due diligence, channel models, joint venture exploration and commercial negotiation support.' },
+  { num: '05', title: 'GTM activation & business development', text: 'Positioning, regional messaging, demand generation, sales collateral, outreach, channel enablement and opportunity pipeline tracking.' },
+  { num: '06', title: 'Market setup & operational execution', text: 'Soft landing, infrastructure setup coordination, local talent support, vendor management, organisation design and operating-model development.' },
+  { num: '07', title: 'Capital & institutional engagement', text: 'Investor briefs, fundraising preparation, relevant introductions and institutional partnership strategy, subject to applicable rules.' },
+  { num: '08', title: 'Programme management & impact', text: 'Project coordination, milestones, operations review, policy and strategy assessment, performance dashboards and optimisation.' },
 ]
 
 /* IBA Initiatives. An entry without a `logo` shows a monogram (`mono`). */
@@ -230,6 +279,33 @@ export default function Expertise() {
       </Section>
 
       <TokenizationBand />
+
+      {/* Global Market Expansion (the client's GTM page, 11-10-2026): the
+          four-stage framework, then the advisory stack behind it */}
+      <Section
+        id="global-market-expansion"
+        tone="dark"
+        eyebrow="Global Market Expansion · Web3 Corridor"
+        title="New markets. Real traction. Global scale."
+        lede={[
+          'From market intelligence and regulatory navigation to local partnerships, commercial activation and sustained expansion, IBA helps Web3, fintech and emerging-technology businesses turn cross-border opportunity into an executable growth strategy.',
+          'Start at the stage that matches your readiness: Explore, Engage, Activate or Elevate. Each can be commissioned on its own, for one country, or as a connected multi-market programme.',
+        ]}
+      >
+        <Cards items={GTM_TIERS} cols={4} />
+        <SubHead lede="Specialist capability across the entire market-entry lifecycle, from IBA's business strategy, corporate strategy, partnerships, implementation, operational strategy and impact-assessment service lines.">
+          The advisory and consulting stack
+        </SubHead>
+        <Cards items={GTM_SERVICES} cols={4} />
+        <div className="pk-actions" data-rise>
+          <Btn enquiry="Global Market Expansion">
+            Request a GTM consultation <span aria-hidden="true">→</span>
+          </Btn>
+          <Btn href="/membership" variant="ghost">
+            Enter through Web360
+          </Btn>
+        </div>
+      </Section>
 
       {/* the same section and cards as the About page's Our Mission (by
           request): the red light-arcs ground, glass cards, neon-ring icons */}
