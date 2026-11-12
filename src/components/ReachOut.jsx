@@ -94,6 +94,10 @@ export const channels = (phrase) => [
  *   where the dialog's own h2 already exists and a second one would break the
  *   heading order a screen reader navigates by.
  */
+/* the Let's Talk form shows three channels only (by request, 11-12): no
+   phone, which the form's own Phone / WhatsApp field already covers */
+const ICON_CHANNELS = ['Email', 'WhatsApp', 'LinkedIn']
+
 export default function ReachOut({ phrase, heading = 'Or reach us directly', as = 'h2', iconsOnly = false }) {
   const Heading = as
   /* the Let's Talk form (content review, 11-05): the channels as icons only,
@@ -104,7 +108,9 @@ export default function ReachOut({ phrase, heading = 'Or reach us directly', as 
       <div className="reach reach--icons">
         <Heading className={as === 'h2' ? 'reach__h display' : 'eyebrow'}>{heading}</Heading>
         <ul className="reach__iconRow">
-          {channels(phrase).map((c) => (
+          {channels(phrase)
+            .filter((c) => ICON_CHANNELS.includes(c.k))
+            .map((c) => (
             <li key={c.k}>
               <a
                 href={c.href}

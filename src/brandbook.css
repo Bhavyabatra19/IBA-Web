@@ -13532,3 +13532,28 @@ img.ib__sectorIcon {
 .w3p .pk-sec--plain + .pk-sec--plain .pk-sec__panel {
   padding-top: 0;
 }
+
+/* Let's Talk (content review, 11-12): one column, with the contact icons
+   above the form rather than in a pane of their own beside it, which left
+   a tall empty strip down the left. The panel narrows to the form's width. */
+.enq__panel {
+  width: min(100%, 720px);
+}
+.enq__body {
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.2rem, 2.4vw, 1.6rem);
+}
+.enq__reach {
+  padding-bottom: clamp(1.2rem, 2.4vw, 1.6rem);
+  border-bottom: 1px solid var(--line);
+}
+.reach--icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+}
+.reach--icons .reach__iconRow {
+  margin: 0;
+}

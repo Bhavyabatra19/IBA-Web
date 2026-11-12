@@ -79,8 +79,9 @@ const RULES = {
         ? ''
         : "That doesn't look like an email address.",
   organisation: (v) => (v.trim() ? '' : 'Please tell us your organisation and its website.'),
-  topic: (v) => (v ? '' : 'Pick the closest match, you can explain below.'),
-  message: (v) => (v.trim() ? '' : 'Tell us what you’re working on.'),
+  topic: (v) => (v ? '' : 'Pick the closest match.'),
+  /* Message is optional (by request, 11-12): the other fields already carry
+     what the team needs to reply */
   consent: (v) => (v ? '' : 'We need your agreement before we can reply.'),
   /* optional: checked only when a file has been chosen */
   document: (f) => {
@@ -308,11 +309,8 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
         label="Message"
         name="message"
         rows={4}
-        required
         mark="required"
-        error={errors.message}
         defaultValue={kept.message}
-        onBlur={() => check('message')}
         onChange={recheck('message')}
       />
       {/* optional supporting document, kept with the enquiry; it is sent once
