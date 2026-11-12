@@ -13557,3 +13557,62 @@ img.ib__sectorIcon {
 .reach--icons .reach__iconRow {
   margin: 0;
 }
+
+/* ------------------------------------------------------------------
+   Web3 Corridor grounds (pages/site/Corridor.jsx, .w3p): light and dark
+   alternate, and every dark band takes a gradient ground in the manner of
+   the Expertise and Tokenization pages (by request: the page was flat)
+   ------------------------------------------------------------------ */
+/* Premium Programs: the red light-arcs ground of About's Our Mission */
+.w3p #premium-programs .pk-sec__panel {
+  background:
+    linear-gradient(180deg, rgba(5, 3, 4, 0.78) 0%, rgba(5, 3, 4, 0.4) 34%, rgba(5, 3, 4, 0.15) 60%, rgba(5, 3, 4, 0.55) 100%),
+    url('/images/mission-bg.jpg') center 60% / cover no-repeat,
+    #0a0304;
+}
+/* the Gold cohort: a light band with a soft red glow in its corners */
+.w3p #xchange-cohort .pk-sec__panel {
+  background:
+    radial-gradient(55% 70% at 100% 0%, rgba(215, 25, 32, 0.1), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, rgba(215, 25, 32, 0.07), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--bb-surface-alt) 100%);
+}
+/* the network: a faint block grid and red glows behind the map */
+.w3p #about .pk-sec__panel {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(60% 55% at 80% 30%, rgba(215, 25, 32, 0.28), transparent 70%),
+    radial-gradient(50% 50% at 10% 90%, rgba(215, 25, 32, 0.18), transparent 70%),
+    #08080a;
+}
+/* TheBlock: the founder quote's slow black-to-red flow */
+.w3p #the-block .pk-sec__panel {
+  background: linear-gradient(120deg, #050505 0%, #1a0305 30%, #6e0a10 62%, #b5141b 82%, #1a0305 100%);
+  background-size: 260% 260%;
+  animation: fq-flow 18s ease-in-out infinite alternate;
+}
+.w3p :is(#about, #the-block, #premium-programs) .pk-head__lede {
+  color: rgba(255, 255, 255, 0.8);
+}
+/* region cards: frosted glass with a red rim on hover, as on About */
+.w3p #about .pk-card {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 55%, rgba(255, 120, 125, 0.08) 100%);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+.w3p #about .pk-card:hover {
+  border-color: #ff4a50;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 55%, rgba(255, 60, 70, 0.16) 100%);
+  box-shadow: 0 0 28px rgba(255, 40, 50, 0.3);
+}
+/* the closing ask, centred on white before the dark CTA band */
+.w3p #contact .pk-actions {
+  justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .w3p #the-block .pk-sec__panel {
+    animation: none;
+  }
+}
