@@ -55,8 +55,8 @@ export default function GetInTouch() {
             Rewriting the Rules with Web3.
           </h2>
           <p className="git__lede" data-rise>
-            Talk to our team about consulting, tokenization, corridors, membership, the UAE
-            Experience Center or the Red Club.
+            Talk to our team about funding and capital raising, consulting, tokenization,
+            corridors, membership, the UAE Experience Center or the Red Club.
           </p>
           {/* the direct lines, as three icon buttons, email, phone, WhatsApp;
               the address itself is the label (screen readers, hover tooltip) */}
