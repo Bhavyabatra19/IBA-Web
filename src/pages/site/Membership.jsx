@@ -10,6 +10,11 @@
  * Tokenization and Expertise: a 3D render in the hero, the icon strip under
  * it, glass cards on the red light-arcs ground, the tiers in a dark glass
  * panel, and the steps as glass cards on the red gradient.
+ * Tones alternate light and dark with no two dark bands touching (as on the
+ * Web3 Corridor page): dark hero, the white strip, the red light-arcs, white
+ * (the tiers' dark panel), the red gradient, the questions on a light band
+ * with a soft red glow, the ask white and centred, and then the site's dark
+ * CTA band (brandbook.css, "Membership grounds").
  */
 
 import { PageHero, Section, Btn } from '../../components/Kit'
@@ -213,13 +218,13 @@ export default function Membership() {
         </div>
       </Section>
 
-      <Section id="membership-faq" eyebrow="Frequently asked questions" title="Before you choose.">
+      <Section id="membership-faq" tone="card" eyebrow="Frequently asked questions" title="Before you choose.">
         <Faq items={FAQ} />
       </Section>
 
       <Section
         id="membership-cta"
-        tone="dark"
+        center
         eyebrow="Next step"
         title="Your next market starts with the right membership."
         lede="Tell us your organisation, your preferred pathway and tier, and the markets you are building for, and the IBA team will take it from there."
