@@ -146,11 +146,11 @@ export default function Membership() {
         lede={`Membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries, with a pathway for every stage of growth.`}
         actions={
           <>
-            <Btn enquiry={ENQUIRY}>
-              Become a Member <Arrow />
-            </Btn>
             <Btn href="#plans" variant="ghost">
               Explore Pathways & Tiers
+            </Btn>
+            <Btn enquiry={ENQUIRY}>
+              Become a Member <Arrow />
             </Btn>
           </>
         }
@@ -204,11 +204,11 @@ export default function Membership() {
       >
         <MissionPillars items={JOURNEY} />
         <div className="pk-actions" data-rise>
-          <Btn enquiry={ENQUIRY}>
-            Become a Member <Arrow />
-          </Btn>
           <Btn href="#plans" variant="ghost">
             Explore Pathways & Tiers
+          </Btn>
+          <Btn enquiry={ENQUIRY}>
+            Become a Member <Arrow />
           </Btn>
         </div>
       </Section>
