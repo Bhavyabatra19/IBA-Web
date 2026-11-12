@@ -6,6 +6,9 @@
  * site's tier card (.mbr-tier, TierShield); the tabs are styled in
  * brandbook.css (.cpl).
  *
+ * Each tier shows 4–5 key benefits and a Request Brochure button (by
+ * request, 11-12-2026); the full lists are in the brochure.
+ *
  * No prices anywhere on the site (by request, 11-04-2026): the cards give
  * who each tier is for and what it includes; terms are shared on enquiry.
  */
@@ -43,16 +46,11 @@ const PLANS = {
       audience: 'Founders, operators, MSMEs and early-stage businesses',
       summary: 'Build international exposure with the Web360 community, expert access and market-entry guidance.',
       benefits: [
-        'Webinars, AMAs and monthly Corridor roundup',
+        'Webinars, AMAs and the monthly Corridor roundup',
         'Verified Club badge; public and community events',
-        'Member pricing on Corridor services and products',
-        'Special Dubai co-hosted event packages',
-        'Go-to-market advisory for business expansion',
-        'Priority review for Bronze Plus track',
-        'Global member and partner directory; templates and frameworks',
-        'Corporate document vault; KYC/KYB via biometrics',
-        'Mentoring on setup, legal frameworks and fundraising activation',
-        'Member-only marketplace and investor table invitations',
+        'Go-to-market advisory and mentoring on setup, legal and fundraising',
+        'Member pricing on Corridor services and Dubai co-hosted events',
+        'Global member directory, document vault and KYC/KYB',
       ],
     },
     {
@@ -63,14 +61,10 @@ const PLANS = {
       summary: 'Bronze inclusions plus founder-focused visibility, investor readiness and growth support.',
       benefits: [
         'All Bronze inclusions',
-        'Learning links: RWA, tokenomics and regulatory primers',
-        'Startup podcast company feature',
-        'Two complimentary Dubai event admissions',
-        'On-request tech interns for projects',
-        'Growth advisory; deck and plan reviews',
+        'Growth advisory with deck and plan reviews',
         'Matched investor introductions and networking',
-        'Customized setup, legal and GTM mentoring',
-        'Priority review for Silver Plus track',
+        'Startup podcast feature and two Dubai event admissions',
+        'Customised setup, legal and GTM mentoring',
       ],
     },
     {
@@ -81,15 +75,10 @@ const PLANS = {
       summary: 'Silver inclusions plus curated investor access, structured milestone reviews and expansion support.',
       benefits: [
         'All Silver inclusions',
-        'Curated expert and founder–mentor appointments',
-        'GTM advisory and member pricing',
-        'Special prices for Dubai co-hosted events',
-        'On-request technical interns',
-        'Expert Board Advisor preparation and support for six months',
-        'Continuous market-readiness reviews',
-        'Fast-track plans into Gold Plus programme',
-        'Media and podcast visibility; investor and mentor directory',
+        'Expert Board Advisor support for six months',
         'Weekly strategy sessions and KPI/milestone reviews',
+        'Curated expert, mentor and investor access',
+        'Media and podcast visibility; fast-track into Gold Plus',
       ],
     },
   ],
@@ -101,17 +90,11 @@ const PLANS = {
       audience: 'Founders, issuers, advisors, professionals and small businesses',
       summary: 'Join the tokenized markets ecosystem with resources, directories, learning and advisory.',
       benefits: [
-        'Verified badge and live/on-demand webinars',
-        'Tokenized Markets Weekly newsletter',
+        'Verified badge, webinars and the Tokenized Markets Weekly',
         'RWA, tokenomics and regulatory learning centre',
         'Full portal, RWA forum, vendor and issuer directories',
-        'Vendor listing and issuer profile/offering',
-        'Monthly member roundup and member pricing',
-        'Five-day Buy Side trial plus member pricing',
-        'On-request technical interns',
-        'Dubai co-hosted event member prices',
+        'Vendor listing and issuer profile',
         'Business setup, legal, GTM and early fundraising advisory',
-        'Corporate vault and KYC/KYB facilities',
       ],
     },
     {
@@ -122,15 +105,10 @@ const PLANS = {
       summary: 'Bronze Plus inclusions with enhanced business development, expert reviews and promotional reach.',
       benefits: [
         'All Bronze Plus inclusions',
-        'Enhanced listings and active business development',
+        'Enhanced listings, lead generation and business development',
         'Branded media, Member Spotlight and podcast eligibility',
-        'Expert mentor sessions for tokenomics white paper',
-        'Detailed reviews of project and business plans',
+        'Expert reviews of tokenomics white paper and business plans',
         'Introductions to tokenization platforms',
-        'Lead-generation and ecosystem introductions',
-        'Annual strategy session',
-        'GTM advisory, member pricing and Dubai event offers',
-        'Full portal, directories and corporate vault',
       ],
     },
     {
@@ -141,15 +119,10 @@ const PLANS = {
       summary: 'An enterprise-oriented package for market presence, sponsorship and high-value introductions.',
       benefits: [
         'All Silver Plus inclusions',
-        'Sponsorships, lead generation and prospective client opportunities',
-        'Company-wide/core-team access and preferred visibility',
-        'Enhanced vendor listings and business development',
-        'Expert mentor sessions and detailed plan reviews',
-        'Introductions to tokenization platforms',
+        'Company-wide access and preferred visibility',
+        'Sponsorship and prospective client opportunities',
         'Expert Board Advisor for six months',
         'Priority introductions and advisory',
-        'Access to global portal, RWA forum and directories',
-        'Member pricing, Dubai event offers and technical intern availability',
       ],
     },
   ],
@@ -164,7 +137,7 @@ const PLANS = {
         'Member events and briefings',
         'Founder community across both markets',
         'Network and ecosystem orientation',
-        'Suitable for India → UAE or UAE → India tracks',
+        'For India → UAE or UAE → India tracks',
       ],
     },
     {
@@ -190,9 +163,7 @@ const PLANS = {
       benefits: [
         'All Silver Xchange inclusions',
         '12-week launch sprint',
-        'Weeks 1–3: Validate',
-        'Weeks 4–8: Build',
-        'Weeks 9–12: Launch',
+        'Validate (weeks 1–3), build (4–8), launch (9–12)',
         'Demo day and soft-landing support',
       ],
     },
@@ -265,7 +236,7 @@ export default function CorridorPlans() {
               <p className="mbr-tier__why">{p.summary}</p>
               <Bullets items={p.benefits} />
               <a className="mbr-tier__cta" href="/connect" data-enquiry={ENQUIRY}>
-                Enquire about {p.name}
+                Request Brochure
               </a>
             </li>
           ))}

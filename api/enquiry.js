@@ -59,7 +59,7 @@ export default async function handler(req, res) {
   if (body[HONEYPOT]) return reply(res, 200, { ok: true })
 
   const data = Object.fromEntries(FIELDS.map(([k]) => [k, clean(body[k], k === 'message' ? 5000 : 300)]))
-  if (!data.name || !isEmail(data.email) || !data.message) return reply(res, 422, { error: 'invalid' })
+  if (!data.name || !isEmail(data.email)) return reply(res, 422, { error: 'invalid' })
 
   const lines = FIELDS.filter(([k]) => data[k]).map(([k, label]) => `${label}: ${data[k]}`)
   const text = [

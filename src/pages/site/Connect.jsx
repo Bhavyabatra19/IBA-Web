@@ -84,7 +84,7 @@ export default function Connect() {
               { name: 'email', label: 'Work email', type: 'email' },
               { name: 'phone', label: 'Phone / WhatsApp', type: 'tel', required: false },
               { name: 'topic', label: "I'm interested in", type: 'select', wide: true, options: INTERESTS },
-              { name: 'message', label: 'Message', type: 'textarea' },
+              { name: 'message', label: 'Message', type: 'textarea', required: false },
             ]}
           />
         </div>
