@@ -9,6 +9,12 @@
  *
  * ⚠ The three market figures and the "source material" wording come from the
  * client's copy, which itself says they should be validated before publication.
+ *
+ * Tones alternate light and dark with no two dark bands touching (as on the
+ * Web3 Corridor and Membership pages): dark hero, the white strip, red,
+ * white, the red light-arcs, white, the dark grid, Market Expansion on a
+ * light band with a soft red glow, the closing box white, and then the
+ * site's dark CTA band (brandbook.css, "Tokenization grounds").
  */
 
 import { PageHero, Section, Cards, Btn, Stats } from '../../components/Kit'
@@ -249,6 +255,7 @@ export default function Tokenization() {
 
       <Section
         id="market-expansion"
+        tone="card"
         eyebrow="Ecosystem and Market Expansion"
         title="Tokenization scales when the ecosystem connects."
         lede="Issuers need more than technology. They need a network of asset owners, brokers, marketplaces, investors, service providers and institutional partners, supported by regulatory engagement and access to priority markets."
@@ -258,7 +265,6 @@ export default function Tokenization() {
 
       <Section
         id="tokenization-cta"
-        tone="dark"
         eyebrow="India Blockchain Alliance"
         title="Move from tokenization concept to a market-ready program."
         lede="Explore the asset, regulatory, technology and ecosystem requirements for your initiative and identify the partners and markets needed to take it forward."
