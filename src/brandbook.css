@@ -13639,3 +13639,20 @@ img.ib__sectorIcon {
   justify-content: center;
   text-align: center;
 }
+
+/* ------------------------------------------------------------------
+   Tokenization grounds (pages/site/Tokenization.jsx, .tkp): Market
+   Expansion on a light band with a soft red glow, as the Corridor's Gold
+   cohort; the closing box white, so no two dark bands touch before the
+   CTA band, its disclaimer in grey on the white
+   ------------------------------------------------------------------ */
+.tkp #market-expansion .pk-sec__panel {
+  background:
+    radial-gradient(55% 70% at 100% 0%, rgba(215, 25, 32, 0.1), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, rgba(215, 25, 32, 0.07), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--bb-surface-alt) 100%);
+}
+.tkp #tokenization-cta .tkp-disclaimer {
+  border-top-color: var(--bb-line);
+  color: var(--bb-ink-muted);
+}
