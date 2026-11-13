@@ -3,7 +3,7 @@
  * & Investor, Web360 Tokenization & Institutions, Indo–UAE Startup
  * Xchange), each with its three tier cards, from the
  * client's Corridor membership reference (11-04-2026). The cards reuse the
- * site's tier card (.mbr-tier, TierShield); the tabs are styled in
+ * site's tier card (.mbr-tier, with a TierCard in each metal); the tabs are styled in
  * brandbook.css (.cpl).
  *
  * Each tier shows 4–5 key benefits and a Request Brochure button (by
@@ -14,7 +14,7 @@
  */
 
 import { useEffect, useState } from 'react'
-import TierShield from './TierShield'
+import TierCard from './TierCard'
 import { Bullets } from './Kit'
 
 const ENQUIRY = 'Membership'
@@ -28,7 +28,8 @@ const TRACKS = [
   {
     key: 'token',
     label: 'Tokenization & Institutions',
-    intro: 'Web360 Club’s tokenization track: dedicated tokenization, RWA, issuer, vendor and corporate plans.',
+    title: 'Web360 Club Membership Benefits',
+    intro: 'Membership positioning: Bronze establishes ecosystem access and knowledge; Silver strengthens visibility, business development and commercial readiness; Gold delivers executive-level engagement, institutional positioning and priority growth opportunities.',
   },
   {
     key: 'xchange',
@@ -85,44 +86,43 @@ const PLANS = {
   token: [
     {
       metal: 'bronze',
-      name: 'Bronze Plus',
-      sub: 'Tokenization Starter Pack',
-      audience: 'Founders, issuers, advisors, professionals and small businesses',
-      summary: 'Join the tokenized markets ecosystem with resources, directories, learning and advisory.',
+      name: 'Bronze',
+      sub: 'Essential Access',
+      tagline: 'Learn • Connect • Explore',
       benefits: [
-        'Verified badge, webinars and the Tokenized Markets Weekly',
-        'RWA, tokenomics and regulatory learning centre',
-        'Full portal, RWA forum, vendor and issuer directories',
-        'Vendor listing and issuer profile',
-        'Business setup, legal, GTM and early fundraising advisory',
+        { t: 'Membership & Industry Insights', d: 'Verified badge, live and on-demand webinars, Tokenized Markets Weekly newsletter, and monthly member updates.' },
+        { t: 'Knowledge & Learning', d: 'Access to RWA, tokenomics, and regulatory learning resources, member portal, and RWA forum.' },
+        { t: 'Ecosystem Visibility', d: 'Vendor listings, issuer profiles, offerings, and access to industry directories.' },
+        { t: 'Business Enablement', d: 'Business setup, legal, GTM and fundraising advisory access, corporate vault, KYC/KYB support and on-request technology interns.' },
+        { t: 'Member Privileges', d: 'Five-day Buy Side trial, preferential member pricing, and discounted Dubai co-hosted events.' },
       ],
     },
     {
       metal: 'silver',
-      name: 'Silver Plus',
-      sub: 'Tokenization Pro Pack',
-      audience: 'Tokenization businesses seeking leads and visibility',
-      summary: 'Bronze Plus inclusions with enhanced business development, expert reviews and promotional reach.',
+      name: 'Silver',
+      sub: 'Growth & Visibility',
+      tagline: 'Position • Engage • Accelerate',
+      includes: 'Includes all Bronze benefits, plus:',
       benefits: [
-        'All Bronze Plus inclusions',
-        'Enhanced listings, lead generation and business development',
-        'Branded media, Member Spotlight and podcast eligibility',
-        'Expert reviews of tokenomics white paper and business plans',
-        'Introductions to tokenization platforms',
+        { t: 'Enhanced Market Visibility', d: 'Premium listings, branded media exposure, Member Spotlight features and podcast participation eligibility.' },
+        { t: 'Strategic Business Development', d: 'Active lead generation, targeted ecosystem introductions and new commercial opportunities.' },
+        { t: 'Specialist Tokenization Mentorship', d: 'Expert-led tokenomics white-paper sessions and introductions to tokenization platforms.' },
+        { t: 'Business & Project Readiness', d: 'Detailed project assessments, business plan reviews and an annual strategy session.' },
+        { t: 'Expanded Ecosystem Engagement', d: 'Greater access to relevant industry partners, potential clients and strategic collaborations.' },
       ],
     },
     {
       metal: 'gold',
-      name: 'Gold Plus',
-      sub: 'Corporate & Institutional Pack',
-      audience: 'Tokenization platforms, law firms, banks, institutions and established vendors',
-      summary: 'An enterprise-oriented package for market presence, sponsorship and high-value introductions.',
+      name: 'Gold',
+      sub: 'Executive & Institutional',
+      tagline: 'Lead • Expand • Scale',
+      includes: 'Includes all Bronze and Silver benefits, plus:',
       benefits: [
-        'All Silver Plus inclusions',
-        'Company-wide access and preferred visibility',
-        'Sponsorship and prospective client opportunities',
-        'Expert Board Advisor for six months',
-        'Priority introductions and advisory',
+        { t: 'Enterprise-Wide Privileges', d: 'Company-wide and core-team access with preferred visibility across the Web3 Corridor ecosystem.' },
+        { t: 'Executive Advisory', d: 'Access to an Expert Board Advisor for six months, with priority strategic advisory support.' },
+        { t: 'Priority Business Introductions', d: 'Preferential introductions to prospective clients, institutional partners, and relevant ecosystem stakeholders.' },
+        { t: 'Sponsorship & Market Leadership', d: 'Sponsorship opportunities, enhanced brand positioning, and high-value industry engagement.' },
+        { t: 'Global Business Expansion', d: 'Priority advisory and relationship-building opportunities supporting international market access, institutional engagement and long-term commercial growth.' },
       ],
     },
   ],
@@ -221,20 +221,37 @@ export default function CorridorPlans() {
       </div>
 
       <div id="cpl-panel" role="tabpanel" aria-labelledby={`cpl-tab-${track}`}>
+        {current.title && <h3 className="cpl__title">{current.title}</h3>}
         <p className="cpl__intro">{current.intro}</p>
 
         <ul className="cpl__plans">
           {plans.map((p) => (
             <li className={`mbr-tier mbr-tier--${p.metal}`} key={p.name}>
               <div className="mbr-tier__top">
-                <TierShield metal={p.metal} />
+                <TierCard metal={p.metal} />
               </div>
               <h3 className="mbr-tier__name">{p.name}</h3>
               <p className="cpl__sub">{p.sub}</p>
-              <p className="mbr-tier__label">Designed for</p>
-              <p className="mbr-tier__who">{p.audience}</p>
-              <p className="mbr-tier__why">{p.summary}</p>
-              <Bullets items={p.benefits} />
+              {p.tagline && <p className="cpl__tagline">{p.tagline}</p>}
+              {p.audience && (
+                <>
+                  <p className="mbr-tier__label">Designed for</p>
+                  <p className="mbr-tier__who">{p.audience}</p>
+                </>
+              )}
+              {p.summary && <p className="mbr-tier__why">{p.summary}</p>}
+              {p.includes && <p className="cpl__includes">{p.includes}</p>}
+              {typeof p.benefits[0] === 'string' ? (
+                <Bullets items={p.benefits} />
+              ) : (
+                <ol className="pk-bullets cpl__benefits">
+                  {p.benefits.map((b) => (
+                    <li key={b.t}>
+                      <strong>{b.t}:</strong> {b.d}
+                    </li>
+                  ))}
+                </ol>
+              )}
               <a className="mbr-tier__cta" href="/connect" data-enquiry={ENQUIRY}>
                 Request Brochure
               </a>

@@ -131,8 +131,8 @@ const FAQ = [
     a: 'No. Investor introductions, regulatory guidance, market access and launch support are programme benefits, not assured funding, approvals or sales.',
   },
   {
-    q: 'What is the difference between Gold and Gold Plus?',
-    a: 'Web360 founder Gold is an accelerator and fundraising-focused tier. Gold Plus is a separate tokenization-oriented corporate and institutional membership with sponsorship, visibility and business-development benefits.',
+    q: 'What is the difference between Founder Gold and Tokenization Gold?',
+    a: 'Web360 founder Gold is an accelerator and fundraising-focused tier. Tokenization Gold is an executive and institutional membership with enterprise-wide access, sponsorship, visibility and priority business introductions.',
   },
   {
     q: 'Are tax and foreign investment figures legal advice?',
@@ -148,7 +148,10 @@ export default function Membership() {
         aside={<HeroArt />}
         eyebrow="IBA Membership"
         title="Join the Alliance"
-        lede={`Membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries, with a pathway for every stage of growth.`}
+        lede={[
+          `Membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries, with a pathway for every stage of growth.`,
+          'Structured across three membership tiers, with each level building on the benefits of the preceding tier.',
+        ]}
         actions={
           <>
             <Btn href="#plans" variant="ghost">
