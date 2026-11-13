@@ -124,7 +124,7 @@ const FAQ = [
   },
   {
     q: 'Do all members get a dedicated concierge?',
-    a: 'No. A named corridor concierge is included for Xchange Silver and Gold, not Bronze. Priority access on certain Web360 tiers is described separately.',
+    a: 'No. A named corridor concierge is included for Xchange Premier and Gold, not Club. Priority access on certain Web360 tiers is described separately.',
   },
   {
     q: 'Does membership guarantee investment, licensing or customers?',

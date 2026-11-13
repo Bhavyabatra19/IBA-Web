@@ -13725,3 +13725,61 @@ img.ib__sectorIcon {
     radial-gradient(45% 60% at 0% 100%, rgba(215, 25, 32, 0.07), transparent 70%),
     linear-gradient(180deg, #ffffff 0%, var(--bb-surface-alt) 100%);
 }
+
+/* Membership tiers (Club, Premier, Gold; by request, 11-13-2026): each card
+   a metallic glass panel in its tier's metal (bronze, silver, gold), with a
+   brushed-metal rim and a light sheen that sweeps across on hover. */
+.mbp-plans .mbr-tier {
+  overflow: hidden;
+  isolation: isolate;
+}
+.mbp-plans .mbr-tier--bronze {
+  background:
+    linear-gradient(160deg, rgba(255, 214, 180, 0.2) 0%, rgba(201, 131, 82, 0.1) 28%, rgba(20, 12, 8, 0.35) 60%, rgba(150, 82, 42, 0.22) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 220, 190, 0.45), 0 0 22px rgba(224, 138, 79, 0.16), 0 24px 40px -20px rgba(0, 0, 0, 0.8);
+}
+.mbp-plans .mbr-tier--bronze::before {
+  background: linear-gradient(135deg, #ffd9bb, rgba(201, 131, 82, 0.55) 25%, rgba(110, 58, 27, 0.25) 50%, rgba(201, 131, 82, 0.45) 75%, #f0b088 100%);
+}
+.mbp-plans .mbr-tier--silver {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.22) 0%, rgba(207, 211, 217, 0.1) 28%, rgba(12, 13, 16, 0.35) 60%, rgba(160, 168, 180, 0.2) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 22px rgba(223, 230, 240, 0.14), 0 24px 40px -20px rgba(0, 0, 0, 0.8);
+}
+.mbp-plans .mbr-tier--silver::before {
+  background: linear-gradient(135deg, #ffffff, rgba(207, 211, 217, 0.6) 25%, rgba(123, 128, 137, 0.25) 50%, rgba(207, 211, 217, 0.5) 75%, #f4f6fa 100%);
+}
+.mbp-plans .mbr-tier--gold {
+  background:
+    linear-gradient(160deg, rgba(255, 236, 160, 0.22) 0%, rgba(227, 183, 63, 0.12) 28%, rgba(20, 15, 4, 0.35) 60%, rgba(180, 136, 30, 0.24) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 190, 0.55), 0 0 24px rgba(242, 201, 76, 0.18), 0 24px 40px -20px rgba(0, 0, 0, 0.8);
+}
+.mbp-plans .mbr-tier--gold::before {
+  background: linear-gradient(135deg, #fff4c2, rgba(227, 183, 63, 0.65) 25%, rgba(140, 100, 16, 0.3) 50%, rgba(227, 183, 63, 0.55) 75%, #ffe58a 100%);
+}
+/* the sheen: a soft diagonal band of light */
+.mbp-plans .mbr-tier::after {
+  content: '';
+  position: absolute;
+  inset: -40% auto -40% -60%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 60%, transparent);
+  transform: rotate(18deg) translateX(0);
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+.mbp-plans .mbr-tier:hover::after {
+  transform: rotate(18deg) translateX(420%);
+}
+.mbp-plans .mbr-tier--bronze:hover { box-shadow: inset 0 1px 0 rgba(255, 220, 190, 0.6), 0 0 34px rgba(224, 138, 79, 0.32), 0 30px 50px -20px rgba(0, 0, 0, 0.9); }
+.mbp-plans .mbr-tier--silver:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 34px rgba(223, 230, 240, 0.28), 0 30px 50px -20px rgba(0, 0, 0, 0.9); }
+.mbp-plans .mbr-tier--gold:hover { box-shadow: inset 0 1px 0 rgba(255, 240, 190, 0.7), 0 0 36px rgba(242, 201, 76, 0.34), 0 30px 50px -20px rgba(0, 0, 0, 0.9); }
+.mbp-plans .mbr-tier--bronze .mbr-tier__label { color: #f0b088; }
+.mbp-plans .mbr-tier--silver .mbr-tier__label { color: #e6eaf0; }
+.mbp-plans .mbr-tier--bronze .mbr-tier__name { color: #ffe1c9; }
+.mbp-plans .mbr-tier--silver .mbr-tier__name { color: #ffffff; }
+.mbp-plans .mbr-tier--gold .mbr-tier__name { color: #fff0b8; }
+@media (prefers-reduced-motion: reduce) {
+  .mbp-plans .mbr-tier::after { transition: none; }
+}
