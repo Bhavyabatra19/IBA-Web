@@ -6,10 +6,14 @@
  * home page's What IBA Does cards; Web360 Club Premium Programs (the
  * Indo–UAE Startup Xchange and its Gold cohort), in brief and then each in
  * full; the five regions and the network map; the operating model;
- * TheBlock Experience (video); the Global Innovation Corridor Forum at
- * WTC 2026; and the ask.
+ * TheBlock Experience (video); and the ask. (The Global Innovation
+ * Corridor Forum / WTC 2026 band was taken off by request, 11-10-2026.)
  *
  * The hero keeps the heading and the turning globe (by request).
+ * Tones alternate light and dark, each dark band on a gradient ground as on
+ * the Expertise and Tokenization pages (by request: the page was flat):
+ * dark hero, white, grey (the partners' dark glass panel), dark, white,
+ * grey, dark, white, dark, white, and then the site's dark CTA band (brandbook.css, "Web3 Corridor grounds").
  */
 
 import { PageHero, Section, SubHead, Cards, Stats, Btn } from '../../components/Kit'
@@ -124,8 +128,7 @@ const PATHWAYS = [
     href: '/membership#plans',
     img: '/images/card-tokenization-art.jpg',
   },
-  /* ⚠ links to the Expertise page's Global Market Expansion section, whose
-     content is on its way (content review, 11-06) */
+  /* links to the Expertise page's Global Market Expansion section */
   {
     key: 'expand',
     tag: 'Cross-border growth',
@@ -247,6 +250,7 @@ export default function Corridor() {
           dark glass panel in a white section, as the Membership tiers */}
       <Section
         id="corridor-partners"
+        tone="card"
         eyebrow="Corridor partners"
         title="Building the corridor together."
         lede="The organisations working with IBA to connect markets, capital and infrastructure across the Web3 Corridor."
@@ -307,6 +311,7 @@ export default function Corridor() {
 
       <Section
         id="xchange-cohort"
+        tone="card"
         eyebrow="Premium Program · The Gold Xchange Cohort"
         title="A 12-week route from decision to market signal."
         lede={[
@@ -340,6 +345,7 @@ export default function Corridor() {
 
       <Section
         id="the-block"
+        tone="dark"
         eyebrow="Partnership · Dubai"
         title="TheBlock Experience"
         lede="IBA at The Block, Dubai: a workspace and community for virtual-asset companies, giving corridor members a real-time experience of the Dubai ecosystem and a launchpad into the UAE."
@@ -353,22 +359,8 @@ export default function Corridor() {
       </Section>
 
       <Section
-        id="corridor-forum"
-        tone="red"
-        eyebrow="Launch · WTC 2026 · November · Barcelona"
-        title="Global Innovation Corridor Forum"
-        lede="The corridor launches at the World Token Congress in Barcelona, where its partner countries, investors and innovators meet and set the roadmap."
-      >
-        <div className="pk-actions" data-rise>
-          <Btn enquiry={ENQUIRY}>
-            Participate in WTC 2026 <Arrow />
-          </Btn>
-        </div>
-      </Section>
-
-      <Section
         id="contact"
-        tone="red"
+        center
         eyebrow="Next step"
         title="Your next market starts with the right corridor."
         lede="Explore your membership fit across Web360 founder programmes, tokenization plans, global market expansion or the Web360 Club premium programmes, and tell us your preferred track, tier and target markets."

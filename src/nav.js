@@ -160,7 +160,7 @@ export const NAV = [
         title: 'Take Part',
         items: [
           { label: 'TheBlock Experience', icon: 'handshake', desc: 'IBA at The Block, Dubai.', href: '/corridor#the-block' },
-          { label: 'Corridor Forum', icon: 'chat', desc: 'The launch at WTC 2026, Barcelona.', href: '/corridor#corridor-forum' },
+          { label: 'Global Market Expansion', icon: 'pin', desc: 'Market entry and GTM across the corridor.', href: '/expertise#global-market-expansion' },
         ],
       },
     ],
