@@ -53,7 +53,7 @@ export const PARTNERS = [
      Ecosystem page only */
   { name: 'AgoraX' },
   { name: 'Ira Blocks', logo: '/logos/partners/ira-blocks.png' },
-  { name: 'Adlam' },
+  { name: 'AdLunam Inc' },
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
   { name: 'Fab C Labs', logo: '/logos/partners/fab-c-labs.png' },
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },

@@ -177,6 +177,7 @@ const CORRIDOR_PARTNERS = [
     logo: '/logos/partners/token-asset-foundation.jpg',
     tag: 'Tokenization standards',
     text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
+    href: 'https://stofdn.com/',
   },
 ]
 
