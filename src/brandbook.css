@@ -13352,6 +13352,48 @@ img.ib__sectorIcon {
   color: #ffffff;
 }
 .mbp-plans .cpl__intro { color: rgba(255, 255, 255, 0.75); }
+/* the Web360 tracks' corridor partner benefits, above the tier cards */
+.cpl__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: -8px 0 24px;
+}
+.cpl__partners-label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff6a6f;
+}
+.cpl__partners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cpl__partners-list a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.cpl__partners-list a:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+.cpl__partners .cpl__partners-list strong { font-weight: 600; color: inherit; }
+@media (max-width: 640px) {
+  .cpl__partners-list a { padding: 7px 14px; font-size: 0.86rem; }
+}
 
 /* each tier a frosted glass card with a bright rim, as the mission cards */
 .mbp-plans .mbr-tier {
