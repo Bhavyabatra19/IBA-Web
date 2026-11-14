@@ -12,8 +12,9 @@
  *   1739422591472.jpeg      an "A" mark with no name
  * ⚠ "Power" is matched to 1720871479371.jpeg (a power-button mark) by its
  *   look alone, confirm.
- * Ira Blocks, Aasthi, Unify Platform AG and Ztudium were supplied by IBA
- * separately; Ira Blocks and Ztudium are recoloured dark to read on white,
+ * Ira Blocks, Aasthi, Unify Platform AG, Ztudium and Block Intelligence were
+ * supplied by IBA separately; Ira Blocks, Ztudium and Block Intelligence are
+ * recoloured dark to read on white,
  * and Unify uses its V mark alone, since the name sits beneath it.
  */
 
@@ -55,7 +56,7 @@ export const PARTNERS = [
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
   { name: 'Fab C Labs' },
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },
-  { name: 'Block Intelligence' },
+  { name: 'Block Intelligence', logo: '/logos/partners/block-intelligence.png' },
   { name: 'Ztudium', logo: '/logos/partners/ztudium.png' },
   { name: 'Zamindaar' },
   { name: 'Global Alliance for Ethical AI Innovation' },
