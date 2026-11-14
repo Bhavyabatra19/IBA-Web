@@ -13950,3 +13950,25 @@ img.ib__sectorIcon {
 .cpl__yes { color: #ff6a6f; font-weight: 700; }
 .cpl__no { color: rgba(255, 255, 255, 0.3); }
 .cpl__note { font-size: 13px; color: #ffffff; white-space: nowrap; }
+
+/* Let's Talk form: the channel icons as red-lit glass circles (artwork,
+   11-14); the image carries its own ring, so the CSS ring and fill go */
+.reach__iconRow--glass a {
+  width: 56px;
+  height: 56px;
+  border: 0;
+  background: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.reach__iconRow--glass a:hover,
+.reach__iconRow--glass a:focus-visible {
+  border: 0;
+  background: none;
+  transform: translateY(-2px);
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 40, 50, 0.45));
+}
+.reach__iconRow--glass img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
