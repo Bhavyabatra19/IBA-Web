@@ -3,10 +3,13 @@
  *   hero · Web3 Solution Advisory and Consulting Stack (four core
  *   capabilities, each with an icon) · the founder's quote (text only, on a
  *   moving ground) · Tokenization (a black hero-style band, "Know more" to
- *   /tokenization) · the outcome · who we work with · IBA initiatives
- *   (a logo carousel).
- * Tones alternate so no two dark sections touch (by request): dark, white,
- * white, dark, grey, dark, white, and then the site's dark CTA band.
+ *   /tokenization) · Global Market Expansion · the outcome · who we work
+ *   with · IBA initiatives (a logo carousel).
+ * Tones alternate light and dark (by request, as on the Web3 Corridor,
+ * Membership and Tokenization pages): dark hero, white, the red quote, the
+ * black Tokenization band, Global Market Expansion on a light band with a
+ * soft red glow, white, the red light-arcs, the dotted grey, and then the
+ * site's dark CTA band (brandbook.css, "Expertise grounds").
  * The Power Consulting and How We Work blocks were taken off by request.
  */
 
@@ -284,7 +287,7 @@ export default function Expertise() {
           four-stage framework, then the advisory stack behind it */}
       <Section
         id="global-market-expansion"
-        tone="dark"
+        tone="card"
         eyebrow="Global Market Expansion · Web3 Corridor"
         title="New markets. Real traction. Global scale."
         lede={[

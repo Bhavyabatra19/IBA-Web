@@ -270,15 +270,12 @@ export default function Hero() {
             Web3 Corridor network.
           </p>
 
-          {/* two actions above the fold (content review, Raj): membership,
-              and a conversation with the team */}
+          {/* one action above the fold (by request, 11-13-2026): join the
+              movement, on the Web3 Corridor page */}
           <div className="hero__ctas">
-            <Go className="btn btn--primary" href="/membership">
-              Become a Member
+            <Go className="btn btn--primary" href="/corridor">
+              Join the Movement
             </Go>
-            <a className="btn btn--ghost" href="/connect" data-enquiry="">
-              Talk to Our Team
-            </a>
           </div>
         </div>
       </div>

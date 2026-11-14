@@ -29,7 +29,7 @@ const TRACKS = [
     key: 'token',
     label: 'Tokenization & Institutions',
     title: 'Web360 Club Membership Benefits',
-    intro: 'Membership positioning: Bronze establishes ecosystem access and knowledge; Silver strengthens visibility, business development and commercial readiness; Gold delivers executive-level engagement, institutional positioning and priority growth opportunities.',
+    intro: 'Membership positioning: Club establishes ecosystem access and knowledge; Premier strengthens visibility, business development and commercial readiness; Gold delivers executive-level engagement, institutional positioning and priority growth opportunities.',
   },
   {
     key: 'xchange',
@@ -42,7 +42,7 @@ const PLANS = {
   club: [
     {
       metal: 'bronze',
-      name: 'Bronze',
+      name: 'Club',
       sub: 'Starters & Early Builders',
       audience: 'Founders, operators, MSMEs and early-stage businesses',
       summary: 'Build international exposure with the Web360 community, expert access and market-entry guidance.',
@@ -56,12 +56,12 @@ const PLANS = {
     },
     {
       metal: 'silver',
-      name: 'Silver',
+      name: 'Premier',
       sub: 'Growth Plan for Founders',
       audience: 'Registered startups pursuing multi-country expansion',
-      summary: 'Bronze inclusions plus founder-focused visibility, investor readiness and growth support.',
+      summary: 'Club inclusions plus founder-focused visibility, investor readiness and growth support.',
       benefits: [
-        'All Bronze inclusions',
+        'All Club inclusions',
         'Growth advisory with deck and plan reviews',
         'Matched investor introductions and networking',
         'Startup podcast feature and two Dubai event admissions',
@@ -73,20 +73,20 @@ const PLANS = {
       name: 'Gold',
       sub: 'Growth & Accelerator Plan',
       audience: 'High-growth founders and fundraising-focused ventures',
-      summary: 'Silver inclusions plus curated investor access, structured milestone reviews and expansion support.',
+      summary: 'Premier inclusions plus curated investor access, structured milestone reviews and expansion support.',
       benefits: [
-        'All Silver inclusions',
+        'All Premier inclusions',
         'Expert Board Advisor support for six months',
         'Weekly strategy sessions and KPI/milestone reviews',
         'Curated expert, mentor and investor access',
-        'Media and podcast visibility; fast-track into Gold Plus',
+        'Media and podcast visibility; fast-track into Tokenization Gold',
       ],
     },
   ],
   token: [
     {
       metal: 'bronze',
-      name: 'Bronze',
+      name: 'Club',
       sub: 'Essential Access',
       tagline: 'Learn • Connect • Explore',
       benefits: [
@@ -99,10 +99,10 @@ const PLANS = {
     },
     {
       metal: 'silver',
-      name: 'Silver',
+      name: 'Premier',
       sub: 'Growth & Visibility',
       tagline: 'Position • Engage • Accelerate',
-      includes: 'Includes all Bronze benefits, plus:',
+      includes: 'Includes all Club benefits, plus:',
       benefits: [
         { t: 'Enhanced Market Visibility', d: 'Premium listings, branded media exposure, Member Spotlight features and podcast participation eligibility.' },
         { t: 'Strategic Business Development', d: 'Active lead generation, targeted ecosystem introductions and new commercial opportunities.' },
@@ -116,7 +116,7 @@ const PLANS = {
       name: 'Gold',
       sub: 'Executive & Institutional',
       tagline: 'Lead • Expand • Scale',
-      includes: 'Includes all Bronze and Silver benefits, plus:',
+      includes: 'Includes all Club and Premier benefits, plus:',
       benefits: [
         { t: 'Enterprise-Wide Privileges', d: 'Company-wide and core-team access with preferred visibility across the Web3 Corridor ecosystem.' },
         { t: 'Executive Advisory', d: 'Access to an Expert Board Advisor for six months, with priority strategic advisory support.' },
@@ -129,7 +129,7 @@ const PLANS = {
   xchange: [
     {
       metal: 'bronze',
-      name: 'Bronze',
+      name: 'Club',
       sub: 'Network Access',
       audience: 'Founder-led ventures exploring India ↔ UAE expansion',
       summary: 'A year-round starting point for corridor briefings, events and peer community.',
@@ -142,12 +142,12 @@ const PLANS = {
     },
     {
       metal: 'silver',
-      name: 'Silver',
+      name: 'Premier',
       sub: 'Hands-on Market Entry',
       audience: 'Startups needing guided compliance and commercial introductions',
-      summary: 'Bronze access with practical market-entry clinics, curated introductions and named support.',
+      summary: 'Club access with practical market-entry clinics, curated introductions and named support.',
       benefits: [
-        'All Bronze Xchange inclusions',
+        'All Club Xchange inclusions',
         'Compliance clinics',
         'Curated introductions',
         'Named corridor concierge',
@@ -159,9 +159,9 @@ const PLANS = {
       name: 'Gold',
       sub: '12-week Launch Sprint',
       audience: 'Startups ready for a structured India ↔ UAE launch',
-      summary: 'Silver access plus a focused 12-week sprint from validation to launch.',
+      summary: 'Premier access plus a focused 12-week sprint from validation to launch.',
       benefits: [
-        'All Silver Xchange inclusions',
+        'All Premier Xchange inclusions',
         '12-week launch sprint',
         'Validate (weeks 1–3), build (4–8), launch (9–12)',
         'Demo day and soft-landing support',
