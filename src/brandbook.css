@@ -13424,14 +13424,6 @@ img.ib__sectorIcon {
     #08080a;
   box-shadow: 0 40px 80px -40px rgba(10, 0, 0, 0.6);
 }
-.cpn-partners__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 1.6vw, 24px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 .cpn-partner {
   position: relative;
   display: flex;
@@ -13518,8 +13510,17 @@ img.ib__sectorIcon {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .cpn-partner__go:hover { border-color: #ffffff; }
+/* the carousel (components/CardRail.jsx): two cards to a view so the row
+   always has somewhere to go, room above for the hover lift, arrows centred */
+.cpn-partners .rail__track {
+  --rail-cols: 2;
+  padding-top: 10px;
+}
+.cpn-partners .rail__controls {
+  justify-content: center;
+}
 @media (max-width: 900px) {
-  .cpn-partners__list { grid-template-columns: minmax(0, 1fr); }
+  .cpn-partners .rail__track { --rail-cols: 1.1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cpn-partner,
