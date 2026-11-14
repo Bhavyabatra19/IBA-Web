@@ -12,7 +12,7 @@
  * ⚠ "Power" is matched to 1720871479371.jpeg (a power-button mark) by its
  *   look alone, confirm.
  * Ira Blocks, Aasthi, Unify Platform AG, Ztudium, Block Intelligence,
- * Zamindaar (the "eZ" mark) and Fab C Labs were supplied by IBA
+ * Zamindaar (the "eZ" mark), Fab C Labs and AdLunam Inc were supplied by IBA
  * separately; the white or grey lettering of Ira Blocks, Ztudium, Block
  * Intelligence and Fab C Labs is recoloured dark to read on white (Fab C
  * Labs also loses its black ground and its tagline, unreadable at tile size),
@@ -56,7 +56,7 @@ export const PARTNERS = [
      Ecosystem page only */
   { name: 'AgoraX' },
   { name: 'Ira Blocks', logo: '/logos/partners/ira-blocks.png' },
-  { name: 'AdLunam Inc' },
+  { name: 'AdLunam Inc', logo: '/logos/partners/adlunam.png' },
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
   { name: 'Fab C Labs', logo: '/logos/partners/fab-c-labs.png' },
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },
