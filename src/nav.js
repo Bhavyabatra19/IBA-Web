@@ -183,8 +183,7 @@ export const NAV = [
       {
         title: 'Web360 Club',
         items: [
-          { label: 'Founder & Investor', icon: 'layers', desc: 'Deal flow, advisory and international growth.', href: '/membership#plans-club' },
-          { label: 'Tokenization & Institutions', icon: 'link', desc: 'RWA, issuers, vendors and corporates.', href: '/membership#plans-token' },
+          { label: 'Club, Premier & Gold Class', icon: 'layers', desc: 'Three Web3 Corridor memberships, each building on the last.', href: '/membership#plans-web360' },
         ],
       },
       {

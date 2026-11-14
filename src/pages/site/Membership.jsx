@@ -120,7 +120,7 @@ const JOURNEY = [
 const FAQ = [
   {
     q: 'Are Web360 Club and Indo–UAE Startup Xchange the same membership?',
-    a: 'No. Web360 Club runs founder/investor and tokenization tracks; the Indo–UAE Startup Xchange is a separate membership with its own tiers, terms and benefits.',
+    a: 'No. Web360 Club offers the three Web3 Corridor memberships (Club Class, Premier Class and Gold Class); the Indo–UAE Startup Xchange is a separate membership with its own tiers, terms and benefits.',
   },
   {
     q: 'How are membership terms shared?',
@@ -128,15 +128,15 @@ const FAQ = [
   },
   {
     q: 'Do all members get a dedicated concierge?',
-    a: 'No. A named corridor concierge is included for Xchange Premier and Gold, not Club. Priority access on certain Web360 tiers is described separately.',
+    a: 'No. A named corridor concierge is included for Xchange Premier and Gold, not Club. Priority access on Web360 Club tiers is described separately.',
   },
   {
     q: 'Does membership guarantee investment, licensing or customers?',
     a: 'No. Investor introductions, regulatory guidance, market access and launch support are programme benefits, not assured funding, approvals or sales.',
   },
   {
-    q: 'What is the difference between Founder Gold and Tokenization Gold?',
-    a: 'Web360 founder Gold is an accelerator and fundraising-focused tier. Tokenization Gold is an executive and institutional membership with enterprise-wide access, sponsorship, visibility and priority business introductions.',
+    q: 'What does Gold Class add over Premier Class?',
+    a: 'Gold Class includes every Premier Class privilege, plus access to the Dubai Web3 Experience Center at the World Trade Centre, support for establishing a Dubai presence, tokenization launch support through TheBlock, and curated introductions to investors and institutions.',
   },
   {
     q: 'Are tax and foreign investment figures legal advice?',
@@ -154,7 +154,8 @@ export default function Membership() {
         title="A network for every stage of growth"
         lede={[
           `IBA membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries.`,
-          'See what membership opens, compare the three pathways and their tiers, and join when you have found the right fit.',
+          'Structured across three membership tiers, with each level building on the benefits of the preceding tier.',
+          'See what membership opens, compare the tiers, and join when you have found the right fit.',
         ]}
         actions={
           <>
@@ -198,7 +199,7 @@ export default function Membership() {
         id="plans"
         eyebrow="Pathways & tiers"
         title="Find the membership built for your ambition."
-        lede="Three pathways, each with three tiers: Web360 Club for founders and investors, Web360 Club for tokenization and institutions, and the Indo–UAE Startup Xchange. Choose a pathway to see its tiers, with each tier building on the benefits of the one before it."
+        lede="Three Web3 Corridor memberships: Club Class, Premier Class and Gold Class, with each tier building on the benefits of the one before it. The Indo–UAE Startup Xchange has its own tiers alongside them."
       >
         {/* the tiers in a dark glass panel, as the Expertise page's
             Consulting Stack sits in its white section */}
