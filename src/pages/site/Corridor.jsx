@@ -107,26 +107,18 @@ const BLOCK_VIDEOS = [
   },
 ]
 
-/* Corridor memberships: the three pathways, as the home page's What IBA
+/* Corridor memberships: the pathways (Tokenization & Institutions folded
+   into the Web360 Club classes, 11-14-2026), as the home page's What IBA
    Does cards (content review, 11-06-2026) */
 const PATHWAYS = [
   {
     key: 'founder',
     tag: 'Web360 Club',
-    title: 'Founder & Investor',
-    body: 'Investor relations, deal flow, advisory and international growth for founders and the investors who back them.',
+    title: 'Club, Premier & Gold Class',
+    body: 'Three Web3 Corridor memberships, each building on the last: advisory, funding readiness, visibility and a Dubai presence.',
     cta: 'See the tiers',
-    href: '/membership#plans',
+    href: '/membership#plans-web360',
     img: '/images/corridor-founder.jpg',
-  },
-  {
-    key: 'institution',
-    tag: 'Web360 Club',
-    title: 'Tokenization & Institutions',
-    body: 'Tokenization, RWA, issuer, vendor and corporate plans for institutions bringing assets and services on-chain.',
-    cta: 'See the tiers',
-    href: '/membership#plans',
-    img: '/images/card-tokenization-art.jpg',
   },
   /* links to the Expertise page's Global Market Expansion section */
   {
@@ -234,8 +226,8 @@ export default function Corridor() {
       <Section
         id="memberships"
         eyebrow="Corridor memberships"
-        title="Three pathways into the corridor."
-        lede="Choose the route that fits your next move: Web360 Club for founders and investors, Web360 Club for tokenization and institutions, or Global Market Expansion."
+        title="Two pathways into the corridor."
+        lede="Choose the route that fits your next move: Web360 Club membership, from Club Class to Gold Class, or Global Market Expansion."
       >
         <div className="wd wd--duo wd--art wd--pillars">
           <PillarCards cards={PATHWAYS} />

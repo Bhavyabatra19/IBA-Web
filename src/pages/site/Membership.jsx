@@ -120,7 +120,7 @@ const JOURNEY = [
 const FAQ = [
   {
     q: 'Are Web360 Club and Indo–UAE Startup Xchange the same membership?',
-    a: 'No. Web360 Club offers the three Web3 Corridor memberships (Club Class, Premier Class and Gold Class); the Indo–UAE Startup Xchange is a separate membership with its own tiers, terms and benefits.',
+    a: 'No. Web360 Club offers the three Web3 Corridor memberships (Club Class, Premier Class and Gold Class); the Indo–UAE Startup Xchange is a separate membership, Gold Xchange, with its own terms and benefits.',
   },
   {
     q: 'How are membership terms shared?',
@@ -128,7 +128,7 @@ const FAQ = [
   },
   {
     q: 'Do all members get a dedicated concierge?',
-    a: 'No. A named corridor concierge is included for Xchange Premier and Gold, not Club. Priority access on Web360 Club tiers is described separately.',
+    a: 'No. A named corridor concierge is included with Gold Xchange. Web360 Club tiers include the advisory support listed for each class.',
   },
   {
     q: 'Does membership guarantee investment, licensing or customers?',
@@ -199,7 +199,7 @@ export default function Membership() {
         id="plans"
         eyebrow="Pathways & tiers"
         title="Find the membership built for your ambition."
-        lede="Three Web3 Corridor memberships: Club Class, Premier Class and Gold Class, with each tier building on the benefits of the one before it. The Indo–UAE Startup Xchange has its own tiers alongside them."
+        lede="Three Web3 Corridor memberships: Club Class, Premier Class and Gold Class, with each tier building on the benefits of the one before it. The Indo–UAE Startup Xchange, Gold Xchange, sits alongside them as its own membership."
       >
         {/* the tiers in a dark glass panel, as the Expertise page's
             Consulting Stack sits in its white section */}

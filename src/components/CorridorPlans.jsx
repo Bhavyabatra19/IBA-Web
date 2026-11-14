@@ -29,7 +29,7 @@ const TRACKS = [
   {
     key: 'xchange',
     label: 'Indo–UAE Startup Xchange',
-    intro: 'A distinct bilateral market-entry membership with three tiers and a 12-week Gold launch sprint.',
+    intro: 'A distinct bilateral market-entry membership, Gold Xchange, built around a 12-week launch sprint.',
   },
 ]
 
@@ -82,49 +82,101 @@ const PLANS = {
       ],
     },
   ],
+  /* one tier, Gold Xchange (IBA Membership Matrix, 11-13-2026) */
   xchange: [
     {
-      metal: 'bronze',
-      name: 'Club',
-      sub: 'Network Access',
-      audience: 'Founder-led ventures exploring India ↔ UAE expansion',
-      summary: 'A year-round starting point for corridor briefings, events and peer community.',
+      metal: 'gold',
+      name: 'Gold Xchange',
+      sub: '12-week Launch Sprint',
+      audience: 'Startups ready for a structured India ↔ UAE launch',
       benefits: [
         'Member events and briefings',
         'Founder community across both markets',
         'Network and ecosystem orientation',
-        'For India → UAE or UAE → India tracks',
-      ],
-    },
-    {
-      metal: 'silver',
-      name: 'Premier',
-      sub: 'Hands-on Market Entry',
-      audience: 'Startups needing guided compliance and commercial introductions',
-      summary: 'Club access with practical market-entry clinics, curated introductions and named support.',
-      benefits: [
-        'All Club Xchange inclusions',
+        'India → UAE or UAE → India track',
         'Compliance clinics',
         'Curated introductions',
         'Named corridor concierge',
         'Market-entry support and partner navigation',
-      ],
-    },
-    {
-      metal: 'gold',
-      name: 'Gold',
-      sub: '12-week Launch Sprint',
-      audience: 'Startups ready for a structured India ↔ UAE launch',
-      summary: 'Premier access plus a focused 12-week sprint from validation to launch.',
-      benefits: [
-        'All Premier Xchange inclusions',
-        '12-week launch sprint',
-        'Validate (weeks 1–3), build (4–8), launch (9–12)',
+        '12-week launch sprint: validate, build, launch',
         'Demo day and soft-landing support',
       ],
     },
   ],
 }
+
+/* the full Web360 Club matrix (IBA Membership Matrix, 11-13-2026), row by
+   row: what each class includes (true, or a note such as how many a year),
+   shown as a comparison table under the cards. No prices (by request). */
+const MATRIX = [
+  ['Verified Club badge', true, true, true],
+  ['IBA SafeVault: data room, corporate documents and KYC/KYB', true, true, true],
+  ['Roundtable invitations and the members’ roundup', '2 a year', '4 a year', '6 a year'],
+  ['Funding prep and assistance: growth advisory, deck and plan reviews', true, true, true],
+  ['Member pricing on Corridor services and products', true, true, true],
+  ['Dubai co-hosted event packages and special prices', true, true, true],
+  ['GTM blueprint', true, true, true],
+  ['Global member and partner directory', true, true, true],
+  ['Product advisory: blueprint analysis, lifecycle, expansion and business plan', true, true, true],
+  ['Mentoring on the regulatory framework', true, true, true],
+  ['Introduction to the Web3 Corridor promotions', true, true, true],
+  ['IBA promotion and LinkedIn spotlight', true, true, true],
+  ['Event passes, on request and subsidised', false, true, 'Connect: full service'],
+  ['Advisor on Board: KPI and milestone reviews, strategy sessions', false, true, true],
+  ['Startup podcast and media visibility', false, true, true],
+  ['Market readiness assessment', false, true, true],
+  ['On-request tech interns', false, true, true],
+  ['Access to the IBA talent pool', false, true, true],
+  ['Business set-up blueprint', false, true, true],
+  ['Expert Board Advisor support (6 months)', false, true, true],
+  ['Exposure to a mock investor committee', false, true, true],
+  ['White paper publishing support', false, true, true],
+  ['Blockchain grant advice and information', false, true, true],
+  ['TheCircle Level 1 pack', false, true, true],
+  ['TheBlock Level 1 pack', false, false, true],
+]
+const CLASSES = ['Club Class', 'Premier Class', 'Gold Class']
+
+const Mark = ({ v }) =>
+  v === true ? (
+    <span className="cpl__yes" aria-label="Included">✓</span>
+  ) : v ? (
+    <span className="cpl__note">{v}</span>
+  ) : (
+    <span className="cpl__no" aria-label="Not included">–</span>
+  )
+
+const Compare = () => (
+  <details className="cpl__compare">
+    <summary>Compare all Web360 Club benefits</summary>
+    <div className="cpl__tableWrap">
+      <table className="cpl__table">
+        <thead>
+          <tr>
+            <th scope="col">Benefit</th>
+            {CLASSES.map((n) => (
+              <th scope="col" key={n}>
+                {n}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {MATRIX.map(([label, ...tiers]) => (
+            <tr key={label}>
+              <th scope="row">{label}</th>
+              {tiers.map((v, i) => (
+                <td key={CLASSES[i]}>
+                  <Mark v={v} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+)
 
 /* #plans-web360, #plans-xchange: a link can open a pathway's tab (the
    Membership menu does); the old #plans-club and #plans-token links (the
@@ -183,7 +235,7 @@ export default function CorridorPlans() {
         {current.title && <h3 className="cpl__title">{current.title}</h3>}
         <p className="cpl__intro">{current.intro}</p>
 
-        <ul className="cpl__plans">
+        <ul className={`cpl__plans${plans.length === 1 ? ' cpl__plans--single' : ''}`}>
           {plans.map((p) => (
             <li className={`mbr-tier mbr-tier--${p.metal}`} key={p.name}>
               <div className="mbr-tier__top">
@@ -218,6 +270,8 @@ export default function CorridorPlans() {
             </li>
           ))}
         </ul>
+
+        {track === 'web360' && <Compare />}
       </div>
     </div>
   )

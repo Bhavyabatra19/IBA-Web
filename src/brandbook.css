@@ -13272,7 +13272,7 @@ img.ib__sectorIcon {
   margin-top: clamp(1.25rem, 2.5vw, 2rem);
 }
 .w3p .wd.wd--duo.wd--pillars .wd__grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .w3p .wd.wd--duo.wd--premium .wd__grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -13873,3 +13873,80 @@ img.ib__sectorIcon {
   background: rgba(215, 25, 32, 0.06);
 }
 .cnx .reach--icons .eyebrow { color: var(--bb-ink-muted, #6b655e); }
+
+/* Membership plans (CorridorPlans): a pathway with one tier (Gold Xchange)
+   centres its card; the full Web360 Club matrix as a table under the cards */
+.cpl__plans--single {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
+.cpl__compare {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+.cpl__compare > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  list-style: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.cpl__compare > summary::-webkit-details-marker { display: none; }
+.cpl__compare > summary::after {
+  content: '+';
+  font-size: 18px;
+  line-height: 1;
+}
+.cpl__compare[open] > summary::after { content: '–'; }
+.cpl__compare > summary:hover { border-color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.06); }
+.cpl__compare > summary:focus-visible { outline: 2px solid #ff6a6f; outline-offset: 3px; }
+.cpl__tableWrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+}
+.cpl__table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.cpl__table th,
+.cpl__table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  vertical-align: middle;
+}
+.cpl__table tbody tr:last-child th,
+.cpl__table tbody tr:last-child td { border-bottom: 0; }
+.cpl__table th[scope='row'],
+.cpl__table thead th:first-child {
+  text-align: left;
+  font-weight: 400;
+  color: #ffffff;
+}
+.cpl__table thead th {
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(20, 8, 10, 0.92);
+  white-space: nowrap;
+}
+.cpl__table thead th:nth-child(2) { color: #f0b088; }
+.cpl__table thead th:nth-child(3) { color: #e6eaf0; }
+.cpl__table thead th:nth-child(4) { color: #e6c766; }
+.cpl__table tbody tr:hover { background: rgba(255, 255, 255, 0.04); }
+.cpl__yes { color: #ff6a6f; font-weight: 700; }
+.cpl__no { color: rgba(255, 255, 255, 0.3); }
+.cpl__note { font-size: 13px; color: #ffffff; white-space: nowrap; }
