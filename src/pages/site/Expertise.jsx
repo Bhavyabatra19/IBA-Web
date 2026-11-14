@@ -277,7 +277,7 @@ export default function Expertise() {
           The future of capital markets won’t simply be digital. It will be transparent,
           programmable, compliant and tokenized. And I’m excited to help build it.
           <span className="founder-quote__setup">The future isn’t coming.</span>
-          <span className="founder-quote__final">I am building it.</span>
+          <span className="founder-quote__final">We at IBA are building it.</span>
         </Quote>
       </Section>
 
