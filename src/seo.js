@@ -74,6 +74,11 @@ export const SEO = {
     description:
       'Searchable, categorised library of articles, videos, reports and recorded sessions. Free with a member account.',
   },
+  '/gallery': {
+    title: 'IBA in the News & Gallery | India Blockchain Alliance',
+    description:
+      'Press coverage of India Blockchain Alliance, and photos from IBA events, conferences and gatherings across the Web3 Corridor.',
+  },
   '/connect': {
     brief: true,
     title: 'Contact IBA | Let the Journey Begin',

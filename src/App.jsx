@@ -20,6 +20,7 @@ import RedClub from './pages/site/RedClub'
 import RedClubInstitutions from './pages/site/RedClubInstitutions'
 import RedClubLearners from './pages/site/RedClubLearners'
 import Library from './pages/site/Library'
+import Gallery from './pages/site/Gallery'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
 import ReviewBar from './components/ReviewBar'
@@ -49,6 +50,7 @@ const PAGES = {
   '/red-club/institutions': RedClubInstitutions,
   '/red-club/learners': RedClubLearners,
   '/library': Library,
+  '/gallery': Gallery,
   '/connect': Connect,
   '/privacy': Privacy,
 }

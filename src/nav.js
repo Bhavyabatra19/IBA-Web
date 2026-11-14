@@ -247,6 +247,13 @@ export const NAV = [
           { label: 'Reports & Whitepapers', icon: 'report', desc: 'Research and policy briefs.', href: '/library#catalogue' },
         ],
       },
+      {
+        title: 'Media',
+        items: [
+          { label: 'IBA in the News', icon: 'doc', desc: 'Press coverage and announcements.', href: '/gallery#in-the-news' },
+          { label: 'Photo Gallery', icon: 'camera', desc: 'Moments from IBA events and conferences.', href: '/gallery#photos' },
+        ],
+      },
     ],
   },
 ]
@@ -348,6 +355,7 @@ export const FOOTER = [
     title: 'Resources & Contact',
     items: [
       { label: 'The IBA Library', href: '/library' },
+      { label: 'IBA in the News & Gallery', href: '/gallery' },
       { label: MEMBER_LOGIN, href: '/library#login' },
       { label: 'Newsletter signup', href: '/library#signup' },
       { label: 'Contact Us', href: '/connect' },
