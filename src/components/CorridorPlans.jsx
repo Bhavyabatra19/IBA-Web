@@ -6,7 +6,7 @@
  * site's tier card (.mbr-tier, with a TierCard in each metal); the tabs are styled in
  * brandbook.css (.cpl).
  *
- * Each tier shows 4–5 key benefits and a Request Brochure button (by
+ * Each tier shows 4–5 key benefits and a Request Information button (by
  * request, 11-12-2026); the full lists are in the brochure.
  *
  * The Web360 Club track carries the corridor partners' benefits for every
@@ -291,7 +291,7 @@ export default function CorridorPlans() {
                 </ol>
               )}
               <a className="mbr-tier__cta" href="/connect" data-enquiry={ENQUIRY}>
-                Request Brochure
+                Request Information
               </a>
             </li>
           ))}
