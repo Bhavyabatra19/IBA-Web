@@ -176,8 +176,9 @@ const CORRIDOR_PARTNERS = [
   {
     name: 'TheCircle',
     logo: '/logos/partners/thecircle.png',
-    tag: 'Corridor partner',
-    text: 'Partnering with IBA across the Web3 Corridor network.',
+    tag: 'UAE market entry',
+    text: 'IBA’s corridor partner for UAE market entry, supporting companies entering the UAE through the Web3 Corridor.',
+    href: 'https://the-block.com/the-circle/',
   },
   {
     name: 'Tokenized Asset Foundation',
@@ -272,7 +273,11 @@ export default function Corridor() {
                 <h3 className="cpn-partner__name">{p.name}</h3>
                 <p className="cpn-partner__text">{p.text}</p>
                 {p.href && (
-                  <a className="cpn-partner__go" href={p.href}>
+                  <a
+                    className="cpn-partner__go"
+                    href={p.href}
+                    {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                  >
                     Know more <Arrow />
                   </a>
                 )}
