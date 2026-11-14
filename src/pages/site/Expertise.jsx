@@ -276,8 +276,8 @@ export default function Expertise() {
         <Quote by="Raj Kapoor · Founder, India Blockchain Alliance">
           The future of capital markets won’t simply be digital. It will be transparent,
           programmable, compliant and tokenized. And we’re excited to help build it.
-          <span className="founder-quote__setup">The future isn’t coming.</span>
-          <span className="founder-quote__final">We at IBA are building it.</span>
+          {/* the close on one line of its own (by request, 11-14) */}
+          <span className="founder-quote__close">The future isn’t coming. We at IBA are building it.</span>
         </Quote>
       </Section>
 

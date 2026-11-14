@@ -8622,8 +8622,7 @@ main {
   letter-spacing: 0;
   color: #ffffff;
 }
-#founder-quote .founder-quote__setup,
-#founder-quote .founder-quote__final {
+#founder-quote .founder-quote__close {
   display: block;
 }
 #founder-quote .pk-quote figcaption {
