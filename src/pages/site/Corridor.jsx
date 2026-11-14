@@ -180,7 +180,7 @@ const CORRIDOR_PARTNERS = [
     text: 'Partnering with IBA across the Web3 Corridor network.',
   },
   {
-    name: 'Token Asset Foundation',
+    name: 'Tokenized Asset Foundation',
     logo: '/logos/partners/token-asset-foundation.jpg',
     tag: 'Tokenization standards',
     text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
