@@ -1,4 +1,11 @@
-/** About, who we are, vision, mission, impact, and the founder. */
+/**
+ * About, who we are, vision, mission, impact, and the founder.
+ * Tones alternate light and dark (as on the Web3 Corridor, Membership,
+ * Tokenization and Expertise pages): dark hero, white, the red light-arcs,
+ * the Framework on a light band with a soft red glow, the red Impact band,
+ * the founder white, and then the site's dark CTA band (brandbook.css,
+ * "About grounds").
+ */
 
 import { PageHero, Section, Stats, Cards } from '../../components/Kit'
 import { CONTACT } from '../../nav'
