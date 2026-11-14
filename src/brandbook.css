@@ -12897,72 +12897,85 @@ main {
 
 /* Home impact band: the asset classes as a row of line icons with labels,
    under the figures (by request) */
-.ib__sectors {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+/* the asset classes as a marquee: the track holds the list twice and slides
+   by half its width, so it loops without a seam; the edges fade out, and it
+   pauses under the pointer. Reduced motion: one still, wrapped, centred row. */
+.ib__marquee {
+  position: relative;
   margin: 32px 0 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ib__belt {
+  display: flex;
+  width: max-content;
+  animation: ib-marquee 40s linear infinite;
+}
+.ib__marquee:hover .ib__belt {
+  animation-play-state: paused;
+}
+@keyframes ib-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.ib__sectors {
+  display: flex;
+  flex: none;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 .ib__sector {
   display: grid;
   justify-items: center;
+  align-content: start;
   gap: 12px;
+  width: 248px;
   padding: 20px 12px;
   text-align: center;
 }
 .ib__sectorIcon {
   width: 40px;
   height: 40px;
-  fill: none;
-  stroke: var(--iba-red);
-  stroke-width: 1.3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 .ib__sectorLabel {
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--bb-ink);
 }
 @media (max-width: 760px) {
-  .ib__sectors {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-}
-@media (max-width: 420px) {
-  .ib__sectors {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-/* on smaller screens the row wraps centred, so an odd last item sits in the
-   middle rather than alone at the left */
-@media (max-width: 760px) {
-  .ib__sectors {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  .ib__belt {
+    animation-duration: 28s;
   }
   .ib__sector {
-    flex: 0 0 calc((100% - 16px) / 3);
-  }
-}
-@media (max-width: 420px) {
-  .ib__sector {
-    flex-basis: calc((100% - 8px) / 2);
-  }
-}
-@media (max-width: 760px) {
-  .ib__sector {
-    min-width: 0;
+    width: 168px;
     padding: 14px 4px;
   }
   .ib__sectorLabel {
     font-size: 12px;
     letter-spacing: 0.08em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ib__marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ib__belt {
+    width: auto;
+    animation: none;
+  }
+  .ib__sectors {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ib__sectors[aria-hidden] {
+    display: none;
   }
 }
 
