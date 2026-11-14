@@ -9354,6 +9354,25 @@ main {
   color: #ffffff;
   overflow-wrap: anywhere;
 }
+/* a partner with a site: the name is the link, stretched over the tile */
+.pcx__link {
+  text-decoration: none;
+}
+.pcx__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.pcx__link:focus-visible {
+  outline: none;
+}
+.pcx__tile--link:has(.pcx__link:focus-visible) {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+.pcx__tile--link {
+  cursor: pointer;
+}
 
 /* round arrows and the page dots */
 .pcx__controls {

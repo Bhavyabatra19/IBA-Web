@@ -10,7 +10,8 @@
  * the carousel. Reduced motion: no float, no autoplay, no slide animation.
  *
  * Partners come from data/partners.js (shared with the home marquee); one
- * without a logo shows its initials.
+ * without a logo shows its initials, and one with a `url` is a link to its
+ * site.
  */
 
 import { useEffect, useRef, useState } from 'react'
@@ -98,8 +99,8 @@ export default function PartnerCarousel() {
               aria-hidden={p !== page || undefined}
               inert={p !== page ? '' : undefined}
             >
-              {items.map(({ name, logo }, i) => (
-                <li className="pcx__tile" key={name} style={{ '--i': i }}>
+              {items.map(({ name, logo, url }, i) => (
+                <li className={`pcx__tile${url ? ' pcx__tile--link' : ''}`} key={name} style={{ '--i': i }}>
                   <span className="pcx__badge" style={{ '--float': `${4.2 + (i % 5) * 0.55}s`, '--delay': `${-(i * 0.7)}s` }}>
                     {logo ? (
                       <img className="pcx__logo" src={logo} alt="" loading="lazy" decoding="async" />
@@ -109,7 +110,16 @@ export default function PartnerCarousel() {
                       </span>
                     )}
                   </span>
-                  <span className="pcx__name">{name}</span>
+                  {url ? (
+                    /* the name is the link; its ::after stretches over the
+                       whole tile, so the tile is one click target */
+                    <a className="pcx__name pcx__link" href={url} target="_blank" rel="noreferrer noopener">
+                      {name}
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  ) : (
+                    <span className="pcx__name">{name}</span>
+                  )}
                 </li>
               ))}
             </ul>

@@ -17,18 +17,21 @@
  * Intelligence and Fab C Labs is recoloured dark to read on white (Fab C
  * Labs also loses its black ground and its tagline, unreadable at tile size),
  * and Unify uses its V mark alone, since the name sits beneath it.
+ *
+ * `url` (optional) makes the partner's Ecosystem tile a link to its site,
+ * opening in a new tab. Add one only for a site IBA has confirmed.
  */
 
 const L = (f) => `/logos/partners/${f}.jpg`
 
 export const PARTNERS = [
   { name: 'TheBlock.', logo: '/logos/eco/theblock-ae.png' },
-  { name: 'Tokenized Asset Foundation', logo: L('token-asset-foundation') },
-  { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png' },
+  { name: 'Tokenized Asset Foundation', logo: L('token-asset-foundation'), url: 'https://stofdn.com/' },
+  { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png', url: 'https://www.zoniqx.com/' },
   { name: 'Integra', logo: L('integra') },
   { name: 'Kula', logo: L('kula') },
-  { name: 'T-Hub', logo: '/logos/eco/t-hub-co.png' },
-  { name: 'India AI Alliance', logo: L('india-ai-alliance') },
+  { name: 'T-Hub', logo: '/logos/eco/t-hub-co.png', url: 'https://t-hub.co/' },
+  { name: 'India AI Alliance', logo: L('india-ai-alliance'), url: 'https://indiaaialliance.org/' },
   { name: 'Payomatix', logo: L('payomatix') },
   { name: 'Enlighten Capital', logo: L('enlighten-capital') },
   { name: 'Indian Startup Premier League', logo: L('ispl') },
@@ -48,7 +51,7 @@ export const PARTNERS = [
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
   { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
-  { name: 'TheCircle', logo: '/logos/partners/thecircle.png' },
+  { name: 'TheCircle', logo: '/logos/partners/thecircle.png', url: 'https://the-block.com/the-circle/' },
   /* added later; the ones still without a logo show monograms on the
      Ecosystem page only */
   { name: 'AgoraX' },
