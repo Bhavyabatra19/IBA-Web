@@ -9,13 +9,6 @@
 export const LEARNER = 'Red Club (learner)'
 export const INSTITUTION = 'Red Club / Verifyble (institution)'
 
-export const HIGHLIGHTS = [
-  { title: 'Industry + Academia', text: 'Collaborative learning ecosystem' },
-  { title: 'Blockchain · AI', text: 'Frontier technology capabilities' },
-  { title: 'Real-World Projects', text: 'Applied, practical experience' },
-  { title: 'Global Pathways', text: 'Cross-border learning and networking' },
-]
-
 export const PROPOSITION = [
   { num: '01 / Advance', title: 'Strengthen institutional capability', text: 'Build emerging-technology research, training and industry engagement capacity on campus.' },
   { num: '02 / Activate', title: 'Translate learning into practice', text: 'Bring curricula, labs, industry problem statements, capstones and live projects together.' },
@@ -23,12 +16,10 @@ export const PROPOSITION = [
 ]
 
 export const EXPERIENCE = [
-  { num: 'Learn', title: 'Build knowledge', text: 'Understand blockchain, Web3, digital assets and tokenisation through accessible learning and industry-led programmes.' },
-  { num: 'Experience', title: 'Learn by doing', text: 'Engage with practical challenges, live projects and experience-centre initiatives that connect concepts to real applications.' },
-  { num: 'Connect', title: 'Find your people', text: 'Build relationships with peers, mentors, practitioners, founders and organisations across the IBA ecosystem.' },
-  { num: 'Build', title: 'Turn ideas into action', text: 'Explore use cases, collaborate on solutions and develop the confidence to contribute to Web3 projects.' },
-  { num: 'Grow', title: 'Access opportunities', text: 'Discover pathways to mentorship, events, industry exposure, collaboration and professional development.' },
-  { num: 'Lead', title: 'Shape what comes next', text: 'Progress from learner to contributor, builder and community leader in a fast-evolving digital economy.' },
+  { num: 'Learn', title: 'Build knowledge', text: 'Blockchain, Web3, digital assets and tokenization through industry-led programmes and practical challenges.' },
+  { num: 'Build', title: 'Turn ideas into action', text: 'Work on live projects and real use cases that turn concepts into working solutions.' },
+  { num: 'Connect', title: 'Find your people', text: 'Meet mentors, founders and organisations across the IBA ecosystem.' },
+  { num: 'Lead', title: 'Shape what comes next', text: 'Grow from learner to contributor, builder and community leader, with access to events and industry exposure.' },
 ]
 
 export const WHO = [
