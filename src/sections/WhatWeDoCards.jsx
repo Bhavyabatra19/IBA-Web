@@ -65,7 +65,7 @@ const CARDS = [
     body:
       'IBA at TheBlock, Dubai: a workspace and community for virtual-asset companies, with a real-time experience of the UAE ecosystem and investor access.',
     href: '/corridor#the-block',
-    img: '/images/the-block-card.jpg',
+    img: '/images/the-block-event.jpg',
   },
   /* the full content for this pillar is the Expertise page's
      #global-market-expansion section (the client's GTM page, 11-10) */

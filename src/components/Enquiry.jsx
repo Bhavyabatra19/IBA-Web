@@ -188,7 +188,7 @@ export default function Enquiry() {
         <div className="enq__body">
           {/* first in the DOM, see the note at the top of this file */}
           <div className="enq__reach">
-            <ReachOut phrase={phrase} heading="Or reach us directly" as="p" iconsOnly />
+            <ReachOut phrase={phrase} heading="Or reach us directly" as="p" iconsOnly glass />
           </div>
           <div className="enq__formPane">
             <EnquiryForm topic={topic} phrase={phrase} onDone={close} />
