@@ -47,7 +47,7 @@ const CARDS = [
     body:
       'One corridor across India, the UAE, Europe, Africa and the Americas: market access, capital, technology transfer and memberships for cross-border growth.',
     href: '/corridor',
-    img: '/images/card-globe.jpg',
+    img: '/images/corridor-globe-team.jpg',
   },
   {
     key: 'redclub',
