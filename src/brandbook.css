@@ -13950,3 +13950,21 @@ img.ib__sectorIcon {
 .cpl__yes { color: #ff6a6f; font-weight: 700; }
 .cpl__no { color: rgba(255, 255, 255, 0.3); }
 .cpl__note { font-size: 13px; color: #ffffff; white-space: nowrap; }
+
+/* Every section's eyebrow, title and subtext centred across the site (by
+   request, 11-14-2026, as the Tokenization page already had it), so the
+   intro no longer leaves one side of the panel empty. The Red Club
+   community band keeps its copy beside its button. */
+.pk-sec:not(#rc-community) .pk-head {
+  justify-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+.pk-sec:not(#rc-community) .pk-head .pk-eyebrow {
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+}
+.pk-sec:not(#rc-community) .pk-head__lede {
+  margin-inline: auto;
+}
