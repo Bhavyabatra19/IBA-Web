@@ -71,7 +71,7 @@ export const channels = (phrase) => [
   },
   {
     k: 'LinkedIn',
-    v: 'linkedin.com/in/indieblock',
+    v: 'linkedin.com/company/indiablockchain',
     href: CONTACT.linkedin.href,
     external: true,
     icon: (
