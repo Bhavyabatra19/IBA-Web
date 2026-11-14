@@ -175,7 +175,7 @@ export const NAV = [
       {
         title: 'Discover Membership',
         items: [
-          { label: 'Membership of the Alliance', icon: 'users', desc: 'The library, the IBA Directory and more.', href: '/membership#alliance' },
+          { label: 'The Alliance Membership', icon: 'users', desc: 'The library, the IBA Directory and more.', href: '/membership#alliance' },
           { label: 'Membership FAQ', icon: 'chat', desc: 'Before you choose.', href: '/membership#membership-faq' },
           { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/membership#join' },
         ],

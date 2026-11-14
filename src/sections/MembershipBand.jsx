@@ -13,7 +13,7 @@ import { Go } from './service/ServiceBlocks'
 const SLIDES = [
   {
     tag: 'Free access',
-    title: 'Membership of the Alliance',
+    title: 'The Alliance Membership',
     text: 'The complete IBA Library, the IBA Directory, member briefings and a verified profile in the network.',
     href: '/membership#alliance',
   },

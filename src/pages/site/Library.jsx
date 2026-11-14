@@ -85,7 +85,7 @@ export default function Library() {
         id="membership"
         tone="card"
         eyebrow="IBA Membership"
-        title="Membership of the Alliance"
+        title="The Alliance Membership"
         lede={`Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions across ${FACTS.countries.text} countries.`}
       >
         <Cards
