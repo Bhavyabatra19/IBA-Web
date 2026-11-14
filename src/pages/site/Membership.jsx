@@ -10,11 +10,15 @@
  * Tokenization and Expertise: a 3D render in the hero, the icon strip under
  * it, glass cards on the red light-arcs ground, the tiers in a dark glass
  * panel, and the steps as glass cards on the red gradient.
+ * The page reads as a story, discovery before commitment (content review,
+ * 11-14): who membership is for (hero), what it opens, the pathways and
+ * tiers to compare, the questions people ask before choosing, and only then
+ * how to join and the ask. Each section's lede hands on to the next.
  * Tones alternate light and dark with no two dark bands touching (as on the
  * Web3 Corridor page): dark hero, the white strip, the red light-arcs, white
- * (the tiers' dark panel), the red gradient, the questions on a light band
- * with a soft red glow, the ask white and centred, and then the site's dark
- * CTA band (brandbook.css, "Membership grounds").
+ * (the tiers' dark panel), the questions on a light band with a soft red
+ * glow, the red gradient, the ask white and centred, and then the site's
+ * dark CTA band (brandbook.css, "Membership grounds").
  */
 
 import { PageHero, Section, Btn } from '../../components/Kit'
@@ -49,8 +53,8 @@ const HeroArt = () => (
 const JUMP = [
   { href: '#alliance', label: 'Membership of the Alliance', icon: <><path d="M12 3 4 6.5v5c0 4.6 3.4 8.4 8 9.5 4.6-1.1 8-4.9 8-9.5v-5Z" /><path d="m8.5 12 2.5 2.5 4.5-5" /></> },
   { href: '#plans', label: 'Pathways & Tiers', icon: <><path d="M12 3 3 7.5l9 4.5 9-4.5Z" /><path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5" /></> },
-  { href: '#join', label: 'How to Join', icon: <><path d="M5 12h12M13 6l6 6-6 6" /></> },
   { href: '#membership-faq', label: 'Questions', icon: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17.2v.1" /></> },
+  { href: '#join', label: 'How to Join', icon: <><path d="M5 12h12M13 6l6 6-6 6" /></> },
 ]
 
 const OPENS = [
@@ -147,10 +151,10 @@ export default function Membership() {
         id="membership"
         aside={<HeroArt />}
         eyebrow="IBA Membership"
-        title="Join the Alliance"
+        title="A network for every stage of growth"
         lede={[
-          `Membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries, with a pathway for every stage of growth.`,
-          'Structured across three membership tiers, with each level building on the benefits of the preceding tier.',
+          `IBA membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries.`,
+          'See what membership opens, compare the three pathways and their tiers, and join when you have found the right fit.',
         ]}
         actions={
           <>
@@ -182,9 +186,9 @@ export default function Membership() {
       <Section
         id="alliance"
         tone="dark"
-        eyebrow="Membership of the Alliance"
+        eyebrow="Why membership"
         title="What membership opens"
-        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. Membership of the alliance is free access, by application."
+        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. Membership of the alliance is free access, by application, and it is where every member begins."
       >
         {/* glass cards on the red light-arcs ground, as About's Our Mission */}
         <MissionPillars items={OPENS} />
@@ -194,7 +198,7 @@ export default function Membership() {
         id="plans"
         eyebrow="Pathways & tiers"
         title="Find the membership built for your ambition."
-        lede="Three pathways, each with three tiers: Web360 Club for founders and investors, Web360 Club for tokenization and institutions, and the Indo–UAE Startup Xchange. Choose a pathway to see its tiers."
+        lede="Three pathways, each with three tiers: Web360 Club for founders and investors, Web360 Club for tokenization and institutions, and the Indo–UAE Startup Xchange. Choose a pathway to see its tiers, with each tier building on the benefits of the one before it."
       >
         {/* the tiers in a dark glass panel, as the Expertise page's
             Consulting Stack sits in its white section */}
@@ -203,26 +207,26 @@ export default function Membership() {
         </div>
       </Section>
 
+      <Section id="membership-faq" tone="card" eyebrow="Frequently asked questions" title="Before you choose.">
+        <Faq items={FAQ} />
+      </Section>
+
       <Section
         id="join"
         tone="red"
-        eyebrow="IBA Membership"
+        eyebrow="When you are ready"
         title="How to join"
-        lede="Four steps from first conversation to an active membership, with the IBA team alongside you at each one."
+        lede="Found your pathway? Four steps take you from first conversation to an active membership, with the IBA team alongside you at each one."
       >
         <MissionPillars items={JOURNEY} />
         <div className="pk-actions" data-rise>
           <Btn href="#plans" variant="ghost">
-            Explore Pathways & Tiers
+            Compare Pathways & Tiers
           </Btn>
           <Btn enquiry={ENQUIRY}>
             Become a Member <Arrow />
           </Btn>
         </div>
-      </Section>
-
-      <Section id="membership-faq" tone="card" eyebrow="Frequently asked questions" title="Before you choose.">
-        <Faq items={FAQ} />
       </Section>
 
       <Section
