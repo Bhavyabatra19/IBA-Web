@@ -3,7 +3,47 @@
     {
       "source": "/memberships",
       "destination": "/membership",
-      "permanent": false
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/corporate-training",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/education",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/the-iba-blockchain-club",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/academia-(&|%26)-students",
+      "destination": "/red-club/learners",
+      "permanent": true
+    },
+    {
+      "source": "/insights-(&|%26)-resources",
+      "destination": "/library",
+      "permanent": true
     },
     {
       "source": "/red-club/students",
