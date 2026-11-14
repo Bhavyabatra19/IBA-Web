@@ -21,6 +21,7 @@ import { Steps } from '../../sections/service/ServiceBlocks'
 import CorridorNetwork from '../../components/CorridorNetwork'
 import BlockFilm from '../../components/BlockFilm'
 import PillarCards from '../../components/PillarCards'
+import CardRail from '../../components/CardRail'
 import { initials } from '../../data/partners'
 
 const ENQUIRY = 'Web3 Corridor'
@@ -153,17 +154,20 @@ const PREMIUM = [
   },
 ]
 
-/* Corridor partners: the third section (content review, 11-10). Logos
-   from public/logos. TheCircle's mark is cut from the supplied white
-   wordmark (thecircle-wordmark-white.png) and set in IBA Black, so it
-   reads on the white logo tile. */
+/* Corridor partners: the third section (content review, 11-10), now a
+   carousel (11-14): a short note on each and a link to its own membership
+   page, opened in a new tab. Logos from public/logos. TheCircle's mark is
+   cut from the supplied white wordmark (thecircle-wordmark-white.png) and
+   set in IBA Black, so it reads on the white logo tile.
+   ⚠ TheBlock has no single company-membership page; the link goes to its
+   individual membership page (company membership is by email). */
 const CORRIDOR_PARTNERS = [
   {
     name: 'TheBlock',
     logo: '/logos/eco/theblock-ae.png',
     tag: 'Dubai · UAE Experience Centre',
-    text: 'A workspace and community for virtual-asset companies, giving corridor members a real-time experience of the UAE ecosystem.',
-    href: '#the-block',
+    text: 'Dubai’s home for virtual-asset companies at the World Trade Centre: workspace, community and a launchpad into the UAE for corridor members.',
+    href: 'https://the-block.com/individual-membership/',
   },
   {
     name: 'TheCircle',
@@ -177,7 +181,7 @@ const CORRIDOR_PARTNERS = [
     logo: '/logos/partners/token-asset-foundation.jpg',
     tag: 'Tokenization standards',
     text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
-    href: 'https://stofdn.com/',
+    href: 'https://stofdn.com/membership',
   },
 ]
 
@@ -250,7 +254,7 @@ export default function Corridor() {
         lede="The organisations working with IBA to connect markets, capital and infrastructure across the Web3 Corridor."
       >
         <div className="cpn-partners" data-rise>
-          <ul className="cpn-partners__list">
+          <CardRail label="Corridor partners" autoplay={5000}>
             {CORRIDOR_PARTNERS.map((p) => (
               <li className="cpn-partner" key={p.name}>
                 <span className="cpn-partner__logo">
@@ -265,18 +269,18 @@ export default function Corridor() {
                 <span className="cpn-partner__tag">{p.tag}</span>
                 <h3 className="cpn-partner__name">{p.name}</h3>
                 <p className="cpn-partner__text">{p.text}</p>
-                {p.href && (
-                  <a
-                    className="cpn-partner__go"
-                    href={p.href}
-                    {...(p.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
-                  >
-                    Know more <Arrow />
-                  </a>
-                )}
+                <a
+                  className="cpn-partner__go"
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${p.name} membership (opens in a new tab)`}
+                >
+                  Explore membership <span aria-hidden="true">↗</span>
+                </a>
               </li>
             ))}
-          </ul>
+          </CardRail>
         </div>
       </Section>
 

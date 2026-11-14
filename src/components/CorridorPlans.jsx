@@ -9,6 +9,10 @@
  * Each tier shows 4–5 key benefits and a Request Brochure button (by
  * request, 11-12-2026); the full lists are in the brochure.
  *
+ * The Web360 Club track carries the corridor partners' benefits for every
+ * tier (by request, 11-14-2026), shown once above the tier cards, each
+ * linking to that partner's membership page.
+ *
  * No prices anywhere on the site (by request, 11-04-2026): the cards give
  * who each tier is for and what it includes; terms are shared on enquiry.
  */
@@ -19,11 +23,18 @@ import { Bullets } from './Kit'
 
 const ENQUIRY = 'Membership'
 
+/* corridor partner benefits, for every Web360 Club tier */
+const PARTNER_BENEFITS = [
+  { partner: 'TheCircle', benefit: 'Global Member benefits', href: 'https://the-block.com/the-circle/' },
+  { partner: 'TheBlock', benefit: 'Connect benefits', href: 'https://the-block.com/individual-membership/' },
+]
+
 const TRACKS = [
   {
     key: 'web360',
     label: 'Web360 Club',
     title: 'Web360 Club Membership Benefits',
+    partners: true,
     intro: 'Membership positioning: Club Class establishes ecosystem access and knowledge; Premier Class strengthens visibility, business development and commercial readiness; Gold Class delivers executive-level engagement, institutional positioning and priority growth opportunities in the heart of Dubai.',
   },
   {
@@ -234,6 +245,21 @@ export default function CorridorPlans() {
       <div id="cpl-panel" role="tabpanel" aria-labelledby={`cpl-tab-${track}`}>
         {current.title && <h3 className="cpl__title">{current.title}</h3>}
         <p className="cpl__intro">{current.intro}</p>
+
+        {current.partners && (
+          <div className="cpl__partners">
+            <p className="cpl__partners-label">Partner benefits · every tier</p>
+            <ul className="cpl__partners-list">
+              {PARTNER_BENEFITS.map((b) => (
+                <li key={b.partner}>
+                  <a href={b.href} target="_blank" rel="noopener noreferrer">
+                    <strong>{b.partner}:</strong> {b.benefit} <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <ul className={`cpl__plans${plans.length === 1 ? ' cpl__plans--single' : ''}`}>
           {plans.map((p) => (

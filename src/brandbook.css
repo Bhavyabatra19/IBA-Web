@@ -13365,6 +13365,48 @@ img.ib__sectorIcon {
   color: #ffffff;
 }
 .mbp-plans .cpl__intro { color: rgba(255, 255, 255, 0.75); }
+/* the Web360 tracks' corridor partner benefits, above the tier cards */
+.cpl__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: -8px 0 24px;
+}
+.cpl__partners-label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff6a6f;
+}
+.cpl__partners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cpl__partners-list a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.cpl__partners-list a:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+}
+.cpl__partners .cpl__partners-list strong { font-weight: 600; color: inherit; }
+@media (max-width: 640px) {
+  .cpl__partners-list a { padding: 7px 14px; font-size: 0.86rem; }
+}
 
 /* each tier a frosted glass card with a bright rim, as the mission cards */
 .mbp-plans .mbr-tier {
@@ -13436,14 +13478,6 @@ img.ib__sectorIcon {
     radial-gradient(40% 60% at 100% 100%, rgba(215, 25, 32, 0.2), transparent 70%),
     #08080a;
   box-shadow: 0 40px 80px -40px rgba(10, 0, 0, 0.6);
-}
-.cpn-partners__list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(14px, 1.6vw, 24px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 .cpn-partner {
   position: relative;
@@ -13531,8 +13565,17 @@ img.ib__sectorIcon {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .cpn-partner__go:hover { border-color: #ffffff; }
+/* the carousel (components/CardRail.jsx): two cards to a view so the row
+   always has somewhere to go, room above for the hover lift, arrows centred */
+.cpn-partners .rail__track {
+  --rail-cols: 2;
+  padding-top: 10px;
+}
+.cpn-partners .rail__controls {
+  justify-content: center;
+}
 @media (max-width: 900px) {
-  .cpn-partners__list { grid-template-columns: minmax(0, 1fr); }
+  .cpn-partners .rail__track { --rail-cols: 1.1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cpn-partner,
