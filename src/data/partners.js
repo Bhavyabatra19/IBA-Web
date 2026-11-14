@@ -8,13 +8,12 @@
  *
  * ⚠ HELD BACK from the supplied folder, pending confirmation:
  *   nexus_nodes_logo.jpeg   the artwork reads "Matter Labs", not Nexus Nodes
- *   1632936119627.jpeg      an "eZ" mark with no name
  *   1739422591472.jpeg      an "A" mark with no name
  * ⚠ "Power" is matched to 1720871479371.jpeg (a power-button mark) by its
  *   look alone, confirm.
- * Ira Blocks, Aasthi, Unify Platform AG, Ztudium and Block Intelligence were
- * supplied by IBA separately; Ira Blocks, Ztudium and Block Intelligence are
- * recoloured dark to read on white,
+ * Ira Blocks, Aasthi, Unify Platform AG, Ztudium, Block Intelligence and
+ * Zamindaar (the "eZ" mark) were supplied by IBA separately; Ira Blocks,
+ * Ztudium and Block Intelligence are recoloured dark to read on white,
  * and Unify uses its V mark alone, since the name sits beneath it.
  */
 
@@ -58,7 +57,7 @@ export const PARTNERS = [
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },
   { name: 'Block Intelligence', logo: '/logos/partners/block-intelligence.png' },
   { name: 'Ztudium', logo: '/logos/partners/ztudium.png' },
-  { name: 'Zamindaar' },
+  { name: 'Zamindaar', logo: '/logos/partners/zamindaar.png' },
   { name: 'Global Alliance for Ethical AI Innovation' },
 ]
 
