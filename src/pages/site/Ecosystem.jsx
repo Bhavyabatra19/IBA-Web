@@ -1,4 +1,11 @@
-/** Ecosystem, initiatives, key partners, councils, people, partnering. */
+/**
+ * Ecosystem, initiatives, key partners, councils, people, partnering.
+ * Tones alternate so no two dark bands touch (as on the Web3 Corridor,
+ * Membership, Tokenization, Expertise and About pages): dark hero, white
+ * (the partners' red panel), Communities and Councils on a light band with a
+ * soft red glow (its cards stay black), the red Associates band, white, and
+ * then the site's dark CTA band (brandbook.css, "Ecosystem grounds").
+ */
 
 import { PageHero, Section, Cards, Form, Btn } from '../../components/Kit'
 import EcoHolo from '../../components/EcoHolo'
@@ -172,7 +179,8 @@ export default function Ecosystem() {
       </Section>
 
       <Section
-        id="communities" tone="dark"
+        id="communities"
+        tone="card"
         eyebrow="Communities and Councils"
         title="Contributing to shape Global Web3 Standards and Frameworks"
       >
