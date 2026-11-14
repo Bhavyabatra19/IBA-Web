@@ -12897,72 +12897,85 @@ main {
 
 /* Home impact band: the asset classes as a row of line icons with labels,
    under the figures (by request) */
-.ib__sectors {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+/* the asset classes as a marquee: the track holds the list twice and slides
+   by half its width, so it loops without a seam; the edges fade out, and it
+   pauses under the pointer. Reduced motion: one still, wrapped, centred row. */
+.ib__marquee {
+  position: relative;
   margin: 32px 0 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.ib__belt {
+  display: flex;
+  width: max-content;
+  animation: ib-marquee 40s linear infinite;
+}
+.ib__marquee:hover .ib__belt {
+  animation-play-state: paused;
+}
+@keyframes ib-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.ib__sectors {
+  display: flex;
+  flex: none;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 .ib__sector {
   display: grid;
   justify-items: center;
+  align-content: start;
   gap: 12px;
+  width: 248px;
   padding: 20px 12px;
   text-align: center;
 }
 .ib__sectorIcon {
   width: 40px;
   height: 40px;
-  fill: none;
-  stroke: var(--iba-red);
-  stroke-width: 1.3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 .ib__sectorLabel {
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--bb-ink);
 }
 @media (max-width: 760px) {
-  .ib__sectors {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-}
-@media (max-width: 420px) {
-  .ib__sectors {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-/* on smaller screens the row wraps centred, so an odd last item sits in the
-   middle rather than alone at the left */
-@media (max-width: 760px) {
-  .ib__sectors {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  .ib__belt {
+    animation-duration: 28s;
   }
   .ib__sector {
-    flex: 0 0 calc((100% - 16px) / 3);
-  }
-}
-@media (max-width: 420px) {
-  .ib__sector {
-    flex-basis: calc((100% - 8px) / 2);
-  }
-}
-@media (max-width: 760px) {
-  .ib__sector {
-    min-width: 0;
+    width: 168px;
     padding: 14px 4px;
   }
   .ib__sectorLabel {
     font-size: 12px;
     letter-spacing: 0.08em;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ib__marquee {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .ib__belt {
+    width: auto;
+    animation: none;
+  }
+  .ib__sectors {
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ib__sectors[aria-hidden] {
+    display: none;
   }
 }
 
@@ -13259,7 +13272,7 @@ img.ib__sectorIcon {
   margin-top: clamp(1.25rem, 2.5vw, 2rem);
 }
 .w3p .wd.wd--duo.wd--pillars .wd__grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .w3p .wd.wd--duo.wd--premium .wd__grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -13700,35 +13713,58 @@ img.ib__sectorIcon {
   color: var(--bb-ink-muted);
 }
 
-/* Membership tiers: a glowing glass card in each tier's metal, tilted like
-   the cards in the Membership hero render (components/TierCard.jsx). */
+/* Membership tiers: a dark glass card with a red neon rim and the tier's
+   name, tilted and stacked like the cards in the Membership hero render
+   (components/TierCard.jsx). */
 .tcard {
   display: block;
-  width: 118px;
-  height: 92px;
-  perspective: 420px;
+  width: 100%;
+  max-width: 250px;
+  margin: 4px auto 0;
+  perspective: 700px;
 }
 .tcard__svg {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   overflow: visible;
-  transform: rotateX(38deg) rotateZ(-14deg);
+  transform: rotateX(34deg) rotateZ(-12deg);
   transform-origin: 50% 60%;
-  filter: drop-shadow(0 0 6px var(--tcard-glow)) drop-shadow(0 0 16px color-mix(in srgb, var(--tcard-glow) 55%, transparent));
+  filter: drop-shadow(0 0 4px rgba(255, 40, 48, 0.9)) drop-shadow(0 0 18px rgba(255, 30, 40, 0.55));
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
 }
 .mbr-tier:hover .tcard__svg {
-  transform: rotateX(30deg) rotateZ(-10deg) translateY(-4px);
-  filter: drop-shadow(0 0 8px var(--tcard-glow)) drop-shadow(0 0 24px var(--tcard-glow));
+  transform: rotateX(26deg) rotateZ(-8deg) translateY(-6px);
+  filter: drop-shadow(0 0 6px rgba(255, 50, 58, 1)) drop-shadow(0 0 28px rgba(255, 30, 40, 0.75));
+}
+.tcard__under { opacity: 0.85; }
+.tcard__name {
+  font-family: inherit;
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.tcard__brand {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  fill: rgba(255, 255, 255, 0.5);
 }
 .mbr-tier__top:has(.tcard) {
-  min-height: 100px;
-  margin-bottom: 10px;
+  display: block;
+  min-height: 0;
+  margin: 0 0 22px;
 }
 @media (prefers-reduced-motion: reduce) {
   .tcard__svg,
   .mbr-tier:hover .tcard__svg { transition: none; }
+}
+.cpl__lead {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
 }
 .cpl__title {
   margin: 0 0 8px;
@@ -13854,4 +13890,184 @@ img.ib__sectorIcon {
 #communities .ecc__card {
   border-color: transparent;
   box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.55);
+}
+
+/* Connect, Talk to the IBA Team (content review, 11-14): one column, the
+   three channels as icons above the form, both at the form's width */
+.cnx {
+  display: grid;
+  gap: clamp(1.2rem, 2.4vw, 1.6rem);
+  width: min(100%, 760px);
+}
+.cnx .reach--icons {
+  padding-bottom: clamp(1.2rem, 2.4vw, 1.6rem);
+  border-bottom: 1px solid #ece6dc;
+}
+/* the icon circles on the light page: a visible ring, IBA Red marks */
+.cnx .reach__iconRow { margin: 0; }
+.cnx .reach__iconRow a {
+  border-color: #e2dcd2;
+  color: var(--iba-red);
+  background: #ffffff;
+}
+.cnx .reach__iconRow a:hover,
+.cnx .reach__iconRow a:focus-visible {
+  border-color: var(--iba-red);
+  background: rgba(215, 25, 32, 0.06);
+}
+.cnx .reach--icons .eyebrow { color: var(--bb-ink-muted, #6b655e); }
+
+/* Membership plans (CorridorPlans): a pathway with one tier (Gold Xchange)
+   centres its card; the full Web360 Club matrix as a table under the cards */
+.cpl__plans--single {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
+.cpl__compare {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+.cpl__compare > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  list-style: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.cpl__compare > summary::-webkit-details-marker { display: none; }
+.cpl__compare > summary::after {
+  content: '+';
+  font-size: 18px;
+  line-height: 1;
+}
+.cpl__compare[open] > summary::after { content: '–'; }
+.cpl__compare > summary:hover { border-color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.06); }
+.cpl__compare > summary:focus-visible { outline: 2px solid #ff6a6f; outline-offset: 3px; }
+.cpl__tableWrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+}
+.cpl__table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.cpl__table th,
+.cpl__table td {
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  vertical-align: middle;
+}
+.cpl__table tbody tr:last-child th,
+.cpl__table tbody tr:last-child td { border-bottom: 0; }
+.cpl__table th[scope='row'],
+.cpl__table thead th:first-child {
+  text-align: left;
+  font-weight: 400;
+  color: #ffffff;
+}
+.cpl__table thead th {
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(20, 8, 10, 0.92);
+  white-space: nowrap;
+}
+.cpl__table thead th:nth-child(2) { color: #f0b088; }
+.cpl__table thead th:nth-child(3) { color: #e6eaf0; }
+.cpl__table thead th:nth-child(4) { color: #e6c766; }
+.cpl__table tbody tr:hover { background: rgba(255, 255, 255, 0.04); }
+.cpl__yes { color: #ff6a6f; font-weight: 700; }
+.cpl__no { color: rgba(255, 255, 255, 0.3); }
+.cpl__note { font-size: 13px; color: #ffffff; white-space: nowrap; }
+
+/* Every section's eyebrow, title and subtext centred across the site (by
+   request, 11-14-2026, as the Tokenization page already had it), so the
+   intro no longer leaves one side of the panel empty. The Red Club
+   community band keeps its copy beside its button. */
+.pk-sec:not(#rc-community) .pk-head {
+  justify-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+.pk-sec:not(#rc-community) .pk-head .pk-eyebrow {
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+}
+.pk-sec:not(#rc-community) .pk-head__lede {
+  margin-inline: auto;
+}
+
+/* Let's Talk form: the channel icons as red-lit glass circles (artwork,
+   11-14); the image carries its own ring, so the CSS ring and fill go */
+.reach__iconRow--glass a {
+  width: 56px;
+  height: 56px;
+  border: 0;
+  background: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.reach__iconRow--glass a:hover,
+.reach__iconRow--glass a:focus-visible {
+  border: 0;
+  background: none;
+  transform: translateY(-2px);
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 40, 50, 0.45));
+}
+.reach__iconRow--glass img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==================================================================
+   The red light beam on every remaining black panel: the Connect,
+   Initiatives and Membership heroes, the home Membership band and the
+   footer take the same diagonal arc as the Corridor and About heroes,
+   so no black block on the site sits flat
+   ================================================================== */
+:is(#connect-page, #initiatives-page, #membership) .pk-hero__panel,
+#membership.pk-sec--dark .pk-sec__panel,
+.ft__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #060607;
+}
+:is(#connect-page, #initiatives-page, #membership) .pk-hero__beam,
+#membership.pk-sec--dark .pk-sec__panel::before,
+.ft__panel::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      158deg,
+      transparent 44%,
+      rgba(150, 30, 42, 0.18) 52%,
+      rgba(200, 52, 62, 0.55) 58.5%,
+      rgba(150, 30, 42, 0.18) 64%,
+      transparent 72%
+    ),
+    radial-gradient(60% 55% at 92% 30%, rgba(120, 22, 34, 0.28), transparent 70%);
+  filter: blur(14px);
+  -webkit-mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
 }

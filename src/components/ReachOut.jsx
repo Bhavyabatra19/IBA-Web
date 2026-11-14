@@ -71,7 +71,7 @@ export const channels = (phrase) => [
   },
   {
     k: 'LinkedIn',
-    v: 'linkedin.com/in/indieblock',
+    v: 'linkedin.com/company/indiablockchain',
     href: CONTACT.linkedin.href,
     external: true,
     icon: (
@@ -98,7 +98,15 @@ export const channels = (phrase) => [
    phone, which the form's own Phone / WhatsApp field already covers */
 const ICON_CHANNELS = ['Email', 'WhatsApp', 'LinkedIn']
 
-export default function ReachOut({ phrase, heading = 'Or reach us directly', as = 'h2', iconsOnly = false }) {
+/* the Let's Talk form's glass icons (by request, 11-14): red-lit glass
+   circles cut from the client's artwork, in public/images/contact */
+const GLASS_ICONS = {
+  Email: '/images/contact/glass-email.png',
+  WhatsApp: '/images/contact/glass-whatsapp.png',
+  LinkedIn: '/images/contact/glass-linkedin.png',
+}
+
+export default function ReachOut({ phrase, heading = 'Or reach us directly', as = 'h2', iconsOnly = false, glass = false }) {
   const Heading = as
   /* the Let's Talk form (content review, 11-05): the channels as icons only,
      no address or number printed; each still names itself to assistive tech
@@ -107,7 +115,7 @@ export default function ReachOut({ phrase, heading = 'Or reach us directly', as 
     return (
       <div className="reach reach--icons">
         <Heading className={as === 'h2' ? 'reach__h display' : 'eyebrow'}>{heading}</Heading>
-        <ul className="reach__iconRow">
+        <ul className={glass ? 'reach__iconRow reach__iconRow--glass' : 'reach__iconRow'}>
           {channels(phrase)
             .filter((c) => ICON_CHANNELS.includes(c.k))
             .map((c) => (
@@ -118,6 +126,9 @@ export default function ReachOut({ phrase, heading = 'Or reach us directly', as 
                 title={`${c.k}: ${c.v}`}
                 {...(c.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
               >
+                {glass ? (
+                  <img src={GLASS_ICONS[c.k]} alt="" width="52" height="52" loading="lazy" decoding="async" />
+                ) : (
                 <svg
                   viewBox="0 0 16 16"
                   fill="none"
@@ -129,6 +140,7 @@ export default function ReachOut({ phrase, heading = 'Or reach us directly', as 
                 >
                   {c.icon}
                 </svg>
+                )}
               </a>
             </li>
           ))}

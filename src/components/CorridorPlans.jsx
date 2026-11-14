@@ -1,15 +1,15 @@
 /**
- * Web3 Corridor membership plans, three tracks behind tabs (Web360 Founder
- * & Investor, Web360 Tokenization & Institutions, Indo–UAE Startup
- * Xchange), each with its three tier cards, from the
- * client's Corridor membership reference (11-04-2026). The cards reuse the
+ * Web3 Corridor membership plans behind tabs: the three Web360 Club
+ * memberships (Club Class, Premier Class, Gold Class; content review,
+ * 11-14-2026) and the Indo–UAE Startup Xchange, each with its three tier
+ * cards. The cards reuse the
  * site's tier card (.mbr-tier, with a TierCard in each metal); the tabs are styled in
  * brandbook.css (.cpl).
  *
  * Each tier shows 4–5 key benefits and a Request Brochure button (by
  * request, 11-12-2026); the full lists are in the brochure.
  *
- * Both Web360 Club tracks carry the corridor partners' benefits for every
+ * The Web360 Club track carries the corridor partners' benefits for every
  * tier (by request, 11-14-2026), shown once above the tier cards, each
  * linking to that partner's membership page.
  *
@@ -31,166 +31,176 @@ const PARTNER_BENEFITS = [
 
 const TRACKS = [
   {
-    key: 'club',
-    label: 'Founder & Investor',
-    intro: 'Web360 Club for founders and investors: investor relations, deal flow, advisory and international growth.',
-    partners: true,
-  },
-  {
-    key: 'token',
-    label: 'Tokenization & Institutions',
+    key: 'web360',
+    label: 'Web360 Club',
     title: 'Web360 Club Membership Benefits',
     partners: true,
-    intro: 'Membership positioning: Club establishes ecosystem access and knowledge; Premier strengthens visibility, business development and commercial readiness; Gold delivers executive-level engagement, institutional positioning and priority growth opportunities.',
+    intro: 'Membership positioning: Club Class establishes ecosystem access and knowledge; Premier Class strengthens visibility, business development and commercial readiness; Gold Class delivers executive-level engagement, institutional positioning and priority growth opportunities in the heart of Dubai.',
   },
   {
     key: 'xchange',
     label: 'Indo–UAE Startup Xchange',
-    intro: 'A distinct bilateral market-entry membership with three tiers and a 12-week Gold launch sprint.',
+    intro: 'A distinct bilateral market-entry membership, Gold Xchange, built around a 12-week launch sprint.',
   },
 ]
 
 const PLANS = {
-  club: [
+  /* the three Web3 Corridor memberships (content review, 11-14-2026): one
+     set of tiers in place of the Founder & Investor and Tokenization &
+     Institutions tracks */
+  web360: [
     {
       metal: 'bronze',
-      name: 'Club',
-      sub: 'Starters & Early Builders',
-      audience: 'Founders, operators, MSMEs and early-stage businesses',
-      summary: 'Build international exposure with the Web360 community, expert access and market-entry guidance.',
-      benefits: [
-        'Webinars, AMAs and the monthly Corridor roundup',
-        'Verified Club badge; public and community events',
-        'Go-to-market advisory and mentoring on setup, legal and fundraising',
-        'Member pricing on Corridor services and Dubai co-hosted events',
-        'Global member directory, document vault and KYC/KYB',
-      ],
-    },
-    {
-      metal: 'silver',
-      name: 'Premier',
-      sub: 'Growth Plan for Founders',
-      audience: 'Registered startups pursuing multi-country expansion',
-      summary: 'Club inclusions plus founder-focused visibility, investor readiness and growth support.',
-      benefits: [
-        'All Club inclusions',
-        'Growth advisory with deck and plan reviews',
-        'Matched investor introductions and networking',
-        'Startup podcast feature and two Dubai event admissions',
-        'Customised setup, legal and GTM mentoring',
-      ],
-    },
-    {
-      metal: 'gold',
-      name: 'Gold',
-      sub: 'Growth & Accelerator Plan',
-      audience: 'High-growth founders and fundraising-focused ventures',
-      summary: 'Premier inclusions plus curated investor access, structured milestone reviews and expansion support.',
-      benefits: [
-        'All Premier inclusions',
-        'Expert Board Advisor support for six months',
-        'Weekly strategy sessions and KPI/milestone reviews',
-        'Curated expert, mentor and investor access',
-        'Media and podcast visibility; fast-track into Tokenization Gold',
-      ],
-    },
-  ],
-  token: [
-    {
-      metal: 'bronze',
-      name: 'Club',
+      name: 'Club Class',
       sub: 'Essential Access',
       tagline: 'Learn • Connect • Explore',
+      includes: 'Club Class Membership — Exclusive Benefits',
       benefits: [
-        { t: 'Membership & Industry Insights', d: 'Verified badge, live and on-demand webinars, Tokenized Markets Weekly newsletter, and monthly member updates.' },
-        { t: 'Knowledge & Learning', d: 'Access to RWA, tokenomics, and regulatory learning resources, member portal, and RWA forum.' },
-        { t: 'Ecosystem Visibility', d: 'Vendor listings, issuer profiles, offerings, and access to industry directories.' },
-        { t: 'Business Enablement', d: 'Business setup, legal, GTM and fundraising advisory access, corporate vault, KYC/KYB support and on-request technology interns.' },
-        { t: 'Member Privileges', d: 'Five-day Buy Side trial, preferential member pricing, and discounted Dubai co-hosted events.' },
+        { t: 'Verified Identity & Secure Access', d: 'Official Club badge, IBA SafeVault for corporate documentation and KYC/KYB, and access to the global member and partner directory.' },
+        { t: 'Strategic Advisory & Growth Enablement', d: 'GTM blueprint, product lifecycle advisory, business planning, expansion strategies and regulatory mentoring.' },
+        { t: 'Funding Readiness & Investor Preparation', d: 'Growth advisory, pitch deck and business plan reviews, and tailored funding preparation assistance.' },
+        { t: 'Exclusive Networking & Global Exposure', d: 'Curated roundtables, member roundups, Web3 Corridor introductions, Dubai co-hosted event privileges and special event pricing.' },
+        { t: 'Visibility & Preferred Member Privileges', d: 'IBA LinkedIn spotlights, promotional opportunities, and preferential pricing on Web3 Corridor services and products.' },
       ],
     },
     {
       metal: 'silver',
-      name: 'Premier',
+      name: 'Premier Class',
       sub: 'Growth & Visibility',
       tagline: 'Position • Engage • Accelerate',
-      includes: 'Includes all Club benefits, plus:',
+      includes: 'Includes all Club Class benefits, plus:',
       benefits: [
-        { t: 'Enhanced Market Visibility', d: 'Premium listings, branded media exposure, Member Spotlight features and podcast participation eligibility.' },
-        { t: 'Strategic Business Development', d: 'Active lead generation, targeted ecosystem introductions and new commercial opportunities.' },
-        { t: 'Specialist Tokenization Mentorship', d: 'Expert-led tokenomics white-paper sessions and introductions to tokenization platforms.' },
-        { t: 'Business & Project Readiness', d: 'Detailed project assessments, business plan reviews and an annual strategy session.' },
-        { t: 'Expanded Ecosystem Engagement', d: 'Greater access to relevant industry partners, potential clients and strategic collaborations.' },
+        { t: 'Strategic Advisory & Growth Acceleration', d: 'Six months of expert board advisory, strategic mentoring, KPI and milestone reviews, and business growth planning.' },
+        { t: 'Market Readiness & Business Expansion', d: 'Comprehensive market readiness assessments, business setup blueprints, and strategic guidance for market entry and expansion.' },
+        { t: 'Investment Readiness & Grant Opportunities', d: 'Mock investor committee exposure, investment preparation, and advisory on blockchain grants and funding opportunities.' },
+        { t: 'Talent Access & Technical Enablement', d: 'Priority access to the IBA talent pool, on-request technical interns, and expert support for innovation and execution.' },
+        { t: 'Global Visibility & Thought Leadership', d: 'Startup podcasts, media exposure, white paper publishing support, and subsidized access to exclusive industry events and passes on request.' },
       ],
     },
     {
       metal: 'gold',
-      name: 'Gold',
+      name: 'Gold Class',
       sub: 'Executive & Institutional',
       tagline: 'Lead • Expand • Scale',
-      includes: 'Includes all Club and Premier benefits, plus:',
+      includes: 'Includes all Premier Class benefits, plus:',
+      lead: 'Premier Class privileges. Premium Dubai presence. Global Web3 opportunities.',
       benefits: [
-        { t: 'Enterprise-Wide Privileges', d: 'Company-wide and core-team access with preferred visibility across the Web3 Corridor ecosystem.' },
-        { t: 'Executive Advisory', d: 'Access to an Expert Board Advisor for six months, with priority strategic advisory support.' },
-        { t: 'Priority Business Introductions', d: 'Preferential introductions to prospective clients, institutional partners, and relevant ecosystem stakeholders.' },
-        { t: 'Sponsorship & Market Leadership', d: 'Sponsorship opportunities, enhanced brand positioning, and high-value industry engagement.' },
-        { t: 'Global Business Expansion', d: 'Priority advisory and relationship-building opportunities supporting international market access, institutional engagement and long-term commercial growth.' },
+        { t: 'All Premier Class Privileges', d: 'Complete access to strategic advisory, investment readiness, talent networks, market expansion, global visibility and growth acceleration services.' },
+        { t: 'Dubai Web3 Experience Center Access', d: 'Exclusive access to full-service business facilities, professional office space and operational support at Dubai’s prestigious World Trade Centre.' },
+        { t: 'Premium Business Establishment & Market Access', d: 'Dedicated support for establishing a Dubai presence, facilitating business operations, strategic partnerships and cross-border market expansion.' },
+        { t: 'Tokenization Launch & Ecosystem Enablement', d: 'Privileged access to IBA’s premier Dubai partner, TheBlock, leveraging its ecosystem for tokenization launches, industry showcases, curated events and strategic networking.' },
+        { t: 'Global Visibility & Institutional Connections', d: 'Enhanced brand positioning, media exposure, executive networking and curated introductions to investors, institutions and Web3 ecosystem leaders through the IBA Web3 Corridor.' },
       ],
     },
   ],
+  /* one tier, Gold Xchange (IBA Membership Matrix, 11-13-2026) */
   xchange: [
     {
-      metal: 'bronze',
-      name: 'Club',
-      sub: 'Network Access',
-      audience: 'Founder-led ventures exploring India ↔ UAE expansion',
-      summary: 'A year-round starting point for corridor briefings, events and peer community.',
+      metal: 'gold',
+      name: 'Gold Xchange',
+      sub: '12-week Launch Sprint',
+      audience: 'Startups ready for a structured India ↔ UAE launch',
       benefits: [
         'Member events and briefings',
         'Founder community across both markets',
         'Network and ecosystem orientation',
-        'For India → UAE or UAE → India tracks',
-      ],
-    },
-    {
-      metal: 'silver',
-      name: 'Premier',
-      sub: 'Hands-on Market Entry',
-      audience: 'Startups needing guided compliance and commercial introductions',
-      summary: 'Club access with practical market-entry clinics, curated introductions and named support.',
-      benefits: [
-        'All Club Xchange inclusions',
+        'India → UAE or UAE → India track',
         'Compliance clinics',
         'Curated introductions',
         'Named corridor concierge',
         'Market-entry support and partner navigation',
-      ],
-    },
-    {
-      metal: 'gold',
-      name: 'Gold',
-      sub: '12-week Launch Sprint',
-      audience: 'Startups ready for a structured India ↔ UAE launch',
-      summary: 'Premier access plus a focused 12-week sprint from validation to launch.',
-      benefits: [
-        'All Premier Xchange inclusions',
-        '12-week launch sprint',
-        'Validate (weeks 1–3), build (4–8), launch (9–12)',
+        '12-week launch sprint: validate, build, launch',
         'Demo day and soft-landing support',
       ],
     },
   ],
 }
 
-/* #plans-club, #plans-token, #plans-xchange: a link can open a pathway's
-   tab (the Membership menu does) */
+/* the full Web360 Club matrix (IBA Membership Matrix, 11-13-2026), row by
+   row: what each class includes (true, or a note such as how many a year),
+   shown as a comparison table under the cards. No prices (by request). */
+const MATRIX = [
+  ['Verified Club badge', true, true, true],
+  ['IBA SafeVault: data room, corporate documents and KYC/KYB', true, true, true],
+  ['Roundtable invitations and the members’ roundup', '2 a year', '4 a year', '6 a year'],
+  ['Funding prep and assistance: growth advisory, deck and plan reviews', true, true, true],
+  ['Member pricing on Corridor services and products', true, true, true],
+  ['Dubai co-hosted event packages and special prices', true, true, true],
+  ['GTM blueprint', true, true, true],
+  ['Global member and partner directory', true, true, true],
+  ['Product advisory: blueprint analysis, lifecycle, expansion and business plan', true, true, true],
+  ['Mentoring on the regulatory framework', true, true, true],
+  ['Introduction to the Web3 Corridor promotions', true, true, true],
+  ['IBA promotion and LinkedIn spotlight', true, true, true],
+  ['Event passes, on request and subsidised', false, true, 'Connect: full service'],
+  ['Advisor on Board: KPI and milestone reviews, strategy sessions', false, true, true],
+  ['Startup podcast and media visibility', false, true, true],
+  ['Market readiness assessment', false, true, true],
+  ['On-request tech interns', false, true, true],
+  ['Access to the IBA talent pool', false, true, true],
+  ['Business set-up blueprint', false, true, true],
+  ['Expert Board Advisor support (6 months)', false, true, true],
+  ['Exposure to a mock investor committee', false, true, true],
+  ['White paper publishing support', false, true, true],
+  ['Blockchain grant advice and information', false, true, true],
+  ['TheCircle Level 1 pack', false, true, true],
+  ['TheBlock Level 1 pack', false, false, true],
+]
+const CLASSES = ['Club Class', 'Premier Class', 'Gold Class']
+
+const Mark = ({ v }) =>
+  v === true ? (
+    <span className="cpl__yes" aria-label="Included">✓</span>
+  ) : v ? (
+    <span className="cpl__note">{v}</span>
+  ) : (
+    <span className="cpl__no" aria-label="Not included">–</span>
+  )
+
+const Compare = () => (
+  <details className="cpl__compare">
+    <summary>Compare all Web360 Club benefits</summary>
+    <div className="cpl__tableWrap">
+      <table className="cpl__table">
+        <thead>
+          <tr>
+            <th scope="col">Benefit</th>
+            {CLASSES.map((n) => (
+              <th scope="col" key={n}>
+                {n}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {MATRIX.map(([label, ...tiers]) => (
+            <tr key={label}>
+              <th scope="row">{label}</th>
+              {tiers.map((v, i) => (
+                <td key={CLASSES[i]}>
+                  <Mark v={v} />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </details>
+)
+
+/* #plans-web360, #plans-xchange: a link can open a pathway's tab (the
+   Membership menu does); the old #plans-club and #plans-token links (the
+   homepage band, the Web3 Corridor page) open the Web360 Club tiers */
+const ALIAS = { club: 'web360', token: 'web360', web360: 'web360', xchange: 'xchange' }
+const ANCHORS = ['web360', 'club', 'token', 'xchange']
 const fromHash = () => {
-  const m = typeof window !== 'undefined' && window.location.hash.match(/^#plans-(club|token|xchange)$/)
-  return m ? m[1] : null
+  const m = typeof window !== 'undefined' && window.location.hash.match(/^#plans-(web360|club|token|xchange)$/)
+  return m ? ALIAS[m[1]] : null
 }
 
 export default function CorridorPlans() {
-  const [track, setTrack] = useState(() => fromHash() || 'club')
+  const [track, setTrack] = useState(() => fromHash() || 'web360')
   const current = TRACKS.find((t) => t.key === track)
   const plans = PLANS[track]
 
@@ -212,8 +222,8 @@ export default function CorridorPlans() {
   return (
     <div className="cpl">
       {/* the pathway anchors the menu links to */}
-      {TRACKS.map((t) => (
-        <span key={t.key} id={`plans-${t.key}`} className="cpl__anchor" aria-hidden="true" />
+      {ANCHORS.map((a) => (
+        <span key={a} id={`plans-${a}`} className="cpl__anchor" aria-hidden="true" />
       ))}
       <div className="cpl__tabs" role="tablist" aria-label="Membership pathways">
         {TRACKS.map((t) => (
@@ -251,11 +261,11 @@ export default function CorridorPlans() {
           </div>
         )}
 
-        <ul className="cpl__plans">
+        <ul className={`cpl__plans${plans.length === 1 ? ' cpl__plans--single' : ''}`}>
           {plans.map((p) => (
             <li className={`mbr-tier mbr-tier--${p.metal}`} key={p.name}>
               <div className="mbr-tier__top">
-                <TierCard metal={p.metal} />
+                <TierCard metal={p.metal} label={p.name} />
               </div>
               <h3 className="mbr-tier__name">{p.name}</h3>
               <p className="cpl__sub">{p.sub}</p>
@@ -268,6 +278,7 @@ export default function CorridorPlans() {
               )}
               {p.summary && <p className="mbr-tier__why">{p.summary}</p>}
               {p.includes && <p className="cpl__includes">{p.includes}</p>}
+              {p.lead && <p className="cpl__lead">{p.lead}</p>}
               {typeof p.benefits[0] === 'string' ? (
                 <Bullets items={p.benefits} />
               ) : (
@@ -285,6 +296,8 @@ export default function CorridorPlans() {
             </li>
           ))}
         </ul>
+
+        {track === 'web360' && <Compare />}
       </div>
     </div>
   )

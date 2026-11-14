@@ -1,15 +1,14 @@
 /**
- * IBA Red Club, the overview: what Red Club is, what members get and who
- * it is for, then a door each to the detail for institutions and for
- * learners (/red-club/institutions, /red-club/learners). Kept short by
- * request; the rest of the reference copy lives on those two pages. Copy in
- * redClubContent.js.
+ * IBA Red Club, the overview: what Red Club is, the two ways in, the member
+ * journey and a closing call to action. Kept short by request; each point is
+ * said once here, and the detail lives on /red-club/institutions and
+ * /red-club/learners. Copy in redClubContent.js.
  */
 
 import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { Faq } from '../../sections/service/ServiceBlocks'
 import EzStairs from '../../components/EzStairs'
-import { LEARNER, HIGHLIGHTS, EXPERIENCE, WHO, FAQ } from './redClubContent'
+import { LEARNER, EXPERIENCE } from './redClubContent'
 
 const Arrow = () => <span aria-hidden="true">→</span>
 
@@ -17,29 +16,33 @@ const DOORS = [
   {
     img: '/images/card-institutions.jpg',
     tag: 'For institutions',
-    title: 'More than a campus club. An institutional growth platform.',
-    text: 'Experience Centers on campus: curriculum, labs, research, industry projects and international pathways, run as a partnership between IBA and the institution.',
+    title: 'An Experience Center on your campus',
+    text: 'Curriculum, labs, research, industry projects and international pathways, run in partnership with IBA.',
     href: '/red-club/institutions',
     cta: 'Know more',
   },
   {
     img: '/images/card-students.jpg',
-    tag: 'For individual learners',
-    title: 'From curiosity to industry-ready capability',
-    text: 'Programmes, live projects, mentors, career support and verifiable credentials for anyone building Web3 skills, whether you are studying, working or starting out.',
+    tag: 'For learners',
+    title: 'From curiosity to industry-ready',
+    text: 'Programmes, live projects, mentors, career support and verifiable credentials. For students, developers, founders and working professionals.',
     href: '/red-club/learners',
     cta: 'Know more',
   },
 ]
 
-/* the general questions; the institution and learner ones are on their pages */
-const OVERVIEW_FAQ = FAQ.filter((f) =>
-  ['Who can join Red Club?', 'Do I need prior blockchain experience?', 'What can members gain?', 'How is Red Club connected to IBA?'].includes(f.q)
-)
-
-/* who it's for, without the bullet lists: the overview names them, the
-   detail pages say what each gets */
-const WHO_SHORT = WHO.map(({ title, text }) => ({ title, text }))
+/* only what the page above doesn't already answer; the institution and
+   learner questions are on their own pages */
+const OVERVIEW_FAQ = [
+  {
+    q: 'Who can join Red Club?',
+    a: 'Students, developers, professionals, founders and institutions interested in blockchain, Web3 and the digital economy.',
+  },
+  {
+    q: 'Do I need prior blockchain experience?',
+    a: 'No. Red Club has pathways for newcomers and for experienced builders.',
+  },
+]
 
 export default function RedClub() {
   return (
@@ -55,7 +58,7 @@ export default function RedClub() {
             Learners build the future.
           </>
         }
-        lede="The IBA Red Club Experience Centers connect universities, educators and learners to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways."
+        lede="Red Club is IBA's skills and innovation network. It connects universities, educators and learners to hands-on blockchain, tokenization and AI, through industry projects, applied research and international pathways."
         actions={
           <>
             <Btn href="/red-club/institutions">
@@ -68,40 +71,16 @@ export default function RedClub() {
         }
       />
 
-      <Section
-        id="rc-about"
-        eyebrow="About Red Club"
-        title="Where the next wave of Web3 talent comes together."
-        lede="Red Club is a learning, collaboration and opportunity network within the India Blockchain Alliance ecosystem, and its institution-facing skills and innovation initiative within the IBA Web3 Corridor: a launchpad for learners, developers, professionals, founders and entrepreneurs who want to take an active role in building the Web3 economy."
-      >
-        <Cards cols={4} items={HIGHLIGHTS} />
-      </Section>
-
-      <Section
-        id="rc-paths"
-        eyebrow="Know more"
-        title="Two ways into Red Club"
-        lede="Red Club works with institutions and with individual learners: institutions build Experience Centers on campus, and learners at any stage build practical Web3 skills, projects and networks."
-      >
+      <Section id="rc-paths" eyebrow="Know more" title="Two ways into Red Club">
         <Cards cols={2} items={DOORS} />
       </Section>
 
       <Section
         id="rc-experience"
-        eyebrow="The Red Club experience"
+        eyebrow="The Red Club journey"
         title="Knowledge is the starting point. Capability is the outcome."
-        lede="A connected experience designed to move members from awareness to practical participation."
       >
-        <Cards cols={3} items={EXPERIENCE} />
-      </Section>
-
-      <Section
-        id="rc-who"
-        eyebrow="Who it's for"
-        title="Different journeys. One connected community."
-        lede="Whether you're exploring Web3 or already building in the ecosystem, Red Club can be a place to learn, contribute and grow."
-      >
-        <Cards cols={4} items={WHO_SHORT} />
+        <Cards cols={4} items={EXPERIENCE} />
       </Section>
 
       <Section
@@ -109,7 +88,7 @@ export default function RedClub() {
         tone="red"
         eyebrow="A network. A shared ambition."
         title="Be part of the community building the future of Web3."
-        lede="Connect your curiosity with people, knowledge and opportunities across the India Blockchain Alliance ecosystem."
+        lede="Red Club is part of the India Blockchain Alliance, alongside its work in education, industry collaboration and Web3 adoption."
       >
         <div className="pk-actions" data-rise>
           <Btn enquiry={LEARNER}>

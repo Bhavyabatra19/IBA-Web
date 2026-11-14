@@ -57,16 +57,20 @@ const FIGURES = [
   { fig: n(11), label: 'Impact Projects', note: 'Tokenized for measurable social and climate outcomes', icon: 'globe' },
 ]
 
-/* the asset classes IBA tokenizes, under the figures (by request, in place
-   of the project cards): 3D medallions cut from the hero's coin artwork
-   (the emblem on the coin's face, with a red metal rim), so they match the
-   coins (public/images/sector-icons) */
+/* the asset classes IBA tokenizes, under the figures: one per coin in the
+   hero (Gold, Real Estate, Carbon Credits, Bonds & Debt, Commodities,
+   Infrastructure, Agriculture, Green Assets), as 3D medallions cut from that
+   coin artwork (the emblem on the coin's face, with a red metal rim), so they
+   match the coins (public/images/sector-icons). They run as a slow marquee. */
 const SECTORS = [
   { label: 'Precious Ores', img: '/images/sector-icons/precious-ores.png' },
   { label: 'Real Estate', img: '/images/sector-icons/real-estate.png' },
+  { label: 'Carbon Credits', img: '/images/sector-icons/carbon-credits.png' },
+  { label: 'Financial Services', img: '/images/sector-icons/financial-services.png' },
   { label: 'Consumables', img: '/images/sector-icons/consumables.png' },
   { label: 'Infrastructure', img: '/images/sector-icons/infrastructure.png' },
-  { label: 'Financial Services', img: '/images/sector-icons/financial-services.png' },
+  { label: 'Agriculture', img: '/images/sector-icons/agriculture.png' },
+  { label: 'Green Assets', img: '/images/sector-icons/green-assets.png' },
 ]
 
 /** Count a [data-count] figure from 0, keeping its decimals and affixes. */
@@ -168,14 +172,27 @@ export default function ImpactBand() {
           ))}
         </ul>
 
-        <ul className="ib__sectors" aria-label="Asset classes we tokenize">
-          {SECTORS.map((sec) => (
-            <li className="ib__sector" key={sec.label} data-rise>
-              <img className="ib__sectorIcon" src={sec.img} alt="" width="320" height="320" loading="lazy" decoding="async" />
-              <span className="ib__sectorLabel">{sec.label}</span>
-            </li>
-          ))}
-        </ul>
+        {/* the list twice, so the track can slide by half its width and loop
+            seamlessly; the copy is hidden from assistive tech */}
+        <div className="ib__marquee" data-rise>
+          <div className="ib__belt">
+            {[0, 1].map((copy) => (
+              <ul
+                className="ib__sectors"
+                key={copy}
+                aria-label={copy ? undefined : 'Asset classes we tokenize'}
+                aria-hidden={copy ? true : undefined}
+              >
+                {SECTORS.map((sec) => (
+                  <li className="ib__sector" key={sec.label}>
+                    <img className="ib__sectorIcon" src={sec.img} alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span className="ib__sectorLabel">{sec.label}</span>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )

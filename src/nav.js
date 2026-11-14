@@ -183,8 +183,7 @@ export const NAV = [
       {
         title: 'Web360 Club',
         items: [
-          { label: 'Founder & Investor', icon: 'layers', desc: 'Deal flow, advisory and international growth.', href: '/membership#plans-club' },
-          { label: 'Tokenization & Institutions', icon: 'link', desc: 'RWA, issuers, vendors and corporates.', href: '/membership#plans-token' },
+          { label: 'Club, Premier & Gold Class', icon: 'layers', desc: 'Three Web3 Corridor memberships, each building on the last.', href: '/membership#plans-web360' },
         ],
       },
       {
@@ -286,16 +285,10 @@ export const CONTACT = {
    * only form wa.me accepts.
    */
   whatsapp: { label: '+91 8420045940', number: '918420045940' },
-  /**
-   * ⚠ THIS IS A PERSONAL PROFILE, not a company page, /in/ rather than
-   * /company/. It is the value section 8.2 supplies, so it is the value used;
-   * but the closing band and the footer both label this link "India Blockchain
-   * Alliance", which is an organisation. Confirm which of the two IBA wants
-   * readers sent to before launch.
-   */
+  /* IBA's LinkedIn company page (content review, 11-14) */
   linkedin: {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/indieblock',
+    href: 'https://www.linkedin.com/company/indiablockchain/posts/',
   },
 }
 

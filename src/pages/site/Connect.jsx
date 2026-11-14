@@ -6,7 +6,7 @@
  */
 
 import { PageHero, Section, Form, Btn } from '../../components/Kit'
-import { CONTACT } from '../../nav'
+import ReachOut from '../../components/ReachOut'
 
 const WAYS = [
   { title: 'For Learners', text: 'Join the IBA Red Club: programmes, projects, placements.', enquiry: 'Red Club (learner)', cta: 'Join Red Club' },
@@ -25,13 +25,6 @@ const INTERESTS = [
   'Tech4Good / Green Chain Protocol',
   'Media / Speaking',
   'Something else',
-]
-
-const LINES = [
-  { label: 'Email', value: CONTACT.email.label, href: CONTACT.email.href },
-  { label: 'Phone', value: CONTACT.phone.label, href: CONTACT.phone.href },
-  { label: 'WhatsApp', value: CONTACT.whatsapp.label, href: `https://wa.me/${CONTACT.whatsapp.number}` },
-  { label: 'LinkedIn', value: 'linkedin.com/in/indieblock', href: CONTACT.linkedin.href },
 ]
 
 export default function Connect() {
@@ -61,19 +54,11 @@ export default function Connect() {
       </Section>
 
       <Section id="reach" eyebrow="Or Reach Us Directly" title="Talk to the IBA Team">
-        <div className="pk-split">
-          <div className="pk-init">
-            <ul className="pk-lines">
-              {LINES.map((l) => (
-                <li key={l.label} data-rise>
-                  <span>{l.label}</span>
-                  <a href={l.href} {...(l.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : {})}>
-                    {l.value}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* one column (content review, 11-14): Email, WhatsApp and LinkedIn
+            as icons above the form, as in the Let's Talk form, rather than a
+            list beside it */}
+        <div className="cnx">
+          <ReachOut heading="Email, WhatsApp or LinkedIn" as="p" iconsOnly />
           <Form
             subject="Enquiry via indiablockchainalliance.org"
             submit="Submit Enquiry"

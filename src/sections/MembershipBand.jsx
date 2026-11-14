@@ -19,20 +19,14 @@ const SLIDES = [
   },
   {
     tag: 'Web360 Club',
-    title: 'Founder & Investor',
-    text: 'Investor relations, deal flow, advisory and international growth, from early builders to global leaders.',
-    href: '/membership#plans-club',
-  },
-  {
-    tag: 'Web360 Club',
-    title: 'Tokenization & Institutions',
-    text: 'Plans for tokenization businesses, issuers, vendors, platforms and institutions in tokenized markets.',
-    href: '/membership#plans-token',
+    title: 'Club, Premier & Gold Class',
+    text: 'Three Web3 Corridor memberships, each building on the last: advisory, funding readiness, visibility and a Dubai presence.',
+    href: '/membership#plans-web360',
   },
   {
     tag: 'India ↔ UAE',
     title: 'Indo–UAE Startup Xchange',
-    text: 'Market entry between India and the UAE: setup, compliance, introductions and a 12-week launch sprint.',
+    text: 'Gold Xchange: market entry between India and the UAE, with compliance clinics, introductions and a 12-week launch sprint.',
     href: '/membership#plans-xchange',
   },
   {

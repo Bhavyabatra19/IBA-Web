@@ -8,12 +8,14 @@
  *
  * ⚠ HELD BACK from the supplied folder, pending confirmation:
  *   nexus_nodes_logo.jpeg   the artwork reads "Matter Labs", not Nexus Nodes
- *   1632936119627.jpeg      an "eZ" mark with no name
  *   1739422591472.jpeg      an "A" mark with no name
  * ⚠ "Power" is matched to 1720871479371.jpeg (a power-button mark) by its
  *   look alone, confirm.
- * Ira Blocks, Aasthi, Unify Platform AG and Ztudium were supplied by IBA
- * separately; Ira Blocks and Ztudium are recoloured dark to read on white,
+ * Ira Blocks, Aasthi, Unify Platform AG, Ztudium, Block Intelligence,
+ * Zamindaar (the "eZ" mark) and Fab C Labs were supplied by IBA
+ * separately; the white or grey lettering of Ira Blocks, Ztudium, Block
+ * Intelligence and Fab C Labs is recoloured dark to read on white (Fab C
+ * Labs also loses its black ground and its tagline, unreadable at tile size),
  * and Unify uses its V mark alone, since the name sits beneath it.
  */
 
@@ -51,13 +53,13 @@ export const PARTNERS = [
      Ecosystem page only */
   { name: 'AgoraX' },
   { name: 'Ira Blocks', logo: '/logos/partners/ira-blocks.png' },
-  { name: 'Adlam' },
+  { name: 'AdLunam Inc' },
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
-  { name: 'Fab C Labs' },
+  { name: 'Fab C Labs', logo: '/logos/partners/fab-c-labs.png' },
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },
-  { name: 'Block Intelligence' },
+  { name: 'Block Intelligence', logo: '/logos/partners/block-intelligence.png' },
   { name: 'Ztudium', logo: '/logos/partners/ztudium.png' },
-  { name: 'Zamindaar' },
+  { name: 'Zamindaar', logo: '/logos/partners/zamindaar.png' },
   { name: 'Global Alliance for Ethical AI Innovation' },
 ]
 
