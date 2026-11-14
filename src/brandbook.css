@@ -13991,12 +13991,40 @@ img.ib__sectorIcon {
   height: 100%;
 }
 
-/* Membership hero: a subtle dark gradient in the family of the site's other
-   black panels (the charcoal diagonal of the About cards and the Tokenization
-   hero), with a soft red glow settling behind the card stack */
-.mbp #membership.pk-hero .pk-hero__panel {
+/* ==================================================================
+   The red light beam on every remaining black panel: the Connect,
+   Initiatives and Membership heroes, the home Membership band and the
+   footer take the same diagonal arc as the Corridor and About heroes,
+   so no black block on the site sits flat
+   ================================================================== */
+:is(#connect-page, #initiatives-page, #membership) .pk-hero__panel,
+#membership.pk-sec--dark .pk-sec__panel,
+.ft__panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #060607;
+}
+:is(#connect-page, #initiatives-page, #membership) .pk-hero__beam,
+#membership.pk-sec--dark .pk-sec__panel::before,
+.ft__panel::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background:
-    radial-gradient(65% 80% at 80% 70%, rgba(215, 25, 32, 0.06), rgba(215, 25, 32, 0) 75%),
-    radial-gradient(60% 60% at 10% 0%, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0) 70%),
-    linear-gradient(135deg, #1c1c1f 0%, #111111 50%, #0b0b0c 100%);
+    linear-gradient(
+      158deg,
+      transparent 44%,
+      rgba(150, 30, 42, 0.18) 52%,
+      rgba(200, 52, 62, 0.55) 58.5%,
+      rgba(150, 30, 42, 0.18) 64%,
+      transparent 72%
+    ),
+    radial-gradient(60% 55% at 92% 30%, rgba(120, 22, 34, 0.28), transparent 70%);
+  filter: blur(14px);
+  -webkit-mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
 }
