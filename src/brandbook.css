@@ -14092,7 +14092,7 @@ img.ib__sectorIcon {
 
 /* Home partner marquee: tall cards, each a big square logo with the
    partner's name under it. Every logo is the same size, in an identical
-   square box with no tile behind it, all in one grey scale. The rows'
+   square box, the original logos in black and white. The rows'
    movement is unchanged. */
 .eco .eco__marquee .eco__chip {
   box-sizing: border-box;
@@ -14113,12 +14113,12 @@ img.ib__sectorIcon {
   border-radius: 0;
   background: none;
   object-fit: contain;
-  /* every logo flattened to the same light grey (#d9d9d9) */
-  filter: brightness(0) invert(0.85);
-  opacity: 1;
+  /* the original logos, in black and white */
+  filter: grayscale(1);
+  opacity: 0.9;
 }
 .eco .eco__marquee .eco__chip:hover :is(.eco__logo, .eco__mono) {
-  filter: brightness(0) invert(1);
+  opacity: 1;
 }
 .eco .eco__marquee .eco__name {
   display: -webkit-box;

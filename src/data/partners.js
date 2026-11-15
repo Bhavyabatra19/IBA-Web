@@ -72,7 +72,3 @@ export const initials = (name) => {
   return w.length === 1 ? w[0].slice(0, 2).toUpperCase() : (w[0][0] + w[1][0]).toUpperCase()
 }
 
-/** the home marquee's version of a logo: a smooth, high-resolution,
-    light-grey silhouette with the background removed, built from the
-    original by scripts/logos-mono.sh */
-export const monoLogo = (p) => `/logos/mono/${p.logo.split('/').pop().replace(/\.\w+$/, '')}.png`

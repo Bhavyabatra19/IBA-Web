@@ -14,7 +14,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import { Go } from './service/ServiceBlocks'
-import { PARTNERS, monoLogo } from '../data/partners'
+import { PARTNERS } from '../data/partners'
 import { FACTS } from '../data/facts'
 
 /* the partners with a logo, from the shared list, in two rows that run
@@ -27,7 +27,7 @@ function Chip({ p, hidden }) {
   return (
     <li className="eco__chip" aria-hidden={hidden || undefined}>
       {p.logo ? (
-        <img className="eco__logo" src={monoLogo(p)} alt="" loading="lazy" decoding="async" />
+        <img className="eco__logo" src={p.logo} alt="" loading="lazy" decoding="async" />
       ) : (
         <span className={`eco__mono eco__mono--${p.tone}`} aria-hidden="true">
           {p.mono}
