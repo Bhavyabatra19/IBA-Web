@@ -8,7 +8,6 @@
  */
 
 import { PageHero, Section, Stats, Cards } from '../../components/Kit'
-import { CONTACT } from '../../nav'
 import FloatingCubes from '../../components/FloatingCubes'
 import VisionMission from '../../sections/VisionMission'
 import FounderLetter from '../../sections/FounderLetter'
@@ -125,7 +124,7 @@ export default function About() {
 
       <Section id="team" eyebrow="Founder" title="Welcome to IBA">
         <FounderLetter
-          linkedin={CONTACT.linkedin.href}
+          linkedin="https://www.linkedin.com/in/indieblock/"
           lead="Every great nation is defined by the infrastructure it chooses to build."
           /* condensed from the founder's message (11-06); the complete note
              opens from "Read the full note" */
