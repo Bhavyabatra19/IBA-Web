@@ -351,9 +351,11 @@ export const FOOTER = [
       { label: MEMBER_LOGIN, href: '/library#login' },
       { label: 'Newsletter signup', href: '/library#signup' },
       { label: 'Contact Us', href: '/connect' },
-      { label: 'LinkedIn', href: CONTACT.linkedin.href, external: true, icon: 'linkedin' },
+      /* the same three channels, in the same order, as the Let's Talk form
+         (by request, 11-15); the footer builds the WhatsApp link with waLink */
       { label: 'Email', href: CONTACT.email.href, icon: 'email' },
-      { label: 'Phone', href: CONTACT.phone.href, icon: 'phone' },
+      { label: 'WhatsApp', href: 'https://wa.me/' + CONTACT.whatsapp.number, external: true, icon: 'whatsapp' },
+      { label: 'LinkedIn', href: CONTACT.linkedin.href, external: true, icon: 'linkedin' },
     ],
   },
 ]

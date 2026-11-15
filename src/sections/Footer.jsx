@@ -10,34 +10,14 @@
 import { FOOTER, PENDING } from '../nav'
 import { scrollToId, scrollToTop } from '../lib/scroll'
 import { navigate, parseHref } from '../lib/router'
+import { waLink } from '../enquiry'
 
-/* the contact icons, drawn on a 24 grid in currentColor */
+/* the contact icons: the red-lit glass circles of the Let's Talk form
+   (by request, 11-15), so the two rows match */
 const ICONS = {
-  linkedin: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4v11H3v-11Zm6.5 0h3.8v1.5h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.65 4.77 6.1v5.45h-4v-4.83c0-1.15-.02-2.63-1.6-2.63-1.6 0-1.85 1.25-1.85 2.55v4.91h-4v-11Z"
-      />
-    </svg>
-  ),
-  email: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="5" width="18" height="14" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-      <path d="m3.5 6.5 8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-    </svg>
-  ),
-  phone: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-    </svg>
-  ),
+  email: '/images/contact/glass-email.png',
+  whatsapp: '/images/contact/glass-whatsapp.png',
+  linkedin: '/images/contact/glass-linkedin.png',
 }
 
 export default function Footer() {
@@ -89,12 +69,12 @@ export default function Footer() {
                   {col.items.filter((it) => it.icon).map((it) => (
                     <li key={it.label}>
                       <a
-                        href={it.href}
+                        href={it.icon === 'whatsapp' ? waLink() : it.href}
                         aria-label={it.label}
                         title={it.label}
                         {...(it.external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
                       >
-                        {ICONS[it.icon]}
+                        <img src={ICONS[it.icon]} alt="" width="48" height="48" loading="lazy" decoding="async" />
                       </a>
                     </li>
                   ))}
