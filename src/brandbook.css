@@ -14090,20 +14090,54 @@ img.ib__sectorIcon {
   mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
 }
 
-/* Home partner marquee: every logo the same size, a little bigger, in an
-   identical square box with no tile behind it, all in one grey scale */
+/* Home partner marquee: tall cards, each a big square logo with the
+   partner's name under it. Every logo is the same size, in an identical
+   square box with no tile behind it, all in one grey scale. The rows'
+   movement is unchanged. */
+.eco .eco__marquee .eco__chip {
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 148px;
+  margin-right: 14px;
+  padding: 12px 12px 14px;
+}
 .eco .eco__marquee :is(.eco__logo, .eco__mono) {
   box-sizing: border-box;
-  width: 46px;
-  height: 46px;
-  padding: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0;
   background: none;
   object-fit: contain;
-  filter: grayscale(1) contrast(1.05) brightness(1.05);
-  opacity: 0.85;
+  filter: grayscale(1) contrast(1.05) brightness(1.08);
+  opacity: 0.9;
 }
 .eco .eco__marquee .eco__chip:hover :is(.eco__logo, .eco__mono) {
   opacity: 1;
+}
+.eco .eco__marquee .eco__name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.5em;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+}
+@media (max-width: 640px) {
+  .eco .eco__marquee .eco__chip {
+    width: 120px;
+    margin-right: 10px;
+    padding: 10px 10px 12px;
+  }
+  .eco .eco__marquee .eco__name {
+    font-size: 13px;
+  }
 }

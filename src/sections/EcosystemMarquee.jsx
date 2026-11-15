@@ -27,7 +27,7 @@ function Chip({ p, hidden }) {
   return (
     <li className="eco__chip" aria-hidden={hidden || undefined}>
       {p.logo ? (
-        <img className="eco__logo" src={p.logo} alt="" loading="lazy" decoding="async" />
+        <img className="eco__logo" src={p.mark || p.logo} alt="" loading="lazy" decoding="async" />
       ) : (
         <span className={`eco__mono eco__mono--${p.tone}`} aria-hidden="true">
           {p.mono}
