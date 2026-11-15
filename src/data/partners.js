@@ -23,43 +23,40 @@
  */
 
 const L = (f) => `/logos/partners/${f}.jpg`
-/* `mark`: a cut-out copy of the logo (baked-in background removed) used in
-   the home marquee, where the logos sit straight on the glass */
-const M = (f) => `/logos/cutout/${f}.png`
 
 export const PARTNERS = [
   { name: 'TheBlock.', logo: '/logos/eco/theblock-ae.png' },
-  { name: 'Tokenized Asset Foundation', logo: L('token-asset-foundation'), mark: M('token-asset-foundation'), url: 'https://stofdn.com/' },
-  { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png', mark: M('zoniqx-com'), url: 'https://www.zoniqx.com/' },
-  { name: 'Integra', logo: L('integra'), mark: M('integra') },
-  { name: 'Kula', logo: L('kula'), mark: M('kula') },
-  { name: 'T-Hub', logo: '/logos/eco/t-hub-co.png', mark: M('t-hub-co'), url: 'https://t-hub.co/' },
-  { name: 'India AI Alliance', logo: L('india-ai-alliance'), mark: M('india-ai-alliance'), url: 'https://indiaaialliance.org/' },
-  { name: 'Payomatix', logo: L('payomatix'), mark: M('payomatix') },
-  { name: 'Enlighten Capital', logo: L('enlighten-capital'), mark: M('enlighten-capital') },
-  { name: 'Indian Startup Premier League', logo: L('ispl'), mark: M('ispl') },
-  { name: 'Enterprise Quotient', logo: L('enterprise-quotient'), mark: M('enterprise-quotient') },
-  { name: 'NaapBooks', logo: L('naapbooks'), mark: M('naapbooks') },
-  { name: 'Edon Global', logo: L('edon-global'), mark: M('edon-global') },
-  { name: 'HYPE Ventures', logo: L('hype-ventures'), mark: M('hype-ventures') },
-  { name: 'Zerodots', logo: L('zerodots'), mark: M('zerodots') },
-  { name: 'Uttung GCC', logo: L('uttung'), mark: M('uttung') },
-  { name: 'Eyekyam', logo: L('eyekyam'), mark: M('eyekyam') },
-  { name: 'Immverse AI', logo: L('immverse-ai'), mark: M('immverse-ai') },
-  { name: 'Mythyaverse', logo: L('mythyaverse'), mark: M('mythyaverse') },
-  { name: 'Power', logo: L('power'), mark: M('power') },
-  { name: 'Web5 Nexus', logo: L('web5-nexus'), mark: M('web5-nexus') },
-  { name: 'ArthaChain', logo: L('arthachain'), mark: M('arthachain') },
-  { name: 'Edza AI', logo: L('edza-ai'), mark: M('edza-ai') },
-  { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund'), mark: M('inner-compass-impact-fund') },
+  { name: 'Tokenized Asset Foundation', logo: L('token-asset-foundation'), url: 'https://stofdn.com/' },
+  { name: 'Zoniqx', logo: '/logos/eco/zoniqx-com.png', url: 'https://www.zoniqx.com/' },
+  { name: 'Integra', logo: L('integra') },
+  { name: 'Kula', logo: L('kula') },
+  { name: 'T-Hub', logo: '/logos/eco/t-hub-co.png', url: 'https://t-hub.co/' },
+  { name: 'India AI Alliance', logo: L('india-ai-alliance'), url: 'https://indiaaialliance.org/' },
+  { name: 'Payomatix', logo: L('payomatix') },
+  { name: 'Enlighten Capital', logo: L('enlighten-capital') },
+  { name: 'Indian Startup Premier League', logo: L('ispl') },
+  { name: 'Enterprise Quotient', logo: L('enterprise-quotient') },
+  { name: 'NaapBooks', logo: L('naapbooks') },
+  { name: 'Edon Global', logo: L('edon-global') },
+  { name: 'HYPE Ventures', logo: L('hype-ventures') },
+  { name: 'Zerodots', logo: L('zerodots') },
+  { name: 'Uttung GCC', logo: L('uttung') },
+  { name: 'Eyekyam', logo: L('eyekyam') },
+  { name: 'Immverse AI', logo: L('immverse-ai') },
+  { name: 'Mythyaverse', logo: L('mythyaverse') },
+  { name: 'Power', logo: L('power') },
+  { name: 'Web5 Nexus', logo: L('web5-nexus') },
+  { name: 'ArthaChain', logo: L('arthachain') },
+  { name: 'Edza AI', logo: L('edza-ai') },
+  { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
   { name: 'nGRND' },
-  { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation'), mark: M('velocity-network-foundation') },
+  { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
   { name: 'TheCircle', logo: '/logos/partners/thecircle.png', url: 'https://the-block.com/the-circle/' },
   /* added later; the ones still without a logo show monograms on the
      Ecosystem page only */
   { name: 'AgoraX' },
   { name: 'Ira Blocks', logo: '/logos/partners/ira-blocks.png' },
-  { name: 'AdLunam Inc', logo: '/logos/partners/adlunam.png', mark: M('adlunam') },
+  { name: 'AdLunam Inc', logo: '/logos/partners/adlunam.png' },
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
   { name: 'Fab C Labs', logo: '/logos/partners/fab-c-labs.png' },
   { name: 'Unify Platform AG', logo: '/logos/partners/unify-platform.png' },
@@ -74,3 +71,8 @@ export const initials = (name) => {
   const w = name.replace(/[^A-Za-z0-9& ]/g, '').split(' ').filter(Boolean)
   return w.length === 1 ? w[0].slice(0, 2).toUpperCase() : (w[0][0] + w[1][0]).toUpperCase()
 }
+
+/** the home marquee's version of a logo: a smooth, high-resolution,
+    light-grey silhouette with the background removed, built from the
+    original by scripts/logos-mono.sh */
+export const monoLogo = (p) => `/logos/mono/${p.logo.split('/').pop().replace(/\.\w+$/, '')}.png`
