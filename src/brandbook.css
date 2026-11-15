@@ -14089,3 +14089,21 @@ img.ib__sectorIcon {
   -webkit-mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
   mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
 }
+
+/* Home partner marquee: every logo the same size, a little bigger, in an
+   identical square box with no tile behind it, all in one grey scale */
+.eco .eco__marquee :is(.eco__logo, .eco__mono) {
+  box-sizing: border-box;
+  width: 46px;
+  height: 46px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0;
+  background: none;
+  object-fit: contain;
+  filter: grayscale(1) contrast(1.05) brightness(1.05);
+  opacity: 0.85;
+}
+.eco .eco__marquee .eco__chip:hover :is(.eco__logo, .eco__mono) {
+  opacity: 1;
+}
