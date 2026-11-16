@@ -359,3 +359,37 @@ a { color: inherit; }
 .choose__grid h2 { font-size: 26px; margin: 8px 0 4px; }
 .choose__grid p { margin: 0 0 18px; color: var(--on-black); font-size: 14px; }
 .choose__grid .open { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); }
+
+/* ---------------------------------------------------------------- */
+/* benefits in full (paginated by brochure.js)                       */
+/* ---------------------------------------------------------------- */
+.flow { display: block; }
+.bgrp {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 3cqw;
+  margin: 3cqw 0 0;
+  padding: 1.6cqw 0 1.4cqw;
+  border-bottom: 1px solid var(--ink);
+}
+.flow > .bgrp:first-child,
+.flow > p + .bgrp { margin-top: 1cqw; }
+.bgrp span { font-size: 2.1cqw; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+.bgrp em { font-style: normal; font-size: 1.8cqw; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.bi { display: grid; grid-template-columns: 6cqw 1fr; gap: 2cqw; padding: 1.75cqw 0; border-bottom: 1px solid var(--line); }
+.bi__n { font-size: 2.3cqw; color: var(--red); padding-top: 0.3cqw; }
+.bi h4 { font-size: 2.9cqw; line-height: 1.3; margin: 0 0 0.6cqw; }
+.bi p { margin: 0; font-size: 2.25cqw; line-height: 1.45; color: var(--muted); }
+.tag { display: inline-block; vertical-align: 0.2cqw; margin-left: 1cqw; font-size: 1.6cqw; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-deep); background: #fdeaea; padding: 0.5cqw 1.4cqw; border-radius: 4px; }
+
+/* picture page ---------------------------------------------------- */
+.fill { padding: 0; background: var(--black); color: #fff; }
+.fill img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+.fill blockquote { position: relative; margin: auto 8cqw 6cqw; font-size: 5.4cqw; line-height: 1.2; border-left: 1.2cqw solid var(--red); padding-left: 4cqw; }
+.fill cite { display: block; font-style: normal; font-size: 1.9cqw; letter-spacing: 0.2em; text-transform: uppercase; color: var(--on-black); margin-top: 2.4cqw; }
+.fill .pg__foot { position: relative; margin: 0 8cqw; border-top-color: #444; color: var(--on-black); }
+
+/* price breakdown -------------------------------------------------- */
+.price__list li { display: flex; align-items: baseline; }
+.price__list li span { margin-left: auto; color: #fff; font-size: 2.4cqw; }

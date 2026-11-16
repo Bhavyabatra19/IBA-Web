@@ -110,3 +110,135 @@ window.W3C = {
     ['TheBlock Level 1 pack', false, false, true],
   ],
 }
+
+/* ------------------------------------------------------------------
+   Every benefit, in full, by theme (by request, 11-16-2026: each tier's
+   brochure and welcome letter lists everything that tier includes, never
+   "everything in the tier below, plus").
+
+   Built from the membership matrix (which tier gets what) and the tier
+   copy on the website (what each benefit is). Per tier: true = included,
+   a string = included with that detail (shown as a tag), false or
+   missing = not included. A description can differ by tier (dByTier).
+   ------------------------------------------------------------------ */
+window.W3C.groups = [
+  {
+    name: 'Verified Identity & Secure Access',
+    items: [
+      { t: 'Verified Club badge', d: 'An official, verified Web3 Corridor member badge for your website, pitch deck and profiles, showing your organisation has been verified by IBA.', club: true, premier: true, gold: true },
+      { t: 'IBA SafeVault', d: 'A secure data room for your corporate documents, with your KYC/KYB verification held in one place and ready to share with investors and partners.', club: true, premier: true, gold: true },
+      { t: 'Global member and partner directory', d: 'A listing in, and access to, the global directory of Web3 Corridor members and partners, so the right people can find you and you can find them.', club: true, premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Strategic Advisory & Growth',
+    items: [
+      { t: 'Go-to-market (GTM) blueprint', d: 'A go-to-market blueprint for your product: target markets, positioning, channels and launch priorities.', club: true, premier: true, gold: true },
+      { t: 'Product advisory', d: 'Advisory on your product blueprint and lifecycle, your expansion strategy and your business plan.', club: true, premier: true, gold: true },
+      { t: 'Regulatory mentoring', d: 'Mentoring on the regulatory framework that applies to your business in India, the UAE and the markets you plan to enter.', club: true, premier: true, gold: true },
+      { t: 'Expert Board Advisor', d: 'Six months of support from an expert advisor alongside your board, bringing strategic mentoring and business growth planning.', premier: '6 months', gold: '6 months' },
+      { t: 'Advisor on Board: KPI and milestone reviews', d: 'Regular strategy sessions with reviews of your KPIs and milestones, so progress is tracked and corrected early.', premier: true, gold: true },
+      { t: 'Market readiness assessment', d: 'A structured assessment of how ready you are to enter a new market, and the gaps to close before you launch.', premier: true, gold: true },
+      { t: 'Business set-up blueprint', d: 'A blueprint for setting up your business in a new market: the structure, the requirements and the steps in order.', premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Funding & Investment Readiness',
+    items: [
+      { t: 'Funding preparation and assistance', d: 'Growth advisory, reviews of your pitch deck and business plan, and funding preparation tailored to your stage.', club: true, premier: true, gold: true },
+      { t: 'Mock investor committee', d: 'Pitch to a mock investor committee and get candid feedback before you meet real investors.', premier: true, gold: true },
+      { t: 'Blockchain grant advisory', d: 'Advice and information on blockchain grants and non-dilutive funding opportunities that fit your project.', premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Networking, Events & Global Exposure',
+    items: [
+      { t: 'Member roundtables and the members’ roundup', d: 'Invitations to curated member roundtables, and the members’ roundup: a regular digest of members, news and opportunities across the corridor.', club: '2 a year', premier: '4 a year', gold: '6 a year' },
+      { t: 'Web3 Corridor introductions and promotions', d: 'Introductions into Web3 Corridor programmes and promotions across India, the UAE and the corridor’s partner markets.', club: true, premier: true, gold: true },
+      { t: 'Dubai co-hosted event privileges', d: 'Privileged packages and special pricing for events IBA co-hosts in Dubai.', club: true, premier: true, gold: true },
+      { t: 'Industry event passes', d: '', dByTier: { premier: 'Subsidised passes to selected industry events, on request.', gold: 'Full-service event access through TheBlock Connect, including passes to selected industry events.' }, premier: 'Subsidised', gold: 'Full service' },
+      { t: 'Member pricing', d: 'Preferential member pricing on Web3 Corridor services and products.', club: true, premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Visibility & Thought Leadership',
+    items: [
+      { t: 'IBA promotion and LinkedIn spotlight', d: 'Promotion through IBA’s channels, including a member spotlight on IBA’s LinkedIn.', club: true, premier: true, gold: true },
+      { t: 'Startup podcast and media visibility', d: 'Appearances on startup podcasts and exposure through IBA’s media partners.', premier: true, gold: true },
+      { t: 'White paper publishing support', d: 'Support to write, refine and publish your white paper.', premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Talent & Technical Enablement',
+    items: [
+      { t: 'IBA talent pool', d: 'Priority access to the IBA talent pool when you hire for technical and business roles.', premier: true, gold: true },
+      { t: 'Technical interns on request', d: 'Technical interns placed with your team on request, to support innovation and execution.', premier: true, gold: true },
+    ],
+  },
+  {
+    name: 'Dubai Presence & Institutional Access',
+    items: [
+      { t: 'Dubai Web3 Experience Center', d: 'Access to full-service business facilities, professional office space and operational support at Dubai’s World Trade Centre.', gold: true },
+      { t: 'Business establishment and market access', d: 'Dedicated support to establish your Dubai presence, run business operations there, and build strategic partnerships for cross-border expansion.', gold: true },
+      { t: 'Tokenization launch and ecosystem enablement', d: 'Privileged access to IBA’s premier Dubai partner, TheBlock, and its ecosystem for tokenization launches, industry showcases, curated events and strategic networking.', gold: true },
+      { t: 'Institutional connections', d: 'Executive networking, enhanced brand positioning and media exposure, and curated introductions to investors, institutions and Web3 ecosystem leaders through the Web3 Corridor.', gold: true },
+    ],
+  },
+  {
+    name: 'Corridor Partner Benefits',
+    items: [
+      { t: 'TheCircle Global Member benefits', d: 'TheCircle’s Global Member benefits, through IBA’s corridor partnership.', club: true, premier: true, gold: true },
+      { t: 'TheBlock Connect benefits', d: 'TheBlock’s Connect benefits in Dubai, through IBA’s corridor partnership.', club: true, premier: true, gold: true },
+      { t: 'TheCircle Level 1 pack', d: 'TheCircle’s Level 1 membership pack, included in your membership.', premier: true, gold: true },
+      { t: 'TheBlock Level 1 pack', d: 'TheBlock’s Level 1 membership pack, included in your membership.', gold: true },
+    ],
+  },
+]
+
+/* Gold Xchange, in full */
+window.W3C.xgroups = [
+  {
+    name: 'The Launch Programme',
+    items: [
+      { t: '12-week launch sprint', d: 'A structured three-phase programme to validate, build and launch your business in the other market.' },
+      { t: 'India → UAE or UAE → India track', d: 'A dedicated track for your direction of expansion, with programme content built around it.' },
+      { t: 'Named corridor concierge', d: 'One named point of contact who coordinates your programme, introductions and requests from start to finish.' },
+    ],
+  },
+  {
+    name: 'Market Entry',
+    items: [
+      { t: 'Network and ecosystem orientation', d: 'A structured introduction to your target market’s ecosystem: the regulators, investors, partners and service providers who matter.' },
+      { t: 'Compliance clinics', d: 'Working sessions on the regulatory and compliance requirements for entering your target market.' },
+      { t: 'Market-entry support and partner navigation', d: 'Guidance on setting up in the target market and choosing the right partners and service providers.' },
+    ],
+  },
+  {
+    name: 'Network & Community',
+    items: [
+      { t: 'Curated introductions', d: 'Introductions to investors, partners, customers and advisors, matched to your goals.' },
+      { t: 'Founder community across both markets', d: 'A community of founders building between India and the UAE, to share contacts, lessons and opportunities.' },
+      { t: 'Member events and briefings', d: 'Invitations to Startup Xchange member events and market briefings in both markets.' },
+    ],
+  },
+  {
+    name: 'Launch & Landing',
+    items: [
+      { t: 'Demo day and soft-landing support', d: 'Present to investors and partners at demo day, with support as you land and operate in the new market.' },
+    ],
+  },
+]
+
+/* every benefit a tier includes, in full: [{ name, items: [{ t, d, tag }] }] */
+window.W3C.benefitsFor = function (key) {
+  if (key === 'xchange') return window.W3C.xgroups.map((g) => ({ name: g.name, items: g.items.map((i) => ({ t: i.t, d: i.d, tag: '' })) }))
+  return window.W3C.groups
+    .map((g) => ({
+      name: g.name,
+      items: g.items
+        .filter((i) => i[key])
+        .map((i) => ({ t: i.t, d: (i.dByTier && i.dByTier[key]) || i.d, tag: typeof i[key] === 'string' ? i[key] : '' })),
+    }))
+    .filter((g) => g.items.length)
+}
+window.W3C.countFor = (key) => window.W3C.benefitsFor(key).reduce((n, g) => n + g.items.length, 0)

@@ -108,12 +108,23 @@ function letter(key) {
     ...(t.servicePartners ? [para(['Service partners: ', { b: t.servicePartners }], { spacing: { after: 40 } })] : []),
     para(['Member ID: ', { ph: 'Member ID' }], { spacing: { after: 240 } }),
 
-    para([`Your ${t.name} membership includes:`], { spacing: { after: 60 } }),
-    para([t.includes], { run: { size: 18, color: MUTED }, spacing: { after: 120 } }),
-    ...t.benefits.map((b) => bullet(b.d ? [{ b: b.t }, ` — ${b.d}`] : [b.t])),
-    ...(xch
-      ? []
-      : [para([{ b: 'Corridor partner benefits: ' }, W3C.partners.map((p) => `${p.partner} ${p.benefit}`).join(' · '), '.'], { spacing: { before: 120, after: 240 } })]),
+    /* every benefit the tier includes, in full: each letter stands on its
+       own and never refers to another tier (by request, 11-16-2026) */
+    para([{ b: 'Your benefits in full' }], { run: { size: 26 }, spacing: { before: 120, after: 80 } }),
+    para([`As a ${t.name} member you have access to all ${W3C.countFor(key)} benefits below, for the full term of your membership.`], { spacing: { after: 160 } }),
+    ...W3C.benefitsFor(key).flatMap((g) => [
+      new Paragraph({
+        keepNext: true,
+        spacing: { before: 200, after: 80 },
+        border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: INK, space: 2 } },
+        children: [
+          new TextRun({ text: g.name.toUpperCase(), color: RED, size: 17, characterSpacing: 30 }),
+          new TextRun({ text: `   ${g.items.length} ${g.items.length === 1 ? 'benefit' : 'benefits'}`, color: MUTED, size: 15 }),
+        ],
+      }),
+      ...g.items.map((b) => bullet([{ b: b.t }, ...(b.tag ? [{ red: ` (${b.tag})` }] : []), ` — ${b.d}`])),
+    ]),
+    para([''], { spacing: { after: 120 } }),
 
     para([{ b: 'To complete your onboarding, please take the following steps:' }], { spacing: { before: 200, after: 120 } }),
     step([{ b: 'Complete your member onboarding. ' }, 'Fill in the onboarding form so we can set up your membership, verify your organisation (KYC/KYB) and create your member directory profile: ', { ph: 'onboarding form link' }]),

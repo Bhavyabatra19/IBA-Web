@@ -19,6 +19,14 @@ This folder sits outside `public/`, so none of it is deployed to the website.
 | `pdf/` | Blank PDF exports of each template. |
 | `assets/tiers.js` | Tier data. Benefit text comes from `src/components/CorridorPlans.jsx`; prices and service partners come from the IBA Membership Matrix (“updated matrix” sheet, 13 Nov). If either source changes, update this file to match. |
 
+## Every document stands on its own
+
+A member or prospect only ever receives the brochure and letter for their own tier. So each one lists every benefit that tier includes, in full, with a description. None of them refers to another tier (no "everything in Club Class, plus…").
+
+The full list lives in `assets/tiers.js`: `W3C.groups` holds the Web360 Club benefits and marks which tiers include each one, `W3C.xgroups` holds Gold Xchange, and `W3C.benefitsFor(tier)` returns one tier's complete list. The brochures, the HTML letter and the Word letters all read from it. Club has 14 benefits, Premier 26, Gold 31 and Gold Xchange 10.
+
+`membership-benefits.html` is the one exception. It is a side-by-side comparison of the tiers.
+
 ## Prices (from the IBA Membership Matrix, US$ per year)
 
 Club Class $2,500 · Premier Class $5,000 · Gold Class $10,000 · Gold Xchange $15,000.
