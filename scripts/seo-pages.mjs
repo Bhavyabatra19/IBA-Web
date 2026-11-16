@@ -29,6 +29,79 @@ await vite.close()
 const esc = (v) =>
   String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
+/* each page's short name, for the breadcrumb trail Google shows under a
+   result ("indiablockchainalliance.org › Red Club › Institutions") */
+const NAMES = {
+  '/about': 'About',
+  '/expertise': 'Expertise',
+  '/tokenization': 'Tokenization',
+  '/ecosystem': 'Ecosystem',
+  '/initiatives': 'Initiatives',
+  '/corridor': 'Web3 Corridor',
+  '/membership': 'Membership',
+  '/red-club': 'Red Club',
+  '/red-club/institutions': 'For Institutions',
+  '/red-club/learners': 'For Learners',
+  '/library': 'Library',
+  '/connect': 'Contact',
+  '/privacy': 'Privacy Policy',
+}
+
+/* the services IBA offers, described for Google on the pages that sell them */
+const SERVICES = {
+  '/expertise': { name: 'Web3 Advisory and Consulting', type: 'Web3 advisory, compliance and market expansion consulting' },
+  '/tokenization': { name: 'Real-World Asset Tokenization', type: 'Asset tokenization advisory' },
+  '/corridor': { name: 'Web3 Corridor Market Entry', type: 'Cross-border market entry and expansion' },
+}
+
+/* structured data for one page: the page itself, its breadcrumb trail and,
+   where it applies, the service it describes; all tied to the Organization
+   in index.html by its @id */
+const schema = (path, { title, description }) => {
+  const url = SITE_URL + path
+  const org = { '@id': `${SITE_URL}/#organization` }
+  const graph = [
+    {
+      '@type': 'WebPage',
+      '@id': `${url}#webpage`,
+      url,
+      name: title,
+      description,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      about: org,
+      inLanguage: 'en',
+    },
+  ]
+  if (path !== '/') {
+    const parts = path.split('/').filter(Boolean)
+    const crumbs = [{ name: 'Home', url: `${SITE_URL}/` }].concat(
+      parts.map((_, i) => {
+        const p = '/' + parts.slice(0, i + 1).join('/')
+        return { name: NAMES[p] || p, url: SITE_URL + p }
+      }),
+    )
+    graph.push({
+      '@type': 'BreadcrumbList',
+      itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })),
+    })
+    graph[0].breadcrumb = { '@id': `${url}#breadcrumb` }
+    graph[1]['@id'] = `${url}#breadcrumb`
+  }
+  if (SERVICES[path]) {
+    graph.push({
+      '@type': 'Service',
+      name: SERVICES[path].name,
+      serviceType: SERVICES[path].type,
+      description,
+      url,
+      provider: org,
+      areaServed: ['India', 'United Arab Emirates', 'Europe', 'Africa', 'Americas'],
+    })
+  }
+  /* "<" escaped so nothing in the text can close the script tag */
+  return `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c')}</script>`
+}
+
 const tags = (path, { title, description, noindex }) => {
   const url = SITE_URL + path
   return [
@@ -48,6 +121,7 @@ const tags = (path, { title, description, noindex }) => {
     `<meta name="twitter:title" content="${esc(title)}" />`,
     `<meta name="twitter:description" content="${esc(description)}" />`,
     `<meta name="twitter:image" content="${esc(OG_IMAGE)}" />`,
+    schema(path, { title, description }),
   ]
     .filter(Boolean)
     .join('\n    ')

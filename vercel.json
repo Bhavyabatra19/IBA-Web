@@ -363,7 +363,7 @@
       "destination": "/privacy/index.html"
     },
     {
-      "source": "/((?!api/|admin/).*)",
+      "source": "/((?!api/|admin/|_vercel/).*)",
       "destination": "/index.html"
     }
   ]

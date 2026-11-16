@@ -25,6 +25,8 @@ import Privacy from './pages/site/Privacy'
 import ReviewBar from './components/ReviewBar'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
+import { initAnalytics, pageview } from './lib/analytics'
+import ConsentBanner from './components/ConsentBanner'
 import { SEO } from './seo'
 import {
   initSmoothScroll,
@@ -81,6 +83,11 @@ export default function App() {
      layout effect so the title has changed before the new page paints; a reader
      watching the tab should not see the old page's name on the new one. */
   useLayoutEffect(() => applySeo(path), [path])
+
+  /* analytics: started once, then one page view per route (after applySeo,
+     so the view carries the new page's title) */
+  useEffect(() => initAnalytics(), [])
+  useEffect(() => pageview(path), [path])
 
   /* A pinned hero cannot be restored into halfway through, the browser would
      drop the reader into the middle of the sequence with no way to read it. */
@@ -177,6 +184,7 @@ export default function App() {
           control on the site goes through, so it must not be inside the tree
           App remounts on a route change. */}
       <Enquiry />
+      <ConsentBanner />
       {import.meta.env.VITE_ARTIFACT === '1' && <ReviewBar />}
     </>
   )

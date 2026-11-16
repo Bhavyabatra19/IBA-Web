@@ -273,7 +273,7 @@ export default function Nav() {
       >
         <div className="nav__bar">
           <a className="nav__brand" href="/" onClick={(e) => go(e, '/')}>
-            <img src="/iba-logo-blocks.png" alt="India Blockchain Alliance home page" />
+            <img src="/iba-logo-blocks.webp" alt="India Blockchain Alliance home page" width="360" height="334" />
           </a>
 
           <nav className="nav__tabs" aria-label="Primary">
