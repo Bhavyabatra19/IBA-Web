@@ -54,6 +54,13 @@
   .ps { margin-top: 6mm; font-size: 8.8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
   .ps b { color: var(--ink); }
   .sheet__body { padding-top: 9mm; }
+  /* blank-lines mode: each [placeholder] becomes a line to write on, with
+     what goes there in small capitals underneath */
+  .blank { display: inline-block; height: 1.1em; border-bottom: 0.8px solid #0e0e0e; vertical-align: baseline; position: relative; margin: 0 0.6mm; }
+  .blank::after { content: attr(data-l); position: absolute; left: 0; top: calc(100% + 0.3mm); font-size: 5pt; line-height: 1; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8a8a; white-space: nowrap; font-weight: 400; }
+  .hello .blank { border-bottom-color: var(--red); }
+  body.blanks .letter p { line-height: 1.95; }
+  body.blanks .addr { line-height: 2.3; }
 </style>
 </head>
 <body>
@@ -74,6 +81,7 @@
   <label>Instalments
     <select id="iInst"><option>1</option><option>2</option><option selected>3</option><option>4</option></select>
   </label>
+  <label><input type="checkbox" id="blanks"> Blank lines to fill by hand</label>
   <button type="button" id="clean">Hide highlights</button>
   <button type="button" class="primary" onclick="window.print()">Print / Save PDF</button>
   <span class="bar__hint">The plan sets the annual dues from the IBA Membership Matrix (US$); overwrite them for a negotiated rate or another currency. The toolbar fields fill in every mention in the letter. Everything tinted on the page can be edited directly. Print with A4, margins “None”, “Background graphics” on.</span>
@@ -97,7 +105,7 @@
       </div>
       <div class="ref">
         <p class="label">Date · reference</p>
-        <div contenteditable="true">16 November 2026<br>Member ID W3C-<span data-f="code">GLD</span>-0001</div>
+        <div contenteditable="true" id="refBlock">16 November 2026<br>Member ID W3C-<span data-f="code">GLD</span>-0001</div>
       </div>
     </div>
 
@@ -116,7 +124,7 @@
       </div>
       <div class="member__facts">
         <div><p class="label">Programme</p><div class="v" data-f="prog">Web360 Club</div></div>
-        <div><p class="label">Term</p><div class="v" contenteditable="true">[01 Dec 2026 – 30 Nov 2027]</div></div>
+        <div><p class="label">Term</p><div class="v" contenteditable="true" id="termV">[01 Dec 2026 – 30 Nov 2027]</div></div>
         <div><p class="label">Annual dues</p><div class="v" data-f="dues"></div></div>
         <div><p class="label">Payable</p><div class="v" data-f="payable"></div></div>
       </div>
@@ -190,6 +198,7 @@
   function apply() {
     const key = $('tier').value
     const t = W3C.tiers[key]
+    SWAP.forEach(([sel, off, blank]) => ($(sel.slice(1)).innerHTML = BLANKS() ? blank : off))
     set('tier', t.name)
     set('tierUp', t.name.toUpperCase())
     set('tagline', t.tagline)
@@ -206,6 +215,7 @@
       .map((b) => `<li><b>${b.t}</b>${b.d ? ' — <span>' + b.d + '</span>' : ''}</li>`)
       .join('')
     $('partners').hidden = key === 'xchange'
+    if (BLANKS()) toBlanks(true)
   }
 
   /* dues: list price for the plan unless someone has typed their own */
@@ -236,12 +246,53 @@
       const more = n - 1 === 1 ? 'one further instalment' : `${n - 1} further instalments`
       tail = `${co} will make the first payment of <b>${amt}</b> today, and the balance is payable in ${more} of <b>${total ? fmt(base) : '[amount]'}</b> on ${list}, as set out in your invoice.`
     }
+    if (BLANKS()) {
+      tail = `${co} will make the first payment of <b>[amount]</b> on [date], and the balance is payable in [no.] further instalments of <b>[amount]</b> on [dates], as set out in your invoice.`
+    }
     $('payPara').innerHTML = `It was a pleasure speaking with you again today. As discussed, we will lock in your ${tier} membership dues of <b>${dues} per year</b>. ${tail}`
-    set('first', amt)
-    set('payable', n === 1 ? 'In full on activation' : `In ${n} instalments`)
+    set('first', BLANKS() ? '[amount]' : amt)
+    set('payable', BLANKS() ? 'In [no.] instalments' : n === 1 ? 'In full on activation' : `In ${n} instalments`)
+  }
+
+  /* blank-lines mode ------------------------------------------------ */
+  const BLANKS = () => $('blanks').checked
+  const WIDTH = { 'first name': 30, 'last name': 32, title: 28, 'company name': 46, 'city, country': 40, date: 28, 'no.': 9, amount: 24, dates: 44, 'start date': 26, 'end date': 26, number: 14, 'onboarding form link': 60, 'payment link': 56, name: 32, phone: 32, '2': 6 }
+  const SWAP = [
+    ['#refBlock', '16 November 2026<br>Member ID W3C-<span data-f="code"></span>-0001', '[date]<br>Member ID W3C-<span data-f="code"></span>-[number]'],
+    ['#termV', '[01 Dec 2026 – 30 Nov 2027]', '[start date] – [end date]'],
+  ]
+  function toBlanks(on) {
+    if (!on) {
+      document.querySelectorAll('.sheet .blank').forEach((b) => b.replaceWith(`[${b.dataset.o}]`))
+      return
+    }
+    const walk = document.createTreeWalker(document.querySelector('body'), NodeFilter.SHOW_TEXT)
+    const hits = []
+    while (walk.nextNode()) if (/\[[^\]]+\]/.test(walk.currentNode.nodeValue) && walk.currentNode.parentElement.closest('.sheet')) hits.push(walk.currentNode)
+    hits.forEach((node) => {
+      const frag = document.createDocumentFragment()
+      node.nodeValue.split(/(\[[^\]]+\])/).forEach((part) => {
+        const m = part.match(/^\[([^\]]+)\]$/)
+        if (!m) return part && frag.append(part)
+        const label = m[1].toLowerCase()
+        const span = document.createElement('span')
+        span.className = 'blank'
+        span.dataset.l = label
+        span.dataset.o = m[1]
+        span.style.width = (WIDTH[label] || Math.max(22, label.length * 2.4)) + 'mm'
+        frag.append(span)
+      })
+      node.replaceWith(frag)
+    })
   }
 
   ;['tier', 'iName', 'iCo', 'iDues', 'iInst'].forEach((id) => $(id).addEventListener('input', apply))
+  $('blanks').addEventListener('change', () => {
+    document.body.classList.toggle('blanks', BLANKS())
+    if (BLANKS()) { $('iName').value = '[First name]'; $('iCo').value = '[Company name]' }
+    toBlanks(false)
+    apply()
+  })
   $('clean').addEventListener('click', (e) => {
     document.body.classList.toggle('clean')
     e.target.textContent = document.body.classList.contains('clean') ? 'Show highlights' : 'Hide highlights'
@@ -254,6 +305,7 @@
   $('iDues').value = q.get('dues') || listPrice()
   if (q.get('inst')) $('iInst').value = q.get('inst')
   if (q.get('clean')) document.body.classList.add('clean')
+  if (q.get('blanks')) { $('blanks').checked = true; document.body.classList.add('blanks') }
   apply()
 })()
 </script>

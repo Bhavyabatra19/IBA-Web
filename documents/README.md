@@ -13,6 +13,8 @@ This folder sits outside `public/`, so none of it is deployed to the website.
 | `invoice.html` | Page 1: tax invoice issued by Northstar Tecq. Page 2: payment instructions (NEFT/RTGS/IMPS, SWIFT wire, UPI, card link, and an optional digital-asset block). |
 | `welcome-letter.html` | Personalised welcome letter: dues, instalments, the tier's inclusions, onboarding steps and the founder's signature. |
 | `membership-benefits.html` | Membership level benefits: Club, Premier and Gold Class with prices and service partners, the partner benefits, Gold Xchange and the full comparison matrix. Untick “Show prices” for a version that matches the website. |
+| `word/welcome-letter-<tier>.docx` | Word welcome letter for each tier (Club, Premier, Gold, Gold Xchange), to paste into an email. Every value to fill in is a yellow-highlighted `[placeholder]`. Rebuild with `node documents/scripts/build-welcome-docx.cjs` (needs `npm i docx`). |
+| `pdf/welcome-letter-<tier>-fill-in.pdf` | The printed welcome letter for each tier, with underlined blanks to fill in by hand (name, company, dates, amounts, member number). The tier's price is printed. To make one yourself, open `welcome-letter.html` and tick “Blank lines to fill by hand”, or add `?blanks=1` to the URL. |
 | `email-signature.html` | Email signature in the same style. Copy and paste it into Gmail or Outlook. |
 | `pdf/` | Blank PDF exports of each template. |
 | `assets/tiers.js` | Tier data. Benefit text comes from `src/components/CorridorPlans.jsx`; prices and service partners come from the IBA Membership Matrix (“updated matrix” sheet, 13 Nov). If either source changes, update this file to match. |
