@@ -14166,3 +14166,30 @@ img.ib__sectorIcon {
   width: 100%;
   height: 100%;
 }
+
+/* Let's Talk, the fallback panel (content review, 11-16): its buttons were
+   caught by the panel's red underlined link style, red on the red button and
+   dark on the dark outline. Set as buttons again, readable on the dark panel. */
+.enq__endRow .btn {
+  text-decoration: none;
+}
+.enq__endRow .btn--primary,
+.enq__endRow .btn--primary:hover {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.enq__endRow .btn--primary:hover {
+  border-color: #b3121a;
+  background: #b3121a;
+}
+.enq__endRow > .btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #ffffff;
+}
+.enq__endRow > .btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #111111;
+}

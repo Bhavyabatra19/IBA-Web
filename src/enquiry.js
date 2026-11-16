@@ -109,9 +109,41 @@ export const FAILED = {
  * enquiry into a form that cannot ever accept it.
  */
 export const UNWIRED = {
-  title: 'This form is not connected yet.',
-  body: 'Nothing was sent, and we would rather say so than show you a confirmation for an enquiry nobody received. Your message is still in the form, copy it into an email or a WhatsApp message and it will reach the same people.',
+  title: 'Send your enquiry by email or WhatsApp.',
+  body: 'We could not send this from the website just now, so nothing has gone yet. Choose email or WhatsApp below: your details are already filled in, so one tap sends the same enquiry to the IBA team.',
 }
+
+/**
+ * The enquiry as plain text, for the email and WhatsApp fallbacks: the
+ * reader's own answers, so "Email us instead" sends the enquiry rather than
+ * an empty message (content review, 11-16).
+ */
+const ENQUIRY_LINES = [
+  ['name', 'Name'],
+  ['email', 'Email'],
+  ['phone', 'Phone / WhatsApp'],
+  ['organisation', 'Organisation and website'],
+  ['topic', 'Interested in'],
+  ['country', 'Country'],
+  ['preferred', 'Preferred contact'],
+  ['message', 'Message'],
+]
+export const enquiryText = (f = {}) =>
+  ENQUIRY_LINES.filter(([k]) => String(f[k] ?? '').trim())
+    .map(([k, label]) => `${label}: ${String(f[k]).trim()}`)
+    .join('\n')
+
+/** mailto: to the IBA inbox, the enquiry as the body */
+export const enquiryMailto = (f = {}) => {
+  const subject = `Website enquiry${f.topic ? `: ${f.topic}` : ''}${f.name ? ` from ${f.name}` : ''}`
+  return `${CONTACT.email.href.split('?')[0]}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+    `Hello IBA team,\n\n${enquiryText(f)}\n`,
+  )}`
+}
+
+/** WhatsApp to the IBA number, the enquiry as the message */
+export const enquiryWhatsApp = (f = {}) =>
+  `https://wa.me/${CONTACT.whatsapp.number}?text=${encodeURIComponent(`Hi IBA, an enquiry from your website:\n\n${enquiryText(f)}`)}`
 
 /**
  * The auto-reply. Not rendered by this app, it is copy for whoever wires the
