@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/seo-pages.mjs",
     "build:artifact": "VITE_ARTIFACT=1 vite build --outDir dist-artifact --emptyOutDir && node scripts/artifact-paths.mjs",
     "preview": "vite preview"
   },
