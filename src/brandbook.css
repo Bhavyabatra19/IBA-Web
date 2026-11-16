@@ -12492,6 +12492,27 @@ main {
   margin-top: auto;
   align-self: flex-start;
 }
+/* the tier's flip-book brochure, under Request Information */
+.cpl__brochure {
+  align-self: flex-start;
+  margin-top: 14px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: inherit;
+  opacity: 0.85;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+.cpl__brochure:hover {
+  opacity: 1;
+}
+.mbr-tier--gold .cpl__brochure {
+  color: #e6c766;
+}
+.mbr-tier--gold .cpl__brochure:hover {
+  color: #ffffff;
+}
 .cpl__plans .pk-bullets {
   margin: 8px 0 24px;
 }

@@ -78,7 +78,15 @@
       "destination": "/privacy/index.html"
     },
     {
-      "source": "/((?!api/|admin/).*)",
+      "source": "/brochures",
+      "destination": "/brochures/index.html"
+    },
+    {
+      "source": "/brochures/:tier",
+      "destination": "/brochures/:tier/index.html"
+    },
+    {
+      "source": "/((?!api/|admin/|brochures/).*)",
       "destination": "/index.html"
     }
   ]

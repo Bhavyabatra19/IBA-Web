@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gold Xchange Brochure · Web3 Corridor</title>
+<meta name="description" content="The Indo-UAE Startup Xchange: a 12-week launch sprint between India and the UAE.">
+<meta property="og:title" content="Gold Xchange membership brochure · Web3 Corridor">
+<meta property="og:description" content="The Indo-UAE Startup Xchange: a 12-week launch sprint between India and the UAE.">
+<meta property="og:image" content="https://indiablockchainalliance.org/images/corridor-gold.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/brochures/brochure.css">
+</head>
+<body>
+<div class="stage">
+  <header class="top">
+    <a class="top__brand" href="/membership"><img src="/images/web3-corridor-logo.webp" alt="Web3 Corridor"><span>WEB3 CORRIDOR</span></a>
+    <div class="top__by"><span>An initiative by</span><img src="/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+  <main class="book-wrap"><div class="book" id="book"></div></main>
+  <nav class="controls" aria-label="Brochure pages">
+    <button type="button" id="prev" aria-label="Previous page">←</button>
+    <span class="count" id="count" aria-live="polite"></span>
+    <button type="button" id="next" aria-label="Next page">→</button>
+    <span class="hint">Drag a page corner, click a page, or use the arrow keys</span>
+  </nav>
+</div>
+
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate__card">
+    <div class="gate__art">
+      <img class="bg" id="gateImg" src="" alt="">
+      <div class="fade"></div>
+      <div class="txt">
+        <p class="k">Membership brochure</p>
+        <h2 id="gateTier">Gold Xchange</h2>
+        <p id="gateSub"></p>
+      </div>
+    </div>
+    <form class="gate__form" id="gateForm" novalidate>
+      <h3 id="gateTitle">Read the Gold Xchange brochure</h3>
+      <p>Tell us where to follow up and the brochure opens straight away: benefits, what is included, how membership works and the price.</p>
+      <label class="f"><span>Full name</span><input name="name" autocomplete="name" required></label>
+      <label class="f"><span>Work email</span><input name="email" type="email" autocomplete="email" required></label>
+      <label class="f"><span>Company</span><input name="company" autocomplete="organization"></label>
+      <label class="hp" aria-hidden="true">Website<input name="company_website" tabindex="-1" autocomplete="off"></label>
+      <label class="consent"><input type="checkbox" name="consent" checked> <span>India Blockchain Alliance may contact me about Web3 Corridor membership. See our <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.</span></label>
+      <button class="go" type="submit">Open the brochure</button>
+      <p class="err" id="gateErr" role="alert"></p>
+    </form>
+  </div>
+</div>
+
+<script>window.BROCHURE = 'xchange'</script>
+<script src="/brochures/vendor/page-flip.browser.js"></script>
+<script src="/brochures/tiers.js"></script>
+<script src="/brochures/brochure.js"></script>
+</body>
+</html>

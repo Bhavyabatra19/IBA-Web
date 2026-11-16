@@ -15,6 +15,8 @@
  *
  * No prices anywhere on the site (by request, 11-04-2026): the cards give
  * who each tier is for and what it includes; terms are shared on enquiry.
+ * Each tier links to its email-gated flip-book brochure, which does show
+ * the price on its last page (by request, 11-16-2026).
  */
 
 import { useEffect, useState } from 'react'
@@ -22,6 +24,16 @@ import TierCard from './TierCard'
 import { Bullets } from './Kit'
 
 const ENQUIRY = 'Membership'
+
+/* each tier's flip-book brochure (public/brochures/<slug>/, gated by email;
+   by request, 11-16-2026). The brochures carry the price on their last
+   page; the site itself still shows none. */
+const BROCHURE = {
+  'Club Class': 'club-class',
+  'Premier Class': 'premier-class',
+  'Gold Class': 'gold-class',
+  'Gold Xchange': 'gold-xchange',
+}
 
 /* corridor partner benefits, for every Web360 Club tier */
 const PARTNER_BENEFITS = [
@@ -293,6 +305,11 @@ export default function CorridorPlans() {
               <a className="mbr-tier__cta" href="/connect" data-enquiry={ENQUIRY}>
                 Request Information
               </a>
+              {BROCHURE[p.name] && (
+                <a className="cpl__brochure" href={`/brochures/${BROCHURE[p.name]}/`}>
+                  View the brochure <span aria-hidden="true">→</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>

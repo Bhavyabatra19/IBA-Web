@@ -60,3 +60,23 @@ The enquiry form posts to `api/enquiry.js`, which emails each enquiry to **hello
 4. Redeploy, then send a test enquiry from the site.
 
 Without `ENQUIRY_FROM` on a verified domain, Resend only delivers to the email address of the Resend account itself, which is useful for a first test.
+
+# Membership brochures (flip books, email-gated)
+
+Each membership tier has its own flip-book brochure. The price is on the last page:
+
+| Tier | URL |
+| --- | --- |
+| Club Class | `/brochures/club-class/` |
+| Premier Class | `/brochures/premier-class/` |
+| Gold Class | `/brochures/gold-class/` |
+| Gold Xchange | `/brochures/gold-xchange/` |
+| All four | `/brochures/` |
+
+The tier cards on `/membership` link to them ("View the brochure").
+
+**The gate.** Before the book opens, a visitor gives their name, work email and company. `api/brochure.js` emails that lead to the IBA inbox through Resend (subject "Brochure lead: Gold Class · Name (Company)", Reply-To set to the visitor). It uses the same `RESEND_API_KEY` and `ENQUIRY_FROM` as the Let's Talk form. Set `BROCHURE_TO` to send leads somewhere other than `ENQUIRY_TO` / hello@indiablockchainalliance.org. If email isn't set up, the brochure still opens for the visitor, but no lead is sent. A visitor who has unlocked once is remembered in that browser and goes straight to the book next time.
+
+The gate is a lead-capture step, not access control. The prices are in `public/brochures/tiers.js`, so anyone who reads the page source can see them.
+
+**Content.** Pages are built by `public/brochures/brochure.js` from `public/brochures/tiers.js`. That file is a copy of `documents/assets/tiers.js`, so change both together. The flip engine is StPageFlip 2.0.7 (MIT), kept in `public/brochures/vendor/`.
