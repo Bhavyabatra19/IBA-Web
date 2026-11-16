@@ -1,0 +1,7 @@
+# India Blockchain Alliance
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Sitemap: https://indiablockchainalliance.org/sitemap.xml

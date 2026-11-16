@@ -26,6 +26,58 @@
       "destination": "/assets/:path*"
     },
     {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/expertise",
+      "destination": "/expertise/index.html"
+    },
+    {
+      "source": "/tokenization",
+      "destination": "/tokenization/index.html"
+    },
+    {
+      "source": "/ecosystem",
+      "destination": "/ecosystem/index.html"
+    },
+    {
+      "source": "/initiatives",
+      "destination": "/initiatives/index.html"
+    },
+    {
+      "source": "/corridor",
+      "destination": "/corridor/index.html"
+    },
+    {
+      "source": "/membership",
+      "destination": "/membership/index.html"
+    },
+    {
+      "source": "/red-club",
+      "destination": "/red-club/index.html"
+    },
+    {
+      "source": "/red-club/institutions",
+      "destination": "/red-club/institutions/index.html"
+    },
+    {
+      "source": "/red-club/learners",
+      "destination": "/red-club/learners/index.html"
+    },
+    {
+      "source": "/library",
+      "destination": "/library/index.html"
+    },
+    {
+      "source": "/connect",
+      "destination": "/connect/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
       "source": "/((?!api/|admin/).*)",
       "destination": "/index.html"
     }
