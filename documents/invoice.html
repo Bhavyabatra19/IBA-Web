@@ -102,16 +102,16 @@
   </label>
   <label>Currency
     <select id="cur">
+      <option value="USD" selected>USD $</option>
       <option value="INR">INR ₹</option>
-      <option value="USD">USD $</option>
       <option value="AED">AED</option>
     </select>
   </label>
   <label>Tax
     <select id="tax">
-      <option value="intra">Same state: CGST 9% + SGST 9%</option>
-      <option value="inter">Other state: IGST 18%</option>
-      <option value="export">Export of service (LUT): 0%</option>
+      <option value="export" selected>Export of service (LUT): 0%</option>
+      <option value="intra">India, same state: CGST 9% + SGST 9%</option>
+      <option value="inter">India, other state: IGST 18%</option>
     </select>
   </label>
   <label>Instalments
@@ -120,10 +120,17 @@
     </select>
   </label>
   <label><input type="checkbox" id="crypto"> Digital-asset payments</label>
-  <button type="button" id="add">+ Line</button>
+  <label>Add line
+    <select id="add">
+      <option value="">Choose…</option>
+      <option value="circle">TheCircle membership · $1,000</option>
+      <option value="block">TheBlock membership · $6,000</option>
+      <option value="blank">Blank line</option>
+    </select>
+  </label>
   <button type="button" id="clean">Hide highlights</button>
   <button type="button" class="primary" onclick="window.print()">Print / Save PDF</button>
-  <span class="bar__hint">Click any tinted text to edit it. Amounts, tax and the instalment plan recalculate as you type. In the print dialog choose A4, margins “None”, and turn on “Background graphics”.</span>
+  <span class="bar__hint">The plan sets the US$ price from the IBA Membership Matrix (Club $2,500 · Premier $5,000 · Gold $10,000 · Gold Xchange $15,000 a year); in INR or AED type the converted rate. Click any tinted text to edit it; totals, tax and instalments recalculate. In the print dialog choose A4, margins “None”, and turn on “Background graphics”.</span>
 </div>
 
 <!-- ============================================================ -->
@@ -383,11 +390,12 @@
     const t = W3C.tiers[$('tier').value]
     const programme = $('tier').value === 'xchange' ? 'Indo–UAE Startup Xchange' : 'Web360 Club'
     const first = rows[0] || { qty: 1, rate: 0 }
+    const partners = t.servicePartners ? ` Service partners: ${t.servicePartners}.` : ''
     rows[0] = {
       desc: `Web3 Corridor — ${programme} · ${t.name} membership`,
-      note: `${t.sub}. ${$('tier').value === 'xchange' ? '12-week launch sprint' : periodNote()}`,
+      note: `${t.sub}. ${$('tier').value === 'xchange' ? '12-week launch sprint · annual membership' : periodNote()}.${partners}`,
       qty: first.qty,
-      rate: first.rate,
+      rate: $('cur').value === 'USD' ? t.price : first.rate,
     }
     const code = { club: 'CLB', premier: 'PRM', gold: 'GLD', xchange: 'GXC' }[$('tier').value]
     document.querySelectorAll('.meta dd').forEach((dd) => {
@@ -473,7 +481,7 @@
     const body = $('plan')
     const keep = [...body.querySelectorAll('[data-date]')].map((d) => d.textContent)
     keep.forEach((d, i) => (planDates[i] = d))
-    const base = Math.floor((total / n) * 100) / 100
+    const base = Math.floor(total / n) // whole units, as in the welcome letter
     const first = Math.round((total - base * (n - 1)) * 100) / 100
     const ord = ['First', 'Second', 'Third', 'Fourth']
     body.innerHTML = ''
@@ -490,14 +498,23 @@
   }
 
   $('tier').addEventListener('change', setTier)
-  $('cur').addEventListener('change', () => {
-    if ($('cur').value !== 'INR' && $('tax').value !== 'export') $('tax').value = 'export'
-    render()
-  })
+  /* USD is the matrix currency: switching back to it restores the list price */
+  $('cur').addEventListener('change', () => ($('cur').value === 'USD' ? setTier() : render()))
   $('tax').addEventListener('change', calc)
   $('inst').addEventListener('change', calc)
   $('crypto').addEventListener('change', (e) => ($('cryptoCard').hidden = !e.target.checked))
-  $('add').addEventListener('click', () => { rows.push({ desc: '[Additional item, e.g. Dubai event pass]', note: '[detail]', qty: 1, rate: 0 }); render() })
+  const ADD = {
+    circle: { desc: 'TheCircle membership — Global Member benefits', note: 'Corridor partner membership · 12 months', rate: 1000 },
+    block: { desc: 'TheBlock membership — Connect benefits', note: 'Corridor partner membership, Dubai · 12 months', rate: 6000 },
+    blank: { desc: '[Additional item, e.g. Dubai event pass]', note: '[detail]', rate: 0 },
+  }
+  $('add').addEventListener('change', (e) => {
+    const a = ADD[e.target.value]
+    e.target.value = ''
+    if (!a) return
+    rows.push({ desc: a.desc, note: a.note, qty: 1, rate: $('cur').value === 'USD' ? a.rate : 0 })
+    render()
+  })
   $('clean').addEventListener('click', (e) => {
     document.body.classList.toggle('clean')
     e.target.textContent = document.body.classList.contains('clean') ? 'Show highlights' : 'Hide highlights'
@@ -510,9 +527,10 @@
   if (q.get('tax')) $('tax').value = q.get('tax')
   if (q.get('inst')) $('inst').value = q.get('inst')
   if (q.get('crypto')) { $('crypto').checked = true; $('cryptoCard').hidden = false }
-  rows.push({ desc: '', note: '', qty: 1, rate: num(q.get('amount') || 0) })
+  rows.push({ desc: '', note: '', qty: 1, rate: 0 })
   if (q.get('clean')) document.body.classList.add('clean')
   setTier()
+  if (q.get('amount')) { rows[0].rate = num(q.get('amount')); render() }
 })()
 </script>
 </body>

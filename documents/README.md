@@ -12,10 +12,16 @@ This folder sits outside `public/`, so none of it is deployed to the website.
 | --- | --- |
 | `invoice.html` | Page 1: tax invoice issued by Northstar Tecq. Page 2: payment instructions (NEFT/RTGS/IMPS, SWIFT wire, UPI, card link, and an optional digital-asset block). |
 | `welcome-letter.html` | Personalised welcome letter: dues, instalments, the tier's inclusions, onboarding steps and the founder's signature. |
-| `membership-benefits.html` | Membership level benefits: Club, Premier and Gold Class, the partner benefits, Gold Xchange and the full comparison matrix. No prices. |
+| `membership-benefits.html` | Membership level benefits: Club, Premier and Gold Class with prices and service partners, the partner benefits, Gold Xchange and the full comparison matrix. Untick “Show prices” for a version that matches the website. |
 | `email-signature.html` | Email signature in the same style. Copy and paste it into Gmail or Outlook. |
 | `pdf/` | Blank PDF exports of each template. |
-| `assets/tiers.js` | Tier benefits, copied from `src/components/CorridorPlans.jsx`. Update both files together. |
+| `assets/tiers.js` | Tier data. Benefit text comes from `src/components/CorridorPlans.jsx`; prices and service partners come from the IBA Membership Matrix (“updated matrix” sheet, 13 Nov). If either source changes, update this file to match. |
+
+## Prices (from the IBA Membership Matrix, US$ per year)
+
+Club Class $2,500 · Premier Class $5,000 · Gold Class $10,000 · Gold Xchange $15,000.
+Partner memberships on their own: TheCircle $1,000 · TheBlock $6,000.
+The invoice and the welcome letter fill these in from the plan you choose. You can still overwrite them for a negotiated rate or another currency. Instalments are split into whole dollars, with any remainder on the first payment, so the invoice and the letter always agree.
 
 ## How to use
 

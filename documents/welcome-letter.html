@@ -21,6 +21,7 @@
   .member__tier .label { color: var(--on-black-muted); }
   .member__tier .nm { font-size: 15pt; line-height: 1.15; }
   .member__tier .tg { font-size: 7.5pt; letter-spacing: 0.16em; color: var(--red); text-transform: uppercase; margin-top: 1.5mm; }
+  .sp { font-size: 8pt; color: #fff; line-height: 1.4; }
   .member__facts { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
   .member__facts > div { padding: 3mm 5mm; border-left: 1px solid var(--line); }
   .member__facts > div:nth-child(n+3) { border-top: 1px solid var(--line); }
@@ -69,10 +70,13 @@
   </label>
   <label>First name <input id="iName" value="[First name]" size="12"></label>
   <label>Company <input id="iCo" value="[Company name]" size="16"></label>
-  <label>Dues <input id="iDues" value="[₹ amount] + GST" size="14"></label>
+  <label>Annual dues <input id="iDues" value="" size="12"></label>
+  <label>Instalments
+    <select id="iInst"><option>1</option><option>2</option><option selected>3</option><option>4</option></select>
+  </label>
   <button type="button" id="clean">Hide highlights</button>
   <button type="button" class="primary" onclick="window.print()">Print / Save PDF</button>
-  <span class="bar__hint">The four fields above fill in every mention in the letter. Everything tinted on the page can be edited directly. Print with A4, margins “None”, “Background graphics” on.</span>
+  <span class="bar__hint">The plan sets the annual dues from the IBA Membership Matrix (US$); overwrite them for a negotiated rate or another currency. The toolbar fields fill in every mention in the letter. Everything tinted on the page can be edited directly. Print with A4, margins “None”, “Background graphics” on.</span>
 </div>
 
 <!-- ============================ PAGE 1 ============================ -->
@@ -99,7 +103,7 @@
 
     <p contenteditable="true">Dear <span data-f="name">[First name]</span>,</p>
 
-    <p contenteditable="true">It was a pleasure speaking with you again today. As discussed, we will lock in your <span data-f="tier">Gold Class</span> membership dues of <b data-f="dues">[₹ amount] + GST</b> for the first year. <span data-f="co">[Company name]</span> will make an activation payment of <b>[first instalment]</b> today, and the balance is payable in instalments on <b>[01 Mar 2027]</b> and <b>[01 Jun 2027]</b>, as set out in your invoice.</p>
+    <p contenteditable="true" id="payPara"></p>
 
     <h2 class="hello">Welcome to the Web3 Corridor!<span class="red" contenteditable="true">We’re excited to have <span data-f="co">[Company name]</span> join as a <span data-f="tierUp">GOLD CLASS</span> MEMBER.</span></h2>
 
@@ -108,12 +112,13 @@
         <p class="label">Membership</p>
         <div class="nm" data-f="tier">Gold Class</div>
         <div class="tg" data-f="tagline">Lead • Expand • Scale</div>
+        <div class="sp" id="sp"><span class="label" style="display:block;margin:2.4mm 0 0.4mm">Service partners</span><span data-f="sp"></span></div>
       </div>
       <div class="member__facts">
         <div><p class="label">Programme</p><div class="v" data-f="prog">Web360 Club</div></div>
         <div><p class="label">Term</p><div class="v" contenteditable="true">[01 Dec 2026 – 30 Nov 2027]</div></div>
-        <div><p class="label">Annual dues</p><div class="v" data-f="dues">[₹ amount] + GST</div></div>
-        <div><p class="label">Payable</p><div class="v" contenteditable="true">In 3 instalments</div></div>
+        <div><p class="label">Annual dues</p><div class="v" data-f="dues"></div></div>
+        <div><p class="label">Payable</p><div class="v" data-f="payable"></div></div>
       </div>
     </div>
 
@@ -145,7 +150,7 @@
     <ol class="steps">
       <li><div><b>Complete your member onboarding</b><span contenteditable="true">Fill in the onboarding form so we can set up your membership, verify your organisation (KYC/KYB) and create your member directory profile: <span class="lnk">[onboarding form link]</span></span></div></li>
       <li><div><b>Sign your Membership Agreement</b><span contenteditable="true">Please sign and return the Web3 Corridor Membership Agreement to <span class="lnk">hello@indiablockchainalliance.org</span>.</span></div></li>
-      <li><div><b>Complete your first dues payment — [first instalment]</b><span contenteditable="true">Your invoice and payment instructions are attached. Dues are collected by our billing partner, <b style="display:inline;font-size:inherit">Northstar Tecq</b>; quote your invoice number as the reference. Online payment link: <span class="lnk">[payment link]</span></span></div></li>
+      <li><div><b>Complete your first dues payment — <span data-f="first"></span></b><span contenteditable="true">Your invoice and payment instructions are attached. Dues are collected by our billing partner, <b style="display:inline;font-size:inherit">Northstar Tecq</b>; quote your invoice number as the reference. Online payment link: <span class="lnk">[payment link]</span></span></div></li>
       <li><div><b>Set up IBA SafeVault</b><span contenteditable="true">Once onboarding is approved you will receive your SafeVault access to store corporate documents and your data room, and your official <span data-f="tier">Gold Class</span> member badge.</span></div></li>
       <li><div><b>Your welcome call</b><span contenteditable="true">Your corridor concierge, <b style="display:inline;font-size:inherit">[name]</b>, will be in touch within [2] working days to schedule a welcome call, map your goals for the year and line up your first introductions and roundtable invitations.</span></div></li>
     </ol>
@@ -194,13 +199,49 @@
     set('name', $('iName').value)
     set('co', $('iCo').value)
     set('dues', $('iDues').value)
+    set('sp', t.servicePartners)
+    $('sp').hidden = !t.servicePartners
+    payment()
     $('benefits').innerHTML = t.benefits
       .map((b) => `<li><b>${b.t}</b>${b.d ? ' — <span>' + b.d + '</span>' : ''}</li>`)
       .join('')
     $('partners').hidden = key === 'xchange'
   }
 
-  ;['tier', 'iName', 'iCo', 'iDues'].forEach((id) => $(id).addEventListener('input', apply))
+  /* dues: list price for the plan unless someone has typed their own */
+  let duesTyped = false
+  const listPrice = () => `US$${W3C.tiers[$('tier').value].price.toLocaleString('en-US')}`
+  $('iDues').addEventListener('input', () => (duesTyped = true))
+  $('tier').addEventListener('input', () => { if (!duesTyped) $('iDues').value = listPrice() })
+
+  /* split the dues into instalments; the remainder goes on the first */
+  function payment() {
+    const dues = $('iDues').value
+    const m = dues.match(/\d[\d,]*(\.\d+)?/)
+    const total = m ? parseFloat(m[0].replace(/,/g, '')) : 0
+    const pre = m ? dues.slice(0, m.index) : ''
+    const n = +$('iInst').value
+    const fmt = (v) => pre + v.toLocaleString('en-US', { maximumFractionDigits: 2 })
+    const base = Math.floor(total / n)
+    const first = total - base * (n - 1)
+    const amt = total ? fmt(first) : '[first instalment]'
+    const co = `<span data-f="co">${$('iCo').value}</span>`
+    const tier = W3C.tiers[$('tier').value].name
+    const dates = ['[01 Mar 2027]', '[01 Jun 2027]', '[01 Sep 2027]']
+    let tail
+    if (n === 1) tail = `${co} will settle the full amount of <b>${amt}</b> on activation.`
+    else {
+      const rest = dates.slice(0, n - 1).map((d) => `<b>${d}</b>`)
+      const list = rest.length > 1 ? rest.slice(0, -1).join(', ') + ' and ' + rest[rest.length - 1] : rest[0]
+      const more = n - 1 === 1 ? 'one further instalment' : `${n - 1} further instalments`
+      tail = `${co} will make the first payment of <b>${amt}</b> today, and the balance is payable in ${more} of <b>${total ? fmt(base) : '[amount]'}</b> on ${list}, as set out in your invoice.`
+    }
+    $('payPara').innerHTML = `It was a pleasure speaking with you again today. As discussed, we will lock in your ${tier} membership dues of <b>${dues} per year</b>. ${tail}`
+    set('first', amt)
+    set('payable', n === 1 ? 'In full on activation' : `In ${n} instalments`)
+  }
+
+  ;['tier', 'iName', 'iCo', 'iDues', 'iInst'].forEach((id) => $(id).addEventListener('input', apply))
   $('clean').addEventListener('click', (e) => {
     document.body.classList.toggle('clean')
     e.target.textContent = document.body.classList.contains('clean') ? 'Show highlights' : 'Hide highlights'
@@ -210,7 +251,8 @@
   if (q.get('tier')) $('tier').value = q.get('tier')
   if (q.get('name')) $('iName').value = q.get('name')
   if (q.get('co')) $('iCo').value = q.get('co')
-  if (q.get('dues')) $('iDues').value = q.get('dues')
+  $('iDues').value = q.get('dues') || listPrice()
+  if (q.get('inst')) $('iInst').value = q.get('inst')
   if (q.get('clean')) document.body.classList.add('clean')
   apply()
 })()

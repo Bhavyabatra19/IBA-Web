@@ -1,9 +1,15 @@
-/* Web3 Corridor membership tiers, shared by the welcome letter and the
-   benefits sheet. Copied from src/components/CorridorPlans.jsx (content
-   review 11-14-2026); change both together. No prices here: the amount is
-   typed into each letter and invoice. */
+/* Web3 Corridor membership tiers, shared by the invoice, the welcome letter
+   and the benefits sheet. Benefit copy from src/components/CorridorPlans.jsx
+   (content review 11-14-2026); prices and service partners from the IBA
+   Membership Matrix, "updated matrix" sheet (Nov 13). Prices are annual, in
+   US dollars. The website shows no prices (by request); these documents do. */
 
 window.W3C = {
+  /* partner memberships sold on their own (US$ / year) */
+  standalone: [
+    { name: 'TheCircle', price: 1000 },
+    { name: 'TheBlock', price: 6000 },
+  ],
   partners: [
     { partner: 'TheCircle', benefit: 'Global Member benefits' },
     { partner: 'TheBlock', benefit: 'Connect benefits' },
@@ -11,6 +17,8 @@ window.W3C = {
   tiers: {
     club: {
       name: 'Club Class',
+      price: 2500,
+      servicePartners: 'TheCircle',
       sub: 'Essential Access',
       tagline: 'Learn • Connect • Explore',
       includes: 'Club Class Membership — exclusive benefits',
@@ -24,6 +32,8 @@ window.W3C = {
     },
     premier: {
       name: 'Premier Class',
+      price: 5000,
+      servicePartners: 'TheCircle & Edon Global',
       sub: 'Growth & Visibility',
       tagline: 'Position • Engage • Accelerate',
       includes: 'Includes all Club Class benefits, plus:',
@@ -37,6 +47,8 @@ window.W3C = {
     },
     gold: {
       name: 'Gold Class',
+      price: 10000,
+      servicePartners: 'TheCircle, Edon Global & TheBlock',
       sub: 'Executive & Institutional',
       tagline: 'Lead • Expand • Scale',
       includes: 'Includes all Premier Class benefits, plus:',
@@ -50,6 +62,8 @@ window.W3C = {
     },
     xchange: {
       name: 'Gold Xchange',
+      price: 15000,
+      servicePartners: '',
       sub: 'Indo–UAE Startup Xchange · 12-week Launch Sprint',
       tagline: 'Validate • Build • Launch',
       includes: 'Gold Xchange membership includes:',
