@@ -23,7 +23,7 @@ This folder sits outside `public/`, so none of it is deployed to the website.
 
 A member or prospect only ever receives the brochure and letter for their own tier. So each one lists every benefit that tier includes, in full, with a description. None of them refers to another tier (no "everything in Club Class, plus…").
 
-The full list lives in `assets/tiers.js`: `W3C.groups` holds the Web360 Club benefits and marks which tiers include each one, `W3C.xgroups` holds Gold Xchange, and `W3C.benefitsFor(tier)` returns one tier's complete list. The brochures, the HTML letter and the Word letters all read from it. Club has 14 benefits, Premier 26, Gold 31 and Gold Xchange 10.
+The full list lives in `assets/tiers.js`: `W3C.groups` holds the Web360 Club benefits and marks which tiers include each one, `W3C.xgroups` holds Gold Xchange, and `W3C.benefitsFor(tier)` returns one tier's complete list. The brochures, the HTML letter and the Word letters all read from it. Club has 13 benefits, Premier 25, Gold 31 and Gold Xchange 10. TheBlock Connect benefits are Gold Class only; TheCircle Global Member benefits come with every Web360 Club tier.
 
 `membership-benefits.html` is the one exception. It is a side-by-side comparison of the tiers.
 

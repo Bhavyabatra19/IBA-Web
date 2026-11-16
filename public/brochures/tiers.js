@@ -10,9 +10,11 @@ window.W3C = {
     { name: 'TheCircle', price: 1000 },
     { name: 'TheBlock', price: 6000 },
   ],
+  /* corridor partner benefits: TheCircle for every tier, TheBlock Connect
+     for Gold Class only (by request, 11-16-2026) */
   partners: [
-    { partner: 'TheCircle', benefit: 'Global Member benefits' },
-    { partner: 'TheBlock', benefit: 'Connect benefits' },
+    { partner: 'TheCircle', benefit: 'Global Member benefits', who: 'Every tier' },
+    { partner: 'TheBlock', benefit: 'Connect benefits', who: 'Gold Class' },
   ],
   tiers: {
     club: {
@@ -188,7 +190,7 @@ window.W3C.groups = [
     name: 'Corridor Partner Benefits',
     items: [
       { t: 'TheCircle Global Member benefits', d: 'TheCircle’s Global Member benefits, through IBA’s corridor partnership.', club: true, premier: true, gold: true },
-      { t: 'TheBlock Connect benefits', d: 'TheBlock’s Connect benefits in Dubai, through IBA’s corridor partnership.', club: true, premier: true, gold: true },
+      { t: 'TheBlock Connect benefits', d: 'TheBlock’s Connect benefits in Dubai, through IBA’s corridor partnership.', gold: true },
       { t: 'TheCircle Level 1 pack', d: 'TheCircle’s Level 1 membership pack, included in your membership.', premier: true, gold: true },
       { t: 'TheBlock Level 1 pack', d: 'TheBlock’s Level 1 membership pack, included in your membership.', gold: true },
     ],

@@ -9,9 +9,10 @@
  * Each tier shows 4–5 key benefits and a Request Information button (by
  * request, 11-12-2026); the full lists are in the brochure.
  *
- * The Web360 Club track carries the corridor partners' benefits for every
- * tier (by request, 11-14-2026), shown once above the tier cards, each
- * linking to that partner's membership page.
+ * The Web360 Club track carries the corridor partners' benefits (by
+ * request, 11-14-2026), shown once above the tier cards, each linking to
+ * that partner's membership page: TheCircle for every tier, TheBlock
+ * Connect for Gold Class only (by request, 11-16-2026).
  *
  * No prices anywhere on the site (by request, 11-04-2026): the cards give
  * who each tier is for and what it includes; terms are shared on enquiry.
@@ -35,10 +36,11 @@ const BROCHURE = {
   'Gold Xchange': 'gold-xchange',
 }
 
-/* corridor partner benefits, for every Web360 Club tier */
+/* corridor partner benefits: TheCircle for every Web360 Club tier,
+   TheBlock Connect for Gold Class only (by request, 11-16-2026) */
 const PARTNER_BENEFITS = [
-  { partner: 'TheCircle', benefit: 'Global Member benefits', href: 'https://the-block.com/the-circle/' },
-  { partner: 'TheBlock', benefit: 'Connect benefits', href: 'https://the-block.com/individual-membership/' },
+  { partner: 'TheCircle', benefit: 'Global Member benefits', who: 'every tier', href: 'https://the-block.com/the-circle/' },
+  { partner: 'TheBlock', benefit: 'Connect benefits', who: 'Gold Class', href: 'https://the-block.com/individual-membership/' },
 ]
 
 const TRACKS = [
@@ -260,12 +262,12 @@ export default function CorridorPlans() {
 
         {current.partners && (
           <div className="cpl__partners">
-            <p className="cpl__partners-label">Partner benefits · every tier</p>
+            <p className="cpl__partners-label">Partner benefits</p>
             <ul className="cpl__partners-list">
               {PARTNER_BENEFITS.map((b) => (
                 <li key={b.partner}>
                   <a href={b.href} target="_blank" rel="noopener noreferrer">
-                    <strong>{b.partner}:</strong> {b.benefit} <span aria-hidden="true">↗</span>
+                    <strong>{b.partner}:</strong> {b.benefit} ({b.who}) <span aria-hidden="true">↗</span>
                   </a>
                 </li>
               ))}
