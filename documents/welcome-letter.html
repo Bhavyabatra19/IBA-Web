@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web3 Corridor Welcome Letter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/docs.css">
+<style>
+  .letter { font-size: 10pt; line-height: 1.62; }
+  .letter p { margin: 0 0 3.2mm; }
+  .addr { display: flex; justify-content: space-between; gap: 10mm; font-size: 9pt; line-height: 1.55; margin-bottom: 7mm; }
+  .addr .label { margin-bottom: 1mm; }
+  .ref { text-align: right; }
+  .hello { font-size: 18pt; line-height: 1.2; margin: 1mm 0 4mm; }
+  .hello .red { display: block; }
+  .member { display: flex; align-items: stretch; margin: 4mm 0 5mm; border: 1px solid var(--line); }
+  .member__tier { background: var(--black); color: #fff; padding: 4mm 6mm; min-width: 58mm; }
+  .member__tier .label { color: var(--on-black-muted); }
+  .member__tier .nm { font-size: 15pt; line-height: 1.15; }
+  .member__tier .tg { font-size: 7.5pt; letter-spacing: 0.16em; color: var(--red); text-transform: uppercase; margin-top: 1.5mm; }
+  .member__facts { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
+  .member__facts > div { padding: 3mm 5mm; border-left: 1px solid var(--line); }
+  .member__facts > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .member__facts .v { font-size: 9.6pt; }
+  .includes { margin: 0 0 3mm; padding: 0; list-style: none; }
+  .includes li { position: relative; padding: 0 0 2.2mm 6mm; font-size: 9.2pt; line-height: 1.5; }
+  .includes li::before { content: ''; position: absolute; left: 0; top: 1.6mm; width: 2mm; height: 2mm; background: var(--red); }
+  .includes li b { color: var(--ink); }
+  .includes li span { color: var(--muted); }
+  .partners { font-size: 8.6pt; color: var(--muted); background: var(--alt); padding: 2.6mm 4mm; margin-bottom: 4mm; }
+  .partners b { color: var(--ink); }
+  h3.sec { font-size: 12pt; margin: 2mm 0 3mm; display: flex; align-items: center; gap: 3mm; }
+  h3.sec::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+  .steps { counter-reset: s; list-style: none; margin: 0; padding: 0; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; padding: 3mm 0; border-bottom: 1px solid var(--line); font-size: 9.2pt; }
+  .steps li::before { content: counter(s, decimal-leading-zero); width: 9mm; height: 9mm; background: var(--red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 9pt; }
+  .steps li:first-child { border-top: 1px solid var(--ink); }
+  .steps b { display: block; color: var(--ink); font-size: 10pt; margin-bottom: 0.5mm; }
+  .steps span { color: var(--muted); }
+  .steps .lnk { color: var(--red); word-break: break-all; }
+  .letter .close { margin-top: 6mm; }
+  /* signature: modelled on the reference email signature */
+  .sig { display: flex; gap: 5mm; align-items: stretch; margin-top: 7mm; }
+  .sig__mark { width: 30mm; display: flex; align-items: center; justify-content: center; border-right: 1mm solid var(--red); padding-right: 5mm; }
+  .sig__mark img { width: 100%; height: auto; display: block; }
+  .sig__txt { font-size: 8.6pt; line-height: 1.6; color: var(--muted); }
+  .sig__name { font-size: 13pt; color: var(--ink); line-height: 1.2; }
+  .sig__role { color: var(--ink); margin-bottom: 1.2mm; }
+  .sig__txt b { color: var(--ink); }
+  .ps { margin-top: 6mm; font-size: 8.8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 3mm; }
+  .ps b { color: var(--ink); }
+  .sheet__body { padding-top: 9mm; }
+</style>
+</head>
+<body>
+
+<div class="bar no-print">
+  <span class="bar__title">Web3 Corridor · Welcome letter</span>
+  <label>Plan
+    <select id="tier">
+      <option value="club">Club Class</option>
+      <option value="premier">Premier Class</option>
+      <option value="gold" selected>Gold Class</option>
+      <option value="xchange">Gold Xchange</option>
+    </select>
+  </label>
+  <label>First name <input id="iName" value="[First name]" size="12"></label>
+  <label>Company <input id="iCo" value="[Company name]" size="16"></label>
+  <label>Dues <input id="iDues" value="[₹ amount] + GST" size="14"></label>
+  <button type="button" id="clean">Hide highlights</button>
+  <button type="button" class="primary" onclick="window.print()">Print / Save PDF</button>
+  <span class="bar__hint">The four fields above fill in every mention in the letter. Everything tinted on the page can be edited directly. Print with A4, margins “None”, “Background graphics” on.</span>
+</div>
+
+<!-- ============================ PAGE 1 ============================ -->
+<section class="sheet">
+  <header class="mast">
+    <div class="mast__w3">
+      <img src="assets/web3-corridor-logo.webp" alt="Web3 Corridor">
+      <div class="mast__name">WEB3 CORRIDOR<small>MEMBERSHIP · WELCOME</small></div>
+    </div>
+    <div class="mast__by"><span>An initiative by</span><img src="assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+
+  <div class="sheet__body letter">
+    <div class="addr">
+      <div>
+        <p class="label">To</p>
+        <div contenteditable="true"><span data-f="name">[First name]</span> [Last name], [Title]<br><span data-f="co">[Company name]</span><br>[City, Country]</div>
+      </div>
+      <div class="ref">
+        <p class="label">Date · reference</p>
+        <div contenteditable="true">16 November 2026<br>Member ID W3C-<span data-f="code">GLD</span>-0001</div>
+      </div>
+    </div>
+
+    <p contenteditable="true">Dear <span data-f="name">[First name]</span>,</p>
+
+    <p contenteditable="true">It was a pleasure speaking with you again today. As discussed, we will lock in your <span data-f="tier">Gold Class</span> membership dues of <b data-f="dues">[₹ amount] + GST</b> for the first year. <span data-f="co">[Company name]</span> will make an activation payment of <b>[first instalment]</b> today, and the balance is payable in instalments on <b>[01 Mar 2027]</b> and <b>[01 Jun 2027]</b>, as set out in your invoice.</p>
+
+    <h2 class="hello">Welcome to the Web3 Corridor!<span class="red" contenteditable="true">We’re excited to have <span data-f="co">[Company name]</span> join as a <span data-f="tierUp">GOLD CLASS</span> MEMBER.</span></h2>
+
+    <div class="member">
+      <div class="member__tier">
+        <p class="label">Membership</p>
+        <div class="nm" data-f="tier">Gold Class</div>
+        <div class="tg" data-f="tagline">Lead • Expand • Scale</div>
+      </div>
+      <div class="member__facts">
+        <div><p class="label">Programme</p><div class="v" data-f="prog">Web360 Club</div></div>
+        <div><p class="label">Term</p><div class="v" contenteditable="true">[01 Dec 2026 – 30 Nov 2027]</div></div>
+        <div><p class="label">Annual dues</p><div class="v" data-f="dues">[₹ amount] + GST</div></div>
+        <div><p class="label">Payable</p><div class="v" contenteditable="true">In 3 instalments</div></div>
+      </div>
+    </div>
+
+    <p>Your <span data-f="tier">Gold Class</span> membership includes:</p>
+    <p class="label" data-f="includes" style="margin-top:-1mm">Includes all Premier Class benefits, plus:</p>
+    <ul class="includes" id="benefits"></ul>
+    <div class="partners" id="partners"><b>Corridor partner benefits, for every Web360 Club tier:</b> TheCircle Global Member benefits · TheBlock Connect benefits.</div>
+  </div>
+
+  <footer class="foot">
+    <div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · indiablockchainalliance.org</div>
+    <div class="foot__page">Page 1 / 2</div>
+  </footer>
+</section>
+
+<!-- ============================ PAGE 2 ============================ -->
+<section class="sheet">
+  <header class="mast mast--slim">
+    <div class="mast__w3">
+      <img src="assets/web3-corridor-logo.webp" alt="Web3 Corridor">
+      <div class="mast__name">WEB3 CORRIDOR</div>
+    </div>
+    <div class="mast__by"><span>An initiative by</span><img src="assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+
+  <div class="sheet__body letter">
+    <h3 class="sec">To complete your onboarding</h3>
+    <p>Please take the following steps:</p>
+    <ol class="steps">
+      <li><div><b>Complete your member onboarding</b><span contenteditable="true">Fill in the onboarding form so we can set up your membership, verify your organisation (KYC/KYB) and create your member directory profile: <span class="lnk">[onboarding form link]</span></span></div></li>
+      <li><div><b>Sign your Membership Agreement</b><span contenteditable="true">Please sign and return the Web3 Corridor Membership Agreement to <span class="lnk">hello@indiablockchainalliance.org</span>.</span></div></li>
+      <li><div><b>Complete your first dues payment — [first instalment]</b><span contenteditable="true">Your invoice and payment instructions are attached. Dues are collected by our billing partner, <b style="display:inline;font-size:inherit">Northstar Tecq</b>; quote your invoice number as the reference. Online payment link: <span class="lnk">[payment link]</span></span></div></li>
+      <li><div><b>Set up IBA SafeVault</b><span contenteditable="true">Once onboarding is approved you will receive your SafeVault access to store corporate documents and your data room, and your official <span data-f="tier">Gold Class</span> member badge.</span></div></li>
+      <li><div><b>Your welcome call</b><span contenteditable="true">Your corridor concierge, <b style="display:inline;font-size:inherit">[name]</b>, will be in touch within [2] working days to schedule a welcome call, map your goals for the year and line up your first introductions and roundtable invitations.</span></div></li>
+    </ol>
+
+    <p class="close" contenteditable="true">We’re excited to welcome <span data-f="co">[Company name]</span> to the Web3 Corridor family, and we look forward to building with you across India, the UAE and beyond.</p>
+
+    <p style="margin-top:5mm">Warm regards,</p>
+
+    <div class="sig">
+      <div class="sig__mark"><img src="assets/iba-logo-light.png" alt="India Blockchain Alliance"></div>
+      <div class="sig__txt" contenteditable="true">
+        <div class="sig__name">Raj Kapoor</div>
+        <div class="sig__role">Founder &nbsp;|&nbsp; <b>India Blockchain Alliance</b> · Web3 Corridor</div>
+        <b>E:</b> hello@indiablockchainalliance.org &nbsp;&nbsp; <b>W:</b> indiablockchainalliance.org<br>
+        <b>P:</b> [phone] &nbsp;&nbsp; <b>in:</b> linkedin.com/company/indiablockchain
+      </div>
+    </div>
+
+    <div class="ps" contenteditable="true">
+      <b>PS</b> — We will send a short membership announcement and LinkedIn spotlight for your approval. If you have brand assets (logo, a one-line description and a link), reply with them and we will add <span data-f="co">[Company name]</span> to the member directory and Web3 Corridor promotions.
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance. Membership billing and payments: Northstar Tecq.</div>
+    <div class="foot__page">Page 2 / 2</div>
+  </footer>
+</section>
+
+<script src="assets/tiers.js"></script>
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id)
+  const CODE = { club: 'CLB', premier: 'PRM', gold: 'GLD', xchange: 'GXC' }
+  const set = (f, v) => document.querySelectorAll(`[data-f="${f}"]`).forEach((el) => (el.textContent = v))
+
+  function apply() {
+    const key = $('tier').value
+    const t = W3C.tiers[key]
+    set('tier', t.name)
+    set('tierUp', t.name.toUpperCase())
+    set('tagline', t.tagline)
+    set('includes', t.includes)
+    set('prog', key === 'xchange' ? 'Indo–UAE Startup Xchange' : 'Web360 Club')
+    set('code', CODE[key])
+    set('name', $('iName').value)
+    set('co', $('iCo').value)
+    set('dues', $('iDues').value)
+    $('benefits').innerHTML = t.benefits
+      .map((b) => `<li><b>${b.t}</b>${b.d ? ' — <span>' + b.d + '</span>' : ''}</li>`)
+      .join('')
+    $('partners').hidden = key === 'xchange'
+  }
+
+  ;['tier', 'iName', 'iCo', 'iDues'].forEach((id) => $(id).addEventListener('input', apply))
+  $('clean').addEventListener('click', (e) => {
+    document.body.classList.toggle('clean')
+    e.target.textContent = document.body.classList.contains('clean') ? 'Show highlights' : 'Hide highlights'
+  })
+
+  const q = new URLSearchParams(location.search)
+  if (q.get('tier')) $('tier').value = q.get('tier')
+  if (q.get('name')) $('iName').value = q.get('name')
+  if (q.get('co')) $('iCo').value = q.get('co')
+  if (q.get('dues')) $('iDues').value = q.get('dues')
+  if (q.get('clean')) document.body.classList.add('clean')
+  apply()
+})()
+</script>
+</body>
+</html>

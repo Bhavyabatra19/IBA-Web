@@ -1,0 +1,373 @@
+/* ==================================================================
+   Web3 Corridor documents: shared print stylesheet.
+
+   Follows the IBA Brand Guidelines v1.0 (src/brandbook.css):
+   Questrial 400 only, IBA Red #D71920 / Black #111111 / white,
+   flat colour, square corners, no shadows, 1px lines.
+
+   Every page is an A4 sheet (210 x 297 mm). On screen the sheets sit on a
+   grey desk with a toolbar above; in print only the sheets are output.
+   ================================================================== */
+
+:root {
+  --red: #d71920;
+  --red-deep: #9e1016;
+  --red-soft: #fdeaea;
+  --black: #111111;
+  --ink: #0e0e0e;
+  --muted: #5c5c5c;
+  --line: #e2dfdd;
+  --line-strong: #8a8a8a;
+  --alt: #f5f3f2;
+  --on-black-muted: #b3b3b3;
+  --font: 'Questrial', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #d9d6d4;
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 10pt;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+h1,
+h2,
+h3,
+h4,
+strong,
+b,
+th {
+  font-weight: 400;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+/* ---------------------------------------------------------------- */
+/* the sheet                                                         */
+/* ---------------------------------------------------------------- */
+.sheet {
+  width: 210mm;
+  height: 297mm;
+  margin: 12mm auto;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet__body {
+  flex: 1;
+  padding: 10mm 16mm 0;
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .sheet {
+    margin: 0;
+    page-break-after: always;
+    break-after: page;
+  }
+  .sheet:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* masthead: black band, Web3 Corridor mark + "an initiative by" IBA */
+/* ---------------------------------------------------------------- */
+.mast {
+  background: var(--black);
+  color: #fff;
+  height: 30mm;
+  padding: 0 16mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2mm solid var(--red);
+  flex-shrink: 0;
+}
+
+.mast__w3 {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+}
+
+.mast__w3 img {
+  height: 20mm;
+  width: auto;
+  display: block;
+}
+
+.mast__w3 .mast__name {
+  font-size: 15pt;
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+}
+
+.mast__w3 .mast__name small {
+  display: block;
+  font-size: 7pt;
+  letter-spacing: 0.22em;
+  color: var(--on-black-muted);
+  margin-top: 1.2mm;
+}
+
+.mast__by {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  text-align: right;
+}
+
+.mast__by span {
+  font-size: 6.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--on-black-muted);
+  line-height: 1.4;
+}
+
+.mast__by img {
+  height: 17mm;
+  width: auto;
+  display: block;
+}
+
+/* the compact masthead used on continuation pages */
+.mast--slim {
+  height: 18mm;
+  border-bottom-width: 1.2mm;
+}
+.mast--slim .mast__w3 img {
+  height: 12mm;
+}
+.mast--slim .mast__w3 .mast__name {
+  font-size: 11pt;
+}
+.mast--slim .mast__w3 .mast__name small {
+  display: none;
+}
+.mast--slim .mast__by img {
+  height: 11mm;
+}
+
+/* ---------------------------------------------------------------- */
+/* footer                                                            */
+/* ---------------------------------------------------------------- */
+.foot {
+  flex-shrink: 0;
+  margin: 0 16mm;
+  padding: 3.5mm 0 6mm;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8mm;
+  font-size: 7pt;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.foot strong {
+  color: var(--ink);
+}
+
+.foot__mark {
+  display: inline-block;
+  width: 2.2mm;
+  height: 2.2mm;
+  background: var(--red);
+  margin-right: 1.6mm;
+  vertical-align: 0.1mm;
+}
+
+.foot__page {
+  white-space: nowrap;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------- */
+/* type                                                              */
+/* ---------------------------------------------------------------- */
+.eyebrow {
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 2mm;
+}
+
+.title {
+  font-size: 24pt;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.lede {
+  font-size: 11pt;
+  color: var(--muted);
+  margin: 3mm 0 0;
+  max-width: 150mm;
+}
+
+.label {
+  font-size: 6.5pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.2mm;
+}
+
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 6mm 0;
+}
+
+.red {
+  color: var(--red);
+}
+
+/* ---------------------------------------------------------------- */
+/* editable fields (screen only cue)                                 */
+/* ---------------------------------------------------------------- */
+[contenteditable='true'] {
+  outline: none;
+  border-radius: 0;
+}
+@media screen {
+  [contenteditable='true'] {
+    background: rgba(215, 25, 32, 0.06);
+    box-shadow: inset 0 -1px 0 rgba(215, 25, 32, 0.35);
+    cursor: text;
+  }
+  [contenteditable='true']:hover {
+    background: rgba(215, 25, 32, 0.1);
+  }
+  [contenteditable='true']:focus {
+    background: #fff8d6;
+    box-shadow: inset 0 -1px 0 var(--red);
+  }
+  body.clean [contenteditable='true'] {
+    background: none;
+    box-shadow: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* toolbar (screen only)                                             */
+/* ---------------------------------------------------------------- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--black);
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  border-bottom: 3px solid var(--red);
+}
+
+.bar__title {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-right: auto;
+}
+
+.bar label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--on-black-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+
+.bar select,
+.bar input {
+  font-family: var(--font);
+  font-size: 12px;
+  background: #fff;
+  color: var(--ink);
+  border: 0;
+  border-radius: 4px;
+  height: 30px;
+  padding: 0 8px;
+}
+
+.bar button {
+  font-family: var(--font);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  height: 32px;
+  padding: 0 16px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.bar button.primary {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.bar button:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+.bar__hint {
+  width: 100%;
+  color: var(--on-black-muted);
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .sheet {
+    transform-origin: top left;
+  }
+}
