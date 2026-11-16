@@ -23,6 +23,7 @@
  */
 
 import { useRef, useState } from 'react'
+import { track } from '../lib/analytics'
 import {
   Area,
   Check,
@@ -167,6 +168,9 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
       const result = await submitEnquiry(fields)
       setOutcome(result)
       if (result === SENT) clearEnquiry()
+      /* the enquiry, counted in Google Analytics: generate_lead is GA4's own
+         name for it, so it can be marked as a key event as it is */
+      track(result === SENT ? 'generate_lead' : 'enquiry_not_sent', { topic: fields.topic || '' })
     } catch {
       setOutcome(SEND_FAILED)
     } finally {

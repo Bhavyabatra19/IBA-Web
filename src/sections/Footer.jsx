@@ -41,7 +41,7 @@ export default function Footer() {
         <div className="ft__top">
           <div className="ft__brand">
             <a className="ft__logo" href="/" onClick={(e) => go(e, '/')} aria-label="India Blockchain Alliance home page">
-              <img src="/iba-logo-blocks.png" alt="" />
+              <img src="/iba-logo-blocks.webp" alt="" width="360" height="334" />
             </a>
             {/* IBA's one tagline (by request, 11-06) */}
             <p className="ft__triad">Rewriting the Rules with Web3</p>
