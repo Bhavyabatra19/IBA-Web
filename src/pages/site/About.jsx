@@ -14,6 +14,8 @@ import FounderLetter from '../../sections/FounderLetter'
 import MissionPillars from '../../components/MissionPillars'
 import { FRAMEWORK } from '../../data/framework'
 import { FACTS, REGIONS_LINE } from '../../data/facts'
+import InitiativeCarousel from '../../components/InitiativeCarousel'
+import { INITIATIVES_IN_ORDER } from '../../data/initiatives'
 
 export default function About() {
   return (
@@ -120,6 +122,12 @@ export default function About() {
             { value: FACTS.partners.text, count: FACTS.partners.n, suffix: FACTS.partners.suffix, label: 'Ecosystem Partners' },
           ]}
         />
+      </Section>
+
+      {/* moved here from the Expertise page, just before the founder's note
+          (content review, 11-17) */}
+      <Section id="initiatives" eyebrow="India Entry" title="Web3 and Emerging Tech Market Expansion">
+        <InitiativeCarousel items={INITIATIVES_IN_ORDER} />
       </Section>
 
       <Section id="team" eyebrow="Founder" title="Welcome to IBA">

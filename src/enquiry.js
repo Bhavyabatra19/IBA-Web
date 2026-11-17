@@ -62,6 +62,8 @@ export const TOPICS = [
   'Red Club (learner)',
   'Red Club / Verifyble (institution)',
   'Web3 Corridor',
+  /* added 11-17, with the About page's India Entry section */
+  'India Market Entry',
   'Ecosystem partnership',
   'Membership',
   /* ⚠ NAMING, carried over from nav.js: "Tech4Good" matches none of the four
@@ -202,6 +204,7 @@ export const ROUTING = {
     'Red Club (learner)': 'education-student',
     'Red Club / Verifyble (institution)': 'education-institution',
     'Web3 Corridor': 'corridor',
+    'India Market Entry': 'corridor',
     'Ecosystem partnership': 'partnerships',
     Membership: 'partnerships',
     'Tech4Good / Green Chain Protocol': 'partnerships',
