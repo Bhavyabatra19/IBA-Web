@@ -246,19 +246,19 @@ a { color: inherit; }
 
 /* back cover / price -------------------------------------------- */
 .page--back { background: var(--black); color: #fff; }
-.price { padding: 8cqw 8cqw 0; }
+.price { padding: 7cqw 8cqw 0; }
 .price .eyebrow { color: var(--red); }
 .price__tier { font-size: 6cqw; line-height: 1.1; margin: 0 0 1cqw; }
-.price__sub { font-size: 2.6cqw; color: var(--on-black); margin: 0 0 6cqw; }
-.price__box { border: 1px solid #333; border-top: 1.4cqw solid var(--red); padding: 5cqw 5cqw 4.4cqw; }
-.price__amt { font-size: 12cqw; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+.price__sub { font-size: 2.6cqw; color: var(--on-black); margin: 0 0 4cqw; }
+.price__box { border: 1px solid #333; border-top: 1.4cqw solid var(--red); padding: 4cqw 5cqw 3cqw; }
+.price__amt { font-size: 10.5cqw; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
 .price__amt small { font-size: 3.4cqw; color: var(--on-black); letter-spacing: 0.08em; margin-left: 1cqw; }
 .price__note { font-size: 2.2cqw; color: var(--on-black); margin: 3cqw 0 0; line-height: 1.55; }
 .price__note b { color: #fff; }
-.price__list { list-style: none; padding: 0; margin: 4cqw 0 0; font-size: 2.4cqw; color: #ddd; }
-.price__list li { padding: 1.3cqw 0; border-top: 1px solid #2a2a2a; }
+.price__list { list-style: none; padding: 0; margin: 3cqw 0 0; font-size: 2.3cqw; color: #ddd; }
+.price__list li { padding: 0.95cqw 0; border-top: 1px solid #2a2a2a; }
 .price__list li::before { content: ''; display: inline-block; width: 1.5cqw; height: 1.5cqw; background: var(--red); margin-right: 2cqw; vertical-align: 0.2cqw; }
-.ctas { display: flex; gap: 2.4cqw; margin-top: 5cqw; flex-wrap: wrap; }
+.ctas { display: flex; gap: 2.4cqw; margin-top: 3.5cqw; flex-wrap: wrap; }
 .btn { display: inline-flex; align-items: center; justify-content: center; height: 9cqw; padding: 0 5cqw; font-size: 2.1cqw; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; border: 1px solid #fff; color: #fff; }
 .btn--red { background: var(--red); border-color: var(--red); }
 .btn:hover { background: #fff; color: var(--ink); }
