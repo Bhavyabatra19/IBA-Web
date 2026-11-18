@@ -24,6 +24,9 @@ global.window = {}
 require(path.join(ROOT, 'assets/tiers.js'))
 const W3C = global.window.W3C
 
+/* values filled in for one member's letter (see --member below) */
+const FILL = {}
+
 const RED = 'D71920'
 const INK = '0E0E0E'
 const MUTED = '5C5C5C'
@@ -37,7 +40,7 @@ const IBA_LOGO = fs.readFileSync(path.join(ROOT, 'assets/iba-logo-small.png'))
 const runs = (parts, base = {}) =>
   parts.map((p) => {
     if (typeof p === 'string') return new TextRun({ text: p, ...base })
-    if (p.ph) return new TextRun({ text: `[${p.ph}]`, highlight: 'yellow', ...base })
+    if (p.ph) return FILL[p.ph] ? new TextRun({ text: FILL[p.ph], ...base }) : new TextRun({ text: `[${p.ph}]`, highlight: 'yellow', ...base })
     if (p.b) return new TextRun({ text: p.b, bold: true, ...base })
     if (p.red) return new TextRun({ text: p.red, color: RED, ...base })
     if (p.link)
@@ -80,7 +83,9 @@ function letter(key) {
       { b: `${price} per year` },
       '. ',
       { ph: 'Company name' },
-      ' will make the first payment of ',
+      ...(FILL.payAgreed
+        ? [' will settle the dues as agreed: ', { ph: 'payment arrangement' }, ', as set out in your invoice.']
+        : [' will make the first payment of ',
       { ph: 'amount' },
       ' on ',
       { ph: 'date' },
@@ -90,7 +95,7 @@ function letter(key) {
       { ph: 'amount' },
       ' on ',
       { ph: 'dates' },
-      ', as set out in your invoice.',
+      ', as set out in your invoice.']),
     ]),
 
     para([{ b: 'Welcome to the Web3 Corridor!' }], { spacing: { before: 200, after: 80 }, run: { size: 32 } }),
@@ -223,6 +228,20 @@ const OUT = path.join(ROOT, 'word')
 fs.mkdirSync(OUT, { recursive: true })
 const FILES = { club: 'club-class', premier: 'premier-class', gold: 'gold-class', xchange: 'gold-xchange' }
 ;(async () => {
+  /* one member's letter:
+       node build-welcome-docx.cjs --member members/x/fill.json
+     the JSON gives the tier, the output file and the values to fill in
+     (keys are the placeholder names, e.g. "Company name"); anything not
+     given stays a highlighted placeholder */
+  const m = process.argv.indexOf('--member')
+  if (m > -1) {
+    const spec = JSON.parse(fs.readFileSync(process.argv[m + 1], 'utf8'))
+    Object.assign(FILL, spec.fill)
+    const file = path.resolve(path.dirname(process.argv[m + 1]), spec.out)
+    fs.writeFileSync(file, await Packer.toBuffer(letter(spec.tier)))
+    console.log('wrote', path.relative(process.cwd(), file))
+    return
+  }
   for (const [key, slug] of Object.entries(FILES)) {
     const file = path.join(OUT, `welcome-letter-${slug}.docx`)
     fs.writeFileSync(file, await Packer.toBuffer(letter(key)))

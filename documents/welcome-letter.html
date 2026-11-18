@@ -339,17 +339,24 @@
     if (BLANKS()) {
       tail = `${co} will make the first payment of <b>[amount]</b> on [date], and the balance is payable in [no.] further instalments of <b>[amount]</b> on [dates], as set out in your invoice.`
     }
+    /* ?pay=agreed: the payment plan is bespoke, so the letter says "as
+       agreed" and leaves the arrangement to be written in */
+    if (QP.get('pay') === 'agreed') tail = `${co} will settle the dues as agreed: [payment arrangement], as set out in your invoice.`
     $('payPara').innerHTML = `It was a pleasure speaking with you again today. As discussed, we will lock in your ${tier} membership dues of <b>${dues} per year</b>. ${tail}`
-    set('first', BLANKS() ? '[amount]' : amt)
-    set('payable', BLANKS() ? 'In [no.] instalments' : n === 1 ? 'In full on activation' : `In ${n} instalments`)
+    set('first', BLANKS() || QP.get('pay') === 'agreed' ? '[amount]' : amt)
+    set('payable', QP.get('pay') === 'agreed' ? 'As agreed' : BLANKS() ? 'In [no.] instalments' : n === 1 ? 'In full on activation' : `In ${n} instalments`)
   }
 
   /* blank-lines mode ------------------------------------------------ */
   const BLANKS = () => $('blanks').checked
-  const WIDTH = { 'first name': 30, 'last name': 32, title: 28, 'company name': 46, 'city, country': 40, date: 28, 'no.': 9, amount: 24, dates: 44, 'start date': 26, 'end date': 26, number: 14, 'onboarding form link': 60, 'payment link': 56, name: 32, phone: 32, '2': 6 }
+  const WIDTH = { 'payment arrangement': 90, 'first name': 30, 'last name': 32, title: 28, 'company name': 46, 'city, country': 40, date: 28, 'no.': 9, amount: 24, dates: 44, 'start date': 26, 'end date': 26, number: 14, 'onboarding form link': 60, 'payment link': 56, name: 32, phone: 32, '2': 6 }
+  /* a letter for a real member can fix the date, member number and term
+     from the URL (?date=…&num=0001&term=…); anything not given stays a
+     placeholder or a blank line */
+  const QP = new URLSearchParams(location.search)
   const SWAP = [
-    ['#refBlock', '16 November 2026<br>Member ID W3C-<span data-f="code"></span>-0001', '[date]<br>Member ID W3C-<span data-f="code"></span>-[number]'],
-    ['#termV', '[01 Dec 2026 – 30 Nov 2027]', '[start date] – [end date]'],
+    ['#refBlock', `${QP.get('date') || '16 November 2026'}<br>Member ID W3C-<span data-f="code"></span>-${QP.get('num') || '0001'}`, `${QP.get('date') || '[date]'}<br>Member ID W3C-<span data-f="code"></span>-${QP.get('num') || '[number]'}`],
+    ['#termV', QP.get('term') || '[01 Dec 2026 – 30 Nov 2027]', QP.get('term') || '[start date] – [end date]'],
   ]
   function toBlanks(on) {
     if (!on) {
