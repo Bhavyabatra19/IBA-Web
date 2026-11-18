@@ -106,6 +106,33 @@
   .goals div + div { border-left: 1px solid var(--line); }
   .goals em { font-style: normal; display: block; font-size: 16pt; color: var(--red); line-height: 1; margin-bottom: 1.6mm; }
   .goals b { display: block; font-weight: 400; font-size: 10.5pt; color: var(--ink); margin-bottom: 1mm; }
+  /* The Circle pathway */
+  .ladder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 5mm; border: 1px solid var(--line); }
+  .rung { display: flex; flex-direction: column; border-left: 1px solid var(--line); }
+  .rung:first-child { border-left: 0; }
+  .rung__head { padding: 3.4mm 4mm 3mm; background: var(--alt); border-bottom: 1px solid var(--line); }
+  .rung--now .rung__head { background: var(--red); color: #fff; border-bottom-color: var(--red); }
+  .rung--far { opacity: 0.75; }
+  .rung__tag { display: block; font-size: 6.4pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+  .rung--now .rung__tag { color: #ffe1e2; }
+  .rung__name { font-size: 13pt; line-height: 1.2; margin-top: 1mm; }
+  .rung__sub { font-size: 7.6pt; color: var(--muted); }
+  .rung--now .rung__sub { color: #ffe1e2; }
+  .rung__body { padding: 3mm 4mm 4mm; font-size: 8pt; line-height: 1.45; }
+  .rung__body p { margin: 0 0 2.4mm; color: var(--muted); }
+  .rung__body .label { margin: 0 0 1.2mm; color: var(--ink); }
+  .plain, .ready { margin: 0; padding: 0; list-style: none; }
+  .plain li { position: relative; padding: 0 0 1.3mm 3.2mm; }
+  .plain li::before { content: ''; position: absolute; left: 0; top: 1.5mm; width: 1.4mm; height: 1.4mm; background: var(--red); }
+  .ready li { position: relative; padding: 0 0 1.5mm 4.6mm; }
+  .ready li::before, .dot { content: ''; position: absolute; left: 0; top: 1.1mm; width: 2.6mm; height: 2.6mm; border-radius: 50%; box-sizing: border-box; }
+  .ready li.y::before, .dot.y { background: var(--red); }
+  .ready li.p::before, .dot.p { border: 0.6mm solid var(--red); background: linear-gradient(90deg, var(--red) 50%, #fff 50%); }
+  .ready li.n::before, .dot.n { border: 0.6mm solid var(--line-strong); background: #fff; }
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 2mm 6mm; margin-top: 4mm; font-size: 7.6pt; color: var(--muted); }
+  .legend span { position: relative; padding-left: 4mm; }
+  .legend .dot { position: absolute; left: 0; top: 0.4mm; }
+  .legend em { font-style: normal; flex-basis: 100%; }
 </style>
 </head>
 <body>
@@ -146,10 +173,76 @@
       <div><em>03</em><b>Partners and profile</b>Investors, building owners, housing authorities and technology, legal and compliance partners met through the corridor; the story told across IBA's channels.</div>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap · Prepared 18 Nov 2026</div><div class="foot__page">Page 1 / 5</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap · Prepared 18 Nov 2026</div><div class="foot__page">Page 1 / 6</div></footer>
 </section>
 
-<!-- ======================= 2 · EAGLE-EYE VIEW ======================= -->
+<!-- ======================= 2 · THE CIRCLE PATHWAY ======================= -->
+<section class="sheet">
+  <header class="mast mast--slim">
+    <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
+    <div class="mast__by"><span>An initiative by</span><img src="../../assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+  <div class="sheet__body">
+    <p class="eyebrow">Your pathway · through IBA and The Circle</p>
+    <h1 class="title">Where Club Class leads</h1>
+    <p class="lede">Club Class includes The Circle's Global Member programme. As Fluid Equity grows, IBA can refer it to The Circle's next levels. Each level has its own criteria; the gates in this roadmap build the evidence for the next one.</p>
+
+    <div class="ladder">
+      <div class="rung rung--now">
+        <div class="rung__head"><span class="rung__tag">You are here</span><div class="rung__name">Global Member</div><div class="rung__sub">Included in Club Class</div></div>
+        <div class="rung__body">
+          <p>Early-stage founders joining an international ecosystem before they need more intensive support.</p>
+          <p class="label">Includes</p>
+          <ul class="plain"><li>The ecosystem, events, workshops and roundtables</li><li>Directories, resources, KPI frameworks, data-room guidance</li><li>Up to 4 hours of mentorship a month</li><li>One podcast recording</li></ul>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rung__head"><span class="rung__tag">Next · target year one</span><div class="rung__name">Startup Member</div><div class="rung__sub">Annual · by referral</div></div>
+        <div class="rung__body">
+          <p>Strategic guidance to accelerate growth, sharpen commercial positioning and prepare for fundraising.</p>
+          <p class="label">What it takes · our early view</p>
+          <ul class="ready">
+            <li class="y">Defined business model: Class A / Class B</li>
+            <li class="y">Founders and core team in place</li>
+            <li class="y">Clear objective: the pilot fund</li>
+            <li class="p">Service ready for market: legal work under way</li>
+            <li class="n">Early validation: the first building</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rung__head"><span class="rung__tag">Later · when the pilot runs</span><div class="rung__name">Seed Accelerator</div><div class="rung__sub">3 months · selective</div></div>
+        <div class="rung__body">
+          <p>Structured execution for high-potential startups with early traction, preparing a round.</p>
+          <p class="label">What it takes · our early view</p>
+          <ul class="ready">
+            <li class="n">MVP launched, with initial traction</li>
+            <li class="p">Recurring revenue, or a clear path: rent</li>
+            <li class="p">A round of US$100K–1M: to confirm</li>
+            <li class="p">GCC focus or international scalability</li>
+            <li class="p">Team able to join weekly KPI reviews</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rung rung--far">
+        <div class="rung__head"><span class="rung__tag">Beyond year one</span><div class="rung__name">Series A Accelerator</div><div class="rung__sub">4 months · selective</div></div>
+        <div class="rung__body">
+          <p>For revenue-generating companies preparing institutional fundraising and international expansion.</p>
+          <p class="label">What it takes</p>
+          <ul class="plain"><li>Established revenue and demonstrated traction</li><li>Credible unit economics</li><li>A round of US$500K–3M</li><li>A defined expansion strategy</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot y"></i>In place</span><span><i class="dot p"></i>In progress or to confirm</span><span><i class="dot n"></i>Not yet</span>
+      <em>Early view from Fluid Equity's public information. The Circle assesses every application individually; admission to the accelerators is selective, and introductions or fundraising outcomes are not guaranteed.</em>
+    </div>
+  </div>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 2 / 6</div></footer>
+</section>
+
+<!-- ======================= 3 · EAGLE-EYE VIEW ======================= -->
 <section class="sheet">
   <header class="mast mast--slim">
     <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
@@ -157,7 +250,7 @@
   </header>
   <div class="sheet__body">
     <p class="eyebrow">The year at a glance</p>
-    <h1 class="title">Four stages, four gates</h1>
+    <h1 class="title">Four stages, four gates, one pathway</h1>
     <p class="lede">Membership is a journey, not a static subscription: every stage is gated, and every gate is earned. Each quarter closes with a gate we review together before the next stage opens.</p>
 
     <div class="year">
@@ -188,7 +281,7 @@
             <li>Roundtables and member roundups</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 2 · Pilot plan set</b>Blueprint signed off; first-building criteria and regulatory steps clear.</div>
+        <div class="gate"><b>Gate 2 · Pilot plan set</b>Blueprint signed off; first-building criteria and regulatory steps clear; evidence mapped to Startup Member criteria.</div>
       </div>
       <div class="q">
         <div class="q__head"><div class="q__when">Q3 · Jun – Aug 2027</div><div class="q__name">Fund Readiness &amp; Story</div></div>
@@ -197,12 +290,12 @@
           <ul>
             <li>Growth advisory: deck and plan reviews, tailored funding preparation</li>
             <li>Data room completed in the vault, using the data-room guidance</li>
-            <li>Podcast recording: the rent-to-equity story</li>
+            <li>Podcast recording: the rent-to-equity story (optional distribution through The Block channels and newsletter, at extra cost)</li>
             <li>Media promotion: podcast, live TV, crypto news media</li>
             <li>Investor and industry networking sessions</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 3 · Fund-ready</b>Final deck, business plan, model and data room ready for qualified investors.</div>
+        <div class="gate"><b>Gate 3 · Fund-ready</b>Final deck, model and data room ready; if the pilot is validated, IBA refers Fluid Equity to The Circle for Startup Member.</div>
       </div>
       <div class="q">
         <div class="q__head"><div class="q__when">Q4 · Sep – Nov 2027</div><div class="q__name">Partners &amp; Momentum</div></div>
@@ -216,7 +309,7 @@
             <li>Year-end review against the Q1 baseline</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 4 · Year one complete</b>Progress reviewed against the three goals; year-two plan agreed.</div>
+        <div class="gate"><b>Gate 4 · Year one complete</b>Goals reviewed; year-two path chosen: Club Class, Startup Member, or Seed Accelerator once its criteria are met.</div>
       </div>
     </div>
 
@@ -225,7 +318,7 @@
       <span><b>Up to 4 hours of mentorship a month</b> (12 hours a quarter) · startup resources, KPI frameworks, playbooks and templates · member roundups · startup, investor and mentor directories · preferential pricing on Web3 Corridor services and products</span>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 2 / 5</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 3 / 6</div></footer>
 </section>
 
 <!-- ======================= 3 · Q1 FORTNIGHT BY FORTNIGHT ======================= -->
@@ -302,7 +395,7 @@
       </div>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 3 / 5</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 4 / 6</div></footer>
 </section>
 
 <!-- ======================= 4 · Q1 ACTIONS AND GATE ======================= -->
@@ -331,7 +424,7 @@
           <tr><td class="n">10</td><td>Attend a community event; shortlist investors, owners and partners from the directories</td><td class="w">31 Jan</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
           <tr><td class="n">11</td><td>Mentorship 3: pilot-fund deck review 1 (growth advisory)</td><td class="w">14 Feb</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
           <tr><td class="n">12</td><td>Join the first curated roundtable</td><td class="w">14 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
-          <tr><td class="n">13</td><td>Draft GTM blueprint v1: pilot market, first-building criteria, product order</td><td class="w">21 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
+          <tr><td class="n">13</td><td>Draft GTM blueprint v1: pilot market, first-building criteria, product order; record readiness against The Circle criteria</td><td class="w">21 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
           <tr><td class="n">14</td><td>Gate 1 review and Q2 plan</td><td class="w">28 Feb</td><td class="o"><span class="who who--iba">IBA</span> <span class="who">FE</span></td></tr>
         </tbody>
       </table>
@@ -347,6 +440,7 @@
             <li>Three goals and their KPIs agreed</li>
             <li>GTM blueprint v1 drafted</li>
             <li>Pilot-fund deck reviewed once, actions noted</li>
+            <li>Readiness against The Circle criteria recorded</li>
             <li>One community event and one roundtable attended</li>
             <li>LinkedIn spotlight published</li>
           </ul>
@@ -358,7 +452,7 @@
       </div>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 4 / 5</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 5 / 6</div></footer>
 </section>
 
 <!-- ======================= 5 · HOW TO PROCEED ======================= -->
@@ -384,7 +478,7 @@
       <div class="col">
         <h3>On the welcome call</h3>
         <ol>
-          <li><div>Walk through this roadmap<span>Confirm the three goals, the four stages and the Gate 1 criteria.</span></div></li>
+          <li><div>Walk through this roadmap<span>Confirm the three goals, the four stages, the Gate 1 criteria and the pathway through The Circle.</span></div></li>
           <li><div>Book Q1's three mentorship blocks<span>December, January and February, four hours each.</span></div></li>
           <li><div>Agree how we work<span>A short monthly check-in inside the mentorship hours; email updates between.</span></div></li>
           <li><div>Hand over the starter kit<span>KPI framework, playbooks, templates and the data-room checklist.</span></div></li>
@@ -403,7 +497,7 @@
 
     <div class="principle"><b>How the gates work.</b> At the end of each quarter we review the gate together. When its criteria are met, the next stage opens; if something is outstanding, we agree what closes it and carry it into the next quarter's first weeks. The gates keep the year moving at Fluid Equity's pace: legal first, no rushing the foundation.</div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · hello@indiablockchainalliance.org</div><div class="foot__page">Page 5 / 5</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · hello@indiablockchainalliance.org</div><div class="foot__page">Page 6 / 6</div></footer>
 </section>
 
 </body>
