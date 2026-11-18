@@ -89,11 +89,28 @@
   .col ul li::before { content: ''; position: absolute; left: 0; top: 3mm; width: 1.5mm; height: 1.5mm; background: var(--red); }
   .col ul li span { color: var(--muted); display: block; font-size: 7.6pt; }
   .principle { margin-top: 5mm; background: var(--alt); border-left: 1.2mm solid var(--red); padding: 3mm 4.5mm; font-size: 8.6pt; }
+  /* page 1: Fluid Equity today, and the year's goals */
+  .profile { display: grid; grid-template-columns: 1.5fr 1fr; gap: 8mm; margin-top: 5mm; }
+  .profile__main p { font-size: 9.6pt; line-height: 1.55; margin: 0 0 3mm; }
+  .profile__main b { font-weight: 400; color: var(--red); }
+  .prods { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); }
+  .prods div { padding: 2.4mm 3mm 2.4mm 0; font-size: 8pt; color: var(--muted); line-height: 1.4; }
+  .prods div + div { padding-left: 3mm; border-left: 1px solid var(--line); }
+  .prods b { display: block; color: var(--ink); font-size: 9.6pt; font-weight: 400; margin-bottom: 0.6mm; }
+  .profile__facts { background: var(--alt); padding: 3mm 4.5mm; }
+  .profile__facts div { padding: 1.8mm 0; border-bottom: 1px solid var(--line); font-size: 8.4pt; line-height: 1.4; }
+  .profile__facts div:last-child { border-bottom: 0; }
+  .profile__facts .label { display: block; margin: 0 0 0.4mm; }
+  .goals { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .goals div { padding: 3.4mm 4mm; font-size: 8.4pt; line-height: 1.45; color: var(--muted); }
+  .goals div + div { border-left: 1px solid var(--line); }
+  .goals em { font-style: normal; display: block; font-size: 16pt; color: var(--red); line-height: 1; margin-bottom: 1.6mm; }
+  .goals b { display: block; font-weight: 400; font-size: 10.5pt; color: var(--ink); margin-bottom: 1mm; }
 </style>
 </head>
 <body>
 
-<!-- ======================= 1 · EAGLE-EYE VIEW ======================= -->
+<!-- ======================= 1 · FLUID EQUITY AND THE YEAR'S GOALS ======================= -->
 <section class="sheet">
   <header class="mast">
     <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR<small>MEMBER ROADMAP</small></div></div>
@@ -101,66 +118,105 @@
   </header>
   <div class="sheet__body">
     <p class="eyebrow">Fluid Equity · Club Class · 1 Dec 2026 – 30 Nov 2027</p>
-    <h1 class="title">Your 12-month roadmap: the year at a glance</h1>
-    <p class="lede">Membership is a journey, not a static subscription: every stage is gated, and every gate is earned. The year runs in four stages, each closing with a gate we review together before the next stage opens.</p>
+    <h1 class="title">The rent should leave something behind.</h1>
+    <p class="lede">A 12-month Club Class roadmap for Fluid Equity, built around where the company is today: the model designed, counsel engaged, the pilot fund forming and the first building ahead.</p>
+
+    <div class="profile">
+      <div class="profile__main">
+        <p class="label">Fluid Equity today</p>
+        <p>Fluid Equity builds <b>rent-to-equity structures</b> for housing. Investors (Class A) buy the building with no bank loan and are paid first, when the building earns it. Residents (Class B) pay ordinary rent and build a <b>capped stake of up to a quarter of the home</b>, without a down payment or a mortgage. The stake is recorded, and it is not a coin.</p>
+        <div class="prods">
+          <div><b>Fluid Equity</b>Core. No loan: part of the rent becomes a share of the home.</div>
+          <div><b>Fluid Edge</b>Buildings that already have a mortgage. The lender is paid first.</div>
+          <div><b>Fluid Entry</b>Public and authority housing. A credit, not a share.</div>
+        </div>
+      </div>
+      <div class="profile__facts">
+        <div><span class="label">Base</span>Vergennes, Vermont · eastern US pilot</div>
+        <div><span class="label">Stage</span>Legal first: counsel engaged, no building bought yet</div>
+        <div><span class="label">Capital</span>Pilot fund; Class A investors at 6%, paid when the building earns it</div>
+        <div><span class="label">Team</span>Andrew Lee and Peter Stevens, co-founders · Britt Crompton, CMO · Anthony Craig, blockchain educator</div>
+      </div>
+    </div>
+
+    <p class="label" style="margin-top:5mm">Three goals for the year · proposed, to confirm on the welcome call</p>
+    <div class="goals">
+      <div><em>01</em><b>Pilot fund investor-ready</b>Deck, business plan, model and data room that answer a Class A investor's questions first time.</div>
+      <div><em>02</em><b>First-building plan set</b>Pilot market, building criteria and the order for Fluid Equity, Edge and Entry, with the regulatory steps mapped alongside counsel.</div>
+      <div><em>03</em><b>Partners and profile</b>Investors, building owners, housing authorities and technology, legal and compliance partners met through the corridor; the story told across IBA's channels.</div>
+    </div>
+  </div>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap · Prepared 18 Nov 2026</div><div class="foot__page">Page 1 / 5</div></footer>
+</section>
+
+<!-- ======================= 2 · EAGLE-EYE VIEW ======================= -->
+<section class="sheet">
+  <header class="mast mast--slim">
+    <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
+    <div class="mast__by"><span>An initiative by</span><img src="../../assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+  <div class="sheet__body">
+    <p class="eyebrow">The year at a glance</p>
+    <h1 class="title">Four stages, four gates</h1>
+    <p class="lede">Membership is a journey, not a static subscription: every stage is gated, and every gate is earned. Each quarter closes with a gate we review together before the next stage opens.</p>
 
     <div class="year">
       <div class="q q--now">
-        <div class="q__head"><div class="q__when">Q1 · Dec 2026 – Feb 2027</div><div class="q__name">Foundation &amp; Onboarding</div></div>
+        <div class="q__head"><div class="q__when">Q1 · Dec 2026 – Feb 2027</div><div class="q__name">Foundation &amp; Baseline</div></div>
         <div class="q__body">
-          <p>Get set up, verified and visible inside the ecosystem, and agree what success looks like for the year.</p>
+          <p>Get set up and verified, and agree where the pilot stands today.</p>
           <ul>
-            <li>Official Club Badge, verifiable vault and directory listing</li>
-            <li>Baseline on the KPI framework; 12-month goals agreed</li>
-            <li>GTM blueprint started</li>
-            <li>First pitch deck review</li>
-            <li>First community event and roundtable</li>
-            <li>Membership spotlight on IBA LinkedIn</li>
+            <li>Club Badge, verifiable vault and directory listing</li>
+            <li>Baseline on the KPI framework: pilot fund, building pipeline, legal milestones</li>
+            <li>Goals for the year confirmed</li>
+            <li>GTM blueprint kick-off: pilot market and product order</li>
+            <li>Regulatory mentoring on the Class A / Class B model, alongside counsel</li>
+            <li>Pilot-fund deck review 1</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 1 · Corridor-ready</b>Verified profile live, goals and baseline agreed, GTM blueprint draft in hand.</div>
+        <div class="gate"><b>Gate 1 · Corridor-ready</b>Verified profile live, baseline and goals agreed, GTM blueprint draft in hand.</div>
       </div>
       <div class="q">
-        <div class="q__head"><div class="q__when">Q2 · Mar – May 2027</div><div class="q__name">Strategy &amp; Positioning</div></div>
+        <div class="q__head"><div class="q__when">Q2 · Mar – May 2027</div><div class="q__name">Pilot Strategy</div></div>
         <div class="q__body">
-          <p>Turn the draft into a go-to-market plan you can act on, with the regulatory picture clear.</p>
+          <p>Turn the model into a pilot plan: where, which building, in what order.</p>
           <ul>
-            <li>GTM blueprint completed: product lifecycle, business plan, expansion strategy</li>
-            <li>Regulatory mentoring for your target markets</li>
-            <li>Business plan review</li>
-            <li>Ecosystem introductions sought through the directories and roundtables</li>
+            <li>GTM blueprint completed: pilot market, first-building criteria, sequence for Equity, Edge and Entry</li>
+            <li>Business plan review: the pilot-fund model</li>
+            <li>Regulatory mentoring: the resident stake and its record</li>
+            <li>Partner map: owners, housing authorities, technology, legal and compliance</li>
             <li>Roundtables and member roundups</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 2 · Strategy set</b>GTM blueprint signed off, target markets and regulatory steps clear.</div>
+        <div class="gate"><b>Gate 2 · Pilot plan set</b>Blueprint signed off; first-building criteria and regulatory steps clear.</div>
       </div>
       <div class="q">
-        <div class="q__head"><div class="q__when">Q3 · Jun – Aug 2027</div><div class="q__name">Funding Readiness &amp; Visibility</div></div>
+        <div class="q__head"><div class="q__when">Q3 · Jun – Aug 2027</div><div class="q__name">Fund Readiness &amp; Story</div></div>
         <div class="q__body">
-          <p>Get investor-ready and raise Fluid Equity's profile across IBA's channels.</p>
+          <p>Make the pilot fund investor-ready and tell the rent-to-equity story.</p>
           <ul>
             <li>Growth advisory: deck and plan reviews, tailored funding preparation</li>
-            <li>Data room completed in your vault, using the data-room guidance</li>
-            <li>Your podcast recording</li>
+            <li>Data room completed in the vault, using the data-room guidance</li>
+            <li>Podcast recording: the rent-to-equity story</li>
             <li>Media promotion: podcast, live TV, crypto news media</li>
             <li>Investor and industry networking sessions</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 3 · Investor-ready</b>Final deck, business plan and data room ready to share; funding ask defined.</div>
+        <div class="gate"><b>Gate 3 · Fund-ready</b>Final deck, business plan, model and data room ready for qualified investors.</div>
       </div>
       <div class="q">
-        <div class="q__head"><div class="q__when">Q4 · Sep – Nov 2027</div><div class="q__name">Market Access &amp; Growth</div></div>
+        <div class="q__head"><div class="q__when">Q4 · Sep – Nov 2027</div><div class="q__name">Partners &amp; Momentum</div></div>
         <div class="q__body">
-          <p>Put Fluid Equity in front of the corridor and convert relationships into opportunities.</p>
+          <p>Put Fluid Equity in front of the corridor and move toward the first building.</p>
           <ul>
-            <li>Showcase at community events and roundtables</li>
+            <li>Showcase at community events and curated roundtables</li>
             <li>Dubai co-hosted event, at member pricing</li>
-            <li>Follow-up on potential deal-flow and partner opportunities</li>
-            <li>Preferential pricing on any Corridor services you need</li>
+            <li>Follow-up on investor and partner conversations</li>
+            <li>Preferential pricing on any Corridor services needed</li>
             <li>Year-end review against the Q1 baseline</li>
           </ul>
         </div>
-        <div class="gate"><b>Gate 4 · Year one complete</b>Results reviewed against goals; plan for year two agreed.</div>
+        <div class="gate"><b>Gate 4 · Year one complete</b>Progress reviewed against the three goals; year-two plan agreed.</div>
       </div>
     </div>
 
@@ -169,10 +225,10 @@
       <span><b>Up to 4 hours of mentorship a month</b> (12 hours a quarter) · startup resources, KPI frameworks, playbooks and templates · member roundups · startup, investor and mentor directories · preferential pricing on Web3 Corridor services and products</span>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap · Prepared 18 Nov 2026</div><div class="foot__page">Page 1 / 4</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 2 / 5</div></footer>
 </section>
 
-<!-- ======================= 2 · Q1 WEEK BY WEEK ======================= -->
+<!-- ======================= 3 · Q1 FORTNIGHT BY FORTNIGHT ======================= -->
 <section class="sheet">
   <header class="mast mast--slim">
     <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
@@ -180,7 +236,7 @@
   </header>
   <div class="sheet__body">
     <p class="eyebrow">Quarter one in detail · 1 Dec 2026 – 28 Feb 2027</p>
-    <h1 class="title">Q1: Foundation &amp; Onboarding, fortnight by fortnight</h1>
+    <h1 class="title">Q1: Foundation &amp; Baseline, fortnight by fortnight</h1>
     <p class="lede">Four workstreams run side by side. December is lighter, around the year-end holidays; the heavy lifting is in January and February.</p>
 
     <table class="gantt">
@@ -197,31 +253,31 @@
           <td class="ws">Onboarding &amp; access<small>Badge · vault · directories</small></td>
           <td><span class="bar">Agreement signed; onboarding form; welcome call</span></td>
           <td><span class="bar">Club Badge issued; vault and directory listing set up</span></td>
-          <td><span class="bar bar--ink">Core documents loaded to the vault</span></td>
+          <td><span class="bar bar--ink">Pilot deck, model and structure summary in the vault</span></td>
           <td><span class="bar bar--ink">Directory profile complete</span></td>
           <td></td><td></td>
         </tr>
         <tr>
-          <td class="ws">Goals &amp; baseline<small>KPI frameworks · playbooks</small></td>
-          <td><span class="bar">Mentorship 1: goals for the year</span></td>
-          <td><span class="bar bar--ink">KPI baseline using the KPI framework</span></td>
-          <td><span class="bar">12-month goals and KPIs agreed</span></td>
+          <td class="ws">Baseline &amp; goals<small>KPI frameworks · playbooks</small></td>
+          <td><span class="bar">Mentorship 1: the three goals</span></td>
+          <td><span class="bar bar--ink">KPI baseline: fund, pipeline, legal milestones</span></td>
+          <td><span class="bar">Goals and KPIs agreed</span></td>
           <td></td><td></td>
           <td><span class="bar bar--ink">KPI check against baseline</span></td>
         </tr>
         <tr>
-          <td class="ws">Strategy &amp; advisory<small>GTM blueprint · growth advisory</small></td>
+          <td class="ws">Pilot strategy<small>GTM blueprint · regulatory · growth advisory</small></td>
           <td></td><td></td>
-          <td><span class="bar">Mentorship 2: GTM blueprint kick-off</span></td>
-          <td><span class="bar">Regulatory mentoring session</span></td>
-          <td><span class="bar">Mentorship 3: pitch deck review 1</span></td>
+          <td><span class="bar">Mentorship 2: GTM kick-off, pilot market and product order</span></td>
+          <td><span class="bar">Regulatory mentoring: Class A / Class B model, with counsel's view</span></td>
+          <td><span class="bar">Mentorship 3: pilot-fund deck review 1</span></td>
           <td><span class="bar bar--ink">GTM blueprint draft v1</span></td>
         </tr>
         <tr>
           <td class="ws">Network &amp; visibility<small>Events · roundtables · LinkedIn</small></td>
           <td></td>
-          <td><span class="bar bar--ink">Share brand assets for the spotlight</span></td>
-          <td><span class="bar">IBA LinkedIn membership spotlight</span></td>
+          <td><span class="bar bar--ink">Brand assets and story for the spotlight</span></td>
+          <td><span class="bar">IBA LinkedIn spotlight: the mission</span></td>
           <td><span class="bar">First community event or workshop</span></td>
           <td><span class="bar">First curated roundtable</span></td>
           <td><span class="bar bar--gate">Gate 1 review</span></td>
@@ -233,9 +289,9 @@
       <div class="box">
         <h3>Mentorship hours in Q1 · up to 12</h3>
         <div class="hours">
-          <div><b>December · 4 h</b>Welcome and goal setting; KPI baseline walk-through</div>
-          <div><b>January · 4 h</b>GTM blueprint kick-off; regulatory mentoring</div>
-          <div><b>February · 4 h</b>Pitch deck review 1; Gate 1 review</div>
+          <div><b>December · 4 h</b>Welcome; the three goals; KPI baseline walk-through</div>
+          <div><b>January · 4 h</b>GTM blueprint kick-off; regulatory mentoring on the resident stake</div>
+          <div><b>February · 4 h</b>Pilot-fund deck review 1; Gate 1 review</div>
         </div>
       </div>
       <div class="box">
@@ -246,10 +302,10 @@
       </div>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 2 / 4</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 3 / 5</div></footer>
 </section>
 
-<!-- ======================= 3 · Q1 ACTIONS AND GATE ======================= -->
+<!-- ======================= 4 · Q1 ACTIONS AND GATE ======================= -->
 <section class="sheet">
   <header class="mast mast--slim">
     <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
@@ -266,16 +322,16 @@
           <tr><td class="n">01</td><td>Sign the Membership Agreement and complete the onboarding form</td><td class="w">5 Dec</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
           <tr><td class="n">02</td><td>Welcome call: introductions, ways of working, mentorship schedule</td><td class="w">Week of 7 Dec</td><td class="o"><span class="who who--iba">IBA</span> <span class="who">FE</span></td></tr>
           <tr><td class="n">03</td><td>Issue the official Club Badge; set up the verifiable vault and directory listing</td><td class="w">14 Dec</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
-          <tr><td class="n">04</td><td>Mentorship 1: goals for the year; share the KPI framework and playbooks</td><td class="w">18 Dec</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
+          <tr><td class="n">04</td><td>Mentorship 1: the three goals; share the KPI framework and playbooks</td><td class="w">18 Dec</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
           <tr><td class="n">05</td><td>Send logo, one-line description and link for the LinkedIn spotlight</td><td class="w">22 Dec</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
-          <tr><td class="n">06</td><td>Complete the KPI baseline; load core documents to the vault using the data-room guidance</td><td class="w">10 Jan</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
-          <tr><td class="n">07</td><td>Agree three 12-month goals and the KPIs that track them</td><td class="w">15 Jan</td><td class="o"><span class="who who--iba">IBA</span> <span class="who">FE</span></td></tr>
-          <tr><td class="n">08</td><td>Publish the membership spotlight on IBA LinkedIn</td><td class="w">15 Jan</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
-          <tr><td class="n">09</td><td>Mentorship 2: GTM blueprint kick-off; regulatory mentoring session</td><td class="w">31 Jan</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
-          <tr><td class="n">10</td><td>Attend a community event or workshop; use the directories to shortlist contacts</td><td class="w">31 Jan</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
-          <tr><td class="n">11</td><td>Mentorship 3: pitch deck review 1 (growth advisory)</td><td class="w">14 Feb</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
+          <tr><td class="n">06</td><td>KPI baseline (pilot fund, building pipeline, legal milestones); load the pilot deck, model and structure summary to the vault</td><td class="w">10 Jan</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
+          <tr><td class="n">07</td><td>Agree the three goals and the KPIs that track them</td><td class="w">15 Jan</td><td class="o"><span class="who who--iba">IBA</span> <span class="who">FE</span></td></tr>
+          <tr><td class="n">08</td><td>Publish the LinkedIn spotlight on the mission, cleared with Fluid Equity</td><td class="w">15 Jan</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
+          <tr><td class="n">09</td><td>Mentorship 2: GTM kick-off; regulatory mentoring on the Class A / Class B model</td><td class="w">31 Jan</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
+          <tr><td class="n">10</td><td>Attend a community event; shortlist investors, owners and partners from the directories</td><td class="w">31 Jan</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
+          <tr><td class="n">11</td><td>Mentorship 3: pilot-fund deck review 1 (growth advisory)</td><td class="w">14 Feb</td><td class="o"><span class="who who--iba">IBA</span></td></tr>
           <tr><td class="n">12</td><td>Join the first curated roundtable</td><td class="w">14 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
-          <tr><td class="n">13</td><td>Draft GTM blueprint v1</td><td class="w">21 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
+          <tr><td class="n">13</td><td>Draft GTM blueprint v1: pilot market, first-building criteria, product order</td><td class="w">21 Feb</td><td class="o"><span class="who">Fluid Equity</span></td></tr>
           <tr><td class="n">14</td><td>Gate 1 review and Q2 plan</td><td class="w">28 Feb</td><td class="o"><span class="who who--iba">IBA</span> <span class="who">FE</span></td></tr>
         </tbody>
       </table>
@@ -286,34 +342,26 @@
           <p style="margin:0 0 2mm;color:var(--on-black-muted)">Reviewed together on 28 Feb. Q2 opens when these are in place:</p>
           <ul>
             <li>Club Badge issued; directory profile live</li>
-            <li>Core documents in the verifiable vault</li>
+            <li>Pilot deck, model and structure summary in the vault</li>
             <li>KPI baseline recorded</li>
-            <li>Three 12-month goals agreed</li>
+            <li>Three goals and their KPIs agreed</li>
             <li>GTM blueprint v1 drafted</li>
-            <li>Pitch deck reviewed once, with actions noted</li>
-            <li>At least one community event and one roundtable attended</li>
-            <li>LinkedIn membership spotlight published</li>
+            <li>Pilot-fund deck reviewed once, actions noted</li>
+            <li>One community event and one roundtable attended</li>
+            <li>LinkedIn spotlight published</li>
           </ul>
         </div>
         <div class="box" style="margin-top:4mm">
-          <h3>What Q1 uses from your membership</h3>
-          <ul>
-            <li>Up to 12 hours of mentorship</li>
-            <li>Official Club Badge and verifiable vault</li>
-            <li>Startup, investor and mentor directories</li>
-            <li>KPI frameworks, playbooks, templates and data-room guidance</li>
-            <li>GTM blueprint and growth advisory</li>
-            <li>Community events, curated roundtables and member roundups</li>
-            <li>IBA LinkedIn spotlight</li>
-          </ul>
+          <h3>A note on promotion</h3>
+          <p style="margin:0;color:var(--muted)">IBA's spotlight, podcast and media promotion tell Fluid Equity's mission and model. They do not promote the pilot fund or any investment. Fluid Equity clears investor-facing wording with its counsel first. IBA's mentoring is not legal or investment advice; counsel leads on the legal work.</p>
         </div>
       </div>
     </div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 3 / 4</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · Fluid Equity · Club Class roadmap</div><div class="foot__page">Page 4 / 5</div></footer>
 </section>
 
-<!-- ======================= 4 · HOW TO PROCEED ======================= -->
+<!-- ======================= 5 · HOW TO PROCEED ======================= -->
 <section class="sheet">
   <header class="mast mast--slim">
     <div class="mast__w3"><img src="../../assets/web3-corridor-logo.webp" alt="Web3 Corridor"><div class="mast__name">WEB3 CORRIDOR</div></div>
@@ -327,36 +375,37 @@
       <div class="col">
         <h3>Before 1 December</h3>
         <ol>
-          <li><div>Send the welcome letter and invoice<span>Welcome pack to Fluid Equity, with this roadmap attached.</span></div></li>
-          <li><div>Name the leads on both sides<span>One IBA lead and one Fluid Equity lead own the roadmap and the gate reviews.</span></div></li>
-          <li><div>Share the onboarding form and Membership Agreement<span>So both can be completed by 5 December.</span></div></li>
-          <li><div>Book the welcome call<span>For the week of 7 December.</span></div></li>
+          <li><div>Send the welcome pack<span>Welcome letter, invoice and this roadmap to Fluid Equity.</span></div></li>
+          <li><div>Name the leads on both sides<span>One IBA lead, and one Fluid Equity lead (for example Andrew Lee, who runs operations and partnerships), to own the roadmap and the gates.</span></div></li>
+          <li><div>Share the onboarding form and Membership Agreement<span>So both are complete by 5 December.</span></div></li>
+          <li><div>Book the welcome call<span>Week of 7 December, with the co-founders.</span></div></li>
         </ol>
       </div>
       <div class="col">
         <h3>On the welcome call</h3>
         <ol>
-          <li><div>Walk through this roadmap<span>Confirm the four stages and the Gate 1 criteria.</span></div></li>
+          <li><div>Walk through this roadmap<span>Confirm the three goals, the four stages and the Gate 1 criteria.</span></div></li>
           <li><div>Book Q1's three mentorship blocks<span>December, January and February, four hours each.</span></div></li>
-          <li><div>Agree how we work<span>A short monthly check-in inside the mentorship hours; updates by email between.</span></div></li>
+          <li><div>Agree how we work<span>A short monthly check-in inside the mentorship hours; email updates between.</span></div></li>
           <li><div>Hand over the starter kit<span>KPI framework, playbooks, templates and the data-room checklist.</span></div></li>
         </ol>
       </div>
       <div class="col">
         <h3>What we need from Fluid Equity</h3>
         <ul>
-          <li>Contact details for the lead and billing<span>Name, title, email and address.</span></li>
-          <li>Company documents for the vault<span>Incorporation documents, current deck, business plan or one-pager, key financials.</span></li>
-          <li>Brand assets for the LinkedIn spotlight<span>Logo, a one-line description and a link.</span></li>
-          <li>Three goals for the year<span>A first view to bring to the welcome call; we sharpen them in January.</span></li>
+          <li>Lead and billing contacts<span>Name, title, email and billing address.</span></li>
+          <li>Documents for the vault<span>Pilot-fund deck, financial model, the Class A / Class B structure summary, and what counsel can share.</span></li>
+          <li>Spotlight material<span>Logo, a one-line description and the mission in a sentence: "The rent should leave something behind."</span></li>
+          <li>Where the pilot stands<span>Fund target and progress, buildings under review, legal milestones: the starting point for the baseline.</span></li>
         </ul>
       </div>
     </div>
 
-    <div class="principle"><b>How the gates work.</b> At the end of each quarter we review the gate together. When its criteria are met, the next stage opens; if something is outstanding, we agree what closes it and carry it into the next quarter's first weeks. The gates keep the year moving at Fluid Equity's pace, and make sure each stage builds on the last.</div>
+    <div class="principle"><b>How the gates work.</b> At the end of each quarter we review the gate together. When its criteria are met, the next stage opens; if something is outstanding, we agree what closes it and carry it into the next quarter's first weeks. The gates keep the year moving at Fluid Equity's pace: legal first, no rushing the foundation.</div>
   </div>
-  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · hello@indiablockchainalliance.org</div><div class="foot__page">Page 4 / 4</div></footer>
+  <footer class="foot"><div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · hello@indiablockchainalliance.org</div><div class="foot__page">Page 5 / 5</div></footer>
 </section>
 
 </body>
+
 </html>
