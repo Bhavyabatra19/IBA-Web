@@ -110,8 +110,21 @@ function letter(key) {
 
     /* every benefit the tier includes, in full: each letter stands on its
        own and never refers to another tier (by request, 11-16-2026) */
-    para([{ b: 'Your benefits in full' }], { run: { size: 26 }, spacing: { before: 120, after: 80 } }),
-    para([`As a ${t.name} member you have access to all ${W3C.countFor(key)} benefits below, for the full term of your membership.`], { spacing: { after: 160 } }),
+    /* a tier IBA has written up in full (Club Class): its own words first */
+    ...(t.profile
+      ? [
+          para([{ b: `Your ${t.name} membership` }], { run: { size: 26 }, spacing: { before: 120, after: 80 } }),
+          para([{ b: t.profile.headline }], { run: { color: RED }, spacing: { after: 120 } }),
+          para([`${t.profile.journey} ${t.profile.access}`]),
+          ...t.profile.about.map((x) => para([x], { run: { color: MUTED } })),
+        ]
+      : []),
+    para([{ b: t.profile ? 'Your inclusions in full' : 'Your benefits in full' }], { run: { size: 26 }, spacing: { before: 120, after: 80 } }),
+    para([
+      t.profile
+        ? `As a ${t.name} member you have access to all ${W3C.countFor(key)} inclusions and services below, ${t.profile.sources}, for the full term of your membership.`
+        : `As a ${t.name} member you have access to all ${W3C.countFor(key)} benefits below, for the full term of your membership.`,
+    ], { spacing: { after: 160 } }),
     ...W3C.benefitsFor(key).flatMap((g) => [
       new Paragraph({
         keepNext: true,
@@ -119,12 +132,14 @@ function letter(key) {
         border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: INK, space: 2 } },
         children: [
           new TextRun({ text: g.name.toUpperCase(), color: RED, size: 17, characterSpacing: 30 }),
-          new TextRun({ text: `   ${g.items.length} ${g.items.length === 1 ? 'benefit' : 'benefits'}`, color: MUTED, size: 15 }),
+          new TextRun({ text: `   ${g.items.length} ${t.profile ? 'inclusion' : 'benefit'}${g.items.length === 1 ? '' : 's'}`, color: MUTED, size: 15 }),
         ],
       }),
       ...g.items.map((b) => bullet([{ b: b.t }, ...(b.tag ? [{ red: ` (${b.tag})` }] : []), ` — ${b.d}`])),
     ]),
-    para([''], { spacing: { after: 120 } }),
+    ...(t.profile
+      ? [para([t.profile.note], { run: { color: MUTED }, spacing: { before: 160, after: 120 }, border: { left: { style: BorderStyle.SINGLE, size: 18, color: RED, space: 8 } }, indent: { left: 160 } })]
+      : [para([''], { spacing: { after: 120 } })]),
 
     para([{ b: 'To complete your onboarding, please take the following steps:' }], { spacing: { before: 200, after: 120 } }),
     step([{ b: 'Complete your member onboarding. ' }, 'Fill in the onboarding form so we can set up your membership, verify your organisation (KYC/KYB) and create your member directory profile: ', { ph: 'onboarding form link' }]),
@@ -132,6 +147,8 @@ function letter(key) {
     step([{ b: 'Complete your first dues payment — ' }, { ph: 'amount' }, { b: '. ' }, 'Your invoice and payment instructions are attached. Dues are collected by our billing partner, Northstar Tecq; please quote your invoice number as the reference. Online payment link: ', { ph: 'payment link' }]),
     xch
       ? step([{ b: 'Choose your track. ' }, 'Confirm whether you are taking the India → UAE or UAE → India track, so we can line up your compliance clinics and first introductions.'])
+      : key === 'club'
+      ? step([{ b: 'Set up your vault and Club Badge. ' }, 'Once onboarding is approved you will receive access to your verifiable vault for your data room and corporate documents, and your official Club Badge.'])
       : step([{ b: 'Set up IBA SafeVault. ' }, `Once onboarding is approved you will receive SafeVault access for your corporate documents and data room, and your official ${t.name} member badge.`]),
     step([{ b: xch ? 'Meet your corridor concierge. ' : 'Your welcome call. ' }, 'Your corridor concierge, ', { ph: 'name' }, `, will be in touch within ${'two'} working days to schedule ${xch ? 'your sprint kick-off' : 'a welcome call'}, map your goals for the year and line up your first introductions${xch ? '' : ' and roundtable invitations'}.`]),
 

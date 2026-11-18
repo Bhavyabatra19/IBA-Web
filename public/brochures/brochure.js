@@ -29,7 +29,9 @@
   const GROUPS = W3C.benefitsFor(KEY)
   const COUNT = W3C.countFor(KEY)
   const PROG = XCH ? 'Indo–UAE Startup Xchange' : 'Web360 Club'
-  const ROUNDTABLES = XCH ? '' : W3C.groups[3].items[0][KEY]
+  const ROUNDTABLES = XCH || KEY === 'club' ? '' : W3C.groups[3].items[0][KEY]
+  /* a tier IBA has written up in full (Club Class, 11-18-2026) */
+  const PRO = T.profile
 
   /* brochure copy, per tier: standalone, no reference to other tiers */
   const COPY = {
@@ -95,17 +97,31 @@
   const glance = () => {
     const facts = XCH
       ? [['12', 'week launch sprint'], [String(COUNT), 'benefits included'], ['2', 'markets, one programme']]
-      : [[String(COUNT), 'benefits included'], [String(GROUPS.length), 'areas of support'], [ROUNDTABLES.split(' ')[0], 'roundtables a year']]
+      : PRO
+        ? [[String(COUNT), 'inclusions'], ['4 hrs', 'mentorship a month'], [usd(T.price), 'per year']]
+        : [[String(COUNT), 'benefits included'], [String(GROUPS.length), 'areas of support'], [ROUNDTABLES.split(' ')[0], 'roundtables a year']]
     return page(`
       <div class="glance-img"><img src="${COPY.glance}" alt=""><span>${T.name} at a glance</span></div>
       <p class="eyebrow">${XCH ? '12-week Launch Sprint' : T.sub}</p>
-      <h2 class="h2">${T.tagline.replace(/•/g, '·')}</h2>
-      <p class="lead">${COPY.position}</p>
+      <h2 class="h2">${PRO ? PRO.headline : T.tagline.replace(/•/g, '·')}</h2>
+      <p class="lead">${PRO ? PRO.promise : COPY.position}</p>
       ${COPY.lead ? `<p class="body">${COPY.lead}</p>` : ''}
       <div class="facts">${facts.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('')}</div>
-      <div class="who"><p class="eyebrow">Designed for</p><p>${COPY.who}</p></div>
-      ${T.servicePartners ? `<p class="body" style="margin:0">Service partners: <span style="color:var(--ink)">${T.servicePartners}</span></p>` : ''}`)
+      ${PRO
+        ? `<div class="who"><p class="eyebrow">Ideal for</p><ul class="ideal">${PRO.idealFor.map((x) => `<li>${x}</li>`).join('')}</ul></div>`
+        : `<div class="who"><p class="eyebrow">Designed for</p><p>${COPY.who}</p></div>`}
+      ${T.servicePartners && !PRO ? `<p class="body" style="margin:0">Service partners: <span style="color:var(--ink)">${T.servicePartners}</span></p>` : ''}`, PRO ? 'page--tight' : '')
   }
+
+  /* the programme, in IBA's words (tiers with a profile) */
+  const programme = () =>
+    page(`
+      <p class="eyebrow">${PRO.programme}</p>
+      <h2 class="h2">${PRO.journey}</h2>
+      <div class="redbar"></div>
+      <p class="lead">${PRO.access}</p>
+      ${PRO.about.map((x) => `<p class="body">${x}</p>`).join('')}
+      <div class="who" style="margin-top:2cqw"><p class="eyebrow">Advisory services</p><p>${PRO.note}</p></div>`)
 
   /* Gold Xchange: the sprint, phase by phase */
   const sprint = () => {
@@ -123,13 +139,18 @@
   }
 
   /* every benefit, measured onto as many pages as it needs ----------- */
-  const headFirst = `
+  const headFirst = PRO
+    ? `
+    <p class="eyebrow">Your inclusions in full</p>
+    <h2 class="h2">${COUNT} inclusions in ${T.name}</h2>
+    <p class="body" style="margin-bottom:3cqw">Every inclusion and service ${PRO.sources}, for the full year of your membership.</p>`
+    : `
     <p class="eyebrow">Your benefits in full</p>
     <h2 class="h2">${COUNT} benefits included in ${T.name}</h2>
     <p class="body" style="margin-bottom:3cqw">Everything your membership includes, and what each benefit gives you.</p>`
-  const headNext = `<p class="eyebrow">Your benefits in full, continued</p>`
+  const headNext = PRO ? `<p class="eyebrow">Your inclusions in full, continued</p>` : `<p class="eyebrow">Your benefits in full, continued</p>`
   const groupHead = (g, cont) =>
-    `<div class="bgrp"><span>${g.name}${cont ? ' (continued)' : ''}</span><em>${g.items.length} ${g.items.length === 1 ? 'benefit' : 'benefits'}</em></div>`
+    `<div class="bgrp"><span>${g.name}${cont ? ' (continued)' : ''}</span><em>${g.items.length} ${PRO ? (g.items.length === 1 ? 'inclusion' : 'inclusions') : g.items.length === 1 ? 'benefit' : 'benefits'}</em></div>`
   const item = (b, n) =>
     `<div class="bi"><span class="bi__n">${String(n).padStart(2, '0')}</span><div><h4>${b.t}${b.tag ? ` <span class="tag">${b.tag}</span>` : ''}</h4><p>${b.d}</p></div></div>`
 
@@ -184,7 +205,7 @@
         <li><div><b>Request membership</b><span>Tell us about your organisation and goals, and we confirm your membership.</span></div></li>
         <li><div><b>Sign your Membership Agreement</b><span>A short agreement setting out your membership, term and benefits.</span></div></li>
         <li><div><b>Pay your dues</b><span>Invoiced and collected by Northstar Tecq, our billing partner: bank transfer, international wire, UPI or card.</span></div></li>
-        <li><div><b>Onboard</b><span>${XCH ? 'Choose your track, India → UAE or UAE → India, and meet your named corridor concierge.' : 'KYC/KYB, your IBA SafeVault, your verified badge and your member directory profile.'}</span></div></li>
+        <li><div><b>Onboard</b><span>${XCH ? 'Choose your track, India → UAE or UAE → India, and meet your named corridor concierge.' : KEY === 'club' ? 'Your official Club Badge, your verifiable vault and your directory listing.' : 'KYC/KYB, your IBA SafeVault, your verified badge and your member directory profile.'}</span></div></li>
         <li><div><b>${XCH ? 'Start the sprint' : 'Your welcome call'}</b><span>${XCH ? 'Week one of the 12-week launch sprint, with compliance clinics and curated introductions from the start.' : 'Your corridor concierge maps your year and lines up your first introductions and roundtables.'}</span></div></li>
       </ol>`)
 
@@ -204,9 +225,10 @@
       <p class="price__sub">${PROG} · ${XCH ? '12-week Launch Sprint' : T.sub}</p>
       <div class="price__box">
         <div class="price__amt">${usd(T.price)}<small>/ YEAR</small></div>
-        <p class="price__note">Plus applicable taxes. Covers all <b>${COUNT} benefits</b> in this brochure for a ${XCH ? 'year' : '12-month term'}. <b>Instalment plans available on request.</b> Invoiced and collected by Northstar Tecq, billing partner for the Web3 Corridor.</p>
+        <p class="price__note">Plus applicable taxes. Covers all <b>${COUNT} ${PRO ? 'inclusions' : 'benefits'}</b> in this brochure for a ${XCH ? 'year' : '12-month term'}. <b>Instalment plans available on request.</b> Invoiced and collected by Northstar Tecq, billing partner for the Web3 Corridor.</p>
         <ul class="price__list">${GROUPS.map((g) => `<li>${g.name}<span>${g.items.length}</span></li>`).join('')}</ul>
       </div>
+      ${PRO ? `<p class="price__note" style="margin-top:3cqw">${PRO.note}</p>` : ''}
       <div class="ctas">
         <a class="btn btn--red" href="mailto:hello@indiablockchainalliance.org?subject=${encodeURIComponent(T.name + ' membership')}">Request membership</a>
         <a class="btn" href="/connect">Talk to us</a>
@@ -218,7 +240,7 @@
   const book = $('#book')
   let flip
   const ready = (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
-    const pages = [cover(), corridor(), glance(), ...(XCH ? [sprint()] : []), ...benefitPages(), steps()]
+    const pages = [cover(), corridor(), glance(), ...(PRO ? [programme()] : []), ...(XCH ? [sprint()] : []), ...benefitPages(), steps()]
     if ((pages.length + 1) % 2) pages.push(filler())
     pages.push(back())
     book.innerHTML = pages.map((p, i) => p.replace('__N__', String(i + 1).padStart(2, '0'))).join('')

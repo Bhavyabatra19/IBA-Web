@@ -232,7 +232,79 @@ window.W3C.xgroups = [
 ]
 
 /* every benefit a tier includes, in full: [{ name, items: [{ t, d, tag }] }] */
+/* ------------------------------------------------------------------
+   Club Class, as written by IBA (11-18-2026). These are the Club Class
+   inclusions and services from IBA and TheCircle, and they replace the
+   matrix rows for this tier: list only what is offered, nothing more.
+   ------------------------------------------------------------------ */
+window.W3C.clubGroups = [
+  {
+    name: 'Network & Community',
+    items: [
+      { t: 'International ecosystem access', d: 'Access to our international ecosystem of founders, investors, mentors and partners.' },
+      { t: 'Community events, workshops and roundtables', d: 'Participation in online and in-person community events, workshops and roundtables.' },
+      { t: 'Startup, investor and mentor directories', d: 'Directories of startups, investors and mentors for ecosystem discovery.' },
+      { t: 'Curated roundtables and member roundups', d: 'Invitations to curated member roundtables, and the members\u2019 roundup.' },
+      { t: 'Dubai co-hosted event privileges', d: 'Special event pricing for events IBA co-hosts in Dubai.' },
+    ],
+  },
+  {
+    name: 'Mentorship & Advisory',
+    items: [
+      { t: 'Mentorship', tag: 'Up to 4 hours a month', d: 'Up to four hours of mentorship every month.' },
+      { t: 'GTM blueprint', d: 'Product lifecycle advisory, business planning and expansion strategies, and regulatory mentoring.' },
+      { t: 'Growth advisory', d: 'Pitch deck and business plan reviews, and tailored funding preparation assistance.' },
+    ],
+  },
+  {
+    name: 'Resources & Secure Access',
+    items: [
+      { t: 'Startup resources', d: 'Access to startup resources, KPI frameworks, playbooks, templates and data-room guidance.' },
+      { t: 'Official Club Badge', d: 'Verified identity and secure access, with your official Club Badge.' },
+      { t: 'Verifiable vault', d: 'A safe vault for all your data room and corporate documents.' },
+    ],
+  },
+  {
+    name: 'Visibility & Promotion',
+    items: [
+      { t: 'Podcast recording', tag: 'One recording', d: 'One podcast recording.' },
+      { t: 'Social media and media promotion', d: 'An IBA LinkedIn spotlight, and media promotion across podcast, live TV and crypto news media.' },
+    ],
+  },
+  {
+    name: 'Member Pricing',
+    items: [
+      { t: 'Preferential pricing', d: 'Preferential pricing on Web3 Corridor services and products.' },
+    ],
+  },
+]
+
+/* how IBA describes Club Class (11-18-2026), used by the brochure and
+   the welcome letter */
+window.W3C.tiers.club.profile = {
+  programme: 'Web3 Corridor Global Membership programme',
+  journey: 'Membership is a journey, not a static subscription: every stage is gated, and every gate is earned.',
+  promise: 'Investor relations and funding-focused plans with curated access. At the Club Class we bring you a curated programme where capital meets global opportunity.',
+  access: 'Access curated deal flow, experienced mentors, strategic advisory hours and ecosystem connections to accelerate your journey from early-stage idea to market-ready venture.',
+  headline: 'Build Your Network. Strengthen Your Venture. Prepare for Global Markets.',
+  about: [
+    'The Club Class Membership is the entry point to the IBA Web360 ecosystem, designed for founders, operators, MSMEs and emerging businesses preparing for international growth. Members gain access to curated investor and industry networking sessions, founder roundtables, expert-led market-entry briefings, mentorship and advisory clinics, potential deal-flow opportunities, and introductions to technology, legal, compliance and commercial partners.',
+    'Through the IBA Web3 Corridor, members can explore cross-border markets, understand regulatory and investment-readiness requirements, showcase their ventures, and build strategic relationships that support fundraising, partnerships, business development and international expansion.',
+  ],
+  idealFor: [
+    'Individual founders and operators, MSMEs, businesses operating in one or two countries, and expansion-stage ventures',
+    'Idea-stage, pre-seed or early-stage companies',
+    'A clearly identified business concept, product or service',
+    'Founders actively working on developing their business',
+    'Startups exploring international connections, partnerships or future fundraising opportunities',
+    'No minimum revenue or fundraising requirement at this level',
+  ],
+  note: 'For other IBA Web3 advisory services, members will be evaluated for preferential pricing on customised consulting.',
+  sources: 'from IBA and TheCircle',
+}
+
 window.W3C.benefitsFor = function (key) {
+  if (key === 'club') return window.W3C.clubGroups.map((g) => ({ name: g.name, items: g.items.map((i) => ({ t: i.t, d: i.d, tag: i.tag || '' })) }))
   if (key === 'xchange') return window.W3C.xgroups.map((g) => ({ name: g.name, items: g.items.map((i) => ({ t: i.t, d: i.d, tag: '' })) }))
   return window.W3C.groups
     .map((g) => ({
