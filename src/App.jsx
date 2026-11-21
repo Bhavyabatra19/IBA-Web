@@ -22,6 +22,7 @@ import RedClubLearners from './pages/site/RedClubLearners'
 import Library from './pages/site/Library'
 import Connect from './pages/site/Connect'
 import Privacy from './pages/site/Privacy'
+import IndiaEntry from './pages/site/IndiaEntry'
 import ReviewBar from './components/ReviewBar'
 import { usePath } from './lib/router'
 import { applySeo } from './lib/seo'
@@ -53,6 +54,7 @@ const PAGES = {
   '/library': Library,
   '/connect': Connect,
   '/privacy': Privacy,
+  '/india-entry': IndiaEntry,
 }
 
 /**

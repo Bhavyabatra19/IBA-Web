@@ -126,6 +126,11 @@ export const SEO = {
     description:
       'Talk to India Blockchain Alliance about Web3 advisory, tokenization, the Web3 Corridor, membership or Red Club. Email, WhatsApp, LinkedIn or the enquiry form.',
   },
+  '/india-entry': {
+    title: 'India Market Entry | IBA Web3 Global Corridor',
+    description:
+      'Enter India right with IBA: market intelligence, entity formation, regulatory and tax structuring, partnerships, first customers, capital and corridor expansion.',
+  },
   '/privacy': {
     title: 'Privacy Policy | India Blockchain Alliance',
     description:

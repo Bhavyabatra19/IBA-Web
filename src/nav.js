@@ -107,7 +107,7 @@ export const NAV = [
         items: [
           { label: 'Operating Model', icon: 'layers', desc: 'Advocate, Connect, Educate, Enable.', href: '/about#mission-pillars' },
           { label: 'The IBA Framework', icon: 'link', desc: 'One connected Web3 ecosystem.', href: '/about#iba-framework' },
-          { label: 'India Entry', icon: 'spark', desc: 'Web3 and emerging tech market expansion.', href: '/about#initiatives' },
+          { label: 'India Market Entry', icon: 'spark', desc: 'Enter India right. Expand without borders.', href: '/india-entry' },
         ],
       },
     ],
@@ -317,7 +317,7 @@ export const FOOTER = [
     items: [
       { label: 'Consulting', href: '/expertise#consulting-stack' },
       { label: 'Who We Work With', href: '/expertise#who-we-serve' },
-      { label: 'India Entry', href: '/about#initiatives' },
+      { label: 'India Market Entry', href: '/india-entry' },
       { label: 'Communities & Councils', href: '/ecosystem#communities' },
     ],
   },

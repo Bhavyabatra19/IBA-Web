@@ -7,7 +7,7 @@
  * "About grounds").
  */
 
-import { PageHero, Section, Stats, Cards } from '../../components/Kit'
+import { PageHero, Section, Stats, Cards, Btn } from '../../components/Kit'
 import FloatingCubes from '../../components/FloatingCubes'
 import VisionMission from '../../sections/VisionMission'
 import FounderLetter from '../../sections/FounderLetter'
@@ -128,6 +128,12 @@ export default function About() {
           (content review, 11-17) */}
       <Section id="initiatives" eyebrow="India Entry" title="Web3 and Emerging Tech Market Expansion">
         <InitiativeCarousel items={INITIATIVES_IN_ORDER} />
+        {/* the India market-entry page (content review, 11-21) */}
+        <div className="pk-actions pk-actions--center" data-rise>
+          <Btn href="/india-entry">
+            Know more <span aria-hidden="true">→</span>
+          </Btn>
+        </div>
       </Section>
 
       <Section id="team" eyebrow="Founder" title="Welcome to IBA">

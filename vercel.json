@@ -299,6 +299,11 @@
       "source": "/privacy/",
       "destination": "/privacy",
       "permanent": true
+    },
+    {
+      "source": "/india-entry/",
+      "destination": "/india-entry",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -361,6 +366,10 @@
     {
       "source": "/privacy",
       "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/india-entry",
+      "destination": "/india-entry/index.html"
     },
     {
       "source": "/((?!api/|admin/|_vercel/).*)",

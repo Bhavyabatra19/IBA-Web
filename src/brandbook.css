@@ -14248,3 +14248,306 @@ img.ib__sectorIcon {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* ==================================================================
+   India Market Entry (pages/site/IndiaEntry.jsx, .iep), content review
+   11-21: the site's blocks, in the Web3 Corridor page's light and dark
+   rhythm, with gradient grounds on the dark bands
+   ================================================================== */
+.pk-actions--center { justify-content: center; }
+.iep-hl { font-style: normal; color: #ff4a50; }
+.iep .pk-sec--plain + .pk-sec--plain .pk-sec__panel { padding-top: 0; }
+.iep-note {
+  margin: 0;
+  max-width: 62rem;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--bb-ink-muted, #6b655e);
+}
+.iep-note--dark { color: rgba(255, 255, 255, 0.62); }
+
+/* the four phases under the hero */
+.iep-focus .tkp-focus__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.iep-focus__link { display: flex; align-items: center; gap: 16px; color: inherit; text-decoration: none; }
+.iep-focus .tkp-focus__label b {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--iba-red);
+}
+.iep-focus__link:hover .tkp-focus__icon { box-shadow: 0 10px 20px -8px rgba(215, 25, 32, 0.7); transform: translateY(-2px); }
+.iep-focus .tkp-focus__icon { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+@media (max-width: 1100px) {
+  .iep-focus .tkp-focus__list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 20px; }
+  .iep-focus .tkp-focus__item:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+@media (max-width: 860px) { .iep-focus .tkp-focus__list { grid-template-columns: minmax(0, 1fr); } }
+
+/* the strategic proposition: copy beside a captioned photo */
+.iep-two {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.iep-two__copy p { margin: 0 0 1rem; font-size: clamp(1rem, 0.95rem + 0.2vw, 1.1rem); line-height: 1.7; color: #3d3936; }
+.iep-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+.iep-pills li {
+  padding: 7px 14px;
+  border: 1px solid rgba(215, 25, 32, 0.3);
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(215, 25, 32, 0.07), transparent);
+  font-size: 13px;
+  color: var(--iba-red);
+}
+.iep-photo { position: relative; margin: 0; overflow: hidden; border-radius: 22px; aspect-ratio: 4 / 3; }
+.iep-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.iep-photo figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 70px 24px 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+@media (max-width: 860px) { .iep-two { grid-template-columns: minmax(0, 1fr); } }
+
+/* dark bands: gradient grounds, as on the Web3 Corridor page */
+.iep #corridor .pk-sec__panel {
+  background:
+    linear-gradient(180deg, rgba(5, 3, 4, 0.78) 0%, rgba(5, 3, 4, 0.4) 34%, rgba(5, 3, 4, 0.15) 60%, rgba(5, 3, 4, 0.55) 100%),
+    url('/images/mission-bg.jpg') center 60% / cover no-repeat,
+    #0a0304;
+}
+.iep :is(#routes, #engage) .pk-sec__panel {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(55% 60% at 85% 10%, rgba(215, 25, 32, 0.3), transparent 70%),
+    radial-gradient(45% 55% at 5% 100%, rgba(215, 25, 32, 0.2), transparent 70%),
+    #08080a;
+}
+.iep :is(#corridor, #routes, #engage) .pk-sec__panel::before { display: none; }
+.iep :is(#corridor, #routes, #engage) .pk-head__lede { color: rgba(255, 255, 255, 0.8); }
+
+/* a frosted glass card, shared by the dark-band blocks below */
+.iep-route li,
+.iep-routes__card,
+.iep-models__card {
+  position: relative;
+  border-radius: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.02) 70%, rgba(255, 120, 125, 0.08) 100%);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.12), 0 22px 40px -22px rgba(0, 0, 0, 0.85);
+}
+
+/* the five corridor regions, as one connected route */
+.iep-route {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.iep-route li { display: grid; gap: 6px; padding: 18px; }
+.iep-route li:first-child { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 0 1px #ff4a50, 0 0 26px rgba(255, 50, 58, 0.35); }
+.iep-route b { font-weight: 400; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #ff6a6f; }
+.iep-route span { font-size: 15px; line-height: 1.45; }
+@media (max-width: 1000px) { .iep-route { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .iep-route { grid-template-columns: minmax(0, 1fr); } }
+
+/* the ten regulators: compact tiles, five across */
+.iep-regs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.iep-regs li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid #ece6dc;
+  border-top: 3px solid var(--iba-red);
+  border-radius: 12px;
+  background: #ffffff;
+}
+.iep-regs b { font-weight: 400; font-size: 15px; color: var(--bb-ink, #161412); }
+.iep-regs span { font-size: 13px; line-height: 1.5; color: var(--bb-ink-muted, #6b655e); }
+@media (max-width: 1100px) { .iep-regs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .iep-regs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* short title + line items, a red rule on the left */
+.iep-items { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.iep-items--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.iep-items li { display: grid; gap: 4px; padding: 16px 20px; border-left: 3px solid var(--iba-red); background: #ffffff; }
+.iep-items b { font-weight: 400; font-size: 16px; color: var(--bb-ink, #161412); }
+.iep-items span { font-size: 14px; line-height: 1.55; color: var(--bb-ink-muted, #6b655e); }
+@media (max-width: 960px) { .iep-items--3 { grid-template-columns: minmax(0, 1fr); } }
+
+/* the four entry routes, side by side as comparison cards */
+.iep-routes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.iep-routes__card { padding: 22px; }
+.iep-routes__card h3 { margin: 0 0 14px; font-weight: 400; font-size: 20px; line-height: 1.25; color: #ffffff; }
+.iep-routes__card dl { display: grid; gap: 4px; margin: 0; }
+.iep-routes__card dt {
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff6a6f;
+}
+.iep-routes__card dt:first-child { margin-top: 0; }
+.iep-routes__card dd { margin: 0; font-size: 14px; line-height: 1.5; color: rgba(255, 255, 255, 0.82); }
+.iep-routes__watch { padding-left: 10px; border-left: 2px solid #ff4a50; }
+@media (max-width: 1100px) { .iep-routes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .iep-routes { grid-template-columns: minmax(0, 1fr); } }
+
+/* the five moves, a numbered path; the three discovery steps reuse it */
+.iep-moves,
+.iep-start__steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+.iep-moves li,
+.iep-start__steps li {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 20px 18px;
+  border-top: 4px solid var(--iba-red);
+  background: #ffffff;
+  box-shadow: 0 14px 30px -24px rgba(0, 0, 0, 0.5);
+}
+.iep-moves__n { font-size: 26px; line-height: 1; color: var(--iba-red); }
+.iep-moves b,
+.iep-start__steps b { font-weight: 400; font-size: 19px; color: var(--bb-ink, #161412); }
+.iep-moves li > span:last-child,
+.iep-start__steps li > span:last-child { font-size: 14px; line-height: 1.5; color: var(--bb-ink-muted, #6b655e); }
+@media (max-width: 1000px) { .iep-moves { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .iep-moves { grid-template-columns: minmax(0, 1fr); } }
+
+/* pitfall → how it is prevented */
+.iep-pitfalls { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.iep-pitfalls li { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid #ece6dc; border-radius: 12px; background: #ffffff; }
+.iep-pitfalls__risk { font-size: 15px; line-height: 1.4; color: var(--bb-ink, #161412); }
+.iep-pitfalls__risk::before { content: '✕'; margin-right: 8px; color: var(--iba-red); }
+.iep-pitfalls__fix { font-size: 13px; line-height: 1.5; color: var(--bb-ink-muted, #6b655e); }
+.iep-pitfalls__fix::before { content: '→ '; color: var(--iba-red); }
+@media (max-width: 1100px) { .iep-pitfalls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .iep-pitfalls { grid-template-columns: minmax(0, 1fr); } }
+
+/* services by phase: tabs, the phase's roadmap, then the service cards */
+.iep-svc { display: grid; gap: 18px; }
+.iep-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+.iep-tab {
+  padding: 9px 18px;
+  border: 1px solid #ddd6cc;
+  border-radius: 999px;
+  background: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  color: var(--bb-ink, #161412);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.iep-tab:hover { border-color: var(--bb-ink, #161412); }
+.iep-tab[aria-selected='true'] { border-color: var(--iba-red); background: var(--iba-red); color: #ffffff; }
+.iep-phase {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 20px;
+  align-items: center;
+  padding: 22px 26px;
+  border-radius: 18px;
+  background: var(--bb-red-black);
+  color: #ffffff;
+}
+.iep-phase__time { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb3b6; }
+.iep-phase__name { margin: 4px 0; font-weight: 400; font-size: 28px; color: #ffffff; }
+.iep-phase__line { margin: 0; font-size: 15px; color: rgba(255, 255, 255, 0.85); }
+.iep-phase__marks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; margin: 0; padding: 0; list-style: none; }
+.iep-phase__marks li { padding-left: 18px; position: relative; font-size: 14px; line-height: 1.45; color: rgba(255, 255, 255, 0.92); }
+.iep-phase__marks li::before { content: ''; position: absolute; left: 0; top: 7px; width: 7px; height: 7px; background: #ffffff; transform: rotate(45deg); }
+@media (max-width: 760px) {
+  .iep-phase { grid-template-columns: minmax(0, 1fr); }
+  .iep-phase__marks { grid-template-columns: minmax(0, 1fr); }
+}
+.iep-svc__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; align-items: start; }
+@media (max-width: 1000px) { .iep-svc__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .iep-svc__grid { grid-template-columns: minmax(0, 1fr); } }
+.iep-svc__card { border: 1px solid #ece6dc; border-radius: 14px; background: #ffffff; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.iep-svc__card[open],
+.iep-svc__card:hover { border-color: rgba(215, 25, 32, 0.45); box-shadow: 0 16px 30px -22px rgba(150, 12, 20, 0.5); }
+.iep-svc__card summary { display: flex; align-items: center; gap: 14px; padding: 18px 20px; list-style: none; cursor: pointer; }
+.iep-svc__card summary::-webkit-details-marker { display: none; }
+.iep-svc__n { font-size: 15px; color: #a8a29b; }
+.iep-svc__head { display: grid; gap: 2px; }
+.iep-svc__phase { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--iba-red); }
+.iep-svc__title { font-size: 16px; line-height: 1.35; color: var(--bb-ink, #161412); }
+.iep-svc__plus { position: relative; flex: none; width: 14px; height: 14px; margin-left: auto; }
+.iep-svc__plus::before,
+.iep-svc__plus::after { content: ''; position: absolute; left: 0; top: 6px; width: 14px; height: 2px; background: var(--iba-red); transition: transform 0.25s ease; }
+.iep-svc__plus::after { transform: rotate(90deg); }
+.iep-svc__card[open] .iep-svc__plus::after { transform: rotate(0deg); }
+.iep-svc__body { padding: 0 20px 18px; border-top: 1px solid #f0ebe4; }
+.iep-svc__promise { margin: 14px 0 8px; font-size: 15px; color: var(--bb-ink, #161412); }
+.iep-svc__body ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: var(--bb-ink-muted, #6b655e); }
+
+/* ways to work: four glass cards, each with its duration */
+.iep-models { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.iep-models__card { padding: 22px; }
+.iep-models__time { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #ff6a6f; }
+.iep-models__card h3 { margin: 8px 0 12px; font-weight: 400; font-size: 20px; color: #ffffff; }
+.iep-models__card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.6; color: rgba(255, 255, 255, 0.8); }
+@media (max-width: 1100px) { .iep-models { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .iep-models { grid-template-columns: minmax(0, 1fr); } }
+
+/* start: the three discovery steps beside the contact card */
+.iep-start { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr); gap: 20px; align-items: stretch; }
+.iep-start__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); align-self: start; }
+.iep-contact {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 6px;
+  padding: 26px;
+  border-radius: 18px;
+  background: var(--bb-red-black);
+  color: #ffffff;
+}
+.iep-contact__eyebrow { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #ffb3b6; }
+.iep-contact h3 { margin: 6px 0 0; font-weight: 400; font-size: 24px; color: #ffffff; }
+.iep-contact p { margin: 0; color: rgba(255, 255, 255, 0.82); }
+.iep-contact__mail { margin: 8px 0 14px; color: #ffffff; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.iep-contact .pk-btn--primary { border-color: #ffffff; background: #ffffff; color: var(--iba-red); }
+.iep-disclaimer { margin: 0; padding-top: 18px; border-top: 1px solid #ece6dc; font-size: 12.5px; line-height: 1.6; color: var(--bb-ink-muted, #6b655e); }
+@media (max-width: 960px) {
+  .iep-start { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) { .iep-start__steps { grid-template-columns: minmax(0, 1fr); } }
+/* India Entry: the four market figures in one row */
+.iep #opportunity .pk-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 860px) { .iep #opportunity .pk-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

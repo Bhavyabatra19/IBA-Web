@@ -45,6 +45,7 @@ const NAMES = {
   '/library': 'Library',
   '/connect': 'Contact',
   '/privacy': 'Privacy Policy',
+  '/india-entry': 'India Market Entry',
 }
 
 /* the services IBA offers, described for Google on the pages that sell them */
@@ -52,6 +53,7 @@ const SERVICES = {
   '/expertise': { name: 'Web3 Advisory and Consulting', type: 'Web3 advisory, compliance and market expansion consulting' },
   '/tokenization': { name: 'Real-World Asset Tokenization', type: 'Asset tokenization advisory' },
   '/corridor': { name: 'Web3 Corridor Market Entry', type: 'Cross-border market entry and expansion' },
+  '/india-entry': { name: 'India Market Entry', type: 'Market entry, compliance, go-to-market and expansion in India' },
 }
 
 /* structured data for one page: the page itself, its breadcrumb trail and,
