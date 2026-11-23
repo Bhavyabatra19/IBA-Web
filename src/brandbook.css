@@ -14067,6 +14067,7 @@ img.ib__sectorIcon {
   background: #060607;
 }
 :is(#connect-page, #initiatives-page, #membership) .pk-hero__beam,
+#xp-india-entry .tkb__beam,
 #membership.pk-sec--dark .pk-sec__panel::before,
 .ft__panel::before {
   content: '';
@@ -14295,4 +14296,297 @@ img.ib__sectorIcon {
 }
 .xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card__text {
   line-height: 1.5;
+}
+
+/* ==================================================================
+   India Entry Strategy (pages/site/IndiaEntry.jsx, .iep) — the client's
+   India Market Entry copy in the Tokenization page's sections and cards
+   (the page also carries .tkp, so it shares Tokenization's centred heads,
+   notes and disclaimer); and its graphic (IndiaGateway.jsx, .ieg), also
+   on the Expertise page's India Entry band
+   ================================================================== */
+
+/* --- the graphic: India, four phase rings, arcs to the corridor --- */
+.ieg {
+  position: relative;
+  width: min(100%, 460px);
+  margin-inline: auto;
+}
+.ieg__glow {
+  position: absolute;
+  z-index: 0;
+  inset: 20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 40, 50, 0.4), rgba(215, 25, 32, 0.08) 60%, transparent 72%);
+  filter: blur(28px);
+  animation: tkh-glow 6s ease-in-out infinite;
+}
+.ieg__svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: tkh-float 7s ease-in-out infinite;
+}
+.ieg__ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+.ieg__ring--outer {
+  stroke: rgba(255, 74, 80, 0.55);
+  stroke-width: 1.4;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
+}
+.ieg__phase {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.62);
+}
+.ieg__arc {
+  fill: none;
+  stroke: url(#ieg-arc);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-dasharray: 6 10;
+  filter: drop-shadow(0 0 4px rgba(255, 40, 50, 0.8));
+  animation: ieg-flow 2.4s linear infinite;
+}
+.ieg__node {
+  fill: #ff4a50;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+.ieg__node-halo {
+  fill: rgba(255, 74, 80, 0.25);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ieg-halo 2.8s ease-out infinite;
+}
+.ieg__region {
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: #ffffff;
+}
+.ieg__hub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  fill: #ffffff;
+}
+.ieg__pulse {
+  fill: rgba(255, 74, 80, 0.35);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ieg-halo 3s ease-out infinite;
+}
+@keyframes ieg-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+@keyframes ieg-halo {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@media (max-width: 860px) {
+  .ieg {
+    width: min(85%, 360px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ieg__glow,
+  .ieg__svg,
+  .ieg__arc,
+  .ieg__node-halo,
+  .ieg__pulse {
+    animation: none;
+  }
+}
+
+/* --- hero: Tokenization's (a dark gradient, the eyebrow in red) --- */
+#india-entry .pk-hero__panel {
+  overflow: hidden;
+  background: linear-gradient(120deg, #0b0b0d 0%, #17151a 55%, #3a0b12 100%);
+}
+#india-entry .pk-hero__beam {
+  display: none;
+}
+#india-entry .pk-hero__lede {
+  max-width: 44rem;
+}
+#india-entry .pk-eyebrow {
+  color: #ff6a6e;
+}
+#india-entry .pk-actions {
+  flex-wrap: wrap;
+}
+#india-entry .pk-hero__aside {
+  display: grid;
+  place-items: center;
+}
+
+/* --- the four phases strip: four across, as Membership's --- */
+.iep-focus .tkp-focus__list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.iep-focus .tkp-focus__label strong {
+  display: block;
+  font-weight: 400;
+  color: var(--iba-red);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .iep-focus .tkp-focus__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+  .iep-focus .tkp-focus__item:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 860px) {
+  .iep-focus .tkp-focus__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- the sector tags under the proposition, and the services' phase filter --- */
+.iep-tags,
+.iep-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.iep-tags li {
+  padding: 6px 14px;
+  border: 1px solid var(--bb-line);
+  font-size: 14px;
+  color: var(--bb-ink);
+  background: #ffffff;
+}
+.iep-filter {
+  padding: 9px 18px;
+  border: 1px solid var(--bb-line);
+  background: #ffffff;
+  color: var(--bb-ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+}
+.iep-filter:hover {
+  border-color: var(--bb-ink);
+}
+.iep-filter.is-active {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.iep-filter:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+
+/* --- grounds, as Tokenization's --- */
+/* Why India: the red Impact band, as Tokenization's Opportunity */
+#ie-why .pk-stat span {
+  max-width: 22rem;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+}
+#ie-why .tkp-note,
+#ie-corridor .tkp-note,
+#ie-roadmap .tkp-note {
+  color: rgba(255, 255, 255, 0.7);
+}
+#ie-why .pk-head__lede,
+#ie-corridor .pk-head__lede,
+#ie-roadmap .pk-head__lede,
+#ie-method .pk-head__lede,
+#ie-pitfalls .pk-head__lede {
+  color: rgba(255, 255, 255, 0.82);
+}
+@media (max-width: 760px) {
+  #ie-why .pk-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #ie-why .pk-stat + .pk-stat {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+}
+/* the five moves: the red light-arcs glass cards, five across */
+#ie-method .pk-sec__panel {
+  background:
+    linear-gradient(180deg, rgba(5, 3, 4, 0.72) 0%, rgba(5, 3, 4, 0.35) 34%, rgba(5, 3, 4, 0.1) 60%, rgba(5, 3, 4, 0.45) 100%),
+    url('/images/mission-bg.jpg') center 60% / cover no-repeat,
+    #0a0304;
+}
+#ie-method .pk-sec__panel::before {
+  display: none;
+}
+@media (min-width: 1181px) {
+  #ie-method .mp {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+/* the pitfalls: the chain graphic on the dark block grid */
+#ie-pitfalls .pk-sec__panel {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(60% 70% at 78% 55%, rgba(215, 25, 32, 0.22), transparent 70%),
+    #08080a;
+}
+#ie-pitfalls .pk-sec__panel::before {
+  display: none;
+}
+/* the light bands with a soft red glow */
+.iep #ie-routes .pk-sec__panel,
+.iep #ie-beyond .pk-sec__panel {
+  background:
+    radial-gradient(55% 70% at 100% 0%, rgba(215, 25, 32, 0.1), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, rgba(215, 25, 32, 0.07), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--bb-surface-alt) 100%);
+}
+.iep #ie-cta .tkp-disclaimer {
+  border-top-color: var(--bb-line);
+  color: var(--bb-ink-muted);
+}
+.iep .pk-sub {
+  justify-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+/* the region and regulator cards: compact, five across */
+.iep #ie-corridor .pk-card,
+.iep #ie-regulatory .pk-cards--5 .pk-card {
+  padding: 18px 20px;
+}
+.iep #ie-corridor .pk-card__title,
+.iep #ie-regulatory .pk-cards--5 .pk-card__title {
+  font-size: 18px;
+  line-height: 24px;
 }

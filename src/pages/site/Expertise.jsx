@@ -3,7 +3,8 @@
  *   hero · Web3 Solution Advisory and Consulting Stack (four core
  *   capabilities, each with an icon) · the founder's quote (text only, on a
  *   moving ground) · Tokenization (a black hero-style band, "Know more" to
- *   /tokenization) · Global Market Expansion · the outcome · who we work
+ *   /tokenization) · India Entry Strategy (the same band, "Know more" to
+ *   /india-entry) · Global Market Expansion · the outcome · who we work
  *   with. (IBA Initiatives moved to the About page as India Entry, 11-17.)
  * Tones alternate light and dark (by request, as on the Web3 Corridor,
  * Membership and Tokenization pages): dark hero, white, the red quote, the
@@ -16,6 +17,7 @@
 import { PageHero, Section, SubHead, Cards, Quote, Btn } from '../../components/Kit'
 import CoreCapabilities from '../../components/CoreCapabilities'
 import TokenHero from '../../components/TokenHero'
+import IndiaGateway from '../../components/IndiaGateway'
 import MissionPillars from '../../components/MissionPillars'
 
 /* Supplied innovation image in the Expertise hero. */
@@ -198,6 +200,41 @@ function TokenizationBand() {
   )
 }
 
+/**
+ * India Entry Strategy, as a second band in the Tokenization band's format
+ * (by request, 11-23), just under it: the copy from the client's India
+ * Market Entry page, its India-to-corridor graphic beside it, and "Know
+ * more" to /india-entry.
+ */
+function IndiaEntryBand() {
+  return (
+    <section className="tkb band band--light band--own" id="xp-india-entry" aria-labelledby="ieb-title">
+      <div className="tkb__panel">
+        <span className="pk-hero__beam tkb__beam" aria-hidden="true" />
+        <div className="tkb__copy">
+          <p className="hero__kicker pk-eyebrow">India Entry Strategy</p>
+          <h2 className="tkb__title" id="ieb-title">
+            Enter India right. Expand without borders.
+          </h2>
+          <p className="tkb__lede">
+            A structured market-entry and growth pathway for global technology, blockchain, AI, fintech and Web3
+            companies, from regulatory readiness and entity formation to partnerships, first customers, capital and
+            cross-border scale through the Web3 Global Corridor.
+          </p>
+          <div className="pk-actions">
+            <Btn href="/india-entry">
+              Know more <span aria-hidden="true">→</span>
+            </Btn>
+          </div>
+        </div>
+        <div className="tkb__art">
+          <IndiaGateway />
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function Expertise() {
   return (
     /* xp-page: the page's square corners (brandbook.css) */
@@ -257,6 +294,9 @@ export default function Expertise() {
       </Section>
 
       <TokenizationBand />
+
+      {/* India Entry Strategy, in the same format, just under Tokenization */}
+      <IndiaEntryBand />
 
       {/* Global Market Expansion (the client's GTM page, 11-10-2026): the
           four-stage framework, then the advisory stack behind it */}

@@ -12,6 +12,7 @@ import Home from './pages/Home'
 import About from './pages/site/About'
 import Expertise from './pages/site/Expertise'
 import Tokenization from './pages/site/Tokenization'
+import IndiaEntry from './pages/site/IndiaEntry'
 import Ecosystem from './pages/site/Ecosystem'
 import Initiatives from './pages/site/Initiatives'
 import Corridor from './pages/site/Corridor'
@@ -43,6 +44,7 @@ const PAGES = {
   '/about': About,
   '/expertise': Expertise,
   '/tokenization': Tokenization,
+  '/india-entry': IndiaEntry,
   '/ecosystem': Ecosystem,
   '/initiatives': Initiatives,
   '/corridor': Corridor,

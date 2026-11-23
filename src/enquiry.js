@@ -62,7 +62,7 @@ export const TOPICS = [
   'Red Club (learner)',
   'Red Club / Verifyble (institution)',
   'Web3 Corridor',
-  /* added 11-17, with the About page's India Entry section */
+  /* added 11-17; the India Entry Strategy page's topic (11-23) */
   'India Market Entry',
   'Ecosystem partnership',
   'Membership',
@@ -277,6 +277,7 @@ export const PAGE_CONTEXT = {
   /* the current pages */
   '/expertise': { topic: 'Consulting', phrase: 'working with IBA' },
   '/tokenization': { topic: 'RWA Tokenization', phrase: 'a tokenization project' },
+  '/india-entry': { topic: 'India Market Entry', phrase: 'entering India' },
   '/ecosystem': { topic: 'Ecosystem partnership', phrase: 'joining the IBA ecosystem' },
   '/initiatives': { topic: 'Ecosystem partnership', phrase: 'IBA initiatives' },
   '/membership': { topic: 'Membership', phrase: 'IBA membership' },
