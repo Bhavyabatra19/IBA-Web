@@ -49,6 +49,14 @@ export const ICONS = {
       <path d="M31 13h8v8M39 13 29 23" />
     </>
   ),
+  /* India entry: a gateway arch with an arrow passing in */
+  india: (
+    <>
+      <path d="M8 42V20a16 16 0 0 1 32 0v22" />
+      <path d="M15 42V21a9 9 0 0 1 18 0v21M4 42h40" />
+      <path d="M18 31h12M25 26l5 5-5 5" />
+    </>
+  ),
   /* founders and investors: two figures and a rising line */
   founder: (
     <>

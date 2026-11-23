@@ -1,5 +1,7 @@
 /**
- * What IBA Does, the six pillars as photo-header cards. Light band.
+ * What IBA Does, the seven pillars, one per row: the photo on one side and
+ * the copy on the other, alternating sides (by request, 11-23, so any
+ * number of pillars sits neatly). Light band.
  *
  * Follows the flagship-programme panel, at the hero's width. Each card has
  * a photo header in a red hue, with an icon badge; the copy sits beneath. On
@@ -15,8 +17,9 @@ import { useLayoutEffect, useRef } from 'react'
 import { gsap, revealRise, reducedMotion } from '../lib/scroll'
 import PillarCards from '../components/PillarCards'
 
-/* in the order of the content review (11-06-2026): Web3 Advisory,
-   Tokenization, Web3 Corridor, Red Club Experience, UAE Experience Centre
+/* in the order of the content review (11-06-2026), with India Entry
+   Strategy after Tokenization (11-23): Web3 Advisory, Tokenization, India
+   Entry Strategy, Web3 Corridor, Red Club Experience, UAE Experience Centre
    (TheBlock), Global Market Expansion */
 const CARDS = [
   {
@@ -39,6 +42,16 @@ const CARDS = [
     href: '/tokenization#framework',
     /* the same art as the reference site: the team over a tokenized-property model */
     img: '/images/card-tokenization-art.jpg',
+  },
+  /* the Expertise page's India Entry Strategy band, and its page (11-23) */
+  {
+    key: 'india',
+    tag: 'Your gateway to India',
+    title: 'India Entry Strategy',
+    body:
+      'Market intelligence, regulatory and legal structuring, entity formation, partnerships, first customers and capital: a structured pathway into India for global technology companies.',
+    href: '/india-entry',
+    img: '/images/corridor-hero-map.jpg',
   },
   {
     key: 'corridor',
@@ -93,7 +106,7 @@ export default function WhatWeDoCards() {
   }, [])
 
   return (
-    <section className="wd wd--duo wd--art wd--pillars band band--light band--own" ref={root} aria-labelledby="wd-title">
+    <section className="wd wd--duo wd--art wd--pillars wd--rows band band--light band--own" ref={root} aria-labelledby="wd-title">
       <div className="wd__inner">
         {/* the section's main heading (by request), set like the other home
             section titles: the site's H2 face, size and colour, centred */}
