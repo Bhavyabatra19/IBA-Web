@@ -124,9 +124,9 @@ export default function About() {
         />
       </Section>
 
-      {/* moved here from the Expertise page, just before the founder's note
-          (content review, 11-17) */}
-      <Section id="initiatives" eyebrow="India Entry" title="Web3 and Emerging Tech Market Expansion">
+      {/* IBA Initiatives, just before the founder's note (moved here from the
+          Expertise page, 11-17; its original heading restored, 11-23) */}
+      <Section id="initiatives" eyebrow="IBA Initiatives" title="Our programs. Our commitment. Our impact">
         <InitiativeCarousel items={INITIATIVES_IN_ORDER} />
       </Section>
 
