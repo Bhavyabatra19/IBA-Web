@@ -14306,112 +14306,58 @@ img.ib__sectorIcon {
    on the Expertise page's India Entry band
    ================================================================== */
 
-/* --- the graphic: India, four phase rings, arcs to the corridor --- */
+/* --- the graphic: the client's glass-globe render (IndiaGateway.jsx),
+   floating over a soft red glow and swaying slowly in 3D --- */
 .ieg {
   position: relative;
-  width: min(100%, 460px);
+  width: min(100%, 540px);
   margin-inline: auto;
+  perspective: 1400px;
 }
 .ieg__glow {
   position: absolute;
   z-index: 0;
-  inset: 20%;
+  inset: 18% 22% 26%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 40, 50, 0.4), rgba(215, 25, 32, 0.08) 60%, transparent 72%);
-  filter: blur(28px);
+  background: radial-gradient(circle, rgba(255, 40, 50, 0.38), rgba(215, 25, 32, 0.08) 60%, transparent 72%);
+  filter: blur(30px);
   animation: tkh-glow 6s ease-in-out infinite;
 }
-.ieg__svg {
+/* the float on the stage, the 3D sway on the image, so the two transforms
+   don't overwrite each other */
+.ieg__stage {
   position: relative;
   z-index: 1;
+  transform-style: preserve-3d;
+  animation: tkh-float 7s ease-in-out infinite;
+}
+.ieg__img {
   display: block;
   width: 100%;
   height: auto;
-  overflow: visible;
-  animation: tkh-float 7s ease-in-out infinite;
+  max-width: none;
+  transform-origin: 50% 55%;
+  animation: ieg-sway 18s ease-in-out infinite;
+  will-change: transform;
 }
-.ieg__ring {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.16);
-  stroke-width: 1;
-  stroke-dasharray: 2 5;
-}
-.ieg__ring--outer {
-  stroke: rgba(255, 74, 80, 0.55);
-  stroke-width: 1.4;
-  stroke-dasharray: none;
-  filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
-}
-.ieg__phase {
-  font-family: var(--font-display);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  fill: rgba(255, 255, 255, 0.62);
-}
-.ieg__arc {
-  fill: none;
-  stroke: url(#ieg-arc);
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-dasharray: 6 10;
-  filter: drop-shadow(0 0 4px rgba(255, 40, 50, 0.8));
-  animation: ieg-flow 2.4s linear infinite;
-}
-.ieg__node {
-  fill: #ff4a50;
-  stroke: #ffffff;
-  stroke-width: 1.5;
-}
-.ieg__node-halo {
-  fill: rgba(255, 74, 80, 0.25);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ieg-halo 2.8s ease-out infinite;
-}
-.ieg__region {
-  font-family: var(--font-display);
-  font-size: 15px;
-  fill: #ffffff;
-}
-.ieg__hub {
-  font-family: var(--font-display);
-  font-size: 15px;
-  letter-spacing: 0.04em;
-  fill: #ffffff;
-}
-.ieg__pulse {
-  fill: rgba(255, 74, 80, 0.35);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: ieg-halo 3s ease-out infinite;
-}
-@keyframes ieg-flow {
-  to {
-    stroke-dashoffset: -32;
-  }
-}
-@keyframes ieg-halo {
-  0% {
-    opacity: 0.9;
-    transform: scale(0.8);
-  }
+@keyframes ieg-sway {
+  0%,
   100% {
-    opacity: 0;
-    transform: scale(2);
+    transform: rotateY(-14deg) rotateX(3deg);
+  }
+  50% {
+    transform: rotateY(14deg) rotateX(-2deg);
   }
 }
 @media (max-width: 860px) {
   .ieg {
-    width: min(85%, 360px);
+    width: min(92%, 400px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .ieg__glow,
-  .ieg__svg,
-  .ieg__arc,
-  .ieg__node-halo,
-  .ieg__pulse {
+  .ieg__stage,
+  .ieg__img {
     animation: none;
   }
 }
@@ -15043,5 +14989,22 @@ img.ib__sectorIcon {
     top: auto;
     bottom: 16px;
     transform: none;
+  }
+}
+
+/* India Entry hero: the globe render larger than its column (as the
+   client's mockup), reaching into the gap and the panel's padding on wide
+   screens, never over the copy */
+@media (min-width: 1101px) {
+  #india-entry .ieg {
+    width: 110%;
+    max-width: none;
+    margin-left: -8%;
+  }
+}
+@media (min-width: 1400px) {
+  #india-entry .ieg {
+    width: 128%;
+    margin-left: -12%;
   }
 }
