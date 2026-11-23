@@ -35,6 +35,7 @@ const NAMES = {
   '/about': 'About',
   '/expertise': 'Expertise',
   '/tokenization': 'Tokenization',
+  '/india-entry': 'India Entry Strategy',
   '/ecosystem': 'Ecosystem',
   '/initiatives': 'Initiatives',
   '/corridor': 'Web3 Corridor',
@@ -51,6 +52,7 @@ const NAMES = {
 const SERVICES = {
   '/expertise': { name: 'Web3 Advisory and Consulting', type: 'Web3 advisory, compliance and market expansion consulting' },
   '/tokenization': { name: 'Real-World Asset Tokenization', type: 'Asset tokenization advisory' },
+  '/india-entry': { name: 'India Entry Strategy', type: 'India market entry and expansion advisory' },
   '/corridor': { name: 'Web3 Corridor Market Entry', type: 'Cross-border market entry and expansion' },
 }
 

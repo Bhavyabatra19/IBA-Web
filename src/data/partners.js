@@ -49,7 +49,6 @@ export const PARTNERS = [
   { name: 'ArthaChain', logo: L('arthachain') },
   { name: 'Edza AI', logo: L('edza-ai') },
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
-  { name: 'nGRND' },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
   { name: 'TheCircle', logo: '/logos/partners/thecircle.png', url: 'https://the-block.com/the-circle/' },
   /* added later; the ones still without a logo show monograms on the

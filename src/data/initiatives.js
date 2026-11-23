@@ -1,8 +1,8 @@
 /**
  * IBA's programmes and councils, as cards with their logos. Shown on the
- * About page as "India Entry: Web3 and Emerging Tech Market Expansion",
- * just before the founder's note (content review, 11-17; moved from the
- * Expertise page). An entry without a `logo` shows a monogram (`mono`).
+ * About page as "IBA Initiatives: Our programs. Our commitment. Our impact",
+ * just before the founder's note (moved from the Expertise page, 11-17).
+ * An entry without a `logo` shows a monogram (`mono`).
  */
 
 import { REGIONS_LINE } from './facts'

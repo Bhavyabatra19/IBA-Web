@@ -81,6 +81,11 @@ export const SEO = {
     description:
       'Take real-world assets on-chain with IBA: asset selection, token design, regulation and compliance, technology and investor access, from idea to market.',
   },
+  '/india-entry': {
+    title: 'India Entry Strategy | Market Entry for Web3, AI & Fintech | IBA',
+    description:
+      'Enter India with IBA: market intelligence, regulatory and legal structuring, entity formation, partnerships, first customers and capital, connected to the Web3 Global Corridor.',
+  },
   '/corridor': {
     title: 'Web3 Corridor | India, UAE, Europe, Africa & Americas | IBA',
     description:

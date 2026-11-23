@@ -251,6 +251,11 @@
       "permanent": true
     },
     {
+      "source": "/india-entry/",
+      "destination": "/india-entry",
+      "permanent": true
+    },
+    {
       "source": "/ecosystem/",
       "destination": "/ecosystem",
       "permanent": true
@@ -321,6 +326,10 @@
     {
       "source": "/tokenization",
       "destination": "/tokenization/index.html"
+    },
+    {
+      "source": "/india-entry",
+      "destination": "/india-entry/index.html"
     },
     {
       "source": "/ecosystem",

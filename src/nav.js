@@ -107,7 +107,6 @@ export const NAV = [
         items: [
           { label: 'Operating Model', icon: 'layers', desc: 'Advocate, Connect, Educate, Enable.', href: '/about#mission-pillars' },
           { label: 'The IBA Framework', icon: 'link', desc: 'One connected Web3 ecosystem.', href: '/about#iba-framework' },
-          { label: 'India Entry', icon: 'spark', desc: 'Web3 and emerging tech market expansion.', href: '/about#initiatives' },
         ],
       },
     ],
@@ -120,7 +119,9 @@ export const NAV = [
       {
         title: 'What We Deliver',
         items: [
-          { label: 'Web3 Solution Consulting Stack', icon: 'layers', desc: 'Tokenization, standards, compliance and stablecoins.', href: '/expertise#consulting-stack' },
+          { label: 'Web3 Consulting Stack', icon: 'layers', desc: 'Tokenization, standards, compliance and stablecoins.', href: '/expertise#consulting-stack' },
+          { label: 'Tokenization', icon: 'spark', desc: 'Real-world assets into new market opportunities.', href: '/expertise#xp-tokenization' },
+          { label: 'India Entry Strategy', icon: 'globe', desc: 'Enter India right. Expand without borders.', href: '/expertise#xp-india-entry' },
         ],
       },
       {
@@ -317,7 +318,8 @@ export const FOOTER = [
     items: [
       { label: 'Consulting', href: '/expertise#consulting-stack' },
       { label: 'Who We Work With', href: '/expertise#who-we-serve' },
-      { label: 'India Entry', href: '/about#initiatives' },
+      { label: 'Tokenization', href: '/expertise#xp-tokenization' },
+      { label: 'India Entry Strategy', href: '/expertise#xp-india-entry' },
       { label: 'Communities & Councils', href: '/ecosystem#communities' },
     ],
   },
