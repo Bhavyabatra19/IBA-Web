@@ -201,7 +201,7 @@ export default function Corridor() {
             Global Regions:
             <br />
             {/* the initiative's name in plain Questrial: no stroke, open tracking */}
-            <span className="w3p-hero__name">Web3 Corridor</span>
+            <span className="w3p-hero__name">Web3 Global Corridor</span>
           </>
         }
         lede={[
