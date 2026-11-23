@@ -9,13 +9,13 @@
  * Tags are created on first use and then reused, the alternative, clearing and
  * re-adding them per navigation, churns the head on every click for no gain.
  *
- * ⚠ This runs after the page has loaded, so it is invisible to anything that
- * reads raw HTML, which is most crawlers other than Google, and EVERY social
- * link preview. See the note at the top of seo.js for the two ways to fix that;
- * both are deployment work rather than changes here.
+ * The same tags are also written into each route's HTML at build time
+ * (scripts/seo-pages.mjs), for crawlers and link previews that do not run
+ * JavaScript; this keeps them right as a reader moves between pages.
+ * The canonical is always on SITE_URL, whichever host served the page.
  */
 
-import { SITE_NAME, seoFor } from '../seo'
+import { SITE_NAME, SITE_URL, OG_IMAGE, seoFor } from '../seo'
 
 /**
  * Find or create one tag in the head, then set its content.
@@ -63,7 +63,7 @@ export function applySeo(path) {
    * puts a hash in the bar. Left alone, one page would present itself to a
    * crawler as a dozen near-duplicates.
    */
-  link('canonical', window.location.origin + path)
+  link('canonical', SITE_URL + path)
 
   /* Open Graph and Twitter, from the same two strings rather than a second set
      to keep in step. A link to this site is going to be pasted into Slack,
@@ -72,10 +72,13 @@ export function applySeo(path) {
   meta('property', 'og:site_name', SITE_NAME)
   meta('property', 'og:title', page.title)
   meta('property', 'og:description', page.description)
-  meta('property', 'og:url', window.location.origin + path)
-  /* ⚠ NO SHARE IMAGE. There is no og:image because there is no artwork for one, a 1200×630 card is a design job, not a code one. Without it a shared link
-     renders as a plain text row. The logo is the wrong thing to substitute: at
-     card size it crops to an unreadable square. */
+  meta('property', 'og:url', SITE_URL + path)
+  /* the share card, so a pasted link shows the IBA card rather than a bare
+     text row (SEO pass, 11-16) */
+  meta('property', 'og:image', OG_IMAGE)
+  meta('property', 'og:image:width', '1200')
+  meta('property', 'og:image:height', '630')
+  meta('name', 'twitter:image', OG_IMAGE)
   meta('name', 'twitter:card', 'summary_large_image')
   meta('name', 'twitter:title', page.title)
   meta('name', 'twitter:description', page.description)

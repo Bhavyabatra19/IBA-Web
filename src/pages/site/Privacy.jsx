@@ -50,7 +50,7 @@ const SECTIONS = [
     id: 'cookies',
     title: 'Cookies and Third-Party Services',
     paras: [
-      'This website does not use advertising or analytics cookies, and does not store anything in your browser to track you. The site loads its fonts from Google Fonts, which means your browser connects to Google’s servers. Links to LinkedIn, WhatsApp and other sites take you to services with their own privacy policies.',
+      'This website uses no advertising cookies. To understand how the site is used, it uses Vercel Web Analytics, which counts page views without cookies or any identifier that follows you, and Google Analytics, which sets analytics cookies only if you choose Accept on the cookie banner; if you choose Decline, Google Analytics runs without cookies. Your choice is remembered in your browser, and you can change it by clearing this site’s data. The site loads its fonts from Google Fonts, which means your browser connects to Google’s servers. Links to LinkedIn, WhatsApp and other sites take you to services with their own privacy policies.',
     ],
   },
   {

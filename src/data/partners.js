@@ -49,7 +49,6 @@ export const PARTNERS = [
   { name: 'ArthaChain', logo: L('arthachain') },
   { name: 'Edza AI', logo: L('edza-ai') },
   { name: 'Inner Compass Impact Fund', logo: L('inner-compass-impact-fund') },
-  { name: 'nGRND', logo: L('ngrnd') },
   { name: 'Velocity Network Foundation', logo: L('velocity-network-foundation') },
   { name: 'TheCircle', logo: '/logos/partners/thecircle.png', url: 'https://the-block.com/the-circle/' },
   /* added later; the ones still without a logo show monograms on the
@@ -71,3 +70,4 @@ export const initials = (name) => {
   const w = name.replace(/[^A-Za-z0-9& ]/g, '').split(' ').filter(Boolean)
   return w.length === 1 ? w[0].slice(0, 2).toUpperCase() : (w[0][0] + w[1][0]).toUpperCase()
 }
+

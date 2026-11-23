@@ -73,7 +73,8 @@ const TEAM = [
     name: 'Raj Kapoor',
     role: 'Founder',
     bio: null,
-    linkedin: 'https://www.linkedin.com/company/indiablockchain/posts/',
+    /* Raj Kapoor's own profile, not IBA's company page (by request, 11-15) */
+    linkedin: 'https://www.linkedin.com/in/indieblock/',
   },
   { name: 'Gargi Hajela', role: 'Co-Founder', bio: null },
 ]

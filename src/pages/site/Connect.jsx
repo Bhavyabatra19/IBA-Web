@@ -21,6 +21,7 @@ const INTERESTS = [
   'Red Club (institution)',
   'Verifyble',
   'Web3 Corridor',
+  'India Market Entry',
   'Ecosystem partnership',
   'Tech4Good / Green Chain Protocol',
   'Media / Speaking',

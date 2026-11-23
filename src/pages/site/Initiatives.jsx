@@ -89,8 +89,8 @@ export default function Initiatives() {
         title="The Programmes We Build and Run"
         lede="Each initiative has its own team, partners and home online. Find the detail and the links here."
         actions={
-          <Btn href="/expertise#initiatives" variant="ghost">
-            ← Back to Expertise
+          <Btn href="/about#initiatives" variant="ghost">
+            ← Back to About
           </Btn>
         }
       />

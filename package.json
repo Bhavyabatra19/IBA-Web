@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/seo-pages.mjs",
     "build:artifact": "VITE_ARTIFACT=1 vite build --outDir dist-artifact --emptyOutDir && node scripts/artifact-paths.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.5.0",
     "gsap": "^3.13.0",
     "lenis": "^1.3.11",
     "react": "^18.3.1",

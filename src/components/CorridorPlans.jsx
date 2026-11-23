@@ -6,7 +6,7 @@
  * site's tier card (.mbr-tier, with a TierCard in each metal); the tabs are styled in
  * brandbook.css (.cpl).
  *
- * Each tier shows 4–5 key benefits and a Request Brochure button (by
+ * Each tier shows 4–5 key benefits and a Request Information button (by
  * request, 11-12-2026); the full lists are in the brochure.
  *
  * The Web360 Club track carries the corridor partners' benefits for every
@@ -143,8 +143,10 @@ const MATRIX = [
   ['Exposure to a mock investor committee', false, true, true],
   ['White paper publishing support', false, true, true],
   ['Blockchain grant advice and information', false, true, true],
-  ['TheCircle Level 1 pack', false, true, true],
-  ['TheBlock Level 1 pack', false, false, true],
+  ['IBA-Circle Global Member', false, true, true],
+  ['IBA-Block Connect', false, false, true],
+  /* across every class (by request, 11-23); its details to follow */
+  ['IBA-Clarity SOLO', true, true, true],
 ]
 const CLASSES = ['Club Class', 'Premier Class', 'Gold Class']
 
@@ -291,7 +293,7 @@ export default function CorridorPlans() {
                 </ol>
               )}
               <a className="mbr-tier__cta" href="/connect" data-enquiry={ENQUIRY}>
-                Request Brochure
+                Request Information
               </a>
             </li>
           ))}

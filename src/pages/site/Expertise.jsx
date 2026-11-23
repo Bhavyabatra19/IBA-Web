@@ -3,8 +3,9 @@
  *   hero · Web3 Solution Advisory and Consulting Stack (four core
  *   capabilities, each with an icon) · the founder's quote (text only, on a
  *   moving ground) · Tokenization (a black hero-style band, "Know more" to
- *   /tokenization) · Global Market Expansion · the outcome · who we work
- *   with · IBA initiatives (a logo carousel).
+ *   /tokenization) · India Entry Strategy (the same band, "Know more" to
+ *   /india-entry) · Global Market Expansion · the outcome · who we work
+ *   with. (IBA Initiatives moved to the About page as India Entry, 11-17.)
  * Tones alternate light and dark (by request, as on the Web3 Corridor,
  * Membership and Tokenization pages): dark hero, white, the red quote, the
  * black Tokenization band, Global Market Expansion on a light band with a
@@ -14,10 +15,9 @@
  */
 
 import { PageHero, Section, SubHead, Cards, Quote, Btn } from '../../components/Kit'
-import { REGIONS_LINE } from '../../data/facts'
 import CoreCapabilities from '../../components/CoreCapabilities'
 import TokenHero from '../../components/TokenHero'
-import InitiativeCarousel from '../../components/InitiativeCarousel'
+import IndiaGateway from '../../components/IndiaGateway'
 import MissionPillars from '../../components/MissionPillars'
 
 /* Supplied innovation image in the Expertise hero. */
@@ -155,7 +155,6 @@ const GTM_SERVICES = [
   { num: '08', title: 'Programme management & impact', text: 'Project coordination, milestones, operations review, policy and strategy assessment, performance dashboards and optimisation.' },
 ]
 
-/* IBA Initiatives. An entry without a `logo` shows a monogram (`mono`). */
 const OUTCOME_ICONS = [
   <><path d="M3 12s3.2-5.5 9-5.5 9 5.5 9 5.5-3.2 5.5-9 5.5S3 12 3 12Z" /><circle cx="12" cy="12" r="2.5" /><path d="m10.5 12 1.2 1.2 2.5-2.8" /></>,
   <><path d="m12 2.5 8 3v6c0 4.7-3.3 8.2-8 10-4.7-1.8-8-5.3-8-10v-6Z" /><path d="m8.5 12.2 2.4 2.4 4.8-5" /></>,
@@ -165,34 +164,12 @@ const OUTCOME_ICONS = [
   <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.4 2.4 3.5 5.4 3.5 9S14.4 18.6 12 21c-2.4-2.4-3.5-5.4-3.5-9S9.6 5.4 12 3Z" /><path d="M15 5h5v5M20 5l-5 5" /></>,
 ]
 
-const INITIATIVES = [
-  { title: 'Tech4Good', logo: '/logos/initiatives/trim/t4g.png', sub: 'Technology in service of outcomes that matter', text: "IBA's impact initiative, applying blockchain and emerging technology to problems where the return is social rather than commercial. Anchors the alliance's SDG alignment.", href: '/initiatives#init-tech4good' },
-  { title: 'Green Chain Protocol', logo: '/logos/initiatives/trim/green-chain.png', sub: 'Making green finance and governance verifiable', text: 'A blockchain ecosystem focused on ESG, aligned with COP28, showcasing and growing Web3 projects in sustainability.', href: '/initiatives#init-green-chain' },
-  { title: 'Verifyble', logo: '/logos/initiatives/trim/verifyble.png', sub: 'Data security and digital asset management', text: "IBA's platform for data security and digital asset management, helping any organisation or individual secure, verify and manage data and digital assets on-chain.", href: '/initiatives#init-verifyble' },
-  { title: 'IBA Red Club', logo: '/logos/initiatives/trim/red-club.png', sub: 'The talent pipeline for Web3 and AI', text: 'Certified programmes, on-campus labs, live industry projects, internships and placements.', href: '/initiatives#init-red-club' },
-  { title: 'Web3 Corridor', logo: '/images/web3.jpeg', sub: 'Global Innovation Corridor Initiative', text: 'A global innovation platform connecting ' + REGIONS_LINE + ' through innovation, technology, investment and partnerships.', href: '/initiatives#init-web3-corridor' },
-  /* ⚠ India AI Alliance is left out until its description is supplied (by
-     request: no placeholder copy on the page). Its logo is in the project:
-     { title: 'India AI Alliance', logo: '/logos/partners/india-ai-alliance.jpg', sub: …, text: …, href: '/initiatives#init-india-ai-alliance' } */
-  /* the two councils, with their logos (by request); text from the Ecosystem page */
-  { title: 'Emerging Technology Council', logo: '/logos/initiatives/trim/etc.png', sub: 'Policy and community for new tech frontiers', text: "The apex body for India's technology industry, driving policy advocacy, research, knowledge, advisory and community building across newer tech frontiers.", href: '/ecosystem#communities' },
-  { title: 'Blockchain Governance Council', logo: '/logos/initiatives/trim/bgc.png', sub: 'Standards, frameworks and compliance', text: 'An open global multi-stakeholder network co-developing solutions around policy, frameworks, compliance, security, taxation and standards.', href: '/ecosystem#communities' },
-]
 
 /**
  * Tokenization, as a black hero-style band with the client's tokenization
  * render beside it (the same graphic as the Tokenization page's hero).
  * Its copy is the Tokenization page's hero (the client's tokenization PDF).
  */
-const INITIATIVE_ORDER = [
-  'Web3 Corridor',
-  'Blockchain Governance Council',
-  'Emerging Technology Council',
-  'Tech4Good',
-  'Green Chain Protocol',
-  'Verifyble',
-  'IBA Red Club',
-]
 
 function TokenizationBand() {
   return (
@@ -217,6 +194,41 @@ function TokenizationBand() {
         </div>
         <div className="tkb__art">
           <TokenHero />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/**
+ * India Entry Strategy, as a second band in the Tokenization band's format
+ * (by request, 11-23), just under it: the copy from the client's India
+ * Market Entry page, its India-to-corridor graphic beside it, and "Know
+ * more" to /india-entry.
+ */
+function IndiaEntryBand() {
+  return (
+    <section className="tkb band band--light band--own" id="xp-india-entry" aria-labelledby="ieb-title">
+      <div className="tkb__panel">
+        <span className="pk-hero__beam tkb__beam" aria-hidden="true" />
+        <div className="tkb__copy">
+          <p className="hero__kicker pk-eyebrow">India Entry Strategy</p>
+          <h2 className="tkb__title" id="ieb-title">
+            Enter India right. Expand without borders.
+          </h2>
+          <p className="tkb__lede">
+            A structured market-entry and growth pathway for global technology, blockchain, AI, fintech and Web3
+            companies, from regulatory readiness and entity formation to partnerships, first customers, capital and
+            cross-border scale through the Web3 Global Corridor.
+          </p>
+          <div className="pk-actions">
+            <Btn href="/india-entry">
+              Know more <span aria-hidden="true">→</span>
+            </Btn>
+          </div>
+        </div>
+        <div className="tkb__art">
+          <IndiaGateway />
         </div>
       </div>
     </section>
@@ -275,13 +287,16 @@ export default function Expertise() {
       <Section id="founder-quote" tone="dark">
         <Quote by="Raj Kapoor · Founder, India Blockchain Alliance">
           The future of capital markets won’t simply be digital. It will be transparent,
-          programmable, compliant and tokenized. And I’m excited to help build it.
-          <span className="founder-quote__setup">The future isn’t coming.</span>
-          <span className="founder-quote__final">I am building it.</span>
+          programmable, compliant and tokenized. And we’re excited to help build it.
+          {/* the close on one line of its own (by request, 11-14) */}
+          <span className="founder-quote__close">The future isn’t coming. We at IBA are building it.</span>
         </Quote>
       </Section>
 
       <TokenizationBand />
+
+      {/* India Entry Strategy, in the same format, just under Tokenization */}
+      <IndiaEntryBand />
 
       {/* Global Market Expansion (the client's GTM page, 11-10-2026): the
           four-stage framework, then the advisory stack behind it */}
@@ -333,9 +348,6 @@ export default function Expertise() {
       </Section>
 
       {/* light, so the page ends white before the dark CTA band */}
-      <Section id="initiatives" eyebrow="IBA Initiatives" title="Our programs. Our commitment. Our impact">
-        <InitiativeCarousel items={INITIATIVE_ORDER.map((name) => INITIATIVES.find((item) => item.title === name))} />
-      </Section>
     </div>
   )
 }

@@ -12,10 +12,8 @@
  * console during development when the two lists disagree, it is the only place
  * that can, since it is the file that owns PAGES.
  *
- * `brief: true` marks the ten the client supplied, word for word. The rest are
- * written to the same pattern, `Name | what it is`, then a sentence that says
- * what is actually on the page, because the site has twenty routes and the
- * brief covers ten of them.
+ * Titles and descriptions were rewritten in the SEO pass of 11-16 to fit
+ * Google's result snippet; see the note above FALLBACK.
  *
  * ---------------------------------------------------------------------------
  * A NOTE ON WHAT THIS CANNOT DO.
@@ -25,117 +23,123 @@
  * (Slack, WhatsApp, LinkedIn, X, iMessage), read the raw HTML and will see
  * index.html's tags for every URL on the site.
  *
- * That is a deployment problem, not a code one, and it has two standard fixes:
- * prerender the routes at build time (vite-plugin-ssr, or a static export), or
- * put the tags in at the edge (a Netlify/Cloudflare/Vercel middleware that
- * injects them per path). Until one of those is in place, treat the link
- * previews as unfinished.
+ * FIXED (11-16): scripts/seo-pages.mjs runs after `vite build` and writes a
+ * copy of index.html for every route in this table with that route's tags
+ * already in the HTML, plus sitemap.xml. Crawlers and link previews now read
+ * the right title and description without running any JavaScript.
  */
 
-import { FACTS, REGIONS_LINE } from './data/facts'
+import { FACTS } from './data/facts'
 
 /* No brand suffix is appended anywhere. Every title below already names IBA or
-   the Alliance, which is the brief's own pattern, appending one would give
-   half the pages the word twice. */
+   the Alliance, so appending one would give half the pages the word twice. */
 export const SITE_NAME = 'India Blockchain Alliance'
 
 /**
- * The default, and what an unknown path gets.
+ * The site's one address (content review, 11-16): every canonical, og:url and
+ * sitemap entry is built on it, whichever host served the page (the Vercel
+ * preview addresses included), so Google indexes one copy of each page.
+ */
+export const SITE_URL = 'https://indiablockchainalliance.org'
+
+/** The share card (1200 × 630) shown when a link is pasted into LinkedIn,
+    WhatsApp, Slack or X: public/og-image.jpg */
+export const OG_IMAGE = `${SITE_URL}/og-image.jpg`
+
+/**
+ * Titles are kept to about 60 characters and descriptions to about 155, the
+ * lengths Google shows in a result before it cuts them off (SEO pass, 11-16).
  *
- * An unknown path renders the home page (see PAGES) rather than a 404, so it
- * gets the home page's title, and `noindex`, because a URL that does not exist
- * should not collect search results under a title that says it does. When there
- * is a real 404 page, this becomes its row.
+ * The default, and what an unknown path gets: the home page's text, with
+ * `noindex`, because a URL that does not exist should not collect results.
  */
 export const FALLBACK = {
-  title: 'India Blockchain Alliance | Blockchain Advisory, Consulting & Education',
+  title: 'India Blockchain Alliance | Web3, Tokenization & Advisory',
   description:
-    `IBA is a premier global blockchain community and advocacy group advancing blockchain adoption across Asia and MENA. ${FACTS.members.text} members, ${FACTS.countries.text} countries, ${FACTS.tokenized.text} tokenized assets.`,
+    'India Blockchain Alliance (IBA) connects India, the UAE, Europe, Africa and the Americas through the Web3 Corridor: tokenization, Web3 advisory and memberships.',
   noindex: true,
 }
 
 export const SEO = {
-  /* ---- from the brief, verbatim ---- */
   '/': {
-    brief: true,
-    title: 'India Blockchain Alliance | Blockchain Advisory, Consulting & Education',
+    title: 'India Blockchain Alliance | Web3, Tokenization & Advisory',
     description:
-      `IBA is a premier global blockchain community and advocacy group advancing blockchain adoption across Asia and MENA. ${FACTS.members.text} members, ${FACTS.countries.text} countries, ${FACTS.tokenized.text} tokenized assets.`,
+      'India Blockchain Alliance (IBA) connects India, the UAE, Europe, Africa and the Americas through the Web3 Corridor: tokenization, Web3 advisory and memberships.',
   },
   '/about': {
-    brief: true,
     title: 'About IBA | Vision, Mission & Global Presence',
     description:
-      `Who we are, what we're building, and where we operate, across ${FACTS.countries.text} countries, ${FACTS.affiliations.text} affiliations and 16+ industry verticals.`,
-  },
-  '/library': {
-    brief: true,
-    title: 'IBA Library | Free Blockchain Articles, Videos & Research',
-    description:
-      'Searchable, categorised library of articles, videos, reports and recorded sessions. Free with a member account.',
+      `Who India Blockchain Alliance is and what it is building: its vision, mission, founder and team, with ${FACTS.members.text} members across ${FACTS.countries.text} countries.`,
   },
   '/gallery': {
     title: 'IBA in the News & Gallery | India Blockchain Alliance',
     description:
       'Press coverage of India Blockchain Alliance, and photos from IBA events, conferences and gatherings across the Web3 Corridor.',
   },
-  '/connect': {
-    brief: true,
-    title: 'Contact IBA | Let the Journey Begin',
-    description:
-      'Email, call or WhatsApp the India Blockchain Alliance, or submit an enquiry about consulting, advisory, Red Club, Verifyble or a Web3 Corridor.',
-  },
-
-  /* ---- the pages added from the content source ---- */
   '/expertise': {
-    title: 'Expertise | Web3 Solution Advisory and Consulting Stack | IBA',
+    title: 'Web3 Advisory & Consulting | IBA Expertise',
     description:
-      'Tokenization; standards, frameworks and compliance; stablecoin structuring; and advisory and global market expansion: from ‘Should we?’ to ‘It’s live, governed, and ready to scale.’',
+      'Web3 advisory and consulting from IBA: tokenization, standards and compliance, stablecoin structuring and global market expansion, from strategy to launch.',
   },
   '/tokenization': {
-    title: 'Tokenization | Turn Real-World Assets into Market Opportunities | IBA',
+    title: 'Real-World Asset Tokenization | IBA',
     description:
-      'Tokenization can connect traditionally illiquid assets to digital markets, creating new possibilities for fractional ownership, capital formation, transparency and cross-border investor access.',
+      'Take real-world assets on-chain with IBA: asset selection, token design, regulation and compliance, technology and investor access, from idea to market.',
   },
-  '/privacy': {
-    title: 'Privacy Policy | India Blockchain Alliance',
+  '/india-entry': {
+    title: 'India Entry Strategy | Market Entry for Web3, AI & Fintech | IBA',
     description:
-      'How India Blockchain Alliance collects, uses and protects the information you share with us through this website, and the rights you have over it.',
+      'Enter India with IBA: market intelligence, regulatory and legal structuring, entity formation, partnerships, first customers and capital, connected to the Web3 Global Corridor.',
   },
-  '/ecosystem': {
-    title: 'IBA Ecosystem | Initiatives, Partners, Councils & People',
+  '/corridor': {
+    title: 'Web3 Corridor | India, UAE, Europe, Africa & Americas | IBA',
     description:
-      `Tech4Good, Green Chain Protocol, Verifyble, Red Club and the Web3 Corridor, with ${FACTS.partners.text} ecosystem partners and the councils setting blockchain standards.`,
-  },
-  '/initiatives': {
-    title: 'IBA Initiatives | The Programmes We Build and Run',
-    description:
-      'Tech4Good, Green Chain Protocol, Verifyble, IBA Red Club, the Web3 Corridor and the India AI Alliance.',
+      'The IBA Web3 Corridor links five regions for market entry, capital and cross-border growth, with Web360 Club memberships and the Indo–UAE Startup Xchange.',
   },
   '/membership': {
     title: 'IBA Membership | Join the India Blockchain Alliance',
     description:
-      'Membership of the India Blockchain Alliance: the IBA Library, the IBA Directory and the Web3 Corridor network, with Web360 Club and Indo–UAE Startup Xchange pathways for founders, investors and institutions.',
+      'Join India Blockchain Alliance: the IBA Library, the member directory and the Web3 Corridor network, with Club, Premier and Gold tiers for founders and institutions.',
   },
-  '/corridor': {
-    title: 'Web3 Corridor | Memberships, Tokenization & Startup Xchange | IBA',
+  '/ecosystem': {
+    title: 'IBA Ecosystem | Partners, Councils & Initiatives',
     description:
-      'One connected ecosystem across India, the UAE, Europe, the Americas and Africa: Web360 Club founder and tokenization memberships, and the Indo–UAE Startup Xchange.',
+      `The IBA ecosystem: ${FACTS.partners.text} partners, the councils setting blockchain standards, and initiatives including Red Club, Verifyble and Tech4Good.`,
+  },
+  '/initiatives': {
+    title: 'IBA Initiatives | Programmes We Build and Run',
+    description:
+      'Programmes built and run by India Blockchain Alliance: Tech4Good, Green Chain Protocol, Verifyble, Red Club, the Web3 Corridor and the India AI Alliance.',
   },
   '/red-club': {
-    title: 'IBA Red Club | Experience Centers for Institutions and Learners',
+    title: 'IBA Red Club | Blockchain & AI Experience Centers',
     description:
-      'The IBA Red Club Experience Centers connect universities, educators and learners to practical blockchain, tokenization and AI learning, powered by industry collaboration, applied research and international pathways.',
+      'IBA Red Club Experience Centers bring practical blockchain, tokenization and AI learning to universities and learners, with industry projects and global pathways.',
   },
   '/red-club/institutions': {
-    title: 'IBA Red Club for Institutions | Experience Centers on Campus',
+    title: 'Red Club for Universities | IBA Experience Centers',
     description:
-      'Red Club Experience Centers for universities: curriculum, labs, joint research, industry projects, certifications and international pathways, run as a partnership with IBA.',
+      'Bring a Red Club Experience Center to your campus: curriculum, labs, joint research, industry projects and certifications, run in partnership with IBA.',
   },
   '/red-club/learners': {
-    title: 'IBA Red Club for Learners | Industry-Ready Web3 Skills',
+    title: 'Red Club for Learners | Industry-Ready Web3 Skills | IBA',
     description:
-      'Programmes, live projects, internships, mentorship, career support and verifiable credentials that take learners from curiosity to industry-ready capability.',
+      'Learn blockchain, tokenization and AI with IBA Red Club: programmes, live projects, internships, mentorship and verifiable credentials for a Web3 career.',
+  },
+  '/library': {
+    title: 'IBA Library | Blockchain Articles, Videos & Research',
+    description:
+      'A searchable library of blockchain and Web3 articles, videos, reports and recorded sessions from India Blockchain Alliance. Free with a member account.',
+  },
+  '/connect': {
+    title: 'Contact India Blockchain Alliance | Let’s Talk',
+    description:
+      'Talk to India Blockchain Alliance about Web3 advisory, tokenization, the Web3 Corridor, membership or Red Club. Email, WhatsApp, LinkedIn or the enquiry form.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | India Blockchain Alliance',
+    description:
+      'How India Blockchain Alliance collects, uses and protects the information you share through this website, and the rights you have over it.',
   },
 }
 

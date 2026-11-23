@@ -119,19 +119,15 @@ export const NAV = [
       {
         title: 'What We Deliver',
         items: [
-          { label: 'Web3 Solution Consulting Stack', icon: 'layers', desc: 'Tokenization, standards, compliance and stablecoins.', href: '/expertise#consulting-stack' },
+          { label: 'Web3 Consulting Stack', icon: 'layers', desc: 'Tokenization, standards, compliance and stablecoins.', href: '/expertise#consulting-stack' },
+          { label: 'Tokenization', icon: 'spark', desc: 'Real-world assets into new market opportunities.', href: '/expertise#xp-tokenization' },
+          { label: 'India Entry Strategy', icon: 'globe', desc: 'Enter India right. Expand without borders.', href: '/expertise#xp-india-entry' },
         ],
       },
       {
         title: 'Who We Serve',
         items: [
           { label: 'Who We Work With', icon: 'users', desc: 'Governments, enterprises, issuers and founders.', href: '/expertise#who-we-serve' },
-        ],
-      },
-      {
-        title: 'Programmes',
-        items: [
-          { label: 'IBA Initiatives', icon: 'spark', desc: 'Programmes IBA built and runs.', href: '/expertise#initiatives' },
         ],
       },
     ],
@@ -175,7 +171,7 @@ export const NAV = [
       {
         title: 'Discover Membership',
         items: [
-          { label: 'Membership of the Alliance', icon: 'users', desc: 'The library, the IBA Directory and more.', href: '/membership#alliance' },
+          { label: 'The Alliance Membership', icon: 'users', desc: 'The library, the IBA Directory and more.', href: '/membership#alliance' },
           { label: 'Membership FAQ', icon: 'chat', desc: 'Before you choose.', href: '/membership#membership-faq' },
           { label: 'How to Join', icon: 'handshake', desc: 'From application to activation.', href: '/membership#join' },
         ],
@@ -329,7 +325,8 @@ export const FOOTER = [
     items: [
       { label: 'Consulting', href: '/expertise#consulting-stack' },
       { label: 'Who We Work With', href: '/expertise#who-we-serve' },
-      { label: 'IBA Initiatives', href: '/expertise#initiatives' },
+      { label: 'Tokenization', href: '/expertise#xp-tokenization' },
+      { label: 'India Entry Strategy', href: '/expertise#xp-india-entry' },
       { label: 'Communities & Councils', href: '/ecosystem#communities' },
     ],
   },
@@ -359,9 +356,11 @@ export const FOOTER = [
       { label: MEMBER_LOGIN, href: '/library#login' },
       { label: 'Newsletter signup', href: '/library#signup' },
       { label: 'Contact Us', href: '/connect' },
-      { label: 'LinkedIn', href: CONTACT.linkedin.href, external: true, icon: 'linkedin' },
+      /* the same three channels, in the same order, as the Let's Talk form
+         (by request, 11-15); the footer builds the WhatsApp link with waLink */
       { label: 'Email', href: CONTACT.email.href, icon: 'email' },
-      { label: 'Phone', href: CONTACT.phone.href, icon: 'phone' },
+      { label: 'WhatsApp', href: 'https://wa.me/' + CONTACT.whatsapp.number, external: true, icon: 'whatsapp' },
+      { label: 'LinkedIn', href: CONTACT.linkedin.href, external: true, icon: 'linkedin' },
     ],
   },
 ]

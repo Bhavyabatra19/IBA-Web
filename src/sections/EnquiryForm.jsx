@@ -23,6 +23,7 @@
  */
 
 import { useRef, useState } from 'react'
+import { track } from '../lib/analytics'
 import {
   Area,
   Check,
@@ -44,6 +45,8 @@ import {
   TOPICS,
   UNWIRED,
   waLink,
+  enquiryMailto,
+  enquiryWhatsApp,
 } from '../enquiry'
 import {
   NO_ENDPOINT,
@@ -120,6 +123,8 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
   const [errors, setErrors] = useState({})
   const [busy, setBusy] = useState(false)
   const [outcome, setOutcome] = useState(null)
+  /* the answers as sent, for the email and WhatsApp fallbacks */
+  const [sent, setSent] = useState({})
   /* The one controlled field: a CTA sets the topic, so the select has to follow
      a value from outside itself. Everything else is uncontrolled. */
   const [chosen, setChosen] = useState(topic || remembered().topic || '')
@@ -158,10 +163,14 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
 
     setBusy(true)
     const fields = Object.fromEntries(new FormData(form.current).entries())
+    setSent(fields)
     try {
       const result = await submitEnquiry(fields)
       setOutcome(result)
       if (result === SENT) clearEnquiry()
+      /* the enquiry, counted in Google Analytics: generate_lead is GA4's own
+         name for it, so it can be marked as a key event as it is */
+      track(result === SENT ? 'generate_lead' : 'enquiry_not_sent', { topic: fields.topic || '' })
     } catch {
       setOutcome(SEND_FAILED)
     } finally {
@@ -210,16 +219,16 @@ export default function EnquiryForm({ topic = '', phrase, onDone }) {
           {outcome === SEND_FAILED && <a href={CONTACT.email.href}>{CONTACT.email.label}</a>}
         </p>
         <div className="enq__endRow">
-          <a className="btn btn--primary btn--sm" href={CONTACT.email.href}>
-            Email us instead
+          <a className="btn btn--primary btn--sm" href={enquiryMailto(sent)}>
+            Send by email
           </a>
           <a
             className="btn btn--ghost btn--sm"
-            href={waLink(phrase)}
+            href={enquiryWhatsApp(sent)}
             target="_blank"
             rel="noreferrer noopener"
           >
-            WhatsApp us
+            Send on WhatsApp
           </a>
         </div>
         <button

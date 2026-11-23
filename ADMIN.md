@@ -64,3 +64,20 @@ The enquiry form posts to `api/enquiry.js`, which emails each enquiry to **hello
 4. Redeploy, then send a test enquiry from the site.
 
 Without `ENQUIRY_FROM` on a verified domain, Resend only delivers to the email address of the Resend account itself, which is useful for a first test.
+
+# Search (SEO) and analytics
+
+## Search
+- Page titles and descriptions: `src/seo.js` (about 60 and 155 characters, what Google shows). Run `npm run build`; `scripts/seo-pages.mjs` writes each page's HTML with its tags and structured data, and `sitemap.xml`.
+- The official address is `SITE_URL` in `src/seo.js` (https://indiablockchainalliance.org). Every canonical and sitemap entry uses it.
+- Google Search Console (search.google.com/search-console): sitemap `https://indiablockchainalliance.org/sitemap.xml`. **Search impressions, clicks and positions are reported here.**
+
+## Google Analytics 4 (visitors, traffic sources, enquiries)
+1. analytics.google.com → Admin → Create property ("India Blockchain Alliance"), then a **Web** data stream for `https://indiablockchainalliance.org`. Copy the **Measurement ID** (`G-…`).
+2. Vercel → iba-web → Settings → Environment Variables (Production): `VITE_GA_ID` = the Measurement ID. Redeploy.
+3. The site then shows a cookie banner; analytics cookies are set only after Accept (Google Consent Mode).
+4. Events sent: `page_view`, `generate_lead` (an enquiry sent), `enquiry_not_sent`, `enquiry_open` (Let's Talk opened), `contact_click` (method: email, whatsapp, linkedin, phone). In GA4 → Admin → Events, mark `generate_lead` as a **key event**.
+5. To see Search Console data in GA4: GA4 → Admin → Product links → Search Console links → Link.
+
+## Vercel Web Analytics (cookieless page views)
+Vercel → iba-web → Analytics → Enable. Nothing else to set; the site already sends the data.

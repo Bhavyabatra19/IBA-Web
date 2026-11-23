@@ -8622,8 +8622,7 @@ main {
   letter-spacing: 0;
   color: #ffffff;
 }
-#founder-quote .founder-quote__setup,
-#founder-quote .founder-quote__final {
+#founder-quote .founder-quote__close {
   display: block;
 }
 #founder-quote .pk-quote figcaption {
@@ -14059,7 +14058,7 @@ img.ib__sectorIcon {
    footer take the same diagonal arc as the Corridor and About heroes,
    so no black block on the site sits flat
    ================================================================== */
-:is(#connect-page, #initiatives-page, #membership) .pk-hero__panel,
+:is(#connect-page, #initiatives-page, #membership, #gallery) .pk-hero__panel,
 #membership.pk-sec--dark .pk-sec__panel,
 .ft__panel {
   position: relative;
@@ -14067,7 +14066,8 @@ img.ib__sectorIcon {
   overflow: hidden;
   background: #060607;
 }
-:is(#connect-page, #initiatives-page, #membership) .pk-hero__beam,
+:is(#connect-page, #initiatives-page, #membership, #gallery) .pk-hero__beam,
+#xp-india-entry .tkb__beam,
 #membership.pk-sec--dark .pk-sec__panel::before,
 .ft__panel::before {
   content: '';
@@ -14089,6 +14089,802 @@ img.ib__sectorIcon {
   filter: blur(14px);
   -webkit-mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
   mask-image: radial-gradient(85% 120% at 70% 45%, #000 35%, transparent 100%);
+}
+
+/* Home partner marquee: tall cards, each a big square logo with the
+   partner's name under it. Every logo is the same size, in an identical
+   square box, the original logos in black and white. The rows'
+   movement is unchanged. */
+.eco .eco__marquee .eco__chip {
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 148px;
+  margin-right: 14px;
+  padding: 12px 12px 14px;
+}
+.eco .eco__marquee :is(.eco__logo, .eco__mono) {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0;
+  background: none;
+  object-fit: contain;
+  /* the original logos, in black and white */
+  filter: grayscale(1);
+  opacity: 0.9;
+}
+.eco .eco__marquee .eco__chip:hover :is(.eco__logo, .eco__mono) {
+  opacity: 1;
+}
+.eco .eco__marquee .eco__name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.5em;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+}
+@media (max-width: 640px) {
+  .eco .eco__marquee .eco__chip {
+    width: 120px;
+    margin-right: 10px;
+    padding: 10px 10px 12px;
+  }
+  .eco .eco__marquee .eco__name {
+    font-size: 13px;
+  }
+}
+
+/* Footer contact icons: the Let's Talk form's red-lit glass circles (by
+   request, 11-15); the artwork carries its own ring, so the square
+   outline and white fill go */
+.ft__icons a {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.ft__icons a:hover,
+.ft__icons a:focus-visible {
+  border: 0;
+  background: none;
+  transform: translateY(-2px);
+  filter: brightness(1.2) drop-shadow(0 0 10px rgba(255, 40, 50, 0.45));
+}
+.ft__icons img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Let's Talk, the fallback panel (content review, 11-16): its buttons were
+   caught by the panel's red underlined link style, red on the red button and
+   dark on the dark outline. Set as buttons again, readable on the dark panel. */
+.enq__endRow .btn {
+  text-decoration: none;
+}
+.enq__endRow .btn--primary,
+.enq__endRow .btn--primary:hover {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.enq__endRow .btn--primary:hover {
+  border-color: #b3121a;
+  background: #b3121a;
+}
+.enq__endRow > .btn--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #ffffff;
+}
+.enq__endRow > .btn--ghost:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: #111111;
+}
+
+/* Cookie choice for Google Analytics (ConsentBanner.jsx): a small dark card
+   at the bottom left, clear of the scroll-to-top button on the right */
+.cns {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 120;
+  display: grid;
+  gap: 14px;
+  width: min(420px, calc(100vw - 32px));
+  padding: 18px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(14, 12, 12, 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.86);
+}
+.cns__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.cns__text a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cns__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.cns__btn {
+  padding: 9px 18px;
+  border: 1px solid var(--iba-red);
+  background: var(--iba-red);
+  font: inherit;
+  font-size: 14px;
+  color: #ffffff;
+  cursor: pointer;
+}
+.cns__btn:hover {
+  background: #b3121a;
+}
+.cns__btn--ghost {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+}
+.cns__btn--ghost:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Expertise — Global Market Expansion (by request, 11-23): the intro set
+   wider so its two paragraphs take four lines, not six; "The advisory and
+   consulting stack" set like the section title above it (H2 size, centred,
+   its lede centred beneath); and the eight stack cards a little shorter */
+.xp-page #global-market-expansion .pk-head {
+  max-width: 68rem;
+}
+.xp-page #global-market-expansion .pk-head__lede {
+  max-width: 66rem;
+}
+.xp-page #global-market-expansion .pk-sub {
+  justify-items: center;
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.xp-page #global-market-expansion .pk-sub h3 {
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.xp-page #global-market-expansion .pk-sub p {
+  font-size: 18px;
+  line-height: 28px;
+}
+@media (max-width: 760px) {
+  .xp-page #global-market-expansion .pk-sub h3 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .xp-page #global-market-expansion .pk-sub p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card {
+  gap: 6px;
+  padding: 18px 20px 20px;
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card__title {
+  font-size: 18px;
+  line-height: 24px;
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card__text {
+  line-height: 1.5;
+}
+
+/* ==================================================================
+   India Entry Strategy (pages/site/IndiaEntry.jsx, .iep) — the client's
+   India Market Entry copy in the Tokenization page's sections and cards
+   (the page also carries .tkp, so it shares Tokenization's centred heads,
+   notes and disclaimer); and its graphic (IndiaGateway.jsx, .ieg), also
+   on the Expertise page's India Entry band
+   ================================================================== */
+
+/* --- the graphic: India, four phase rings, arcs to the corridor --- */
+.ieg {
+  position: relative;
+  width: min(100%, 460px);
+  margin-inline: auto;
+}
+.ieg__glow {
+  position: absolute;
+  z-index: 0;
+  inset: 20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 40, 50, 0.4), rgba(215, 25, 32, 0.08) 60%, transparent 72%);
+  filter: blur(28px);
+  animation: tkh-glow 6s ease-in-out infinite;
+}
+.ieg__svg {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  animation: tkh-float 7s ease-in-out infinite;
+}
+.ieg__ring {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+.ieg__ring--outer {
+  stroke: rgba(255, 74, 80, 0.55);
+  stroke-width: 1.4;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 6px rgba(255, 40, 50, 0.6));
+}
+.ieg__phase {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: rgba(255, 255, 255, 0.62);
+}
+.ieg__arc {
+  fill: none;
+  stroke: url(#ieg-arc);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-dasharray: 6 10;
+  filter: drop-shadow(0 0 4px rgba(255, 40, 50, 0.8));
+  animation: ieg-flow 2.4s linear infinite;
+}
+.ieg__node {
+  fill: #ff4a50;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+}
+.ieg__node-halo {
+  fill: rgba(255, 74, 80, 0.25);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ieg-halo 2.8s ease-out infinite;
+}
+.ieg__region {
+  font-family: var(--font-display);
+  font-size: 15px;
+  fill: #ffffff;
+}
+.ieg__hub {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  fill: #ffffff;
+}
+.ieg__pulse {
+  fill: rgba(255, 74, 80, 0.35);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ieg-halo 3s ease-out infinite;
+}
+@keyframes ieg-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+@keyframes ieg-halo {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
+@media (max-width: 860px) {
+  .ieg {
+    width: min(85%, 360px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ieg__glow,
+  .ieg__svg,
+  .ieg__arc,
+  .ieg__node-halo,
+  .ieg__pulse {
+    animation: none;
+  }
+}
+
+/* --- hero: Tokenization's (a dark gradient, the eyebrow in red) --- */
+#india-entry .pk-hero__panel {
+  overflow: hidden;
+  background: linear-gradient(120deg, #0b0b0d 0%, #17151a 55%, #3a0b12 100%);
+}
+#india-entry .pk-hero__beam {
+  display: none;
+}
+#india-entry .pk-hero__lede {
+  max-width: 44rem;
+}
+#india-entry .pk-eyebrow {
+  color: #ff6a6e;
+}
+#india-entry .pk-actions {
+  flex-wrap: wrap;
+}
+#india-entry .pk-hero__aside {
+  display: grid;
+  place-items: center;
+}
+
+/* --- the four phases strip: four across, as Membership's --- */
+.iep-focus .tkp-focus__list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.iep-focus .tkp-focus__label strong {
+  display: block;
+  font-weight: 400;
+  color: var(--iba-red);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+@media (max-width: 1100px) {
+  .iep-focus .tkp-focus__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+  .iep-focus .tkp-focus__item:nth-child(3) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 860px) {
+  .iep-focus .tkp-focus__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- the sector tags under the proposition, and the services' phase filter --- */
+.iep-tags,
+.iep-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.iep-tags li {
+  padding: 6px 14px;
+  border: 1px solid var(--bb-line);
+  font-size: 14px;
+  color: var(--bb-ink);
+  background: #ffffff;
+}
+.iep-filter {
+  padding: 9px 18px;
+  border: 1px solid var(--bb-line);
+  background: #ffffff;
+  color: var(--bb-ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease, color 150ms ease;
+}
+.iep-filter:hover {
+  border-color: var(--bb-ink);
+}
+.iep-filter.is-active {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.iep-filter:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: 2px;
+}
+
+/* --- grounds, as Tokenization's --- */
+/* Why India: the red Impact band, as Tokenization's Opportunity */
+#ie-why .pk-stat span {
+  max-width: 22rem;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
+}
+#ie-why .tkp-note,
+#ie-corridor .tkp-note,
+#ie-roadmap .tkp-note {
+  color: rgba(255, 255, 255, 0.7);
+}
+#ie-why .pk-head__lede,
+#ie-corridor .pk-head__lede,
+#ie-roadmap .pk-head__lede,
+#ie-method .pk-head__lede,
+#ie-pitfalls .pk-head__lede {
+  color: rgba(255, 255, 255, 0.82);
+}
+@media (max-width: 760px) {
+  #ie-why .pk-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  #ie-why .pk-stat + .pk-stat {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+}
+/* the five moves: the red light-arcs glass cards, five across */
+#ie-method .pk-sec__panel {
+  background:
+    linear-gradient(180deg, rgba(5, 3, 4, 0.72) 0%, rgba(5, 3, 4, 0.35) 34%, rgba(5, 3, 4, 0.1) 60%, rgba(5, 3, 4, 0.45) 100%),
+    url('/images/mission-bg.jpg') center 60% / cover no-repeat,
+    #0a0304;
+}
+#ie-method .pk-sec__panel::before {
+  display: none;
+}
+@media (min-width: 1181px) {
+  #ie-method .mp {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+/* the pitfalls: the chain graphic on the dark block grid */
+#ie-pitfalls .pk-sec__panel {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 44px 44px,
+    radial-gradient(60% 70% at 78% 55%, rgba(215, 25, 32, 0.22), transparent 70%),
+    #08080a;
+}
+#ie-pitfalls .pk-sec__panel::before {
+  display: none;
+}
+/* the light bands with a soft red glow */
+.iep #ie-routes .pk-sec__panel,
+.iep #ie-beyond .pk-sec__panel {
+  background:
+    radial-gradient(55% 70% at 100% 0%, rgba(215, 25, 32, 0.1), transparent 70%),
+    radial-gradient(45% 60% at 0% 100%, rgba(215, 25, 32, 0.07), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, var(--bb-surface-alt) 100%);
+}
+.iep #ie-cta .tkp-disclaimer {
+  border-top-color: var(--bb-line);
+  color: var(--bb-ink-muted);
+}
+.iep .pk-sub {
+  justify-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+/* the region and regulator cards: compact, five across */
+.iep #ie-corridor .pk-card,
+.iep #ie-regulatory .pk-cards--5 .pk-card {
+  padding: 18px 20px;
+}
+.iep #ie-corridor .pk-card__title,
+.iep #ie-regulatory .pk-cards--5 .pk-card__title {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* Home "What IBA Does" as a switcher (WhatWeDoCards.jsx, .wdx; by request,
+   11-23: the cards in rows ran too long): the pillars listed down the left,
+   the chosen one large on the right, its photo with the copy over a dark
+   fade; on a phone, an accordion */
+.wdx {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  min-height: 540px;
+  border: 1px solid var(--bb-line);
+  background: #ffffff;
+}
+.wdx__list {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--bb-line);
+}
+.wdx__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.wdx__item + .wdx__item {
+  border-top: 1px solid var(--bb-line);
+}
+.wdx__tab {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 14px clamp(18px, 2vw, 28px);
+  border: 0;
+  background: transparent;
+  color: var(--bb-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+/* the chosen pillar: a red bar down its edge, its name in red */
+.wdx__tab::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--iba-red);
+  transform: scaleY(0);
+  transition: transform 250ms var(--ease-out, ease);
+}
+.wdx__item.is-active .wdx__tab {
+  background: #fbf6f4;
+}
+.wdx__item.is-active .wdx__tab::before {
+  transform: scaleY(1);
+}
+.wdx__tab:hover {
+  background: #fbf6f4;
+}
+.wdx__tab:focus-visible {
+  outline: 2px solid var(--iba-red);
+  outline-offset: -2px;
+}
+.wdx__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--bb-line);
+  color: var(--iba-red);
+  background: #ffffff;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.wdx__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wdx__item.is-active .wdx__icon {
+  border-color: var(--iba-red);
+  background: var(--iba-red);
+  color: #ffffff;
+}
+.wdx__label {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.wdx__num {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--bb-ink-muted);
+}
+.wdx__name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.3;
+  transition: color 200ms ease;
+}
+.wdx__item.is-active .wdx__name {
+  color: var(--iba-red);
+}
+.wdx__arrow {
+  margin-left: auto;
+  color: var(--iba-red);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.wdx__item.is-active .wdx__arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* the panel: the art whole above, every photo stacked and the chosen one
+   faded in; the copy on the dark beneath */
+.wdx__panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0b0b0d;
+}
+.wdx__media {
+  position: relative;
+  flex: none;
+  aspect-ratio: 9 / 4;
+  overflow: hidden;
+}
+.wdx__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 500ms ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wdx__img.is-on {
+  opacity: 1;
+  transform: none;
+}
+.wdx__copy {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(22px, 2.6vw, 36px);
+  background:
+    radial-gradient(70% 90% at 100% 100%, rgba(215, 25, 32, 0.22), transparent 70%),
+    #0b0b0d;
+  color: #ffffff;
+  animation: wdx-in 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.wdx__tag {
+  padding: 4px 10px;
+  background: var(--iba-red);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.wdx__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(24px, 1.2rem + 1vw, 32px);
+  font-weight: 400;
+  line-height: 1.15;
+  color: inherit;
+}
+.wdx__text {
+  margin: 0;
+  max-width: 38rem;
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.86);
+}
+.wdx__go {
+  display: inline-flex;
+  gap: 8px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid currentColor;
+  color: #ffffff;
+  text-decoration: none;
+}
+.wdx__go:hover {
+  color: #ff6a6e;
+}
+@keyframes wdx-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+/* the in-place copy is for phones only */
+.wdx__inline {
+  display: none;
+}
+
+/* a phone: the list is an accordion, the chosen pillar opening under its name */
+@media (max-width: 860px) {
+  .wdx {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .wdx__list {
+    border-right: 0;
+  }
+  .wdx__panel {
+    display: none;
+  }
+  .wdx__tab {
+    padding-block: 16px;
+  }
+  .wdx__inline {
+    display: grid;
+    border-top: 1px solid var(--bb-line);
+  }
+  .wdx__inline-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 9 / 4;
+    object-fit: cover;
+  }
+  .wdx__copy--inline {
+    padding: 20px;
+    background: #ffffff;
+    color: var(--bb-ink);
+  }
+  .wdx__copy--inline .wdx__text {
+    color: var(--bb-ink-muted);
+  }
+  .wdx__copy--inline .wdx__go {
+    color: var(--bb-ink);
+  }
+  .wdx__item.is-active .wdx__arrow {
+    transform: rotate(90deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wdx__img,
+  .wdx__copy,
+  .wdx__tab::before {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* What IBA Does switcher: the list icons as the site's 3D glass tiles (the
+   Expertise Core Capabilities glass, by request, 11-23): dark glass with a
+   white line icon, and the chosen pillar's tile red glass, lifted and lit */
+.wdx__icon,
+.wdx__item.is-active .wdx__icon {
+  --g-hi: #3c3638;
+  --g: #121012;
+  --g-lo: #000000;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 12px;
+  color: #ffffff;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0) 52%),
+    linear-gradient(145deg, var(--g-hi), var(--g) 45%, var(--g-lo));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 16px -10px rgba(0, 0, 0, 0.75);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+}
+.wdx__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+.wdx__item.is-active .wdx__icon {
+  --g-hi: #ff3a42;
+  --g: #d10f18;
+  --g-lo: #5a0409;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 18px -4px rgba(255, 30, 40, 0.55), 0 10px 20px -12px rgba(0, 0, 0, 0.8);
+}
+.wdx__tab:hover .wdx__icon {
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wdx__icon {
+    transition: none;
+  }
 }
 
 /* ==================================================================

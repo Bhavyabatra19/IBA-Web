@@ -14,6 +14,301 @@
       "source": "/admin",
       "destination": "/admin/",
       "permanent": false
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-us/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-iba",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-iba/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/who-we-are/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us/",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/education",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/education/",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/courses",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/courses/",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/training",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/training/",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/blockchain-club",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/blockchain-club/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/iba-blockchain-club",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/iba-blockchain-club/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/the-iba-blockchain-club",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/the-iba-blockchain-club/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/blockchain-membership",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/blockchain-membership/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/members",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/members/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/join",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/join/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/services/",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/consulting",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/consulting/",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/advisory",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/advisory/",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/partners",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/partners/",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/events",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/events/",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/news",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/news/",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/resources",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/resources/",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/about/",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/expertise/",
+      "destination": "/expertise",
+      "permanent": true
+    },
+    {
+      "source": "/tokenization/",
+      "destination": "/tokenization",
+      "permanent": true
+    },
+    {
+      "source": "/india-entry/",
+      "destination": "/india-entry",
+      "permanent": true
+    },
+    {
+      "source": "/ecosystem/",
+      "destination": "/ecosystem",
+      "permanent": true
+    },
+    {
+      "source": "/initiatives/",
+      "destination": "/initiatives",
+      "permanent": true
+    },
+    {
+      "source": "/corridor/",
+      "destination": "/corridor",
+      "permanent": true
+    },
+    {
+      "source": "/membership/",
+      "destination": "/membership",
+      "permanent": true
+    },
+    {
+      "source": "/red-club/",
+      "destination": "/red-club",
+      "permanent": true
+    },
+    {
+      "source": "/red-club/institutions/",
+      "destination": "/red-club/institutions",
+      "permanent": true
+    },
+    {
+      "source": "/red-club/learners/",
+      "destination": "/red-club/learners",
+      "permanent": true
+    },
+    {
+      "source": "/library/",
+      "destination": "/library",
+      "permanent": true
+    },
+    {
+      "source": "/gallery/",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/connect/",
+      "destination": "/connect",
+      "permanent": true
+    },
+    {
+      "source": "/privacy/",
+      "destination": "/privacy",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -26,7 +321,67 @@
       "destination": "/assets/:path*"
     },
     {
-      "source": "/((?!api/|admin/).*)",
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/expertise",
+      "destination": "/expertise/index.html"
+    },
+    {
+      "source": "/tokenization",
+      "destination": "/tokenization/index.html"
+    },
+    {
+      "source": "/india-entry",
+      "destination": "/india-entry/index.html"
+    },
+    {
+      "source": "/ecosystem",
+      "destination": "/ecosystem/index.html"
+    },
+    {
+      "source": "/initiatives",
+      "destination": "/initiatives/index.html"
+    },
+    {
+      "source": "/corridor",
+      "destination": "/corridor/index.html"
+    },
+    {
+      "source": "/membership",
+      "destination": "/membership/index.html"
+    },
+    {
+      "source": "/red-club",
+      "destination": "/red-club/index.html"
+    },
+    {
+      "source": "/red-club/institutions",
+      "destination": "/red-club/institutions/index.html"
+    },
+    {
+      "source": "/red-club/learners",
+      "destination": "/red-club/learners/index.html"
+    },
+    {
+      "source": "/library",
+      "destination": "/library/index.html"
+    },
+    {
+      "source": "/gallery",
+      "destination": "/gallery/index.html"
+    },
+    {
+      "source": "/connect",
+      "destination": "/connect/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/((?!api/|admin/|_vercel/).*)",
       "destination": "/index.html"
     }
   ]

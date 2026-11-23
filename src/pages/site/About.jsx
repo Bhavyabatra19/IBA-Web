@@ -8,13 +8,14 @@
  */
 
 import { PageHero, Section, Stats, Cards } from '../../components/Kit'
-import { CONTACT } from '../../nav'
 import FloatingCubes from '../../components/FloatingCubes'
 import VisionMission from '../../sections/VisionMission'
 import FounderLetter from '../../sections/FounderLetter'
 import MissionPillars from '../../components/MissionPillars'
 import { FRAMEWORK } from '../../data/framework'
 import { FACTS, REGIONS_LINE } from '../../data/facts'
+import InitiativeCarousel from '../../components/InitiativeCarousel'
+import { INITIATIVES_IN_ORDER } from '../../data/initiatives'
 
 export default function About() {
   return (
@@ -123,9 +124,15 @@ export default function About() {
         />
       </Section>
 
+      {/* IBA Initiatives, just before the founder's note (moved here from the
+          Expertise page, 11-17; its original heading restored, 11-23) */}
+      <Section id="initiatives" eyebrow="IBA Initiatives" title="Our programs. Our commitment. Our impact">
+        <InitiativeCarousel items={INITIATIVES_IN_ORDER} />
+      </Section>
+
       <Section id="team" eyebrow="Founder" title="Welcome to IBA">
         <FounderLetter
-          linkedin={CONTACT.linkedin.href}
+          linkedin="https://www.linkedin.com/in/indieblock/"
           lead="Every great nation is defined by the infrastructure it chooses to build."
           /* condensed from the founder's message (11-06); the complete note
              opens from "Read the full note" */

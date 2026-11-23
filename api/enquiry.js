@@ -45,7 +45,25 @@ const reply = (res, status, body) => {
   res.end(JSON.stringify(body))
 }
 
+/* the sender's address alone, for the status check (never the key) */
+const senderAddress = () => (FROM.match(/<([^>]+)>/) || [null, FROM])[1]
+
 export default async function handler(req, res) {
+  /* A status check anyone can open in a browser (/api/enquiry): whether the
+     key is set and which addresses the form uses. It never shows the key.
+     Added 11-16 so a form that will not send can be diagnosed without
+     access to the Vercel logs. */
+  if (req.method === 'GET') {
+    const sender = senderAddress()
+    return reply(res, 200, {
+      configured: Boolean(process.env.RESEND_API_KEY),
+      sends_to: TO,
+      sends_from: sender,
+      note: sender.endsWith('@resend.dev')
+        ? 'Sending from Resend’s test address: Resend only delivers to the email the Resend account was created with until the domain is verified and ENQUIRY_FROM is set.'
+        : 'Sending from your own domain: it must show Verified in Resend → Domains.',
+    })
+  }
   if (req.method !== 'POST') return reply(res, 405, { error: 'method' })
   if (!process.env.RESEND_API_KEY) return reply(res, 503, { error: 'not-configured' })
 
@@ -88,9 +106,23 @@ export default async function handler(req, res) {
         text,
       }),
     })
-    if (!r.ok) return reply(res, 502, { error: 'send-failed' })
+    if (!r.ok) {
+      /* Resend's own reason (e.g. an unverified domain, or the test sender
+         used for someone other than the account owner), in the Vercel logs
+         and in the response, so the cause is visible */
+      let reason = ''
+      try {
+        const j = await r.json()
+        reason = j.message || j.error || ''
+      } catch {
+        /* no body */
+      }
+      console.error('enquiry: Resend refused the email', r.status, reason)
+      return reply(res, 502, { error: 'send-failed', status: r.status, reason })
+    }
     return reply(res, 200, { ok: true })
-  } catch {
-    return reply(res, 502, { error: 'send-failed' })
+  } catch (e) {
+    console.error('enquiry: could not reach Resend', e?.message)
+    return reply(res, 502, { error: 'send-failed', reason: 'could not reach Resend' })
   }
 }

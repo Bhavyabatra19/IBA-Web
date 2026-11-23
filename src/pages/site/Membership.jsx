@@ -51,7 +51,7 @@ const HeroArt = () => (
 
 /* the page's sections, as the Tokenization page's icon strip under the hero */
 const JUMP = [
-  { href: '#alliance', label: 'Membership of the Alliance', icon: <><path d="M12 3 4 6.5v5c0 4.6 3.4 8.4 8 9.5 4.6-1.1 8-4.9 8-9.5v-5Z" /><path d="m8.5 12 2.5 2.5 4.5-5" /></> },
+  { href: '#alliance', label: 'The Alliance Membership', icon: <><path d="M12 3 4 6.5v5c0 4.6 3.4 8.4 8 9.5 4.6-1.1 8-4.9 8-9.5v-5Z" /><path d="m8.5 12 2.5 2.5 4.5-5" /></> },
   { href: '#plans', label: 'Pathways & Tiers', icon: <><path d="M12 3 3 7.5l9 4.5 9-4.5Z" /><path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5" /></> },
   { href: '#membership-faq', label: 'Questions', icon: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6v.6M12 17.2v.1" /></> },
   { href: '#join', label: 'How to Join', icon: <><path d="M5 12h12M13 6l6 6-6 6" /></> },
@@ -155,7 +155,7 @@ export default function Membership() {
         lede={[
           `IBA membership brings founders, investors, institutions and professionals into one network across the IBA Web3 Corridor: ${FACTS.members.text} members in ${FACTS.countries.text} countries.`,
           'Structured across three membership tiers, with each level building on the benefits of the preceding tier.',
-          'See what membership opens, compare the tiers, and join when you have found the right fit.',
+          'See what the membership opens, compare the tiers, and join when you have found the right fit.',
         ]}
         actions={
           <>
@@ -187,9 +187,9 @@ export default function Membership() {
       <Section
         id="alliance"
         tone="dark"
-        eyebrow="Why membership"
-        title="What membership opens"
-        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. Membership of the alliance is free access, by application, and it is where every member begins."
+        eyebrow="The Membership"
+        title="What the membership opens"
+        lede="Membership opens the full breadth of the IBA ecosystem to those committed to shaping the future of blockchain and Web3: the complete library, the IBA Directory and a place within a network of leaders, advisors and institutions. The Alliance Membership is free access, by application, and it is where every member begins."
       >
         {/* glass cards on the red light-arcs ground, as About's Our Mission */}
         <MissionPillars items={OPENS} />
