@@ -13,6 +13,7 @@ import { PageHero, Section, Cards, Btn } from '../../components/Kit'
 import { CONTACT } from '../../nav'
 import { FACTS } from '../../data/facts'
 import LibrarySearch from '../../components/LibrarySearch'
+import { Go } from '../../sections/service/ServiceBlocks'
 import DATA from '../../data/resources.json'
 
 /* Every resource in the shared list (src/data/resources.json, edited at
@@ -146,13 +147,13 @@ export default function Library() {
               on: () => showFormat('Video'),
             },
             {
-              /* content review: pictures of IBA's events and conferences,
-                 once the gallery is ready */
+              /* pictures of IBA's events and conferences, and press
+                 coverage, on /gallery */
               tag: 'Gallery',
               title: 'See the Gallery',
-              text: 'Moments from IBA events, conferences and gatherings across the corridor.',
-              cta: 'Coming soon',
-              soon: true,
+              text: 'IBA in the news, and moments from IBA events, conferences and gatherings.',
+              cta: 'View gallery',
+              go: '/gallery',
             },
           ].map((c) => (
             <article className="pk-card" key={c.title} data-rise>
@@ -160,6 +161,10 @@ export default function Library() {
               <h3 className="pk-card__title">
                 {c.soon ? (
                   c.title
+                ) : c.go ? (
+                  <Go className="pk-card__link" href={c.go}>
+                    {c.title}
+                  </Go>
                 ) : c.href ? (
                   <a className="pk-card__link" href={c.href} target="_blank" rel="noreferrer noopener">
                     {c.title}

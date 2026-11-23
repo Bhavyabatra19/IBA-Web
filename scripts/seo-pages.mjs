@@ -44,6 +44,7 @@ const NAMES = {
   '/red-club/institutions': 'For Institutions',
   '/red-club/learners': 'For Learners',
   '/library': 'Library',
+  '/gallery': 'IBA in the News & Gallery',
   '/connect': 'Contact',
   '/privacy': 'Privacy Policy',
 }

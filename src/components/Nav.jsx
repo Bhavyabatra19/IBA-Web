@@ -67,6 +67,7 @@ const ICONS = {
   video: <><rect x="2" y="6" width="14" height="12" /><path d="m16 10 6-3v10l-6-3" /></>,
   report: <><path d="M6 2h12v20H6Z" /><path d="M9 17v-3M12 17v-6M15 17v-4" /></>,
   globe: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z" /></>,
+  camera: <><path d="M3 7h4l2-3h6l2 3h4v13H3Z" /><circle cx="12" cy="13" r="4" /></>,
   pin: <><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12Z" /><circle cx="12" cy="9" r="2.5" /></>,
 }
 

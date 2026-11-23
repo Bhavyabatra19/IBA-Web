@@ -71,6 +71,11 @@ export const SEO = {
     description:
       `Who India Blockchain Alliance is and what it is building: its vision, mission, founder and team, with ${FACTS.members.text} members across ${FACTS.countries.text} countries.`,
   },
+  '/gallery': {
+    title: 'IBA in the News & Gallery | India Blockchain Alliance',
+    description:
+      'Press coverage of India Blockchain Alliance, and photos from IBA events, conferences and gatherings across the Web3 Corridor.',
+  },
   '/expertise': {
     title: 'Web3 Advisory & Consulting | IBA Expertise',
     description:

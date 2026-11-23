@@ -7,6 +7,8 @@ The admin console at **`/admin`** edits the resources shown in two places:
 
 Both read one file, `src/data/resources.json`. Every item needs a **title, summary, link and thumbnail**, plus a platform, format, topic and level; the console will not publish an item with any of these missing. The date is optional.
 
+It also edits the **Photo Gallery** on `/gallery` ("IBA in the News & Gallery"): open **Photo Gallery → Event photos**, add a photo, its caption, event, location and date, and press **Publish**. Photos are stored in `public/images/gallery/`. Visitors can filter by event, so keep each event's name spelled the same way. The page's **In the News** section lists every Resources item whose format is **News** or **Press Release**.
+
 ## How editing works
 
 1. Open `https://<your-site>/admin` and choose **Login with GitHub**.
@@ -42,6 +44,8 @@ Optional: set `OAUTH_GITHUB_SCOPE` to `public_repo` to ask GitHub for narrower a
 | --- | --- |
 | `public/admin/index.html` | The console (Decap CMS 3.17.1) and its fields |
 | `src/data/resources.json` | The resources list it edits |
+| `src/data/gallery.json` | The photo gallery list it edits |
+| `public/images/gallery/` | Where uploaded gallery photos go |
 | `public/images/resources/` | Where uploaded thumbnails go |
 | `api/auth.js`, `api/callback.js` | GitHub sign-in |
 

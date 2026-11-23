@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>IBA Admin · Resources</title>
+    <title>IBA Admin</title>
     <link rel="icon" href="/iba-logo.webp" />
     <!--
       The IBA admin console (Decap CMS). It edits src/data/resources.json, the one list behind the Resources library and the home page's
@@ -35,8 +35,8 @@
             base_url: window.location.origin,
             auth_endpoint: 'api/auth',
             commit_messages: {
-              update: 'Resources: update {{slug}} (admin console)',
-              uploadMedia: 'Resources: upload {{path}} (admin console)',
+              update: '{{collection}}: update {{slug}} (admin console)',
+              uploadMedia: 'Upload {{path}} (admin console)',
             },
           },
           site_url: window.location.origin,
@@ -45,6 +45,56 @@
           media_folder: 'public/images/resources',
           public_folder: '/images/resources',
           collections: [
+            {
+              name: 'gallery',
+              label: 'Photo Gallery',
+              description:
+                'Photos on the “IBA in the News & Gallery” page (/gallery). Upload a photo, give it a caption and the event it is from; visitors can filter by event. Press coverage on that page comes from Resources items whose format is News or Press Release.',
+              media_folder: '/public/images/gallery',
+              public_folder: '/images/gallery',
+              editor: { preview: false },
+              files: [
+                {
+                  name: 'photos',
+                  label: 'Event photos',
+                  file: 'src/data/gallery.json',
+                  fields: [
+                    {
+                      name: 'photos',
+                      label: 'Photos',
+                      label_singular: 'Photo',
+                      widget: 'list',
+                      min: 0,
+                      collapsed: true,
+                      summary: '{{fields.event}} · {{fields.caption}}',
+                      fields: [
+                        {
+                          name: 'image',
+                          label: 'Photo',
+                          widget: 'image',
+                          required: true,
+                          choose_url: false,
+                          hint: 'JPG or WebP, ideally landscape and no wider than 2000 px. Tiles crop to 4:3; the full photo shows when clicked.',
+                        },
+                        { name: 'caption', label: 'Caption', widget: 'string', required: false, hint: 'Who or what is in the photo.' },
+                        { name: 'event', label: 'Event', widget: 'string', required: true, hint: 'Use the same spelling for every photo from one event, e.g. TheBlock Dubai 2026. Visitors filter by it.' },
+                        { name: 'location', label: 'Location', widget: 'string', required: false, hint: 'e.g. Dubai, UAE' },
+                        {
+                          name: 'date',
+                          label: 'Date',
+                          widget: 'datetime',
+                          required: false,
+                          format: 'YYYY-MM-DD',
+                          date_format: 'DD MMM YYYY',
+                          time_format: false,
+                          default: '',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
             {
               name: 'resources',
               label: 'Resources',
