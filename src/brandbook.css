@@ -14248,3 +14248,51 @@ img.ib__sectorIcon {
   border-color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
 }
+
+/* Expertise — Global Market Expansion (by request, 11-23): the intro set
+   wider so its two paragraphs take four lines, not six; "The advisory and
+   consulting stack" set like the section title above it (H2 size, centred,
+   its lede centred beneath); and the eight stack cards a little shorter */
+.xp-page #global-market-expansion .pk-head {
+  max-width: 68rem;
+}
+.xp-page #global-market-expansion .pk-head__lede {
+  max-width: 66rem;
+}
+.xp-page #global-market-expansion .pk-sub {
+  justify-items: center;
+  max-width: 54rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.xp-page #global-market-expansion .pk-sub h3 {
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.xp-page #global-market-expansion .pk-sub p {
+  font-size: 18px;
+  line-height: 28px;
+}
+@media (max-width: 760px) {
+  .xp-page #global-market-expansion .pk-sub h3 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .xp-page #global-market-expansion .pk-sub p {
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card {
+  gap: 6px;
+  padding: 18px 20px 20px;
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card__title {
+  font-size: 18px;
+  line-height: 24px;
+}
+.xp-page #global-market-expansion .pk-sub + .pk-cards .pk-card__text {
+  line-height: 1.5;
+}

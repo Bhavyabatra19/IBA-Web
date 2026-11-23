@@ -7,7 +7,7 @@
  * tags, and the button at the right. Styles in brandbook.css (.cta-band).
  */
 
-const TOPICS = ['Funding & Capital', 'Consulting', 'Tokenization', 'Corridors', 'Membership', 'UAE Experience Center', 'Red Club']
+const TOPICS = ['Funding & Capital', 'Consulting', 'Tokenization', 'India Entry', 'Corridors', 'Membership', 'UAE Experience Center', 'Red Club']
 
 export default function CtaBand() {
   return (
@@ -21,7 +21,7 @@ export default function CtaBand() {
           <p className="cta-band__text">
             Talk to our team about funding and capital raising, consulting, tokenization,
             <br />
-            corridors, membership, the UAE Experience Center or the Red Club.
+            India entry, corridors, membership, the UAE Experience Center or the Red Club.
           </p>
           <ul className="cta-band__tags" aria-label="Topics">
             {TOPICS.map((t) => (

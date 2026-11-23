@@ -143,8 +143,10 @@ const MATRIX = [
   ['Exposure to a mock investor committee', false, true, true],
   ['White paper publishing support', false, true, true],
   ['Blockchain grant advice and information', false, true, true],
-  ['TheCircle Level 1 pack', false, true, true],
-  ['TheBlock Level 1 pack', false, false, true],
+  ['IBA-Circle Global Member', false, true, true],
+  ['IBA-Block Connect', false, false, true],
+  /* across every class (by request, 11-23); its details to follow */
+  ['IBA-Clarity SOLO', true, true, true],
 ]
 const CLASSES = ['Club Class', 'Premier Class', 'Gold Class']
 
