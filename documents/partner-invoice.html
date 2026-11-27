@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Web3 Corridor Partner Invoice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/docs.css">
+<style>
+  /* ---- Northstar Tecq wordmark (swap for the real logo: replace the
+     .ns element with <img src="assets/northstar-tecq-logo.png" height="40">) */
+  .ns { display: inline-flex; align-items: center; gap: 2.4mm; }
+  .ns svg { width: 8mm; height: 8mm; display: block; }
+  .ns__word { font-size: 13pt; letter-spacing: 0.16em; line-height: 1; }
+  .ns__word small { display: block; font-size: 5.6pt; letter-spacing: 0.3em; color: var(--muted); margin-top: 1.2mm; }
+
+  /* page 1 ---------------------------------------------------------- */
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm; }
+  .meta dd .fill { margin-bottom: 1mm; }
+  .meta { display: grid; grid-template-columns: auto auto; gap: 1mm 6mm; font-size: 9pt; text-align: right; }
+  .meta dt { color: var(--muted); font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; align-self: center; }
+  .meta dd { margin: 0; }
+
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 6mm; border: 1px solid var(--line); }
+  .party { padding: 4mm 5mm; font-size: 8.6pt; line-height: 1.55; }
+  .party + .party { border-left: 1px solid var(--line); }
+  .party__name { font-size: 10.5pt; margin: 1mm 0 0.6mm; }
+  .party .ns { margin: 0.5mm 0 2.4mm; }
+  .kv { color: var(--muted); }
+  .kv b { color: var(--ink); }
+
+  table.items { width: 100%; border-collapse: collapse; margin-top: 6mm; font-size: 8.6pt; }
+  table.items th { background: var(--black); color: #fff; text-align: left; font-size: 6.5pt; letter-spacing: 0.16em; text-transform: uppercase; padding: 2.4mm 2.6mm; }
+  table.items td { padding: 3mm 2.6mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.items .num { text-align: right; white-space: nowrap; }
+  table.items td.desc small { display: block; color: var(--muted); font-size: 7.6pt; margin-top: 0.8mm; }
+  .rm { border: 0; background: none; color: var(--red); cursor: pointer; font: inherit; padding: 0 0 0 2mm; }
+
+  .sums { display: grid; grid-template-columns: 1fr 74mm; gap: 8mm; margin-top: 4mm; }
+  .words { font-size: 8.4pt; color: var(--muted); }
+  .words p { margin: 0 0 1mm; }
+  .words .amt { color: var(--ink); font-size: 9pt; }
+  table.tot { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  table.tot td { padding: 1.6mm 0; }
+  table.tot td:last-child { text-align: right; white-space: nowrap; }
+  table.tot tr.grand td { border-top: 2px solid var(--ink); padding-top: 2.6mm; font-size: 12pt; }
+  table.tot tr.grand td:last-child { color: var(--red); }
+
+  .sched { margin-top: 6mm; }
+  table.plan { width: 100%; border-collapse: collapse; font-size: 8.4pt; }
+  table.plan th { text-align: left; font-size: 6.5pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 1.6mm 2.6mm; border-bottom: 1px solid var(--ink); }
+  table.plan td { padding: 2mm 2.6mm; border-bottom: 1px solid var(--line); }
+  table.plan .num { text-align: right; }
+  .tag { display: inline-block; font-size: 6.5pt; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.6mm 2mm; border-radius: 4px; background: var(--alt); color: var(--muted); }
+  .tag--due { background: var(--red-soft); color: var(--red-deep); }
+
+  .terms { display: grid; grid-template-columns: 1fr 60mm; gap: 8mm; margin-top: auto; padding: 6mm 0 5mm; font-size: 7.6pt; color: var(--muted); }
+  .terms ol { margin: 0; padding-left: 4mm; }
+  .terms li { margin-bottom: 0.8mm; }
+  .sign { border-top: 1px solid var(--ink); padding-top: 2mm; text-align: right; align-self: end; }
+  .sign b { color: var(--ink); display: block; font-size: 8.6pt; }
+
+  /* page 2 ---------------------------------------------------------- */
+  .p2title { text-align: center; }
+  .p2title .lede { margin: 3mm auto 0; text-align: center; }
+  .band { background: var(--black); color: #fff; text-align: center; font-size: 8pt; letter-spacing: 0.2em; text-transform: uppercase; padding: 2.6mm; }
+  .card { border: 1px solid var(--line); }
+  .card__body { padding: 4mm 5mm; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .field { border-bottom: 1px solid var(--line); padding: 1.6mm 0 1.8mm; }
+  .field:last-child { border-bottom: 0; }
+  .field .label { margin: 0 0 0.4mm; font-size: 6pt; }
+  .field .v { font-size: 9pt; }
+  .mono { font-family: 'SFMono-Regular', Menlo, Consolas, monospace; font-size: 8.6pt; letter-spacing: 0.02em; }
+  .note { background: var(--alt); border-left: 1.2mm solid var(--red); padding: 3mm 4.5mm; font-size: 8pt; line-height: 1.55; }
+  .note b { color: var(--ink); }
+  .online { display: grid; grid-template-columns: 1fr 1fr; }
+  .online > div { padding: 4mm 5mm; text-align: center; }
+  .online > div + div { border-left: 1px solid var(--line); }
+  .online h4 { margin: 0 0 1mm; font-size: 11pt; color: var(--red); }
+  .online p { margin: 0; font-size: 8pt; color: var(--muted); }
+  .online .addr { margin: 2.4mm auto 1.6mm; background: var(--alt); border: 1px solid var(--line); border-radius: 4px; padding: 2mm; color: var(--ink); }
+  .stack > * + * { margin-top: 4.5mm; }
+  .foot2 { display: grid; grid-template-columns: 1fr 1.25fr; gap: 8mm; font-size: 7.2pt; color: var(--muted); margin: auto 0 0; padding: 4mm 0 0; border-top: 1px solid var(--line); line-height: 1.55; }
+  .foot2 b { color: var(--ink); }
+  .rev { text-align: right; font-size: 6.5pt; letter-spacing: 0.16em; color: var(--muted); padding: 1.5mm 0 4mm; }
+  [hidden] { display: none !important; }
+
+  /* fill-in fields: an underline to write on, with what goes there in small
+     capitals beneath while it is empty; editable on screen */
+  .fill { display: inline-block; min-width: 30mm; min-height: 1.15em; border-bottom: 0.8px solid #0e0e0e; position: relative; vertical-align: bottom; padding: 0 0.6mm; line-height: 1.3; }
+  .fill:empty::after { content: attr(data-l); position: absolute; left: 0; top: calc(100% + 0.4mm); font-size: 5pt; line-height: 1; letter-spacing: 0.1em; text-transform: uppercase; color: #8a8a8a; white-space: nowrap; }
+  .fill.block { display: block; width: 100%; margin-bottom: 3.8mm; }
+  .fill.r { text-align: right; }
+  .fill:focus { outline: none; background: #fff8d6; }
+  @media screen { body:not(.clean) .fill { background: rgba(215, 25, 32, 0.05); } }
+  .party .fill.block { margin-bottom: 4.2mm; }
+  table.items td.fillcell { padding-top: 4.2mm; padding-bottom: 4.2mm; }
+  table.items td.fillcell .fill { width: 100%; }
+  table.items td.calc { text-align: right; white-space: nowrap; vertical-align: bottom; }
+  table.tot td .fill { min-width: 20mm; }
+  .words .fill { width: 100%; }
+  .basis { margin-top: 3mm; font-size: 8.4pt; color: var(--muted); }
+  .basis .fill { min-width: 34mm; }
+
+</style>
+</head>
+<body>
+
+
+<div class="bar no-print">
+  <span class="bar__title">Web3 Corridor · Partner invoice</span>
+  <label>Currency
+    <select id="cur">
+      <option value="USD" selected>USD $</option>
+      <option value="INR">INR ₹</option>
+      <option value="AED">AED</option>
+    </select>
+  </label>
+  <button type="button" id="add">+ Line</button>
+  <button type="button" id="clean">Hide highlights</button>
+  <button type="button" class="primary" onclick="window.print()">Print / Save PDF</button>
+  <span class="bar__hint">Partner details, services, revenue share % and taxes are left blank. Type into any line on screen, or print it blank and fill it in by hand. Enter a revenue base and a share % and the amount, taxes and total calculate. Print with A4, margins “None”, “Background graphics” on.</span>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 1 · PARTNER INVOICE                                      -->
+<!-- ============================================================ -->
+<section class="sheet">
+  <header class="mast">
+    <div class="mast__w3">
+      <img src="assets/web3-corridor-logo.webp" alt="Web3 Corridor">
+      <div class="mast__name">WEB3 CORRIDOR<small>PARTNER BILLING</small></div>
+    </div>
+    <div class="mast__by"><span>An initiative by</span><img src="assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+
+  <div class="sheet__body">
+    <div class="head">
+      <div>
+        <p class="eyebrow">Tax invoice · Partner revenue share</p>
+        <h1 class="title">Partner Invoice</h1>
+      </div>
+      <dl class="meta">
+        <dt>Invoice no.</dt><dd><span class="fill r" contenteditable="true" data-l="" style="min-width:44mm"></span></dd>
+        <dt>Invoice date</dt><dd><span class="fill r" contenteditable="true" data-l="" style="min-width:44mm"></span></dd>
+        <dt>Due date</dt><dd><span class="fill r" contenteditable="true" data-l="" style="min-width:44mm"></span></dd>
+        <dt>Partner ID</dt><dd><span class="fill r" contenteditable="true" data-l="" style="min-width:44mm"></span></dd>
+        <dt>Period covered</dt><dd><span class="fill r" contenteditable="true" data-l="" style="min-width:44mm"></span></dd>
+      </dl>
+    </div>
+
+    <div class="parties">
+      <div class="party">
+        <p class="label">Billed by · payee</p>
+        <!-- Northstar Tecq wordmark: replace with the logo file when available -->
+        <div class="ns" aria-label="Northstar Tecq">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#111"/><path d="M16 4 L18.6 13.4 L28 16 L18.6 18.6 L16 28 L13.4 18.6 L4 16 L13.4 13.4 Z" fill="#d71920"/><circle cx="16" cy="16" r="1.6" fill="#fff"/></svg>
+          <div class="ns__word">NORTHSTAR TECQ<small>BILLING PARTNER · WEB3 CORRIDOR</small></div>
+        </div>
+        <div class="party__name" contenteditable="true">Northstar Tecq [legal entity name]</div>
+        <div contenteditable="true">[Registered office address line 1]<br>[City, State, PIN] · India</div>
+        <div class="kv">GSTIN <b contenteditable="true">[GSTIN]</b> · PAN <b contenteditable="true">[PAN]</b></div>
+        <div class="kv">State <b contenteditable="true">[State, code]</b></div>
+        <div class="kv" contenteditable="true">[billing email] · [phone]</div>
+      </div>
+      <div class="party">
+        <p class="label">Billed to · partner</p>
+        <span class="fill block" contenteditable="true" data-l="partner name"></span>
+        <span class="fill block" contenteditable="true" data-l="contact name, title"></span>
+        <span class="fill block" contenteditable="true" data-l="address"></span>
+        <span class="fill block" contenteditable="true" data-l="city, country"></span>
+        <span class="fill block" contenteditable="true" data-l="tax registration (GSTIN / TRN / VAT)"></span>
+        <span class="fill block" contenteditable="true" data-l="email" style="margin-bottom:1mm"></span>
+      </div>
+    </div>
+
+    <table class="items">
+      <thead>
+        <tr><th style="width:7mm">#</th><th>Services / programme</th><th class="num" style="width:30mm">Revenue base</th><th class="num" style="width:24mm">Revenue share %</th><th class="num" style="width:30mm">Amount</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+
+    <div class="sums">
+      <div class="words">
+        <p class="label">Amount in words</p>
+        <p class="amt" id="words"><span class="fill block" contenteditable="true" data-l=""></span></p>
+        <p class="basis">Revenue share as agreed in the Partner Agreement dated <span class="fill" contenteditable="true" data-l="agreement date"></span></p>
+        <p class="basis" style="margin-top:4mm">on the revenue base for the period covered.</p>
+      </div>
+      <table class="tot">
+        <tbody>
+          <tr><td>Subtotal</td><td id="sub"><span class="fill r"></span></td></tr>
+          <tr><td style="padding-bottom:5mm">Taxes<br><span class="fill" id="taxType" contenteditable="true" data-l="tax type, e.g. IGST / VAT" style="min-width:30mm;margin-top:2mm"></span> @ <span class="fill r" id="taxRate" contenteditable="true" data-l="rate %" style="min-width:12mm"></span></td><td style="vertical-align:bottom;padding-bottom:5mm"><span class="fill r" id="taxAmt" contenteditable="true" data-l="tax amount"></span></td></tr>
+          <tr class="grand"><td>Total due</td><td id="grand"><span class="fill r"></span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="terms">
+      <div>
+        <p class="label">Terms</p>
+        <ol contenteditable="true">
+          <li>Payable within [30] days of the invoice date, by the methods on page 2, quoting the invoice number as the payment reference.</li>
+          <li>The revenue share is calculated on the revenue base for the period covered, at the rate set in the Partner Agreement.</li>
+          <li>All sending-bank and intermediary charges are borne by the payer. Taxes apply as shown and as required by law.</li>
+        </ol>
+      </div>
+      <div class="sign">
+        <div style="height:12mm"></div>
+        <b>For Northstar Tecq</b>
+        Authorised signatory
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance. Partner billing and payments are handled by Northstar Tecq.</div>
+    <div class="foot__page">Page 1 / 2</div>
+  </footer>
+</section>
+
+<!-- ============================================================ -->
+<!-- PAGE 2 · PAYMENT INSTRUCTIONS                                 -->
+<!-- ============================================================ -->
+<section class="sheet">
+  <header class="mast mast--slim">
+    <div class="mast__w3">
+      <img src="assets/web3-corridor-logo.webp" alt="Web3 Corridor">
+      <div class="mast__name">WEB3 CORRIDOR</div>
+    </div>
+    <div class="mast__by"><span>An initiative by</span><img src="assets/iba-logo-dark.png" alt="India Blockchain Alliance"></div>
+  </header>
+
+  <div class="sheet__body">
+    <div class="p2title">
+      <p class="eyebrow">Partner payments</p>
+      <h1 class="title">Payment Instructions</h1>
+      <p class="lede">Thank you for partnering with the <span style="color:var(--ink)">Web3 Corridor</span>. Below are the approved methods for remitting your partner payments to our billing partner, <span style="color:var(--ink)">Northstar Tecq</span>.</p>
+    </div>
+
+    <div class="stack" style="margin-top:6mm">
+      <div class="grid2">
+        <div class="card">
+          <div class="band">Domestic transfer · NEFT / RTGS / IMPS</div>
+          <div class="card__body">
+            <div class="field"><p class="label">Beneficiary</p><div class="v" contenteditable="true">NORTHSTAR TECQ [LEGAL NAME AS ON ACCOUNT]</div></div>
+            <div class="field"><p class="label">Bank</p><div class="v" contenteditable="true">[Bank name]</div></div>
+            <div class="field"><p class="label">Account number</p><div class="v mono" contenteditable="true">[Account number]</div></div>
+            <div class="field"><p class="label">Account type</p><div class="v" contenteditable="true">Current</div></div>
+            <div class="field"><p class="label">IFSC</p><div class="v mono" contenteditable="true">[IFSC]</div></div>
+            <div class="field"><p class="label">Branch</p><div class="v" contenteditable="true">[Branch, city]</div></div>
+            <div class="field"><p class="label">Payment reference</p><div class="v" contenteditable="true">[Invoice no.] · [Member or company name]</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="band">International wire · SWIFT</div>
+          <div class="card__body">
+            <div class="field"><p class="label">Beneficiary</p><div class="v" contenteditable="true">NORTHSTAR TECQ [LEGAL NAME AS ON ACCOUNT]</div></div>
+            <div class="field"><p class="label">Bank</p><div class="v" contenteditable="true">[Bank name]</div></div>
+            <div class="field"><p class="label">SWIFT / BIC</p><div class="v mono" contenteditable="true">[SWIFT code]</div></div>
+            <div class="field"><p class="label">Account number</p><div class="v mono" contenteditable="true">[Account number] · IFSC [IFSC]</div></div>
+            <div class="field"><p class="label">Bank address</p><div class="v" contenteditable="true">[Branch address, city, India]</div></div>
+            <div class="field"><p class="label">Beneficiary address</p><div class="v" contenteditable="true">[Registered office address, India]</div></div>
+            <div class="field"><p class="label">Intermediary bank (opt.) · reference</p><div class="v" contenteditable="true">[Intermediary SWIFT] · Ref: [Invoice no.]</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note" contenteditable="true">
+        <b>Please note:</b> choose the charge option <b>“OUR”</b> on international wires so that <b>all sending-bank and intermediary fees are paid by the sender</b> and the full invoiced amount is received. Purpose of remittance: <b>partner revenue share / business support services</b>. After transferring, reply with the <b>UTR or SWIFT reference number</b> and the invoice number.
+      </div>
+
+      <div class="card">
+        <div class="band">Online payment · UPI · Card</div>
+        <div class="online">
+          <div>
+            <h4>UPI (India)</h4>
+            <p>Any UPI app · accounts in India only</p>
+            <div class="addr mono" contenteditable="true">[upi-id@bank]</div>
+            <p>Add the invoice number in the remarks.</p>
+          </div>
+          <div>
+            <h4>Card / payment link</h4>
+            <p>Domestic and international cards</p>
+            <div class="addr mono" contenteditable="true">[secure payment link]</div>
+            <p>Gateway charges, if any, are shown at checkout.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" id="cryptoCard" hidden>
+        <div class="band">Digital-asset payments · by prior arrangement</div>
+        <div class="online">
+          <div>
+            <h4 contenteditable="true">[Network, e.g. Ethereum Mainnet]</h4>
+            <p contenteditable="true">Accepted: [assets]</p>
+            <div class="addr mono" contenteditable="true">[wallet address]</div>
+          </div>
+          <div>
+            <h4 contenteditable="true">[Network]</h4>
+            <p contenteditable="true">Accepted: [assets]</p>
+            <div class="addr mono" contenteditable="true">[wallet address]</div>
+          </div>
+        </div>
+        <div class="card__body" style="padding-top:0;font-size:7.6pt;color:var(--muted)" contenteditable="true">Only where agreed in writing with Northstar Tecq beforehand. Send on the named network only; reply with the transaction hash, asset used and member name. Digital-asset transactions cannot be reversed.</div>
+      </div>
+    </div>
+
+    <div class="foot2">
+      <div>
+        <b>Northstar Tecq</b> · billing partner for the Web3 Corridor<br>
+        <span contenteditable="true">[Registered office address, City, State, PIN, India]<br>[billing email] · GSTIN [GSTIN]</span>
+      </div>
+      <div>
+        Payment is confirmed to you by email once received, with a receipt quoting the invoice number.
+        For your security, Northstar Tecq and IBA will <b>never</b> ask for passwords, OTPs, private keys or online-banking credentials, and will never change bank details by email. To verify these instructions before sending funds, contact <b contenteditable="true">hello@indiablockchainalliance.org</b>.
+      </div>
+    </div>
+    <div class="rev">REV. 11/2026</div>
+  </div>
+
+  <footer class="foot">
+    <div><span class="foot__mark"></span><strong>Web3 Corridor</strong> · An initiative by India Blockchain Alliance · indiablockchainalliance.org</div>
+    <div class="foot__page">Page 2 / 2</div>
+  </footer>
+</section>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id)
+  const LOCALE = { INR: 'en-IN', USD: 'en-US', AED: 'en-AE' }
+  const SYMBOL = { INR: '₹', USD: '$', AED: 'AED ' }
+  const WORD = { INR: ['Rupees', 'Paise'], USD: ['US Dollars', 'Cents'], AED: ['UAE Dirhams', 'Fils'] }
+  const num = (s) => {
+    const t = String(s || '').replace(/[^0-9.\-]/g, '')
+    if (!t) return null
+    const n = parseFloat(t)
+    return isNaN(n) ? null : n
+  }
+  const money = (n) => {
+    const c = $('cur').value
+    return SYMBOL[c] + n.toLocaleString(LOCALE[c], { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  }
+  const ONES = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen']
+  const TENS = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']
+  const two = (n) => (n < 20 ? ONES[n] : TENS[Math.floor(n / 10)] + (n % 10 ? '-' + ONES[n % 10] : ''))
+  const three = (n) => (n >= 100 ? ONES[Math.floor(n / 100)] + ' Hundred' + (n % 100 ? ' and ' + two(n % 100) : '') : two(n))
+  function words(n, indian) {
+    if (n === 0) return 'Zero'
+    const parts = []
+    const scale = indian ? [[1e7, 'Crore'], [1e5, 'Lakh'], [1e3, 'Thousand']] : [[1e9, 'Billion'], [1e6, 'Million'], [1e3, 'Thousand']]
+    for (const [v, name] of scale) {
+      if (n >= v) {
+        const q = Math.floor(n / v)
+        parts.push((q >= 1000 ? words(q, indian) : three(q)) + ' ' + name)
+        n %= v
+      }
+    }
+    if (n) parts.push(three(n))
+    return parts.join(' ')
+  }
+
+  /* blank line items: services, revenue base and share % are filled in */
+  const blank = (l, cls = '') => `<span class="fill ${cls}" contenteditable="true" data-l="${l}"></span>`
+  function addRow() {
+    const n = $('rows').children.length + 1
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td class="fillcell">${n}</td>
+      <td class="fillcell desc">${blank('services / programme')}</td>
+      <td class="fillcell num">${blank('revenue base', 'r')}</td>
+      <td class="fillcell num">${blank('share %', 'r')}</td>
+      <td class="fillcell calc" data-amt><span class="fill r"></span></td>`
+    $('rows').appendChild(tr)
+  }
+
+  /* amount = base × share %; taxes from the rate, unless typed in directly */
+  let taxTyped = false
+  function calc() {
+    let sub = 0
+    let any = false
+    ;[...$('rows').children].forEach((tr) => {
+      const f = tr.querySelectorAll('.fill[contenteditable]')
+      const base = num(f[1].textContent)
+      const pct = num(f[2].textContent)
+      const cell = tr.querySelector('[data-amt]')
+      if (base !== null && pct !== null) {
+        const a = Math.round(base * pct) / 100
+        sub += a
+        any = true
+        cell.innerHTML = `<span class="fill r">${money(a)}</span>`
+      } else cell.innerHTML = '<span class="fill r"></span>'
+    })
+    const rate = num($('taxRate').textContent)
+    let tax = num($('taxAmt').textContent)
+    if (!taxTyped) {
+      tax = any && rate !== null ? Math.round(sub * rate) / 100 : null
+      $('taxAmt').textContent = tax === null ? '' : money(tax)
+    }
+    $('sub').innerHTML = `<span class="fill r">${any ? money(sub) : ''}</span>`
+    const total = any ? sub + (tax || 0) : null
+    $('grand').innerHTML = `<span class="fill r">${total === null ? '' : money(total)}</span>`
+    const w = $('words').querySelector('.fill')
+    if (total !== null) {
+      const cur = $('cur').value
+      const whole = Math.floor(total + 1e-9)
+      const frac = Math.round((total - whole) * 100)
+      const [maj, min] = WORD[cur]
+      w.textContent = `${maj} ${words(whole, cur === 'INR')}${frac ? ' and ' + words(frac, false) + ' ' + min : ''} only`
+    } else if (w.dataset.auto) w.textContent = ''
+    if (total !== null) w.dataset.auto = '1'
+  }
+
+  document.addEventListener('input', (e) => {
+    if (e.target.id === 'taxAmt') taxTyped = e.target.textContent.trim() !== ''
+    if (e.target.closest('#rows') || e.target.id === 'taxRate' || e.target.id === 'taxAmt') calc()
+  })
+  $('cur').addEventListener('change', () => { taxTyped = false; calc() })
+  $('add').addEventListener('click', () => { addRow(); calc() })
+  $('clean').addEventListener('click', (e) => {
+    document.body.classList.toggle('clean')
+    e.target.textContent = document.body.classList.contains('clean') ? 'Show highlights' : 'Hide highlights'
+  })
+  for (let i = 0; i < 4; i++) addRow()
+  if (new URLSearchParams(location.search).get('clean')) document.body.classList.add('clean')
+})()
+</script>
+</body>
+</html>

@@ -11,6 +11,7 @@ This folder sits outside `public/`, so none of it is deployed to the website.
 | File | What it is |
 | --- | --- |
 | `invoice.html` | Page 1: tax invoice issued by Northstar Tecq. Page 2: payment instructions (NEFT/RTGS/IMPS, SWIFT wire, UPI, card link, and an optional digital-asset block). |
+| `partner-invoice.html` | Partner invoice from Northstar Tecq: the partner's name and details, the services, the revenue share % and the taxes are all left blank, as lines to fill in. On screen, typing a revenue base and a share % calculates the amount, the taxes (from the rate), the total and the amount in words. Page 2 is the payment instructions. The blank template is in `pdf/partner-invoice-template.pdf`. |
 | `welcome-letter.html` | Personalised welcome letter: dues, instalments, the tier's inclusions, onboarding steps and the founder's signature. |
 | `membership-benefits.html` | Membership level benefits: Club, Premier and Gold Class with prices and service partners, the partner benefits, Gold Xchange and the full comparison matrix. Untick “Show prices” for a version that matches the website. |
 | `word/welcome-letter-<tier>.docx` | Word welcome letter for each tier (Club, Premier, Gold, Gold Xchange), to paste into an email. Every value to fill in is a yellow-highlighted `[placeholder]`. Rebuild with `node documents/scripts/build-welcome-docx.cjs` (needs `npm i docx`). |
