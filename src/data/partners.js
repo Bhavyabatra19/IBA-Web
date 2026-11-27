@@ -53,7 +53,7 @@ export const PARTNERS = [
   { name: 'TheCircle', logo: '/logos/partners/thecircle.png', url: 'https://the-block.com/the-circle/' },
   /* added later; the ones still without a logo show monograms on the
      Ecosystem page only */
-  { name: 'AgoraX' },
+  { name: 'AgoraX', logo: '/logos/partners/agorax.png' },
   { name: 'Ira Blocks', logo: '/logos/partners/ira-blocks.png' },
   { name: 'AdLunam Inc', logo: '/logos/partners/adlunam.png' },
   { name: 'Aasthi', logo: '/logos/partners/aasthi.png' },
