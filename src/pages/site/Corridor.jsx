@@ -172,8 +172,10 @@ const CORRIDOR_PARTNERS = [
   {
     name: 'TheCircle',
     logo: '/logos/partners/thecircle.png',
-    tag: 'UAE market entry',
-    text: 'IBA’s corridor partner for UAE market entry, supporting companies entering the UAE through the Web3 Corridor.',
+    /* VC and capital introducers (content review, 11-27), not UAE market
+       entry; hosts its Capital Sessions at TheBlock, Dubai */
+    tag: 'Capital & investor access',
+    text: 'VC and capital introducers at TheBlock, Dubai, connecting founders with venture investors through curated introductions and Capital Sessions on investor readiness.',
     href: 'https://the-block.com/the-circle/',
   },
   {
@@ -182,6 +184,16 @@ const CORRIDOR_PARTNERS = [
     tag: 'Tokenization standards',
     text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
     href: 'https://stofdn.com/membership',
+  },
+  /* added 11-27, in the client's words. ⚠ No logo file yet (the W3RC mark
+     was supplied as a pasted image); until one is in
+     public/logos/partners/clarity.png the card shows a monogram. */
+  {
+    name: 'CLARITY',
+    tag: 'Regulatory readiness & compliance',
+    text: 'The featured regulatory readiness and compliance partner in IBA’s Web3 Corridor premium partner ecosystem.',
+    href: 'https://web3readyclarity.com/',
+    cta: 'Visit website',
   },
 ]
 
@@ -274,9 +286,9 @@ export default function Corridor() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${p.name} membership (opens in a new tab)`}
+                  aria-label={`${p.cta ?? 'Explore membership'}: ${p.name} (opens in a new tab)`}
                 >
-                  Explore membership <span aria-hidden="true">↗</span>
+                  {p.cta ?? 'Explore membership'} <span aria-hidden="true">↗</span>
                 </a>
               </li>
             ))}
