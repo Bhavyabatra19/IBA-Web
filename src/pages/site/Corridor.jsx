@@ -185,11 +185,11 @@ const CORRIDOR_PARTNERS = [
     text: 'Advancing tokenized assets and institutional adoption; IBA’s founder serves as its Chief Strategy Advisor.',
     href: 'https://stofdn.com/membership',
   },
-  /* added 11-27, in the client's words. ⚠ No logo file yet (the W3RC mark
-     was supplied as a pasted image); until one is in
-     public/logos/partners/clarity.png the card shows a monogram. */
+  /* added 11-27, in the client's words; the W3RC mark, supplied 11-27 */
   {
     name: 'CLARITY',
+    logo: '/logos/partners/clarity.png',
+    wide: true,
     tag: 'Regulatory readiness & compliance',
     text: 'The featured regulatory readiness and compliance partner in IBA’s Web3 Corridor premium partner ecosystem.',
     href: 'https://web3readyclarity.com/',
@@ -269,7 +269,7 @@ export default function Corridor() {
           <CardRail label="Corridor partners" autoplay={5000}>
             {CORRIDOR_PARTNERS.map((p) => (
               <li className="cpn-partner" key={p.name}>
-                <span className="cpn-partner__logo">
+                <span className={`cpn-partner__logo${p.wide ? ' cpn-partner__logo--wide' : ''}`}>
                   {p.logo ? (
                     <img src={p.logo} alt={`${p.name} logo`} loading="lazy" decoding="async" />
                   ) : (
