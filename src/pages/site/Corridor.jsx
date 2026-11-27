@@ -187,7 +187,7 @@ const CORRIDOR_PARTNERS = [
   },
   /* added 11-27, in the client's words; the W3RC mark, supplied 11-27 */
   {
-    name: 'CLARITY',
+    name: 'Clarity',
     logo: '/logos/partners/clarity.png',
     wide: true,
     tag: 'Regulatory readiness & compliance',
